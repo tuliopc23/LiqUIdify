@@ -1,0 +1,403 @@
+---
+title: Search
+description: Intelligent search input with suggestions, recent searches, and keyboard navigation.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassSearch } from '@liquidify/components'
+
+export default function Demo() {
+  const [query, setQuery] = useState('')
+  
+  const suggestions = [
+    { id: '1', text: 'React components', type: 'suggestion', category: 'Development' },
+    { id: '2', text: 'TypeScript guide', type: 'suggestion', category: 'Development' },
+    { id: '3', text: 'Design system', type: 'trending', count: 1250 },
+    { id: '4', text: 'Accessibility best practices', type: 'suggestion', category: 'UX' },
+    { id: '5', text: 'Apple HIG', type: 'trending', count: 890 },
+  ]
+  
+  const recentSearches = [
+    'liquid glass effects',
+    'component documentation',
+    'theme customization'
+  ]
+  
+  const handleSearch = (searchQuery) => {
+    console.log('Searching for:', searchQuery)
+    setQuery(searchQuery)
+  }
+  
+  const handleSuggestionClick = (suggestion) => {
+    console.log('Selected suggestion:', suggestion)
+    setQuery(suggestion.text)
+  }
+  
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Search</h3>
+        <GlassSearch 
+          placeholder="Search documentation..."
+          suggestions={suggestions}
+          recentSearches={recentSearches}
+          onSearch={handleSearch}
+          onSuggestionClick={handleSuggestionClick}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">E-commerce Search</h3>
+        <GlassSearch 
+          placeholder="Search products..."
+          suggestions={[
+            { id: '1', text: 'iPhone 15 Pro', type: 'suggestion', category: 'Electronics' },
+            { id: '2', text: 'MacBook Air', type: 'trending', count: 2340 },
+            { id: '3', text: 'AirPods Pro', type: 'suggestion', category: 'Audio' },
+          ]}
+          recentSearches={['wireless headphones', 'laptop stand']}
+          onSearch={handleSearch}
+          maxSuggestions={5}
+        />
+      </div>
+      
+      {query && (
+        <div className="text-white/70 text-sm">
+          Current query: "{query}"
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## Search Types
+
+```tsx live
+import { GlassSearch } from '@liquidify/components'
+
+export default function SearchTypesDemo() {
+  const documentationSuggestions = [
+    { id: '1', text: 'Getting started guide', type: 'suggestion', category: 'Guides' },
+    { id: '2', text: 'Component API', type: 'suggestion', category: 'Reference' },
+    { id: '3', text: 'Theming system', type: 'trending', count: 456 },
+  ]
+  
+  const userSuggestions = [
+    { id: '1', text: 'John Doe', type: 'suggestion', category: 'Users' },
+    { id: '2', text: 'Jane Smith', type: 'suggestion', category: 'Users' },
+    { id: '3', text: 'Admin Dashboard', type: 'recent' },
+  ]
+  
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-white mb-4">Documentation Search</h3>
+        <GlassSearch 
+          placeholder="Search docs, guides, and API..."
+          suggestions={documentationSuggestions}
+          recentSearches={['installation', 'dark mode', 'accessibility']}
+          showTrending={true}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">User Search</h3>
+        <GlassSearch 
+          placeholder="Search users and teams..."
+          suggestions={userSuggestions}
+          recentSearches={['development team', 'project managers']}
+          maxSuggestions={6}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Minimal Search</h3>
+        <GlassSearch 
+          placeholder="Quick search..."
+          suggestions={[]}
+          recentSearches={[]}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | `'Search...'` | Input placeholder text |
+| `suggestions` | `SearchSuggestion[]` | `[]` | Array of search suggestions |
+| `recentSearches` | `string[]` | `[]` | Array of recent search terms |
+| `onSearch` | `(query: string) => void` | - | Callback when search is performed |
+| `onSuggestionClick` | `(suggestion: SearchSuggestion) => void` | - | Callback when suggestion is clicked |
+| `showTrending` | `boolean` | `false` | Show trending indicators |
+| `maxSuggestions` | `number` | `8` | Maximum suggestions to display |
+| `className` | `string` | - | Additional CSS classes |
+| `id` | `string` | - | Input element ID |
+
+### SearchSuggestion Interface
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Unique suggestion identifier |
+| `text` | `string` | Suggestion display text |
+| `type` | `'recent' \| 'suggestion' \| 'trending'` | Suggestion type |
+| `category` | `string` | Optional category label |
+| `count` | `number` | Optional popularity count |
+
+## Usage Patterns
+
+### Documentation Search
+
+```tsx
+import { GlassSearch } from '@liquidify/components'
+import { useRouter } from 'next/router'
+
+function DocumentationSearch() {
+  const router = useRouter()
+  const [suggestions] = useState([
+    { id: '1', text: 'Getting Started', type: 'suggestion', category: 'Guides' },
+    { id: '2', text: 'Component API', type: 'suggestion', category: 'Reference' },
+    { id: '3', text: 'Theming', type: 'trending', count: 1250 },
+  ])
+  
+  const handleSearch = (query) => {
+    router.push(`/search?q=${encodeURIComponent(query)}`)
+  }
+  
+  const handleSuggestionClick = (suggestion) => {
+    // Navigate to specific page based on suggestion
+    if (suggestion.category === 'Guides') {
+      router.push(`/guides/${suggestion.text.toLowerCase().replace(' ', '-')}`)
+    } else {
+      handleSearch(suggestion.text)
+    }
+  }
+  
+  return (
+    <GlassSearch 
+      placeholder="Search documentation..."
+      suggestions={suggestions}
+      onSearch={handleSearch}
+      onSuggestionClick={handleSuggestionClick}
+    />
+  )
+}
+```
+
+### E-commerce Product Search
+
+```tsx
+import { GlassSearch } from '@liquidify/components'
+import { useProducts } from './hooks/useProducts'
+
+function ProductSearch() {
+  const { searchProducts, suggestions, recentSearches } = useProducts()
+  
+  const handleSearch = async (query) => {
+    const results = await searchProducts(query)
+    // Handle search results
+  }
+  
+  const handleSuggestionClick = (suggestion) => {
+    // Track analytics
+    analytics.track('suggestion_clicked', {
+      suggestion: suggestion.text,
+      type: suggestion.type
+    })
+    
+    handleSearch(suggestion.text)
+  }
+  
+  return (
+    <GlassSearch 
+      placeholder="Search products..."
+      suggestions={suggestions}
+      recentSearches={recentSearches}
+      onSearch={handleSearch}
+      onSuggestionClick={handleSuggestionClick}
+      maxSuggestions={10}
+      showTrending={true}
+    />
+  )
+}
+```
+
+### Command Palette Integration
+
+```tsx
+import { GlassSearch, CommandPalette } from '@liquidify/components'
+
+function AppSearch() {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const commands = [
+    { id: '1', text: 'Create new project', type: 'suggestion', category: 'Actions' },
+    { id: '2', text: 'Open settings', type: 'suggestion', category: 'Navigation' },
+    { id: '3', text: 'View dashboard', type: 'recent' },
+  ]
+  
+  return (
+    <>
+      <GlassSearch 
+        placeholder="Search or type a command..."
+        suggestions={commands}
+        onSearch={(query) => {
+          if (query.startsWith('/')) {
+            setIsOpen(true)
+          }
+        }}
+      />
+      
+      <CommandPalette 
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        items={commands}
+      />
+    </>
+  )
+}
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **Keyboard Navigation**: Full keyboard support with arrow keys
+- **Screen Reader**: Proper ARIA attributes and live regions
+- **Focus Management**: Clear focus indicators and logical tab order
+- **Search Results**: Announced to screen readers
+
+### Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Enter` | Perform search with current query |
+| `Arrow Down` | Navigate to next suggestion |
+| `Arrow Up` | Navigate to previous suggestion |
+| `Escape` | Close suggestions and clear focus |
+| `Tab` | Move focus away from search |
+
+### Screen Reader Support
+
+```tsx
+// Automatic ARIA attributes
+<GlassSearch 
+  placeholder="Search..."
+  suggestions={suggestions}
+/>
+
+// Generates:
+// <input 
+//   role="combobox"
+//   aria-expanded="true"
+//   aria-autocomplete="list"
+//   aria-controls="search-suggestions"
+// />
+// <div 
+//   id="search-suggestions"
+//   role="listbox"
+//   aria-live="polite"
+// >
+//   <div role="option" aria-selected="false">
+//     Suggestion text
+//   </div>
+// </div>
+```
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Clarity**: Clear visual hierarchy in search results
+- **Depth**: Subtle glass effects that enhance the search metaphor
+- **Consistency**: Consistent styling across suggestion types
+- **Feedback**: Immediate visual feedback for user interactions
+
+### Interaction Design
+
+- **Immediate Response**: Instant suggestion display as user types
+- **Predictive**: Smart suggestions based on context and history
+- **Efficient**: Quick access to recent and trending searches
+- **Forgiving**: Handles typos and partial matches gracefully
+
+### Content Organization
+
+- **Categorization**: Logical grouping of suggestions by type
+- **Prioritization**: Most relevant suggestions appear first
+- **Context**: Additional information (categories, counts) when helpful
+- **Scannability**: Easy to scan and compare options
+
+## Best Practices
+
+### Do's
+
+- ✅ Provide relevant, contextual suggestions
+- ✅ Show recent searches for quick access
+- ✅ Use clear, descriptive placeholder text
+- ✅ Handle empty states gracefully
+- ✅ Implement proper keyboard navigation
+
+### Don'ts
+
+- ❌ Don't overwhelm with too many suggestions
+- ❌ Don't show irrelevant or outdated suggestions
+- ❌ Don't ignore keyboard accessibility
+- ❌ Don't make the search box too small
+- ❌ Don't forget to handle loading states
+
+### Performance
+
+- **Debounced Input**: Prevent excessive API calls
+- **Cached Results**: Store recent searches and suggestions
+- **Lazy Loading**: Load suggestions on demand
+- **Efficient Filtering**: Client-side filtering for better performance
+
+```tsx
+// Debounced search implementation
+import { useDebouncedCallback } from 'use-debounce'
+
+const debouncedSearch = useDebouncedCallback(
+  async (query) => {
+    const results = await searchAPI(query)
+    setSuggestions(results)
+  },
+  300
+)
+
+const handleInputChange = (value) => {
+  setQuery(value)
+  if (value.length > 2) {
+    debouncedSearch(value)
+  }
+}
+```
+
+### Analytics Integration
+
+```tsx
+// Track search analytics
+const handleSearch = (query) => {
+  analytics.track('search_performed', {
+    query,
+    timestamp: Date.now(),
+    source: 'main_search'
+  })
+  
+  performSearch(query)
+}
+
+const handleSuggestionClick = (suggestion) => {
+  analytics.track('suggestion_selected', {
+    suggestion: suggestion.text,
+    type: suggestion.type,
+    position: suggestions.indexOf(suggestion)
+  })
+  
+  handleSearch(suggestion.text)
+}
+```

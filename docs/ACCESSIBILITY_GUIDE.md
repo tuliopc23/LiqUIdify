@@ -155,7 +155,7 @@ Use live regions for dynamic content updates:
 Use focus trap for overlays and modals:
 
 ```javascript
-import { GlassFocusTrap } from "@liquidify/components";
+import { GlassFocusTrap } from "liquidify";
 
 <GlassFocusTrap active={isModalOpen}>
   <GlassModal>{/* Focus stays within modal */}</GlassModal>
@@ -194,7 +194,7 @@ function Example() {
 Implement skip navigation:
 
 ```javascript
-import { GlassSkipLink } from "@liquidify/components";
+import { GlassSkipLink } from "liquidify";
 
 <>
   <GlassSkipLink href="#main-content">Skip to main content</GlassSkipLink>

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import dts from 'vite-plugin-dts'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import lightningcss from 'vite-plugin-lightningcss'
 import { resolve } from 'node:path'
@@ -9,32 +8,14 @@ import { fileURLToPath } from 'node:url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 export default defineConfig({
+  logLevel: 'error',
   plugins: [
     react(),
     tsconfigPaths(),
     lightningcss({
       browserslist: '>0.5%, last 2 versions, not dead, not IE 11',
-      // Enable modern CSS features and optimizations
       cssModules: false,
       // Additional options not present in current type defs
-    } as any),
-    dts({
-      include: ['src/**/*'],
-      exclude: [
-        '**/*.stories.*',
-        '**/*.test.*',
-        '**/*.spec.*',
-        '**/__tests__/**',
-        '**/tests/**',
-        '**/examples/**',
-        '**/demo/**',
-        '**/playground/**',
-        '**/glass-playground/**'
-      ],
-      outDir: '../../dist/libs/components',
-      tsconfigPath: resolve(__dirname, 'tsconfig.lib.json'),
-      staticImport: true,
-      insertTypesEntry: true
     } as any)
   ],
   build: {
@@ -71,10 +52,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@liquidify/components': resolve(__dirname, 'src/index.ts')
+      'liquidify': resolve(__dirname, 'src/index.ts')
     }
   },
-  // Use Rolldown as Vite's bundler
   experimental: {
     renderBuiltUrl(filename) {
       return filename

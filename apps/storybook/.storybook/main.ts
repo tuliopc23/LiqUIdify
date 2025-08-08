@@ -8,9 +8,8 @@ const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
-    // Curated: Only stable, visual component stories
-    "../../../libs/components/src/components/glass-button-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-card-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
+    // Curated: include all visual component stories; exclude demos by convention (*.disabled)
+    "../../../libs/components/src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
@@ -42,17 +41,25 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config, { configType }) => {
     try {
-      // Debug: log the resolved paths
-      // Prefer consuming the built package entry to match real consumers
       const distBase = path.resolve(__dirname, "../../../dist/libs/components");
-      const aliasMap: Record<string, string> = {
-        "@liquidify/components/css": path.resolve(distBase, "components.css"),
-        "@liquidify/components/styles": path.resolve(distBase, "components.css"),
-        "@liquidify/components": path.resolve(distBase, "index.mjs"),
-        "@": path.resolve(__dirname, "../../../libs/components/src"),
-      };
+      const srcBase = path.resolve(__dirname, "../../../libs/components/src");
+      const aliasMap: Record<string, string> =
+        configType === "PRODUCTION"
+          ? {
+              "liquidify/css": path.resolve(distBase, "liquidify.css"),
+              "liquidify/styles": path.resolve(distBase, "liquidify.css"),
+              "liquidify": path.resolve(distBase, "index.mjs"),
+              "@": srcBase,
+            }
+          : {
+              "liquidify/css": path.resolve(srcBase, "styles/index.css"),
+              "liquidify/styles": path.resolve(srcBase, "styles/index.css"),
+              "liquidify": path.resolve(srcBase, "index.ts"),
+              "@": srcBase,
+            };
 
       return mergeConfig(config, {
+        logLevel: 'error',
         resolve: {
           alias: aliasMap,
           dedupe: ["react", "react-dom"],
@@ -60,6 +67,17 @@ const config: StorybookConfig = {
         plugins: [tsconfigPaths()],
         build: {
           rollupOptions: {
+            onwarn(warning, warn) {
+              // Suppress "use client" directive warnings
+              if (warning.message && warning.message.includes('Module level directives cause errors when bundled')) {
+                return;
+              }
+              // Suppress "use client" warnings
+              if (warning.message && warning.message.includes('"use client"')) {
+                return;
+              }
+              warn(warning);
+            },
             output: {
               manualChunks: (id: string) => {
                 if (id.includes("node_modules")) {
@@ -77,7 +95,7 @@ const config: StorybookConfig = {
               },
             },
           },
-          chunkSizeWarningLimit: 1000,
+          chunkSizeWarningLimit: 2500,
         },
         optimizeDeps: {
           include: ["react", "react-dom", "@storybook/react-vite"],

@@ -1,0 +1,315 @@
+---
+title: Sidebar
+description: Flexible sidebar navigation with collapsible sections and Apple-inspired glass effects.
+---
+
+```tsx live
+import { useState } from 'react'
+import { Sidebar, SidebarItem, SidebarSection } from '@liquidify/components'
+import { Home, Settings, User, Bell, Search, Heart, Package, BarChart, FileText, Shield } from 'lucide-react'
+
+export default function Demo() {
+  const [isOpen, setIsOpen] = useState(true)
+  const [activeItem, setActiveItem] = useState('dashboard')
+  
+  return (
+    <div className="flex h-96 bg-black/20 rounded-xl overflow-hidden">
+      <Sidebar
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        header={
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-lg bg-blue-500 flex items-center justify-center">
+              <span className="text-white font-bold text-sm">A</span>
+            </div>
+            <span className="font-semibold text-white">Admin Panel</span>
+          </div>
+        }
+        footer={
+          <div className="text-xs text-white/60">
+            Version 2.1.0
+          </div>
+        }
+      >
+        <SidebarSection title="Main">
+          <SidebarItem
+            icon={<Home className="h-5 w-5" />}
+            label="Dashboard"
+            active={activeItem === 'dashboard'}
+            onClick={() => setActiveItem('dashboard')}
+          />
+          <SidebarItem
+            icon={<BarChart className="h-5 w-5" />}
+            label="Analytics"
+            active={activeItem === 'analytics'}
+            onClick={() => setActiveItem('analytics')}
+            badge={<span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">New</span>}
+          />
+          <SidebarItem
+            icon={<Package className="h-5 w-5" />}
+            label="Products"
+            active={activeItem === 'products'}
+            onClick={() => setActiveItem('products')}
+          >
+            <SidebarItem
+              label="Electronics"
+              active={activeItem === 'electronics'}
+              onClick={() => setActiveItem('electronics')}
+            />
+            <SidebarItem
+              label="Clothing"
+              active={activeItem === 'clothing'}
+              onClick={() => setActiveItem('clothing')}
+            />
+          </SidebarItem>
+        </SidebarSection>
+        
+        <SidebarSection title="Account">
+          <SidebarItem
+            icon={<User className="h-5 w-5" />}
+            label="Profile"
+            active={activeItem === 'profile'}
+            onClick={() => setActiveItem('profile')}
+          />
+          <SidebarItem
+            icon={<Settings className="h-5 w-5" />}
+            label="Settings"
+            active={activeItem === 'settings'}
+            onClick={() => setActiveItem('settings')}
+          />
+        </SidebarSection>
+      </Sidebar>
+      
+      <div className="flex-1 p-6 flex items-center justify-center">
+        <div className="text-center">
+          <h3 className="text-white text-lg font-semibold mb-2">Content Area</h3>
+          <p className="text-white/60">Active: {activeItem}</p>
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Toggle Sidebar
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+## Overview
+
+The Sidebar component provides a flexible navigation solution with support for collapsible sections, nested items, and various layout modes. It features Apple-inspired glass effects and smooth animations.
+
+## Props
+
+### Sidebar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | **Required.** Sidebar content |
+| `open` | `boolean` | - | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state (uncontrolled) |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `position` | `'left' \| 'right'` | `'left'` | Sidebar position |
+| `width` | `'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` | Sidebar width |
+| `overlay` | `boolean` | `true` | Overlay behavior |
+| `push` | `boolean` | `false` | Push content instead of overlay |
+| `collapsible` | `boolean` | `false` | Collapsible on desktop |
+| `collapsedWidth` | `string` | `'4rem'` | Collapsed width when collapsible |
+| `header` | `ReactNode` | - | Header content |
+| `footer` | `ReactNode` | - | Footer content |
+| `zIndex` | `number` | `40` | Z-index value |
+| `closeOnOverlayClick` | `boolean` | `true` | Close on overlay click |
+| `closeOnEsc` | `boolean` | `true` | Close on escape key |
+
+### SidebarItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | - | Item icon |
+| `label` | `string` | - | **Required.** Item label |
+| `href` | `string` | - | Link destination |
+| `active` | `boolean` | `false` | Active state |
+| `onClick` | `() => void` | - | Click handler |
+| `children` | `ReactNode` | - | Nested items |
+| `collapsed` | `boolean` | `true` | Collapsed state for nested items |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `badge` | `ReactNode` | - | Badge content |
+
+### SidebarSection Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | Section title |
+| `children` | `ReactNode` | - | **Required.** Section content |
+
+## Usage Patterns
+
+### Basic Sidebar
+
+```tsx
+<Sidebar>
+  <SidebarItem icon={<Home />} label="Home" />
+  <SidebarItem icon={<Settings />} label="Settings" />
+  <SidebarItem icon={<User />} label="Profile" />
+</Sidebar>
+```
+
+### Controlled Sidebar
+
+```tsx
+const [isOpen, setIsOpen] = useState(false)
+
+<Sidebar open={isOpen} onOpenChange={setIsOpen}>
+  <SidebarItem icon={<Dashboard />} label="Dashboard" />
+  <SidebarItem icon={<Analytics />} label="Analytics" />
+</Sidebar>
+```
+
+### Right-Side Overlay
+
+```tsx
+<Sidebar position="right" overlay>
+  <SidebarSection title="Navigation">
+    <SidebarItem icon={<Home />} label="Home" />
+    <SidebarItem icon={<About />} label="About" />
+  </SidebarSection>
+</Sidebar>
+```
+
+### Nested Navigation
+
+```tsx
+<Sidebar>
+  <SidebarItem 
+    icon={<Folder />} 
+    label="Products"
+  >
+    <SidebarItem label="Electronics" href="/electronics" />
+    <SidebarItem label="Clothing" href="/clothing" />
+    <SidebarItem label="Books" href="/books" />
+  </SidebarItem>
+</Sidebar>
+```
+
+### Push Layout Mode
+
+```tsx
+<Sidebar push collapsible>
+  <SidebarItem icon={<Dashboard />} label="Dashboard" />
+  <SidebarItem icon={<Settings />} label="Settings" />
+</Sidebar>
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **Landmark Navigation**: Uses semantic navigation landmarks
+- **Keyboard Navigation**: Full keyboard support with arrow keys
+- **Screen Readers**: Proper ARIA labels and tree structure
+- **Focus Management**: Maintains focus within sidebar when open
+
+### Implementation Details
+
+- Uses `role="navigation"` for the sidebar container
+- Nested items use proper tree navigation patterns
+- Active states are announced to screen readers
+- Escape key closes overlay sidebars
+- Focus trap prevents focus from leaving modal sidebars
+
+### Keyboard Support
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Navigate between items |
+| `Enter` / `Space` | Activate focused item |
+| `Arrow Up/Down` | Navigate between items |
+| `Arrow Right` | Expand collapsed item |
+| `Arrow Left` | Collapse expanded item |
+| `Escape` | Close overlay sidebar |
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Glass Morphism**: Multi-layered transparency with backdrop blur
+- **Depth Hierarchy**: Clear visual hierarchy with shadows and elevation
+- **Typography**: SF Pro font family with appropriate weights
+- **Iconography**: Consistent icon style and sizing
+
+### Layout Principles
+
+- **Grid System**: Follows 8pt grid for consistent spacing
+- **Safe Areas**: Respects device safe areas and notches
+- **Responsive Design**: Adapts to different screen sizes
+- **Content Density**: Appropriate spacing for touch and mouse interaction
+
+### Interaction Patterns
+
+- **Smooth Animations**: Spring-based animations for state changes
+- **Hover Effects**: Subtle feedback for interactive elements
+- **Touch Gestures**: Swipe gestures for mobile interaction
+- **Haptic Feedback**: Visual feedback for touch interactions
+
+### Color and Theming
+
+- **Adaptive Colors**: Responds to system light/dark mode
+- **Semantic Colors**: Uses appropriate colors for states
+- **Glass Tinting**: Subtle color overlays for depth
+- **Contrast Ratios**: Maintains accessibility standards
+
+## Best Practices
+
+### Performance
+
+- Use `React.memo` for sidebar items that don't change frequently
+- Implement virtualization for very long navigation lists
+- Lazy load nested content when possible
+- Optimize animations for 60fps performance
+
+### UX Guidelines
+
+- Keep navigation hierarchy shallow (max 2-3 levels)
+- Group related items in sections
+- Use clear, descriptive labels
+- Provide visual feedback for all interactions
+- Consider the user's mental model when organizing items
+
+### Mobile Considerations
+
+- Use overlay mode on mobile devices
+- Ensure touch targets are at least 44px
+- Support swipe gestures for opening/closing
+- Consider thumb-friendly placement of important items
+- Provide clear visual indication of active states
+
+### State Management
+
+- Use controlled components for complex state
+- Persist sidebar state in localStorage when appropriate
+- Handle loading states gracefully
+- Provide fallback content for empty states
+
+### Integration Patterns
+
+```tsx
+// With React Router
+<SidebarItem 
+  as={Link} 
+  to="/dashboard" 
+  active={location.pathname === '/dashboard'}
+>
+  Dashboard
+</SidebarItem>
+
+// With Next.js
+<SidebarItem 
+  as={NextLink} 
+  href="/settings" 
+  active={router.pathname === '/settings'}
+>
+  Settings
+</SidebarItem>
+```

@@ -1,0 +1,134 @@
+---
+title: Slider
+description: Interactive range slider with liquid glass styling and smooth animations.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassSlider } from '@liquidify/components'
+
+export default function Demo() {
+  const [value, setValue] = useState(50)
+  const [volume, setVolume] = useState(75)
+  const [price, setPrice] = useState(250)
+  
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Slider</h3>
+        <GlassSlider 
+          value={value} 
+          onChange={setValue}
+          min={0}
+          max={100}
+          step={1}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Volume Control</h3>
+        <GlassSlider 
+          value={volume} 
+          onChange={setVolume}
+          min={0}
+          max={100}
+          step={5}
+          variant="minimal"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Price Range ($100-$500)</h3>
+        <GlassSlider 
+          value={price} 
+          onChange={setPrice}
+          min={100}
+          max={500}
+          step={10}
+          showValue={true}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Current slider value |
+| `onChange` | `(value: number) => void` | - | Callback fired when value changes |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `disabled` | `boolean` | `false` | Whether slider is disabled |
+| `showValue` | `boolean` | `true` | Show current value above slider |
+| `variant` | `'default' \| 'minimal'` | `'default'` | Visual style variant |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage Patterns
+
+### Volume Control
+```tsx
+<GlassSlider 
+  value={volume}
+  onChange={setVolume}
+  min={0}
+  max={100}
+  step={5}
+  variant="minimal"
+/>
+```
+
+### Price Range
+```tsx
+<GlassSlider 
+  value={price}
+  onChange={setPrice}
+  min={100}
+  max={500}
+  step={50}
+  showValue={true}
+/>
+```
+
+### Disabled State
+```tsx
+<GlassSlider 
+  value={50}
+  disabled={true}
+/>
+```
+
+## Accessibility
+
+- **ARIA Support**: Implements proper ARIA attributes for screen readers
+- **Keyboard Navigation**: 
+  - Arrow keys to adjust value
+  - Home/End keys to jump to min/max
+  - Page Up/Down for larger increments
+- **Focus Management**: Clear focus indicators and proper tab order
+- **Screen Reader**: Announces current value and range information
+- **High Contrast**: Maintains visibility in high contrast modes
+
+## Apple HIG Guidelines
+
+### Visual Design
+- **Depth**: Uses subtle shadows and glass effects for depth perception
+- **Motion**: Smooth animations with spring physics for natural feel
+- **Color**: Follows system color schemes with proper contrast ratios
+- **Typography**: Clear value display with appropriate font weights
+
+### Interaction
+- **Touch Targets**: Minimum 44pt touch target for thumb control
+- **Feedback**: Immediate visual feedback on interaction
+- **Gestures**: Supports both click/drag and keyboard interaction
+- **States**: Clear visual states for normal, hover, active, and disabled
+
+### Best Practices
+- Use appropriate step values for the data type
+- Provide clear labels and value indicators
+- Consider the range and precision needed for your use case
+- Test with assistive technologies
+- Ensure sufficient color contrast for accessibility

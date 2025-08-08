@@ -143,12 +143,11 @@ export default defineConfig({
     // Server configuration
     server: {
       deps: {
-        inline: [
-          // Inline modules that need to be processed by Vitest
-          /@liquidify\/components/,
-          /tailwind-merge/,
-          /clsx/
-        ]
+      inline: [
+        // Inline modules that need to be processed by Vitest
+        /tailwind-merge/,
+        /clsx/
+      ]
       }
     }
   },
@@ -163,7 +162,7 @@ export default defineConfig({
       '@/utils': resolve(__dirname, 'libs/components/src/utils'),
       '@/core': resolve(__dirname, 'libs/components/src/core'),
       '@/styles': resolve(__dirname, 'libs/components/src/styles'),
-      '@liquidify/components': resolve(__dirname, 'libs/components/src/index.ts')
+      'liquidify': resolve(__dirname, 'libs/components/src/index.ts')
     }
   },
   

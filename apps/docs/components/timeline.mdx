@@ -1,0 +1,226 @@
+---
+title: Timeline
+description: Display chronological events with status indicators and liquid glass styling.
+---
+
+```tsx live
+import { GlassTimeline } from '@liquidify/components'
+import { Calendar, Code, Rocket, Users } from 'lucide-react'
+
+export default function Demo() {
+  const projectTimeline = [
+    {
+      id: '1',
+      title: 'Project Planning',
+      description: 'Initial project scope and requirements gathering',
+      date: 'Jan 15, 2024',
+      status: 'completed',
+      icon: <Calendar className="h-4 w-4" />
+    },
+    {
+      id: '2', 
+      title: 'Development Phase',
+      description: 'Core feature implementation and testing',
+      date: 'Feb 1, 2024',
+      status: 'completed',
+      icon: <Code className="h-4 w-4" />,
+      content: (
+        <div className="text-sm text-white/70">
+          <p>Key milestones:</p>
+          <ul className="list-disc list-inside mt-2 space-y-1">
+            <li>API integration complete</li>
+            <li>UI components finalized</li>
+            <li>Testing framework setup</li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      id: '3',
+      title: 'Beta Testing',
+      description: 'User acceptance testing and feedback collection',
+      date: 'Mar 1, 2024',
+      status: 'active',
+      icon: <Users className="h-4 w-4" />
+    },
+    {
+      id: '4',
+      title: 'Production Launch',
+      description: 'Deploy to production and monitor performance',
+      date: 'Mar 15, 2024',
+      status: 'pending',
+      icon: <Rocket className="h-4 w-4" />
+    }
+  ]
+  
+  const horizontalTimeline = [
+    {
+      id: '1',
+      title: 'Q1 2024',
+      description: 'Foundation',
+      status: 'completed'
+    },
+    {
+      id: '2',
+      title: 'Q2 2024', 
+      description: 'Growth',
+      status: 'active'
+    },
+    {
+      id: '3',
+      title: 'Q3 2024',
+      description: 'Expansion',
+      status: 'pending'
+    },
+    {
+      id: '4',
+      title: 'Q4 2024',
+      description: 'Optimization',
+      status: 'pending'
+    }
+  ]
+  
+  return (
+    <div className="space-y-12 p-6">
+      <div>
+        <h3 className="text-white mb-6">Vertical Timeline</h3>
+        <GlassTimeline items={projectTimeline} />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-6">Horizontal Timeline</h3>
+        <GlassTimeline 
+          items={horizontalTimeline} 
+          orientation="horizontal"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-6">Alternating Layout</h3>
+        <GlassTimeline 
+          items={projectTimeline} 
+          alternating={true}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `TimelineItem[]` | - | Array of timeline items |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Timeline layout direction |
+| `alternating` | `boolean` | `false` | Alternate items left/right (vertical only) |
+| `className` | `string` | - | Additional CSS classes |
+
+### TimelineItem Interface
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Unique identifier |
+| `title` | `string` | Item title |
+| `description` | `string` | Optional description |
+| `date` | `string` | Optional date string |
+| `status` | `'completed' \| 'active' \| 'pending'` | Item status |
+| `icon` | `ReactNode` | Optional custom icon |
+| `content` | `ReactNode` | Optional additional content |
+
+## Usage Patterns
+
+### Project Roadmap
+```tsx
+const roadmap = [
+  {
+    id: '1',
+    title: 'Phase 1: Foundation',
+    description: 'Core infrastructure and basic features',
+    date: 'Q1 2024',
+    status: 'completed',
+    content: <FeatureList features={phase1Features} />
+  },
+  // ... more phases
+]
+
+<GlassTimeline items={roadmap} />
+```
+
+### Order Tracking
+```tsx
+const orderSteps = [
+  {
+    id: '1',
+    title: 'Order Placed',
+    date: 'Today, 2:30 PM',
+    status: 'completed'
+  },
+  {
+    id: '2',
+    title: 'Processing',
+    date: 'Today, 3:15 PM',
+    status: 'active'
+  },
+  {
+    id: '3',
+    title: 'Shipped',
+    date: 'Tomorrow',
+    status: 'pending'
+  }
+]
+
+<GlassTimeline items={orderSteps} orientation="horizontal" />
+```
+
+### Company History
+```tsx
+<GlassTimeline 
+  items={milestones}
+  alternating={true}
+  className="max-w-4xl mx-auto"
+/>
+```
+
+## Accessibility
+
+- **Semantic Structure**: Uses proper heading hierarchy and list semantics
+- **ARIA Labels**: Provides context for status indicators and icons
+- **Keyboard Navigation**: Focusable elements follow logical tab order
+- **Screen Reader**: Clear announcement of timeline structure and status
+- **Color Independence**: Status conveyed through icons and text, not just color
+- **High Contrast**: Maintains visibility in high contrast modes
+
+## Apple HIG Guidelines
+
+### Visual Design
+- **Hierarchy**: Clear visual hierarchy with proper spacing and typography
+- **Depth**: Glass effects and shadows create depth without overwhelming
+- **Color**: Status colors follow system conventions (green=success, blue=active, gray=pending)
+- **Typography**: Consistent font weights and sizes for readability
+
+### Layout
+- **Spacing**: Generous whitespace for easy scanning
+- **Alignment**: Consistent alignment for professional appearance
+- **Responsive**: Adapts gracefully to different screen sizes
+- **Flow**: Natural reading flow from top to bottom or left to right
+
+### Interaction
+- **Feedback**: Subtle hover effects on interactive elements
+- **States**: Clear visual states for different timeline statuses
+- **Animation**: Smooth transitions when content changes
+- **Touch**: Appropriate touch targets for mobile devices
+
+### Content Guidelines
+- **Clarity**: Use clear, concise titles and descriptions
+- **Consistency**: Maintain consistent date formats and terminology
+- **Context**: Provide enough context for each timeline item
+- **Scannable**: Structure content for easy scanning
+
+### Best Practices
+- Use consistent date formatting throughout
+- Provide meaningful status indicators
+- Consider content length for responsive design
+- Test with various content lengths
+- Ensure proper contrast for all status colors
+- Use icons consistently to reinforce meaning

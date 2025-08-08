@@ -1,0 +1,451 @@
+---
+title: Glass Date Picker
+description: Elegant date selection component with Apple-inspired liquid glass effects and comprehensive date/time functionality.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassDatePicker } from '@liquidify/components'
+
+export default function Demo() {
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedDateTime, setSelectedDateTime] = useState(null)
+  const [selectedRange, setSelectedRange] = useState(null)
+  
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  
+  const nextWeek = new Date(today)
+  nextWeek.setDate(nextWeek.getDate() + 7)
+  
+  return (
+    <div className="space-y-6 max-w-md mx-auto">
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">
+          Select Date
+        </label>
+        <GlassDatePicker
+          value={selectedDate}
+          onChange={setSelectedDate}
+          placeholder="Choose a date..."
+          minDate={today}
+        />
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">
+          Date & Time
+        </label>
+        <GlassDatePicker
+          value={selectedDateTime}
+          onChange={setSelectedDateTime}
+          placeholder="Select date and time..."
+          showTime
+          size="lg"
+        />
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">
+          Small Date Picker
+        </label>
+        <GlassDatePicker
+          value={selectedRange}
+          onChange={setSelectedRange}
+          placeholder="Pick a date..."
+          size="sm"
+          maxDate={nextWeek}
+        />
+      </div>
+      
+      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+        <h3 className="font-medium text-white mb-2">Selected Values:</h3>
+        <div className="text-white/70 text-sm space-y-1">
+          <p>Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</p>
+          <p>Date & Time: {selectedDateTime ? selectedDateTime.toLocaleString() : 'None'}</p>
+          <p>Range: {selectedRange ? selectedRange.toLocaleDateString() : 'None'}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+## Overview
+
+The Glass Date Picker component provides an elegant date selection interface with Apple-inspired liquid glass effects. It supports date-only and date-time selection with comprehensive customization options.
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `Date` | - | Current selected date |
+| `defaultValue` | `Date` | - | Default selected date (uncontrolled) |
+| `onChange` | `(date: Date \| null) => void` | - | Callback when date changes |
+| `placeholder` | `string` | `'Select date...'` | Placeholder text |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `showTime` | `boolean` | `false` | Enable time selection |
+| `format` | `string` | - | Custom date format |
+| `locale` | `string` | `'en-US'` | Locale for date formatting |
+| `minDate` | `Date` | - | Minimum selectable date |
+| `maxDate` | `Date` | - | Maximum selectable date |
+| `disabledDates` | `Date[]` | `[]` | Array of disabled dates |
+| `weekStartsOn` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0` | First day of week (0 = Sunday) |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+
+## Usage Patterns
+
+### Basic Date Selection
+
+```tsx
+const [selectedDate, setSelectedDate] = useState(null)
+
+<GlassDatePicker
+  value={selectedDate}
+  onChange={setSelectedDate}
+  placeholder="Select a date..."
+/>
+```
+
+### Date and Time Selection
+
+```tsx
+<GlassDatePicker
+  value={appointmentDateTime}
+  onChange={setAppointmentDateTime}
+  showTime
+  placeholder="Choose appointment time..."
+  minDate={new Date()}
+/>
+```
+
+### Date Range Restrictions
+
+```tsx
+const today = new Date()
+const maxDate = new Date()
+maxDate.setMonth(maxDate.getMonth() + 3)
+
+<GlassDatePicker
+  value={eventDate}
+  onChange={setEventDate}
+  minDate={today}
+  maxDate={maxDate}
+  placeholder="Select event date..."
+/>
+```
+
+### Custom Disabled Dates
+
+```tsx
+const getDisabledDates = () => {
+  const dates = []
+  const today = new Date()
+  
+  // Disable weekends
+  for (let i = 0; i < 30; i++) {
+    const date = new Date(today)
+    date.setDate(date.getDate() + i)
+    
+    if (date.getDay() === 0 || date.getDay() === 6) {
+      dates.push(date)
+    }
+  }
+  
+  return dates
+}
+
+<GlassDatePicker
+  value={workDate}
+  onChange={setWorkDate}
+  disabledDates={getDisabledDates()}
+  placeholder="Select work date..."
+/>
+```
+
+### Form Integration
+
+```tsx
+const [formData, setFormData] = useState({
+  startDate: null,
+  endDate: null,
+  reminderDate: null
+})
+
+const [errors, setErrors] = useState({})
+
+const handleStartDateChange = (date) => {
+  setFormData(prev => ({ ...prev, startDate: date }))
+  
+  // Clear end date if it's before start date
+  if (formData.endDate && date && formData.endDate < date) {
+    setFormData(prev => ({ ...prev, endDate: null }))
+  }
+  
+  // Clear error
+  if (errors.startDate) {
+    setErrors(prev => ({ ...prev, startDate: '' }))
+  }
+}
+
+<form className="space-y-4">
+  <div>
+    <label className="block text-sm font-medium mb-2">Start Date</label>
+    <GlassDatePicker
+      value={formData.startDate}
+      onChange={handleStartDateChange}
+      placeholder="Select start date..."
+      minDate={new Date()}
+    />
+    {errors.startDate && (
+      <p className="text-red-400 text-sm mt-1">{errors.startDate}</p>
+    )}
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-2">End Date</label>
+    <GlassDatePicker
+      value={formData.endDate}
+      onChange={(date) => setFormData(prev => ({ ...prev, endDate: date }))}
+      placeholder="Select end date..."
+      minDate={formData.startDate || new Date()}
+    />
+  </div>
+</form>
+```
+
+### International Localization
+
+```tsx
+const [locale, setLocale] = useState('en-US')
+
+const locales = [
+  { code: 'en-US', name: 'English (US)' },
+  { code: 'en-GB', name: 'English (UK)' },
+  { code: 'fr-FR', name: 'Français' },
+  { code: 'de-DE', name: 'Deutsch' },
+  { code: 'ja-JP', name: '日本語' }
+]
+
+<div className="space-y-4">
+  <select 
+    value={locale} 
+    onChange={(e) => setLocale(e.target.value)}
+    className="px-3 py-2 rounded-lg bg-white/10 text-white"
+  >
+    {locales.map(loc => (
+      <option key={loc.code} value={loc.code}>{loc.name}</option>
+    ))}
+  </select>
+  
+  <GlassDatePicker
+    value={selectedDate}
+    onChange={setSelectedDate}
+    locale={locale}
+    weekStartsOn={locale === 'en-US' ? 0 : 1}
+    placeholder="Select date..."
+  />
+</div>
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **Keyboard Navigation**: Full keyboard support for calendar navigation
+- **Screen Readers**: Proper ARIA labels and live regions for date announcements
+- **Focus Management**: Maintains focus within calendar during interaction
+- **Date Formatting**: Uses locale-appropriate date formats
+
+### Implementation Details
+
+- Calendar uses `role="grid"` with proper row/cell structure
+- Date cells have `aria-label` with full date information
+- Selected date is announced with `aria-selected`
+- Disabled dates are marked with `aria-disabled`
+- Month/year navigation is properly labeled
+
+### Keyboard Support
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Open calendar or select date |
+| `Escape` | Close calendar |
+| `Arrow Keys` | Navigate between dates |
+| `Home` | Go to first day of week |
+| `End` | Go to last day of week |
+| `Page Up` | Previous month |
+| `Page Down` | Next month |
+| `Shift + Page Up` | Previous year |
+| `Shift + Page Down` | Next year |
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Liquid Glass Effects**: Multi-layered transparency with backdrop blur
+- **Calendar Layout**: Clean, grid-based calendar design
+- **Typography**: SF Pro font family with appropriate weights
+- **Color Coding**: Semantic colors for different date states
+
+### Interaction Patterns
+
+- **Smooth Animations**: Spring-based animations for calendar appearance
+- **Hover States**: Subtle feedback for interactive dates
+- **Touch Gestures**: Swipe gestures for month navigation on mobile
+- **Immediate Feedback**: Visual feedback for all user actions
+
+### Layout Principles
+
+- **Grid System**: Consistent 7-column grid for calendar
+- **Touch Targets**: Minimum 44px touch targets for dates
+- **Responsive Design**: Adapts to different screen sizes
+- **Safe Areas**: Respects device safe areas and notches
+
+### Time Selection
+
+- **Native Controls**: Uses native time inputs when appropriate
+- **Clear Labeling**: Clear labels for hours and minutes
+- **24-hour Support**: Supports both 12-hour and 24-hour formats
+- **Validation**: Prevents invalid time selections
+
+## Best Practices
+
+### Performance
+
+- Use `React.memo` for calendar cells that don't change
+- Implement lazy loading for month data
+- Optimize date calculations and formatting
+- Cache formatted date strings
+
+```tsx
+// Memoized calendar cell
+const CalendarCell = React.memo(({ date, isSelected, isToday, isDisabled, onClick }) => {
+  const formattedDate = useMemo(() => {
+    return date.toLocaleDateString(locale, { day: 'numeric' })
+  }, [date, locale])
+  
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(date)}
+      disabled={isDisabled}
+      className={cn(
+        'w-10 h-10 rounded-lg transition-all',
+        isSelected && 'bg-blue-500 text-white',
+        isToday && !isSelected && 'bg-white/10',
+        isDisabled && 'opacity-50 cursor-not-allowed'
+      )}
+      aria-label={date.toLocaleDateString(locale, { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      })}
+    >
+      {formattedDate}
+    </button>
+  )
+})
+```
+
+### UX Guidelines
+
+- Provide clear visual feedback for all interactive elements
+- Use appropriate date formats for the user's locale
+- Handle edge cases gracefully (leap years, month boundaries)
+- Provide helpful error messages for invalid selections
+
+### Validation and Error Handling
+
+```tsx
+const validateDate = (date, minDate, maxDate, disabledDates) => {
+  if (!date) return null
+  
+  if (minDate && date < minDate) {
+    return `Date must be after ${minDate.toLocaleDateString()}`
+  }
+  
+  if (maxDate && date > maxDate) {
+    return `Date must be before ${maxDate.toLocaleDateString()}`
+  }
+  
+  if (disabledDates.some(disabled => 
+    date.toDateString() === disabled.toDateString()
+  )) {
+    return 'This date is not available'
+  }
+  
+  return null
+}
+
+const handleDateChange = (date) => {
+  const error = validateDate(date, minDate, maxDate, disabledDates)
+  
+  if (error) {
+    setError(error)
+    return
+  }
+  
+  setError('')
+  onChange(date)
+}
+```
+
+### Mobile Considerations
+
+- Use native date picker on mobile when appropriate
+- Ensure calendar is properly sized for touch interaction
+- Support swipe gestures for month navigation
+- Consider bottom sheet pattern for mobile calendars
+
+```tsx
+const isMobile = useMediaQuery('(max-width: 768px)')
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+
+if (isMobile && isIOS) {
+  return (
+    <input
+      type="date"
+      value={value ? value.toISOString().split('T')[0] : ''}
+      onChange={(e) => onChange(new Date(e.target.value))}
+      className="glass-input"
+    />
+  )
+}
+
+return <GlassDatePicker {...props} />
+```
+
+### Internationalization
+
+```tsx
+// Custom hook for date formatting
+const useDateFormatter = (locale) => {
+  return useMemo(() => {
+    const formatters = {
+      short: new Intl.DateTimeFormat(locale, { 
+        month: 'short', 
+        day: 'numeric' 
+      }),
+      long: new Intl.DateTimeFormat(locale, { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }),
+      time: new Intl.DateTimeFormat(locale, { 
+        hour: 'numeric', 
+        minute: '2-digit' 
+      })
+    }
+    
+    return formatters
+  }, [locale])
+}
+
+// Usage
+const formatters = useDateFormatter(locale)
+const displayDate = formatters.long.format(selectedDate)
+```

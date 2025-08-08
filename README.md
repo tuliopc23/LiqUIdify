@@ -1,11 +1,11 @@
 # 🌊 LiqUIdify
 
-[![npm version](https://img.shields.io/npm/v/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
-[![npm downloads](https://img.shields.io/npm/dm/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
+[![npm version](https://img.shields.io/npm/v/liquidify)](https://www.npmjs.com/package/liquidify)
+[![npm downloads](https://img.shields.io/npm/dm/liquidify)](https://www.npmjs.com/package/liquidify)
 [![Build Status](https://github.com/tuliopc23/LiqUIdify/actions/workflows/ci.yml/badge.svg)](https://github.com/tuliopc23/LiqUIdify/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@liquidify/components)](https://bundlephobia.com/package/@liquidify/components)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 [![Storybook](https://img.shields.io/badge/Storybook-52%2B%20Components-ff4785)](https://liquidify-storybook.vercel.app)
 
@@ -32,16 +32,16 @@
 
 ```bash
 # npm
-npm install @liquidify/components
+npm install liquidify
 
 # yarn
-yarn add @liquidify/components
+yarn add liquidify
 
 # pnpm
-pnpm add @liquidify/components
+pnpm add liquidify
 
 # bun
-bun add @liquidify/components
+bun add liquidify
 ```
 
 ### Basic Usage
@@ -51,8 +51,8 @@ import {
   GlassButton,
   GlassCard,
   UnifiedGlassProvider,
-} from "@liquidify/components";
-import "@liquidify/components/css";
+} from "liquidify";
+import "liquidify/css";
 
 function App() {
   return (
@@ -73,21 +73,18 @@ function App() {
 
 ```tsx
 // Import specific components for smaller bundle size
-import { GlassButton } from "@liquidify/components/button";
-import { GlassCard } from "@liquidify/components/card";
-import { GlassModal } from "@liquidify/components/modal";
+import { GlassButton } from "liquidify/button";
+import { GlassCard } from "liquidify/card";
+import { GlassModal } from "liquidify/modal";
 
 // Import component bundles by category
-import * as Core from "@liquidify/components/core";
-import * as Forms from "@liquidify/components/forms";
-import * as Navigation from "@liquidify/components/navigation";
-import * as Feedback from "@liquidify/components/feedback";
+import * as Core from "liquidify/core";
+import * as Forms from "liquidify/forms";
+import * as Navigation from "liquidify/navigation";
+import * as Feedback from "liquidify/feedback";
 
 // Import just the CSS you need
-import "@liquidify/components/css"; // All styles
-// OR import specific style bundles
-import "@liquidify/components/styles/core.css";
-import "@liquidify/components/styles/forms.css";
+import "liquidify/css"; // All styles
 ```
 
 ## 📚 Documentation
@@ -391,7 +388,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 - **[📖 Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
-- **[📦 NPM](https://www.npmjs.com/package/@liquidify/components)** - Package registry
+**[📦 NPM](https://www.npmjs.com/package/liquidify)**
 - **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions
 - **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
 
@@ -408,7 +405,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
   <p>
     <a href="https://liquidify-storybook.vercel.app">📖 Storybook</a> •
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
-    <a href="https://www.npmjs.com/package/@liquidify/components">📦 NPM</a> •
+<a href="https://www.npmjs.com/package/liquidify">📦 NPM</a>
     <a href="https://liquidify-docs.vercel.app/api/">📋 API Docs</a>
   </p>
   <p>

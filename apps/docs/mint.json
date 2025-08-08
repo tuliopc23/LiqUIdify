@@ -52,17 +52,86 @@
       "group": "Components",
       "pages": [
         "components/index",
-        "components/button",
-        "components/card",
-        "components/modal",
-        "components/input",
-        "components/tabs",
-        "components/toast",
-        "components/tooltip",
-        "components/dropdown",
-        "components/table",
-        "components/switch"
-      ]
+        {
+          "group": "Core System",
+          "pages": [
+            "components/liquid-glass",
+            "components/theme-toggle"
+          ]
+        },
+        {
+          "group": "Form Controls",
+          "pages": [
+            "components/button",
+            "components/input",
+            "components/textarea",
+            "components/select",
+            "components/checkbox",
+            "components/radio-group",
+            "components/switch",
+            "components/slider",
+            "components/file-upload",
+            "components/date-picker",
+            "components/number-input"
+          ]
+        },
+        {
+          "group": "Layout & Containers",
+          "pages": [
+            "components/card",
+            "components/modal",
+            "components/drawer",
+            "components/accordion",
+            "components/popover",
+            "components/portal"
+          ]
+        },
+        {
+          "group": "Navigation",
+          "pages": [
+            "components/tabs",
+            "components/breadcrumbs",
+            "components/pagination",
+            "components/mobile-nav",
+            "components/skip-navigation"
+          ]
+        },
+        {
+          "group": "Feedback & Loading",
+          "pages": [
+            "components/alert",
+            "components/banner",
+            "components/toast",
+            "components/tooltip",
+            "components/notification",
+            "components/progress",
+            "components/loading",
+            "components/spinner",
+            "components/skeleton"
+          ]
+        },
+        {
+          "group": "Data Display",
+          "pages": [
+            "components/avatar",
+            "components/badge",
+            "components/table",
+            "components/timeline",
+            "components/tree-view",
+            "components/chart"
+          ]
+        },
+        {
+          "group": "Utility",
+          "pages": [
+            "components/dropdown",
+            "components/command",
+            "components/combobox",
+            "components/search",
+            "components/focus-trap",
+            "components/error-boundary"
+          ]
+        }
     },
     {
       "group": "API Reference",

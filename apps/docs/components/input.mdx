@@ -1,26 +1,471 @@
 ---
 title: Input
-description: Text input with icons, clear, and password variants.
+description: Text input fields with liquid glass effects, validation states, and comprehensive accessibility.
+icon: type
 ---
 
+# Input
+
+A glassmorphic input component with liquid glass effects, validation states, and comprehensive accessibility support. Features Apple-inspired design with smooth focus transitions and clear visual feedback.
+
+## Live Examples
+
+### Basic Usage
+
 ```tsx live
-import { useState } from 'react'
 import { GlassInput } from '@liquidify/components'
 
 export default function Demo() {
-  const [value, setValue] = useState('')
   return (
-    <div className="space-y-4" style={{maxWidth:420}}>
-      <GlassInput placeholder="Default" value={value} onChange={(e:any)=>setValue(e.target?.value ?? '')} clearable />
-      <GlassInput variant="search" placeholder="Search" />
-      <GlassInput variant="password" placeholder="Password" />
-      <GlassInput error helperText="Example invalid state" placeholder="Error state" />
+    <div className="w-full max-w-md space-y-4">
+      <GlassInput placeholder="Enter your name" />
+      
+      <GlassInput 
+        type="email" 
+        placeholder="Enter your email"
+        label="Email Address"
+      />
+      
+      <GlassInput 
+        type="password" 
+        placeholder="Enter your password"
+        label="Password"
+      />
     </div>
   )
 }
 ```
 
-Props
-- variant: default | search | password | email
-- leftIcon, rightIcon, clearable, error, helperText
+### Size Variants
 
+```tsx live
+import { GlassInput } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md space-y-4">
+      <GlassInput size="sm" placeholder="Small input" label="Small" />
+      <GlassInput size="md" placeholder="Medium input" label="Medium" />
+      <GlassInput size="lg" placeholder="Large input" label="Large" />
+    </div>
+  )
+}
+```
+
+### Validation States
+
+```tsx live
+import { GlassInput } from '@liquidify/components'
+import { Check, AlertCircle } from 'lucide-react'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md space-y-4">
+      <GlassInput 
+        placeholder="Valid input"
+        label="Success State"
+        state="success"
+        message="This field is valid"
+        rightIcon={<Check className="w-4 h-4" />}
+      />
+      
+      <GlassInput 
+        placeholder="Invalid input"
+        label="Error State"
+        state="error"
+        message="This field is required"
+        rightIcon={<AlertCircle className="w-4 h-4" />}
+      />
+      
+      <GlassInput 
+        placeholder="Warning input"
+        label="Warning State"
+        state="warning"
+        message="Please double-check this value"
+      />
+    </div>
+  )
+}
+```
+
+### With Icons
+
+```tsx live
+import { GlassInput } from '@liquidify/components'
+import { Search, Mail, Lock, User } from 'lucide-react'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md space-y-4">
+      <GlassInput 
+        placeholder="Search..."
+        leftIcon={<Search className="w-4 h-4" />}
+      />
+      
+      <GlassInput 
+        type="email"
+        placeholder="Email address"
+        leftIcon={<Mail className="w-4 h-4" />}
+      />
+      
+      <GlassInput 
+        type="password"
+        placeholder="Password"
+        leftIcon={<Lock className="w-4 h-4" />}
+      />
+      
+      <GlassInput 
+        placeholder="Username"
+        leftIcon={<User className="w-4 h-4" />}
+        rightIcon={<Check className="w-4 h-4 text-green-500" />}
+      />
+    </div>
+  )
+}
+```
+
+### Disabled and Read-only
+
+```tsx live
+import { GlassInput } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md space-y-4">
+      <GlassInput 
+        placeholder="Disabled input"
+        label="Disabled"
+        disabled
+      />
+      
+      <GlassInput 
+        value="Read-only value"
+        label="Read-only"
+        readOnly
+      />
+      
+      <GlassInput 
+        value="Disabled with value"
+        label="Disabled with Value"
+        disabled
+      />
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `"text"` | HTML input type |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Input size |
+| `label` | `string` | - | Input label |
+| `placeholder` | `string` | - | Placeholder text |
+| `state` | `"default" \| "success" \| "error" \| "warning"` | `"default"` | Validation state |
+| `message` | `string` | - | Help or error message |
+| `leftIcon` | `ReactNode` | - | Icon on the left side |
+| `rightIcon` | `ReactNode` | - | Icon on the right side |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `readOnly` | `boolean` | `false` | Read-only state |
+| `required` | `boolean` | `false` | Required field |
+| `value` | `string` | - | Controlled value |
+| `defaultValue` | `string` | - | Default value |
+| `onChange` | `(event) => void` | - | Change event handler |
+| `onFocus` | `(event) => void` | - | Focus event handler |
+| `onBlur` | `(event) => void` | - | Blur event handler |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage Patterns
+
+### Form Fields
+
+```tsx
+import { useState } from 'react'
+import { GlassInput, GlassButton } from '@liquidify/components'
+
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  
+  const [errors, setErrors] = useState({})
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Validation logic
+    const newErrors = {}
+    if (!formData.name) newErrors.name = 'Name is required'
+    if (!formData.email) newErrors.email = 'Email is required'
+    
+    setErrors(newErrors)
+    
+    if (Object.keys(newErrors).length === 0) {
+      // Submit form
+      console.log('Form submitted:', formData)
+    }
+  }
+  
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <GlassInput
+        label="Full Name"
+        placeholder="Enter your full name"
+        value={formData.name}
+        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+        state={errors.name ? 'error' : 'default'}
+        message={errors.name}
+        required
+      />
+      
+      <GlassInput
+        type="email"
+        label="Email Address"
+        placeholder="Enter your email"
+        value={formData.email}
+        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+        state={errors.email ? 'error' : 'default'}
+        message={errors.email}
+        required
+      />
+      
+      <GlassButton type="submit" variant="primary">
+        Submit
+      </GlassButton>
+    </form>
+  )
+}
+```
+
+### Search Input
+
+```tsx
+import { useState } from 'react'
+import { GlassInput } from '@liquidify/components'
+import { Search, X } from 'lucide-react'
+
+function SearchInput({ onSearch, placeholder = "Search..." }) {
+  const [query, setQuery] = useState('')
+  
+  const handleClear = () => {
+    setQuery('')
+    onSearch('')
+  }
+  
+  const handleChange = (e) => {
+    const value = e.target.value
+    setQuery(value)
+    onSearch(value)
+  }
+  
+  return (
+    <GlassInput
+      placeholder={placeholder}
+      value={query}
+      onChange={handleChange}
+      leftIcon={<Search className="w-4 h-4" />}
+      rightIcon={
+        query && (
+          <button
+            type="button"
+            onClick={handleClear}
+            className="p-1 hover:bg-gray-100 rounded"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        )
+      }
+    />
+  )
+}
+```
+
+### Password Input with Visibility Toggle
+
+```tsx
+import { useState } from 'react'
+import { GlassInput } from '@liquidify/components'
+import { Eye, EyeOff, Lock } from 'lucide-react'
+
+function PasswordInput({ label = "Password", ...props }) {
+  const [showPassword, setShowPassword] = useState(false)
+  
+  return (
+    <GlassInput
+      type={showPassword ? 'text' : 'password'}
+      label={label}
+      leftIcon={<Lock className="w-4 h-4" />}
+      rightIcon={
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="p-1 hover:bg-gray-100 rounded"
+        >
+          {showPassword ? (
+            <EyeOff className="w-4 h-4" />
+          ) : (
+            <Eye className="w-4 h-4" />
+          )}
+        </button>
+      }
+      {...props}
+    />
+  )
+}
+```
+
+## Accessibility
+
+The GlassInput component follows WCAG 2.1 guidelines:
+
+### Keyboard Navigation
+- **Tab**: Navigate between inputs
+- **Enter**: Submit form (when in form)
+- **Escape**: Clear input (when applicable)
+
+### Screen Reader Support
+- Proper label association
+- Error message announcements
+- State change notifications
+- Required field indicators
+
+### Visual Accessibility
+- High contrast focus indicators
+- Clear error states
+- Sufficient color contrast
+- Readable typography
+
+### ARIA Attributes
+- `aria-invalid` for error states
+- `aria-describedby` for help text
+- `aria-required` for required fields
+- `aria-label` when no visible label
+
+## Apple HIG Guidelines
+
+Following Apple's Human Interface Guidelines for text fields:
+
+### Visual Design
+- **Clarity**: Clean, readable input styling
+- **Depth**: Subtle glass effects create visual hierarchy
+- **Consistency**: Uniform styling across states
+
+### Interaction
+- **Responsiveness**: Immediate visual feedback
+- **Predictability**: Consistent behavior patterns
+- **Feedback**: Clear validation states
+
+### Content
+- **Helpful**: Clear labels and placeholder text
+- **Concise**: Brief, descriptive messaging
+- **Contextual**: Appropriate for the input type
+
+## Best Practices
+
+### Labels and Placeholders
+- Always provide clear labels
+- Use placeholders for examples, not instructions
+- Keep placeholder text concise
+- Consider internationalization
+
+### Validation
+- Validate on blur for better UX
+- Provide clear, actionable error messages
+- Use appropriate validation states
+- Consider real-time validation for complex fields
+
+### Icons
+- Use icons to clarify input purpose
+- Ensure icons are accessible
+- Don't rely solely on icons for meaning
+- Keep icon usage consistent
+
+### Responsive Design
+- Ensure adequate touch targets
+- Test on various screen sizes
+- Consider mobile keyboard types
+- Maintain readability at all sizes
+
+## Examples
+
+### Login Form
+
+```tsx
+function LoginForm() {
+  const [credentials, setCredentials] = useState({ email: '', password: '' })
+  const [errors, setErrors] = useState({})
+  
+  return (
+    <div className="space-y-4">
+      <GlassInput
+        type="email"
+        label="Email"
+        placeholder="Enter your email"
+        value={credentials.email}
+        onChange={(e) => setCredentials(prev => ({ ...prev, email: e.target.value }))}
+        leftIcon={<Mail className="w-4 h-4" />}
+        state={errors.email ? 'error' : 'default'}
+        message={errors.email}
+        required
+      />
+      
+      <PasswordInput
+        label="Password"
+        placeholder="Enter your password"
+        value={credentials.password}
+        onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
+        state={errors.password ? 'error' : 'default'}
+        message={errors.password}
+        required
+      />
+    </div>
+  )
+}
+```
+
+### Settings Form
+
+```tsx
+function ProfileSettings({ user }) {
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <GlassInput
+          label="First Name"
+          defaultValue={user.firstName}
+          required
+        />
+        
+        <GlassInput
+          label="Last Name"
+          defaultValue={user.lastName}
+          required
+        />
+      </div>
+      
+      <GlassInput
+        type="email"
+        label="Email Address"
+        defaultValue={user.email}
+        leftIcon={<Mail className="w-4 h-4" />}
+        required
+      />
+      
+      <GlassInput
+        label="Company"
+        defaultValue={user.company}
+        leftIcon={<Building className="w-4 h-4" />}
+      />
+      
+      <GlassInput
+        label="Website"
+        placeholder="https://"
+        defaultValue={user.website}
+        leftIcon={<Globe className="w-4 h-4" />}
+      />
+    </div>
+  )
+}
+```

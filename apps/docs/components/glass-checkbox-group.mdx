@@ -1,0 +1,423 @@
+---
+title: Glass Checkbox Group
+description: Elegant checkbox group component with Apple-inspired liquid glass effects and flexible layout options.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassCheckboxGroup } from '@liquidify/components'
+
+export default function Demo() {
+  const [selectedFeatures, setSelectedFeatures] = useState(['notifications', 'analytics'])
+  const [selectedCategories, setSelectedCategories] = useState([])
+  
+  const features = [
+    {
+      value: 'notifications',
+      label: 'Push Notifications',
+      description: 'Receive real-time updates and alerts'
+    },
+    {
+      value: 'analytics',
+      label: 'Advanced Analytics',
+      description: 'Detailed insights and reporting'
+    },
+    {
+      value: 'api',
+      label: 'API Access',
+      description: 'Programmatic access to your data'
+    },
+    {
+      value: 'support',
+      label: 'Priority Support',
+      description: '24/7 dedicated customer support'
+    }
+  ]
+  
+  const categories = [
+    { value: 'tech', label: 'Technology' },
+    { value: 'design', label: 'Design' },
+    { value: 'business', label: 'Business' },
+    { value: 'marketing', label: 'Marketing' }
+  ]
+  
+  return (
+    <div className="space-y-8 max-w-lg mx-auto">
+      <div>
+        <GlassCheckboxGroup
+          label="Premium Features"
+          description="Select the features you'd like to enable"
+          options={features}
+          value={selectedFeatures}
+          onChange={setSelectedFeatures}
+          size="md"
+        />
+      </div>
+      
+      <div>
+        <GlassCheckboxGroup
+          label="Interests"
+          description="Choose your areas of interest"
+          options={categories}
+          value={selectedCategories}
+          onChange={setSelectedCategories}
+          orientation="horizontal"
+          size="sm"
+        />
+      </div>
+      
+      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+        <h3 className="font-medium text-white mb-2">Selected Values:</h3>
+        <div className="text-white/70 text-sm space-y-1">
+          <p>Features: {selectedFeatures.join(', ') || 'None'}</p>
+          <p>Categories: {selectedCategories.join(', ') || 'None'}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+## Overview
+
+The Glass Checkbox Group component provides an elegant way to present multiple checkbox options with consistent styling and behavior. It features Apple-inspired liquid glass effects and supports both vertical and horizontal layouts.
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `CheckboxOption[]` | - | **Required.** Array of checkbox options |
+| `value` | `string[]` | - | Controlled selected values |
+| `defaultValue` | `string[]` | `[]` | Default selected values (uncontrolled) |
+| `onChange` | `(value: string[]) => void` | - | Callback when selection changes |
+| `name` | `string` | - | Form field name |
+| `label` | `string` | - | Group label |
+| `description` | `string` | - | Group description |
+| `error` | `string` | - | Error message |
+| `required` | `boolean` | `false` | Required field indicator |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation |
+
+### CheckboxOption Interface
+
+```typescript
+interface CheckboxOption {
+  value: string
+  label: string
+  disabled?: boolean
+  description?: string
+}
+```
+
+## Usage Patterns
+
+### Basic Checkbox Group
+
+```tsx
+const options = [
+  { value: 'email', label: 'Email notifications' },
+  { value: 'sms', label: 'SMS notifications' },
+  { value: 'push', label: 'Push notifications' }
+]
+
+<GlassCheckboxGroup
+  label="Notification Preferences"
+  options={options}
+  value={selectedNotifications}
+  onChange={setSelectedNotifications}
+/>
+```
+
+### With Descriptions
+
+```tsx
+const features = [
+  {
+    value: 'premium',
+    label: 'Premium Features',
+    description: 'Access to advanced tools and analytics'
+  },
+  {
+    value: 'beta',
+    label: 'Beta Features',
+    description: 'Early access to experimental features'
+  }
+]
+
+<GlassCheckboxGroup
+  label="Feature Access"
+  options={features}
+  value={selectedFeatures}
+  onChange={setSelectedFeatures}
+/>
+```
+
+### Horizontal Layout
+
+```tsx
+<GlassCheckboxGroup
+  label="Skills"
+  options={skillOptions}
+  value={selectedSkills}
+  onChange={setSelectedSkills}
+  orientation="horizontal"
+  size="sm"
+/>
+```
+
+### Form Integration
+
+```tsx
+const [formData, setFormData] = useState({
+  interests: [],
+  preferences: []
+})
+
+const [errors, setErrors] = useState({})
+
+const handleInterestsChange = (interests) => {
+  setFormData(prev => ({ ...prev, interests }))
+  
+  // Clear error when user makes selection
+  if (interests.length > 0 && errors.interests) {
+    setErrors(prev => ({ ...prev, interests: '' }))
+  }
+}
+
+<form>
+  <GlassCheckboxGroup
+    label="Areas of Interest"
+    description="Select at least one area"
+    options={interestOptions}
+    value={formData.interests}
+    onChange={handleInterestsChange}
+    error={errors.interests}
+    required
+  />
+  
+  <GlassCheckboxGroup
+    label="Communication Preferences"
+    options={communicationOptions}
+    value={formData.preferences}
+    onChange={(preferences) => 
+      setFormData(prev => ({ ...prev, preferences }))
+    }
+  />
+</form>
+```
+
+### Conditional Options
+
+```tsx
+const [selectedPlan, setSelectedPlan] = useState('basic')
+const [selectedAddons, setSelectedAddons] = useState([])
+
+const getAvailableAddons = (plan) => {
+  const baseAddons = [
+    { value: 'support', label: 'Priority Support' },
+    { value: 'backup', label: 'Daily Backups' }
+  ]
+  
+  if (plan === 'premium') {
+    return [
+      ...baseAddons,
+      { value: 'analytics', label: 'Advanced Analytics' },
+      { value: 'api', label: 'API Access' }
+    ]
+  }
+  
+  return baseAddons
+}
+
+<GlassCheckboxGroup
+  label="Add-ons"
+  options={getAvailableAddons(selectedPlan)}
+  value={selectedAddons}
+  onChange={setSelectedAddons}
+/>
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **Keyboard Navigation**: Full keyboard support with Tab and Space
+- **Screen Readers**: Proper fieldset/legend structure and ARIA labels
+- **Focus Management**: Clear focus indicators for all interactive elements
+- **Group Semantics**: Uses fieldset and legend for proper grouping
+
+### Implementation Details
+
+- Uses `<fieldset>` and `<legend>` for semantic grouping
+- Each checkbox has proper labels and descriptions
+- Error messages are associated with the group
+- Required state is communicated to assistive technologies
+
+### Keyboard Support
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Navigate between checkboxes |
+| `Space` | Toggle focused checkbox |
+| `Enter` | Toggle focused checkbox |
+| `Arrow Keys` | Navigate between checkboxes (optional) |
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Liquid Glass Effects**: Subtle transparency and backdrop blur
+- **Consistent Spacing**: Uses 8pt grid system for layout
+- **Typography**: SF Pro font family with appropriate weights
+- **Touch Targets**: Minimum 44px touch targets on mobile
+
+### Interaction Patterns
+
+- **Immediate Feedback**: Visual feedback for all state changes
+- **Clear States**: Distinct visual states for checked, unchecked, and disabled
+- **Hover Effects**: Subtle hover feedback for interactive elements
+- **Error Handling**: Clear error messaging and visual indicators
+
+### Layout Principles
+
+- **Logical Grouping**: Related options are visually grouped
+- **Scannable Layout**: Easy to scan and understand at a glance
+- **Responsive Design**: Adapts to different screen sizes
+- **Content Hierarchy**: Clear hierarchy with labels and descriptions
+
+### Color and Theming
+
+- **Semantic Colors**: Uses appropriate colors for different states
+- **High Contrast**: Maintains accessibility standards
+- **Adaptive Colors**: Responds to system light/dark mode
+- **Brand Integration**: Supports custom color schemes
+
+## Best Practices
+
+### Performance
+
+- Use `React.memo` for option components that don't change frequently
+- Implement virtualization for very large option lists
+- Optimize re-renders with proper dependency arrays
+
+```tsx
+const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
+  return (
+    <label className="flex items-center gap-3 p-2 cursor-pointer">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        disabled={disabled}
+        className="sr-only"
+      />
+      <div className={cn(
+        'w-5 h-5 rounded border-2 transition-all',
+        checked ? 'bg-blue-500 border-blue-500' : 'border-white/20'
+      )}>
+        {checked && <CheckIcon />}
+      </div>
+      <div>
+        <div className="font-medium">{option.label}</div>
+        {option.description && (
+          <div className="text-sm text-white/60">{option.description}</div>
+        )}
+      </div>
+    </label>
+  )
+})
+```
+
+### UX Guidelines
+
+- Keep option lists manageable (5-10 items when possible)
+- Use clear, descriptive labels
+- Group related options logically
+- Provide helpful descriptions for complex options
+- Consider the cognitive load of multiple selections
+
+### Validation and Error Handling
+
+```tsx
+const validateSelection = (values, options) => {
+  const errors = []
+  
+  if (required && values.length === 0) {
+    errors.push('Please select at least one option')
+  }
+  
+  if (maxSelections && values.length > maxSelections) {
+    errors.push(`Please select no more than ${maxSelections} options`)
+  }
+  
+  if (minSelections && values.length < minSelections) {
+    errors.push(`Please select at least ${minSelections} options`)
+  }
+  
+  return errors
+}
+
+const handleChange = (newValues) => {
+  const errors = validateSelection(newValues, options)
+  
+  if (errors.length > 0) {
+    setError(errors[0])
+  } else {
+    setError('')
+    onChange(newValues)
+  }
+}
+```
+
+### Mobile Considerations
+
+- Ensure touch targets are appropriately sized (minimum 44px)
+- Consider using larger checkboxes on mobile devices
+- Test with various screen sizes and orientations
+- Optimize for thumb-friendly interaction
+
+### State Management
+
+```tsx
+// Custom hook for checkbox group state
+const useCheckboxGroup = (initialValues = [], options = {}) => {
+  const [values, setValues] = useState(initialValues)
+  const [errors, setErrors] = useState([])
+  
+  const toggle = useCallback((value) => {
+    setValues(prev => {
+      const newValues = prev.includes(value)
+        ? prev.filter(v => v !== value)
+        : [...prev, value]
+      
+      // Validate new values
+      const validationErrors = validateSelection(newValues, options)
+      setErrors(validationErrors)
+      
+      return newValues
+    })
+  }, [options])
+  
+  const selectAll = useCallback(() => {
+    const allValues = options.map(opt => opt.value)
+    setValues(allValues)
+    setErrors([])
+  }, [options])
+  
+  const selectNone = useCallback(() => {
+    setValues([])
+    setErrors([])
+  }, [])
+  
+  return {
+    values,
+    errors,
+    toggle,
+    selectAll,
+    selectNone,
+    isSelected: (value) => values.includes(value),
+    hasErrors: errors.length > 0
+  }
+}
+```

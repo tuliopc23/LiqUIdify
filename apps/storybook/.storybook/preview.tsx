@@ -1,6 +1,7 @@
+import React from "react";
 import type { Preview } from "@storybook/react";
 // Use package CSS export to mirror consumer usage
-import "@liquidify/components/css";
+import "liquidify/css";
 
 const preview: Preview = {
   parameters: {
@@ -93,7 +94,9 @@ const preview: Preview = {
               : '#ffffff',
           }}
         >
-          <Story />
+          <React.StrictMode>
+            <Story />
+          </React.StrictMode>
         </div>
       );
     },

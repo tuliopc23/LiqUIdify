@@ -1,0 +1,465 @@
+---
+title: Badge
+description: Small status indicators with glassmorphism effects and semantic variants.
+icon: tag
+---
+
+# Badge
+
+A glassmorphic badge component for displaying status, counts, labels, and other small pieces of information. Features semantic color variants and smooth glass effects.
+
+## Live Examples
+
+### Basic Variants
+
+```tsx live
+import { GlassBadge } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="flex items-center gap-3 flex-wrap">
+      <GlassBadge variant="default">Default</GlassBadge>
+      <GlassBadge variant="success">Success</GlassBadge>
+      <GlassBadge variant="warning">Warning</GlassBadge>
+      <GlassBadge variant="error">Error</GlassBadge>
+    </div>
+  )
+}
+```
+
+### Status Indicators
+
+```tsx live
+import { GlassBadge } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Server Status:</span>
+        <GlassBadge variant="success">Online</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Build Status:</span>
+        <GlassBadge variant="warning">Pending</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Connection:</span>
+        <GlassBadge variant="error">Failed</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Version:</span>
+        <GlassBadge variant="default">v2.1.0</GlassBadge>
+      </div>
+    </div>
+  )
+}
+```
+
+### Count Badges
+
+```tsx live
+import { GlassBadge } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Notifications</span>
+        <GlassBadge variant="error">3</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Messages</span>
+        <GlassBadge variant="default">12</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Tasks</span>
+        <GlassBadge variant="warning">5</GlassBadge>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Completed</span>
+        <GlassBadge variant="success">24</GlassBadge>
+      </div>
+    </div>
+  )
+}
+```
+
+### Category Tags
+
+```tsx live
+import { GlassBadge } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h4 className="text-sm font-medium mb-2">Article Categories</h4>
+        <div className="flex gap-2 flex-wrap">
+          <GlassBadge variant="default">Technology</GlassBadge>
+          <GlassBadge variant="default">Design</GlassBadge>
+          <GlassBadge variant="default">Development</GlassBadge>
+          <GlassBadge variant="default">UI/UX</GlassBadge>
+        </div>
+      </div>
+      
+      <div>
+        <h4 className="text-sm font-medium mb-2">Priority Levels</h4>
+        <div className="flex gap-2 flex-wrap">
+          <GlassBadge variant="error">High</GlassBadge>
+          <GlassBadge variant="warning">Medium</GlassBadge>
+          <GlassBadge variant="success">Low</GlassBadge>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+### With Icons
+
+```tsx live
+import { GlassBadge } from '@liquidify/components'
+import { Check, AlertTriangle, X, Info } from 'lucide-react'
+
+export default function Demo() {
+  return (
+    <div className="flex items-center gap-3 flex-wrap">
+      <GlassBadge variant="success">
+        <Check className="w-3 h-3 mr-1" />
+        Verified
+      </GlassBadge>
+      
+      <GlassBadge variant="warning">
+        <AlertTriangle className="w-3 h-3 mr-1" />
+        Pending
+      </GlassBadge>
+      
+      <GlassBadge variant="error">
+        <X className="w-3 h-3 mr-1" />
+        Failed
+      </GlassBadge>
+      
+      <GlassBadge variant="default">
+        <Info className="w-3 h-3 mr-1" />
+        Info
+      </GlassBadge>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "success" \| "warning" \| "error"` | `"default"` | Semantic variant affecting color and styling |
+| `children` | `ReactNode` | - | **Required.** Badge content |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage Patterns
+
+### Status Dashboard
+
+```tsx
+import { GlassBadge } from '@liquidify/components'
+
+function StatusDashboard({ services }) {
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'operational': return 'success'
+      case 'degraded': return 'warning'
+      case 'outage': return 'error'
+      default: return 'default'
+    }
+  }
+  
+  return (
+    <div className="space-y-4">
+      <h3 className="font-semibold">Service Status</h3>
+      {services.map((service) => (
+        <div key={service.id} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+          <span className="font-medium">{service.name}</span>
+          <GlassBadge variant={getStatusVariant(service.status)}>
+            {service.status}
+          </GlassBadge>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Notification Counter
+
+```tsx
+import { GlassBadge } from '@liquidify/components'
+import { Bell } from 'lucide-react'
+
+function NotificationButton({ count }) {
+  return (
+    <button className="relative p-2 rounded-lg hover:bg-white/10">
+      <Bell className="w-5 h-5" />
+      {count > 0 && (
+        <GlassBadge 
+          variant="error" 
+          className="absolute -top-1 -right-1 min-w-[20px] h-5 text-xs"
+        >
+          {count > 99 ? '99+' : count}
+        </GlassBadge>
+      )}
+    </button>
+  )
+}
+```
+
+### Product Features
+
+```tsx
+import { GlassBadge } from '@liquidify/components'
+
+function ProductCard({ product }) {
+  return (
+    <div className="p-4 bg-white/10 rounded-lg">
+      <div className="flex items-start justify-between mb-2">
+        <h3 className="font-semibold">{product.name}</h3>
+        {product.isNew && (
+          <GlassBadge variant="success">New</GlassBadge>
+        )}
+      </div>
+      
+      <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+      
+      <div className="flex gap-2 flex-wrap">
+        {product.features.map((feature) => (
+          <GlassBadge key={feature} variant="default">
+            {feature}
+          </GlassBadge>
+        ))}
+      </div>
+      
+      <div className="flex items-center justify-between mt-4">
+        <span className="font-bold">${product.price}</span>
+        {product.discount && (
+          <GlassBadge variant="warning">
+            {product.discount}% OFF
+          </GlassBadge>
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+### User Roles
+
+```tsx
+import { GlassBadge } from '@liquidify/components'
+import { GlassAvatar } from '@liquidify/components'
+
+function UserList({ users }) {
+  const getRoleVariant = (role) => {
+    switch (role) {
+      case 'admin': return 'error'
+      case 'moderator': return 'warning'
+      case 'premium': return 'success'
+      default: return 'default'
+    }
+  }
+  
+  return (
+    <div className="space-y-3">
+      {users.map((user) => (
+        <div key={user.id} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+          <div className="flex items-center gap-3">
+            <GlassAvatar 
+              src={user.avatar}
+              alt={user.name}
+              fallback={user.initials}
+            />
+            <div>
+              <h4 className="font-medium">{user.name}</h4>
+              <p className="text-sm text-gray-600">{user.email}</p>
+            </div>
+          </div>
+          <GlassBadge variant={getRoleVariant(user.role)}>
+            {user.role}
+          </GlassBadge>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+## Accessibility
+
+The GlassBadge component follows WCAG 2.1 guidelines:
+
+### Visual Design
+- High contrast colors for readability
+- Sufficient color contrast ratios (4.5:1 minimum)
+- Clear typography with appropriate sizing
+- Color is not the sole indicator of meaning
+
+### Content
+- Concise, meaningful text
+- Descriptive labels for status indicators
+- Consistent terminology across the application
+- Screen reader friendly content
+
+### Semantic HTML
+- Uses appropriate HTML elements
+- Proper ARIA labels when needed
+- Meaningful content structure
+
+## Apple HIG Guidelines
+
+Following Apple's Human Interface Guidelines for labels and indicators:
+
+### Visual Design
+- **Clarity**: Clean, readable typography
+- **Depth**: Subtle glass effects create visual hierarchy
+- **Color**: Semantic colors that convey meaning
+
+### Content
+- **Concise**: Brief, scannable text
+- **Meaningful**: Clear purpose and context
+- **Consistent**: Uniform styling and terminology
+
+### Interaction
+- **Subtle**: Non-intrusive visual presence
+- **Contextual**: Appears where relevant
+- **Responsive**: Adapts to different screen sizes
+
+## Best Practices
+
+### Content Guidelines
+- Keep text short and descriptive
+- Use consistent terminology
+- Avoid technical jargon
+- Consider internationalization
+
+### Visual Hierarchy
+- Use semantic variants appropriately
+- Don't overuse badges in a single view
+- Maintain consistent sizing
+- Group related badges logically
+
+### Performance
+- Avoid excessive badge animations
+- Use appropriate color variants
+- Consider badge density in lists
+- Test with various content lengths
+
+### Responsive Design
+- Ensure readability on all screen sizes
+- Consider badge wrapping behavior
+- Maintain touch-friendly spacing
+- Test with different text lengths
+
+## Examples
+
+### E-commerce Product
+
+```tsx
+function ProductBadges({ product }) {
+  return (
+    <div className="flex gap-2 flex-wrap">
+      {product.isOnSale && (
+        <GlassBadge variant="error">Sale</GlassBadge>
+      )}
+      {product.isFeatured && (
+        <GlassBadge variant="warning">Featured</GlassBadge>
+      )}
+      {product.isNew && (
+        <GlassBadge variant="success">New</GlassBadge>
+      )}
+      {product.stock < 5 && (
+        <GlassBadge variant="warning">Low Stock</GlassBadge>
+      )}
+      {product.isBestseller && (
+        <GlassBadge variant="success">Bestseller</GlassBadge>
+      )}
+    </div>
+  )
+}
+```
+
+### Task Management
+
+```tsx
+function TaskItem({ task }) {
+  const getPriorityVariant = (priority) => {
+    switch (priority) {
+      case 'high': return 'error'
+      case 'medium': return 'warning'
+      case 'low': return 'success'
+      default: return 'default'
+    }
+  }
+  
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'completed': return 'success'
+      case 'in-progress': return 'warning'
+      case 'blocked': return 'error'
+      default: return 'default'
+    }
+  }
+  
+  return (
+    <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+      <div className="flex-1">
+        <h4 className="font-medium mb-1">{task.title}</h4>
+        <p className="text-sm text-gray-600">{task.description}</p>
+      </div>
+      <div className="flex gap-2">
+        <GlassBadge variant={getPriorityVariant(task.priority)}>
+          {task.priority}
+        </GlassBadge>
+        <GlassBadge variant={getStatusVariant(task.status)}>
+          {task.status}
+        </GlassBadge>
+      </div>
+    </div>
+  )
+}
+```
+
+### Analytics Dashboard
+
+```tsx
+function MetricCard({ metric }) {
+  const getTrendVariant = (trend) => {
+    if (trend > 0) return 'success'
+    if (trend < 0) return 'error'
+    return 'default'
+  }
+  
+  const getTrendText = (trend) => {
+    if (trend > 0) return `+${trend}%`
+    if (trend < 0) return `${trend}%`
+    return 'No change'
+  }
+  
+  return (
+    <div className="p-4 bg-white/10 rounded-lg">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-sm font-medium text-gray-600">{metric.label}</h3>
+        <GlassBadge variant={getTrendVariant(metric.trend)}>
+          {getTrendText(metric.trend)}
+        </GlassBadge>
+      </div>
+      <p className="text-2xl font-bold">{metric.value}</p>
+      <p className="text-xs text-gray-500 mt-1">vs last period</p>
+    </div>
+  )
+}
+```

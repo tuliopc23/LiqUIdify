@@ -1,23 +1,169 @@
 ---
 title: Switch
-description: Toggle control with smooth handle animation.
+description: Toggle control with smooth handle animation and liquid glass styling.
 ---
 
 ```tsx live
 import { useState } from 'react'
 import { GlassSwitch } from '@liquidify/components'
 
-export default function Demo(){
-  const [checked, setChecked] = useState(false)
+export default function Demo() {
+  const [basicSwitch, setBasicSwitch] = useState(false)
+  const [labeledSwitch, setLabeledSwitch] = useState(true)
+  const [disabledSwitch, setDisabledSwitch] = useState(false)
+  const [settings, setSettings] = useState({
+    notifications: true,
+    darkMode: false,
+    autoSave: true
+  })
+  
   return (
-    <div className="space-y-2">
-      <GlassSwitch label={checked ? 'On' : 'Off'} checked={checked} onChange={setChecked} />
-      <div className="text-white/80 text-sm">State: {checked ? 'enabled' : 'disabled'}</div>
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Switch</h3>
+        <div className="space-y-4">
+          <GlassSwitch 
+            checked={basicSwitch} 
+            onChange={setBasicSwitch} 
+          />
+          <div className="text-white/70 text-sm">
+            State: {basicSwitch ? 'enabled' : 'disabled'}
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">With Labels</h3>
+        <div className="space-y-4">
+          <GlassSwitch 
+            label="Enable notifications" 
+            checked={labeledSwitch} 
+            onChange={setLabeledSwitch} 
+          />
+          <GlassSwitch 
+            label={basicSwitch ? 'On' : 'Off'} 
+            checked={basicSwitch} 
+            onChange={setBasicSwitch} 
+          />
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Disabled State</h3>
+        <GlassSwitch 
+          label="Disabled switch" 
+          checked={disabledSwitch} 
+          onChange={setDisabledSwitch}
+          disabled={true}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Settings Panel</h3>
+        <div className="space-y-4 bg-white/5 rounded-lg p-4 border border-white/10">
+          <GlassSwitch 
+            label="Push notifications" 
+            checked={settings.notifications} 
+            onChange={(checked) => setSettings(prev => ({ ...prev, notifications: checked }))}
+          />
+          <GlassSwitch 
+            label="Dark mode" 
+            checked={settings.darkMode} 
+            onChange={(checked) => setSettings(prev => ({ ...prev, darkMode: checked }))}
+          />
+          <GlassSwitch 
+            label="Auto-save documents" 
+            checked={settings.autoSave} 
+            onChange={(checked) => setSettings(prev => ({ ...prev, autoSave: checked }))}
+          />
+        </div>
+      </div>
     </div>
   )
 }
 ```
 
-Props
-- checked, onChange(checked), label?, disabled?
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Whether the switch is checked |
+| `onChange` | `(checked: boolean) => void` | - | Callback fired when state changes |
+| `label` | `string` | - | Optional label text |
+| `disabled` | `boolean` | `false` | Whether the switch is disabled |
+| `id` | `string` | - | Optional ID for the input element |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage Patterns
+
+### Basic Toggle
+```tsx
+const [enabled, setEnabled] = useState(false)
+
+<GlassSwitch 
+  checked={enabled}
+  onChange={setEnabled}
+/>
+```
+
+### Settings Form
+```tsx
+const [settings, setSettings] = useState({
+  notifications: true,
+  autoSave: false
+})
+
+<GlassSwitch 
+  label="Enable notifications"
+  checked={settings.notifications}
+  onChange={(checked) => 
+    setSettings(prev => ({ ...prev, notifications: checked }))
+  }
+/>
+```
+
+### Controlled with Label
+```tsx
+<GlassSwitch 
+  label={isEnabled ? 'Enabled' : 'Disabled'}
+  checked={isEnabled}
+  onChange={setIsEnabled}
+/>
+```
+
+## Accessibility
+
+- **ARIA Support**: Uses proper `role="switch"` and ARIA attributes
+- **Keyboard Navigation**: Space key toggles the switch
+- **Screen Reader**: Announces current state and label
+- **Focus Management**: Clear focus indicators
+- **Label Association**: Proper label-input association with `htmlFor`
+- **State Announcement**: Screen readers announce state changes
+
+## Apple HIG Guidelines
+
+### Visual Design
+- **Clarity**: Clear on/off states with distinct visual differences
+- **Depth**: Subtle glass effects that enhance the toggle metaphor
+- **Color**: Uses system colors for consistency
+- **Animation**: Smooth transitions that feel natural and responsive
+
+### Interaction
+- **Immediate Feedback**: Instant visual response to user interaction
+- **Touch Targets**: Appropriate size for touch interaction
+- **States**: Clear visual states for normal, hover, focus, and disabled
+- **Gestures**: Supports both click and keyboard interaction
+
+### Content
+- **Labels**: Use clear, descriptive labels when provided
+- **Context**: Provide enough context for the user to understand the action
+- **Consistency**: Use consistent labeling patterns throughout the app
+
+### Best Practices
+- Use switches for binary on/off settings
+- Provide clear labels that describe what the switch controls
+- Consider the default state carefully
+- Test with assistive technologies
+- Ensure sufficient color contrast for all states
+- Use consistent switch behavior throughout your application
 

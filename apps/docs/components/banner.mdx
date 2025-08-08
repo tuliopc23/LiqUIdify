@@ -1,0 +1,498 @@
+---
+title: Banner
+description: Prominent messages and announcements with glassmorphism effects and dismissible functionality.
+icon: megaphone
+---
+
+# Banner
+
+A glassmorphic banner component for displaying prominent messages, announcements, and system notifications. Features semantic variants, dismissible functionality, and Apple-inspired design.
+
+## Live Examples
+
+### Basic Variants
+
+```tsx live
+import { GlassBanner } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-2xl space-y-4">
+      <GlassBanner variant="info">
+        📢 New features are now available! Check out our latest updates.
+      </GlassBanner>
+      
+      <GlassBanner variant="success">
+        ✅ Your account has been successfully verified.
+      </GlassBanner>
+      
+      <GlassBanner variant="warning">
+        ⚠️ Scheduled maintenance will occur tonight from 2-4 AM UTC.
+      </GlassBanner>
+      
+      <GlassBanner variant="error">
+        🚨 Service disruption detected. Our team is investigating.
+      </GlassBanner>
+    </div>
+  )
+}
+```
+
+### Dismissible Banners
+
+```tsx live
+import { useState } from 'react'
+import { GlassBanner } from '@liquidify/components'
+
+export default function Demo() {
+  const [showInfo, setShowInfo] = useState(true)
+  const [showWarning, setShowWarning] = useState(true)
+  
+  return (
+    <div className="w-full max-w-2xl space-y-4">
+      {showInfo && (
+        <GlassBanner 
+          variant="info" 
+          dismissible 
+          onDismiss={() => setShowInfo(false)}
+        >
+          💡 Tip: You can dismiss this banner by clicking the X button.
+        </GlassBanner>
+      )}
+      
+      {showWarning && (
+        <GlassBanner 
+          variant="warning" 
+          dismissible 
+          onDismiss={() => setShowWarning(false)}
+        >
+          📅 Don't forget about the team meeting at 3 PM today.
+        </GlassBanner>
+      )}
+      
+      <div className="text-center text-sm text-gray-600">
+        {!showInfo && !showWarning && "All banners dismissed!"}
+      </div>
+    </div>
+  )
+}
+```
+
+### With Actions
+
+```tsx live
+import { GlassBanner, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-2xl space-y-4">
+      <GlassBanner 
+        variant="info"
+        action={
+          <GlassButton size="sm" variant="primary">
+            Learn More
+          </GlassButton>
+        }
+      >
+        🎉 LiqUIdify v2.0 is here with amazing new features!
+      </GlassBanner>
+      
+      <GlassBanner 
+        variant="warning"
+        dismissible
+        action={
+          <div className="flex gap-2">
+            <GlassButton size="sm" variant="primary">
+              Update Now
+            </GlassButton>
+            <GlassButton size="sm" variant="ghost">
+              Later
+            </GlassButton>
+          </div>
+        }
+      >
+        🔄 A security update is available for your application.
+      </GlassBanner>
+    </div>
+  )
+}
+```
+
+### Custom Icons
+
+```tsx live
+import { GlassBanner } from '@liquidify/components'
+import { Gift, Zap, Shield, Heart } from 'lucide-react'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-2xl space-y-4">
+      <GlassBanner 
+        variant="info"
+        icon={<Gift className="h-5 w-5" />}
+      >
+        Special offer: Get 50% off your first month!
+      </GlassBanner>
+      
+      <GlassBanner 
+        variant="success"
+        icon={<Zap className="h-5 w-5" />}
+      >
+        Performance improvements deployed successfully.
+      </GlassBanner>
+      
+      <GlassBanner 
+        variant="warning"
+        icon={<Shield className="h-5 w-5" />}
+      >
+        Enable two-factor authentication for better security.
+      </GlassBanner>
+      
+      <GlassBanner 
+        variant="error"
+        icon={<Heart className="h-5 w-5" />}
+      >
+        We appreciate your patience during this outage.
+      </GlassBanner>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Semantic variant affecting color and styling |
+| `dismissible` | `boolean` | `false` | Show dismiss button |
+| `onDismiss` | `() => void` | - | Callback when banner is dismissed |
+| `icon` | `ReactNode` | - | Custom icon (overrides default variant icon) |
+| `action` | `ReactNode` | - | Action buttons or content |
+| `children` | `ReactNode` | - | **Required.** Banner content |
+| `className` | `string` | - | Additional CSS classes |
+| `role` | `string` | `"alert"` | ARIA role for accessibility |
+
+## Usage Patterns
+
+### System Announcements
+
+```tsx
+import { useState, useEffect } from 'react'
+import { GlassBanner, GlassButton } from '@liquidify/components'
+
+function SystemAnnouncements() {
+  const [announcements, setAnnouncements] = useState([])
+  
+  useEffect(() => {
+    // Fetch announcements from API
+    fetchAnnouncements().then(setAnnouncements)
+  }, [])
+  
+  const dismissAnnouncement = (id) => {
+    setAnnouncements(prev => prev.filter(a => a.id !== id))
+    // Mark as dismissed in backend
+    markAnnouncementDismissed(id)
+  }
+  
+  return (
+    <div className="space-y-4">
+      {announcements.map((announcement) => (
+        <GlassBanner
+          key={announcement.id}
+          variant={announcement.type}
+          dismissible={announcement.dismissible}
+          onDismiss={() => dismissAnnouncement(announcement.id)}
+          action={
+            announcement.actionUrl && (
+              <GlassButton 
+                size="sm" 
+                variant="primary"
+                onClick={() => window.open(announcement.actionUrl)}
+              >
+                {announcement.actionText}
+              </GlassButton>
+            )
+          }
+        >
+          {announcement.message}
+        </GlassBanner>
+      ))}
+    </div>
+  )
+}
+```
+
+### Feature Announcements
+
+```tsx
+import { GlassBanner, GlassButton } from '@liquidify/components'
+import { Sparkles } from 'lucide-react'
+
+function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
+  return (
+    <GlassBanner
+      variant="info"
+      icon={<Sparkles className="h-5 w-5" />}
+      dismissible
+      onDismiss={onDismiss}
+      action={
+        <div className="flex gap-2">
+          <GlassButton size="sm" variant="primary" onClick={onTryFeature}>
+            Try It Now
+          </GlassButton>
+          <GlassButton size="sm" variant="ghost">
+            Learn More
+          </GlassButton>
+        </div>
+      }
+    >
+      <div>
+        <strong>New Feature:</strong> {feature.name} is now available! 
+        {feature.description}
+      </div>
+    </GlassBanner>
+  )
+}
+```
+
+### Maintenance Notifications
+
+```tsx
+import { GlassBanner } from '@liquidify/components'
+import { Clock } from 'lucide-react'
+
+function MaintenanceNotification({ maintenance }) {
+  const getVariant = (status) => {
+    switch (status) {
+      case 'scheduled': return 'info'
+      case 'in-progress': return 'warning'
+      case 'completed': return 'success'
+      default: return 'info'
+    }
+  }
+  
+  const getMessage = (maintenance) => {
+    switch (maintenance.status) {
+      case 'scheduled':
+        return `Scheduled maintenance: ${maintenance.startTime} - ${maintenance.endTime}`
+      case 'in-progress':
+        return `Maintenance in progress. Expected completion: ${maintenance.endTime}`
+      case 'completed':
+        return 'Maintenance completed successfully. All services are operational.'
+      default:
+        return maintenance.message
+    }
+  }
+  
+  return (
+    <GlassBanner
+      variant={getVariant(maintenance.status)}
+      icon={<Clock className="h-5 w-5" />}
+      dismissible={maintenance.status === 'completed'}
+    >
+      {getMessage(maintenance)}
+    </GlassBanner>
+  )
+}
+```
+
+### Cookie Consent
+
+```tsx
+import { useState } from 'react'
+import { GlassBanner, GlassButton } from '@liquidify/components'
+import { Cookie } from 'lucide-react'
+
+function CookieConsent() {
+  const [isVisible, setIsVisible] = useState(true)
+  
+  const acceptCookies = () => {
+    // Set cookie consent
+    localStorage.setItem('cookieConsent', 'accepted')
+    setIsVisible(false)
+  }
+  
+  const declineCookies = () => {
+    localStorage.setItem('cookieConsent', 'declined')
+    setIsVisible(false)
+  }
+  
+  if (!isVisible) return null
+  
+  return (
+    <div className="fixed bottom-4 left-4 right-4 z-50">
+      <GlassBanner
+        variant="info"
+        icon={<Cookie className="h-5 w-5" />}
+        action={
+          <div className="flex gap-2">
+            <GlassButton size="sm" variant="primary" onClick={acceptCookies}>
+              Accept
+            </GlassButton>
+            <GlassButton size="sm" variant="ghost" onClick={declineCookies}>
+              Decline
+            </GlassButton>
+          </div>
+        }
+      >
+        We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+      </GlassBanner>
+    </div>
+  )
+}
+```
+
+## Accessibility
+
+The GlassBanner component follows WCAG 2.1 guidelines:
+
+### ARIA Support
+- Default `role="alert"` for important messages
+- Proper focus management for dismiss button
+- Screen reader announcements for dynamic content
+- Keyboard navigation support
+
+### Visual Design
+- High contrast colors for readability
+- Clear visual hierarchy
+- Sufficient color contrast ratios
+- Icons complement text (not sole indicators)
+
+### Keyboard Navigation
+- **Tab**: Navigate to dismiss button and actions
+- **Enter/Space**: Activate buttons
+- **Escape**: Dismiss banner (when dismissible)
+
+## Apple HIG Guidelines
+
+Following Apple's Human Interface Guidelines for alerts and notifications:
+
+### Visual Design
+- **Clarity**: Clean typography and clear messaging
+- **Depth**: Subtle glassmorphism effects create visual hierarchy
+- **Color**: Semantic colors that convey appropriate meaning
+
+### Content
+- **Concise**: Brief, scannable messages
+- **Actionable**: Clear next steps when appropriate
+- **Timely**: Relevant to current context
+
+### Interaction
+- **Non-blocking**: Doesn't interrupt user workflow
+- **Dismissible**: Can be easily dismissed when appropriate
+- **Contextual**: Appears at relevant moments
+
+## Best Practices
+
+### Content Guidelines
+- Keep messages concise and actionable
+- Use clear, non-technical language
+- Provide relevant context and next steps
+- Consider message priority and urgency
+
+### Timing and Placement
+- Show banners at appropriate moments
+- Don't overwhelm users with multiple banners
+- Consider auto-dismissal for temporary messages
+- Position banners where they're most relevant
+
+### Visual Hierarchy
+- Use semantic variants appropriately
+- Limit the number of simultaneous banners
+- Maintain consistent styling
+- Consider banner stacking behavior
+
+### Responsive Design
+- Ensure readability on all screen sizes
+- Stack content appropriately on mobile
+- Maintain touch-friendly button sizes
+- Test with various content lengths
+
+## Examples
+
+### App Update Notification
+
+```tsx
+function AppUpdateBanner({ version, onUpdate, onDismiss }) {
+  return (
+    <GlassBanner
+      variant="info"
+      dismissible
+      onDismiss={onDismiss}
+      action={
+        <div className="flex gap-2">
+          <GlassButton size="sm" variant="primary" onClick={onUpdate}>
+            Update Now
+          </GlassButton>
+          <GlassButton size="sm" variant="ghost">
+            Release Notes
+          </GlassButton>
+        </div>
+      }
+    >
+      <div>
+        <strong>App Update Available:</strong> Version {version} includes 
+        important security fixes and new features.
+      </div>
+    </GlassBanner>
+  )
+}
+```
+
+### Promotional Banner
+
+```tsx
+function PromotionalBanner({ promotion, onClaim, onDismiss }) {
+  return (
+    <GlassBanner
+      variant="success"
+      dismissible
+      onDismiss={onDismiss}
+      action={
+        <GlassButton size="sm" variant="primary" onClick={onClaim}>
+          Claim Offer
+        </GlassButton>
+      }
+    >
+      <div className="flex items-center gap-2">
+        <span>🎉</span>
+        <div>
+          <strong>{promotion.title}:</strong> {promotion.description}
+          <div className="text-xs opacity-75 mt-1">
+            Expires {promotion.expiryDate}
+          </div>
+        </div>
+      </div>
+    </GlassBanner>
+  )
+}
+```
+
+### Error Recovery
+
+```tsx
+function ErrorRecoveryBanner({ error, onRetry, onReport }) {
+  return (
+    <GlassBanner
+      variant="error"
+      action={
+        <div className="flex gap-2">
+          <GlassButton size="sm" variant="primary" onClick={onRetry}>
+            Try Again
+          </GlassButton>
+          <GlassButton size="sm" variant="ghost" onClick={onReport}>
+            Report Issue
+          </GlassButton>
+        </div>
+      }
+    >
+      <div>
+        <strong>Something went wrong:</strong> {error.message}
+        <div className="text-xs opacity-75 mt-1">
+          Error ID: {error.id}
+        </div>
+      </div>
+    </GlassBanner>
+  )
+}
+```

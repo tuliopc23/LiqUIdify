@@ -18,7 +18,6 @@
     "types": ["vite/client"],
     "paths": {
       "@/*": ["../../libs/components/src/*"],
-      "@liquidify/components": ["../../libs/components/src/index.ts"],
       "@/components/*": ["../../libs/components/src/components/*"],
       "@/core/*": ["../../libs/components/src/core/*"],
       "@/hooks/*": ["../../libs/components/src/hooks/*"],

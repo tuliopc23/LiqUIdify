@@ -1,0 +1,290 @@
+---
+title: ThemeToggle
+description: Apple-inspired theme toggle with smooth transitions and accessibility support.
+---
+
+# ThemeToggle
+
+A beautifully crafted theme toggle component that switches between light and dark modes with smooth animations and proper accessibility support. Follows Apple Human Interface Guidelines for intuitive user experience.
+
+## Live Examples
+
+### Basic Usage
+
+```tsx live
+import { ThemeToggle, useTheme } from '@liquidify/components'
+
+export default function Demo() {
+  const { theme } = useTheme()
+  return (
+    <div className="flex items-center gap-4">
+      <ThemeToggle />
+      <span className="text-liquid-secondary">Current theme: {theme}</span>
+    </div>
+  )
+}
+```
+
+### Custom Styling
+
+```tsx live
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from '@liquidify/components'
+
+function CustomThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="liquid-glass-container liquid-glass-interactive p-3 rounded-xl"
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+    >
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content">
+        {theme === "light" ? (
+          <Moon className="h-5 w-5 text-liquid-primary" />
+        ) : (
+          <Sun className="h-5 w-5 text-liquid-accent" />
+        )}
+      </div>
+    </button>
+  )
+}
+
+export default function Demo() {
+  return (
+    <div className="flex gap-4">
+      <CustomThemeToggle />
+    </div>
+  )
+}
+```
+
+### Integration with Navigation
+
+```tsx live
+import { ThemeToggle, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <nav className="liquid-glass-container p-4 rounded-2xl">
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content justify-between">
+        <div className="flex gap-4">
+          <GlassButton variant="ghost">Home</GlassButton>
+          <GlassButton variant="ghost">About</GlassButton>
+          <GlassButton variant="ghost">Contact</GlassButton>
+        </div>
+        <ThemeToggle />
+      </div>
+    </nav>
+  )
+}
+```
+
+## Props
+
+The `ThemeToggle` component doesn't accept any props. It automatically uses the `useTheme` hook to manage theme state.
+
+```typescript
+interface ThemeToggleProps {
+  // No props - uses internal useTheme hook
+}
+```
+
+## Theme Hook
+
+The component relies on the `useTheme` hook which provides:
+
+```typescript
+interface ThemeProviderState {
+  theme: 'light' | 'dark'
+  setTheme: (theme: 'light' | 'dark') => void
+}
+```
+
+## Usage Patterns
+
+### Basic Setup
+
+```tsx
+import { ThemeProvider, ThemeToggle } from '@liquidify/components'
+import '@liquidify/components/styles'
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="light" storageKey="my-app-theme">
+      <div className="min-h-screen bg-glass-bg-canvas">
+        <header className="p-4">
+          <ThemeToggle />
+        </header>
+        {/* Your app content */}
+      </div>
+    </ThemeProvider>
+  )
+}
+```
+
+### Custom Theme Storage
+
+```tsx
+import { ThemeProvider } from '@liquidify/components'
+
+function App() {
+  return (
+    <ThemeProvider 
+      defaultTheme="dark" 
+      storageKey="custom-theme-key"
+    >
+      {/* Your app */}
+    </ThemeProvider>
+  )
+}
+```
+
+### Programmatic Theme Control
+
+```tsx
+import { useTheme } from '@liquidify/components'
+
+function CustomControls() {
+  const { theme, setTheme } = useTheme()
+  
+  return (
+    <div className="flex gap-2">
+      <button 
+        onClick={() => setTheme('light')}
+        className={theme === 'light' ? 'active' : ''}
+      >
+        Light
+      </button>
+      <button 
+        onClick={() => setTheme('dark')}
+        className={theme === 'dark' ? 'active' : ''}
+      >
+        Dark
+      </button>
+    </div>
+  )
+}
+```
+
+## Accessibility
+
+The ThemeToggle component follows WCAG 2.1 AA guidelines:
+
+### Keyboard Navigation
+- **Tab**: Focus the toggle button
+- **Space/Enter**: Activate theme switch
+- **Escape**: Remove focus (standard behavior)
+
+### Screen Reader Support
+- Implicit `button` role with proper semantics
+- Visual state changes are announced automatically
+- Icon changes provide clear visual feedback
+
+### ARIA Attributes
+
+```tsx
+// Enhanced version with explicit ARIA
+function AccessibleThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-pressed={theme === 'dark'}
+      className="glass-effect btn-scale rounded-lg p-2"
+    >
+      {theme === "light" ? (
+        <Moon className="h-5 w-5" aria-hidden="true" />
+      ) : (
+        <Sun className="h-5 w-5" aria-hidden="true" />
+      )}
+    </button>
+  )
+}
+```
+
+### Focus Management
+- Clear focus indicators with `glass-effect` styling
+- Proper focus ring with sufficient contrast
+- Smooth transitions that don't interfere with focus
+
+## Apple Human Interface Guidelines
+
+The ThemeToggle follows Apple's design principles:
+
+### Visual Design
+- **Clarity**: Clear sun/moon icons indicate current state
+- **Deference**: Subtle glass effect doesn't compete with content
+- **Depth**: Layered glass creates natural hierarchy
+
+### Interaction Design
+- **Predictable**: Standard toggle behavior users expect
+- **Responsive**: Immediate visual feedback on interaction
+- **Forgiving**: Large touch target (44pt minimum)
+
+### Motion Design
+- **Purposeful**: Smooth transitions enhance understanding
+- **Respectful**: Honors `prefers-reduced-motion`
+- **Natural**: Easing curves feel organic
+
+### Color and Typography
+- **Dynamic**: Adapts to system appearance preferences
+- **Accessible**: Maintains contrast in both themes
+- **Consistent**: Uses system color tokens
+
+## Best Practices
+
+### Do's
+- ✅ Place in consistent location (usually top-right)
+- ✅ Use with ThemeProvider for proper context
+- ✅ Test with screen readers and keyboard navigation
+- ✅ Respect user's system preference as default
+- ✅ Persist theme choice across sessions
+
+### Don'ts
+- ❌ Don't override user's reduced motion preferences
+- ❌ Don't place multiple theme toggles on same page
+- ❌ Don't use without proper ThemeProvider setup
+- ❌ Don't forget to test color contrast in both themes
+- ❌ Don't make the toggle too small for touch devices
+
+## Theme System Integration
+
+The ThemeToggle integrates with the complete liquid glass theme system:
+
+```css
+/* Automatic CSS variable updates */
+:root {
+  --glass-bg-primary: rgba(255, 255, 255, 0.12); /* Light mode */
+  --text-primary: rgba(0, 0, 0, 0.9);
+}
+
+.dark {
+  --glass-bg-primary: rgba(18, 18, 18, 0.25); /* Dark mode */
+  --text-primary: rgba(255, 255, 255, 0.95);
+}
+```
+
+### Performance Considerations
+- Theme changes update CSS custom properties efficiently
+- No JavaScript style recalculation needed
+- Smooth transitions without layout thrashing
+- Minimal bundle size impact
+
+## Related Components
+
+- [ThemeProvider](/components/theme-provider) - Required context provider
+- [useTheme](/hooks/use-theme) - Theme management hook
+- [GlassButton](/components/button) - For custom toggle implementations
+- [LiquidGlass](/components/liquid-glass) - Core glass effect system

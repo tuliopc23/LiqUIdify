@@ -1,0 +1,553 @@
+---
+title: Glass File Upload
+description: Elegant drag-and-drop file upload component with Apple-inspired liquid glass effects and comprehensive file handling.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassFileUpload } from '@liquidify/components'
+
+export default function Demo() {
+  const [files, setFiles] = useState([])
+  const [uploadProgress, setUploadProgress] = useState({})
+  
+  const handleFilesChange = (newFiles) => {
+    setFiles(newFiles)
+  }
+  
+  const handleUpload = async (filesToUpload) => {
+    // Simulate upload progress
+    for (const fileItem of filesToUpload) {
+      setUploadProgress(prev => ({ ...prev, [fileItem.id]: 0 }))
+      
+      // Simulate progress updates
+      for (let progress = 0; progress <= 100; progress += 10) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+        setUploadProgress(prev => ({ ...prev, [fileItem.id]: progress }))
+      }
+    }
+    
+    // Clear progress after completion
+    setTimeout(() => {
+      setUploadProgress({})
+    }, 1000)
+  }
+  
+  return (
+    <div className="space-y-6 max-w-lg mx-auto">
+      <div>
+        <h3 className="text-lg font-medium text-white mb-4">Basic File Upload</h3>
+        <GlassFileUpload
+          onFilesChange={handleFilesChange}
+          onUpload={handleUpload}
+          accept="image/*,application/pdf"
+          maxFiles={3}
+          maxFileSize={5 * 1024 * 1024} // 5MB
+          dropzoneText="Drop images or PDFs here"
+          browseText="Choose Files"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium text-white mb-4">Compact Upload</h3>
+        <GlassFileUpload
+          size="sm"
+          multiple={false}
+          accept=".csv,.xlsx"
+          dropzoneText="Drop spreadsheet here"
+          browseText="Select File"
+          showPreview={false}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium text-white mb-4">Large Upload Area</h3>
+        <GlassFileUpload
+          size="lg"
+          accept="*/*"
+          maxFiles={10}
+          dropzoneText="Drop any files here or click to browse"
+          browseText="Browse Files"
+          showProgress
+        />
+      </div>
+      
+      {files.length > 0 && (
+        <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+          <h4 className="font-medium text-white mb-2">Uploaded Files:</h4>
+          <ul className="text-white/70 text-sm space-y-1">
+            {files.map(file => (
+              <li key={file.id} className="flex justify-between">
+                <span>{file.file.name}</span>
+                <span className="text-white/50">
+                  {(file.file.size / 1024).toFixed(1)} KB
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## Overview
+
+The Glass File Upload component provides an elegant drag-and-drop file upload interface with Apple-inspired liquid glass effects. It supports multiple files, progress tracking, file validation, and preview functionality.
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onFilesChange` | `(files: FileUploadItem[]) => void` | - | Callback when file list changes |
+| `onUpload` | `(files: File[]) => Promise<void>` | - | Upload handler function |
+| `accept` | `string` | `'*/*'` | Accepted file types |
+| `multiple` | `boolean` | `true` | Allow multiple file selection |
+| `maxFiles` | `number` | `5` | Maximum number of files |
+| `maxFileSize` | `number` | `10MB` | Maximum file size in bytes |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `showPreview` | `boolean` | `true` | Show file previews |
+| `showProgress` | `boolean` | `true` | Show upload progress |
+| `allowedTypes` | `string[]` | `[]` | Specific allowed MIME types |
+| `dropzoneText` | `string` | `'Drag and drop files here...'` | Dropzone instruction text |
+| `browseText` | `string` | `'Browse files'` | Browse button text |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+
+### FileUploadItem Interface
+
+```typescript
+interface FileUploadItem {
+  id: string
+  file: File
+  status: 'pending' | 'uploading' | 'success' | 'error'
+  progress?: number
+  error?: string
+  preview?: string
+}
+```
+
+## Usage Patterns
+
+### Basic File Upload
+
+```tsx
+const [files, setFiles] = useState([])
+
+const handleUpload = async (filesToUpload) => {
+  const formData = new FormData()
+  filesToUpload.forEach(file => {
+    formData.append('files', file)
+  })
+  
+  try {
+    await fetch('/api/upload', {
+      method: 'POST',
+      body: formData
+    })
+  } catch (error) {
+    console.error('Upload failed:', error)
+  }
+}
+
+<GlassFileUpload
+  onFilesChange={setFiles}
+  onUpload={handleUpload}
+  accept="image/*"
+  maxFiles={5}
+/>
+```
+
+### Image Upload with Preview
+
+```tsx
+<GlassFileUpload
+  accept="image/jpeg,image/png,image/gif"
+  maxFileSize={2 * 1024 * 1024} // 2MB
+  showPreview
+  dropzoneText="Drop images here or click to browse"
+  browseText="Select Images"
+  onFilesChange={(files) => {
+    const imageFiles = files.filter(f => f.file.type.startsWith('image/'))
+    setSelectedImages(imageFiles)
+  }}
+/>
+```
+
+### Document Upload with Validation
+
+```tsx
+const documentTypes = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'text/plain'
+]
+
+<GlassFileUpload
+  allowedTypes={documentTypes}
+  maxFiles={3}
+  maxFileSize={10 * 1024 * 1024} // 10MB
+  showPreview={false}
+  dropzoneText="Upload documents (PDF, DOC, TXT)"
+  onFilesChange={setDocuments}
+/>
+```
+
+### Progress Tracking
+
+```tsx
+const [uploadProgress, setUploadProgress] = useState({})
+
+const handleUploadWithProgress = async (files) => {
+  for (const file of files) {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    try {
+      await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          )
+          setUploadProgress(prev => ({
+            ...prev,
+            [file.name]: progress
+          }))
+        }
+      })
+    } catch (error) {
+      console.error(`Upload failed for ${file.name}:`, error)
+    }
+  }
+}
+
+<GlassFileUpload
+  onUpload={handleUploadWithProgress}
+  showProgress
+  onFilesChange={(files) => {
+    // Update progress for each file
+    files.forEach(fileItem => {
+      if (uploadProgress[fileItem.file.name]) {
+        fileItem.progress = uploadProgress[fileItem.file.name]
+      }
+    })
+    setFiles(files)
+  }}
+/>
+```
+
+### Form Integration
+
+```tsx
+const [formData, setFormData] = useState({
+  title: '',
+  description: '',
+  attachments: []
+})
+
+const [errors, setErrors] = useState({})
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  
+  if (formData.attachments.length === 0) {
+    setErrors({ attachments: 'Please upload at least one file' })
+    return
+  }
+  
+  // Submit form with files
+  const submitData = new FormData()
+  submitData.append('title', formData.title)
+  submitData.append('description', formData.description)
+  
+  formData.attachments.forEach(fileItem => {
+    submitData.append('attachments', fileItem.file)
+  })
+  
+  try {
+    await fetch('/api/submit', {
+      method: 'POST',
+      body: submitData
+    })
+  } catch (error) {
+    console.error('Submission failed:', error)
+  }
+}
+
+<form onSubmit={handleSubmit} className="space-y-4">
+  <input
+    type="text"
+    placeholder="Title"
+    value={formData.title}
+    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+    className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
+  />
+  
+  <textarea
+    placeholder="Description"
+    value={formData.description}
+    onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+    className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
+  />
+  
+  <div>
+    <label className="block text-sm font-medium text-white mb-2">
+      Attachments
+    </label>
+    <GlassFileUpload
+      onFilesChange={(files) => {
+        setFormData(prev => ({ ...prev, attachments: files }))
+        if (errors.attachments) {
+          setErrors(prev => ({ ...prev, attachments: '' }))
+        }
+      }}
+      maxFiles={5}
+    />
+    {errors.attachments && (
+      <p className="text-red-400 text-sm mt-1">{errors.attachments}</p>
+    )}
+  </div>
+  
+  <button
+    type="submit"
+    className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+  >
+    Submit
+  </button>
+</form>
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **Keyboard Navigation**: Full keyboard support for file selection and management
+- **Screen Readers**: Proper ARIA labels and live regions for upload status
+- **Focus Management**: Clear focus indicators for all interactive elements
+- **Error Handling**: Accessible error messages and validation feedback
+
+### Implementation Details
+
+- Dropzone has proper `role` and `aria-label` attributes
+- File input is properly labeled and associated
+- Upload progress is announced to screen readers
+- Error messages are associated with the upload area
+- Keyboard shortcuts for common actions
+
+### Keyboard Support
+
+| Key | Action |
+|-----|--------|
+| `Enter` / `Space` | Open file browser |
+| `Delete` | Remove focused file |
+| `Tab` | Navigate between files and controls |
+| `Escape` | Cancel current upload |
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Liquid Glass Effects**: Multi-layered transparency with backdrop blur
+- **Drag States**: Clear visual feedback for drag-over states
+- **File Previews**: Thumbnail previews for supported file types
+- **Progress Indicators**: Smooth progress animations
+
+### Interaction Patterns
+
+- **Drag and Drop**: Intuitive drag-and-drop interaction
+- **Immediate Feedback**: Visual feedback for all user actions
+- **Error Prevention**: Clear validation and file type restrictions
+- **Batch Operations**: Support for multiple file operations
+
+### File Management
+
+- **Clear Organization**: Logical grouping of uploaded files
+- **Quick Actions**: Easy access to remove or retry uploads
+- **Status Indicators**: Clear visual status for each file
+- **Preview Support**: Thumbnails for images and documents
+
+### Animation Guidelines
+
+- **Smooth Transitions**: Fluid animations for state changes
+- **Progress Animation**: Smooth progress bar animations
+- **Hover Effects**: Subtle feedback for interactive elements
+- **Loading States**: Elegant loading indicators
+
+## Best Practices
+
+### Performance
+
+- Implement file chunking for large uploads
+- Use web workers for file processing
+- Optimize image previews with proper sizing
+- Implement upload queuing for multiple files
+
+```tsx
+// Chunked upload implementation
+const uploadFileInChunks = async (file, chunkSize = 1024 * 1024) => {
+  const chunks = Math.ceil(file.size / chunkSize)
+  
+  for (let chunk = 0; chunk < chunks; chunk++) {
+    const start = chunk * chunkSize
+    const end = Math.min(start + chunkSize, file.size)
+    const chunkData = file.slice(start, end)
+    
+    const formData = new FormData()
+    formData.append('chunk', chunkData)
+    formData.append('chunkIndex', chunk.toString())
+    formData.append('totalChunks', chunks.toString())
+    formData.append('fileName', file.name)
+    
+    await fetch('/api/upload-chunk', {
+      method: 'POST',
+      body: formData
+    })
+    
+    // Update progress
+    const progress = Math.round(((chunk + 1) / chunks) * 100)
+    setUploadProgress(prev => ({ ...prev, [file.name]: progress }))
+  }
+}
+```
+
+### Security
+
+- Validate file types on both client and server
+- Scan uploaded files for malware
+- Implement proper file size limits
+- Use secure file storage solutions
+
+```tsx
+// Client-side file validation
+const validateFile = (file, allowedTypes, maxSize) => {
+  const errors = []
+  
+  // Check file type
+  if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
+    errors.push(`File type ${file.type} is not allowed`)
+  }
+  
+  // Check file size
+  if (file.size > maxSize) {
+    errors.push(`File size exceeds ${formatFileSize(maxSize)} limit`)
+  }
+  
+  // Check file name
+  if (!/^[a-zA-Z0-9._-]+$/.test(file.name)) {
+    errors.push('File name contains invalid characters')
+  }
+  
+  return errors
+}
+```
+
+### Error Handling
+
+```tsx
+const handleUploadError = (error, file) => {
+  let errorMessage = 'Upload failed'
+  
+  if (error.code === 'FILE_TOO_LARGE') {
+    errorMessage = 'File is too large'
+  } else if (error.code === 'INVALID_FILE_TYPE') {
+    errorMessage = 'File type not supported'
+  } else if (error.code === 'NETWORK_ERROR') {
+    errorMessage = 'Network error, please try again'
+  }
+  
+  setFiles(prev => prev.map(f => 
+    f.id === file.id 
+      ? { ...f, status: 'error', error: errorMessage }
+      : f
+  ))
+}
+```
+
+### Mobile Considerations
+
+- Use native file picker on mobile devices
+- Support camera capture for image uploads
+- Optimize touch targets for mobile interaction
+- Handle device orientation changes
+
+```tsx
+const isMobile = useMediaQuery('(max-width: 768px)')
+
+const handleMobileUpload = () => {
+  if (isMobile && accept.includes('image/')) {
+    // Offer camera option on mobile
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = accept
+    input.capture = 'environment' // Use rear camera
+    input.onchange = handleFileSelect
+    input.click()
+  } else {
+    // Standard file picker
+    fileInputRef.current?.click()
+  }
+}
+```
+
+### State Management
+
+```tsx
+// Custom hook for file upload state
+const useFileUpload = (options = {}) => {
+  const [files, setFiles] = useState([])
+  const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState({})
+  const [errors, setErrors] = useState({})
+  
+  const addFiles = useCallback((newFiles) => {
+    const validatedFiles = newFiles.map(file => {
+      const validation = validateFile(file, options)
+      return {
+        id: generateId(),
+        file,
+        status: validation.errors.length > 0 ? 'error' : 'pending',
+        error: validation.errors[0],
+        preview: generatePreview(file)
+      }
+    })
+    
+    setFiles(prev => [...prev, ...validatedFiles])
+  }, [options])
+  
+  const removeFile = useCallback((fileId) => {
+    setFiles(prev => prev.filter(f => f.id !== fileId))
+    setProgress(prev => {
+      const newProgress = { ...prev }
+      delete newProgress[fileId]
+      return newProgress
+    })
+  }, [])
+  
+  const uploadFiles = useCallback(async (filesToUpload) => {
+    setUploading(true)
+    
+    try {
+      await Promise.all(
+        filesToUpload.map(file => uploadSingleFile(file, setProgress))
+      )
+    } catch (error) {
+      console.error('Upload failed:', error)
+    } finally {
+      setUploading(false)
+    }
+  }, [])
+  
+  return {
+    files,
+    uploading,
+    progress,
+    errors,
+    addFiles,
+    removeFile,
+    uploadFiles
+  }
+}
+```

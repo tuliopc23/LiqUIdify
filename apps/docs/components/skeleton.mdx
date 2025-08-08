@@ -1,0 +1,547 @@
+---
+title: Skeleton
+description: Liquid Glass skeleton loaders with multiple variants and pre-built patterns.
+---
+
+# Skeleton
+
+The `GlassSkeleton` component provides elegant loading placeholders with glassmorphism effects. It includes multiple animation variants, shapes, and pre-built patterns for common use cases.
+
+## Live Examples
+
+### Basic Skeleton
+
+```tsx live
+import { GlassSkeleton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:16, padding:20}}>
+      <GlassSkeleton width={200} height={20} />
+      <GlassSkeleton width={300} height={20} />
+      <GlassSkeleton width={250} height={20} />
+    </div>
+  )
+}
+```
+
+### Shape Variants
+
+```tsx live
+import { GlassSkeleton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{display:'flex', gap:20, alignItems:'center', padding:20, flexWrap:'wrap'}}>
+      <div style={{textAlign:'center'}}>
+        <h4 style={{marginBottom:8}}>Rectangle</h4>
+        <GlassSkeleton shape="rectangle" width={120} height={80} />
+      </div>
+      
+      <div style={{textAlign:'center'}}>
+        <h4 style={{marginBottom:8}}>Circle</h4>
+        <GlassSkeleton shape="circle" width={80} height={80} />
+      </div>
+      
+      <div style={{textAlign:'center'}}>
+        <h4 style={{marginBottom:8}}>Line</h4>
+        <GlassSkeleton shape="line" width={200} />
+      </div>
+    </div>
+  )
+}
+```
+
+### Animation Variants
+
+```tsx live
+import { GlassSkeleton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:20, padding:20}}>
+      <div>
+        <h4 style={{marginBottom:8}}>Default (Pulse)</h4>
+        <GlassSkeleton variant="default" width={300} height={20} />
+      </div>
+      
+      <div>
+        <h4 style={{marginBottom:8}}>Shimmer</h4>
+        <GlassSkeleton variant="shimmer" width={300} height={20} />
+      </div>
+      
+      <div>
+        <h4 style={{marginBottom:8}}>Pulse</h4>
+        <GlassSkeleton variant="pulse" width={300} height={20} />
+      </div>
+      
+      <div>
+        <h4 style={{marginBottom:8}}>No Animation</h4>
+        <GlassSkeleton animated={false} width={300} height={20} />
+      </div>
+    </div>
+  )
+}
+```
+
+### Size Variants
+
+```tsx live
+import { GlassSkeleton } from '@liquidify/components'
+
+export default function Demo() {
+  const sizes = ['sm', 'md', 'lg', 'xl']
+  
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:16, padding:20}}>
+      {sizes.map(size => (
+        <div key={size}>
+          <h4 style={{marginBottom:8}}>{size.toUpperCase()}</h4>
+          <GlassSkeleton size={size} width={200} variant="shimmer" />
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Multiple Skeletons
+
+```tsx live
+import { GlassSkeleton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{padding:20}}>
+      <h4 style={{marginBottom:16}}>Loading Multiple Items</h4>
+      <GlassSkeleton 
+        count={5} 
+        width={300} 
+        height={20} 
+        spacing={12}
+        variant="shimmer"
+      />
+    </div>
+  )
+}
+```
+
+### Pre-built Patterns
+
+```tsx live
+import { SkeletonText, SkeletonCard, SkeletonTable } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:32, padding:20}}>
+      <div>
+        <h4 style={{marginBottom:16}}>Text Skeleton</h4>
+        <SkeletonText lines={4} lastLineWidth="60%" />
+      </div>
+      
+      <div>
+        <h4 style={{marginBottom:16}}>Card Skeleton</h4>
+        <SkeletonCard showAvatar={true} />
+      </div>
+      
+      <div>
+        <h4 style={{marginBottom:16}}>Table Skeleton</h4>
+        <SkeletonTable rows={3} columns={4} />
+      </div>
+    </div>
+  )
+}
+```
+
+### Real-world Example
+
+```tsx live
+import { useState, useEffect } from 'react'
+import { GlassSkeleton, SkeletonCard, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  
+  const loadData = () => {
+    setLoading(true)
+    setData(null)
+    
+    // Simulate API call
+    setTimeout(() => {
+      setData({
+        title: 'Amazing Product',
+        description: 'This is a fantastic product that will change your life. It has many great features and benefits.',
+        price: '$99.99',
+        rating: 4.8,
+        reviews: 1234
+      })
+      setLoading(false)
+    }, 2000)
+  }
+  
+  useEffect(() => {
+    loadData()
+  }, [])
+  
+  return (
+    <div style={{maxWidth:400, margin:'0 auto', padding:20}}>
+      <div style={{marginBottom:16}}>
+        <GlassButton onClick={loadData} disabled={loading}>
+          {loading ? 'Loading...' : 'Reload Data'}
+        </GlassButton>
+      </div>
+      
+      <div style={{
+        padding:20,
+        border:'1px solid rgba(255,255,255,0.2)',
+        borderRadius:12,
+        background:'rgba(255,255,255,0.05)'
+      }}>
+        {loading ? (
+          <div>
+            <GlassSkeleton width="80%" height={24} variant="shimmer" style={{marginBottom:12}} />
+            <GlassSkeleton width="100%" height={16} variant="shimmer" style={{marginBottom:8}} />
+            <GlassSkeleton width="100%" height={16} variant="shimmer" style={{marginBottom:8}} />
+            <GlassSkeleton width="60%" height={16} variant="shimmer" style={{marginBottom:16}} />
+            
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+              <GlassSkeleton width={80} height={20} variant="shimmer" />
+              <GlassSkeleton width={100} height={16} variant="shimmer" />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h3 style={{margin:'0 0 12px 0'}}>{data.title}</h3>
+            <p style={{margin:'0 0 16px 0', fontSize:'0.875rem', opacity:0.8}}>
+              {data.description}
+            </p>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+              <span style={{fontSize:'1.25rem', fontWeight:'bold'}}>{data.price}</span>
+              <div style={{fontSize:'0.875rem', opacity:0.7}}>
+                ⭐ {data.rating} ({data.reviews} reviews)
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+### Interactive Demo
+
+```tsx live
+import { useState } from 'react'
+import { GlassSkeleton, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  const [variant, setVariant] = useState('shimmer')
+  const [shape, setShape] = useState('rectangle')
+  const [animated, setAnimated] = useState(true)
+  const [count, setCount] = useState(1)
+  
+  const variants = ['default', 'shimmer', 'pulse']
+  const shapes = ['rectangle', 'circle', 'line']
+  
+  return (
+    <div style={{padding:20}}>
+      <div style={{display:'flex', flexDirection:'column', gap:16, marginBottom:24}}>
+        <div>
+          <h4 style={{marginBottom:8}}>Variant</h4>
+          <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+            {variants.map(v => (
+              <GlassButton 
+                key={v}
+                size="sm"
+                variant={variant === v ? 'primary' : 'ghost'}
+                onClick={() => setVariant(v)}
+              >
+                {v}
+              </GlassButton>
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h4 style={{marginBottom:8}}>Shape</h4>
+          <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+            {shapes.map(s => (
+              <GlassButton 
+                key={s}
+                size="sm"
+                variant={shape === s ? 'primary' : 'ghost'}
+                onClick={() => setShape(s)}
+              >
+                {s}
+              </GlassButton>
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h4 style={{marginBottom:8}}>Options</h4>
+          <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+            <GlassButton 
+              size="sm"
+              variant={animated ? 'primary' : 'ghost'}
+              onClick={() => setAnimated(!animated)}
+            >
+              Animated
+            </GlassButton>
+          </div>
+        </div>
+        
+        <div>
+          <h4 style={{marginBottom:8}}>Count: {count}</h4>
+          <div style={{display:'flex', gap:8}}>
+            <GlassButton size="sm" onClick={() => setCount(Math.max(1, count - 1))}>-</GlassButton>
+            <GlassButton size="sm" onClick={() => setCount(Math.min(10, count + 1))}>+</GlassButton>
+          </div>
+        </div>
+      </div>
+      
+      <div style={{padding:20, border:'1px solid rgba(255,255,255,0.2)', borderRadius:8}}>
+        <GlassSkeleton 
+          variant={variant}
+          shape={shape}
+          animated={animated}
+          count={count}
+          width={shape === 'circle' ? 60 : 200}
+          height={shape === 'line' ? undefined : 60}
+          spacing={12}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+### GlassSkeleton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "shimmer" \| "pulse"` | `"default"` | Animation style |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Predefined size |
+| `shape` | `"rectangle" \| "circle" \| "line"` | `"rectangle"` | Shape of the skeleton |
+| `width` | `string \| number` | `undefined` | Custom width |
+| `height` | `string \| number` | `undefined` | Custom height |
+| `count` | `number` | `1` | Number of skeleton items |
+| `spacing` | `number` | `8` | Spacing between items (px) |
+| `animated` | `boolean` | `true` | Enable animations |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### SkeletonText
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `lines` | `number` | `3` | Number of text lines |
+| `lastLineWidth` | `string` | `"60%"` | Width of the last line |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### SkeletonCard
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showAvatar` | `boolean` | `true` | Show avatar skeleton |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### SkeletonTable
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `rows` | `number` | `5` | Number of table rows |
+| `columns` | `number` | `4` | Number of table columns |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+## Usage Patterns
+
+### Page Loading
+
+```tsx
+const PageSkeleton = () => (
+  <div className="space-y-6">
+    {/* Header */}
+    <div className="flex items-center gap-4">
+      <GlassSkeleton shape="circle" width={60} height={60} />
+      <div className="flex-1">
+        <GlassSkeleton width="40%" height={24} className="mb-2" />
+        <GlassSkeleton width="60%" height={16} />
+      </div>
+    </div>
+    
+    {/* Content */}
+    <SkeletonText lines={6} />
+    
+    {/* Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {Array.from({ length: 6 }, (_, i) => (
+        <SkeletonCard key={i} />
+      ))}
+    </div>
+  </div>
+)
+```
+
+### List Loading
+
+```tsx
+const ListSkeleton = ({ count = 5 }) => (
+  <div className="space-y-4">
+    {Array.from({ length: count }, (_, i) => (
+      <div key={i} className="flex items-center gap-3 p-4">
+        <GlassSkeleton shape="circle" width={40} height={40} />
+        <div className="flex-1">
+          <GlassSkeleton width="60%" height={16} className="mb-2" />
+          <GlassSkeleton width="40%" height={14} />
+        </div>
+        <GlassSkeleton width={80} height={32} />
+      </div>
+    ))}
+  </div>
+)
+```
+
+### Form Loading
+
+```tsx
+const FormSkeleton = () => (
+  <div className="space-y-4">
+    <div>
+      <GlassSkeleton width={100} height={16} className="mb-2" />
+      <GlassSkeleton width="100%" height={40} />
+    </div>
+    <div>
+      <GlassSkeleton width={120} height={16} className="mb-2" />
+      <GlassSkeleton width="100%" height={40} />
+    </div>
+    <div>
+      <GlassSkeleton width={80} height={16} className="mb-2" />
+      <GlassSkeleton width="100%" height={80} />
+    </div>
+    <GlassSkeleton width={120} height={40} />
+  </div>
+)
+```
+
+### Dashboard Loading
+
+```tsx
+const DashboardSkeleton = () => (
+  <div className="space-y-6">
+    {/* Stats */}
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {Array.from({ length: 4 }, (_, i) => (
+        <div key={i} className="p-4">
+          <GlassSkeleton width={60} height={16} className="mb-2" />
+          <GlassSkeleton width={80} height={32} className="mb-1" />
+          <GlassSkeleton width={40} height={14} />
+        </div>
+      ))}
+    </div>
+    
+    {/* Chart */}
+    <div className="p-4">
+      <GlassSkeleton width={200} height={24} className="mb-4" />
+      <GlassSkeleton width="100%" height={300} />
+    </div>
+    
+    {/* Table */}
+    <SkeletonTable rows={8} columns={5} />
+  </div>
+)
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **WCAG 2.1 AA**: Respects motion preferences and provides alternative content
+- **Screen Readers**: Proper ARIA attributes for loading states
+- **Motion Sensitivity**: Honors `prefers-reduced-motion` settings
+- **Focus Management**: Non-interactive, doesn't interfere with navigation
+
+### Implementation Details
+
+```tsx
+// Accessible skeleton with proper ARIA
+<div role="status" aria-live="polite" aria-label="Loading content">
+  <GlassSkeleton variant="shimmer" width={200} height={20} />
+  <span className="sr-only">Loading, please wait...</span>
+</div>
+```
+
+### Best Practices
+
+- Always provide meaningful loading messages for screen readers
+- Use appropriate `aria-live` regions for dynamic content
+- Respect user motion preferences
+- Ensure skeleton layouts match actual content structure
+- Provide alternative loading indicators when needed
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Clarity**: Clean, minimal loading indicators that match content structure
+- **Deference**: Subtle animations that don't distract from the loading process
+- **Depth**: Glassmorphism effects create visual hierarchy during loading
+
+### Animation Principles
+
+- **Smooth Transitions**: 60fps animations with hardware acceleration
+- **Purposeful Motion**: Each variant serves a specific loading context
+- **Respectful**: Honors system motion preferences
+
+### Usage Guidelines
+
+- **Default**: General content loading with subtle pulse
+- **Shimmer**: Data fetching, progressive loading
+- **Pulse**: Heartbeat-like loading for real-time content
+
+### Layout Considerations
+
+- **Consistent**: Skeleton layouts should match actual content
+- **Proportional**: Maintain proper aspect ratios and spacing
+- **Responsive**: Adapt skeleton layouts for different screen sizes
+
+## Performance
+
+### Optimization Features
+
+- **CSS Animations**: Hardware-accelerated transforms
+- **Minimal DOM**: Lightweight component structure
+- **Memory Efficient**: No JavaScript animation loops
+- **Responsive**: Adapts to different screen sizes
+
+### Best Practices
+
+- Use CSS animations instead of JavaScript for better performance
+- Implement proper cleanup for skeleton states
+- Consider skeleton complexity for large lists
+- Use virtualization for very long skeleton lists
+
+```tsx
+// Performance-optimized skeleton list
+const OptimizedSkeletonList = ({ count }) => {
+  const visibleCount = Math.min(count, 20) // Limit visible skeletons
+  
+  return (
+    <div>
+      {Array.from({ length: visibleCount }, (_, i) => (
+        <SkeletonCard key={i} />
+      ))}
+    </div>
+  )
+}
+```
+
+## Related Components
+
+- [Loading](/components/loading) - For indeterminate loading states
+- [Progress](/components/progress) - For determinate progress
+- [Spinner](/components/spinner) - For simple loading indicators
+- [Card](/components/card) - For actual content containers

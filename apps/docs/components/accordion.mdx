@@ -1,0 +1,312 @@
+---
+title: Accordion
+description: Collapsible content sections with liquid glass design and smooth animations.
+icon: chevron-down
+---
+
+# Accordion
+
+A flexible accordion component with glassmorphism design, smooth animations, and support for single or multiple expanded items. Built on Radix UI primitives for robust accessibility.
+
+## Live Examples
+
+### Basic Usage
+
+```tsx live
+import { GlassAccordion } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md">
+      <GlassAccordion type="single" collapsible defaultValue="item-1">
+        <GlassAccordion.Item value="item-1">
+          <GlassAccordion.Trigger>What is glassmorphism?</GlassAccordion.Trigger>
+          <GlassAccordion.Content>
+            Glassmorphism is a design trend that uses transparency, blur effects, and subtle borders to create a glass-like appearance.
+          </GlassAccordion.Content>
+        </GlassAccordion.Item>
+        <GlassAccordion.Item value="item-2">
+          <GlassAccordion.Trigger>How do I use this component?</GlassAccordion.Trigger>
+          <GlassAccordion.Content>
+            Import the component and use it like any other React component. You can control which items are expanded and customize the appearance.
+          </GlassAccordion.Content>
+        </GlassAccordion.Item>
+        <GlassAccordion.Item value="item-3">
+          <GlassAccordion.Trigger>Is it accessible?</GlassAccordion.Trigger>
+          <GlassAccordion.Content>
+            Yes! Built on Radix UI primitives with full keyboard navigation, ARIA attributes, and screen reader support.
+          </GlassAccordion.Content>
+        </GlassAccordion.Item>
+      </GlassAccordion>
+    </div>
+  )
+}
+```
+
+### Multiple Selection
+
+```tsx live
+import { GlassAccordion } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md">
+      <GlassAccordion type="multiple" defaultValue={["item-1", "item-2"]}>
+        <GlassAccordion.Item value="item-1">
+          <GlassAccordion.Trigger>Features</GlassAccordion.Trigger>
+          <GlassAccordion.Content>
+            <ul className="list-inside list-disc space-y-1">
+              <li>Smooth animations with Framer Motion</li>
+              <li>Glassmorphism styling</li>
+              <li>Single or multiple selection modes</li>
+              <li>Keyboard navigation</li>
+            </ul>
+          </GlassAccordion.Content>
+        </GlassAccordion.Item>
+        <GlassAccordion.Item value="item-2">
+          <GlassAccordion.Trigger>Technical Details</GlassAccordion.Trigger>
+          <GlassAccordion.Content>
+            Built with Radix UI for robust accessibility and behavior. Uses Framer Motion for smooth animations.
+          </GlassAccordion.Content>
+        </GlassAccordion.Item>
+      </GlassAccordion>
+    </div>
+  )
+}
+```
+
+### Size Variants
+
+```tsx live
+import { GlassAccordion } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div className="w-full max-w-md space-y-6">
+      <div>
+        <h4 className="mb-2 text-sm font-medium text-gray-600">Small</h4>
+        <GlassAccordion type="single" size="sm" collapsible>
+          <GlassAccordion.Item value="item-1" size="sm">
+            <GlassAccordion.Trigger size="sm">Small Accordion</GlassAccordion.Trigger>
+            <GlassAccordion.Content size="sm">
+              Compact size with reduced padding and smaller text.
+            </GlassAccordion.Content>
+          </GlassAccordion.Item>
+        </GlassAccordion>
+      </div>
+      
+      <div>
+        <h4 className="mb-2 text-sm font-medium text-gray-600">Large</h4>
+        <GlassAccordion type="single" size="lg" collapsible>
+          <GlassAccordion.Item value="item-1" size="lg">
+            <GlassAccordion.Trigger size="lg">Large Accordion</GlassAccordion.Trigger>
+            <GlassAccordion.Content size="lg">
+              Spacious size with increased padding and larger text.
+            </GlassAccordion.Content>
+          </GlassAccordion.Item>
+        </GlassAccordion>
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+### GlassAccordion
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single" \| "multiple"` | - | **Required.** Accordion behavior mode |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant affecting padding and text |
+| `variant` | `"default" \| "enhanced" \| "ghost"` | `"default"` | Visual style variant |
+| `collapsible` | `boolean` | `false` | Allow collapsing all items (single type only) |
+| `value` | `string \| string[]` | - | Controlled expanded value(s) |
+| `defaultValue` | `string \| string[]` | - | Default expanded value(s) |
+| `onValueChange` | `(value) => void` | - | Callback when expanded items change |
+| `className` | `string` | - | Additional CSS classes |
+
+### GlassAccordionItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | **Required.** Unique identifier for the item |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `className` | `string` | - | Additional CSS classes |
+
+### GlassAccordionTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `showIcon` | `boolean` | `true` | Show chevron icon |
+| `className` | `string` | - | Additional CSS classes |
+
+### GlassAccordionContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `className` | `string` | - | Additional CSS classes |
+
+## Usage Patterns
+
+### Controlled Accordion
+
+```tsx
+import { useState } from 'react'
+import { GlassAccordion } from '@liquidify/components'
+
+function ControlledAccordion() {
+  const [value, setValue] = useState('item-1')
+  
+  return (
+    <GlassAccordion 
+      type="single" 
+      value={value} 
+      onValueChange={setValue}
+      collapsible
+    >
+      <GlassAccordion.Item value="item-1">
+        <GlassAccordion.Trigger>First Item</GlassAccordion.Trigger>
+        <GlassAccordion.Content>
+          Content for first item
+        </GlassAccordion.Content>
+      </GlassAccordion.Item>
+      {/* More items... */}
+    </GlassAccordion>
+  )
+}
+```
+
+### FAQ Section
+
+```tsx
+import { GlassAccordion } from '@liquidify/components'
+
+function FAQ() {
+  const faqs = [
+    {
+      question: "How do I get started?",
+      answer: "Follow our quickstart guide to set up the components."
+    },
+    {
+      question: "Is it accessible?",
+      answer: "Yes, all components follow WCAG guidelines."
+    }
+  ]
+  
+  return (
+    <GlassAccordion type="single" collapsible>
+      {faqs.map((faq, index) => (
+        <GlassAccordion.Item key={index} value={`faq-${index}`}>
+          <GlassAccordion.Trigger>{faq.question}</GlassAccordion.Trigger>
+          <GlassAccordion.Content>{faq.answer}</GlassAccordion.Content>
+        </GlassAccordion.Item>
+      ))}
+    </GlassAccordion>
+  )
+}
+```
+
+## Accessibility
+
+The GlassAccordion component follows WCAG 2.1 guidelines:
+
+### Keyboard Navigation
+- **Tab**: Navigate between accordion triggers
+- **Space/Enter**: Toggle accordion item
+- **Arrow Keys**: Navigate between triggers (when focused)
+- **Home/End**: Jump to first/last trigger
+
+### Screen Reader Support
+- Proper ARIA attributes (`aria-expanded`, `aria-controls`)
+- Semantic HTML structure with headings
+- Clear focus indicators
+- Descriptive labels and states
+
+### Focus Management
+- Focus remains on trigger after activation
+- Clear visual focus indicators
+- Logical tab order
+
+## Apple HIG Guidelines
+
+Following Apple's Human Interface Guidelines for disclosure controls:
+
+### Visual Design
+- **Clarity**: Clear visual hierarchy with proper spacing
+- **Depth**: Subtle shadows and transparency create depth
+- **Consistency**: Uniform spacing and typography
+
+### Interaction
+- **Responsiveness**: Immediate visual feedback on interaction
+- **Predictability**: Consistent behavior across all items
+- **Smooth Animations**: Fluid expand/collapse transitions
+
+### Content
+- **Scannable**: Easy to scan trigger labels
+- **Concise**: Brief, descriptive trigger text
+- **Organized**: Logical grouping of related content
+
+## Best Practices
+
+### Content Organization
+- Use clear, descriptive trigger labels
+- Group related content logically
+- Keep content concise and scannable
+- Consider using icons for visual hierarchy
+
+### Performance
+- Use `defaultValue` for uncontrolled components
+- Avoid heavy content in accordion items
+- Consider lazy loading for complex content
+
+### Responsive Design
+- Test on various screen sizes
+- Ensure touch targets are adequate (44px minimum)
+- Consider stacking on mobile devices
+
+### Common Patterns
+- **FAQ sections**: Single selection with collapsible
+- **Settings panels**: Multiple selection for categories
+- **Navigation menus**: Single selection without collapsible
+- **Content sections**: Multiple selection for exploration
+
+## Examples
+
+### Settings Panel
+
+```tsx
+<GlassAccordion type="multiple" defaultValue={["account", "privacy"]}>
+  <GlassAccordion.Item value="account">
+    <GlassAccordion.Trigger>Account Settings</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      {/* Account settings form */}
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+  <GlassAccordion.Item value="privacy">
+    <GlassAccordion.Trigger>Privacy Settings</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      {/* Privacy settings form */}
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+</GlassAccordion>
+```
+
+### Product Features
+
+```tsx
+<GlassAccordion type="single" size="lg">
+  <GlassAccordion.Item value="features">
+    <GlassAccordion.Trigger>Key Features</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      <ul className="space-y-2">
+        <li>✨ Glassmorphism design</li>
+        <li>🎯 Full accessibility</li>
+        <li>📱 Responsive layout</li>
+      </ul>
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+</GlassAccordion>
+```

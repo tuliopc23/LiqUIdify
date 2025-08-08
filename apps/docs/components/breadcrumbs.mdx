@@ -1,0 +1,266 @@
+---
+title: Breadcrumbs
+description: Navigation breadcrumbs with liquid glass styling and customizable separators.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassBreadcrumbs } from '@liquidify/components'
+import { Home, ChevronRight, Slash, ArrowRight, Settings, User, Shield } from 'lucide-react'
+
+export default function Demo() {
+  const [currentPath, setCurrentPath] = useState(['dashboard', 'settings', 'profile'])
+  
+  const basicItems = [
+    { label: 'Dashboard', onClick: () => setCurrentPath(['dashboard']) },
+    { label: 'Settings', onClick: () => setCurrentPath(['dashboard', 'settings']) },
+    { label: 'Profile', onClick: () => setCurrentPath(['dashboard', 'settings', 'profile']) }
+  ]
+  
+  const iconItems = [
+    { 
+      label: 'Dashboard', 
+      icon: <Home className="h-4 w-4" />,
+      onClick: () => console.log('Navigate to dashboard')
+    },
+    { 
+      label: 'Settings', 
+      icon: <Settings className="h-4 w-4" />,
+      onClick: () => console.log('Navigate to settings')
+    },
+    { 
+      label: 'User Profile', 
+      icon: <User className="h-4 w-4" />
+    }
+  ]
+  
+  const longItems = [
+    { label: 'Home', onClick: () => console.log('Home') },
+    { label: 'Products', onClick: () => console.log('Products') },
+    { label: 'Electronics', onClick: () => console.log('Electronics') },
+    { label: 'Computers', onClick: () => console.log('Computers') },
+    { label: 'Laptops', onClick: () => console.log('Laptops') },
+    { label: 'Gaming Laptops', onClick: () => console.log('Gaming') },
+    { label: 'High Performance Gaming Laptop' }
+  ]
+  
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Breadcrumbs</h3>
+        <GlassBreadcrumbs items={basicItems} />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">With Icons</h3>
+        <GlassBreadcrumbs 
+          items={iconItems}
+          showHome={true}
+          onHomeClick={() => console.log('Home clicked')}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Custom Separators</h3>
+        <div className="space-y-4">
+          <GlassBreadcrumbs 
+            items={basicItems}
+            separator={<Slash className="h-4 w-4 text-white/40" />}
+          />
+          <GlassBreadcrumbs 
+            items={basicItems}
+            separator={<ArrowRight className="h-4 w-4 text-white/40" />}
+          />
+          <GlassBreadcrumbs 
+            items={basicItems}
+            separator={<span className="text-white/40">•</span>}
+          />
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Sizes</h3>
+        <div className="space-y-4">
+          <GlassBreadcrumbs items={basicItems} size="sm" />
+          <GlassBreadcrumbs items={basicItems} size="md" />
+          <GlassBreadcrumbs items={basicItems} size="lg" />
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Variants</h3>
+        <div className="space-y-4">
+          <GlassBreadcrumbs items={basicItems} variant="default" />
+          <GlassBreadcrumbs items={basicItems} variant="solid" />
+          <GlassBreadcrumbs items={basicItems} variant="ghost" />
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Truncated (Max 4 Items)</h3>
+        <GlassBreadcrumbs 
+          items={longItems}
+          maxItems={4}
+          showHome={false}
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-white mb-4">Without Home Icon</h3>
+        <GlassBreadcrumbs 
+          items={iconItems}
+          showHome={false}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `BreadcrumbItem[]` | - | Array of breadcrumb items |
+| `separator` | `ReactNode` | `<ChevronRight />` | Custom separator element |
+| `showHome` | `boolean` | `true` | Whether to show home icon |
+| `onHomeClick` | `() => void` | - | Callback when home icon is clicked |
+| `maxItems` | `number` | - | Maximum items to show (truncates with "...") |
+| `variant` | `'default' \| 'solid' \| 'ghost'` | `'default'` | Visual style variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| `className` | `string` | - | Additional CSS classes |
+
+### BreadcrumbItem Interface
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `label` | `string` | Display text |
+| `href` | `string` | Optional URL for navigation |
+| `onClick` | `() => void` | Optional click handler |
+| `icon` | `ReactNode` | Optional icon element |
+
+## Usage Patterns
+
+### E-commerce Navigation
+```tsx
+const productBreadcrumbs = [
+  { 
+    label: 'Electronics', 
+    onClick: () => navigate('/electronics')
+  },
+  { 
+    label: 'Smartphones', 
+    onClick: () => navigate('/electronics/smartphones')
+  },
+  { 
+    label: 'iPhone 15 Pro'
+  }
+]
+
+<GlassBreadcrumbs 
+  items={productBreadcrumbs}
+  onHomeClick={() => navigate('/')}
+/>
+```
+
+### Admin Dashboard
+```tsx
+import { Users, User, Edit } from 'lucide-react'
+
+const adminBreadcrumbs = [
+  {
+    label: 'Users',
+    icon: <Users className="h-4 w-4" />,
+    onClick: () => navigate('/admin/users')
+  },
+  {
+    label: 'John Doe',
+    icon: <User className="h-4 w-4" />,
+    onClick: () => navigate('/admin/users/123')
+  },
+  {
+    label: 'Edit Profile',
+    icon: <Edit className="h-4 w-4" />
+  }
+]
+
+<GlassBreadcrumbs 
+  items={adminBreadcrumbs}
+  variant="solid"
+  size="lg"
+/>
+```
+
+### File System Navigation
+```tsx
+const pathBreadcrumbs = currentPath.split('/').map((segment, index, array) => ({
+  label: segment || 'Root',
+  onClick: index < array.length - 1 
+    ? () => navigateToPath(array.slice(0, index + 1).join('/'))
+    : undefined
+}))
+
+<GlassBreadcrumbs 
+  items={pathBreadcrumbs}
+  separator={<Slash className="h-4 w-4" />}
+  maxItems={5}
+/>
+```
+
+### Documentation Navigation
+```tsx
+<GlassBreadcrumbs 
+  items={[
+    { label: 'Docs', onClick: () => navigate('/docs') },
+    { label: 'Components', onClick: () => navigate('/docs/components') },
+    { label: 'Breadcrumbs' }
+  ]}
+  variant="ghost"
+  showHome={false}
+/>
+```
+
+## Accessibility
+
+- **ARIA Navigation**: Uses `role="navigation"` and `aria-label="Breadcrumb"`
+- **Semantic HTML**: Implements proper `<nav>` and `<ol>` structure
+- **Current Page**: Uses `aria-current="page"` for the last item
+- **Keyboard Navigation**: All interactive elements are keyboard accessible
+- **Screen Reader**: Clear announcement of navigation structure
+- **Focus Management**: Proper focus indicators and tab order
+
+## Apple HIG Guidelines
+
+### Visual Design
+- **Hierarchy**: Clear visual hierarchy with proper typography
+- **Depth**: Subtle glass effects that enhance without overwhelming
+- **Color**: Consistent color usage for interactive and static elements
+- **Spacing**: Appropriate spacing between items and separators
+
+### Navigation
+- **Clarity**: Clear indication of current location in hierarchy
+- **Consistency**: Consistent behavior across the application
+- **Efficiency**: Quick navigation to any level in the hierarchy
+- **Context**: Provides context about user's location
+
+### Interaction
+- **Feedback**: Clear hover and focus states for interactive elements
+- **Touch Targets**: Appropriate size for touch interaction
+- **Animation**: Smooth transitions and micro-interactions
+- **States**: Clear visual states for different interaction modes
+
+### Content
+- **Conciseness**: Keep labels short and descriptive
+- **Consistency**: Use consistent naming conventions
+- **Hierarchy**: Reflect the actual information architecture
+- **Truncation**: Handle long paths gracefully
+
+### Best Practices
+- Use meaningful, descriptive labels
+- Ensure all levels are clickable except the current page
+- Consider mobile responsiveness for long breadcrumb trails
+- Test with screen readers and keyboard navigation
+- Maintain consistent styling with your navigation system
+- Use appropriate separators that match your design language
+- Consider truncation for very deep hierarchies
+- Provide clear visual feedback for interactive elements

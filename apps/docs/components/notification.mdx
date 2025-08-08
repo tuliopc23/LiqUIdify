@@ -1,0 +1,356 @@
+---
+title: Notification
+description: Liquid Glass notification center with real-time updates and interactive management.
+---
+
+# Notification
+
+The `NotificationCenter` component provides a comprehensive notification system with glassmorphism effects. It supports different notification types, real-time updates, and interactive management features.
+
+## Live Examples
+
+### Basic Notification Center
+
+```tsx live
+import { useState } from 'react'
+import { NotificationCenter } from '@liquidify/components'
+
+export default function Demo() {
+  const [notifications, setNotifications] = useState([
+    {
+      id: '1',
+      title: 'Welcome!',
+      message: 'Thanks for trying our notification system.',
+      type: 'success',
+      timestamp: new Date(Date.now() - 5 * 60 * 1000),
+      read: false
+    },
+    {
+      id: '2', 
+      title: 'System Update',
+      message: 'A new version is available for download.',
+      type: 'info',
+      timestamp: new Date(Date.now() - 15 * 60 * 1000),
+      read: true
+    },
+    {
+      id: '3',
+      title: 'Warning',
+      message: 'Your storage is almost full.',
+      type: 'warning',
+      timestamp: new Date(Date.now() - 30 * 60 * 1000),
+      read: false
+    }
+  ])
+  
+  const handleMarkAsRead = (id) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    )
+  }
+  
+  const handleMarkAllAsRead = () => {
+    setNotifications(prev => prev.map(n => ({ ...n, read: true })))
+  }
+  
+  const handleDismiss = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }
+  
+  return (
+    <div style={{display:'flex', justifyContent:'center', padding:20}}>
+      <NotificationCenter
+        notifications={notifications}
+        onMarkAsRead={handleMarkAsRead}
+        onMarkAllAsRead={handleMarkAllAsRead}
+        onDismiss={handleDismiss}
+      />
+    </div>
+  )
+}
+```
+
+### Notification Types
+
+```tsx live
+import { useState } from 'react'
+import { NotificationCenter, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  const [notifications, setNotifications] = useState([])
+  
+  const addNotification = (type) => {
+    const messages = {
+      success: { title: 'Success!', message: 'Operation completed successfully.' },
+      error: { title: 'Error', message: 'Something went wrong. Please try again.' },
+      warning: { title: 'Warning', message: 'Please review your settings.' },
+      info: { title: 'Information', message: 'Here\'s some helpful information.' },
+      system: { title: 'System', message: 'System notification received.' }
+    }
+    
+    const newNotification = {
+      id: Date.now().toString(),
+      ...messages[type],
+      type,
+      timestamp: new Date(),
+      read: false
+    }
+    
+    setNotifications(prev => [newNotification, ...prev])
+  }
+  
+  const handleMarkAsRead = (id) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    )
+  }
+  
+  const handleDismiss = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }
+  
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'center'}}>
+      <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+        <GlassButton size="sm" onClick={() => addNotification('success')}>Success</GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification('error')}>Error</GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification('warning')}>Warning</GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification('info')}>Info</GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification('system')}>System</GlassButton>
+      </div>
+      
+      <NotificationCenter
+        notifications={notifications}
+        onMarkAsRead={handleMarkAsRead}
+        onDismiss={handleDismiss}
+      />
+    </div>
+  )
+}
+```
+
+### With Actions
+
+```tsx live
+import { useState } from 'react'
+import { NotificationCenter, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  const [notifications, setNotifications] = useState([
+    {
+      id: '1',
+      title: 'Friend Request',
+      message: 'John Doe wants to connect with you.',
+      type: 'info',
+      timestamp: new Date(Date.now() - 2 * 60 * 1000),
+      read: false,
+      action: {
+        label: 'Accept',
+        onClick: () => alert('Friend request accepted!')
+      }
+    },
+    {
+      id: '2',
+      title: 'Update Available',
+      message: 'Version 2.0 is ready to install.',
+      type: 'system',
+      timestamp: new Date(Date.now() - 10 * 60 * 1000),
+      read: false,
+      action: {
+        label: 'Install',
+        onClick: () => alert('Starting installation...')
+      }
+    }
+  ])
+  
+  const handleMarkAsRead = (id) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    )
+  }
+  
+  const handleDismiss = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }
+  
+  return (
+    <div style={{display:'flex', justifyContent:'center', padding:20}}>
+      <NotificationCenter
+        notifications={notifications}
+        onMarkAsRead={handleMarkAsRead}
+        onDismiss={handleDismiss}
+      />
+    </div>
+  )
+}
+```
+
+## Props
+
+### NotificationCenter
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `notifications` | `NotificationItem[]` | `[]` | Array of notification objects |
+| `onMarkAsRead` | `(id: string) => void` | `undefined` | Callback when notification is marked as read |
+| `onMarkAllAsRead` | `() => void` | `undefined` | Callback when all notifications are marked as read |
+| `onDismiss` | `(id: string) => void` | `undefined` | Callback when notification is dismissed |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### NotificationItem Interface
+
+```typescript
+interface NotificationItem {
+  id: string
+  title: string
+  message: string
+  type?: 'success' | 'error' | 'warning' | 'info' | 'system'
+  timestamp?: Date
+  read?: boolean
+  avatar?: string
+  action?: {
+    label: string
+    onClick: () => void
+  }
+}
+```
+
+## Usage Patterns
+
+### Real-time Notifications
+
+```tsx
+// WebSocket integration
+const [notifications, setNotifications] = useState([])
+
+useEffect(() => {
+  const ws = new WebSocket('ws://localhost:8080')
+  
+  ws.onmessage = (event) => {
+    const notification = JSON.parse(event.data)
+    setNotifications(prev => [notification, ...prev])
+  }
+  
+  return () => ws.close()
+}, [])
+```
+
+### Persistent Storage
+
+```tsx
+// Save to localStorage
+const saveNotifications = (notifications) => {
+  localStorage.setItem('notifications', JSON.stringify(notifications))
+}
+
+// Load from localStorage
+const loadNotifications = () => {
+  const saved = localStorage.getItem('notifications')
+  return saved ? JSON.parse(saved) : []
+}
+```
+
+### Integration with Toast
+
+```tsx
+// Show toast for new notifications
+const addNotification = (notification) => {
+  setNotifications(prev => [notification, ...prev])
+  
+  // Show toast for immediate feedback
+  toast.success(notification.title)
+}
+```
+
+### Filtering and Search
+
+```tsx
+// Filter by type or read status
+const filteredNotifications = notifications.filter(n => {
+  if (filter === 'unread') return !n.read
+  if (filter === 'type') return n.type === selectedType
+  return true
+})
+```
+
+## Accessibility
+
+### WCAG Compliance
+
+- **WCAG 2.1 AA**: Full compliance with color contrast and keyboard navigation
+- **Screen Readers**: Proper ARIA labels and live regions
+- **Keyboard Navigation**: Full keyboard support with focus management
+- **Focus Management**: Logical tab order and focus indicators
+
+### Implementation Details
+
+```tsx
+// Accessible notification center
+<div role="region" aria-label="Notifications">
+  <NotificationCenter
+    notifications={notifications}
+    onMarkAsRead={handleMarkAsRead}
+    aria-live="polite"
+    aria-atomic="false"
+  />
+</div>
+```
+
+### Best Practices
+
+- Use `aria-live="polite"` for non-urgent notifications
+- Use `aria-live="assertive"` for critical alerts
+- Provide clear action labels and keyboard shortcuts
+- Ensure sufficient color contrast for all notification types
+- Include proper focus management for interactive elements
+
+## Apple HIG Guidelines
+
+### Visual Design
+
+- **Clarity**: Clear hierarchy with distinct notification types
+- **Deference**: Subtle glassmorphism that doesn't overwhelm content
+- **Depth**: Layered glass effects create visual separation
+
+### Interaction Design
+
+- **Intuitive**: Familiar notification patterns and gestures
+- **Responsive**: Immediate feedback for all interactions
+- **Contextual**: Relevant actions based on notification type
+
+### Content Guidelines
+
+- **Concise**: Brief, scannable notification content
+- **Actionable**: Clear next steps when applicable
+- **Timely**: Relevant timestamps and urgency indicators
+
+### Notification Types
+
+- **Success**: Green accent, checkmark icon
+- **Error**: Red accent, alert circle icon
+- **Warning**: Yellow accent, triangle icon
+- **Info**: Blue accent, info circle icon
+- **System**: Gray accent, bell icon
+
+## Performance
+
+### Optimization Features
+
+- **Virtual Scrolling**: Efficient rendering for large notification lists
+- **Memoization**: Optimized re-renders with React.memo
+- **Lazy Loading**: Load notifications on demand
+- **Debounced Updates**: Batch notification updates
+
+### Best Practices
+
+- Limit the number of visible notifications
+- Implement pagination for large datasets
+- Use efficient state management patterns
+- Consider notification expiration policies
+
+## Related Components
+
+- [Toast](/components/toast) - For temporary notifications
+- [Alert](/components/alert) - For inline alerts
+- [Badge](/components/badge) - For notification counts
+- [Modal](/components/modal) - For detailed notification views
