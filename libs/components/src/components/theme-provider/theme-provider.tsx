@@ -90,6 +90,8 @@ export function ThemeProvider({
         }, 1);
       };
     }
+
+    return undefined;
   }, [theme, attribute, disableTransitionOnChange]);
 
   useEffect(() => {
@@ -118,6 +120,8 @@ export function ThemeProvider({
         mediaQuery.removeEventListener("change", handleSystemThemeChange);
       };
     }
+
+    return undefined;
   }, [theme, enableSystem, attribute]);
 
   const value = {

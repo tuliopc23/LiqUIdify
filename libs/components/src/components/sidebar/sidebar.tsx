@@ -102,6 +102,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           document.body.style.overflow = "";
         };
       }
+      return () => {};
     }, [overlay, open]);
 
     const positionClasses = {

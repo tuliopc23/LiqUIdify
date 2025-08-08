@@ -243,9 +243,11 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         (error || errorMessage) &&
         fieldRef.current
       ) {
-        fieldRef.current.focus({
-          preventScroll: focusOptions.preventScroll,
-        });
+        const focusOpts: FocusOptions = {};
+        if (focusOptions.preventScroll !== undefined) {
+          focusOpts.preventScroll = focusOptions.preventScroll;
+        }
+        fieldRef.current.focus(focusOpts);
       }
     }, [
       error,

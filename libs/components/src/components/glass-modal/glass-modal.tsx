@@ -17,8 +17,8 @@ interface GlassModalProps {
   contentClassName?: string;
   closeOnBackdropClick?: boolean;
   closeOnEscape?: boolean;
-  initialFocus?: React.RefObject<HTMLElement>;
-  portalTarget?: HTMLElement;
+initialFocus?: React.RefObject<HTMLElement>;
+  // portalTarget?: HTMLElement;
 }
 
 export function GlassModal({
@@ -32,7 +32,7 @@ export function GlassModal({
   closeOnBackdropClick = true,
   closeOnEscape = true,
   initialFocus,
-  portalTarget,
+  // portalTarget,
 }: GlassModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);

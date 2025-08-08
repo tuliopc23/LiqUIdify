@@ -1,0 +1,56 @@
+---
+title: Project Setup (Tailwind + PostCSS)
+description: Configure Tailwind and global CSS to use @liquidify/components.
+---
+
+This page sets up Tailwind and required global CSS. Works with Vite, Bun, and React 18/19.
+
+## 1) Install
+
+```bash
+bun add -d tailwindcss postcss autoprefixer
+```
+
+## 2) Tailwind config
+
+Create `tailwind.config.ts`:
+
+```ts
+import type { Config } from 'tailwindcss'
+
+export default {
+  content: [
+    './index.html',
+    './src/**/*.{ts,tsx}',
+    './node_modules/@liquidify/components/dist/**/*.{js,mjs}'
+  ],
+  theme: { extend: {} },
+  plugins: []
+} satisfies Config
+```
+
+## 3) PostCSS
+
+`postcss.config.js`:
+
+```js
+module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } }
+```
+
+## 4) Global CSS
+
+Import library CSS once (tree-shake safe). Add to `src/main.tsx` or your app root:
+
+```tsx
+import '@liquidify/components/styles'
+```
+
+If you prefer tokens only:
+
+```tsx
+import '@liquidify/components/tokens'
+```
+
+## 5) ESM + sideEffects
+
+The package ships ESM with sideEffects set for CSS. Keep `build.target` modern, and avoid importing from `src/`.

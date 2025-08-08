@@ -116,14 +116,15 @@ export const PulseSpinner: React.FC<{
   };
 
   return (
-    <div className={cn("flex space-x-1", className)}>
+  <div className={cn("flex space-x-1", className)}>
       {[0, 1, 2].map((index) => (
         <motion.div
           key={`pulse-${index}`}
           className={cn(
-            "rounded-full bg-liquid-glass-hl/50",
+            "rounded-full",
             sizeClasses[size],
           )}
+          style={{ backgroundColor: color }}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],

@@ -28,11 +28,11 @@ function ConfigProvider({
   globalConfig,
 }: ConfigProviderProps) {
   return (
-    <GlobalConfigProvider config={globalConfig}>
+    <GlobalConfigProvider config={globalConfig || {}}>
       <GlassUIProvider
         theme={theme}
-        glassConfig={glassConfig}
-        hapticConfig={hapticConfig}
+        glassConfig={glassConfig || {}}
+        hapticConfig={hapticConfig || {}}
       >
         {children}
       </GlassUIProvider>
