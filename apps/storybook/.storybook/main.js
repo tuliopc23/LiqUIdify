@@ -1,16 +1,51 @@
 import { createRequire } from "node:module";
-import type { StorybookConfig } from "@storybook/react-vite";
-import { mergeConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path, { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import {
+  PRODUCTION_COMPONENTS,
+  // eslint-disable-next-line import/no-relative-parent-imports
+} from "./production-stories.config";
 
+// ---------------------------------------------------------------------------
+// ESM helpers ---------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Storybook executes this file in Node ESM context, but many utilities below
+// still expect CommonJS‐style `__dirname` as well as `require`.  We recreate
+// both so the rest of the configuration can stay framework-agnostic.
+const baseDir = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
-const config: StorybookConfig = {
-  stories: [
-    // Curated: include all visual component stories; exclude demos by convention (*.disabled)
-    "../../../libs/components/src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-  ],
+/**
+ * Determine the current Storybook build mode.
+ * Storybook passes NODE_ENV=production during `storybook build`
+ * and NODE_ENV=development during `storybook dev`.
+ */
+const isProductionBuild = process.env.NODE_ENV === "production";
+
+/**
+ * Build story globs for the production whitelist.
+ * We flatten all component lists from PRODUCTION_COMPONENTS and
+ * create a glob per component folder.
+ */
+function buildProductionStoryGlobs() {
+  const basePath = "../../../libs/components/src/components";
+
+  const flatList = Object.values(PRODUCTION_COMPONENTS).flat();
+
+  return flatList.map(
+    (componentName) =>
+      `${basePath}/${componentName}/**/*.stories.@(js|jsx|ts|tsx|mdx)`,
+  );
+}
+
+const config = {
+  stories: isProductionBuild
+    ? buildProductionStoryGlobs()
+    : [
+        // Development: include every story so contributors can preview work-in-progress components.
+        "../../../libs/components/src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-a11y"),
@@ -41,9 +76,9 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config, { configType }) => {
     try {
-      const distBase = path.resolve(__dirname, "../../../dist/libs/components");
-      const srcBase = path.resolve(__dirname, "../../../libs/components/src");
-      const aliasMap: Record<string, string> =
+      const distBase = path.resolve(baseDir, "../../../dist/libs/components");
+      const srcBase = path.resolve(baseDir, "../../../libs/components/src");
+      const aliasMap =
         configType === "PRODUCTION"
           ? {
               "liquidify/css": path.resolve(distBase, "liquidify.css"),
@@ -58,15 +93,28 @@ const config: StorybookConfig = {
               "@": srcBase,
             };
 
-      return mergeConfig(config, {
-        logLevel: "error",
-        resolve: {
-          alias: aliasMap,
-          dedupe: ["react", "react-dom"],
-        },
-        plugins: [tsconfigPaths()],
-        build: {
-          rollupOptions: {
+      // -----------------------------
+      // Mutate the supplied Vite config in-place instead of using mergeConfig
+      // This avoids the duplicate __dirname declaration error that Storybook
+      // hits when evaluating main.ts in CJS context.
+      // -----------------------------
+
+      // Resolve & alias settings
+      config.logLevel = "error";
+      config.resolve = {
+        ...(config.resolve ?? {}),
+        alias: aliasMap,
+        dedupe: ["react", "react-dom"],
+      };
+
+      // Plugins
+      config.plugins = [...(config.plugins ?? []), tsconfigPaths()];
+
+      // Build options
+      config.build = {
+        ...(config.build ?? {}),
+        rollupOptions: {
+          ...(config.build?.rollupOptions ?? {}),
             onwarn(warning, warn) {
               // Suppress "use client" directive warnings
               if (
@@ -84,7 +132,7 @@ const config: StorybookConfig = {
               warn(warning);
             },
             output: {
-              manualChunks: (id: string) => {
+              manualChunks: (id) => {
                 if (id.includes("node_modules")) {
                   if (id.includes("react") || id.includes("react-dom")) {
                     return "react-vendor";
@@ -100,18 +148,24 @@ const config: StorybookConfig = {
               },
             },
           },
-          chunkSizeWarningLimit: 2500,
-        },
-        optimizeDeps: {
-          include: ["react", "react-dom", "@storybook/react-vite"],
-          exclude: [],
-        },
-        define: {
-          "process.env.NODE_ENV": JSON.stringify(
-            configType === "PRODUCTION" ? "production" : "development",
-          ),
-        },
-      });
+        chunkSizeWarningLimit: 2500,
+      };
+
+      // Dependency optimisation
+      config.optimizeDeps = {
+        include: ["react", "react-dom", "@storybook/react-vite"],
+        exclude: [],
+      };
+
+      // Global defines
+      config.define = {
+        ...(config.define ?? {}),
+        "process.env.NODE_ENV": JSON.stringify(
+          configType === "PRODUCTION" ? "production" : "development",
+        ),
+      };
+
+      return config;
     } catch (error) {
       console.error("❌ Storybook Vite configuration error:", error);
       throw error;
@@ -161,6 +215,7 @@ const config: StorybookConfig = {
 
 export default config;
 
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
 }
+

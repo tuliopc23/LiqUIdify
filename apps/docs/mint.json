@@ -6,6 +6,10 @@
     "light": "/logo-light.svg"
   },
   "favicon": "/favicon.svg",
+  "stylesheets": [
+    "/styles/apple-hig.css",
+    "/styles/liquid-glass.css"
+  ],
   "colors": {
     "primary": "#007AFF",
     "light": "#5AC8FA",

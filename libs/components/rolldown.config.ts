@@ -45,7 +45,12 @@ export default defineConfig({
         entryFileNames: (chunk) => (chunk.name === "index" ? "index.mjs" : "[name].mjs"),
         chunkFileNames: "chunks/[name]-[hash].mjs",
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith(".css")) return "[name][extname]";
+          // Always emit a single deterministic stylesheet so
+          // consumers can import  "liquidify/css"  and Storybook /
+          // package.json `style` field resolves correctly.
+          if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+            return "liquidify.css";
+          }
           return "assets/[name]-[hash][extname]";
         },
       },
