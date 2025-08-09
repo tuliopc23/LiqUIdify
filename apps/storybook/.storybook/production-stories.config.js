@@ -17,7 +17,7 @@ export const PRODUCTION_COMPONENTS = {
     "glass-banner",
   ],
 
-  // Form / Input Components
+  // Form Components
   forms: [
     "glass-checkbox",
     "glass-radio-group",
@@ -38,7 +38,7 @@ export const PRODUCTION_COMPONENTS = {
     "glass-search",
   ],
 
-  // Layout & Containers
+  // Layout Components
   layout: [
     "glass-accordion",
     "glass-tabs",

@@ -50,12 +50,12 @@
     "mintlify": "^4.2.60",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-        "rollup-plugin-visualizer": "^6.0.3",
-        "serve": "^14.2.4",
-        "storybook": "^9.1.1",
-        "@storybook/builder-vite": "^9.1.1",
-        "@storybook/react-vite": "^9.1.1",
-        "tailwindcss": "^4.1.11",
+    "rollup-plugin-visualizer": "^6.0.3",
+    "serve": "^14.2.4",
+    "@storybook/react-vite": "^9.1.1",
+    "@storybook/builder-vite": "^9.1.1",
+    "storybook": "^9.1.1",
+    "tailwindcss": "^4.1.11",
     "tailwindcss-filters": "^3.0.0",
     "typescript": "^5.9.2",
     "vite-plugin-dts": "^4.5.4",
@@ -121,8 +121,7 @@
   },
   "overrides": {
     "@stoplight/spectral-core": "1.19.3",
-    "@stoplight/spectral-functions": "1.9.2",
-    "esbuild-register": "3.5.0"
+    "@stoplight/spectral-functions": "1.9.2"
   },
   "scripts": {
     "build": "bun run build:lib && bun run build:storybook",

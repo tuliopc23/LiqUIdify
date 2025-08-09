@@ -70,8 +70,6 @@ const config = {
     try {
       // Dynamically import vite-tsconfig-paths
       const { default: tsconfigPaths } = await import("vite-tsconfig-paths");
-      // Use statically imported vite-tsconfig-paths
-      
       
       const distBase = path.resolve(baseDir, "../../../dist/libs/components");
       const srcBase = path.resolve(baseDir, "../../../libs/components/src");
