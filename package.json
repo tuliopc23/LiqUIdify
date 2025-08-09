@@ -121,8 +121,7 @@
   },
   "overrides": {
     "@stoplight/spectral-core": "1.19.3",
-    "@stoplight/spectral-functions": "1.9.2",
-    /* Removed duplicate and redundant `esbuild-register` overrides */
+    "@stoplight/spectral-functions": "1.9.2"
   },
   "scripts": {
     "build": "bun run build:lib && bun run build:storybook",
