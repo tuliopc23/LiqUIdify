@@ -1,0 +1,43 @@
+---
+title: Checkbox Group
+description: Grouped selection of related options with descriptions.
+---
+
+# Checkbox Group
+
+```tsx live
+import { GlassCheckboxGroup } from "liquidify";
+import { useState } from 'react';
+
+export default function Demo() {
+  const [value, setValue] = useState(['analytics']);
+  return (
+    <GlassCheckboxGroup
+      label="Features"
+      description="Enable the modules you need"
+      options={[
+        { value: 'analytics', label: 'Analytics' },
+        { value: 'notifications', label: 'Notifications' },
+        { value: 'api', label: 'API Access' }
+      ]}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `options` | `CheckboxOption[]` | Required option list |
+| `value` | `string[]` | Controlled selected values |
+| `onChange` | `(values: string[]) => void` | Change handler |
+| `orientation` | `'vertical' | 'horizontal'` | Layout direction |
+| `size` | `'sm' | 'md' | 'lg'` | Visual size |
+
+## Accessibility
+
+- Fieldset + legend semantics applied internally.
+- Click target includes label & description.

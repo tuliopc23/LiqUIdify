@@ -13,7 +13,7 @@ A glassmorphic banner component for displaying prominent messages, announcements
 ### Basic Variants
 
 ```tsx live
-import { GlassBanner } from "@liquidify/components";
+import { GlassBanner } from "liquidify";
 
 export default function Demo() {
   return (
@@ -42,7 +42,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassBanner } from "@liquidify/components";
+import { GlassBanner } from "liquidify";
 
 export default function Demo() {
   const [showInfo, setShowInfo] = useState(true);
@@ -81,7 +81,7 @@ export default function Demo() {
 ### With Actions
 
 ```tsx live
-import { GlassBanner, GlassButton } from "@liquidify/components";
+import { GlassBanner, GlassButton } from "liquidify";
 
 export default function Demo() {
   return (
@@ -121,7 +121,7 @@ export default function Demo() {
 ### Custom Icons
 
 ```tsx live
-import { GlassBanner } from "@liquidify/components";
+import { GlassBanner } from "liquidify";
 import { Gift, Zap, Shield, Heart } from "lucide-react";
 
 export default function Demo() {
@@ -166,7 +166,7 @@ export default function Demo() {
 
 ```tsx
 import { useState, useEffect } from "react";
-import { GlassBanner, GlassButton } from "@liquidify/components";
+import { GlassBanner, GlassButton } from "liquidify";
 
 function SystemAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);
@@ -213,7 +213,7 @@ function SystemAnnouncements() {
 ### Feature Announcements
 
 ```tsx
-import { GlassBanner, GlassButton } from "@liquidify/components";
+import { GlassBanner, GlassButton } from "liquidify";
 import { Sparkles } from "lucide-react";
 
 function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
@@ -246,7 +246,7 @@ function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
 ### Maintenance Notifications
 
 ```tsx
-import { GlassBanner } from "@liquidify/components";
+import { GlassBanner } from "liquidify";
 import { Clock } from "lucide-react";
 
 function MaintenanceNotification({ maintenance }) {
@@ -292,7 +292,7 @@ function MaintenanceNotification({ maintenance }) {
 
 ```tsx
 import { useState } from "react";
-import { GlassBanner, GlassButton } from "@liquidify/components";
+import { GlassBanner, GlassButton } from "liquidify";
 import { Cookie } from "lucide-react";
 
 function CookieConsent() {

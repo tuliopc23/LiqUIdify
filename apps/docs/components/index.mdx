@@ -12,16 +12,16 @@ LiqUIdify provides a comprehensive set of Apple-inspired components built with t
 ### Installation
 
 ```bash
-npm install @liquidify/components
+npm install liquidify
 # or
-bun add @liquidify/components
+bun add liquidify
 ```
 
 ### Basic Setup
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -38,7 +38,7 @@ function App() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassButton, ThemeToggle } from "@liquidify/components";
+import { GlassButton, ThemeToggle } from "liquidify";
 
 export default function Example() {
   const [count, setCount] = useState(0);
@@ -59,7 +59,7 @@ export default function Example() {
 ### Liquid Glass Container
 
 ```tsx live
-import { LiquidGlassProvider, GlassButton } from "@liquidify/components";
+import { LiquidGlassProvider, GlassButton } from "liquidify";
 
 function GlassContainer({ children }) {
   return (
@@ -216,14 +216,14 @@ Specialized utility and accessibility components.
 ### 1. Install Dependencies
 
 ```bash
-npm install @liquidify/components lucide-react
+npm install liquidify lucide-react
 ```
 
 ### 2. Setup Providers
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -252,7 +252,7 @@ import {
   GlassCard,
   GlassInput,
   ThemeToggle,
-} from "@liquidify/components";
+} from "liquidify";
 
 function MyComponent() {
   return (
@@ -336,4 +336,4 @@ All components follow Apple's design principles:
 - 🐛 [Report Issues](https://github.com/tuliopc23/LiqUIdify/issues)
 - 💬 [Join Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)
 - 📖 [View Source](https://github.com/tuliopc23/LiqUIdify)
-- 📦 [NPM Package](https://www.npmjs.com/package/@liquidify/components)
+- 📦 [NPM Package](https://www.npmjs.com/package/liquidify)

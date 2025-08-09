@@ -34,7 +34,7 @@ const heightMap = {
   lg: "h-20",
 };
 
-const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
+export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
   (
     {
       brand,
@@ -153,7 +153,7 @@ interface NavbarItemProps {
   disabled?: boolean;
 }
 
-const NavbarItem = React.forwardRef<
+export const NavbarItem = React.forwardRef<
   HTMLAnchorElement | HTMLButtonElement,
   NavbarItemProps
 >(({ href, active, onClick, children, className, disabled }, ref) => {
@@ -182,6 +182,6 @@ const NavbarItem = React.forwardRef<
 NavbarItem.displayName = "NavbarItem";
 
 // NavbarDivider for visual separation
-const NavbarDivider: React.FC<{ className?: string }> = ({ className }) => (
+export const NavbarDivider: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn("h-6 w-px bg-gray-300 dark:bg-gray-700", className)} />
 );

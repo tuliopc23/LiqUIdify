@@ -12,7 +12,7 @@ A beautifully crafted theme toggle component that switches between light and dar
 ### Basic Usage
 
 ```tsx live
-import { ThemeToggle, useTheme } from "@liquidify/components";
+import { ThemeToggle, useTheme } from "liquidify";
 
 export default function Demo() {
   const { theme } = useTheme();
@@ -29,7 +29,7 @@ export default function Demo() {
 
 ```tsx live
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@liquidify/components";
+import { useTheme } from "liquidify";
 
 function CustomThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -67,7 +67,7 @@ export default function Demo() {
 ### Integration with Navigation
 
 ```tsx live
-import { ThemeToggle, GlassButton } from "@liquidify/components";
+import { ThemeToggle, GlassButton } from "liquidify";
 
 export default function Demo() {
   return (
@@ -114,8 +114,8 @@ interface ThemeProviderState {
 ### Basic Setup
 
 ```tsx
-import { ThemeProvider, ThemeToggle } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { ThemeProvider, ThemeToggle } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -134,7 +134,7 @@ function App() {
 ### Custom Theme Storage
 
 ```tsx
-import { ThemeProvider } from "@liquidify/components";
+import { ThemeProvider } from "liquidify";
 
 function App() {
   return (
@@ -148,7 +148,7 @@ function App() {
 ### Programmatic Theme Control
 
 ```tsx
-import { useTheme } from "@liquidify/components";
+import { useTheme } from "liquidify";
 
 function CustomControls() {
   const { theme, setTheme } = useTheme();

@@ -11,12 +11,16 @@
 
 :root {
   /* Core Liquid Glass Colors - EXACT MATCH to your snippets */
-  --lg-bg-color: rgba(255, 255, 255, 0.25);
+  /* Decorative glass base */
+  --lg-bg-color: rgba(20, 20, 25, 0.35);
+  /* Readable surface background (higher contrast) */
+  --lg-bg-readable: rgba(20, 20, 25, 0.65);
   --lg-highlight: rgba(255, 255, 255, 0.75);
   --lg-text: #ffffff;
   --lg-red: #fb4268;
   --lg-grey: #444739;
-  --lg-accent: #fb4268; /* Primary accent color - matches lg-red */
+  --lg-accent: #fb4268;
+  /* Primary accent color - matches lg-red */
 
   /* Liquid Glass Layers - Transparent System */
   --lg-filter-blur: blur(4px);
@@ -41,17 +45,26 @@
   --lg-transition-press: all 0.1s ease-in;
 
   /* Apple-style Border Radius - Authentic Bento Box Design */
-  --lg-radius-xs: 0.75rem; /* 12px - Small elements */
-  --lg-radius-sm: 1rem; /* 16px - Standard elements */
-  --lg-radius-md: 1.25rem; /* 20px - Cards, containers */
-  --lg-radius-lg: 1.5rem; /* 24px - Large cards */
-  --lg-radius-xl: 2rem; /* 32px - Hero elements */
-  --lg-radius-2xl: 2.5rem; /* 40px - Modal, overlays */
-  --lg-radius-3xl: 3rem; /* 48px - Special cases */
+  --lg-radius-xs: 0.75rem;
+  /* 12px - Small elements */
+  --lg-radius-sm: 1rem;
+  /* 16px - Standard elements */
+  --lg-radius-md: 1.25rem;
+  /* 20px - Cards, containers */
+  --lg-radius-lg: 1.5rem;
+  /* 24px - Large cards */
+  --lg-radius-xl: 2rem;
+  /* 32px - Hero elements */
+  --lg-radius-2xl: 2.5rem;
+  /* 40px - Modal, overlays */
+  --lg-radius-3xl: 3rem;
+  /* 48px - Special cases */
 
   /* Apple Bento Box Grid System */
-  --lg-bento-gap: 1rem; /* Standard gap between bento items */
-  --lg-bento-padding: 1.5rem; /* Internal padding for bento items */
+  --lg-bento-gap: 1rem;
+  /* Standard gap between bento items */
+  --lg-bento-padding: 1.5rem;
+  /* Internal padding for bento items */
 
   /* Z-Index Layers - Your exact system */
   --lg-z-filter: 0;
@@ -63,9 +76,12 @@
 
 /* Dark Mode - Keep components transparent, only change text/accents */
 .dark {
-  --lg-text: #ffffff; /* Keep white text */
-  --lg-red: #fb4268; /* Keep same red accent */
-  --lg-grey: #444739; /* Keep same grey */
+  --lg-text: #ffffff;
+  /* Keep white text */
+  --lg-red: #fb4268;
+  /* Keep same red accent */
+  --lg-grey: #444739;
+  /* Keep same grey */
   /* All glass colors stay the same - components remain transparent */
 }
 
@@ -134,7 +150,7 @@
 
 .liquid-glass-overlay {
   z-index: var(--lg-z-overlay);
-  background: var(--lg-bg-color);
+  background: var(--lg-bg-readable);
 }
 
 .liquid-glass-specular {
@@ -288,11 +304,9 @@
 
 /* Button variants */
 .liquid-glass-button-primary {
-  background: linear-gradient(
-    135deg,
-    var(--lg-accent) 0%,
-    rgba(251, 66, 104, 0.8) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--lg-accent) 0%,
+      rgba(251, 66, 104, 0.8) 100%);
 }
 
 .liquid-glass-button-secondary {
@@ -413,10 +427,12 @@
 }
 
 @keyframes liquidFloat {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-4px);
   }
@@ -435,12 +451,10 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%);
   animation: shimmer 2s linear infinite;
   pointer-events: none;
   z-index: var(--lg-z-content);
@@ -450,6 +464,7 @@
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
@@ -526,40 +541,57 @@
 .text-liquid-primary {
   color: var(--lg-text);
 }
+
 .text-liquid-secondary {
   color: rgba(255, 255, 255, 0.8);
 }
+
 .text-liquid-tertiary {
   color: rgba(255, 255, 255, 0.6);
 }
+
 .text-liquid-accent {
   color: var(--lg-red);
 }
+
 .text-liquid-grey {
   color: var(--lg-grey);
+}
+
+/* Readable surface background */
+.bg-liquid-readable {
+  background: var(--lg-bg-readable);
 }
 
 /* Background utilities */
 .bg-liquid {
   background: var(--lg-bg-color);
 }
+
 .bg-liquid-highlight {
   background: var(--lg-highlight);
 }
+
 .bg-liquid-accent {
   background: var(--lg-red);
+}
+
+/* Inverse text for accent surfaces */
+.text-liquid-inverse {
+  color: var(--lg-text-inverse, #ffffff);
 }
 
 /* Border utilities */
 .border-liquid {
   border-color: rgba(255, 255, 255, 0.12);
 }
+
 .border-liquid-accent {
   border-color: var(--lg-red);
 }
 
 /* Apple-style spacing utilities */
-.space-liquid > * + * {
+.space-liquid>*+* {
   margin-top: var(--lg-bento-gap);
 }
 
@@ -602,6 +634,7 @@
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   .liquid-glass,
   .liquid-glass-container,
   .liquid-glass-interactive,
@@ -621,6 +654,7 @@
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
+
   .liquid-glass,
   .liquid-glass-container {
     backdrop-filter: none;
@@ -653,6 +687,7 @@
   from {
     background-position: center center;
   }
+
   to {
     background-position: center top;
   }
@@ -664,11 +699,13 @@
 .liquid-glass-overlay,
 .liquid-glass-specular {
   will-change: transform, opacity;
-  transform: translateZ(0); /* Force GPU acceleration */
+  transform: translateZ(0);
+  /* Force GPU acceleration */
 }
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
+
   .liquid-glass-container,
   .liquid-glass-interactive {
     transition: none !important;
@@ -689,6 +726,7 @@
     border-color: rgba(255, 255, 255, 0.8);
   }
 }
+
 /* Enhanced Focus States */
 .liquid-glass-interactive:focus-visible {
   outline: 2px solid var(--lg-accent);

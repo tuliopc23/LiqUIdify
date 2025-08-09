@@ -1,0 +1,27 @@
+---
+title: File Upload
+description: Drag & drop or browse file selection component.
+---
+
+# File Upload
+
+```tsx live
+import { GlassFileUpload } from "liquidify";
+
+export default function Demo() {
+  return <GlassFileUpload accept="image/*" multiple />;
+}
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `accept` | `string` | Accepted MIME types |
+| `multiple` | `boolean` | Allow multi-select |
+| `maxSize` | `number` | Optional size limit bytes |
+| `onFiles` | `(files: File[]) => void` | Callback after selection |
+
+## Accessibility
+
+- Native input retained (visually hidden) ensuring keyboard & screen reader support.

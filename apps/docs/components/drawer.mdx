@@ -5,7 +5,7 @@ description: Slide-out panel component with multiple positions, sizes, and glass
 
 ```tsx live
 import { useState } from "react";
-import { GlassButton, Drawer } from "@liquidify/components";
+import { GlassButton, Drawer } from "liquidify";
 import { Menu, X, Settings, User } from "lucide-react";
 
 export default function Demo() {
@@ -144,7 +144,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassButton, Drawer } from "@liquidify/components";
+import { GlassButton, Drawer } from "liquidify";
 
 export default function SizesDemo() {
   const [smallOpen, setSmallOpen] = useState(false);
@@ -312,7 +312,7 @@ export default function SizesDemo() {
 ### Navigation Drawer
 
 ```tsx
-import { Drawer, GlassButton } from "@liquidify/components";
+import { Drawer, GlassButton } from "liquidify";
 import { Home, Settings, User, LogOut } from "lucide-react";
 
 function NavigationDrawer() {
@@ -373,7 +373,7 @@ import {
   GlassButton,
   GlassInput,
   GlassFormField,
-} from "@liquidify/components";
+} from "liquidify";
 
 function EditUserDrawer({ user, open, onOpenChange }) {
   const [formData, setFormData] = useState({
@@ -455,7 +455,7 @@ function EditUserDrawer({ user, open, onOpenChange }) {
 ### Details Drawer
 
 ```tsx
-import { Drawer, GlassButton, GlassBadge } from "@liquidify/components";
+import { Drawer, GlassButton, GlassBadge } from "liquidify";
 
 function ProductDetailsDrawer({ product, open, onOpenChange }) {
   return (

@@ -13,7 +13,7 @@ A glassmorphic alert component for displaying important messages with semantic c
 ### Basic Variants
 
 ```tsx live
-import { GlassAlert } from "@liquidify/components";
+import { GlassAlert } from "liquidify";
 
 export default function Demo() {
   return (
@@ -41,7 +41,7 @@ export default function Demo() {
 ### Without Titles
 
 ```tsx live
-import { GlassAlert } from "@liquidify/components";
+import { GlassAlert } from "liquidify";
 
 export default function Demo() {
   return (
@@ -61,8 +61,8 @@ export default function Demo() {
 ### Rich Content
 
 ```tsx live
-import { GlassAlert } from "@liquidify/components";
-import { GlassButton } from "@liquidify/components";
+import { GlassAlert } from "liquidify";
+import { GlassButton } from "liquidify";
 
 export default function Demo() {
   return (
@@ -118,7 +118,7 @@ export default function Demo() {
 
 ```tsx
 import { useState } from "react";
-import { GlassAlert, GlassInput, GlassButton } from "@liquidify/components";
+import { GlassAlert, GlassInput, GlassButton } from "liquidify";
 
 function FormWithValidation() {
   const [error, setError] = useState("");
@@ -162,7 +162,7 @@ function FormWithValidation() {
 ### Status Messages
 
 ```tsx
-import { GlassAlert } from "@liquidify/components";
+import { GlassAlert } from "liquidify";
 
 function StatusMessages({ status }) {
   const alerts = {
@@ -190,7 +190,7 @@ function StatusMessages({ status }) {
 ### System Notifications
 
 ```tsx
-import { GlassAlert } from "@liquidify/components";
+import { GlassAlert } from "liquidify";
 
 function SystemNotifications() {
   return (

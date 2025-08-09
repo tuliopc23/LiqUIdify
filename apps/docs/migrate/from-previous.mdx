@@ -46,17 +46,17 @@ LiqUIdify 2.0 introduces significant improvements in performance, accessibility,
 **Before (v1.x):**
 
 ```tsx
-import { Button, Card, Input } from "@liquidify/components";
-import { useTheme } from "@liquidify/components/hooks";
-import "@liquidify/components/styles";
+import { Button, Card, Input } from "liquidify";
+import { useTheme } from "liquidify/hooks";
+import "liquidify/styles";
 ```
 
 **After (v2.x):**
 
 ```tsx
-import { GlassButton, GlassCard, GlassInput } from "@liquidify/components";
-import { useGlassTheme } from "@liquidify/components";
-import "@liquidify/components/css";
+import { GlassButton, GlassCard, GlassInput } from "liquidify";
+import { useGlassTheme } from "liquidify";
+import "liquidify/css";
 ```
 
 **Migration:**
@@ -77,7 +77,7 @@ npx @liquidify/migrate v1-to-v2 src/
 **Before (v1.x):**
 
 ```tsx
-import { LiquidifyProvider } from "@liquidify/components";
+import { LiquidifyProvider } from "liquidify";
 
 function App() {
   return (
@@ -91,7 +91,7 @@ function App() {
 **After (v2.x):**
 
 ```tsx
-import { UnifiedGlassProvider } from "@liquidify/components";
+import { UnifiedGlassProvider } from "liquidify";
 
 function App() {
   return (
@@ -183,10 +183,10 @@ All components now use consistent size values:
 
 ```bash
 # Remove old version
-npm uninstall @liquidify/components
+npm uninstall liquidify
 
 # Install new version
-npm install @liquidify/components@^2.0.0
+npm install liquidify@latest
 
 # For TypeScript projects
 npm install @types/react@^18.0.0
@@ -213,10 +213,10 @@ Replace your root provider:
 
 ```tsx
 // Before
-import { LiquidifyProvider } from "@liquidify/components";
+import { LiquidifyProvider } from "liquidify";
 
 // After
-import { UnifiedGlassProvider } from "@liquidify/components";
+import { UnifiedGlassProvider } from "liquidify";
 
 function App() {
   return <UnifiedGlassProvider>{/* Your app */}</UnifiedGlassProvider>;
@@ -230,7 +230,7 @@ Update component imports throughout your codebase:
 ```tsx
 // Use find & replace in your IDE
 // Find: from '@liquidify/components'
-// Replace: from '@liquidify/components'
+// Replace: from 'liquidify'
 
 // Update component names
 // Button -> GlassButton
@@ -243,11 +243,11 @@ Update component imports throughout your codebase:
 
 ```tsx
 // Before
-import "@liquidify/components/styles";
-import "@liquidify/components/theme.css";
+import "liquidify/styles";
+import "liquidify/theme.css";
 
 // After
-import "@liquidify/components/css";
+import "liquidify/css";
 ```
 
 ### Step 6: Fix Breaking Changes
@@ -268,8 +268,8 @@ Review and fix any remaining breaking changes:
 <Tab title="Pages Router">
 ```tsx
 // pages/_app.tsx - Before
-import { LiquidifyProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { LiquidifyProvider } from 'liquidify'
+import 'liquidify/styles'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -280,8 +280,8 @@ export default function App({ Component, pageProps }) {
 }
 
 // pages/\_app.tsx - After
-import { UnifiedGlassProvider } from '@liquidify/components'
-import '@liquidify/components/css'
+import { UnifiedGlassProvider } from 'liquidify'
+import 'liquidify/css'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -296,7 +296,7 @@ export default function App({ Component, pageProps }) {
 <Tab title="App Router">
 ```tsx
 // app/layout.tsx - Before
-import { LiquidifyProvider } from '@liquidify/components'
+import { LiquidifyProvider } from 'liquidify'
 
 export default function RootLayout({ children }) {
   return (
@@ -309,8 +309,8 @@ export default function RootLayout({ children }) {
 }
 
 // app/layout.tsx - After
-import { UnifiedGlassProvider } from '@liquidify/components'
-import '@liquidify/components/css'
+import { UnifiedGlassProvider } from 'liquidify'
+import 'liquidify/css'
 
 export default function RootLayout({ children }) {
   return (
@@ -332,8 +332,8 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // main.tsx - Before
-import { LiquidifyProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { LiquidifyProvider } from "liquidify";
+import "liquidify/styles";
 
 ReactDOM.render(
   <LiquidifyProvider>
@@ -343,8 +343,8 @@ ReactDOM.render(
 );
 
 // main.tsx - After
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
+import { UnifiedGlassProvider } from "liquidify";
+import "liquidify/css";
 
 ReactDOM.render(
   <UnifiedGlassProvider>
@@ -513,13 +513,13 @@ Update your custom CSS:
 **Before (v1.x):**
 
 ```tsx
-import type { ButtonProps, CardProps } from "@liquidify/components";
+import type { ButtonProps, CardProps } from "liquidify";
 ```
 
 **After (v2.x):**
 
 ```tsx
-import type { GlassButtonProps, GlassCardProps } from "@liquidify/components";
+import type { GlassButtonProps, GlassCardProps } from "liquidify";
 ```
 
 ### Updated Interfaces
@@ -546,7 +546,7 @@ interface CustomButtonProps extends GlassButtonProps {
 
 ```tsx
 import { render } from "@testing-library/react";
-import { LiquidifyProvider } from "@liquidify/components";
+import { LiquidifyProvider } from "liquidify";
 
 function renderWithProvider(ui) {
   return render(<LiquidifyProvider>{ui}</LiquidifyProvider>);
@@ -557,7 +557,7 @@ function renderWithProvider(ui) {
 
 ```tsx
 import { render } from "@testing-library/react";
-import { UnifiedGlassProvider } from "@liquidify/components";
+import { UnifiedGlassProvider } from "liquidify";
 
 function renderWithProvider(ui) {
   return render(<UnifiedGlassProvider>{ui}</UnifiedGlassProvider>);
@@ -587,10 +587,10 @@ const card = screen.getByTestId("glass-card");
 ```tsx
 // If you see CSS import errors
 // Make sure you have the correct import
-import "@liquidify/components/css";
+import "liquidify/css";
 
 // For Vite projects, you may need
-import "@liquidify/components/dist/index.css";
+import "liquidify/dist/index.css";
 ```
 
 **TypeScript Errors:**
@@ -608,9 +608,9 @@ npm install
 
 ```tsx
 // Ensure you're using tree-shakeable imports
-import { GlassButton } from "@liquidify/components/core";
+import { GlassButton } from "liquidify/core";
 // instead of
-import { GlassButton } from "@liquidify/components";
+import { GlassButton } from "liquidify";
 ```
 
 ### Runtime Errors
@@ -709,8 +709,8 @@ module.exports = {
 **Before (v1.x):**
 
 ```js
-import { LiquidifyProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { LiquidifyProvider } from "liquidify";
+import "liquidify/styles";
 
 export const decorators = [
   (Story) => (
@@ -724,8 +724,8 @@ export const decorators = [
 **After (v2.x):**
 
 ```js
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
+import { UnifiedGlassProvider } from "liquidify";
+import "liquidify/css";
 
 export const decorators = [
   (Story) => (
@@ -768,7 +768,7 @@ Update your component stories to use the new component names and props:
 ```tsx
 // Button.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@liquidify/components";
+import { Button } from "liquidify";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -794,7 +794,7 @@ export const Primary: Story = {
 ```tsx
 // GlassButton.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import { GlassButton } from "@liquidify/components";
+import { GlassButton } from "liquidify";
 
 const meta: Meta<typeof GlassButton> = {
   title: "Components/GlassButton",
@@ -1135,12 +1135,12 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@liquidify/components/scss/variables";`,
+  additionalData: `@import "liquidify/scss/variables";`,
       },
     },
   },
   optimizeDeps: {
-    include: ["@liquidify/components"],
+  include: ["liquidify"],
   },
 });
 ```
@@ -1160,7 +1160,7 @@ module.exports = {
         {
           loader: "sass-loader",
           options: {
-            additionalData: `@import "@liquidify/components/scss/variables";`,
+            additionalData: `@import "liquidify/scss/variables";`,
           },
         },
       ],

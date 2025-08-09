@@ -1,4 +1,20 @@
 # Changelog
+## [1.3.1] - 2025-08-09 - Build Refinements & Quality Gates
+
+### Changed
+- Removed excessive multi-index output; switched to flat bundle (single index.mjs) for cleaner artifacts and faster installs.
+- Added automated story coverage checker ensuring every component has at least one Storybook story.
+- Added bundle size analysis script (with optional compressed flag) and contrast audit script for docs theme tokens.
+- Added prepublish verification guard and moved build/test-only dependencies to devDependencies.
+
+### Added
+- Contrast audit script (basic WCAG ratio sampling on key design tokens).
+- Story coverage script integrated into workflow for visual component completeness.
+- Bundle analyze script producing size summary.
+
+### Notes
+- No breaking API changes; consumers should notice reduced installed file count.
+
 
 All notable changes to this project will be documented in this file.
 
@@ -9,7 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🎉 Major Release Highlights
 
-This is the official production release of LiqUIdify, featuring 52+ premium glassmorphism components with enterprise-grade quality, accessibility compliance, and performance optimization.
+This is the official production release of LiqUIdify, featuring 52+ premium
+glassmorphism components with enterprise-grade quality, accessibility compliance, and performance optimization.
 
 ### ✨ New Features
 

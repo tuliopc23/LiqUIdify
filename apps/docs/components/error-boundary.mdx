@@ -1,0 +1,21 @@
+---
+title: Error Boundary
+description: Catches JavaScript errors in child component tree.
+---
+
+# Error Boundary
+
+```tsx
+import { GlassErrorBoundary } from "liquidify";
+
+<GlassErrorBoundary fallback={<div>Something went wrong.</div>}>
+  <App />
+</GlassErrorBoundary>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `fallback` | `ReactNode` | UI rendered when an error is caught |
+| `onError` | `(error:Error, info: { componentStack:string })=>void` | Reporting hook |

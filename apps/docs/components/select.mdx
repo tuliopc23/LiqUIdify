@@ -5,7 +5,7 @@ description: Dropdown selection component with search, multi-select, and keyboar
 
 ```tsx live
 import { useState } from "react";
-import { GlassSelect } from "@liquidify/components";
+import { GlassSelect } from "liquidify";
 
 export default function Demo() {
   const [singleValue, setSingleValue] = useState("");
@@ -80,7 +80,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassSelect } from "@liquidify/components";
+import { GlassSelect } from "liquidify";
 
 export default function VariantsDemo() {
   const [value1, setValue1] = useState("");
@@ -144,7 +144,7 @@ export default function VariantsDemo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassSelect } from "@liquidify/components";
+import { GlassSelect } from "liquidify";
 import { User, Crown, Shield } from "lucide-react";
 
 export default function AdvancedDemo() {
@@ -231,7 +231,7 @@ export default function AdvancedDemo() {
 ### Form Integration
 
 ```tsx
-import { GlassSelect, GlassFormField } from "@liquidify/components";
+import { GlassSelect, GlassFormField } from "liquidify";
 
 function UserForm() {
   const [formData, setFormData] = useState({
@@ -303,7 +303,7 @@ function UserForm() {
 ### Dynamic Options
 
 ```tsx
-import { GlassSelect } from "@liquidify/components";
+import { GlassSelect } from "liquidify";
 import { useEffect, useState } from "react";
 
 function DynamicSelect() {
@@ -352,7 +352,7 @@ function DynamicSelect() {
 ### Controlled with Validation
 
 ```tsx
-import { GlassSelect, GlassFormField } from "@liquidify/components";
+import { GlassSelect, GlassFormField } from "liquidify";
 
 function ValidatedSelect() {
   const [value, setValue] = useState("");

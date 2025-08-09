@@ -56,7 +56,8 @@
           "group": "Core System",
           "pages": [
             "components/liquid-glass",
-            "components/theme-toggle"
+            "components/theme-toggle",
+            "components/theme-provider"
           ]
         },
         {
@@ -72,7 +73,8 @@
             "components/slider",
             "components/file-upload",
             "components/date-picker",
-            "components/number-input"
+            "components/number-input",
+            "components/checkbox-group"
           ]
         },
         {
@@ -93,7 +95,9 @@
             "components/breadcrumbs",
             "components/pagination",
             "components/mobile-nav",
-            "components/skip-navigation"
+            "components/skip-navigation",
+            "components/navbar",
+            "components/sidebar"
           ]
         },
         {
@@ -132,6 +136,7 @@
             "components/error-boundary"
           ]
         }
+      ]
     },
     {
       "group": "API Reference",
@@ -189,8 +194,7 @@
   "theme": "venus",
   "layout": "topnav",
   "search": {
-    "prompt": "Search LiqUIdify docs...",
-    "style": "apple"
+    "prompt": "Search LiqUIdify docs..."
   },
   "feedback": {
     "thumbsRating": true,
@@ -234,11 +238,5 @@
   "modeToggle": {
     "default": "light",
     "isHidden": false
-  },
-  "typography": {
-    "headings": "SF Pro Display",
-    "body": "SF Pro Text",
-    "code": "SF Mono"
-  },
-  "customCSS": "/styles/liquid-glass.css"
+  }
 }

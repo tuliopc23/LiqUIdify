@@ -1,0 +1,32 @@
+---
+title: Mobile Nav
+description: Sliding mobile navigation with focus trapping.
+---
+
+# Mobile Nav
+
+```tsx live
+import { GlassMobileNav, GlassButton } from "liquidify";
+import { useState } from 'react';
+
+export default function Demo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <GlassButton onClick={() => setOpen(true)}>Open Nav</GlassButton>
+      <GlassMobileNav open={open} onOpenChange={setOpen} items={[
+        { label: 'Home', href: '#' },
+        { label: 'Docs', href: '#' },
+      ]} />
+    </>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `open` | `boolean` | Controlled visibility |
+| `onOpenChange` | `(open:boolean)=>void` | Change callback |
+| `items` | `{label:string;href:string}[]` | Nav links |

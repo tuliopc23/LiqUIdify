@@ -1,0 +1,38 @@
+---
+title: Combobox
+description: Autocomplete text input with listbox suggestions.
+---
+
+# Combobox
+
+```tsx live
+import { GlassCombobox } from "liquidify";
+import { useState } from 'react';
+
+const OPTIONS = ['Red', 'Green', 'Blue', 'Purple', 'Orange'];
+
+export default function Demo() {
+  const [value, setValue] = useState('');
+  return (
+    <GlassCombobox
+      value={value}
+      onChange={setValue}
+      options={OPTIONS.map(o => ({ value: o.toLowerCase(), label: o }))}
+      placeholder="Pick a color"
+    />
+  );
+}
+```
+
+## Key Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `options` | `{ value: string; label: string }[]` | Items displayed |
+| `value` | `string` | Current input / selection |
+| `onChange` | `(value: string) => void` | Change handler |
+| `disabled` | `boolean` | Disable interaction |
+
+## Accessibility
+
+Implements ARIA combobox + listbox pattern; escape collapses; arrows navigate.

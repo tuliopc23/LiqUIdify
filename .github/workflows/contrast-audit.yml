@@ -1,0 +1,53 @@
+name: Contrast Audit
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'apps/docs/styles/**'
+      - 'libs/components/src/styles/**'
+      - 'scripts/contrast-audit.js'
+      - 'package.json'
+      - 'bun.lock'
+      - '.github/workflows/contrast-audit.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/docs/styles/**'
+      - 'libs/components/src/styles/**'
+      - 'scripts/contrast-audit.js'
+      - 'package.json'
+      - 'bun.lock'
+      - '.github/workflows/contrast-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Run contrast accessibility audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 'latest'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run contrast audit
+        run: bun run audit:contrast
+
+      - name: Summarize result
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = 'success' ]; then
+            echo '✅ Contrast audit passed' >> $GITHUB_STEP_SUMMARY
+          else
+            echo '❌ Contrast audit failed. See logs above.' >> $GITHUB_STEP_SUMMARY
+          fi

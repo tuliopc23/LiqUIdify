@@ -44,7 +44,7 @@ const widthMap = {
   full: "w-full max-w-md",
 };
 
-const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
+export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   (
     {
       children,
@@ -102,7 +102,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           document.body.style.overflow = "";
         };
       }
-      return () => {};
+      return () => { };
     }, [overlay, open]);
 
     const positionClasses = {
@@ -175,8 +175,8 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
             positionClasses[position].sidebar,
             !open && positionClasses[position].translate,
             collapsible &&
-              !open &&
-              `${widthMap[width]} md:w-[${collapsedWidth}]`,
+            !open &&
+            `${widthMap[width]} md:w-[${collapsedWidth}]`,
           )}
           style={{ zIndex }}
         >
@@ -243,7 +243,7 @@ interface SidebarItemProps {
   badge?: React.ReactNode;
 }
 
-const SidebarItem = React.forwardRef<
+export const SidebarItem = React.forwardRef<
   HTMLAnchorElement | HTMLButtonElement,
   SidebarItemProps
 >(
@@ -322,7 +322,7 @@ interface SidebarSectionProps {
   className?: string;
 }
 
-const SidebarSection: React.FC<SidebarSectionProps> = ({
+export const SidebarSection: React.FC<SidebarSectionProps> = ({
   title,
   children,
   className,
@@ -338,6 +338,6 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 );
 
 // SidebarDivider for visual separation
-const SidebarDivider: React.FC<{ className?: string }> = ({ className }) => (
+export const SidebarDivider: React.FC<{ className?: string }> = ({ className }) => (
   <hr className={cn("my-4 border-white/10", className)} />
 );

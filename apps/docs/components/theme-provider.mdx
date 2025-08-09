@@ -1,0 +1,86 @@
+---
+title: Theme Provider
+description: Provides global Liquid Glass tokens, theme mode, and configuration context.
+---
+
+# Theme Provider
+
+> Supplies theming context (light/dark), token overrides, and glass effect configuration to all components.
+
+## Import
+
+```tsx
+import { GlassUIProvider } from "liquidify";
+import "liquidify/styles";
+```
+
+## Basic Usage
+
+```tsx live
+import { GlassUIProvider, GlassButton } from "liquidify";
+
+export default function Demo() {
+  return (
+    <GlassUIProvider theme="light">
+      <div className="flex gap-4">
+        <GlassButton variant="primary">Primary</GlassButton>
+        <GlassButton variant="ghost">Ghost</GlassButton>
+      </div>
+    </GlassUIProvider>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `theme` | `"light" | "dark"` | `"light"` | Initial color mode. |
+| `glassConfig` | `{ blur?: number; saturation?: number; brightness?: number; }` | `{}` | Override glass effect tuning. |
+| `children` | `ReactNode` | - | App content. |
+
+## Accessing Theme
+
+Use the `useTheme` hook to read or change mode.
+
+```tsx live
+import { GlassUIProvider, useTheme, GlassButton } from "liquidify";
+
+function Toggle() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <GlassButton variant="ghost" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Mode: {theme}
+    </GlassButton>
+  );
+}
+
+export default function Wrap() {
+  return (
+    <GlassUIProvider>
+      <Toggle />
+    </GlassUIProvider>
+  );
+}
+```
+
+## Token Overrides
+
+Wrap a subtree and inject custom CSS variables:
+
+```tsx
+<div style={{ "--lg-accent": '#6C5CE7' }}>
+  <GlassButton variant="primary">Brand Accent</GlassButton>
+</div>
+```
+
+## Accessibility Notes
+
+- Maintain contrast by using `--lg-bg-readable` for dense content areas.
+- Keep focus styles visible (avoid overriding `outline` / `box-shadow` globally).
+- Respect user preference; consider persisting theme selection in local storage.
+
+## When to Use
+
+- Always at the root of your application (once).
+- Optionally nest for isolated theme experiments (docs, demos) – nested providers override parent values locally.

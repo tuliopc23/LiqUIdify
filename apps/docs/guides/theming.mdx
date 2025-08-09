@@ -11,11 +11,21 @@ LiqUIdify uses a Liquid Glass token system via CSS variables and a Tailwind plug
 
 ```css
 :root {
-  --lg-bg-color: rgba(255, 255, 255, 0.25);
+  /* Decorative vs readable surfaces */
+  --lg-bg-color: rgba(255, 255, 255, 0.35); /* decorative */
+  --lg-bg-readable: rgba(20, 20, 25, 0.65); /* high contrast surface */
   --lg-highlight: rgba(255, 255, 255, 0.75);
-  --lg-text: #ffffff;
+  --lg-text: #1a1d21;
+  --lg-text-inverse: #ffffff;
   --lg-accent: #fb4268;
   --lg-grey: #444739;
+}
+
+.dark {
+  --lg-bg-color: rgba(20, 20, 25, 0.35);
+  --lg-bg-readable: rgba(20, 20, 25, 0.75);
+  --lg-text: #ffffff;
+  --lg-text-inverse: #1a1d21;
 }
 ```
 
@@ -36,8 +46,8 @@ LiqUIdify uses a Liquid Glass token system via CSS variables and a Tailwind plug
 ## Provider and Mode
 
 ```tsx
-import { GlassUIProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { GlassUIProvider } from "liquidify";
+import "liquidify/styles";
 
 export function App({ children }) {
   return (
@@ -51,7 +61,7 @@ export function App({ children }) {
 Toggle theme at runtime:
 
 ```tsx live
-import { useTheme, GlassButton } from "@liquidify/components";
+import { useTheme, GlassButton } from "liquidify";
 
 export default function Toggle() {
   const { theme, setTheme } = useTheme();

@@ -13,7 +13,7 @@ A versatile glassmorphic card component with layered liquid glass effects and a 
 ### Basic Usage
 
 ```tsx live
-import { GlassCard, GlassButton } from "@liquidify/components";
+import { GlassCard, GlassButton } from "liquidify";
 
 export default function Demo() {
   return (
@@ -42,7 +42,7 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx live
-import { GlassCard } from "@liquidify/components";
+import { GlassCard } from "liquidify";
 
 export default function Demo() {
   return (
@@ -90,7 +90,7 @@ export default function Demo() {
 ### Style Variants
 
 ```tsx live
-import { GlassCard } from "@liquidify/components";
+import { GlassCard } from "liquidify";
 
 export default function Demo() {
   return (
@@ -147,7 +147,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassCard, GlassBadge } from "@liquidify/components";
+import { GlassCard, GlassBadge } from "liquidify";
 
 export default function Demo() {
   const [selected, setSelected] = useState(null);
@@ -221,7 +221,7 @@ import {
   GlassButton,
   GlassAvatar,
   GlassBadge,
-} from "@liquidify/components";
+} from "liquidify";
 import { Calendar, MapPin, Users } from "lucide-react";
 
 export default function Demo() {
@@ -329,7 +329,7 @@ All sub-components (`Header`, `Title`, `Description`, `Content`, `Footer`, `Acti
 ### Product Cards
 
 ```tsx
-import { GlassCard, GlassButton, GlassBadge } from "@liquidify/components";
+import { GlassCard, GlassButton, GlassBadge } from "liquidify";
 import { Star } from "lucide-react";
 
 function ProductCard({ product }) {
@@ -379,7 +379,7 @@ function ProductCard({ product }) {
 ### Dashboard Widgets
 
 ```tsx
-import { GlassCard, GlassBadge } from "@liquidify/components";
+import { GlassCard, GlassBadge } from "liquidify";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 function MetricCard({ metric }) {
@@ -420,7 +420,7 @@ import {
   GlassButton,
   GlassInput,
   GlassCheckbox,
-} from "@liquidify/components";
+} from "liquidify";
 
 function SettingsCard({ title, description, children, onSave, onReset }) {
   return (

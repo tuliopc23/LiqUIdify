@@ -1,0 +1,26 @@
+---
+title: Number Input
+description: Numeric input with increment / decrement controls.
+---
+
+# Number Input
+
+```tsx live
+import { GlassNumberInput } from "liquidify";
+import { useState } from 'react';
+
+export default function Demo() {
+  const [value, setValue] = useState(10);
+  return <GlassNumberInput value={value} onChange={setValue} min={0} max={20} />;
+}
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `value` | `number` | Current value |
+| `onChange` | `(n:number)=>void` | Change handler |
+| `min` | `number` | Min value |
+| `max` | `number` | Max value |
+| `step` | `number` | Increment step |

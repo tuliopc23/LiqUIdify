@@ -235,6 +235,30 @@ function App() {
 }
 ```
 
+### Readable vs Decorative Surfaces
+
+LiqUIdify distinguishes between decorative translucent glass and readable surfaces:
+
+- `--lg-bg-color` / `.bg-liquid`: lighter, more translucent (use for purely visual chrome)
+- `--lg-bg-readable` / `.bg-liquid-readable`: higher opacity for WCAG AA text contrast
+- `--lg-text` / `--lg-text-inverse`: automatic pairing for light/dark / accent contexts
+
+When placing body text, prefer wrapping content in a container that uses `.bg-liquid-readable` (or components that already apply it internally) to guarantee contrast (≥4.5:1). Decorative backgrounds are fine for icons or large display text.
+
+### Utility Classes
+
+Included CSS exports provide helpful utilities:
+
+```css
+.bg-liquid           /* decorative glass */
+.bg-liquid-readable  /* readable surface */
+.text-liquid-primary
+.text-liquid-inverse
+.text-liquid-accent
+```
+
+These are optional; components already ship with sensible defaults.
+
 ## ⚡ Performance
 
 LiqUIdify is built for performance:

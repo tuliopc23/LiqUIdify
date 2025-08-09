@@ -12,7 +12,7 @@ The LiquidGlass system is the foundation of LiqUIdify's design language, providi
 ### Basic Glass Container
 
 ```tsx live
-import { LiquidGlassProvider } from "@liquidify/components";
+import { LiquidGlassProvider } from "liquidify";
 
 function BasicGlassContainer({ children }) {
   return (
@@ -44,7 +44,7 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx live
-import { LiquidGlassProvider } from "@liquidify/components";
+import { LiquidGlassProvider } from "liquidify";
 
 function GlassBox({ size, children }) {
   return (
@@ -78,7 +78,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { LiquidGlassProvider } from "@liquidify/components";
+import { LiquidGlassProvider } from "liquidify";
 
 function InteractiveGlass({ children, onClick, active }) {
   return (
@@ -121,7 +121,7 @@ export default function Demo() {
 ### Content-Aware Adaptation
 
 ```tsx live
-import { LiquidGlassProvider } from "@liquidify/components";
+import { LiquidGlassProvider } from "liquidify";
 
 function AdaptiveGlass({ bgColor, children }) {
   return (
@@ -163,7 +163,7 @@ export default function Demo() {
 ### Apple Bento Box Layout
 
 ```tsx live
-import { LiquidGlassProvider } from "@liquidify/components";
+import { LiquidGlassProvider } from "liquidify";
 
 function BentoItem({ span, children, className = "" }) {
   return (
@@ -292,8 +292,8 @@ const defaultConfig: Required<LiquidGlassConfig> = {
 ### Basic Setup
 
 ```tsx
-import { LiquidGlassProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { LiquidGlassProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -314,7 +314,7 @@ function App() {
 
 ```tsx
 import { forwardRef } from "react";
-import { cn } from "@liquidify/components/utils";
+import { cn } from "liquidify/utils";
 
 interface CustomGlassProps {
   children: React.ReactNode;
@@ -353,7 +353,7 @@ const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
 
 ```tsx
 import { useRef, useEffect } from "react";
-import { useLiquidGlass } from "@liquidify/components";
+import { useLiquidGlass } from "liquidify";
 
 function ContentAwareComponent() {
   const contentRef = useRef<HTMLDivElement>(null);

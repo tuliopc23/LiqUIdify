@@ -5,7 +5,7 @@ description: Intelligent search input with suggestions, recent searches, and key
 
 ```tsx live
 import { useState } from "react";
-import { GlassSearch } from "@liquidify/components";
+import { GlassSearch } from "liquidify";
 
 export default function Demo() {
   const [query, setQuery] = useState("");
@@ -98,7 +98,7 @@ export default function Demo() {
 ## Search Types
 
 ```tsx live
-import { GlassSearch } from "@liquidify/components";
+import { GlassSearch } from "liquidify";
 
 export default function SearchTypesDemo() {
   const documentationSuggestions = [
@@ -187,7 +187,7 @@ export default function SearchTypesDemo() {
 ### Documentation Search
 
 ```tsx
-import { GlassSearch } from "@liquidify/components";
+import { GlassSearch } from "liquidify";
 import { useRouter } from "next/router";
 
 function DocumentationSearch() {
@@ -235,7 +235,7 @@ function DocumentationSearch() {
 ### E-commerce Product Search
 
 ```tsx
-import { GlassSearch } from "@liquidify/components";
+import { GlassSearch } from "liquidify";
 import { useProducts } from "./hooks/useProducts";
 
 function ProductSearch() {
@@ -273,7 +273,7 @@ function ProductSearch() {
 ### Command Palette Integration
 
 ```tsx
-import { GlassSearch, CommandPalette } from "@liquidify/components";
+import { GlassSearch, CommandPalette } from "liquidify";
 
 function AppSearch() {
   const [isOpen, setIsOpen] = useState(false);

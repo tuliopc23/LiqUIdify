@@ -1,0 +1,42 @@
+---
+title: Chart
+description: Data visualization components (Line, Bar, Donut) with liquid glass aesthetics.
+---
+
+# Chart
+
+```tsx live
+import { LineChart, BarChart, DonutChart } from "liquidify";
+
+const lineData = [
+  { label: 'Jan', value: 65 },
+  { label: 'Feb', value: 78 },
+  { label: 'Mar', value: 90 }
+];
+
+export default function Demo() {
+  return <LineChart data={lineData} width={360} height={180} gradient animated />;
+}
+```
+
+## Components
+
+- `LineChart` – trends over time
+- `BarChart` – categorical comparison
+- `DonutChart` – proportional breakdown
+
+## Base Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `data` | `ChartDataPoint[]` | Required data points |
+| `width` | `number` | Chart width px |
+| `height` | `number` | Chart height px |
+| `animated` | `boolean` | Enable entrance animations |
+
+> Each chart adds its own extended props (labels, gradients, innerRadius, tooltips, etc.).
+
+## Accessibility
+
+- Provide textual summary near chart for screen readers.
+- Consider a table fallback for high-density data.

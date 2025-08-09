@@ -1,6 +1,6 @@
 ---
 title: Project Setup (Tailwind + PostCSS)
-description: Configure Tailwind and global CSS to use @liquidify/components.
+description: Configure Tailwind and global CSS to use the liquidify component library.
 ---
 
 This page sets up Tailwind and required global CSS. Works with Vite, Bun, and React 18/19.
@@ -22,7 +22,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@liquidify/components/dist/**/*.{js,mjs}",
+  "./node_modules/liquidify/dist/**/*.{js,mjs}",
   ],
   theme: { extend: {} },
   plugins: [],
@@ -42,13 +42,13 @@ module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } };
 Import library CSS once (tree-shake safe). Add to `src/main.tsx` or your app root:
 
 ```tsx
-import "@liquidify/components/styles";
+import "liquidify/styles";
 ```
 
 If you prefer tokens only:
 
 ```tsx
-import "@liquidify/components/tokens";
+import "liquidify/tokens";
 ```
 
 ## 5) ESM + sideEffects

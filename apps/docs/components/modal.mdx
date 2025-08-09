@@ -14,7 +14,7 @@ A glassmorphic modal component with liquid glass effects, robust focus managemen
 
 ```tsx live
 import { useState } from "react";
-import { GlassModal, GlassButton } from "@liquidify/components";
+import { GlassModal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +54,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassModal, GlassButton } from "@liquidify/components";
+import { GlassModal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [activeModal, setActiveModal] = useState(null);
@@ -133,7 +133,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassModal, GlassButton } from "@liquidify/components";
+import { GlassModal, GlassButton } from "liquidify";
 import { AlertTriangle } from "lucide-react";
 
 export default function Demo() {
@@ -205,7 +205,7 @@ export default function Demo() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassModal, GlassButton, GlassInput } from "@liquidify/components";
+import { GlassModal, GlassButton, GlassInput } from "liquidify";
 import { Plus } from "lucide-react";
 
 export default function Demo() {
@@ -317,7 +317,7 @@ export default function Demo() {
 ### Alert Dialog
 
 ```tsx
-import { GlassModal, GlassButton } from "@liquidify/components";
+import { GlassModal, GlassButton } from "liquidify";
 import { AlertCircle } from "lucide-react";
 
 function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
@@ -353,7 +353,7 @@ function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
 
 ```tsx
 import { useState } from "react";
-import { GlassModal, GlassButton } from "@liquidify/components";
+import { GlassModal, GlassButton } from "liquidify";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
@@ -428,7 +428,7 @@ import {
   GlassButton,
   GlassInput,
   GlassCheckbox,
-} from "@liquidify/components";
+} from "liquidify";
 
 function SettingsModal({ isOpen, onClose, settings, onSave }) {
   const [localSettings, setLocalSettings] = useState(settings);

@@ -11,7 +11,7 @@ Get up and running with LiqUIdify’s liquid glass UI in minutes. Install, wrap 
 ## 📦 Installation
 
 ```bash
-bun add @liquidify/components
+bun add liquidify
 ```
 
 ## 🎨 Setup Provider
@@ -19,8 +19,8 @@ bun add @liquidify/components
 Wrap your app with `GlassUIProvider` and import the CSS once:
 
 ```tsx
-import { GlassUIProvider } from "@liquidify/components";
-import "@liquidify/components/styles";
+import { GlassUIProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return <GlassUIProvider>{/* your app */}</GlassUIProvider>;
@@ -30,7 +30,7 @@ function App() {
 ## 🌊 Your First Liquid Glass Component
 
 ```tsx
-import { GlassCard, GlassButton } from "@liquidify/components";
+import { GlassCard, GlassButton } from "liquidify";
 
 export default function WelcomeCard() {
   return (
@@ -62,7 +62,7 @@ export default function WelcomeCard() {
 ## 🎯 Button Variants
 
 ```tsx
-import { GlassButton } from "@liquidify/components";
+import { GlassButton } from "liquidify";
 
 export function ButtonShowcase() {
   return (
@@ -83,7 +83,7 @@ import {
   UnifiedGlassProvider,
   useTheme,
   GlassButton,
-} from "@liquidify/components";
+} from "liquidify";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();

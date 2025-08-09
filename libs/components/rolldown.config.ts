@@ -40,9 +40,14 @@ export default defineConfig({
         "tailwind-merge",
       ],
       output: {
-        preserveModules: true,
-        preserveModulesRoot: resolve(__dirname, "src"),
         exports: "named",
+        // Create a predictable flat chunk strategy for better DX + fewer artifacts
+        entryFileNames: (chunk) => (chunk.name === "index" ? "index.mjs" : "[name].mjs"),
+        chunkFileNames: "chunks/[name]-[hash].mjs",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith(".css")) return "[name][extname]";
+          return "assets/[name]-[hash][extname]";
+        },
       },
     },
     minify: "esbuild",
