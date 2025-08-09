@@ -39,21 +39,36 @@ export default defineConfig({
         "lucide-react",
         "tailwind-merge",
       ],
-      output: {
-        exports: "named",
-        // Create a predictable flat chunk strategy for better DX + fewer artifacts
-        entryFileNames: (chunk) => (chunk.name === "index" ? "index.mjs" : "[name].mjs"),
-        chunkFileNames: "chunks/[name]-[hash].mjs",
-        assetFileNames: (assetInfo) => {
-          // Always emit a single deterministic stylesheet so
-          // consumers can import  "liquidify/css"  and Storybook /
-          // package.json `style` field resolves correctly.
-          if (assetInfo.name && assetInfo.name.endsWith(".css")) {
-            return "liquidify.css";
-          }
-          return "assets/[name]-[hash][extname]";
+      // Emit separate outputs for ESM and CommonJS consumers
+      output: [
+        {
+          format: "es",
+          exports: "named",
+          // Predictable flat chunk strategy for better DX + fewer artifacts
+          entryFileNames: "index.mjs",
+          chunkFileNames: "chunks/[name]-[hash].mjs",
+          assetFileNames: (assetInfo: { name?: string }) => {
+            // Always emit a single deterministic stylesheet so consumers
+            // can import "liquidify/css" and package.json `style` resolves.
+            if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+              return "liquidify.css";
+            }
+            return "assets/[name]-[hash][extname]";
+          },
         },
-      },
+        {
+          format: "cjs",
+          exports: "named",
+          entryFileNames: "index.cjs",
+          chunkFileNames: "chunks/[name]-[hash].cjs",
+          assetFileNames: (assetInfo: { name?: string }) => {
+            if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+              return "liquidify.css";
+            }
+            return "assets/[name]-[hash][extname]";
+          },
+        },
+      ],
     },
     minify: "esbuild",
     sourcemap: true,
