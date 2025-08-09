@@ -1,6 +1,8 @@
 import React from "react";
 // Use package CSS export to mirror consumer usage
 import "liquidify/css";
+// Wrap stories with the library's ThemeProvider so global theme toggle works
+import { ThemeProvider } from "@/hooks/use-theme";
 
 const preview = {
   parameters: {
@@ -100,17 +102,19 @@ const preview = {
       const theme = context.globals.theme || "light";
 
       return (
-        <div
-          className={`${theme} min-h-screen p-4`}
-          style={{
-            fontFamily: "system-ui, sans-serif",
-            background: theme === "dark" ? "#1a1a1a" : "#ffffff",
-          }}
-        >
-          <React.StrictMode>
-            <Story />
-          </React.StrictMode>
-        </div>
+        <ThemeProvider defaultTheme="light">
+          <div
+            className={`${theme} min-h-screen p-4`}
+            style={{
+              fontFamily: "system-ui, sans-serif",
+              background: theme === "dark" ? "#1a1a1a" : "#ffffff",
+            }}
+          >
+            <React.StrictMode>
+              <Story />
+            </React.StrictMode>
+          </div>
+        </ThemeProvider>
       );
     },
   ],

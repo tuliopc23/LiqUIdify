@@ -9,12 +9,15 @@ export const PRODUCTION_COMPONENTS = {
     "glass-button-refactored",
     "glass-card-refactored",
     "glass-input",
+    "glass-responsive-button",
+    "glass-responsive-card",
     "glass-modal",
     "glass-badge",
     "glass-avatar",
+    "glass-banner",
   ],
 
-  // Form Components
+  // Form / Input Components
   forms: [
     "glass-checkbox",
     "glass-radio-group",
@@ -22,14 +25,26 @@ export const PRODUCTION_COMPONENTS = {
     "glass-textarea",
     "glass-switch",
     "glass-form-field",
+    "glass-checkbox-group",
   ],
 
-  // Layout Components
+  // Input-Helpers / Pickers
+  inputs: [
+    "glass-number-input",
+    "glass-date-picker",
+    "glass-combobox",
+    "glass-command",
+    "glass-file-upload",
+    "glass-search",
+  ],
+
+  // Layout & Containers
   layout: [
     "glass-accordion",
     "glass-tabs",
     "glass-drawer",
     "glass-breadcrumbs",
+    "glass-slider",
   ],
 
   // Feedback Components
@@ -43,10 +58,26 @@ export const PRODUCTION_COMPONENTS = {
   ],
 
   // Navigation Components
-  navigation: ["glass-dropdown", "glass-pagination", "glass-mobile-nav"],
+  navigation: [
+    "glass-dropdown",
+    "glass-pagination",
+    "glass-mobile-nav",
+    "navbar",
+    "sidebar",
+    "theme-toggle",
+    "glass-tree-view",
+    "glass-timeline",
+  ],
 
   // Data Display
-  dataDisplay: ["glass-table", "glass-chart", "glass-badge", "glass-tooltip"],
+  dataDisplay: [
+    "glass-table",
+    "glass-chart",
+    "glass-badge",
+    "glass-tooltip",
+    "glass-popover",
+    "glass-skeleton",
+  ],
 };
 
 // Components to exclude from Storybook (experimental/demo)
@@ -57,6 +88,12 @@ export const EXCLUDED_COMPONENTS = [
   "glass-focus-demo",
   "glass-performance-dashboard",
   "glass-visually-hidden",
+  "glass-error-boundary",
+  "glass-live-region",
+  "glass-focus-trap",
+  "glass-portal",
+  "glass-skip-navigation",
+  "theme-provider",
 ];
 
 // Design system configuration
