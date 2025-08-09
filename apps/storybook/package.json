@@ -1,23 +1,16 @@
 {
-  "name": "@liquidify/storybook",
-  "version": "0.1.0",
+  "name": "@liquidify/storybook-app",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "storybook dev -p 6006",
-    "build": "storybook build",
-    "preview": "serve storybook-static",
-    "clean": "rm -rf storybook-static",
-    "validate": "node ../../scripts/storybook-build-validator.cjs",
-    "check-stories": "node ../../scripts/check-stories.cjs",
-    "debug": "node ../../scripts/fix-storybook-build.cjs"
-  },
   "devDependencies": {
-    "@storybook/react-vite": "^9.1.1",
-    "@storybook/addon-links": "^9.1.1",
-    "@storybook/addon-a11y": "^9.1.1",
-    "@storybook/builder-vite": "^9.1.1",
-    "storybook": "^9.1.1",
-    "@storybook/addon-docs": "^9.1.1"
+    "storybook": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/builder-vite": "^8.6.14",
+    "vite": "^5.4.10",
+    "semver": "^7.6.0"
+  },
+  "scripts": {
+    "dev": "storybook dev -p 6006 -c .storybook",
+    "build": "storybook build -c .storybook -o storybook-static"
   }
 }
