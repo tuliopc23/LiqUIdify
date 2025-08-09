@@ -1,9 +1,8 @@
 import React from "react";
-import type { Preview } from "@storybook/react";
 // Use package CSS export to mirror consumer usage
 import "liquidify/css";
 
-const preview: Preview = {
+const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
