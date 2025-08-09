@@ -163,7 +163,7 @@
   "style": "./dist/libs/components/liquidify.css",
   "type": "module",
   "types": "./dist/libs/components/index.d.ts",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "workspaces": [
     "apps/*",
     "examples/*",
