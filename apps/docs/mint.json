@@ -7,8 +7,7 @@
   },
   "favicon": "/favicon.svg",
   "stylesheets": [
-    "/styles/apple-hig.css",
-    "/styles/liquid-glass.css"
+    "/styles/apple-hig.css"
   ],
   "colors": {
     "primary": "#007AFF",
