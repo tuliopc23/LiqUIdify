@@ -63,6 +63,22 @@ const preview = {
         },
       },
     },
+    // Automated accessibility testing with axe-core
+    a11y: {
+      // Limit run to WCAG 2.0/2.1 A & AA rules for quicker feedback
+      options: {
+        runOnly: ["wcag2a", "wcag21a", "wcag2aa", "wcag21aa"],
+      },
+      // Fine-tune individual rules
+      config: {
+        rules: [
+          // Keep color-contrast enabled (default) so we surface issues
+          { id: "color-contrast", enabled: true },
+          // Ensure scrollable regions are focusable
+          { id: "scrollable-region-focusable", enabled: true },
+        ],
+      },
+    },
   },
   globalTypes: {
     theme: {
