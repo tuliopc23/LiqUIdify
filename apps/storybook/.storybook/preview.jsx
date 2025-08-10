@@ -1,6 +1,8 @@
 import React from "react";
 // Use package CSS export to mirror consumer usage
 import "liquidify/css";
+// Wrap stories with the library's ThemeProvider so global theme toggle works
+import { ThemeProvider } from "@/hooks/use-theme";
 
 const preview = {
   parameters: {
@@ -63,6 +65,22 @@ const preview = {
         },
       },
     },
+    // Automated accessibility testing with axe-core
+    a11y: {
+      // Limit run to WCAG 2.0/2.1 A & AA rules for quicker feedback
+      options: {
+        runOnly: ["wcag2a", "wcag21a", "wcag2aa", "wcag21aa"],
+      },
+      // Fine-tune individual rules
+      config: {
+        rules: [
+          // Keep color-contrast enabled (default) so we surface issues
+          { id: "color-contrast", enabled: true },
+          // Ensure scrollable regions are focusable
+          { id: "scrollable-region-focusable", enabled: true },
+        ],
+      },
+    },
   },
   globalTypes: {
     theme: {
@@ -84,17 +102,19 @@ const preview = {
       const theme = context.globals.theme || "light";
 
       return (
-        <div
-          className={`${theme} min-h-screen p-4`}
-          style={{
-            fontFamily: "system-ui, sans-serif",
-            background: theme === "dark" ? "#1a1a1a" : "#ffffff",
-          }}
-        >
-          <React.StrictMode>
-            <Story />
-          </React.StrictMode>
-        </div>
+        <ThemeProvider defaultTheme="light">
+          <div
+            className={`${theme} min-h-screen p-4`}
+            style={{
+              fontFamily: "system-ui, sans-serif",
+              background: theme === "dark" ? "#1a1a1a" : "#ffffff",
+            }}
+          >
+            <React.StrictMode>
+              <Story />
+            </React.StrictMode>
+          </div>
+        </ThemeProvider>
       );
     },
   ],

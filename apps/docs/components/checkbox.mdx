@@ -7,16 +7,25 @@ description: Single boolean selection control.
 
 ```tsx live
 import { GlassCheckbox } from "liquidify";
-import { useState } from 'react';
-export default function Demo(){ const [c,setC]=useState(false); return <GlassCheckbox checked={c} onChange={setC} label={c? 'Enabled':'Enable feature'} /> }
+import { useState } from "react";
+export default function Demo() {
+  const [c, setC] = useState(false);
+  return (
+    <GlassCheckbox
+      checked={c}
+      onChange={setC}
+      label={c ? "Enabled" : "Enable feature"}
+    />
+  );
+}
 ```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `checked` | `boolean` | Controlled state |
-| `defaultChecked` | `boolean` | Uncontrolled initial |
-| `onChange` | `(checked:boolean)=>void` | Change handler |
-| `disabled` | `boolean` | Disable interaction |
-| `label` | `string` | Accessible label |
+| Prop             | Type                      | Description          |
+| ---------------- | ------------------------- | -------------------- |
+| `checked`        | `boolean`                 | Controlled state     |
+| `defaultChecked` | `boolean`                 | Uncontrolled initial |
+| `onChange`       | `(checked:boolean)=>void` | Change handler       |
+| `disabled`       | `boolean`                 | Disable interaction  |
+| `label`          | `string`                  | Accessible label     |

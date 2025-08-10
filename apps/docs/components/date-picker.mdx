@@ -7,23 +7,29 @@ description: Calendar selection with optional time input.
 
 ```tsx live
 import { GlassDatePicker } from "liquidify";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Demo() {
   const [date, setDate] = useState<Date | null>(null);
-  return <GlassDatePicker value={date} onChange={setDate} placeholder="Select date" />;
+  return (
+    <GlassDatePicker
+      value={date}
+      onChange={setDate}
+      placeholder="Select date"
+    />
+  );
 }
 ```
 
 ## Core Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `value` | `Date | null` | Controlled value |
-| `onChange` | `(d: Date | null) => void` | Change handler |
+| Prop       | Type      | Description       |
+| ---------- | --------- | ----------------- | ---------------- |
+| `value`    | `Date     | null`             | Controlled value |
+| `onChange` | `(d: Date | null) => void`    | Change handler   |
 | `showTime` | `boolean` | Enable time field |
-| `minDate` | `Date` | Lower bound |
-| `maxDate` | `Date` | Upper bound |
+| `minDate`  | `Date`    | Lower bound       |
+| `maxDate`  | `Date`    | Upper bound       |
 
 ## Tips
 

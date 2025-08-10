@@ -102,7 +102,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           document.body.style.overflow = "";
         };
       }
-      return () => { };
+      return () => {};
     }, [overlay, open]);
 
     const positionClasses = {
@@ -175,8 +175,8 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
             positionClasses[position].sidebar,
             !open && positionClasses[position].translate,
             collapsible &&
-            !open &&
-            `${widthMap[width]} md:w-[${collapsedWidth}]`,
+              !open &&
+              `${widthMap[width]} md:w-[${collapsedWidth}]`,
           )}
           style={{ zIndex }}
         >
@@ -338,6 +338,6 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 );
 
 // SidebarDivider for visual separation
-export const SidebarDivider: React.FC<{ className?: string }> = ({ className }) => (
-  <hr className={cn("my-4 border-white/10", className)} />
-);
+export const SidebarDivider: React.FC<{ className?: string }> = ({
+  className,
+}) => <hr className={cn("my-4 border-white/10", className)} />;

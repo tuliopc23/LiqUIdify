@@ -6,9 +6,7 @@
     "light": "/logo-light.svg"
   },
   "favicon": "/favicon.svg",
-  "stylesheets": [
-    "/styles/apple-hig.css"
-  ],
+  "stylesheets": ["/styles/apple-hig.css"],
   "colors": {
     "primary": "#007AFF",
     "light": "#5AC8FA",
@@ -45,11 +43,7 @@
     },
     {
       "group": "Guides",
-      "pages": [
-        "guides/theming",
-        "guides/accessibility",
-        "guides/recipes"
-      ]
+      "pages": ["guides/theming", "guides/accessibility", "guides/recipes"]
     },
     {
       "group": "Components",
@@ -143,51 +137,35 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api/index"
-      ]
+      "pages": ["api/index"]
     },
     {
       "group": "Integrations",
-      "pages": [
-        "integrations/storybook"
-      ]
+      "pages": ["integrations/storybook"]
     },
     {
       "group": "Migrate",
-      "pages": [
-        "migrate/from-previous"
-      ]
+      "pages": ["migrate/from-previous"]
     },
     {
       "group": "Troubleshooting",
-      "pages": [
-        "troubleshooting"
-      ]
+      "pages": ["troubleshooting"]
     },
     {
       "group": "FAQ",
-      "pages": [
-        "faq"
-      ]
+      "pages": ["faq"]
     },
     {
       "group": "Changelog",
-      "pages": [
-        "changelog"
-      ]
+      "pages": ["changelog"]
     },
     {
       "group": "Contributing",
-      "pages": [
-        "contributing"
-      ]
+      "pages": ["contributing"]
     },
     {
       "group": "Legal",
-      "pages": [
-        "licenses"
-      ]
+      "pages": ["licenses"]
     }
   ],
   "footerSocials": {

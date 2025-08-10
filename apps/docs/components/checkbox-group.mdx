@@ -7,18 +7,18 @@ description: Grouped selection of related options with descriptions.
 
 ```tsx live
 import { GlassCheckboxGroup } from "liquidify";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Demo() {
-  const [value, setValue] = useState(['analytics']);
+  const [value, setValue] = useState(["analytics"]);
   return (
     <GlassCheckboxGroup
       label="Features"
       description="Enable the modules you need"
       options={[
-        { value: 'analytics', label: 'Analytics' },
-        { value: 'notifications', label: 'Notifications' },
-        { value: 'api', label: 'API Access' }
+        { value: "analytics", label: "Analytics" },
+        { value: "notifications", label: "Notifications" },
+        { value: "api", label: "API Access" },
       ]}
       value={value}
       onChange={setValue}
@@ -29,13 +29,13 @@ export default function Demo() {
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `options` | `CheckboxOption[]` | Required option list |
-| `value` | `string[]` | Controlled selected values |
-| `onChange` | `(values: string[]) => void` | Change handler |
-| `orientation` | `'vertical' | 'horizontal'` | Layout direction |
-| `size` | `'sm' | 'md' | 'lg'` | Visual size |
+| Prop          | Type                         | Description                |
+| ------------- | ---------------------------- | -------------------------- | ---------------- | ----------- |
+| `options`     | `CheckboxOption[]`           | Required option list       |
+| `value`       | `string[]`                   | Controlled selected values |
+| `onChange`    | `(values: string[]) => void` | Change handler             |
+| `orientation` | `'vertical'                  | 'horizontal'`              | Layout direction |
+| `size`        | `'sm'                        | 'md'                       | 'lg'`            | Visual size |
 
 ## Accessibility
 

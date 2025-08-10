@@ -1,20 +1,12 @@
-import { createRequire } from "node:module";
-import tsconfigPaths from "vite-tsconfig-paths";
-import path, { dirname, join } from "path";
+import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import {
-  PRODUCTION_COMPONENTS,
-  // eslint-disable-next-line import/no-relative-parent-imports
-} from "./production-stories.config";
+import { PRODUCTION_COMPONENTS } from "./production-stories.config.js";
 
 // ---------------------------------------------------------------------------
 // ESM helpers ---------------------------------------------------------------
 // ---------------------------------------------------------------------------
-// Storybook executes this file in Node ESM context, but many utilities below
-// still expect CommonJS‐style `__dirname` as well as `require`.  We recreate
-// both so the rest of the configuration can stay framework-agnostic.
+// Storybook executes this file in Node ESM context
 const baseDir = path.dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
 
 /**
  * Determine the current Storybook build mode.
@@ -47,18 +39,18 @@ const config = {
         "../../../libs/components/src/components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       ],
   addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-docs"),
+    "@storybook/addon-links",
+    "@storybook/addon-a11y",
+    "@storybook/addon-docs",
   ],
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
+    name: "@storybook/react-vite",
     options: {
       strictMode: true,
     },
   },
   core: {
-    builder: getAbsolutePath("@storybook/builder-vite"),
+    builder: "@storybook/builder-vite",
     disableTelemetry: true,
   },
   typescript: {
@@ -76,6 +68,9 @@ const config = {
   },
   viteFinal: async (config, { configType }) => {
     try {
+      // Dynamically import vite-tsconfig-paths
+      const { default: tsconfigPaths } = await import("vite-tsconfig-paths");
+
       const distBase = path.resolve(baseDir, "../../../dist/libs/components");
       const srcBase = path.resolve(baseDir, "../../../libs/components/src");
       const aliasMap =
@@ -115,39 +110,39 @@ const config = {
         ...(config.build ?? {}),
         rollupOptions: {
           ...(config.build?.rollupOptions ?? {}),
-            onwarn(warning, warn) {
-              // Suppress "use client" directive warnings
-              if (
-                warning.message &&
-                warning.message.includes(
-                  "Module level directives cause errors when bundled",
-                )
-              ) {
-                return;
-              }
-              // Suppress "use client" warnings
-              if (warning.message && warning.message.includes('"use client"')) {
-                return;
-              }
-              warn(warning);
-            },
-            output: {
-              manualChunks: (id) => {
-                if (id.includes("node_modules")) {
-                  if (id.includes("react") || id.includes("react-dom")) {
-                    return "react-vendor";
-                  }
-                  if (id.includes("@storybook")) {
-                    return "storybook-vendor";
-                  }
-                  return "vendor";
+          onwarn(warning, warn) {
+            // Suppress "use client" directive warnings
+            if (
+              warning.message &&
+              warning.message.includes(
+                "Module level directives cause errors when bundled",
+              )
+            ) {
+              return;
+            }
+            // Suppress "use client" warnings
+            if (warning.message && warning.message.includes('"use client"')) {
+              return;
+            }
+            warn(warning);
+          },
+          output: {
+            manualChunks: (id) => {
+              if (id.includes("node_modules")) {
+                if (id.includes("react") || id.includes("react-dom")) {
+                  return "react-vendor";
                 }
-                if (id.includes("stories")) {
-                  return "stories";
+                if (id.includes("@storybook")) {
+                  return "storybook-vendor";
                 }
-              },
+                return "vendor";
+              }
+              if (id.includes("stories")) {
+                return "stories";
+              }
             },
           },
+        },
         chunkSizeWarningLimit: 2500,
       };
 
@@ -214,8 +209,3 @@ const config = {
 };
 
 export default config;
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
-}
-

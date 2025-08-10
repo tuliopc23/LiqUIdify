@@ -7,19 +7,21 @@ description: Utility to lock keyboard focus within a region.
 
 ```tsx live
 import { GlassFocusTrap, GlassButton } from "liquidify";
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Demo(){
-  const [open,setOpen]=useState(false);
+export default function Demo() {
+  const [open, setOpen] = useState(false);
   return (
     <div>
-      <GlassButton onClick={()=>setOpen(o=>!o)}>{open? 'Close':'Open'} Panel</GlassButton>
+      <GlassButton onClick={() => setOpen((o) => !o)}>
+        {open ? "Close" : "Open"} Panel
+      </GlassButton>
       {open && (
         <GlassFocusTrap>
           <div className="p-4 bg-liquid-readable rounded-xl space-y-2">
             <input className="liquid-glass-input" placeholder="First" />
             <input className="liquid-glass-input" placeholder="Second" />
-            <GlassButton onClick={()=>setOpen(false)}>Done</GlassButton>
+            <GlassButton onClick={() => setOpen(false)}>Done</GlassButton>
           </div>
         </GlassFocusTrap>
       )}
