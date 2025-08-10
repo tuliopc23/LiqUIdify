@@ -4,21 +4,21 @@ on:
   push:
     branches: [main]
     paths:
-      - "apps/docs/styles/**"
-      - "libs/components/src/styles/**"
-      - "scripts/contrast-audit.js"
-      - "package.json"
-      - "bun.lock"
-      - ".github/workflows/contrast-audit.yml"
+      - apps/docs/styles/**
+      - libs/components/src/styles/**
+      - scripts/contrast-audit.js
+      - package.json
+      - bun.lock
+      - .github/workflows/contrast-audit.yml
   pull_request:
     branches: [main]
     paths:
-      - "apps/docs/styles/**"
-      - "libs/components/src/styles/**"
-      - "scripts/contrast-audit.js"
-      - "package.json"
-      - "bun.lock"
-      - ".github/workflows/contrast-audit.yml"
+      - apps/docs/styles/**
+      - libs/components/src/styles/**
+      - scripts/contrast-audit.js
+      - package.json
+      - bun.lock
+      - .github/workflows/contrast-audit.yml
   workflow_dispatch:
 
 permissions:
@@ -35,7 +35,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: "latest"
+          bun-version: latest
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
