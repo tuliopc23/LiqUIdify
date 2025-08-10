@@ -42,7 +42,7 @@
         "rolldown-vite": "^7.1.0",
         "rollup-plugin-visualizer": "^6.0.3",
         "serve": "^14.2.4",
-        "storybook": "^8.4.6",
+        "storybook": "^8.6.14",
         "tailwindcss": "^4.1.11",
         "tailwindcss-filters": "^3.0.0",
         "typescript": "^5.9.2",

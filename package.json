@@ -131,6 +131,7 @@
     "build:lib": "bun run clean && bunx vite build -c libs/components/rolldown.config.ts && bun run build:types",
     "build:types": "bunx tsc -p libs/components/tsconfig.lib.json",
     "build:storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
+    "build:showcase": "bun run -b scripts/build-showcase.ts",
     "build:watch": "bunx rolldown -c libs/components/rolldown.config.ts --watch",
     "check:tsconfig": "tsc --noEmit --project tsconfig.json",
     "clean": "rm -rf dist",

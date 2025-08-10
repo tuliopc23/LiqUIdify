@@ -1,4 +1,14 @@
 # Changelog
+## [Unreleased]
+
+### Stabilization follow-ups (TUL-115)
+- Docs: add `docs/DECISIONS.md` with owners/dates for showcase, features, animations, a11y, and CI.
+- CI: add gated showcase job (disabled by default), keep type-check and build as required jobs.
+- README: add showcase status and manual run command (`SHOWCASE=1 bun run build:showcase`).
+- A11y: add an axe-based integration smoke test for a representative page.
+- A11y: ColorSwatch previously fixed to use semantic button in docs story examples.
+- Cleanup: analyzer scaffolding remains removed; no reintroduction.
+
 ## [1.3.1] - 2025-08-09 - Build Refinements & Quality Gates
 
 ### Changed

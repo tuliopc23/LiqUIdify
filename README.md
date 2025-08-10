@@ -93,6 +93,13 @@ import "liquidify/css"; // All styles
 - 🔄 **[Migration Guide](./docs/MIGRATION_GUIDE.md)** - Migrate from other UI libraries
 - 🛡️ **[Security](./SECURITY.md)** - Security policies and reporting
 
+### Showcase status (Svelte/Histoire)
+
+We experimented with a Svelte-based Histoire showcase for cross-framework demos. As of August 9, 2025, `@histoire/plugin-svelte` does not yet declare Svelte 5 support, so that showcase build is gated and disabled in CI. This does not affect the React library or Storybook.
+
+- Upstream tracking: see `docs/DECISIONS.md` (Histoire Svelte 5 Compatibility) for the draft issue and revisit date.
+- Local runs (once Svelte 5 support lands): `SHOWCASE=1 bun run build:showcase`.
+
 ## 🎨 Component Categories
 
 ### 🎯 Core Components (15KB bundle)
@@ -331,6 +338,10 @@ bun install
 - **Build Storybook static site:**
   ```sh
   bun run build:storybook
+  ```
+- **Build Svelte/Histoire showcase (gated; no-op until upstream support):**
+  ```sh
+  SHOWCASE=1 bun run build:showcase
   ```
 - **Run VitePress docs (dev):**
   ```sh

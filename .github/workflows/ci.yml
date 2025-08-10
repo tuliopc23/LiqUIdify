@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, "**" ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      bun-version: ${{ steps.versions.outputs.bun }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Versions
+        id: versions
+        run: |
+          echo "bun=$(bun --version)" >> "$GITHUB_OUTPUT"
+      - name: Install
+        run: bun install --frozen-lockfile
+
+  typecheck:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install
+        run: bun install --frozen-lockfile
+      - name: Type check
+        run: bun run type-check
+
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install
+        run: bun install --frozen-lockfile
+      - name: Build library
+        run: bun run build:lib
+
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    continue-on-error: true # qlty CLI not available in CI runners
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install
+        run: bun install --frozen-lockfile
+      - name: Lint (best-effort)
+        run: |
+          echo "qlty not installed in CI; skipping lint step" && exit 0
+
+  showcase:
+    needs: setup
+    if: ${{ env.SHOWCASE == '1' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install
+        run: bun install --frozen-lockfile
+      - name: Build showcase (gated)
+        run: SHOWCASE=1 bun run build:showcase
+
