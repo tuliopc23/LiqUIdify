@@ -16,7 +16,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <ThemeToggle />
     </div>
   ),

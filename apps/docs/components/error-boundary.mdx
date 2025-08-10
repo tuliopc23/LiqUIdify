@@ -10,12 +10,12 @@ import { GlassErrorBoundary } from "liquidify";
 
 <GlassErrorBoundary fallback={<div>Something went wrong.</div>}>
   <App />
-</GlassErrorBoundary>
+</GlassErrorBoundary>;
 ```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `fallback` | `ReactNode` | UI rendered when an error is caught |
-| `onError` | `(error:Error, info: { componentStack:string })=>void` | Reporting hook |
+| Prop       | Type                                                   | Description                         |
+| ---------- | ------------------------------------------------------ | ----------------------------------- |
+| `fallback` | `ReactNode`                                            | UI rendered when an error is caught |
+| `onError`  | `(error:Error, info: { componentStack:string })=>void` | Reporting hook                      |

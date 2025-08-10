@@ -9,20 +9,20 @@ description: Spotlight-style command menu with fuzzy filtering.
 import { GlassCommand } from "liquidify";
 
 const ITEMS = [
-  { id: 'new', label: 'New File' },
-  { id: 'open', label: 'Open...' },
-  { id: 'save', label: 'Save' }
+  { id: "new", label: "New File" },
+  { id: "open", label: "Open..." },
+  { id: "save", label: "Save" },
 ];
 
-export default function Demo(){
+export default function Demo() {
   return <GlassCommand items={ITEMS} placeholder="Type a command" />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `items` | `{id:string;label:string}[]` | Command entries |
-| `onSelect` | `(id:string)=>void` | Selection callback |
-| `placeholder` | `string` | Input placeholder |
+| Prop          | Type                         | Description        |
+| ------------- | ---------------------------- | ------------------ |
+| `items`       | `{id:string;label:string}[]` | Command entries    |
+| `onSelect`    | `(id:string)=>void`          | Selection callback |
+| `placeholder` | `string`                     | Input placeholder  |

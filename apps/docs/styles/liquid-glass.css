@@ -315,9 +315,11 @@ body.dark {
 
 /* Button variants */
 .liquid-glass-button-primary {
-  background: linear-gradient(135deg,
-      var(--lg-accent) 0%,
-      rgba(251, 66, 104, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--lg-accent) 0%,
+    rgba(251, 66, 104, 0.8) 100%
+  );
 }
 
 .liquid-glass-button-secondary {
@@ -438,7 +440,6 @@ body.dark {
 }
 
 @keyframes liquidFloat {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -462,10 +463,12 @@ body.dark {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
   animation: shimmer 2s linear infinite;
   pointer-events: none;
   z-index: var(--lg-z-content);
@@ -592,7 +595,7 @@ body.dark {
 }
 
 /* Apple-style spacing utilities */
-.space-liquid>*+* {
+.space-liquid > * + * {
   margin-top: var(--lg-bento-gap);
 }
 
@@ -635,7 +638,6 @@ body.dark {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-
   .liquid-glass,
   .liquid-glass-container,
   .liquid-glass-interactive,
@@ -655,7 +657,6 @@ body.dark {
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
-
   .liquid-glass,
   .liquid-glass-container {
     backdrop-filter: none;
@@ -706,7 +707,6 @@ body.dark {
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-
   .liquid-glass-container,
   .liquid-glass-interactive {
     transition: none !important;

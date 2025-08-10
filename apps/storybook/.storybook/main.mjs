@@ -70,7 +70,7 @@ const config = {
     try {
       // Dynamically import vite-tsconfig-paths
       const { default: tsconfigPaths } = await import("vite-tsconfig-paths");
-      
+
       const distBase = path.resolve(baseDir, "../../../dist/libs/components");
       const srcBase = path.resolve(baseDir, "../../../libs/components/src");
       const aliasMap =
@@ -110,39 +110,39 @@ const config = {
         ...(config.build ?? {}),
         rollupOptions: {
           ...(config.build?.rollupOptions ?? {}),
-            onwarn(warning, warn) {
-              // Suppress "use client" directive warnings
-              if (
-                warning.message &&
-                warning.message.includes(
-                  "Module level directives cause errors when bundled",
-                )
-              ) {
-                return;
-              }
-              // Suppress "use client" warnings
-              if (warning.message && warning.message.includes('"use client"')) {
-                return;
-              }
-              warn(warning);
-            },
-            output: {
-              manualChunks: (id) => {
-                if (id.includes("node_modules")) {
-                  if (id.includes("react") || id.includes("react-dom")) {
-                    return "react-vendor";
-                  }
-                  if (id.includes("@storybook")) {
-                    return "storybook-vendor";
-                  }
-                  return "vendor";
+          onwarn(warning, warn) {
+            // Suppress "use client" directive warnings
+            if (
+              warning.message &&
+              warning.message.includes(
+                "Module level directives cause errors when bundled",
+              )
+            ) {
+              return;
+            }
+            // Suppress "use client" warnings
+            if (warning.message && warning.message.includes('"use client"')) {
+              return;
+            }
+            warn(warning);
+          },
+          output: {
+            manualChunks: (id) => {
+              if (id.includes("node_modules")) {
+                if (id.includes("react") || id.includes("react-dom")) {
+                  return "react-vendor";
                 }
-                if (id.includes("stories")) {
-                  return "stories";
+                if (id.includes("@storybook")) {
+                  return "storybook-vendor";
                 }
-              },
+                return "vendor";
+              }
+              if (id.includes("stories")) {
+                return "stories";
+              }
             },
           },
+        },
         chunkSizeWarningLimit: 2500,
       };
 

@@ -33,11 +33,11 @@ export default function Demo() {
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `theme` | `"light" | "dark"` | `"light"` | Initial color mode. |
-| `glassConfig` | `{ blur?: number; saturation?: number; brightness?: number; }` | `{}` | Override glass effect tuning. |
-| `children` | `ReactNode` | - | App content. |
+| Prop          | Type                                                           | Default | Description                   |
+| ------------- | -------------------------------------------------------------- | ------- | ----------------------------- | ------------------- |
+| `theme`       | `"light"                                                       | "dark"` | `"light"`                     | Initial color mode. |
+| `glassConfig` | `{ blur?: number; saturation?: number; brightness?: number; }` | `{}`    | Override glass effect tuning. |
+| `children`    | `ReactNode`                                                    | -       | App content.                  |
 
 ## Accessing Theme
 
@@ -49,7 +49,10 @@ import { GlassUIProvider, useTheme, GlassButton } from "liquidify";
 function Toggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <GlassButton variant="ghost" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+    <GlassButton
+      variant="ghost"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
       Mode: {theme}
     </GlassButton>
   );
@@ -69,7 +72,7 @@ export default function Wrap() {
 Wrap a subtree and inject custom CSS variables:
 
 ```tsx
-<div style={{ "--lg-accent": '#6C5CE7' }}>
+<div style={{ "--lg-accent": "#6C5CE7" }}>
   <GlassButton variant="primary">Brand Accent</GlassButton>
 </div>
 ```

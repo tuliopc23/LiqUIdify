@@ -7,13 +7,15 @@ description: Multi-line text input with liquid glass styling.
 
 ```tsx live
 import { GlassTextarea } from "liquidify";
-export default function Demo() { return <GlassTextarea placeholder="Write something..." /> }
+export default function Demo() {
+  return <GlassTextarea placeholder="Write something..." />;
+}
 ```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `value` | `string` | Controlled value |
-| `onChange` | `(v:string)=>void` | Change handler |
-| `rows` | `number` | Row hint |
+| Prop       | Type               | Description      |
+| ---------- | ------------------ | ---------------- |
+| `value`    | `string`           | Controlled value |
+| `onChange` | `(v:string)=>void` | Change handler   |
+| `rows`     | `number`           | Row hint         |

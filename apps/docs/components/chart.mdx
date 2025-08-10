@@ -9,13 +9,15 @@ description: Data visualization components (Line, Bar, Donut) with liquid glass 
 import { LineChart, BarChart, DonutChart } from "liquidify";
 
 const lineData = [
-  { label: 'Jan', value: 65 },
-  { label: 'Feb', value: 78 },
-  { label: 'Mar', value: 90 }
+  { label: "Jan", value: 65 },
+  { label: "Feb", value: 78 },
+  { label: "Mar", value: 90 },
 ];
 
 export default function Demo() {
-  return <LineChart data={lineData} width={360} height={180} gradient animated />;
+  return (
+    <LineChart data={lineData} width={360} height={180} gradient animated />
+  );
 }
 ```
 
@@ -27,12 +29,12 @@ export default function Demo() {
 
 ## Base Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `data` | `ChartDataPoint[]` | Required data points |
-| `width` | `number` | Chart width px |
-| `height` | `number` | Chart height px |
-| `animated` | `boolean` | Enable entrance animations |
+| Prop       | Type               | Description                |
+| ---------- | ------------------ | -------------------------- |
+| `data`     | `ChartDataPoint[]` | Required data points       |
+| `width`    | `number`           | Chart width px             |
+| `height`   | `number`           | Chart height px            |
+| `animated` | `boolean`          | Enable entrance animations |
 
 > Each chart adds its own extended props (labels, gradients, innerRadius, tooltips, etc.).
 
