@@ -1,0 +1,21 @@
+name: release-dry-run
+on:
+  workflow_dispatch:
+
+jobs:
+  pkg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build:lib
+      - working-directory: libs/components
+        run: bunx publint
+      - working-directory: libs/components
+        run: npm pack --dry-run
+      - name: Summarize
+        run: |
+          echo "Publint and npm pack --dry-run completed. See logs for details." >> $GITHUB_STEP_SUMMARY

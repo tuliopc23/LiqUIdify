@@ -6,7 +6,6 @@
     "light": "/logo-light.svg"
   },
   "favicon": "/favicon.svg",
-  "stylesheets": ["/styles/apple-hig.css"],
   "colors": {
     "primary": "#007AFF",
     "light": "#5AC8FA",
@@ -24,6 +23,10 @@
     {
       "name": "GitHub",
       "url": "https://github.com/tuliopc23/LiqUIdify"
+    },
+    {
+      "name": "Storybook",
+      "url": "https://liquidify-storybook.vercel.app"
     }
   ],
   "topbarCtaButton": {
@@ -43,7 +46,12 @@
     },
     {
       "group": "Guides",
-      "pages": ["guides/theming", "guides/accessibility", "guides/recipes"]
+      "pages": [
+        "guides/theming",
+        "guides/accessibility",
+        "guides/recipes",
+        "guides/live-previews"
+      ]
     },
     {
       "group": "Components",
@@ -92,7 +100,6 @@
             "components/breadcrumbs",
             "components/pagination",
             "components/mobile-nav",
-            "components/skip-navigation",
             "components/navbar",
             "components/sidebar"
           ]

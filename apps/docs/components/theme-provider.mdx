@@ -3,6 +3,10 @@ title: Theme Provider
 description: Provides global Liquid Glass tokens, theme mode, and configuration context.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassUIProvider } from "liquidify";
+
 # Theme Provider
 
 > Supplies theming context (light/dark), token overrides, and glass effect configuration to all components.
@@ -10,15 +14,14 @@ description: Provides global Liquid Glass tokens, theme mode, and configuration 
 ## Import
 
 ```tsx
-import { GlassUIProvider } from "liquidify";
 import "liquidify/styles";
 ```
 
 ## Basic Usage
 
-```tsx live
-import { GlassUIProvider, GlassButton } from "liquidify";
-
+<Preview
+  title="Example"
+  code={`import { GlassButton, GlassUIProvider } from "liquidify";
 export default function Demo() {
   return (
     <GlassUIProvider theme="light">
@@ -28,8 +31,23 @@ export default function Demo() {
       </div>
     </GlassUIProvider>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <GlassUIProvider theme="light">
+          <div className="flex gap-4">
+            <GlassButton variant="primary">Primary</GlassButton>
+            <GlassButton variant="ghost">Ghost</GlassButton>
+          </div>
+        </GlassUIProvider>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ## Props
 
@@ -43,9 +61,9 @@ export default function Demo() {
 
 Use the `useTheme` hook to read or change mode.
 
-```tsx live
-import { GlassUIProvider, useTheme, GlassButton } from "liquidify";
-
+<Preview
+  title="Example"
+  code={`import { GlassButton, GlassUIProvider } from "liquidify";
 function Toggle() {
   const { theme, setTheme } = useTheme();
   return (
@@ -64,8 +82,33 @@ export default function Wrap() {
       <Toggle />
     </GlassUIProvider>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    function Toggle() {
+      const { theme, setTheme } = useTheme();
+      return (
+        <GlassButton
+          variant="ghost"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+          Mode: {theme}
+        </GlassButton>
+      );
+    }
+    
+    function Wrap() {
+      return (
+        <GlassUIProvider>
+          <Toggle />
+        </GlassUIProvider>
+      );
+    }
+    return <Toggle />
+  })()}
+</Preview>
 
 ## Token Overrides
 

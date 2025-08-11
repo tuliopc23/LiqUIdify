@@ -3,6 +3,10 @@ title: Portal
 description: Liquid Glass portal for rendering components outside the normal DOM hierarchy.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassPortal } from "liquidify";
+
 # Portal
 
 The `GlassPortal` component provides a way to render children into a DOM node that exists outside the parent component's DOM hierarchy. This is essential for overlays, modals, tooltips, and other components that need to escape their container's styling constraints.
@@ -11,26 +15,27 @@ The `GlassPortal` component provides a way to render children into a DOM node th
 
 ### Basic Portal
 
-```tsx live
+<Preview
+  title="Basic Portal"
+  code={`import { GlassButton, GlassPortal } from "liquidify";
 import { useState } from "react";
-import { GlassPortal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [showPortal, setShowPortal] = useState(false);
 
-  return (
-    <div
-      style={{
+return (
+
+<div
+style={{
         position: "relative",
         padding: 20,
         border: "2px dashed rgba(255,255,255,0.3)",
         borderRadius: 8,
-      }}
-    >
-      <h4>Parent Container</h4>
-      <p style={{ fontSize: "0.875rem", opacity: 0.8, marginBottom: 16 }}>
-        This container has overflow:hidden and relative positioning.
-      </p>
+      }} >
+<h4>Parent Container</h4>
+<p style={{ fontSize: "0.875rem", opacity: 0.8, marginBottom: 16 }}>
+This container has overflow:hidden and relative positioning.
+</p>
 
       <GlassButton onClick={() => setShowPortal(!showPortal)}>
         {showPortal ? "Hide" : "Show"} Portal Content
@@ -85,34 +90,116 @@ export default function Demo() {
         <small style={{ opacity: 0.7 }}>This area has overflow:hidden</small>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [showPortal, setShowPortal] = useState(false);
+
+      return (
+        <div
+          style={{
+            position: "relative",
+            padding: 20,
+            border: "2px dashed rgba(255,255,255,0.3)",
+            borderRadius: 8,
+          }}
+        >
+          <h4>Parent Container</h4>
+          <p style={{ fontSize: "0.875rem", opacity: 0.8, marginBottom: 16 }}>
+            This container has overflow:hidden and relative positioning.
+          </p>
+
+          <GlassButton onClick={() => setShowPortal(!showPortal)}>
+            {showPortal ? "Hide" : "Show"} Portal Content
+          </GlassButton>
+
+          {showPortal && (
+            <GlassPortal>
+              <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  background: "rgba(0, 0, 0, 0.8)",
+                  color: "white",
+                  padding: 20,
+                  borderRadius: 12,
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  backdropFilter: "blur(10px)",
+                  zIndex: 1000,
+                  maxWidth: 300,
+                }}
+              >
+                <h4 style={{ margin: "0 0 8px 0" }}>Portal Content</h4>
+                <p
+                  style={{
+                    margin: "0 0 12px 0",
+                    fontSize: "0.875rem",
+                    opacity: 0.9,
+                  }}
+                >
+                  This content is rendered outside the parent container using a
+                  portal!
+                </p>
+                <GlassButton size="sm" onClick={() => setShowPortal(false)}>
+                  Close
+                </GlassButton>
+              </div>
+            </GlassPortal>
+          )}
+
+          <div
+            style={{
+              marginTop: 16,
+              padding: 12,
+              background: "rgba(255,255,255,0.1)",
+              borderRadius: 6,
+              overflow: "hidden",
+              height: 60,
+            }}
+          >
+            <small style={{ opacity: 0.7 }}>This area has overflow:hidden</small>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Custom Container
 
-```tsx live
+<Preview
+  title="Custom Container"
+  code={`import { GlassButton, GlassPortal } from "liquidify";
 import { useState, useRef } from "react";
-import { GlassPortal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [showPortal, setShowPortal] = useState(false);
   const containerRef = useRef(null);
 
-  return (
-    <div style={{ display: "flex", gap: 20 }}>
-      <div
-        style={{
+return (
+
+<div style={{ display: "flex", gap: 20 }}>
+<div
+style={{
           flex: 1,
           padding: 16,
           border: "1px solid rgba(255,255,255,0.3)",
           borderRadius: 8,
-        }}
-      >
-        <h4>Source Container</h4>
-        <GlassButton onClick={() => setShowPortal(!showPortal)}>
-          {showPortal ? "Hide" : "Show"} Portal
-        </GlassButton>
+        }} >
+<h4>Source Container</h4>
+<GlassButton onClick={() => setShowPortal(!showPortal)}>
+{showPortal ? "Hide" : "Show"} Portal
+</GlassButton>
 
         {showPortal && (
           <GlassPortal container={containerRef.current}>
@@ -156,22 +243,96 @@ export default function Demo() {
         </p>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [showPortal, setShowPortal] = useState(false);
+      const containerRef = useRef(null);
+
+      return (
+        <div style={{ display: "flex", gap: 20 }}>
+          <div
+            style={{
+              flex: 1,
+              padding: 16,
+              border: "1px solid rgba(255,255,255,0.3)",
+              borderRadius: 8,
+            }}
+          >
+            <h4>Source Container</h4>
+            <GlassButton onClick={() => setShowPortal(!showPortal)}>
+              {showPortal ? "Hide" : "Show"} Portal
+            </GlassButton>
+
+            {showPortal && (
+              <GlassPortal container={containerRef.current}>
+                <div
+                  style={{
+                    padding: 12,
+                    background: "rgba(0, 100, 255, 0.2)",
+                    border: "1px solid rgba(0, 100, 255, 0.4)",
+                    borderRadius: 8,
+                    marginTop: 8,
+                  }}
+                >
+                  <strong>Portaled Content</strong>
+                  <p
+                    style={{
+                      margin: "4px 0 0 0",
+                      fontSize: "0.875rem",
+                      opacity: 0.8,
+                    }}
+                  >
+                    Rendered in the target container!
+                  </p>
+                </div>
+              </GlassPortal>
+            )}
+          </div>
+
+          <div
+            ref={containerRef}
+            style={{
+              flex: 1,
+              padding: 16,
+              border: "1px solid rgba(255,255,255,0.3)",
+              borderRadius: 8,
+              minHeight: 120,
+            }}
+          >
+            <h4>Target Container</h4>
+            <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+              Portal content will appear here.
+            </p>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Modal with Portal
 
-```tsx live
+<Preview
+  title="Modal with Portal"
+  code={`import { GlassButton, GlassPortal } from "liquidify";
 import { useState } from "react";
-import { GlassPortal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div style={{ padding: 20 }}>
-      <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+return (
+
+<div style={{ padding: 20 }}>
+<GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
 
       {isOpen && (
         <GlassPortal>
@@ -224,37 +385,107 @@ export default function Demo() {
         </GlassPortal>
       )}
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <div style={{ padding: 20 }}>
+          <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+
+          {isOpen && (
+            <GlassPortal>
+              {/* Backdrop */}
+              <div
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  background: "rgba(0, 0, 0, 0.5)",
+                  backdropFilter: "blur(4px)",
+                  zIndex: 1000,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onClick={() => setIsOpen(false)}
+              >
+                {/* Modal */}
+                <div
+                  style={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    borderRadius: 16,
+                    padding: 24,
+                    maxWidth: 400,
+                    width: "90%",
+                    color: "white",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <h3 style={{ margin: "0 0 16px 0" }}>Portal Modal</h3>
+                  <p style={{ margin: "0 0 20px 0", opacity: 0.8 }}>
+                    This modal is rendered using a portal, so it appears above all
+                    other content regardless of the parent component's z-index or
+                    overflow settings.
+                  </p>
+                  <div
+                    style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}
+                  >
+                    <GlassButton variant="ghost" onClick={() => setIsOpen(false)}>
+                      Cancel
+                    </GlassButton>
+                    <GlassButton onClick={() => setIsOpen(false)}>
+                      Confirm
+                    </GlassButton>
+                  </div>
+                </div>
+              </div>
+            </GlassPortal>
+          )}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Tooltip with Portal
 
-```tsx live
+<Preview
+  title="Tooltip with Portal"
+  code={`import { GlassButton, GlassPortal } from "liquidify";
 import { useState } from "react";
-import { GlassPortal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseEnter = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    setPosition({
-      x: rect.left + rect.width / 2,
-      y: rect.top - 8,
-    });
-    setShowTooltip(true);
-  };
+const handleMouseEnter = (e) => {
+const rect = e.target.getBoundingClientRect();
+setPosition({
+x: rect.left + rect.width / 2,
+y: rect.top - 8,
+});
+setShowTooltip(true);
+};
 
-  return (
-    <div style={{ padding: 40, textAlign: "center" }}>
-      <GlassButton
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setShowTooltip(false)}
-      >
-        Hover for Tooltip
-      </GlassButton>
+return (
+
+<div style={{ padding: 40, textAlign: "center" }}>
+<GlassButton
+onMouseEnter={handleMouseEnter}
+onMouseLeave={() => setShowTooltip(false)} >
+Hover for Tooltip
+</GlassButton>
 
       {showTooltip && (
         <GlassPortal>
@@ -292,45 +523,115 @@ export default function Demo() {
         </GlassPortal>
       )}
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [showTooltip, setShowTooltip] = useState(false);
+      const [position, setPosition] = useState({ x: 0, y: 0 });
+
+      const handleMouseEnter = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        setPosition({
+          x: rect.left + rect.width / 2,
+          y: rect.top - 8,
+        });
+        setShowTooltip(true);
+      };
+
+      return (
+        <div style={{ padding: 40, textAlign: "center" }}>
+          <GlassButton
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            Hover for Tooltip
+          </GlassButton>
+
+          {showTooltip && (
+            <GlassPortal>
+              <div
+                style={{
+                  position: "fixed",
+                  left: position.x,
+                  top: position.y,
+                  transform: "translate(-50%, -100%)",
+                  background: "rgba(0, 0, 0, 0.9)",
+                  color: "white",
+                  padding: "8px 12px",
+                  borderRadius: 6,
+                  fontSize: "0.875rem",
+                  whiteSpace: "nowrap",
+                  zIndex: 1000,
+                  pointerEvents: "none",
+                }}
+              >
+                This tooltip uses a portal!
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: 0,
+                    height: 0,
+                    borderLeft: "4px solid transparent",
+                    borderRight: "4px solid transparent",
+                    borderTop: "4px solid rgba(0, 0, 0, 0.9)",
+                  }}
+                />
+              </div>
+            </GlassPortal>
+          )}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Multiple Portals
 
-```tsx live
+<Preview
+  title="Multiple Portals"
+  code={`import { GlassButton, GlassPortal } from "liquidify";
 import { useState } from "react";
-import { GlassPortal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [portals, setPortals] = useState([]);
 
-  const addPortal = () => {
-    const id = Date.now();
-    const newPortal = {
-      id,
-      x: Math.random() * 300 + 50,
-      y: Math.random() * 200 + 50,
-    };
-    setPortals((prev) => [...prev, newPortal]);
-  };
+const addPortal = () => {
+const id = Date.now();
+const newPortal = {
+id,
+x: Math.random() _300 + 50,
+y: Math.random()_ 200 + 50,
+};
+setPortals((prev) => [...prev, newPortal]);
+};
 
-  const removePortal = (id) => {
-    setPortals((prev) => prev.filter((p) => p.id !== id));
-  };
+const removePortal = (id) => {
+setPortals((prev) => prev.filter((p) => p.id !== id));
+};
 
-  return (
-    <div style={{ padding: 20 }}>
-      <div style={{ marginBottom: 16 }}>
-        <GlassButton onClick={addPortal}>Add Portal</GlassButton>
-        <GlassButton
-          variant="ghost"
-          onClick={() => setPortals([])}
-          style={{ marginLeft: 8 }}
-        >
-          Clear All
-        </GlassButton>
-      </div>
+return (
+
+<div style={{ padding: 20 }}>
+<div style={{ marginBottom: 16 }}>
+<GlassButton onClick={addPortal}>Add Portal</GlassButton>
+<GlassButton
+variant="ghost"
+onClick={() => setPortals([])}
+style={{ marginLeft: 8 }} >
+Clear All
+</GlassButton>
+</div>
 
       <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
         Active portals: {portals.length}
@@ -362,9 +663,80 @@ export default function Demo() {
         </GlassPortal>
       ))}
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [portals, setPortals] = useState([]);
+
+      const addPortal = () => {
+        const id = Date.now();
+        const newPortal = {
+          id,
+          x: Math.random() * 300 + 50,
+          y: Math.random() * 200 + 50,
+        };
+        setPortals((prev) => [...prev, newPortal]);
+      };
+
+      const removePortal = (id) => {
+        setPortals((prev) => prev.filter((p) => p.id !== id));
+      };
+
+      return (
+        <div style={{ padding: 20 }}>
+          <div style={{ marginBottom: 16 }}>
+            <GlassButton onClick={addPortal}>Add Portal</GlassButton>
+            <GlassButton
+              variant="ghost"
+              onClick={() => setPortals([])}
+              style={{ marginLeft: 8 }}
+            >
+              Clear All
+            </GlassButton>
+          </div>
+
+          <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+            Active portals: {portals.length}
+          </p>
+
+          {portals.map((portal) => (
+            <GlassPortal key={portal.id}>
+              <div
+                style={{
+                  position: "fixed",
+                  left: portal.x,
+                  top: portal.y,
+                  background: "rgba(100, 200, 255, 0.2)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(100, 200, 255, 0.4)",
+                  borderRadius: 8,
+                  padding: 12,
+                  zIndex: 1000,
+                  minWidth: 120,
+                }}
+              >
+                <div style={{ fontSize: "0.875rem", marginBottom: 8 }}>
+                  Portal #{portal.id}
+                </div>
+                <GlassButton size="sm" onClick={() => removePortal(portal.id)}>
+                  Remove
+                </GlassButton>
+              </div>
+            </GlassPortal>
+          ))}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 

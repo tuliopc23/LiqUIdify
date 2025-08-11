@@ -3,9 +3,13 @@ title: Toast
 description: Notifications via ToastProvider and useToast hook.
 ---
 
-```tsx live
-import { GlassButton, ToastProvider, useToast } from "liquidify";
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton } from "liquidify";
 
+<Preview
+  title="Example"
+  code={`import { GlassButton } from "liquidify";
 function DemoInner() {
   const { addToast } = useToast();
   return (
@@ -55,8 +59,64 @@ export default function Demo() {
       <DemoInner />
     </ToastProvider>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    function DemoInner() {
+      const { addToast } = useToast();
+      return (
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <GlassButton
+            onClick={() =>
+              addToast({
+                title: "Saved",
+                description: "Changes persisted",
+                type: "success",
+              })
+            }
+          >
+            Success
+          </GlassButton>
+          <GlassButton
+            variant="ghost"
+            onClick={() =>
+              addToast({
+                title: "Heads up",
+                description: "Check your input",
+                type: "warning",
+              })
+            }
+          >
+            Warning
+          </GlassButton>
+          <GlassButton
+            variant="destructive"
+            onClick={() =>
+              addToast({
+                title: "Error",
+                description: "Something went wrong",
+                type: "error",
+              })
+            }
+          >
+            Error
+          </GlassButton>
+        </div>
+      );
+    }
+    
+    function Demo() {
+      return (
+        <ToastProvider>
+          <DemoInner />
+        </ToastProvider>
+      );
+    }
+    return <DemoInner />
+  })()}
+</Preview>
 
 API
 

@@ -3,9 +3,13 @@ title: Tabs
 description: Switch content panels using accessible tablist.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
 import { GlassTabs } from "liquidify";
 
+<Preview
+  title="Example"
+  code={`import { GlassTabs } from "liquidify";
 const tabs = [
   { id: "overview", label: "Overview", content: <div>Overview content</div> },
   { id: "details", label: "Details", content: <div>Details content</div> },
@@ -14,8 +18,23 @@ const tabs = [
 
 export default function Demo() {
   return <GlassTabs tabs={tabs} defaultTab="details" />;
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    const tabs = [
+      { id: "overview", label: "Overview", content: <div>Overview content</div> },
+      { id: "details", label: "Details", content: <div>Details content</div> },
+      { id: "settings", label: "Settings", content: <div>Settings content</div> },
+    ];
+    
+    function Demo() {
+      return <GlassTabs tabs={tabs} defaultTab="details" />;
+    }
+    return <Demo />
+  })()}
+</Preview>
 
 Props
 

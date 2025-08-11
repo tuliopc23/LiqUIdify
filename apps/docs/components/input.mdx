@@ -4,6 +4,10 @@ description: Text input fields with liquid glass effects, validation states, and
 icon: type
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassInput } from "liquidify";
+
 # Input
 
 A glassmorphic input component with liquid glass effects, validation states, and comprehensive accessibility support. Features Apple-inspired design with smooth focus transitions and clear visual feedback.
@@ -12,9 +16,9 @@ A glassmorphic input component with liquid glass effects, validation states, and
 
 ### Basic Usage
 
-```tsx live
-import { GlassInput } from "liquidify";
-
+<Preview
+  title="Basic Usage"
+  code={`import { GlassInput } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -32,15 +36,43 @@ export default function Demo() {
         label="Password"
       />
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassInput placeholder="Enter your name" />
+
+          <GlassInput
+            type="email"
+            placeholder="Enter your email"
+            label="Email Address"
+          />
+
+          <GlassInput
+            type="password"
+            placeholder="Enter your password"
+            label="Password"
+          />
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassInput } from "liquidify";
-
+<Preview
+  title="Size Variants"
+  code={`import { GlassInput } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -49,13 +81,28 @@ export default function Demo() {
       <GlassInput size="lg" placeholder="Large input" label="Large" />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassInput size="sm" placeholder="Small input" label="Small" />
+          <GlassInput size="md" placeholder="Medium input" label="Medium" />
+          <GlassInput size="lg" placeholder="Large input" label="Large" />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Validation States
 
-```tsx live
-import { GlassInput } from "liquidify";
+<Preview
+  title="Validation States"
+  code={`import { GlassInput } from "liquidify";
 import { Check, AlertCircle } from "lucide-react";
 
 export default function Demo() {
@@ -84,14 +131,52 @@ export default function Demo() {
         message="Please double-check this value"
       />
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassInput
+            placeholder="Valid input"
+            label="Success State"
+            state="success"
+            message="This field is valid"
+            rightIcon={<Check className="w-4 h-4" />}
+          />
+
+          <GlassInput
+            placeholder="Invalid input"
+            label="Error State"
+            state="error"
+            message="This field is required"
+            rightIcon={<AlertCircle className="w-4 h-4" />}
+          />
+
+          <GlassInput
+            placeholder="Warning input"
+            label="Warning State"
+            state="warning"
+            message="Please double-check this value"
+          />
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### With Icons
 
-```tsx live
-import { GlassInput } from "liquidify";
+<Preview
+  title="With Icons"
+  code={`import { GlassInput } from "liquidify";
 import { Search, Mail, Lock, User } from "lucide-react";
 
 export default function Demo() {
@@ -120,15 +205,52 @@ export default function Demo() {
         rightIcon={<Check className="w-4 h-4 text-green-500" />}
       />
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassInput
+            placeholder="Search..."
+            leftIcon={<Search className="w-4 h-4" />}
+          />
+
+          <GlassInput
+            type="email"
+            placeholder="Email address"
+            leftIcon={<Mail className="w-4 h-4" />}
+          />
+
+          <GlassInput
+            type="password"
+            placeholder="Password"
+            leftIcon={<Lock className="w-4 h-4" />}
+          />
+
+          <GlassInput
+            placeholder="Username"
+            leftIcon={<User className="w-4 h-4" />}
+            rightIcon={<Check className="w-4 h-4 text-green-500" />}
+          />
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Disabled and Read-only
 
-```tsx live
-import { GlassInput } from "liquidify";
-
+<Preview
+  title="Disabled and Read-only"
+  code={`import { GlassInput } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -142,9 +264,33 @@ export default function Demo() {
         disabled
       />
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassInput placeholder="Disabled input" label="Disabled" disabled />
+
+          <GlassInput value="Read-only value" label="Read-only" readOnly />
+
+          <GlassInput
+            value="Disabled with value"
+            label="Disabled with Value"
+            disabled
+          />
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -174,7 +320,6 @@ export default function Demo() {
 
 ```tsx
 import { useState } from "react";
-import { GlassInput, GlassButton } from "liquidify";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -239,7 +384,6 @@ function ContactForm() {
 
 ```tsx
 import { useState } from "react";
-import { GlassInput } from "liquidify";
 import { Search, X } from "lucide-react";
 
 function SearchInput({ onSearch, placeholder = "Search..." }) {
@@ -282,7 +426,6 @@ function SearchInput({ onSearch, placeholder = "Search..." }) {
 
 ```tsx
 import { useState } from "react";
-import { GlassInput } from "liquidify";
 import { Eye, EyeOff, Lock } from "lucide-react";
 
 function PasswordInput({ label = "Password", ...props }) {

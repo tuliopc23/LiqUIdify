@@ -1,0 +1,72 @@
+---
+title: Live Component Previews
+description: Embed interactive React component previews above code blocks using a reusable Preview wrapper.
+---
+
+import { GlassButton, GlassInput } from "liquidify";
+import { Preview } from "../components/Preview";
+
+# Live Component Previews
+
+This guide shows how to add interactive React component previews above (or alongside) code blocks in your Mintlify documentation using a lightweight `Preview` wrapper.
+
+## Quick Example
+
+<Preview
+  title="Primary Button"
+  code={`<GlassButton onClick={() => alert('Clicked!')}>Click me</GlassButton>`}
+  language="tsx"
+>
+  <GlassButton onClick={() => alert("Clicked!")}>Click me</GlassButton>
+</Preview>
+
+## Hook Support
+
+<Preview
+  title="useState Toggle"
+  code={`function Example(){\n  const [on,setOn]=React.useState(false)\n  return (\n    <GlassButton onClick={()=>setOn(o=>!o)}>\n      {on ? 'ON' : 'OFF'}\n    </GlassButton>\n  )\n}`}
+  language="tsx"
+>
+  {(() => {
+    const [on, setOn] = React.useState(false);
+    return (
+      <GlassButton onClick={() => setOn((o) => !o)}>
+        {on ? "ON" : "OFF"}
+      </GlassButton>
+    );
+  })()}
+</Preview>
+
+## Controlled Input
+
+<Preview
+  title="Controlled Input"
+  code={`function Example(){\n  const [value,setValue]=React.useState('')\n  return <GlassInput value={value} onChange={e=>setValue(e.target.value)} />\n}`}
+  language="tsx"
+>
+  {(() => {
+    const [value, setValue] = React.useState("");
+    return (
+      <GlassInput value={value} onChange={(e) => setValue(e.target.value)} />
+    );
+  })()}
+</Preview>
+
+## Usage
+
+1. Create `Preview.tsx` in `apps/docs/components`.
+2. Import it inside any MDX page: `import { Preview } from '../components/Preview'`.
+3. Wrap a live example + code string.
+4. Keep the code prop in sync with what you render.
+
+## Accessibility
+
+- Keyboard focusable copy button.
+- Avoid non-deterministic behavior during SSR.
+- Ensure interactive elements inside previews remain accessible (ARIA when needed).
+
+## Next Steps
+
+- Add more examples for stateful components.
+- Snapshot test critical previews in Storybook / Chromatic.
+- Track copy interactions if analytics is enabled.

@@ -26,6 +26,7 @@
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
+    "prism-react-renderer": "^2.4.1",
     "rolldown-vite": "^7.1.0",
     "oxc": "^1.0.1",
     "@vitest/expect": "^3.2.4",
@@ -75,6 +76,46 @@
       "import": "./dist/libs/components/index.mjs",
       "require": "./dist/libs/components/index.cjs"
     },
+    "./core": {
+      "types": "./dist/libs/components/bundles/core.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./forms": {
+      "types": "./dist/libs/components/bundles/forms.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./navigation": {
+      "types": "./dist/libs/components/bundles/navigation.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./feedback": {
+      "types": "./dist/libs/components/bundles/feedback.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./layout": {
+      "types": "./dist/libs/components/bundles/layout.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./data-display": {
+      "types": "./dist/libs/components/bundles/data-display.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./accessibility": {
+      "types": "./dist/libs/components/bundles/accessibility.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
+    "./components/*": {
+      "types": "./dist/libs/components/components/*/index.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
+    },
     "./css": "./dist/libs/components/liquidify.css",
     "./styles": "./dist/libs/components/liquidify.css",
     "./package.json": "./package.json"
@@ -82,7 +123,8 @@
   "files": [
     "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "funding": {
     "type": "github",
@@ -120,9 +162,9 @@
     "type": "git",
     "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
   },
-  "overrides": {
-    "@stoplight/spectral-core": "1.19.3",
-    "@stoplight/spectral-functions": "1.9.2"
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "bun run build:lib && bun run build:storybook",

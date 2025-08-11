@@ -4,6 +4,10 @@ description: Prominent messages and announcements with glassmorphism effects and
 icon: megaphone
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassBanner, GlassButton } from "liquidify";
+
 # Banner
 
 A glassmorphic banner component for displaying prominent messages, announcements, and system notifications. Features semantic variants, dismissible functionality, and Apple-inspired design.
@@ -12,9 +16,9 @@ A glassmorphic banner component for displaying prominent messages, announcements
 
 ### Basic Variants
 
-```tsx live
-import { GlassBanner } from "liquidify";
-
+<Preview
+  title="Basic Variants"
+  code={`import { GlassBanner } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-2xl space-y-4">
@@ -34,31 +38,62 @@ export default function Demo() {
         🚨 Service disruption detected. Our team is investigating.
       </GlassBanner>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-2xl space-y-4">
+          <GlassBanner variant="info">
+            📢 New features are now available! Check out our latest updates.
+          </GlassBanner>
+
+          <GlassBanner variant="success">
+            ✅ Your account has been successfully verified.
+          </GlassBanner>
+
+          <GlassBanner variant="warning">
+            ⚠️ Scheduled maintenance will occur tonight from 2-4 AM UTC.
+          </GlassBanner>
+
+          <GlassBanner variant="error">
+            🚨 Service disruption detected. Our team is investigating.
+          </GlassBanner>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Dismissible Banners
 
-```tsx live
+<Preview
+  title="Dismissible Banners"
+  code={`import { GlassBanner } from "liquidify";
 import { useState } from "react";
-import { GlassBanner } from "liquidify";
 
 export default function Demo() {
   const [showInfo, setShowInfo] = useState(true);
   const [showWarning, setShowWarning] = useState(true);
 
-  return (
-    <div className="w-full max-w-2xl space-y-4">
-      {showInfo && (
-        <GlassBanner
-          variant="info"
-          dismissible
-          onDismiss={() => setShowInfo(false)}
-        >
-          💡 Tip: You can dismiss this banner by clicking the X button.
-        </GlassBanner>
-      )}
+return (
+
+<div className="w-full max-w-2xl space-y-4">
+{showInfo && (
+<GlassBanner
+variant="info"
+dismissible
+onDismiss={() => setShowInfo(false)} >
+💡 Tip: You can dismiss this banner by clicking the X button.
+</GlassBanner>
+)}
 
       {showWarning && (
         <GlassBanner
@@ -74,15 +109,56 @@ export default function Demo() {
         {!showInfo && !showWarning && "All banners dismissed!"}
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [showInfo, setShowInfo] = useState(true);
+      const [showWarning, setShowWarning] = useState(true);
+
+      return (
+        <div className="w-full max-w-2xl space-y-4">
+          {showInfo && (
+            <GlassBanner
+              variant="info"
+              dismissible
+              onDismiss={() => setShowInfo(false)}
+            >
+              💡 Tip: You can dismiss this banner by clicking the X button.
+            </GlassBanner>
+          )}
+
+          {showWarning && (
+            <GlassBanner
+              variant="warning"
+              dismissible
+              onDismiss={() => setShowWarning(false)}
+            >
+              📅 Don't forget about the team meeting at 3 PM today.
+            </GlassBanner>
+          )}
+
+          <div className="text-center text-sm text-gray-600">
+            {!showInfo && !showWarning && "All banners dismissed!"}
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### With Actions
 
-```tsx live
-import { GlassBanner, GlassButton } from "liquidify";
-
+<Preview
+  title="With Actions"
+  code={`import { GlassBanner, GlassButton } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-2xl space-y-4">
@@ -114,14 +190,57 @@ export default function Demo() {
         🔄 A security update is available for your application.
       </GlassBanner>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-2xl space-y-4">
+          <GlassBanner
+            variant="info"
+            action={
+              <GlassButton size="sm" variant="primary">
+                Learn More
+              </GlassButton>
+            }
+          >
+            🎉 LiqUIdify v2.0 is here with amazing new features!
+          </GlassBanner>
+
+          <GlassBanner
+            variant="warning"
+            dismissible
+            action={
+              <div className="flex gap-2">
+                <GlassButton size="sm" variant="primary">
+                  Update Now
+                </GlassButton>
+                <GlassButton size="sm" variant="ghost">
+                  Later
+                </GlassButton>
+              </div>
+            }
+          >
+            🔄 A security update is available for your application.
+          </GlassBanner>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Custom Icons
 
-```tsx live
-import { GlassBanner } from "liquidify";
+<Preview
+  title="Custom Icons"
+  code={`import { GlassBanner } from "liquidify";
 import { Gift, Zap, Shield, Heart } from "lucide-react";
 
 export default function Demo() {
@@ -143,9 +262,39 @@ export default function Demo() {
         We appreciate your patience during this outage.
       </GlassBanner>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-2xl space-y-4">
+          <GlassBanner variant="info" icon={<Gift className="h-5 w-5" />}>
+            Special offer: Get 50% off your first month!
+          </GlassBanner>
+
+          <GlassBanner variant="success" icon={<Zap className="h-5 w-5" />}>
+            Performance improvements deployed successfully.
+          </GlassBanner>
+
+          <GlassBanner variant="warning" icon={<Shield className="h-5 w-5" />}>
+            Enable two-factor authentication for better security.
+          </GlassBanner>
+
+          <GlassBanner variant="error" icon={<Heart className="h-5 w-5" />}>
+            We appreciate your patience during this outage.
+          </GlassBanner>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -166,7 +315,6 @@ export default function Demo() {
 
 ```tsx
 import { useState, useEffect } from "react";
-import { GlassBanner, GlassButton } from "liquidify";
 
 function SystemAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);
@@ -213,7 +361,6 @@ function SystemAnnouncements() {
 ### Feature Announcements
 
 ```tsx
-import { GlassBanner, GlassButton } from "liquidify";
 import { Sparkles } from "lucide-react";
 
 function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
@@ -246,7 +393,6 @@ function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
 ### Maintenance Notifications
 
 ```tsx
-import { GlassBanner } from "liquidify";
 import { Clock } from "lucide-react";
 
 function MaintenanceNotification({ maintenance }) {
@@ -292,7 +438,6 @@ function MaintenanceNotification({ maintenance }) {
 
 ```tsx
 import { useState } from "react";
-import { GlassBanner, GlassButton } from "liquidify";
 import { Cookie } from "lucide-react";
 
 function CookieConsent() {

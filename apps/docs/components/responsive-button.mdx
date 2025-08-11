@@ -3,6 +3,10 @@ title: Responsive Button
 description: Liquid Glass responsive button with adaptive sizing and enhanced touch interactions.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassResponsiveButton } from "liquidify";
+
 # Responsive Button
 
 The `GlassResponsiveButton` component provides an enhanced button experience with responsive sizing, adaptive touch interactions, and glassmorphism effects. It automatically adjusts for mobile devices and provides optimal touch targets.
@@ -11,9 +15,9 @@ The `GlassResponsiveButton` component provides an enhanced button experience wit
 
 ### Basic Responsive Button
 
-```tsx live
-import { GlassResponsiveButton } from "liquidify";
-
+<Preview
+  title="Basic Responsive Button"
+  code={`import { GlassResponsiveButton } from "liquidify";
 export default function Demo() {
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}>
@@ -31,41 +35,95 @@ export default function Demo() {
       </GlassResponsiveButton>
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div
+          style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}
+        >
+          <GlassResponsiveButton variant="primary">
+            Primary Button
+          </GlassResponsiveButton>
+          <GlassResponsiveButton variant="secondary">
+            Secondary Button
+          </GlassResponsiveButton>
+          <GlassResponsiveButton variant="ghost">
+            Ghost Button
+          </GlassResponsiveButton>
+          <GlassResponsiveButton variant="destructive">
+            Destructive Button
+          </GlassResponsiveButton>
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassResponsiveButton } from "liquidify";
-
+<Preview
+  title="Size Variants"
+  code={`import { GlassResponsiveButton } from "liquidify";
 export default function Demo() {
   const sizes = ["xs", "sm", "md", "lg", "xl"];
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        alignItems: "center",
-        padding: 20,
-      }}
-    >
-      {sizes.map((size) => (
-        <GlassResponsiveButton key={size} size={size}>
-          {size.toUpperCase()} Button
-        </GlassResponsiveButton>
-      ))}
-    </div>
-  );
-}
-```
+return (
+
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+    alignItems: "center",
+    padding: 20,
+  }}
+>
+  {sizes.map((size) => (
+    <GlassResponsiveButton key={size} size={size}>
+      {size.toUpperCase()} Button
+    </GlassResponsiveButton>
+  ))}
+</div>
+); }`} language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const sizes = ["xs", "sm", "md", "lg", "xl"];
+
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            alignItems: "center",
+            padding: 20,
+          }}
+        >
+          {sizes.map((size) => (
+            <GlassResponsiveButton key={size} size={size}>
+              {size.toUpperCase()} Button
+            </GlassResponsiveButton>
+          ))}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### With Icons
 
-```tsx live
-import { GlassResponsiveButton } from "liquidify";
+<Preview
+  title="With Icons"
+  code={`import { GlassResponsiveButton } from "liquidify";
 import { Download, Upload, Settings, Heart, Star } from "lucide-react";
 
 export default function Demo() {
@@ -91,40 +149,75 @@ export default function Demo() {
         Like
       </GlassResponsiveButton>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}>
+          <GlassResponsiveButton leftIcon={<Download />} variant="primary">
+            Download
+          </GlassResponsiveButton>
+
+          <GlassResponsiveButton rightIcon={<Upload />} variant="secondary">
+            Upload
+          </GlassResponsiveButton>
+
+          <GlassResponsiveButton
+            leftIcon={<Settings />}
+            rightIcon={<Star />}
+            variant="ghost"
+          >
+            Configure
+          </GlassResponsiveButton>
+
+          <GlassResponsiveButton leftIcon={<Heart />} variant="tertiary">
+            Like
+          </GlassResponsiveButton>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Loading States
 
-```tsx live
+<Preview
+  title="Loading States"
+  code={`import { GlassResponsiveButton } from "liquidify";
 import { useState } from "react";
-import { GlassResponsiveButton } from "liquidify";
 import { Save, Send } from "lucide-react";
 
 export default function Demo() {
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
-  const handleClick1 = () => {
-    setLoading1(true);
-    setTimeout(() => setLoading1(false), 2000);
-  };
+const handleClick1 = () => {
+setLoading1(true);
+setTimeout(() => setLoading1(false), 2000);
+};
 
-  const handleClick2 = () => {
-    setLoading2(true);
-    setTimeout(() => setLoading2(false), 3000);
-  };
+const handleClick2 = () => {
+setLoading2(true);
+setTimeout(() => setLoading2(false), 3000);
+};
 
-  return (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}>
-      <GlassResponsiveButton
-        loading={loading1}
-        onClick={handleClick1}
-        leftIcon={<Save />}
-      >
-        {loading1 ? "Saving..." : "Save Document"}
-      </GlassResponsiveButton>
+return (
+
+<div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}>
+<GlassResponsiveButton
+loading={loading1}
+onClick={handleClick1}
+leftIcon={<Save />} >
+{loading1 ? "Saving..." : "Save Document"}
+</GlassResponsiveButton>
 
       <GlassResponsiveButton
         loading={loading2}
@@ -135,14 +228,59 @@ export default function Demo() {
         {loading2 ? "Sending..." : "Send Message"}
       </GlassResponsiveButton>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [loading1, setLoading1] = useState(false);
+      const [loading2, setLoading2] = useState(false);
+
+      const handleClick1 = () => {
+        setLoading1(true);
+        setTimeout(() => setLoading1(false), 2000);
+      };
+
+      const handleClick2 = () => {
+        setLoading2(true);
+        setTimeout(() => setLoading2(false), 3000);
+      };
+
+      return (
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 20 }}>
+          <GlassResponsiveButton
+            loading={loading1}
+            onClick={handleClick1}
+            leftIcon={<Save />}
+          >
+            {loading1 ? "Saving..." : "Save Document"}
+          </GlassResponsiveButton>
+
+          <GlassResponsiveButton
+            loading={loading2}
+            onClick={handleClick2}
+            variant="secondary"
+            rightIcon={<Send />}
+          >
+            {loading2 ? "Sending..." : "Send Message"}
+          </GlassResponsiveButton>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Responsive Behavior
 
-```tsx live
-import { GlassResponsiveButton } from "liquidify";
+<Preview
+  title="Responsive Behavior"
+  code={`import { GlassResponsiveButton } from "liquidify";
 import { Smartphone, Monitor } from "lucide-react";
 
 export default function Demo() {
@@ -178,27 +316,73 @@ export default function Demo() {
         </GlassResponsiveButton>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div style={{ padding: 20 }}>
+          <div style={{ marginBottom: 16 }}>
+            <h4>Responsive Sizing (resize window to see effect)</h4>
+            <p style={{ fontSize: "0.875rem", opacity: 0.7, marginBottom: 16 }}>
+              These buttons automatically adjust size for mobile devices
+            </p>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <GlassResponsiveButton
+              responsive={true}
+              size="md"
+              leftIcon={<Smartphone />}
+              fullWidth
+            >
+              Responsive Button (Full Width)
+            </GlassResponsiveButton>
+
+            <GlassResponsiveButton
+              responsive={true}
+              size="lg"
+              leftIcon={<Monitor />}
+            >
+              Large Responsive Button
+            </GlassResponsiveButton>
+
+            <GlassResponsiveButton responsive={false} size="md" variant="ghost">
+              Fixed Size Button
+            </GlassResponsiveButton>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Interactive Demo
 
-```tsx live
+<Preview
+  title="Interactive Demo"
+  code={`import { GlassResponsiveButton } from "liquidify";
 import { useState } from "react";
-import { GlassResponsiveButton } from "liquidify";
 import { Play, Pause, Square, SkipForward } from "lucide-react";
 
 export default function Demo() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
 
-  return (
-    <div style={{ padding: 20 }}>
-      <div style={{ marginBottom: 20 }}>
-        <h4>Media Player Controls</h4>
-        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Volume: {volume}%</p>
-      </div>
+return (
+
+<div style={{ padding: 20 }}>
+<div style={{ marginBottom: 20 }}>
+<h4>Media Player Controls</h4>
+<p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Volume: {volume}%</p>
+</div>
 
       <div
         style={{
@@ -248,39 +432,111 @@ export default function Demo() {
         </GlassResponsiveButton>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [isPlaying, setIsPlaying] = useState(false);
+      const [volume, setVolume] = useState(50);
+
+      return (
+        <div style={{ padding: 20 }}>
+          <div style={{ marginBottom: 20 }}>
+            <h4>Media Player Controls</h4>
+            <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Volume: {volume}%</p>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: 8,
+              marginBottom: 16,
+              justifyContent: "center",
+            }}
+          >
+            <GlassResponsiveButton
+              variant="secondary"
+              size="lg"
+              onClick={() => setIsPlaying(!isPlaying)}
+              leftIcon={isPlaying ? <Pause /> : <Play />}
+            >
+              {isPlaying ? "Pause" : "Play"}
+            </GlassResponsiveButton>
+
+            <GlassResponsiveButton variant="ghost" size="lg" leftIcon={<Square />}>
+              Stop
+            </GlassResponsiveButton>
+
+            <GlassResponsiveButton
+              variant="ghost"
+              size="lg"
+              leftIcon={<SkipForward />}
+            >
+              Next
+            </GlassResponsiveButton>
+          </div>
+
+          <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+            <GlassResponsiveButton
+              size="sm"
+              variant="tertiary"
+              onClick={() => setVolume(Math.max(0, volume - 10))}
+            >
+              Vol -
+            </GlassResponsiveButton>
+
+            <GlassResponsiveButton
+              size="sm"
+              variant="tertiary"
+              onClick={() => setVolume(Math.min(100, volume + 10))}
+            >
+              Vol +
+            </GlassResponsiveButton>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Touch Interaction Demo
 
-```tsx live
+<Preview
+  title="Touch Interaction Demo"
+  code={`import { GlassResponsiveButton } from "liquidify";
 import { useState } from "react";
-import { GlassResponsiveButton } from "liquidify";
 import { TouchIcon as Touch } from "lucide-react";
 
 export default function Demo() {
   const [touchCount, setTouchCount] = useState(0);
   const [lastTouch, setLastTouch] = useState(null);
 
-  const handleTouch = () => {
-    setTouchCount((prev) => prev + 1);
-    setLastTouch(new Date().toLocaleTimeString());
-  };
+const handleTouch = () => {
+setTouchCount((prev) => prev + 1);
+setLastTouch(new Date().toLocaleTimeString());
+};
 
-  return (
-    <div style={{ padding: 20, textAlign: "center" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h4>Touch Interaction Test</h4>
-        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-          Touch count: {touchCount}
-        </p>
-        {lastTouch && (
-          <p style={{ fontSize: "0.75rem", opacity: 0.5 }}>
-            Last touch: {lastTouch}
-          </p>
-        )}
-      </div>
+return (
+
+<div style={{ padding: 20, textAlign: "center" }}>
+<div style={{ marginBottom: 20 }}>
+<h4>Touch Interaction Test</h4>
+<p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+Touch count: {touchCount}
+</p>
+{lastTouch && (
+<p style={{ fontSize: "0.75rem", opacity: 0.5 }}>
+Last touch: {lastTouch}
+</p>
+)}
+</div>
 
       <GlassResponsiveButton
         size="xl"
@@ -305,9 +561,66 @@ export default function Demo() {
         </GlassResponsiveButton>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [touchCount, setTouchCount] = useState(0);
+      const [lastTouch, setLastTouch] = useState(null);
+
+      const handleTouch = () => {
+        setTouchCount((prev) => prev + 1);
+        setLastTouch(new Date().toLocaleTimeString());
+      };
+
+      return (
+        <div style={{ padding: 20, textAlign: "center" }}>
+          <div style={{ marginBottom: 20 }}>
+            <h4>Touch Interaction Test</h4>
+            <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+              Touch count: {touchCount}
+            </p>
+            {lastTouch && (
+              <p style={{ fontSize: "0.75rem", opacity: 0.5 }}>
+                Last touch: {lastTouch}
+              </p>
+            )}
+          </div>
+
+          <GlassResponsiveButton
+            size="xl"
+            variant="primary"
+            onClick={handleTouch}
+            leftIcon={<Touch />}
+            fullWidth
+          >
+            Touch Me! (Optimized for Mobile)
+          </GlassResponsiveButton>
+
+          <div style={{ marginTop: 16 }}>
+            <GlassResponsiveButton
+              size="sm"
+              variant="ghost"
+              onClick={() => {
+                setTouchCount(0);
+                setLastTouch(null);
+              }}
+            >
+              Reset Counter
+            </GlassResponsiveButton>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 

@@ -3,9 +3,15 @@ title: Glass Number Input
 description: Elegant numeric input component with Apple-inspired liquid glass effects and advanced number formatting.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { GlassNumberInput } from "liquidify";
 import { useState } from "react";
 import { GlassNumberInput } from "@liquidify/components";
+import { GlassNumberInput } from 'liquidify'
 
 export default function Demo() {
   const [quantity, setQuantity] = useState(1);
@@ -13,10 +19,11 @@ export default function Demo() {
   const [percentage, setPercentage] = useState(75);
   const [temperature, setTemperature] = useState(22);
 
-  return (
-    <div className="space-y-6 max-w-md mx-auto">
-      <div>
-        <GlassNumberInput
+return (
+
+<div className="space-y-6 max-w-md mx-auto">
+<div>
+<GlassNumberInput
           label="Quantity"
           value={quantity}
           onChange={setQuantity}
@@ -25,7 +32,7 @@ export default function Demo() {
           step={1}
           helperText="Enter quantity (1-999)"
         />
-      </div>
+</div>
 
       <div>
         <GlassNumberInput
@@ -36,7 +43,7 @@ export default function Demo() {
           min={0}
           step={0.01}
           precision={2}
-          formatValue={(value) => `$${value.toFixed(2)}`}
+          formatValue={(value) => \`$${value.toFixed(2)}\`}
           size="lg"
         />
       </div>
@@ -49,7 +56,7 @@ export default function Demo() {
           min={0}
           max={100}
           step={5}
-          formatValue={(value) => `${value}%`}
+          formatValue={(value) => \`${value}%\`}
           size="sm"
         />
       </div>
@@ -63,7 +70,7 @@ export default function Demo() {
           max={50}
           step={0.5}
           precision={1}
-          formatValue={(value) => `${value}°C`}
+          formatValue={(value) => \`${value}°C\`}
           showControls={false}
         />
       </div>
@@ -78,9 +85,91 @@ export default function Demo() {
         </div>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [quantity, setQuantity] = useState(1);
+      const [price, setPrice] = useState(99.99);
+      const [percentage, setPercentage] = useState(75);
+      const [temperature, setTemperature] = useState(22);
+
+      return (
+        <div className="space-y-6 max-w-md mx-auto">
+          <div>
+            <GlassNumberInput
+              label="Quantity"
+              value={quantity}
+              onChange={setQuantity}
+              min={1}
+              max={999}
+              step={1}
+              helperText="Enter quantity (1-999)"
+            />
+          </div>
+
+          <div>
+            <GlassNumberInput
+              label="Price"
+              description="Set the product price"
+              value={price}
+              onChange={setPrice}
+              min={0}
+              step={0.01}
+              precision={2}
+              formatValue={(value) => `${value.toFixed(2)}`}
+              size="lg"
+            />
+          </div>
+
+          <div>
+            <GlassNumberInput
+              label="Completion"
+              value={percentage}
+              onChange={setPercentage}
+              min={0}
+              max={100}
+              step={5}
+              formatValue={(value) => `${value}%`}
+              size="sm"
+            />
+          </div>
+
+          <div>
+            <GlassNumberInput
+              label="Temperature"
+              value={temperature}
+              onChange={setTemperature}
+              min={-10}
+              max={50}
+              step={0.5}
+              precision={1}
+              formatValue={(value) => `${value}°C`}
+              showControls={false}
+            />
+          </div>
+
+          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+            <h3 className="font-medium text-white mb-2">Current Values:</h3>
+            <div className="text-white/70 text-sm space-y-1">
+              <p>Quantity: {quantity}</p>
+              <p>Price: ${price.toFixed(2)}</p>
+              <p>Percentage: {percentage}%</p>
+              <p>Temperature: {temperature}°C</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Overview
 

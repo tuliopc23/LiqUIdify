@@ -3,10 +3,15 @@ title: Combobox
 description: Autocomplete text input with listbox suggestions.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassCombobox } from "liquidify";
+
 # Combobox
 
-```tsx live
-import { GlassCombobox } from "liquidify";
+<Preview
+  title="Example"
+  code={`import { GlassCombobox } from "liquidify";
 import { useState } from "react";
 
 const OPTIONS = ["Red", "Green", "Blue", "Purple", "Orange"];
@@ -21,8 +26,27 @@ export default function Demo() {
       placeholder="Pick a color"
     />
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    const OPTIONS = ["Red", "Green", "Blue", "Purple", "Orange"];
+    
+    function Demo() {
+      const [value, setValue] = useState("");
+      return (
+        <GlassCombobox
+          value={value}
+          onChange={setValue}
+          options={OPTIONS.map((o) => ({ value: o.toLowerCase(), label: o }))}
+          placeholder="Pick a color"
+        />
+      );
+    }
+    return <Demo />
+  })()}
+</Preview>
 
 ## Key Props
 

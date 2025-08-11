@@ -4,6 +4,10 @@ description: Overlay dialogs with liquid glass effects, focus management, and co
 icon: square-stack
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassCheckbox, GlassInput, GlassModal } from "liquidify";
+
 # Modal
 
 A glassmorphic modal component with liquid glass effects, robust focus management, and comprehensive accessibility support. Features Apple-inspired design with smooth animations and proper dialog semantics.
@@ -12,16 +16,18 @@ A glassmorphic modal component with liquid glass effects, robust focus managemen
 
 ### Basic Usage
 
-```tsx live
+<Preview
+  title="Basic Usage"
+  code={`import { GlassButton, GlassModal } from "liquidify";
 import { useState } from "react";
-import { GlassModal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div>
-      <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+return (
+
+<div>
+<GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -46,60 +52,102 @@ export default function Demo() {
         </div>
       </GlassModal>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <div>
+          <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+
+          <GlassModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            title="Basic Modal"
+          >
+            <div className="space-y-4">
+              <p>This is a basic modal with liquid glass effects.</p>
+              <p>
+                The backdrop creates a beautiful blur effect while maintaining
+                readability.
+              </p>
+
+              <div className="flex justify-end gap-3 mt-6">
+                <GlassButton variant="ghost" onClick={() => setIsOpen(false)}>
+                  Cancel
+                </GlassButton>
+                <GlassButton variant="primary" onClick={() => setIsOpen(false)}>
+                  Confirm
+                </GlassButton>
+              </div>
+            </div>
+          </GlassModal>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Size Variants
 
-```tsx live
+<Preview
+  title="Size Variants"
+  code={`import { GlassButton, GlassModal } from "liquidify";
 import { useState } from "react";
-import { GlassModal, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [activeModal, setActiveModal] = useState(null);
 
-  const sizes = [
-    {
-      key: "sm",
-      label: "Small",
-      description: "Compact modal for simple confirmations",
-    },
-    {
-      key: "md",
-      label: "Medium",
-      description: "Default size for most use cases",
-    },
-    {
-      key: "lg",
-      label: "Large",
-      description: "Spacious modal for complex content",
-    },
-    {
-      key: "xl",
-      label: "Extra Large",
-      description: "Maximum size for detailed forms",
-    },
-    {
-      key: "full",
-      label: "Full Screen",
-      description: "Full screen modal for immersive experiences",
-    },
-  ];
+const sizes = [
+{
+key: "sm",
+label: "Small",
+description: "Compact modal for simple confirmations",
+},
+{
+key: "md",
+label: "Medium",
+description: "Default size for most use cases",
+},
+{
+key: "lg",
+label: "Large",
+description: "Spacious modal for complex content",
+},
+{
+key: "xl",
+label: "Extra Large",
+description: "Maximum size for detailed forms",
+},
+{
+key: "full",
+label: "Full Screen",
+description: "Full screen modal for immersive experiences",
+},
+];
 
-  return (
-    <div>
-      <div className="flex gap-2 flex-wrap">
-        {sizes.map((size) => (
-          <GlassButton
-            key={size.key}
-            size="sm"
-            onClick={() => setActiveModal(size.key)}
-          >
-            {size.label}
-          </GlassButton>
-        ))}
-      </div>
+return (
+
+<div>
+<div className="flex gap-2 flex-wrap">
+{sizes.map((size) => (
+<GlassButton
+key={size.key}
+size="sm"
+onClick={() => setActiveModal(size.key)} >
+{size.label}
+</GlassButton>
+))}
+</div>
 
       {sizes.map((size) => (
         <GlassModal
@@ -107,7 +155,7 @@ export default function Demo() {
           isOpen={activeModal === size.key}
           onClose={() => setActiveModal(null)}
           size={size.key}
-          title={`${size.label} Modal`}
+          title={\`${size.label} Modal\`}
         >
           <div className="space-y-4">
             <p>{size.description}</p>
@@ -125,34 +173,116 @@ export default function Demo() {
         </GlassModal>
       ))}
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [activeModal, setActiveModal] = useState(null);
+
+      const sizes = [
+        {
+          key: "sm",
+          label: "Small",
+          description: "Compact modal for simple confirmations",
+        },
+        {
+          key: "md",
+          label: "Medium",
+          description: "Default size for most use cases",
+        },
+        {
+          key: "lg",
+          label: "Large",
+          description: "Spacious modal for complex content",
+        },
+        {
+          key: "xl",
+          label: "Extra Large",
+          description: "Maximum size for detailed forms",
+        },
+        {
+          key: "full",
+          label: "Full Screen",
+          description: "Full screen modal for immersive experiences",
+        },
+      ];
+
+      return (
+        <div>
+          <div className="flex gap-2 flex-wrap">
+            {sizes.map((size) => (
+              <GlassButton
+                key={size.key}
+                size="sm"
+                onClick={() => setActiveModal(size.key)}
+              >
+                {size.label}
+              </GlassButton>
+            ))}
+          </div>
+
+          {sizes.map((size) => (
+            <GlassModal
+              key={size.key}
+              isOpen={activeModal === size.key}
+              onClose={() => setActiveModal(null)}
+              size={size.key}
+              title={`${size.label} Modal`}
+            >
+              <div className="space-y-4">
+                <p>{size.description}</p>
+                <p>
+                  This modal demonstrates the {size.key} size variant with
+                  appropriate spacing and proportions.
+                </p>
+
+                <div className="flex justify-end gap-3 mt-6">
+                  <GlassButton variant="ghost" onClick={() => setActiveModal(null)}>
+                    Close
+                  </GlassButton>
+                </div>
+              </div>
+            </GlassModal>
+          ))}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Confirmation Dialog
 
-```tsx live
+<Preview
+  title="Confirmation Dialog"
+  code={`import { GlassButton, GlassModal } from "liquidify";
 import { useState } from "react";
-import { GlassModal, GlassButton } from "liquidify";
 import { AlertTriangle } from "lucide-react";
 
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDelete = async () => {
-    setIsDeleting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsDeleting(false);
-    setIsOpen(false);
-  };
+const handleDelete = async () => {
+setIsDeleting(true);
+// Simulate API call
+await new Promise((resolve) => setTimeout(resolve, 1000));
+setIsDeleting(false);
+setIsOpen(false);
+};
 
-  return (
-    <div>
-      <GlassButton variant="destructive" onClick={() => setIsOpen(true)}>
-        Delete Item
-      </GlassButton>
+return (
+
+<div>
+<GlassButton variant="destructive" onClick={() => setIsOpen(true)}>
+Delete Item
+</GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -197,15 +327,88 @@ export default function Demo() {
         </div>
       </GlassModal>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [isOpen, setIsOpen] = useState(false);
+      const [isDeleting, setIsDeleting] = useState(false);
+
+      const handleDelete = async () => {
+        setIsDeleting(true);
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setIsDeleting(false);
+        setIsOpen(false);
+      };
+
+      return (
+        <div>
+          <GlassButton variant="destructive" onClick={() => setIsOpen(true)}>
+            Delete Item
+          </GlassButton>
+
+          <GlassModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            title="Confirm Deletion"
+            size="sm"
+          >
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-red-100 rounded-full">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                </div>
+                <div>
+                  <h4 className="font-medium">Are you sure?</h4>
+                  <p className="text-sm text-gray-600">
+                    This action cannot be undone.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-600">
+                This will permanently delete the item and all associated data.
+              </p>
+
+              <div className="flex justify-end gap-3 mt-6">
+                <GlassButton
+                  variant="ghost"
+                  onClick={() => setIsOpen(false)}
+                  disabled={isDeleting}
+                >
+                  Cancel
+                </GlassButton>
+                <GlassButton
+                  variant="destructive"
+                  onClick={handleDelete}
+                  loading={isDeleting}
+                  loadingText="Deleting..."
+                >
+                  Delete
+                </GlassButton>
+              </div>
+            </div>
+          </GlassModal>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Form Modal
 
-```tsx live
+<Preview
+  title="Form Modal"
+  code={`import { GlassButton, GlassInput, GlassModal } from "liquidify";
 import { useState } from "react";
-import { GlassModal, GlassButton, GlassInput } from "liquidify";
 import { Plus } from "lucide-react";
 
 export default function Demo() {
@@ -213,24 +416,24 @@ export default function Demo() {
   const [formData, setFormData] = useState({ name: "", email: "", role: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setIsOpen(false);
-    setFormData({ name: "", email: "", role: "" });
-  };
+const handleSubmit = async (e) => {
+e.preventDefault();
+setIsSubmitting(true);
+// Simulate API call
+await new Promise((resolve) => setTimeout(resolve, 1000));
+setIsSubmitting(false);
+setIsOpen(false);
+setFormData({ name: "", email: "", role: "" });
+};
 
-  return (
-    <div>
-      <GlassButton
-        leftIcon={<Plus className="w-4 h-4" />}
-        onClick={() => setIsOpen(true)}
-      >
-        Add User
-      </GlassButton>
+return (
+
+<div>
+<GlassButton
+leftIcon={<Plus className="w-4 h-4" />}
+onClick={() => setIsOpen(true)} >
+Add User
+</GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -291,9 +494,103 @@ export default function Demo() {
         </form>
       </GlassModal>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [isOpen, setIsOpen] = useState(false);
+      const [formData, setFormData] = useState({ name: "", email: "", role: "" });
+      const [isSubmitting, setIsSubmitting] = useState(false);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setIsSubmitting(false);
+        setIsOpen(false);
+        setFormData({ name: "", email: "", role: "" });
+      };
+
+      return (
+        <div>
+          <GlassButton
+            leftIcon={<Plus className="w-4 h-4" />}
+            onClick={() => setIsOpen(true)}
+          >
+            Add User
+          </GlassButton>
+
+          <GlassModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            title="Add New User"
+            size="md"
+          >
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <GlassInput
+                label="Full Name"
+                placeholder="Enter full name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, name: e.target.value }))
+                }
+                required
+              />
+
+              <GlassInput
+                type="email"
+                label="Email Address"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, email: e.target.value }))
+                }
+                required
+              />
+
+              <GlassInput
+                label="Role"
+                placeholder="Enter role"
+                value={formData.role}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, role: e.target.value }))
+                }
+                required
+              />
+
+              <div className="flex justify-end gap-3 mt-6">
+                <GlassButton
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setIsOpen(false)}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </GlassButton>
+                <GlassButton
+                  type="submit"
+                  variant="primary"
+                  loading={isSubmitting}
+                  loadingText="Adding..."
+                >
+                  Add User
+                </GlassButton>
+              </div>
+            </form>
+          </GlassModal>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -317,7 +614,6 @@ export default function Demo() {
 ### Alert Dialog
 
 ```tsx
-import { GlassModal, GlassButton } from "liquidify";
 import { AlertCircle } from "lucide-react";
 
 function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
@@ -353,7 +649,6 @@ function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
 
 ```tsx
 import { useState } from "react";
-import { GlassModal, GlassButton } from "liquidify";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
@@ -423,8 +718,6 @@ function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
 ### Settings Modal
 
 ```tsx
-import { GlassModal, GlassButton, GlassInput, GlassCheckbox } from "liquidify";
-
 function SettingsModal({ isOpen, onClose, settings, onSave }) {
   const [localSettings, setLocalSettings] = useState(settings);
 

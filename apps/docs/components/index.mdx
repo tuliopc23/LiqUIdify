@@ -20,7 +20,6 @@ bun add liquidify
 ### Basic Setup
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from "liquidify";
 import "liquidify/styles";
 
 function App() {
@@ -38,7 +37,6 @@ function App() {
 
 ```tsx live
 import { useState } from "react";
-import { GlassButton, ThemeToggle } from "liquidify";
 
 export default function Example() {
   const [count, setCount] = useState(0);
@@ -59,8 +57,6 @@ export default function Example() {
 ### Liquid Glass Container
 
 ```tsx live
-import { LiquidGlassProvider, GlassButton } from "liquidify";
-
 function GlassContainer({ children }) {
   return (
     <div className="liquid-glass-container liquid-glass-enhanced liquid-glass-md max-w-md">
@@ -222,8 +218,14 @@ npm install liquidify lucide-react
 ### 2. Setup Providers
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from "liquidify";
 import "liquidify/styles";
+import {
+  GlassButton,
+  GlassCard,
+  GlassContainer,
+  GlassInput,
+  GlassUIProvider,
+} from "liquidify";
 
 function App() {
   return (
@@ -247,8 +249,6 @@ function App() {
 ### 3. Use Components
 
 ```tsx
-import { GlassButton, GlassCard, GlassInput, ThemeToggle } from "liquidify";
-
 function MyComponent() {
   return (
     <GlassCard className="max-w-md">

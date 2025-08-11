@@ -3,11 +3,14 @@ title: Chart
 description: Data visualization components (Line, Bar, Donut) with liquid glass aesthetics.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+
 # Chart
 
-```tsx live
-import { LineChart, BarChart, DonutChart } from "liquidify";
-
+<Preview
+  title="Example"
+  code={`
 const lineData = [
   { label: "Jan", value: 65 },
   { label: "Feb", value: 78 },
@@ -18,8 +21,25 @@ export default function Demo() {
   return (
     <LineChart data={lineData} width={360} height={180} gradient animated />
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    const lineData = [
+      { label: "Jan", value: 65 },
+      { label: "Feb", value: 78 },
+      { label: "Mar", value: 90 },
+    ];
+    
+    function Demo() {
+      return (
+        <LineChart data={lineData} width={360} height={180} gradient animated />
+      );
+    }
+    return <Demo />
+  })()}
+</Preview>
 
 ## Components
 

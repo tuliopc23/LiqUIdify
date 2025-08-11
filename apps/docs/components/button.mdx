@@ -4,200 +4,250 @@ description: Interactive buttons with liquid glass effects, multiple variants, a
 icon: mouse-pointer-click
 ---
 
+import { GlassButton } from "liquidify";
+
 # Button
 
 A versatile glassmorphic button component with liquid glass effects, multiple variants, sizes, and comprehensive interaction states. Features Apple-inspired design with smooth animations and full accessibility support.
+
+import Preview from "./Preview";
+import * as React from "react";
+import {
+  Heart,
+  Download,
+  ArrowRight,
+  Plus,
+  Save,
+  Settings,
+  Search,
+} from "lucide-react";
 
 ## Live Examples
 
 ### Basic Variants
 
-```tsx live
-import { GlassButton } from "liquidify";
-
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton variant="primary">Primary</GlassButton>
-      <GlassButton variant="secondary">Secondary</GlassButton>
-      <GlassButton variant="ghost">Ghost</GlassButton>
-      <GlassButton variant="destructive">Destructive</GlassButton>
-    </div>
-  );
-}
-```
+<Preview
+  title="Basic Variants"
+  code={`import { GlassButton } from "liquidify";
+<div className=\"flex items-center gap-4 flex-wrap\">
+  <GlassButton variant=\"primary\">Primary</GlassButton>
+  <GlassButton variant=\"secondary\">Secondary</GlassButton>
+  <GlassButton variant=\"ghost\">Ghost</GlassButton>
+  <GlassButton variant=\"destructive\">Destructive</GlassButton>
+</div>`}
+>
+  <div className="flex items-center gap-4 flex-wrap">
+    <GlassButton variant="primary">Primary</GlassButton>
+    <GlassButton variant="secondary">Secondary</GlassButton>
+    <GlassButton variant="ghost">Ghost</GlassButton>
+    <GlassButton variant="destructive">Destructive</GlassButton>
+  </div>
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassButton } from "liquidify";
-
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton size="sm">Small</GlassButton>
-      <GlassButton size="md">Medium</GlassButton>
-      <GlassButton size="lg">Large</GlassButton>
-      <GlassButton size="xl">Extra Large</GlassButton>
-    </div>
-  );
-}
-```
+<Preview
+  title="Size Variants"
+  code={`import { GlassButton } from "liquidify";
+<div className=\"flex items-center gap-4 flex-wrap\">
+  <GlassButton size=\"sm\">Small</GlassButton>
+  <GlassButton size=\"md\">Medium</GlassButton>
+  <GlassButton size=\"lg\">Large</GlassButton>
+  <GlassButton size=\"xl\">Extra Large</GlassButton>
+</div>`}
+>
+  <div className="flex items-center gap-4 flex-wrap">
+    <GlassButton size="sm">Small</GlassButton>
+    <GlassButton size="md">Medium</GlassButton>
+    <GlassButton size="lg">Large</GlassButton>
+    <GlassButton size="xl">Extra Large</GlassButton>
+  </div>
+</Preview>
 
 ### With Icons
 
-```tsx live
-import { GlassButton } from "liquidify";
-import { Heart, Download, ArrowRight, Plus } from "lucide-react";
+<Preview
+  title="With Icons"
+  code={`import { GlassButton } from "liquidify";
+import { Heart, Download, ArrowRight, Plus } from 'lucide-react'
 
 export default function Demo() {
   return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton leftIcon={<Heart className="w-4 h-4" />}>Like</GlassButton>
-
-      <GlassButton rightIcon={<Download className="w-4 h-4" />}>
-        Download
-      </GlassButton>
-
-      <GlassButton
-        leftIcon={<Plus className="w-4 h-4" />}
-        rightIcon={<ArrowRight className="w-4 h-4" />}
-      >
-        Add & Continue
-      </GlassButton>
+    <div className=\"flex items-center gap-4 flex-wrap\">
+      <GlassButton leftIcon={<Heart className=\"w-4 h-4\" />}>Like</GlassButton>
+      <GlassButton rightIcon={<Download className=\"w-4 h-4\" />}>Download</GlassButton>
+      <GlassButton leftIcon={<Plus className=\"w-4 h-4\" />} rightIcon={<ArrowRight className=\"w-4 h-4\" />}>Add & Continue</GlassButton>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="flex items-center gap-4 flex-wrap">
+    <GlassButton leftIcon={<Heart className="w-4 h-4" />}>Like</GlassButton>
+    <GlassButton rightIcon={<Download className="w-4 h-4" />}>Download</GlassButton>
+    <GlassButton
+      leftIcon={<Plus className="w-4 h-4" />}
+      rightIcon={<ArrowRight className="w-4 h-4" />}
+    >
+      Add & Continue
+    </GlassButton>
+  </div>
+</Preview>
 
 ### Icon Only Buttons
 
-```tsx live
-import { GlassButton } from "liquidify";
-import { Heart, Download, Settings, Search } from "lucide-react";
+<Preview
+  title="Icon Only Buttons"
+  code={`import { GlassButton } from "liquidify";
+import { Heart, Download, Settings, Search } from 'lucide-react'
 
 export default function Demo() {
   return (
-    <div className="flex items-center gap-4">
-      <GlassButton iconOnly size="sm">
-        <Heart className="w-4 h-4" />
-      </GlassButton>
-
-      <GlassButton iconOnly size="md">
-        <Download className="w-4 h-4" />
-      </GlassButton>
-
-      <GlassButton iconOnly size="lg">
-        <Settings className="w-5 h-5" />
-      </GlassButton>
-
-      <GlassButton iconOnly size="xl">
-        <Search className="w-6 h-6" />
-      </GlassButton>
+    <div className=\"flex items-center gap-4\">
+      <GlassButton iconOnly size=\"sm\"><Heart className=\"w-4 h-4\" /></GlassButton>
+      <GlassButton iconOnly size=\"md\"><Download className=\"w-4 h-4\" /></GlassButton>
+      <GlassButton iconOnly size=\"lg\"><Settings className=\"w-5 h-5\" /></GlassButton>
+      <GlassButton iconOnly size=\"xl\"><Search className=\"w-6 h-6\" /></GlassButton>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="flex items-center gap-4">
+    <GlassButton iconOnly size="sm">
+      <Heart className="w-4 h-4" />
+    </GlassButton>
+    <GlassButton iconOnly size="md">
+      <Download className="w-4 h-4" />
+    </GlassButton>
+    <GlassButton iconOnly size="lg">
+      <Settings className="w-5 h-5" />
+    </GlassButton>
+    <GlassButton iconOnly size="xl">
+      <Search className="w-6 h-6" />
+    </GlassButton>
+  </div>
+</Preview>
 
 ### Loading States
 
-```tsx live
-import { useState } from "react";
-import { GlassButton } from "liquidify";
-import { Save } from "lucide-react";
+<Preview
+  title="Loading States"
+  code={`import { GlassButton } from "liquidify";
+import { useState } from 'react'
+import { Save } from 'lucide-react'
 
 export default function Demo() {
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-  };
-
+    setLoading(true)
+    setTimeout(() => setLoading(false), 2000)
+  }
   return (
-    <div className="flex items-center gap-4 flex-wrap">
+    <div className=\"flex items-center gap-4 flex-wrap\">
       <GlassButton loading>Loading...</GlassButton>
-
-      <GlassButton loading loadingText="Saving...">
-        Save
+      <GlassButton loading loadingText=\"Saving...\">Save</GlassButton>
+      <GlassButton loading={loading} loadingText=\"Processing...\" leftIcon={<Save className=\"w-4 h-4\" />} onClick={handleClick}>
+        {loading ? 'Processing...' : 'Process Data'}
       </GlassButton>
-
-      <GlassButton
-        loading={loading}
-        loadingText="Processing..."
-        leftIcon={<Save className="w-4 h-4" />}
-        onClick={handleClick}
-      >
-        {loading ? "Processing..." : "Process Data"}
-      </GlassButton>
-
-      <GlassButton loading iconOnly>
-        <Save className="w-4 h-4" />
-      </GlassButton>
+      <GlassButton loading iconOnly><Save className=\"w-4 h-4\" /></GlassButton>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  {(() => {
+    const [loading, setLoading] = React.useState(false)
+    const handleClick = () => {
+      setLoading(true)
+      setTimeout(() => setLoading(false), 2000)
+    }
+    return (
+      <div className="flex items-center gap-4 flex-wrap">
+        <GlassButton loading>Loading...</GlassButton>
+        <GlassButton loading loadingText="Saving...">Save</GlassButton>
+        <GlassButton
+          loading={loading}
+          loadingText="Processing..."
+          leftIcon={<Save className="w-4 h-4" />}
+          onClick={handleClick}
+        >
+          {loading ? 'Processing...' : 'Process Data'}
+        </GlassButton>
+        <GlassButton loading iconOnly>
+          <Save className="w-4 h-4" />
+        </GlassButton>
+      </div>
+    )
+  })()}
+</Preview>
 
 ### Interactive States
 
-```tsx live
-import { useState } from "react";
-import { GlassButton } from "liquidify";
+<Preview
+  title="Interactive States"
+  code={`import { GlassButton } from "liquidify";
+import { useState } from 'react'
 
 export default function Demo() {
-  const [count, setCount] = useState(0);
-
+  const [count, setCount] = useState(0)
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-4 flex-wrap">
-        <GlassButton onClick={() => setCount((c) => c + 1)}>
-          Clicked {count} times
-        </GlassButton>
-
+    <div className=\"space-y-4\">
+      <div className=\"flex items-center gap-4 flex-wrap\">
+        <GlassButton onClick={() => setCount(c => c + 1)}>Clicked {count} times</GlassButton>
         <GlassButton disabled>Disabled</GlassButton>
-
-        <GlassButton variant="destructive" disabled>
-          Disabled Destructive
-        </GlassButton>
+        <GlassButton variant=\"destructive\" disabled>Disabled Destructive</GlassButton>
       </div>
-
-      <div className="text-sm text-gray-600">
-        Hover and click the buttons to see the liquid glass effects in action!
-      </div>
+      <div className=\"text-sm text-gray-600\">Hover and click the buttons to see the liquid glass effects in action!</div>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  {(() => {
+    const [count, setCount] = React.useState(0)
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center gap-4 flex-wrap">
+          <GlassButton onClick={() => setCount(c => c + 1)}>Clicked {count} times</GlassButton>
+          <GlassButton disabled>Disabled</GlassButton>
+          <GlassButton variant="destructive" disabled>
+            Disabled Destructive
+          </GlassButton>
+        </div>
+        <div className="text-sm text-gray-600">
+          Hover and click the buttons to see the liquid glass effects in action!
+        </div>
+      </div>
+    )
+  })()}
+</Preview>
 
 ### Full Width
 
-```tsx live
-import { GlassButton } from "liquidify";
-import { ArrowRight } from "lucide-react";
+<Preview
+  title="Full Width"
+  code={`import { GlassButton } from "liquidify";
+import { ArrowRight } from 'lucide-react'
 
 export default function Demo() {
   return (
-    <div className="w-full max-w-md space-y-3">
-      <GlassButton fullWidth variant="primary">
-        Primary Full Width
-      </GlassButton>
-
-      <GlassButton fullWidth variant="secondary">
-        Secondary Full Width
-      </GlassButton>
-
-      <GlassButton
-        fullWidth
-        variant="ghost"
-        rightIcon={<ArrowRight className="w-4 h-4" />}
-      >
-        Ghost with Icon
-      </GlassButton>
+    <div className=\"w-full max-w-md space-y-3\">
+      <GlassButton fullWidth variant=\"primary\">Primary Full Width</GlassButton>
+      <GlassButton fullWidth variant=\"secondary\">Secondary Full Width</GlassButton>
+      <GlassButton fullWidth variant=\"ghost\" rightIcon={<ArrowRight className=\"w-4 h-4\" />}>Ghost with Icon</GlassButton>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="w-full max-w-md space-y-3">
+    <GlassButton fullWidth variant="primary">Primary Full Width</GlassButton>
+    <GlassButton fullWidth variant="secondary">Secondary Full Width</GlassButton>
+    <GlassButton
+      fullWidth
+      variant="ghost"
+      rightIcon={<ArrowRight className="w-4 h-4" />}
+    >
+      Ghost with Icon
+    </GlassButton>
+  </div>
+</Preview>
 
 ## Props
 
@@ -223,7 +273,6 @@ export default function Demo() {
 
 ```tsx
 import { useState } from "react";
-import { GlassButton, GlassInput } from "liquidify";
 import { Save, X } from "lucide-react";
 
 function FormActions({ onSave, onCancel, isLoading }) {
@@ -250,7 +299,6 @@ function FormActions({ onSave, onCancel, isLoading }) {
 ### Navigation Actions
 
 ```tsx
-import { GlassButton } from "liquidify";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 function NavigationButtons({ onPrevious, onNext, canGoPrevious, canGoNext }) {
@@ -281,7 +329,6 @@ function NavigationButtons({ onPrevious, onNext, canGoPrevious, canGoNext }) {
 ### Action Groups
 
 ```tsx
-import { GlassButton } from "liquidify";
 import { Edit, Trash2, Copy, Share } from "lucide-react";
 
 function ActionGroup({ item, onEdit, onDelete, onCopy, onShare }) {
@@ -330,7 +377,6 @@ function ActionGroup({ item, onEdit, onDelete, onCopy, onShare }) {
 ### Call-to-Action
 
 ```tsx
-import { GlassButton } from "liquidify";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 function CallToAction({ onGetStarted, onLearnMore }) {

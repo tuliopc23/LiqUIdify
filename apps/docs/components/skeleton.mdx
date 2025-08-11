@@ -3,6 +3,10 @@ title: Skeleton
 description: Liquid Glass skeleton loaders with multiple variants and pre-built patterns.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassSkeleton } from "liquidify";
+
 # Skeleton
 
 The `GlassSkeleton` component provides elegant loading placeholders with glassmorphism effects. It includes multiple animation variants, shapes, and pre-built patterns for common use cases.
@@ -11,9 +15,9 @@ The `GlassSkeleton` component provides elegant loading placeholders with glassmo
 
 ### Basic Skeleton
 
-```tsx live
-import { GlassSkeleton } from "liquidify";
-
+<Preview
+  title="Basic Skeleton"
+  code={`import { GlassSkeleton } from "liquidify";
 export default function Demo() {
   return (
     <div
@@ -24,14 +28,35 @@ export default function Demo() {
       <GlassSkeleton width={250} height={20} />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            padding: 20,
+          }}
+        >
+          <GlassSkeleton width={200} height={20} />
+          <GlassSkeleton width={300} height={20} />
+          <GlassSkeleton width={250} height={20} />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Shape Variants
 
-```tsx live
-import { GlassSkeleton } from "liquidify";
-
+<Preview
+  title="Shape Variants"
+  code={`import { GlassSkeleton } from "liquidify";
 export default function Demo() {
   return (
     <div
@@ -58,15 +83,52 @@ export default function Demo() {
         <GlassSkeleton shape="line" width={200} />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            alignItems: "center",
+            padding: 20,
+            flexWrap: "wrap",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <h4 style={{ marginBottom: 8 }}>Rectangle</h4>
+            <GlassSkeleton shape="rectangle" width={120} height={80} />
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <h4 style={{ marginBottom: 8 }}>Circle</h4>
+            <GlassSkeleton shape="circle" width={80} height={80} />
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <h4 style={{ marginBottom: 8 }}>Line</h4>
+            <GlassSkeleton shape="line" width={200} />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Animation Variants
 
-```tsx live
-import { GlassSkeleton } from "liquidify";
-
+<Preview
+  title="Animation Variants"
+  code={`import { GlassSkeleton } from "liquidify";
 export default function Demo() {
   return (
     <div
@@ -92,38 +154,95 @@ export default function Demo() {
         <GlassSkeleton animated={false} width={300} height={20} />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
+        >
+          <div>
+            <h4 style={{ marginBottom: 8 }}>Default (Pulse)</h4>
+            <GlassSkeleton variant="default" width={300} height={20} />
+          </div>
+
+          <div>
+            <h4 style={{ marginBottom: 8 }}>Shimmer</h4>
+            <GlassSkeleton variant="shimmer" width={300} height={20} />
+          </div>
+
+          <div>
+            <h4 style={{ marginBottom: 8 }}>Pulse</h4>
+            <GlassSkeleton variant="pulse" width={300} height={20} />
+          </div>
+
+          <div>
+            <h4 style={{ marginBottom: 8 }}>No Animation</h4>
+            <GlassSkeleton animated={false} width={300} height={20} />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassSkeleton } from "liquidify";
-
+<Preview
+  title="Size Variants"
+  code={`import { GlassSkeleton } from "liquidify";
 export default function Demo() {
   const sizes = ["sm", "md", "lg", "xl"];
 
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}
-    >
-      {sizes.map((size) => (
-        <div key={size}>
-          <h4 style={{ marginBottom: 8 }}>{size.toUpperCase()}</h4>
-          <GlassSkeleton size={size} width={200} variant="shimmer" />
-        </div>
-      ))}
+return (
+
+<div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}>
+  {sizes.map((size) => (
+    <div key={size}>
+      <h4 style={{ marginBottom: 8 }}>{size.toUpperCase()}</h4>
+      <GlassSkeleton size={size} width={200} variant="shimmer" />
     </div>
-  );
-}
-```
+  ))}
+</div>
+); }`} language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const sizes = ["sm", "md", "lg", "xl"];
+
+      return (
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}
+        >
+          {sizes.map((size) => (
+            <div key={size}>
+              <h4 style={{ marginBottom: 8 }}>{size.toUpperCase()}</h4>
+              <GlassSkeleton size={size} width={200} variant="shimmer" />
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Multiple Skeletons
 
-```tsx live
-import { GlassSkeleton } from "liquidify";
-
+<Preview
+  title="Multiple Skeletons"
+  code={`import { GlassSkeleton } from "liquidify";
 export default function Demo() {
   return (
     <div style={{ padding: 20 }}>
@@ -137,14 +256,33 @@ export default function Demo() {
       />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div style={{ padding: 20 }}>
+          <h4 style={{ marginBottom: 16 }}>Loading Multiple Items</h4>
+          <GlassSkeleton
+            count={5}
+            width={300}
+            height={20}
+            spacing={12}
+            variant="shimmer"
+          />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Pre-built Patterns
 
-```tsx live
-import { SkeletonText, SkeletonCard, SkeletonTable } from "liquidify";
-
+<Preview
+  title="Pre-built Patterns"
+  code={`
 export default function Demo() {
   return (
     <div
@@ -165,23 +303,55 @@ export default function Demo() {
         <SkeletonTable rows={3} columns={4} />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: 32, padding: 20 }}
+        >
+          <div>
+            <h4 style={{ marginBottom: 16 }}>Text Skeleton</h4>
+            <SkeletonText lines={4} lastLineWidth="60%" />
+          </div>
+
+          <div>
+            <h4 style={{ marginBottom: 16 }}>Card Skeleton</h4>
+            <SkeletonCard showAvatar={true} />
+          </div>
+
+          <div>
+            <h4 style={{ marginBottom: 16 }}>Table Skeleton</h4>
+            <SkeletonTable rows={3} columns={4} />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Real-world Example
 
-```tsx live
+<Preview
+  title="Real-world Example"
+  code={`import { GlassButton, GlassSkeleton } from "liquidify";
 import { useState, useEffect } from "react";
-import { GlassSkeleton, SkeletonCard, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
-  const loadData = () => {
-    setLoading(true);
-    setData(null);
+const loadData = () => {
+setLoading(true);
+setData(null);
 
     // Simulate API call
     setTimeout(() => {
@@ -195,19 +365,21 @@ export default function Demo() {
       });
       setLoading(false);
     }, 2000);
-  };
 
-  useEffect(() => {
-    loadData();
-  }, []);
+};
 
-  return (
-    <div style={{ maxWidth: 400, margin: "0 auto", padding: 20 }}>
-      <div style={{ marginBottom: 16 }}>
-        <GlassButton onClick={loadData} disabled={loading}>
-          {loading ? "Loading..." : "Reload Data"}
-        </GlassButton>
-      </div>
+useEffect(() => {
+loadData();
+}, []);
+
+return (
+
+<div style={{ maxWidth: 400, margin: "0 auto", padding: 20 }}>
+<div style={{ marginBottom: 16 }}>
+<GlassButton onClick={loadData} disabled={loading}>
+{loading ? "Loading..." : "Reload Data"}
+</GlassButton>
+</div>
 
       <div
         style={{
@@ -285,15 +457,137 @@ export default function Demo() {
         )}
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [loading, setLoading] = useState(true);
+      const [data, setData] = useState(null);
+
+      const loadData = () => {
+        setLoading(true);
+        setData(null);
+
+        // Simulate API call
+        setTimeout(() => {
+          setData({
+            title: "Amazing Product",
+            description:
+              "This is a fantastic product that will change your life. It has many great features and benefits.",
+            price: "$99.99",
+            rating: 4.8,
+            reviews: 1234,
+          });
+          setLoading(false);
+        }, 2000);
+      };
+
+      useEffect(() => {
+        loadData();
+      }, []);
+
+      return (
+        <div style={{ maxWidth: 400, margin: "0 auto", padding: 20 }}>
+          <div style={{ marginBottom: 16 }}>
+            <GlassButton onClick={loadData} disabled={loading}>
+              {loading ? "Loading..." : "Reload Data"}
+            </GlassButton>
+          </div>
+
+          <div
+            style={{
+              padding: 20,
+              border: "1px solid rgba(255,255,255,0.2)",
+              borderRadius: 12,
+              background: "rgba(255,255,255,0.05)",
+            }}
+          >
+            {loading ? (
+              <div>
+                <GlassSkeleton
+                  width="80%"
+                  height={24}
+                  variant="shimmer"
+                  style={{ marginBottom: 12 }}
+                />
+                <GlassSkeleton
+                  width="100%"
+                  height={16}
+                  variant="shimmer"
+                  style={{ marginBottom: 8 }}
+                />
+                <GlassSkeleton
+                  width="100%"
+                  height={16}
+                  variant="shimmer"
+                  style={{ marginBottom: 8 }}
+                />
+                <GlassSkeleton
+                  width="60%"
+                  height={16}
+                  variant="shimmer"
+                  style={{ marginBottom: 16 }}
+                />
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <GlassSkeleton width={80} height={20} variant="shimmer" />
+                  <GlassSkeleton width={100} height={16} variant="shimmer" />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h3 style={{ margin: "0 0 12px 0" }}>{data.title}</h3>
+                <p
+                  style={{
+                    margin: "0 0 16px 0",
+                    fontSize: "0.875rem",
+                    opacity: 0.8,
+                  }}
+                >
+                  {data.description}
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
+                    {data.price}
+                  </span>
+                  <div style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+                    ⭐ {data.rating} ({data.reviews} reviews)
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Interactive Demo
 
-```tsx live
+<Preview
+  title="Interactive Demo"
+  code={`import { GlassButton, GlassSkeleton } from "liquidify";
 import { useState } from "react";
-import { GlassSkeleton, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [variant, setVariant] = useState("shimmer");
@@ -301,34 +595,33 @@ export default function Demo() {
   const [animated, setAnimated] = useState(true);
   const [count, setCount] = useState(1);
 
-  const variants = ["default", "shimmer", "pulse"];
-  const shapes = ["rectangle", "circle", "line"];
+const variants = ["default", "shimmer", "pulse"];
+const shapes = ["rectangle", "circle", "line"];
 
-  return (
-    <div style={{ padding: 20 }}>
-      <div
-        style={{
+return (
+
+<div style={{ padding: 20 }}>
+<div
+style={{
           display: "flex",
           flexDirection: "column",
           gap: 16,
           marginBottom: 24,
-        }}
-      >
-        <div>
-          <h4 style={{ marginBottom: 8 }}>Variant</h4>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {variants.map((v) => (
-              <GlassButton
-                key={v}
-                size="sm"
-                variant={variant === v ? "primary" : "ghost"}
-                onClick={() => setVariant(v)}
-              >
-                {v}
-              </GlassButton>
-            ))}
-          </div>
-        </div>
+        }} >
+<div>
+<h4 style={{ marginBottom: 8 }}>Variant</h4>
+<div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+{variants.map((v) => (
+<GlassButton
+key={v}
+size="sm"
+variant={variant === v ? "primary" : "ghost"}
+onClick={() => setVariant(v)} >
+{v}
+</GlassButton>
+))}
+</div>
+</div>
 
         <div>
           <h4 style={{ marginBottom: 8 }}>Shape</h4>
@@ -396,9 +689,121 @@ export default function Demo() {
         />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [variant, setVariant] = useState("shimmer");
+      const [shape, setShape] = useState("rectangle");
+      const [animated, setAnimated] = useState(true);
+      const [count, setCount] = useState(1);
+
+      const variants = ["default", "shimmer", "pulse"];
+      const shapes = ["rectangle", "circle", "line"];
+
+      return (
+        <div style={{ padding: 20 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+              marginBottom: 24,
+            }}
+          >
+            <div>
+              <h4 style={{ marginBottom: 8 }}>Variant</h4>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {variants.map((v) => (
+                  <GlassButton
+                    key={v}
+                    size="sm"
+                    variant={variant === v ? "primary" : "ghost"}
+                    onClick={() => setVariant(v)}
+                  >
+                    {v}
+                  </GlassButton>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 style={{ marginBottom: 8 }}>Shape</h4>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {shapes.map((s) => (
+                  <GlassButton
+                    key={s}
+                    size="sm"
+                    variant={shape === s ? "primary" : "ghost"}
+                    onClick={() => setShape(s)}
+                  >
+                    {s}
+                  </GlassButton>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 style={{ marginBottom: 8 }}>Options</h4>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <GlassButton
+                  size="sm"
+                  variant={animated ? "primary" : "ghost"}
+                  onClick={() => setAnimated(!animated)}
+                >
+                  Animated
+                </GlassButton>
+              </div>
+            </div>
+
+            <div>
+              <h4 style={{ marginBottom: 8 }}>Count: {count}</h4>
+              <div style={{ display: "flex", gap: 8 }}>
+                <GlassButton
+                  size="sm"
+                  onClick={() => setCount(Math.max(1, count - 1))}
+                >
+                  -
+                </GlassButton>
+                <GlassButton
+                  size="sm"
+                  onClick={() => setCount(Math.min(10, count + 1))}
+                >
+                  +
+                </GlassButton>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              padding: 20,
+              border: "1px solid rgba(255,255,255,0.2)",
+              borderRadius: 8,
+            }}
+          >
+            <GlassSkeleton
+              variant={variant}
+              shape={shape}
+              animated={animated}
+              count={count}
+              width={shape === "circle" ? 60 : 200}
+              height={shape === "line" ? undefined : 60}
+              spacing={12}
+            />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 

@@ -3,14 +3,14 @@ title: Error Boundary
 description: Catches JavaScript errors in child component tree.
 ---
 
+import { GlassErrorBoundary } from "liquidify";
+
 # Error Boundary
 
 ```tsx
-import { GlassErrorBoundary } from "liquidify";
-
 <GlassErrorBoundary fallback={<div>Something went wrong.</div>}>
   <App />
-</GlassErrorBoundary>;
+</GlassErrorBoundary>
 ```
 
 ## Props

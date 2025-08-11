@@ -3,9 +3,15 @@ title: Glass Checkbox Group
 description: Elegant checkbox group component with Apple-inspired liquid glass effects and flexible layout options.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { GlassCheckboxGroup } from "liquidify";
 import { useState } from "react";
 import { GlassCheckboxGroup } from "@liquidify/components";
+import { GlassCheckboxGroup } from 'liquidify'
 
 export default function Demo() {
   const [selectedFeatures, setSelectedFeatures] = useState([
@@ -14,40 +20,41 @@ export default function Demo() {
   ]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const features = [
-    {
-      value: "notifications",
-      label: "Push Notifications",
-      description: "Receive real-time updates and alerts",
-    },
-    {
-      value: "analytics",
-      label: "Advanced Analytics",
-      description: "Detailed insights and reporting",
-    },
-    {
-      value: "api",
-      label: "API Access",
-      description: "Programmatic access to your data",
-    },
-    {
-      value: "support",
-      label: "Priority Support",
-      description: "24/7 dedicated customer support",
-    },
-  ];
+const features = [
+{
+value: "notifications",
+label: "Push Notifications",
+description: "Receive real-time updates and alerts",
+},
+{
+value: "analytics",
+label: "Advanced Analytics",
+description: "Detailed insights and reporting",
+},
+{
+value: "api",
+label: "API Access",
+description: "Programmatic access to your data",
+},
+{
+value: "support",
+label: "Priority Support",
+description: "24/7 dedicated customer support",
+},
+];
 
-  const categories = [
-    { value: "tech", label: "Technology" },
-    { value: "design", label: "Design" },
-    { value: "business", label: "Business" },
-    { value: "marketing", label: "Marketing" },
-  ];
+const categories = [
+{ value: "tech", label: "Technology" },
+{ value: "design", label: "Design" },
+{ value: "business", label: "Business" },
+{ value: "marketing", label: "Marketing" },
+];
 
-  return (
-    <div className="space-y-8 max-w-lg mx-auto">
-      <div>
-        <GlassCheckboxGroup
+return (
+
+<div className="space-y-8 max-w-lg mx-auto">
+<div>
+<GlassCheckboxGroup
           label="Premium Features"
           description="Select the features you'd like to enable"
           options={features}
@@ -55,7 +62,7 @@ export default function Demo() {
           onChange={setSelectedFeatures}
           size="md"
         />
-      </div>
+</div>
 
       <div>
         <GlassCheckboxGroup
@@ -77,9 +84,90 @@ export default function Demo() {
         </div>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [selectedFeatures, setSelectedFeatures] = useState([
+        "notifications",
+        "analytics",
+      ]);
+      const [selectedCategories, setSelectedCategories] = useState([]);
+
+      const features = [
+        {
+          value: "notifications",
+          label: "Push Notifications",
+          description: "Receive real-time updates and alerts",
+        },
+        {
+          value: "analytics",
+          label: "Advanced Analytics",
+          description: "Detailed insights and reporting",
+        },
+        {
+          value: "api",
+          label: "API Access",
+          description: "Programmatic access to your data",
+        },
+        {
+          value: "support",
+          label: "Priority Support",
+          description: "24/7 dedicated customer support",
+        },
+      ];
+
+      const categories = [
+        { value: "tech", label: "Technology" },
+        { value: "design", label: "Design" },
+        { value: "business", label: "Business" },
+        { value: "marketing", label: "Marketing" },
+      ];
+
+      return (
+        <div className="space-y-8 max-w-lg mx-auto">
+          <div>
+            <GlassCheckboxGroup
+              label="Premium Features"
+              description="Select the features you'd like to enable"
+              options={features}
+              value={selectedFeatures}
+              onChange={setSelectedFeatures}
+              size="md"
+            />
+          </div>
+
+          <div>
+            <GlassCheckboxGroup
+              label="Interests"
+              description="Choose your areas of interest"
+              options={categories}
+              value={selectedCategories}
+              onChange={setSelectedCategories}
+              orientation="horizontal"
+              size="sm"
+            />
+          </div>
+
+          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+            <h3 className="font-medium text-white mb-2">Selected Values:</h3>
+            <div className="text-white/70 text-sm space-y-1">
+              <p>Features: {selectedFeatures.join(", ") || "None"}</p>
+              <p>Categories: {selectedCategories.join(", ") || "None"}</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Overview
 

@@ -3,6 +3,10 @@ title: LiquidGlass
 description: Core liquid glass effect system with layered transparency and content-aware adaptation.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassBox } from "liquidify";
+
 # LiquidGlass System
 
 The LiquidGlass system is the foundation of LiqUIdify's design language, providing Apple-inspired glassmorphism effects with layered transparency, specular highlights, and content-aware adaptation.
@@ -11,9 +15,9 @@ The LiquidGlass system is the foundation of LiqUIdify's design language, providi
 
 ### Basic Glass Container
 
-```tsx live
-import { LiquidGlassProvider } from "liquidify";
-
+<Preview
+  title="Basic Glass Container"
+  code={`
 function BasicGlassContainer({ children }) {
   return (
     <div className="liquid-glass-container liquid-glass-md">
@@ -38,17 +42,48 @@ export default function Demo() {
       </div>
     </LiquidGlassProvider>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    function BasicGlassContainer({ children }) {
+      return (
+        <div className="liquid-glass-container liquid-glass-md">
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">{children}</div>
+        </div>
+      );
+    }
+    
+    function Demo() {
+      return (
+        <LiquidGlassProvider>
+          <div className="space-y-4">
+            <BasicGlassContainer>
+              <h3 className="text-liquid-primary font-semibold">Glass Container</h3>
+              <p className="text-liquid-secondary">
+                Layered transparency with specular highlights
+              </p>
+            </BasicGlassContainer>
+          </div>
+        </LiquidGlassProvider>
+      );
+    }
+    return <BasicGlassContainer />
+  })()}
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { LiquidGlassProvider } from "liquidify";
-
+<Preview
+  title="Size Variants"
+  code={`
 function GlassBox({ size, children }) {
   return (
-    <div className={`liquid-glass-container liquid-glass-${size}`}>
+    <div className={\`liquid-glass-container liquid-glass-${size}\`}>
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
@@ -60,69 +95,145 @@ function GlassBox({ size, children }) {
 export default function Demo() {
   const sizes = ["xs", "sm", "md", "lg", "xl"];
 
-  return (
-    <LiquidGlassProvider>
-      <div className="flex flex-wrap gap-4">
-        {sizes.map((size) => (
-          <GlassBox key={size} size={size}>
-            <span className="text-liquid-primary font-medium">{size}</span>
-          </GlassBox>
-        ))}
-      </div>
-    </LiquidGlassProvider>
-  );
-}
-```
+return (
+
+<LiquidGlassProvider>
+  <div className="flex flex-wrap gap-4">
+    {sizes.map((size) => (
+      <GlassBox key={size} size={size}>
+        <span className="text-liquid-primary font-medium">{size}</span>
+      </GlassBox>
+    ))}
+  </div>
+</LiquidGlassProvider>
+); }`} language="tsx"
+
+> {(() => {
+
+    function GlassBox({ size, children }) {
+      return (
+        <div className={`liquid-glass-container liquid-glass-${size}`}>
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">{children}</div>
+        </div>
+      );
+    }
+
+    function Demo() {
+      const sizes = ["xs", "sm", "md", "lg", "xl"];
+
+      return (
+        <LiquidGlassProvider>
+          <div className="flex flex-wrap gap-4">
+            {sizes.map((size) => (
+              <GlassBox key={size} size={size}>
+                <span className="text-liquid-primary font-medium">{size}</span>
+              </GlassBox>
+            ))}
+          </div>
+        </LiquidGlassProvider>
+      );
+    }
+    return <GlassBox />
+
+})()}
+
+</Preview>
 
 ### Interactive Glass Elements
 
-```tsx live
-import { useState } from "react";
-import { LiquidGlassProvider } from "liquidify";
+<Preview
+  title="Interactive Glass Elements"
+  code={`import { useState } from "react";
 
 function InteractiveGlass({ children, onClick, active }) {
-  return (
-    <div
-      className={`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
-        active ? "ring-2 ring-liquid-accent" : ""
-      }`}
-      onClick={onClick}
-    >
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">{children}</div>
-    </div>
-  );
+return (
+
+<div
+className={\`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
+active ? "ring-2 ring-liquid-accent" : ""
+}\`}
+onClick={onClick} >
+<div className="liquid-glass-filter" />
+<div className="liquid-glass-overlay" />
+<div className="liquid-glass-specular" />
+<div className="liquid-glass-content">{children}</div>
+</div>
+);
 }
 
 export default function Demo() {
   const [active, setActive] = useState(0);
   const items = ["Design", "Develop", "Deploy"];
 
-  return (
-    <LiquidGlassProvider>
-      <div className="flex gap-4">
-        {items.map((item, index) => (
-          <InteractiveGlass
-            key={item}
-            onClick={() => setActive(index)}
-            active={active === index}
-          >
-            <span className="text-liquid-primary font-medium">{item}</span>
-          </InteractiveGlass>
-        ))}
-      </div>
-    </LiquidGlassProvider>
-  );
-}
-```
+return (
+
+<LiquidGlassProvider>
+  <div className="flex gap-4">
+    {items.map((item, index) => (
+      <InteractiveGlass
+        key={item}
+        onClick={() => setActive(index)}
+        active={active === index}
+      >
+        <span className="text-liquid-primary font-medium">{item}</span>
+      </InteractiveGlass>
+    ))}
+  </div>
+</LiquidGlassProvider>
+); }`} language="tsx"
+
+> {(() => {
+
+    function InteractiveGlass({ children, onClick, active }) {
+      return (
+        <div
+          className={`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
+            active ? "ring-2 ring-liquid-accent" : ""
+          }`}
+          onClick={onClick}
+        >
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">{children}</div>
+        </div>
+      );
+    }
+
+    function Demo() {
+      const [active, setActive] = useState(0);
+      const items = ["Design", "Develop", "Deploy"];
+
+      return (
+        <LiquidGlassProvider>
+          <div className="flex gap-4">
+            {items.map((item, index) => (
+              <InteractiveGlass
+                key={item}
+                onClick={() => setActive(index)}
+                active={active === index}
+              >
+                <span className="text-liquid-primary font-medium">{item}</span>
+              </InteractiveGlass>
+            ))}
+          </div>
+        </LiquidGlassProvider>
+      );
+    }
+    return <InteractiveGlass />
+
+})()}
+
+</Preview>
 
 ### Content-Aware Adaptation
 
-```tsx live
-import { LiquidGlassProvider } from "liquidify";
-
+<Preview
+  title="Content-Aware Adaptation"
+  code={`
 function AdaptiveGlass({ bgColor, children }) {
   return (
     <div
@@ -145,29 +256,71 @@ export default function Demo() {
     { color: "rgba(239, 68, 68, 0.1)", name: "Red" },
   ];
 
-  return (
-    <LiquidGlassProvider config={{ adaptToContent: true }}>
-      <div className="grid grid-cols-2 gap-4">
-        {backgrounds.map((bg) => (
-          <AdaptiveGlass key={bg.name} bgColor={bg.color}>
-            <span className="text-liquid-primary font-medium">{bg.name}</span>
-            <p className="text-liquid-secondary text-sm">Adaptive glass</p>
-          </AdaptiveGlass>
-        ))}
-      </div>
-    </LiquidGlassProvider>
-  );
-}
-```
+return (
+
+<LiquidGlassProvider config={{ adaptToContent: true }}>
+  <div className="grid grid-cols-2 gap-4">
+    {backgrounds.map((bg) => (
+      <AdaptiveGlass key={bg.name} bgColor={bg.color}>
+        <span className="text-liquid-primary font-medium">{bg.name}</span>
+        <p className="text-liquid-secondary text-sm">Adaptive glass</p>
+      </AdaptiveGlass>
+    ))}
+  </div>
+</LiquidGlassProvider>
+); }`} language="tsx"
+
+> {(() => {
+
+    function AdaptiveGlass({ bgColor, children }) {
+      return (
+        <div
+          className="liquid-glass-container liquid-glass-md"
+          style={{ backgroundColor: bgColor }}
+        >
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">{children}</div>
+        </div>
+      );
+    }
+
+    function Demo() {
+      const backgrounds = [
+        { color: "rgba(59, 130, 246, 0.1)", name: "Blue" },
+        { color: "rgba(168, 85, 247, 0.1)", name: "Purple" },
+        { color: "rgba(34, 197, 94, 0.1)", name: "Green" },
+        { color: "rgba(239, 68, 68, 0.1)", name: "Red" },
+      ];
+
+      return (
+        <LiquidGlassProvider config={{ adaptToContent: true }}>
+          <div className="grid grid-cols-2 gap-4">
+            {backgrounds.map((bg) => (
+              <AdaptiveGlass key={bg.name} bgColor={bg.color}>
+                <span className="text-liquid-primary font-medium">{bg.name}</span>
+                <p className="text-liquid-secondary text-sm">Adaptive glass</p>
+              </AdaptiveGlass>
+            ))}
+          </div>
+        </LiquidGlassProvider>
+      );
+    }
+    return <AdaptiveGlass />
+
+})()}
+
+</Preview>
 
 ### Apple Bento Box Layout
 
-```tsx live
-import { LiquidGlassProvider } from "liquidify";
-
+<Preview
+  title="Apple Bento Box Layout"
+  code={`
 function BentoItem({ span, children, className = "" }) {
   return (
-    <div className={`liquid-glass-bento-item ${span} ${className}`}>
+    <div className={\`liquid-glass-bento-item ${span} ${className}\`}>
       {children}
     </div>
   );
@@ -197,8 +350,47 @@ export default function Demo() {
       </div>
     </LiquidGlassProvider>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    function BentoItem({ span, children, className = "" }) {
+      return (
+        <div className={`liquid-glass-bento-item ${span} ${className}`}>
+          {children}
+        </div>
+      );
+    }
+    
+    function Demo() {
+      return (
+        <LiquidGlassProvider>
+          <div className="liquid-glass-bento liquid-glass-bento-3x3 max-w-2xl">
+            <BentoItem span="liquid-glass-bento-span-2">
+              <h3 className="text-liquid-primary font-semibold mb-2">Featured</h3>
+              <p className="text-liquid-secondary text-sm">Large feature card</p>
+            </BentoItem>
+            <BentoItem>
+              <h4 className="text-liquid-primary font-medium">Quick</h4>
+            </BentoItem>
+            <BentoItem>
+              <h4 className="text-liquid-primary font-medium">Action</h4>
+            </BentoItem>
+            <BentoItem>
+              <h4 className="text-liquid-primary font-medium">Stats</h4>
+            </BentoItem>
+            <BentoItem span="liquid-glass-bento-span-2">
+              <h4 className="text-liquid-primary font-medium">Wide Card</h4>
+              <p className="text-liquid-secondary text-sm">Spans two columns</p>
+            </BentoItem>
+          </div>
+        </LiquidGlassProvider>
+      );
+    }
+    return <BentoItem />
+  })()}
+</Preview>
 
 ## Provider Configuration
 
@@ -292,7 +484,6 @@ const defaultConfig: Required<LiquidGlassConfig> = {
 ### Basic Setup
 
 ```tsx
-import { LiquidGlassProvider } from "liquidify";
 import "liquidify/styles";
 
 function App() {
@@ -353,7 +544,6 @@ const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
 
 ```tsx
 import { useRef, useEffect } from "react";
-import { useLiquidGlass } from "liquidify";
 
 function ContentAwareComponent() {
   const contentRef = useRef<HTMLDivElement>(null);

@@ -3,52 +3,56 @@ title: Glass Chart
 description: Beautiful data visualization components with Apple-inspired liquid glass effects and smooth animations.
 ---
 
-```tsx live
-import { useState } from "react";
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { useState } from "react";
 import { LineChart, BarChart, DonutChart } from "@liquidify/components";
 
 export default function Demo() {
   const [chartType, setChartType] = useState("line");
 
-  const lineData = [
-    { label: "Jan", value: 65 },
-    { label: "Feb", value: 78 },
-    { label: "Mar", value: 90 },
-    { label: "Apr", value: 81 },
-    { label: "May", value: 95 },
-    { label: "Jun", value: 87 },
-  ];
+const lineData = [
+{ label: "Jan", value: 65 },
+{ label: "Feb", value: 78 },
+{ label: "Mar", value: 90 },
+{ label: "Apr", value: 81 },
+{ label: "May", value: 95 },
+{ label: "Jun", value: 87 },
+];
 
-  const barData = [
-    { label: "Q1", value: 2400, color: "#3B82F6" },
-    { label: "Q2", value: 1398, color: "#10B981" },
-    { label: "Q3", value: 9800, color: "#F59E0B" },
-    { label: "Q4", value: 3908, color: "#EF4444" },
-  ];
+const barData = [
+{ label: "Q1", value: 2400, color: "#3B82F6" },
+{ label: "Q2", value: 1398, color: "#10B981" },
+{ label: "Q3", value: 9800, color: "#F59E0B" },
+{ label: "Q4", value: 3908, color: "#EF4444" },
+];
 
-  const donutData = [
-    { label: "Desktop", value: 45, color: "#3B82F6" },
-    { label: "Mobile", value: 35, color: "#10B981" },
-    { label: "Tablet", value: 20, color: "#F59E0B" },
-  ];
+const donutData = [
+{ label: "Desktop", value: 45, color: "#3B82F6" },
+{ label: "Mobile", value: 35, color: "#10B981" },
+{ label: "Tablet", value: 20, color: "#F59E0B" },
+];
 
-  return (
-    <div className="space-y-6">
-      <div className="flex gap-2 justify-center">
-        {["line", "bar", "donut"].map((type) => (
-          <button
-            key={type}
-            onClick={() => setChartType(type)}
-            className={`px-4 py-2 rounded-lg transition-all ${
-              chartType === type
-                ? "bg-blue-500 text-white"
-                : "bg-white/10 text-white/70 hover:bg-white/20"
-            }`}
-          >
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-          </button>
-        ))}
-      </div>
+return (
+
+<div className="space-y-6">
+<div className="flex gap-2 justify-center">
+{["line", "bar", "donut"].map((type) => (
+<button
+key={type}
+onClick={() => setChartType(type)}
+className={\`px-4 py-2 rounded-lg transition-all ${
+chartType === type
+? "bg-blue-500 text-white"
+: "bg-white/10 text-white/70 hover:bg-white/20"
+}\`} >
+{type.charAt(0).toUpperCase() + type.slice(1)}
+</button>
+))}
+</div>
 
       <div className="flex justify-center">
         {chartType === "line" && (
@@ -89,9 +93,102 @@ export default function Demo() {
         )}
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [chartType, setChartType] = useState("line");
+
+      const lineData = [
+        { label: "Jan", value: 65 },
+        { label: "Feb", value: 78 },
+        { label: "Mar", value: 90 },
+        { label: "Apr", value: 81 },
+        { label: "May", value: 95 },
+        { label: "Jun", value: 87 },
+      ];
+
+      const barData = [
+        { label: "Q1", value: 2400, color: "#3B82F6" },
+        { label: "Q2", value: 1398, color: "#10B981" },
+        { label: "Q3", value: 9800, color: "#F59E0B" },
+        { label: "Q4", value: 3908, color: "#EF4444" },
+      ];
+
+      const donutData = [
+        { label: "Desktop", value: 45, color: "#3B82F6" },
+        { label: "Mobile", value: 35, color: "#10B981" },
+        { label: "Tablet", value: 20, color: "#F59E0B" },
+      ];
+
+      return (
+        <div className="space-y-6">
+          <div className="flex gap-2 justify-center">
+            {["line", "bar", "donut"].map((type) => (
+              <button
+                key={type}
+                onClick={() => setChartType(type)}
+                className={`px-4 py-2 rounded-lg transition-all ${
+                  chartType === type
+                    ? "bg-blue-500 text-white"
+                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                }`}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex justify-center">
+            {chartType === "line" && (
+              <LineChart
+                data={lineData}
+                width={400}
+                height={200}
+                animated
+                showTooltip
+                gradient
+              />
+            )}
+
+            {chartType === "bar" && (
+              <BarChart
+                data={barData}
+                width={400}
+                height={200}
+                animated
+                showValues
+              />
+            )}
+
+            {chartType === "donut" && (
+              <DonutChart
+                data={donutData}
+                width={200}
+                height={200}
+                animated
+                showLabels
+                centerContent={
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-white">100</div>
+                    <div className="text-sm text-white/60">Total</div>
+                  </div>
+                }
+              />
+            )}
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Overview
 

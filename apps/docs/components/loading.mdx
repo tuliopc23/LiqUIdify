@@ -3,6 +3,10 @@ title: Loading
 description: Liquid Glass loading indicators with multiple variants and animations.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassButton, GlassLoading } from "liquidify";
+
 # Loading
 
 The `GlassLoading` component provides elegant loading indicators with glassmorphism effects. It supports multiple variants including spinners, dots, pulse, and bars with customizable sizes and text labels.
@@ -11,9 +15,9 @@ The `GlassLoading` component provides elegant loading indicators with glassmorph
 
 ### Basic Usage
 
-```tsx live
-import { GlassLoading } from "liquidify";
-
+<Preview
+  title="Basic Usage"
+  code={`import { GlassLoading } from "liquidify";
 export default function Demo() {
   return (
     <div
@@ -30,14 +34,36 @@ export default function Demo() {
       <GlassLoading variant="bars" size="md" />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div
+          style={{
+            display: "flex",
+            gap: 24,
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
+          <GlassLoading variant="spinner" size="md" />
+          <GlassLoading variant="dots" size="md" />
+          <GlassLoading variant="pulse" size="md" />
+          <GlassLoading variant="bars" size="md" />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### With Text Labels
 
-```tsx live
-import { GlassLoading } from "liquidify";
-
+<Preview
+  title="With Text Labels"
+  code={`import { GlassLoading } from "liquidify";
 export default function Demo() {
   return (
     <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
@@ -47,14 +73,29 @@ export default function Demo() {
       <GlassLoading variant="bars" text="Analyzing" />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
+          <GlassLoading variant="spinner" text="Loading..." />
+          <GlassLoading variant="dots" text="Processing" />
+          <GlassLoading variant="pulse" text="Syncing" />
+          <GlassLoading variant="bars" text="Analyzing" />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassLoading } from "liquidify";
-
+<Preview
+  title="Size Variants"
+  code={`import { GlassLoading } from "liquidify";
 export default function Demo() {
   return (
     <div
@@ -71,37 +112,60 @@ export default function Demo() {
       <GlassLoading variant="spinner" size="xl" text="Extra Large" />
     </div>
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    function Demo() {
+      return (
+        <div
+          style={{
+            display: "flex",
+            gap: 24,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <GlassLoading variant="spinner" size="sm" text="Small" />
+          <GlassLoading variant="spinner" size="md" text="Medium" />
+          <GlassLoading variant="spinner" size="lg" text="Large" />
+          <GlassLoading variant="spinner" size="xl" text="Extra Large" />
+        </div>
+      );
+    }
+    return <Demo />;
+  })()}
+</Preview>
 
 ### Interactive Demo
 
-```tsx live
+<Preview
+  title="Interactive Demo"
+  code={`import { GlassButton, GlassLoading } from "liquidify";
 import { useState } from "react";
-import { GlassLoading, GlassButton } from "liquidify";
 
 export default function Demo() {
   const [variant, setVariant] = useState("spinner");
   const [size, setSize] = useState("md");
   const [showText, setShowText] = useState(true);
 
-  const variants = ["spinner", "dots", "pulse", "bars"];
-  const sizes = ["sm", "md", "lg", "xl"];
+const variants = ["spinner", "dots", "pulse", "bars"];
+const sizes = ["sm", "md", "lg", "xl"];
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {variants.map((v) => (
-          <GlassButton
-            key={v}
-            variant={variant === v ? "primary" : "ghost"}
-            size="sm"
-            onClick={() => setVariant(v)}
-          >
-            {v}
-          </GlassButton>
-        ))}
-      </div>
+return (
+
+<div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+<div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+{variants.map((v) => (
+<GlassButton
+key={v}
+variant={variant === v ? "primary" : "ghost"}
+size="sm"
+onClick={() => setVariant(v)} >
+{v}
+</GlassButton>
+))}
+</div>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {sizes.map((s) => (
@@ -134,9 +198,74 @@ export default function Demo() {
         />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [variant, setVariant] = useState("spinner");
+      const [size, setSize] = useState("md");
+      const [showText, setShowText] = useState(true);
+
+      const variants = ["spinner", "dots", "pulse", "bars"];
+      const sizes = ["sm", "md", "lg", "xl"];
+
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {variants.map((v) => (
+              <GlassButton
+                key={v}
+                variant={variant === v ? "primary" : "ghost"}
+                size="sm"
+                onClick={() => setVariant(v)}
+              >
+                {v}
+              </GlassButton>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {sizes.map((s) => (
+              <GlassButton
+                key={s}
+                variant={size === s ? "primary" : "ghost"}
+                size="sm"
+                onClick={() => setSize(s)}
+              >
+                {s.toUpperCase()}
+              </GlassButton>
+            ))}
+          </div>
+
+          <div>
+            <GlassButton
+              variant={showText ? "primary" : "ghost"}
+              size="sm"
+              onClick={() => setShowText(!showText)}
+            >
+              {showText ? "Hide Text" : "Show Text"}
+            </GlassButton>
+          </div>
+
+          <div style={{ padding: 32, display: "flex", justifyContent: "center" }}>
+            <GlassLoading
+              variant={variant}
+              size={size}
+              text={showText ? "Loading content..." : undefined}
+            />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 

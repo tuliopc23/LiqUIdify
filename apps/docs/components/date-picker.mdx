@@ -3,11 +3,16 @@ title: Date Picker
 description: Calendar selection with optional time input.
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+
 ## Date Picker
 
-```tsx live
-import { GlassDatePicker } from "liquidify";
+<Preview
+  title="Example"
+  code={`import { GlassDatePicker } from "liquidify";
 import { useState } from "react";
+import { GlassDatePicker } from 'liquidify'
 
 export default function Demo() {
   const [date, setDate] = useState<Date | null>(null);
@@ -18,8 +23,24 @@ export default function Demo() {
       placeholder="Select date"
     />
   );
-}
-```
+}`}
+  language="tsx"
+>
+  {(() => {
+    
+    function Demo() {
+      const [date, setDate] = useState<Date | null>(null);
+      return (
+        <GlassDatePicker
+          value={date}
+          onChange={setDate}
+          placeholder="Select date"
+        />
+      );
+    }
+    return <Demo />
+  })()}
+</Preview>
 
 ## Core Props
 

@@ -3,27 +3,33 @@ title: Slider
 description: Interactive range slider with liquid glass styling and smooth animations.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { GlassSlider } from "liquidify";
 import { useState } from "react";
-import { GlassSlider } from "liquidify";
+import { GlassSlider } from 'liquidify'
 
 export default function Demo() {
   const [value, setValue] = useState(50);
   const [volume, setVolume] = useState(75);
   const [price, setPrice] = useState(250);
 
-  return (
-    <div className="space-y-8 p-6">
-      <div>
-        <h3 className="text-white mb-4">Basic Slider</h3>
-        <GlassSlider
+return (
+
+<div className="space-y-8 p-6">
+<div>
+<h3 className="text-white mb-4">Basic Slider</h3>
+<GlassSlider
           value={value}
           onChange={setValue}
           min={0}
           max={100}
           step={1}
         />
-      </div>
+</div>
 
       <div>
         <h3 className="text-white mb-4">Volume Control</h3>
@@ -49,9 +55,62 @@ export default function Demo() {
         />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [value, setValue] = useState(50);
+      const [volume, setVolume] = useState(75);
+      const [price, setPrice] = useState(250);
+
+      return (
+        <div className="space-y-8 p-6">
+          <div>
+            <h3 className="text-white mb-4">Basic Slider</h3>
+            <GlassSlider
+              value={value}
+              onChange={setValue}
+              min={0}
+              max={100}
+              step={1}
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Volume Control</h3>
+            <GlassSlider
+              value={volume}
+              onChange={setVolume}
+              min={0}
+              max={100}
+              step={5}
+              variant="minimal"
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Price Range ($100-$500)</h3>
+            <GlassSlider
+              value={price}
+              onChange={setPrice}
+              min={100}
+              max={500}
+              step={10}
+              showValue={true}
+            />
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 

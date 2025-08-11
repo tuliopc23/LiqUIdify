@@ -4,198 +4,241 @@ description: User profile images with glassmorphism effects, fallbacks, and stat
 icon: user-circle
 ---
 
+import { GlassAvatar } from "liquidify";
+
 # Avatar
 
 A glassmorphic avatar component for displaying user profile images with elegant fallbacks, status indicators, and multiple size variants. Features Apple-inspired design with smooth glass effects.
+
+import Preview from "./Preview";
+import * as React from "react";
 
 ## Live Examples
 
 ### Basic Usage
 
-```tsx live
-import { GlassAvatar } from "liquidify";
-
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4">
-      <GlassAvatar
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-        alt="John Doe"
-        fallback="JD"
-      />
-
-      <GlassAvatar fallback="AB" alt="Alice Brown" />
-
-      <GlassAvatar />
-    </div>
-  );
-}
-```
+<Preview
+  title="Basic Usage"
+  code={`import { GlassAvatar } from "liquidify";
+<div className=\"flex items-center gap-4\">
+  <GlassAvatar src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"John Doe\" fallback=\"JD\" />
+  <GlassAvatar fallback=\"AB\" alt=\"Alice Brown\" />
+  <GlassAvatar />
+</div>`}
+>
+  <div className="flex items-center gap-4">
+    <GlassAvatar
+      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+      alt="John Doe"
+      fallback="JD"
+    />
+    <GlassAvatar fallback="AB" alt="Alice Brown" />
+    <GlassAvatar />
+  </div>
+</Preview>
 
 ### Size Variants
 
-```tsx live
-import { GlassAvatar } from "liquidify";
-
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4">
-      <GlassAvatar
-        size="xs"
-        src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-        alt="Extra Small"
-      />
-      <GlassAvatar
-        size="sm"
-        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-        alt="Small"
-      />
-      <GlassAvatar
-        size="md"
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-        alt="Medium"
-      />
-      <GlassAvatar
-        size="lg"
-        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
-        alt="Large"
-      />
-      <GlassAvatar
-        size="xl"
-        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
-        alt="Extra Large"
-      />
-      <GlassAvatar
-        size="2xl"
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face"
-        alt="2X Large"
-      />
-    </div>
-  );
-}
-```
+<Preview
+  title="Size Variants"
+  code={`import { GlassAvatar } from "liquidify";
+<div className=\"flex items-center gap-4\">
+  <GlassAvatar size=\"xs\" src=\"https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face\" alt=\"Extra Small\" />
+  <GlassAvatar size=\"sm\" src=\"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face\" alt=\"Small\" />
+  <GlassAvatar size=\"md\" src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"Medium\" />
+  <GlassAvatar size=\"lg\" src=\"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face\" alt=\"Large\" />
+  <GlassAvatar size=\"xl\" src=\"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face\" alt=\"Extra Large\" />
+  <GlassAvatar size=\"2xl\" src=\"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face\" alt=\"2X Large\" />
+</div>`}
+>
+  <div className="flex items-center gap-4">
+    <GlassAvatar
+      size="xs"
+      src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      alt="Extra Small"
+    />
+    <GlassAvatar
+      size="sm"
+      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+      alt="Small"
+    />
+    <GlassAvatar
+      size="md"
+      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+      alt="Medium"
+    />
+    <GlassAvatar
+      size="lg"
+      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
+      alt="Large"
+    />
+    <GlassAvatar
+      size="xl"
+      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+      alt="Extra Large"
+    />
+    <GlassAvatar
+      size="2xl"
+      src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face"
+      alt="2X Large"
+    />
+  </div>
+</Preview>
 
 ### Shape Variants
 
-```tsx live
-import { GlassAvatar } from "liquidify";
-
+<Preview
+  title="Shape Variants"
+  code={`import { GlassAvatar } from "liquidify";
 export default function Demo() {
   return (
-    <div className="flex items-center gap-4">
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="circular"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-          alt="Circular"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Circular</p>
+    <div className=\"flex items-center gap-4\">
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar variant=\"circular\" src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"Circular\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Circular</p>
       </div>
-
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="rounded"
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-          alt="Rounded"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Rounded</p>
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar variant=\"rounded\" src=\"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face\" alt=\"Rounded\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Rounded</p>
       </div>
-
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="square"
-          src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-          alt="Square"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Square</p>
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar variant=\"square\" src=\"https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face\" alt=\"Square\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Square</p>
       </div>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="flex items-center gap-4">
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        variant="circular"
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+        alt="Circular"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Circular</p>
+    </div>
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        variant="rounded"
+        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+        alt="Rounded"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Rounded</p>
+    </div>
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        variant="square"
+        src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+        alt="Square"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Square</p>
+    </div>
+  </div>
+</Preview>
 
 ### Status Indicators
 
-```tsx live
-import { GlassAvatar } from "liquidify";
-
+<Preview
+  title="Status Indicators"
+  code={`import { GlassAvatar } from "liquidify";
 export default function Demo() {
   return (
-    <div className="flex items-center gap-6">
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-          alt="Online User"
-          status="online"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Online</p>
+    <div className=\"flex items-center gap-6\">
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"Online User\" status=\"online\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Online</p>
       </div>
-
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-          alt="Away User"
-          status="away"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Away</p>
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar src=\"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face\" alt=\"Away User\" status=\"away\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Away</p>
       </div>
-
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-          alt="Busy User"
-          status="busy"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Busy</p>
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar src=\"https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face\" alt=\"Busy User\" status=\"busy\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Busy</p>
       </div>
-
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          fallback="OF"
-          alt="Offline User"
-          status="offline"
-          size="lg"
-        />
-        <p className="text-xs text-gray-600">Offline</p>
+      <div className=\"text-center space-y-2\">
+        <GlassAvatar fallback=\"OF\" alt=\"Offline User\" status=\"offline\" size=\"lg\" />
+        <p className=\"text-xs text-gray-600\">Offline</p>
       </div>
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="flex items-center gap-6">
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+        alt="Online User"
+        status="online"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Online</p>
+    </div>
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+        alt="Away User"
+        status="away"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Away</p>
+    </div>
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+        alt="Busy User"
+        status="busy"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Busy</p>
+    </div>
+    <div className="text-center space-y-2">
+      <GlassAvatar
+        fallback="OF"
+        alt="Offline User"
+        status="offline"
+        size="lg"
+      />
+      <p className="text-xs text-gray-600">Offline</p>
+    </div>
+  </div>
+</Preview>
 
 ### With Border
 
-```tsx live
-import { GlassAvatar } from "liquidify";
-
+<Preview
+  title="With Border"
+  code={`import { GlassAvatar } from "liquidify";
 export default function Demo() {
   return (
-    <div className="flex items-center gap-4">
-      <GlassAvatar
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-        alt="With Border"
-        showBorder
-        size="lg"
-      />
-
-      <GlassAvatar
-        fallback="AB"
-        alt="Fallback with Border"
-        showBorder
-        size="lg"
-      />
-
-      <GlassAvatar showBorder size="lg" />
+    <div className=\"flex items-center gap-4\">
+      <GlassAvatar src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"With Border\" showBorder size=\"lg\" />
+      <GlassAvatar fallback=\"AB\" alt=\"Fallback with Border\" showBorder size=\"lg\" />
+      <GlassAvatar showBorder size=\"lg\" />
     </div>
-  );
-}
-```
+  )
+}`}
+>
+  <div className="flex items-center gap-4">
+    <GlassAvatar
+      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+      alt="With Border"
+      showBorder
+      size="lg"
+    />
+    <GlassAvatar
+      fallback="AB"
+      alt="Fallback with Border"
+      showBorder
+      size="lg"
+    />
+    <GlassAvatar showBorder size="lg" />
+  </div>
+</Preview>
 
 ## Props
 
@@ -215,8 +258,6 @@ export default function Demo() {
 ### User Profile
 
 ```tsx
-import { GlassAvatar } from "liquidify";
-
 function UserProfile({ user }) {
   return (
     <div className="flex items-center gap-3">
@@ -240,8 +281,6 @@ function UserProfile({ user }) {
 ### Team Members List
 
 ```tsx
-import { GlassAvatar } from "liquidify";
-
 function TeamMembersList({ members }) {
   return (
     <div className="space-y-4">
@@ -273,8 +312,6 @@ function TeamMembersList({ members }) {
 ### Avatar Group
 
 ```tsx
-import { GlassAvatar } from "liquidify";
-
 function AvatarGroup({ users, max = 3 }) {
   const displayUsers = users.slice(0, max);
   const remainingCount = users.length - max;
@@ -307,8 +344,6 @@ function AvatarGroup({ users, max = 3 }) {
 ### Comment System
 
 ```tsx
-import { GlassAvatar } from "liquidify";
-
 function Comment({ comment }) {
   return (
     <div className="flex gap-3">

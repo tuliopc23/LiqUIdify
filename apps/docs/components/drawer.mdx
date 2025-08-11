@@ -3,9 +3,13 @@ title: Drawer
 description: Slide-out panel component with multiple positions, sizes, and glass effects.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { GlassButton } from "liquidify";
 import { useState } from "react";
-import { GlassButton, Drawer } from "liquidify";
 import { Menu, X, Settings, User } from "lucide-react";
 
 export default function Demo() {
@@ -14,18 +18,19 @@ export default function Demo() {
   const [topOpen, setTopOpen] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
 
-  return (
-    <div className="space-y-6 p-6">
-      <div className="grid grid-cols-2 gap-4">
-        <GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
-        <GlassButton onClick={() => setRightOpen(true)}>
-          Right Drawer
-        </GlassButton>
-        <GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
-        <GlassButton onClick={() => setBottomOpen(true)}>
-          Bottom Drawer
-        </GlassButton>
-      </div>
+return (
+
+<div className="space-y-6 p-6">
+<div className="grid grid-cols-2 gap-4">
+<GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
+<GlassButton onClick={() => setRightOpen(true)}>
+Right Drawer
+</GlassButton>
+<GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
+<GlassButton onClick={() => setBottomOpen(true)}>
+Bottom Drawer
+</GlassButton>
+</div>
 
       {/* Right Drawer */}
       <Drawer open={rightOpen} onOpenChange={setRightOpen}>
@@ -136,15 +141,155 @@ export default function Demo() {
         </Drawer.Content>
       </Drawer>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [rightOpen, setRightOpen] = useState(false);
+      const [leftOpen, setLeftOpen] = useState(false);
+      const [topOpen, setTopOpen] = useState(false);
+      const [bottomOpen, setBottomOpen] = useState(false);
+
+      return (
+        <div className="space-y-6 p-6">
+          <div className="grid grid-cols-2 gap-4">
+            <GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
+            <GlassButton onClick={() => setRightOpen(true)}>
+              Right Drawer
+            </GlassButton>
+            <GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
+            <GlassButton onClick={() => setBottomOpen(true)}>
+              Bottom Drawer
+            </GlassButton>
+          </div>
+
+          {/* Right Drawer */}
+          <Drawer open={rightOpen} onOpenChange={setRightOpen}>
+            <Drawer.Content side="right" size="md">
+              <Drawer.Header>
+                <Drawer.Title>Settings</Drawer.Title>
+                <Drawer.Description>
+                  Manage your account settings and preferences.
+                </Drawer.Description>
+              </Drawer.Header>
+              <Drawer.Body>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                    <User className="h-5 w-5" />
+                    <span>Profile Settings</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                    <Settings className="h-5 w-5" />
+                    <span>App Preferences</span>
+                  </div>
+                </div>
+              </Drawer.Body>
+              <Drawer.Footer>
+                <GlassButton variant="primary" onClick={() => setRightOpen(false)}>
+                  Save Changes
+                </GlassButton>
+                <Drawer.Close asChild>
+                  <GlassButton variant="ghost">Cancel</GlassButton>
+                </Drawer.Close>
+              </Drawer.Footer>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Left Drawer */}
+          <Drawer open={leftOpen} onOpenChange={setLeftOpen}>
+            <Drawer.Content side="left" size="sm">
+              <Drawer.Header>
+                <Drawer.Title>Navigation</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <nav className="space-y-2">
+                  <a
+                    href="#"
+                    className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+                  >
+                    Dashboard
+                  </a>
+                  <a
+                    href="#"
+                    className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+                  >
+                    Projects
+                  </a>
+                  <a
+                    href="#"
+                    className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+                  >
+                    Team
+                  </a>
+                </nav>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Top Drawer */}
+          <Drawer open={topOpen} onOpenChange={setTopOpen}>
+            <Drawer.Content side="top" size="md">
+              <Drawer.Header>
+                <Drawer.Title>Notifications</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <div className="space-y-3">
+                  <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                    <p className="text-blue-300 text-sm">New message received</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+                    <p className="text-green-300 text-sm">
+                      Task completed successfully
+                    </p>
+                  </div>
+                </div>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Bottom Drawer */}
+          <Drawer open={bottomOpen} onOpenChange={setBottomOpen}>
+            <Drawer.Content side="bottom" size="lg">
+              <Drawer.Header>
+                <Drawer.Title>Quick Actions</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <div className="grid grid-cols-3 gap-4">
+                  <GlassButton variant="ghost" className="h-20 flex-col">
+                    <Menu className="h-6 w-6 mb-2" />
+                    <span className="text-sm">Menu</span>
+                  </GlassButton>
+                  <GlassButton variant="ghost" className="h-20 flex-col">
+                    <Settings className="h-6 w-6 mb-2" />
+                    <span className="text-sm">Settings</span>
+                  </GlassButton>
+                  <GlassButton variant="ghost" className="h-20 flex-col">
+                    <User className="h-6 w-6 mb-2" />
+                    <span className="text-sm">Profile</span>
+                  </GlassButton>
+                </div>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Sizes and Positions
 
-```tsx live
+<Preview
+  title="Example"
+  code={`import { GlassButton } from "liquidify";
 import { useState } from "react";
-import { GlassButton, Drawer } from "liquidify";
 
 export default function SizesDemo() {
   const [smallOpen, setSmallOpen] = useState(false);
@@ -152,20 +297,21 @@ export default function SizesDemo() {
   const [largeOpen, setLargeOpen] = useState(false);
   const [fullOpen, setFullOpen] = useState(false);
 
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <GlassButton onClick={() => setSmallOpen(true)}>
-          Small Drawer
-        </GlassButton>
-        <GlassButton onClick={() => setMediumOpen(true)}>
-          Medium Drawer
-        </GlassButton>
-        <GlassButton onClick={() => setLargeOpen(true)}>
-          Large Drawer
-        </GlassButton>
-        <GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
-      </div>
+return (
+
+<div className="space-y-4">
+<div className="grid grid-cols-2 gap-4">
+<GlassButton onClick={() => setSmallOpen(true)}>
+Small Drawer
+</GlassButton>
+<GlassButton onClick={() => setMediumOpen(true)}>
+Medium Drawer
+</GlassButton>
+<GlassButton onClick={() => setLargeOpen(true)}>
+Large Drawer
+</GlassButton>
+<GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
+</div>
 
       {/* Small Drawer */}
       <Drawer open={smallOpen} onOpenChange={setSmallOpen}>
@@ -268,9 +414,142 @@ export default function SizesDemo() {
         </Drawer.Content>
       </Drawer>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function SizesDemo() {
+      const [smallOpen, setSmallOpen] = useState(false);
+      const [mediumOpen, setMediumOpen] = useState(false);
+      const [largeOpen, setLargeOpen] = useState(false);
+      const [fullOpen, setFullOpen] = useState(false);
+
+      return (
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <GlassButton onClick={() => setSmallOpen(true)}>
+              Small Drawer
+            </GlassButton>
+            <GlassButton onClick={() => setMediumOpen(true)}>
+              Medium Drawer
+            </GlassButton>
+            <GlassButton onClick={() => setLargeOpen(true)}>
+              Large Drawer
+            </GlassButton>
+            <GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
+          </div>
+
+          {/* Small Drawer */}
+          <Drawer open={smallOpen} onOpenChange={setSmallOpen}>
+            <Drawer.Content side="right" size="sm">
+              <Drawer.Header>
+                <Drawer.Title>Small Drawer</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <p className="text-white/70">
+                  This is a small drawer, perfect for simple actions or navigation.
+                </p>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Medium Drawer */}
+          <Drawer open={mediumOpen} onOpenChange={setMediumOpen}>
+            <Drawer.Content side="right" size="md">
+              <Drawer.Header>
+                <Drawer.Title>Medium Drawer</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <p className="text-white/70 mb-4">
+                  This is a medium drawer with more space for content.
+                </p>
+                <div className="space-y-3">
+                  <div className="p-3 rounded-lg bg-white/5">Content item 1</div>
+                  <div className="p-3 rounded-lg bg-white/5">Content item 2</div>
+                  <div className="p-3 rounded-lg bg-white/5">Content item 3</div>
+                </div>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Large Drawer */}
+          <Drawer open={largeOpen} onOpenChange={setLargeOpen}>
+            <Drawer.Content side="right" size="lg">
+              <Drawer.Header>
+                <Drawer.Title>Large Drawer</Drawer.Title>
+                <Drawer.Description>
+                  This large drawer can accommodate complex forms and detailed
+                  content.
+                </Drawer.Description>
+              </Drawer.Header>
+              <Drawer.Body>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-white font-medium mb-3">Section 1</h4>
+                    <div className="space-y-2">
+                      <div className="p-3 rounded-lg bg-white/5">Item A</div>
+                      <div className="p-3 rounded-lg bg-white/5">Item B</div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium mb-3">Section 2</h4>
+                    <div className="space-y-2">
+                      <div className="p-3 rounded-lg bg-white/5">Item C</div>
+                      <div className="p-3 rounded-lg bg-white/5">Item D</div>
+                    </div>
+                  </div>
+                </div>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+
+          {/* Full Drawer */}
+          <Drawer open={fullOpen} onOpenChange={setFullOpen}>
+            <Drawer.Content side="right" size="full">
+              <Drawer.Header>
+                <Drawer.Title>Full Width Drawer</Drawer.Title>
+                <Drawer.Description>
+                  This drawer takes up the full width/height, perfect for detailed
+                  views.
+                </Drawer.Description>
+              </Drawer.Header>
+              <Drawer.Body>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-white font-medium mb-3">Left Column</h4>
+                    <div className="space-y-3">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <div key={i} className="p-4 rounded-lg bg-white/5">
+                          Content item {i + 1}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium mb-3">Right Column</h4>
+                    <div className="space-y-3">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <div key={i} className="p-4 rounded-lg bg-white/5">
+                          Content item {i + 6}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+        </div>
+      );
+    }
+    return <SizesDemo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -312,8 +591,14 @@ export default function SizesDemo() {
 ### Navigation Drawer
 
 ```tsx
-import { Drawer, GlassButton } from "liquidify";
 import { Home, Settings, User, LogOut } from "lucide-react";
+import {
+  GlassBadge,
+  GlassButton,
+  GlassFormField,
+  GlassInput,
+  GlassSelect,
+} from "liquidify";
 
 function NavigationDrawer() {
   const [open, setOpen] = useState(false);
@@ -368,8 +653,6 @@ function NavigationDrawer() {
 ### Form Drawer
 
 ```tsx
-import { Drawer, GlassButton, GlassInput, GlassFormField } from "liquidify";
-
 function EditUserDrawer({ user, open, onOpenChange }) {
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -450,8 +733,6 @@ function EditUserDrawer({ user, open, onOpenChange }) {
 ### Details Drawer
 
 ```tsx
-import { Drawer, GlassButton, GlassBadge } from "liquidify";
-
 function ProductDetailsDrawer({ product, open, onOpenChange }) {
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>

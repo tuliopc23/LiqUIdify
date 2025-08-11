@@ -4,6 +4,10 @@ description: Display important messages with glassmorphism styling and semantic 
 icon: alert-circle
 ---
 
+import Preview from "./Preview";
+import * as React from "react";
+import { GlassAlert, GlassButton, GlassInput } from "liquidify";
+
 # Alert
 
 A glassmorphic alert component for displaying important messages with semantic color variants. Perfect for notifications, warnings, and status updates with Apple-inspired design.
@@ -12,9 +16,9 @@ A glassmorphic alert component for displaying important messages with semantic c
 
 ### Basic Variants
 
-```tsx live
-import { GlassAlert } from "liquidify";
-
+<Preview
+  title="Basic Variants"
+  code={`import { GlassAlert } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -34,15 +38,45 @@ export default function Demo() {
         Something went wrong. Please try again.
       </GlassAlert>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassAlert variant="info" title="Information">
+            This is an informational message with helpful details.
+          </GlassAlert>
+
+          <GlassAlert variant="success" title="Success">
+            Your action was completed successfully!
+          </GlassAlert>
+
+          <GlassAlert variant="warning" title="Warning">
+            Please review this important information.
+          </GlassAlert>
+
+          <GlassAlert variant="error" title="Error">
+            Something went wrong. Please try again.
+          </GlassAlert>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Without Titles
 
-```tsx live
-import { GlassAlert } from "liquidify";
-
+<Preview
+  title="Without Titles"
+  code={`import { GlassAlert } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -54,16 +88,37 @@ export default function Demo() {
         Operation completed successfully.
       </GlassAlert>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassAlert variant="info">
+            Simple informational message without a title.
+          </GlassAlert>
+
+          <GlassAlert variant="success">
+            Operation completed successfully.
+          </GlassAlert>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ### Rich Content
 
-```tsx live
-import { GlassAlert } from "liquidify";
-import { GlassButton } from "liquidify";
-
+<Preview
+  title="Rich Content"
+  code={`import { GlassAlert, GlassButton } from "liquidify";
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
@@ -98,9 +153,54 @@ export default function Demo() {
         </div>
       </GlassAlert>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <GlassAlert variant="warning" title="Update Available">
+            <div className="space-y-3">
+              <p>
+                A new version of the application is available with important
+                security updates.
+              </p>
+              <div className="flex gap-2">
+                <GlassButton size="sm" variant="primary">
+                  Update Now
+                </GlassButton>
+                <GlassButton size="sm" variant="ghost">
+                  Later
+                </GlassButton>
+              </div>
+            </div>
+          </GlassAlert>
+
+          <GlassAlert variant="error" title="Connection Failed">
+            <div className="space-y-2">
+              <p>
+                Unable to connect to the server. Please check your internet
+                connection.
+              </p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Verify your network connection</li>
+                <li>Check firewall settings</li>
+                <li>Try refreshing the page</li>
+              </ul>
+            </div>
+          </GlassAlert>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -118,7 +218,6 @@ export default function Demo() {
 
 ```tsx
 import { useState } from "react";
-import { GlassAlert, GlassInput, GlassButton } from "liquidify";
 
 function FormWithValidation() {
   const [error, setError] = useState("");
@@ -162,8 +261,6 @@ function FormWithValidation() {
 ### Status Messages
 
 ```tsx
-import { GlassAlert } from "liquidify";
-
 function StatusMessages({ status }) {
   const alerts = {
     loading: (
@@ -190,8 +287,6 @@ function StatusMessages({ status }) {
 ### System Notifications
 
 ```tsx
-import { GlassAlert } from "liquidify";
-
 function SystemNotifications() {
   return (
     <div className="space-y-4">

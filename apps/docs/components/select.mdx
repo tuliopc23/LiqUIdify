@@ -3,45 +3,50 @@ title: Select
 description: Dropdown selection component with search, multi-select, and keyboard navigation.
 ---
 
-```tsx live
+import Preview from "./Preview";
+import * as React from "react";
+
+<Preview
+  title="Example"
+  code={`import { GlassSelect } from "liquidify";
 import { useState } from "react";
-import { GlassSelect } from "liquidify";
 
 export default function Demo() {
   const [singleValue, setSingleValue] = useState("");
   const [multiValue, setMultiValue] = useState([]);
   const [countryValue, setCountryValue] = useState("");
 
-  const basicOptions = [
-    { value: "apple", label: "Apple" },
-    { value: "banana", label: "Banana" },
-    { value: "orange", label: "Orange" },
-    { value: "grape", label: "Grape" },
-  ];
+const basicOptions = [
+{ value: "apple", label: "Apple" },
+{ value: "banana", label: "Banana" },
+{ value: "orange", label: "Orange" },
+{ value: "grape", label: "Grape" },
+];
 
-  const countryOptions = [
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "de", label: "Germany" },
-    { value: "fr", label: "France" },
-    { value: "jp", label: "Japan" },
-  ];
+const countryOptions = [
+{ value: "us", label: "United States" },
+{ value: "ca", label: "Canada" },
+{ value: "uk", label: "United Kingdom" },
+{ value: "de", label: "Germany" },
+{ value: "fr", label: "France" },
+{ value: "jp", label: "Japan" },
+];
 
-  return (
-    <div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
-      <div>
-        <h3 className="text-white mb-4">Basic Select</h3>
-        <GlassSelect
+return (
+
+<div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
+<div>
+<h3 className="text-white mb-4">Basic Select</h3>
+<GlassSelect
           options={basicOptions}
           value={singleValue}
           onChange={setSingleValue}
           placeholder="Choose a fruit"
         />
-        <p className="text-white/60 text-sm mt-2">
-          Selected: {singleValue || "None"}
-        </p>
-      </div>
+<p className="text-white/60 text-sm mt-2">
+Selected: {singleValue || "None"}
+</p>
+</div>
 
       <div>
         <h3 className="text-white mb-4">Multi-Select</h3>
@@ -72,38 +77,116 @@ export default function Demo() {
         </p>
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function Demo() {
+      const [singleValue, setSingleValue] = useState("");
+      const [multiValue, setMultiValue] = useState([]);
+      const [countryValue, setCountryValue] = useState("");
+
+      const basicOptions = [
+        { value: "apple", label: "Apple" },
+        { value: "banana", label: "Banana" },
+        { value: "orange", label: "Orange" },
+        { value: "grape", label: "Grape" },
+      ];
+
+      const countryOptions = [
+        { value: "us", label: "United States" },
+        { value: "ca", label: "Canada" },
+        { value: "uk", label: "United Kingdom" },
+        { value: "de", label: "Germany" },
+        { value: "fr", label: "France" },
+        { value: "jp", label: "Japan" },
+      ];
+
+      return (
+        <div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
+          <div>
+            <h3 className="text-white mb-4">Basic Select</h3>
+            <GlassSelect
+              options={basicOptions}
+              value={singleValue}
+              onChange={setSingleValue}
+              placeholder="Choose a fruit"
+            />
+            <p className="text-white/60 text-sm mt-2">
+              Selected: {singleValue || "None"}
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Multi-Select</h3>
+            <GlassSelect
+              options={basicOptions}
+              value={multiValue}
+              onChange={setMultiValue}
+              placeholder="Choose multiple fruits"
+              multiple={true}
+              maxSelections={3}
+            />
+            <p className="text-white/60 text-sm mt-2">
+              Selected: {multiValue.length > 0 ? multiValue.join(", ") : "None"}
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Searchable Select</h3>
+            <GlassSelect
+              options={countryOptions}
+              value={countryValue}
+              onChange={setCountryValue}
+              placeholder="Search countries..."
+              searchable={true}
+            />
+            <p className="text-white/60 text-sm mt-2">
+              Selected: {countryValue || "None"}
+            </p>
+          </div>
+        </div>
+      );
+    }
+    return <Demo />
+
+})()}
+
+</Preview>
 
 ## Variants and States
 
-```tsx live
+<Preview
+  title="Example"
+  code={`import { GlassSelect } from "liquidify";
 import { useState } from "react";
-import { GlassSelect } from "liquidify";
 
 export default function VariantsDemo() {
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("option2");
 
-  const options = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3", disabled: true },
-    { value: "option4", label: "Option 4" },
-  ];
+const options = [
+{ value: "option1", label: "Option 1" },
+{ value: "option2", label: "Option 2" },
+{ value: "option3", label: "Option 3", disabled: true },
+{ value: "option4", label: "Option 4" },
+];
 
-  return (
-    <div className="space-y-8">
-      <div>
-        <h3 className="text-white mb-4">Default State</h3>
-        <GlassSelect
+return (
+
+<div className="space-y-8">
+<div>
+<h3 className="text-white mb-4">Default State</h3>
+<GlassSelect
           options={options}
           value={value1}
           onChange={setValue1}
           placeholder="Select an option"
         />
-      </div>
+</div>
 
       <div>
         <h3 className="text-white mb-4">With Selection</h3>
@@ -136,48 +219,115 @@ export default function VariantsDemo() {
         />
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function VariantsDemo() {
+      const [value1, setValue1] = useState("");
+      const [value2, setValue2] = useState("option2");
+
+      const options = [
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+        { value: "option3", label: "Option 3", disabled: true },
+        { value: "option4", label: "Option 4" },
+      ];
+
+      return (
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-white mb-4">Default State</h3>
+            <GlassSelect
+              options={options}
+              value={value1}
+              onChange={setValue1}
+              placeholder="Select an option"
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">With Selection</h3>
+            <GlassSelect
+              options={options}
+              value={value2}
+              onChange={setValue2}
+              placeholder="Select an option"
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Disabled State</h3>
+            <GlassSelect
+              options={options}
+              value={value2}
+              onChange={setValue2}
+              placeholder="Select an option"
+              disabled={true}
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">With Disabled Options</h3>
+            <GlassSelect
+              options={options}
+              value={value1}
+              onChange={setValue1}
+              placeholder="Some options disabled"
+            />
+          </div>
+        </div>
+      );
+    }
+    return <VariantsDemo />
+
+})()}
+
+</Preview>
 
 ## Advanced Examples
 
-```tsx live
+<Preview
+  title="Example"
+  code={`import { GlassSelect } from "liquidify";
 import { useState } from "react";
-import { GlassSelect } from "liquidify";
 import { User, Crown, Shield } from "lucide-react";
 
 export default function AdvancedDemo() {
   const [userRole, setUserRole] = useState("");
   const [teamMembers, setTeamMembers] = useState([]);
 
-  const roleOptions = [
-    { value: "admin", label: "Administrator" },
-    { value: "editor", label: "Editor" },
-    { value: "viewer", label: "Viewer" },
-    { value: "guest", label: "Guest", disabled: true },
-  ];
+const roleOptions = [
+{ value: "admin", label: "Administrator" },
+{ value: "editor", label: "Editor" },
+{ value: "viewer", label: "Viewer" },
+{ value: "guest", label: "Guest", disabled: true },
+];
 
-  const teamOptions = [
-    { value: "john", label: "John Doe" },
-    { value: "jane", label: "Jane Smith" },
-    { value: "bob", label: "Bob Johnson" },
-    { value: "alice", label: "Alice Brown" },
-    { value: "charlie", label: "Charlie Wilson" },
-  ];
+const teamOptions = [
+{ value: "john", label: "John Doe" },
+{ value: "jane", label: "Jane Smith" },
+{ value: "bob", label: "Bob Johnson" },
+{ value: "alice", label: "Alice Brown" },
+{ value: "charlie", label: "Charlie Wilson" },
+];
 
-  return (
-    <div className="space-y-8">
-      <div>
-        <h3 className="text-white mb-4">User Role Selection</h3>
-        <GlassSelect
+return (
+
+<div className="space-y-8">
+<div>
+<h3 className="text-white mb-4">User Role Selection</h3>
+<GlassSelect
           options={roleOptions}
           value={userRole}
           onChange={setUserRole}
           placeholder="Select user role"
           aria-label="User role selection"
         />
-      </div>
+</div>
 
       <div>
         <h3 className="text-white mb-4">Team Members (Multi-select)</h3>
@@ -197,9 +347,70 @@ export default function AdvancedDemo() {
         )}
       </div>
     </div>
-  );
-}
-```
+
+);
+}`}
+language="tsx"
+
+> {(() => {
+
+    function AdvancedDemo() {
+      const [userRole, setUserRole] = useState("");
+      const [teamMembers, setTeamMembers] = useState([]);
+
+      const roleOptions = [
+        { value: "admin", label: "Administrator" },
+        { value: "editor", label: "Editor" },
+        { value: "viewer", label: "Viewer" },
+        { value: "guest", label: "Guest", disabled: true },
+      ];
+
+      const teamOptions = [
+        { value: "john", label: "John Doe" },
+        { value: "jane", label: "Jane Smith" },
+        { value: "bob", label: "Bob Johnson" },
+        { value: "alice", label: "Alice Brown" },
+        { value: "charlie", label: "Charlie Wilson" },
+      ];
+
+      return (
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-white mb-4">User Role Selection</h3>
+            <GlassSelect
+              options={roleOptions}
+              value={userRole}
+              onChange={setUserRole}
+              placeholder="Select user role"
+              aria-label="User role selection"
+            />
+          </div>
+
+          <div>
+            <h3 className="text-white mb-4">Team Members (Multi-select)</h3>
+            <GlassSelect
+              options={teamOptions}
+              value={teamMembers}
+              onChange={setTeamMembers}
+              placeholder="Add team members"
+              multiple={true}
+              searchable={true}
+              maxSelections={3}
+            />
+            {teamMembers.length > 0 && (
+              <div className="mt-3 text-white/60 text-sm">
+                Selected {teamMembers.length} of {teamOptions.length} members
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    return <AdvancedDemo />
+
+})()}
+
+</Preview>
 
 ## Props
 
@@ -231,8 +442,6 @@ export default function AdvancedDemo() {
 ### Form Integration
 
 ```tsx
-import { GlassSelect, GlassFormField } from "liquidify";
-
 function UserForm() {
   const [formData, setFormData] = useState({
     country: "",
@@ -303,8 +512,8 @@ function UserForm() {
 ### Dynamic Options
 
 ```tsx
-import { GlassSelect } from "liquidify";
 import { useEffect, useState } from "react";
+import { GlassFormField, GlassSelect } from "liquidify";
 
 function DynamicSelect() {
   const [options, setOptions] = useState([]);
@@ -352,8 +561,6 @@ function DynamicSelect() {
 ### Controlled with Validation
 
 ```tsx
-import { GlassSelect, GlassFormField } from "liquidify";
-
 function ValidatedSelect() {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
