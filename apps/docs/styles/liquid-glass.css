@@ -19,6 +19,8 @@
   --lg-text: #1a1d21;
   /* dark text for light surfaces */
   --lg-text-inverse: #ffffff;
+  --lg-text-secondary: rgba(26, 29, 33, 0.8);
+  --lg-text-tertiary: rgba(26, 29, 33, 0.6);
   --lg-red: #fb4268;
   --lg-grey: #444739;
   --lg-accent: #fb4268;
@@ -81,6 +83,8 @@
   --lg-bg-readable: rgba(20, 20, 25, 0.75);
   --lg-text: #ffffff;
   --lg-text-inverse: #1a1d21;
+  --lg-text-secondary: rgba(255, 255, 255, 0.8);
+  --lg-text-tertiary: rgba(255, 255, 255, 0.6);
   --lg-red: #fb4268;
   --lg-grey: #888b95;
   --lg-accent: #fb4268;
@@ -351,7 +355,7 @@ body.dark {
 }
 
 .liquid-glass-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--lg-text-tertiary);
 }
 
 .liquid-glass-input:focus {
@@ -557,11 +561,11 @@ body.dark {
 }
 
 .text-liquid-secondary {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--lg-text-secondary);
 }
 
 .text-liquid-tertiary {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--lg-text-tertiary);
 }
 
 .text-liquid-accent {
