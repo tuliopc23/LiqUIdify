@@ -1,0 +1,59 @@
+name: Deploy Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build all deployables
+        run: |
+          echo "Building library..."
+          bun run build:lib
+          
+          echo "Building Storybook..."
+          bun run build:storybook
+          
+          echo "Building documentation..."
+          bun run docs:build
+
+      - name: Validate Storybook build
+        run: |
+          echo "Validating Storybook build..."
+          if [ ! -f "apps/storybook/storybook-static/index.html" ]; then
+            echo "Error: Storybook build failed - index.html not found"
+            exit 1
+          fi
+          echo "✓ Storybook build valid"
+
+      - name: Validate documentation build
+        run: |
+          echo "Validating documentation build..."
+          if [ ! -d "apps/docs/.mintlify" ]; then
+            echo "Error: Documentation build failed - .mintlify directory not found"
+            exit 1
+          fi
+          echo "✓ Documentation build valid"
+
+      - name: Test end-to-end workflows
+        run: bun run test:e2e
+
+      - name: Performance validation
+        run: bun run test:performance

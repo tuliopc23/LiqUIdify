@@ -2,34 +2,17 @@ name: Contrast Audit
 
 on:
   push:
-    branches: [main]
-    paths:
-      - apps/docs/styles/**
-      - libs/components/src/styles/**
-      - scripts/contrast-audit.js
-      - package.json
-      - bun.lock
-      - .github/workflows/contrast-audit.yml
+    branches: [main, develop]
   pull_request:
-    branches: [main]
-    paths:
-      - apps/docs/styles/**
-      - libs/components/src/styles/**
-      - scripts/contrast-audit.js
-      - package.json
-      - bun.lock
-      - .github/workflows/contrast-audit.yml
+    branches: [main, develop]
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  audit:
-    name: Run contrast accessibility audit
+  contrast-audit:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Bun
@@ -40,14 +23,21 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Build library
+        run: bun run build:lib
+
       - name: Run contrast audit
         run: bun run audit:contrast
 
-      - name: Summarize result
+      - name: Run accessibility tests
+        run: bun run test:a11y
+
+      - name: Upload contrast audit results
+        uses: actions/upload-artifact@v4
         if: always()
-        run: |
-          if [ "${{ job.status }}" = 'success' ]; then
-            echo '✅ Contrast audit passed' >> $GITHUB_STEP_SUMMARY
-          else
-            echo '❌ Contrast audit failed. See logs above.' >> $GITHUB_STEP_SUMMARY
-          fi
+        with:
+          name: contrast-audit-results
+          path: |
+            contrast-audit-report.json
+            a11y-test-results.json
+          retention-days: 7

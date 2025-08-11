@@ -1,0 +1,35 @@
+name: Build Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Validate configuration
+        run: bun run validate:config
+
+      - name: Health check
+        run: bun run health-check
+
+      - name: Build and test validation
+        run: bun run test:build
+
+      - name: Verify Storybook build
+        run: bun run storybook:verify
