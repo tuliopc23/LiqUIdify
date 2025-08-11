@@ -16,13 +16,15 @@ export const Preview: React.FC<PreviewProps> = ({
   children,
 }) => {
   return (
-    <div className="preview-block not-prose my-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/5 backdrop-blur p-4 shadow-sm">
+    <div className="preview-block not-prose my-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-white/5 backdrop-blur-md p-4 shadow-sm">
       {title && (
-        <div className="preview-title mb-3 font-medium text-gray-900 dark:text-gray-100 text-sm tracking-wide">
-          {title}
+        <div className="preview-title mb-3 flex items-center justify-between">
+          <div className="font-medium text-gray-900 dark:text-gray-100 text-sm tracking-wide">
+            {title}
+          </div>
         </div>
       )}
-      <div className="preview-live mb-4 py-3 px-3 rounded-md border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white/70 to-white/30 dark:from-white/10 dark:to-white/5">
+      <div className="preview-live mb-4 py-3 px-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-gradient-to-br from-white/80 to-white/40 dark:from-white/10 dark:to-white/5">
         {children}
       </div>
       <div className="preview-code relative group">
@@ -36,7 +38,7 @@ export const Preview: React.FC<PreviewProps> = ({
             <pre
               className={
                 className +
-                " text-xs leading-relaxed overflow-auto rounded-md p-4 bg-[#0d1117] text-gray-100"
+                " text-[12.5px] leading-relaxed overflow-auto rounded-lg p-4 bg-[#0d1117] text-gray-100 border border-gray-700"
               }
               style={style}
             >
@@ -85,7 +87,7 @@ const CopyButton: React.FC<{ code: string }> = ({ code }) => {
         };
         void doCopy();
       }}
-      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md bg-gray-800/80 text-gray-200 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 text-[10px] px-2 py-1 font-medium"
+      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md bg-gray-800/90 text-gray-200 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-[#0d1117] text-[10px] px-2 py-1 font-medium"
     >
       {copied ? "Copied" : "Copy"}
     </button>

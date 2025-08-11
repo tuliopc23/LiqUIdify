@@ -72,16 +72,14 @@ function GlassContainer({ children }) {
 
 export default function Example() {
   return (
-    <LiquidGlassProvider>
-      <GlassContainer>
-        <h3 className="text-liquid-primary font-semibold mb-2">Liquid Glass</h3>
-        <p className="text-liquid-secondary mb-4">
-          Layered transparency with specular highlights and content-aware
-          adaptation.
-        </p>
-        <GlassButton variant="secondary">Learn More</GlassButton>
-      </GlassContainer>
-    </LiquidGlassProvider>
+    <GlassContainer>
+      <h3 className="text-liquid-primary font-semibold mb-2">Liquid Glass</h3>
+      <p className="text-liquid-secondary mb-4">
+        Layered transparency with specular highlights and content-aware
+        adaptation.
+      </p>
+      <GlassButton variant="secondary">Learn More</GlassButton>
+    </GlassContainer>
   );
 }
 ```

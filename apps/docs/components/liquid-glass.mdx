@@ -5,7 +5,7 @@ description: Core liquid glass effect system with layered transparency and conte
 
 import Preview from "./Preview";
 import * as React from "react";
-import { GlassBox } from "liquidify";
+import { GlassUIProvider } from "liquidify";
 
 # LiquidGlass System
 
@@ -31,7 +31,7 @@ function BasicGlassContainer({ children }) {
 
 export default function Demo() {
   return (
-    <LiquidGlassProvider>
+    <GlassUIProvider>
       <div className="space-y-4">
         <BasicGlassContainer>
           <h3 className="text-liquid-primary font-semibold">Glass Container</h3>
@@ -40,7 +40,7 @@ export default function Demo() {
           </p>
         </BasicGlassContainer>
       </div>
-    </LiquidGlassProvider>
+    </GlassUIProvider>
   );
 }`}
   language="tsx"
@@ -60,7 +60,7 @@ export default function Demo() {
     
     function Demo() {
       return (
-        <LiquidGlassProvider>
+        <GlassUIProvider>
           <div className="space-y-4">
             <BasicGlassContainer>
               <h3 className="text-liquid-primary font-semibold">Glass Container</h3>
@@ -69,10 +69,10 @@ export default function Demo() {
               </p>
             </BasicGlassContainer>
           </div>
-        </LiquidGlassProvider>
+        </GlassUIProvider>
       );
     }
-    return <BasicGlassContainer />
+    return <Demo />
   })()}
 </Preview>
 
@@ -97,7 +97,7 @@ export default function Demo() {
 
 return (
 
-<LiquidGlassProvider>
+<GlassUIProvider>
   <div className="flex flex-wrap gap-4">
     {sizes.map((size) => (
       <GlassBox key={size} size={size}>
@@ -105,7 +105,7 @@ return (
       </GlassBox>
     ))}
   </div>
-</LiquidGlassProvider>
+</GlassUIProvider>
 ); }`} language="tsx"
 
 > {(() => {
@@ -125,7 +125,7 @@ return (
       const sizes = ["xs", "sm", "md", "lg", "xl"];
 
       return (
-        <LiquidGlassProvider>
+        <GlassUIProvider>
           <div className="flex flex-wrap gap-4">
             {sizes.map((size) => (
               <GlassBox key={size} size={size}>
@@ -133,10 +133,10 @@ return (
               </GlassBox>
             ))}
           </div>
-        </LiquidGlassProvider>
+        </GlassUIProvider>
       );
     }
-    return <GlassBox />
+    return <Demo />
 
 })()}
 
@@ -170,7 +170,7 @@ export default function Demo() {
 
 return (
 
-<LiquidGlassProvider>
+<GlassUIProvider>
   <div className="flex gap-4">
     {items.map((item, index) => (
       <InteractiveGlass
@@ -182,7 +182,7 @@ return (
       </InteractiveGlass>
     ))}
   </div>
-</LiquidGlassProvider>
+</GlassUIProvider>
 ); }`} language="tsx"
 
 > {(() => {
@@ -208,7 +208,7 @@ return (
       const items = ["Design", "Develop", "Deploy"];
 
       return (
-        <LiquidGlassProvider>
+        <GlassUIProvider>
           <div className="flex gap-4">
             {items.map((item, index) => (
               <InteractiveGlass
@@ -220,7 +220,7 @@ return (
               </InteractiveGlass>
             ))}
           </div>
-        </LiquidGlassProvider>
+        </GlassUIProvider>
       );
     }
     return <InteractiveGlass />
@@ -258,7 +258,7 @@ export default function Demo() {
 
 return (
 
-<LiquidGlassProvider config={{ adaptToContent: true }}>
+<GlassUIProvider glassConfig={{ adaptToContent: true }}>
   <div className="grid grid-cols-2 gap-4">
     {backgrounds.map((bg) => (
       <AdaptiveGlass key={bg.name} bgColor={bg.color}>
@@ -267,7 +267,7 @@ return (
       </AdaptiveGlass>
     ))}
   </div>
-</LiquidGlassProvider>
+</GlassUIProvider>
 ); }`} language="tsx"
 
 > {(() => {
@@ -295,7 +295,7 @@ return (
       ];
 
       return (
-        <LiquidGlassProvider config={{ adaptToContent: true }}>
+        <GlassUIProvider glassConfig={{ adaptToContent: true }}>
           <div className="grid grid-cols-2 gap-4">
             {backgrounds.map((bg) => (
               <AdaptiveGlass key={bg.name} bgColor={bg.color}>
@@ -304,7 +304,7 @@ return (
               </AdaptiveGlass>
             ))}
           </div>
-        </LiquidGlassProvider>
+        </GlassUIProvider>
       );
     }
     return <AdaptiveGlass />
@@ -328,7 +328,7 @@ function BentoItem({ span, children, className = "" }) {
 
 export default function Demo() {
   return (
-    <LiquidGlassProvider>
+    <GlassUIProvider>
       <div className="liquid-glass-bento liquid-glass-bento-3x3 max-w-2xl">
         <BentoItem span="liquid-glass-bento-span-2">
           <h3 className="text-liquid-primary font-semibold mb-2">Featured</h3>
@@ -348,7 +348,7 @@ export default function Demo() {
           <p className="text-liquid-secondary text-sm">Spans two columns</p>
         </BentoItem>
       </div>
-    </LiquidGlassProvider>
+    </GlassUIProvider>
   );
 }`}
   language="tsx"
@@ -365,7 +365,7 @@ export default function Demo() {
     
     function Demo() {
       return (
-        <LiquidGlassProvider>
+        <GlassUIProvider>
           <div className="liquid-glass-bento liquid-glass-bento-3x3 max-w-2xl">
             <BentoItem span="liquid-glass-bento-span-2">
               <h3 className="text-liquid-primary font-semibold mb-2">Featured</h3>
@@ -385,7 +385,7 @@ export default function Demo() {
               <p className="text-liquid-secondary text-sm">Spans two columns</p>
             </BentoItem>
           </div>
-        </LiquidGlassProvider>
+        </GlassUIProvider>
       );
     }
     return <BentoItem />
@@ -394,7 +394,7 @@ export default function Demo() {
 
 ## Provider Configuration
 
-### LiquidGlassProvider Props
+### GlassUIProvider + LiquidGlass Config
 
 ```typescript
 interface LiquidGlassConfig {
@@ -414,9 +414,9 @@ interface LiquidGlassConfig {
   magneticHover?: boolean;
 }
 
-interface LiquidGlassProviderProps {
+interface GlassUIProviderProps {
   children: React.ReactNode;
-  config?: LiquidGlassConfig;
+  glassConfig?: LiquidGlassConfig;
 }
 ```
 
@@ -488,15 +488,15 @@ import "liquidify/styles";
 
 function App() {
   return (
-    <LiquidGlassProvider
-      config={{
+    <GlassUIProvider
+      glassConfig={{
         blur: 24,
         opacity: 0.75,
         adaptToContent: true,
       }}
     >
       {/* Your app content */}
-    </LiquidGlassProvider>
+    </GlassUIProvider>
   );
 }
 ```
