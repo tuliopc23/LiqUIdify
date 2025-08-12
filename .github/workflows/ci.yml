@@ -27,7 +27,6 @@ jobs:
       - name: Install qlty
         run: |
           curl -s https://download.qlty.sh/qlty-cli/install.sh | sh
-          export PATH="$HOME/.qlty/bin:$PATH"
           echo "$HOME/.qlty/bin" >> $GITHUB_PATH
           
       - name: Type check
