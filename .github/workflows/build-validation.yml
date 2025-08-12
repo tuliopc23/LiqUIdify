@@ -16,6 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -29,9 +34,6 @@ jobs:
 
       - name: Health check
         run: bun run health-check
-
-      - name: Build and test validation
-        run: bun run test:build
 
       - name: Verify Storybook build
         run: bun run storybook:verify

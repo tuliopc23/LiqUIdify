@@ -21,6 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -33,8 +38,7 @@ jobs:
         uses: JetBrains/qodana-action@v2024.1
         with:
           args: --source-directory,./libs/components/src
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+  # Set QODANA_TOKEN secret in repo settings to publish to Qodana Cloud
 
       - name: Upload Qodana results
         uses: actions/upload-artifact@v4

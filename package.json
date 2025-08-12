@@ -193,7 +193,7 @@
     "storybook:build": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "build-storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "storybook:preview": "serve apps/storybook/storybook-static -l 6006",
-    "storybook:verify": "npm run -s storybook:build && node -e \"const fs=require('fs');if(!fs.existsSync('apps/storybook/storybook-static/index.html')){process.exit(1)}\"",
+  "storybook:verify": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static && node -e \"const fs=require('fs');if(!fs.existsSync('apps/storybook/storybook-static/index.html')){process.exit(1)}\"",
     "test": "vitest run",
     "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
     "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
