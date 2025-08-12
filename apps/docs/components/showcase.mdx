@@ -18,10 +18,6 @@ export default function App(){ return <div style={{display:'flex',gap:12}}>
   <Button variant="secondary">Secondary</Button>
   <Button variant="ghost">Ghost</Button>
 </div>; }`,
-    "/index.tsx": `import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-createRoot(document.getElementById("root")!).render(<App />);`,
   }}
 />
 
@@ -33,10 +29,6 @@ createRoot(document.getElementById("root")!).render(<App />);`,
 export default function App(){ return <FormField label="Email" helperText="We'll never share your email.">
   <Input placeholder="you@example.com" />
 </FormField>; }`,
-    "/index.tsx": `import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-createRoot(document.getElementById("root")!).render(<App />);`,
   }}
 />
 
@@ -50,10 +42,6 @@ export default function App(){ return <CheckboxGroup label="Fruits">
   <Checkbox value="banana">Banana</Checkbox>
   <Checkbox value="orange">Orange</Checkbox>
 </CheckboxGroup>; }`,
-    "/index.tsx": `import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-createRoot(document.getElementById("root")!).render(<App />);`,
   }}
 />
 
@@ -67,10 +55,6 @@ export default function App(){ return <Combobox options={[
   { label: "Banana", value: "banana" },
   { label: "Orange", value: "orange" },
 ]} placeholder="Pick a fruit" /> }`,
-    "/index.tsx": `import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-createRoot(document.getElementById("root")!).render(<App />);`,
   }}
 />
 
