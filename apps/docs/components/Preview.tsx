@@ -1,5 +1,5 @@
 import React from "react";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import { Highlight, PrismTheme } from "prism-react-renderer";
 
 export type PreviewProps = {
   title?: string;
@@ -29,11 +29,7 @@ export const Preview: React.FC<PreviewProps> = ({
       </div>
       <div className="preview-code relative group">
         <CopyButton code={code} />
-        <Highlight
-          {...defaultProps}
-          code={code.trim()}
-          language={language as any}
-        >
+        <Highlight code={code.trim()} language={language as any} theme={{ plain: { color: '#e6edf3', backgroundColor: '#0d1117' }, styles: [] } as any}>
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <pre
               className={
