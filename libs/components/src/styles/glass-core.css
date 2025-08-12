@@ -286,7 +286,7 @@
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .liquid-glass-core-enhanced,
   .liquid-glass-core-primary,
   .liquid-glass-core-secondary {

@@ -519,10 +519,12 @@ import "liquidify/styles"; // All styles
 
 ```tsx
 // Conditional imports based on environment
-const GlassChart =
-  process.env.NODE_ENV === "production"
-    ? lazy(() => import("liquidify/chart"))
-    : require("liquidify").GlassChart;
+const GlassChart = lazy(() =>
+  (process.env.NODE_ENV === "production"
+    ? import("liquidify/chart")
+    : import("liquidify")
+  ).then((mod) => ({ default: mod.GlassChart }))
+);
 
 // Development-only features
 if (process.env.NODE_ENV === "development") {

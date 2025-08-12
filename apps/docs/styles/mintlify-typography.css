@@ -328,7 +328,7 @@ pre[data-theme] {
 }
 
 .mintlify-content blockquote::before {
-  content:;
+  content: "\201C";
   font-size: 3rem;
   font-family: serif;
   color: var(--text-accent);

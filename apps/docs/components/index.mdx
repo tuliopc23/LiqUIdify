@@ -248,6 +248,34 @@ Advanced components for complex interactions and functionality.
 
 ---
 
+## Performance Demos
+
+### Blur-up images
+
+Display a sharp image progressively using a tiny placeholder first:
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <p className="text-sm text-secondary">Blur-up placeholder → high-res</p>
+    <img
+      data-src="/images/apple-glass-bg.svg"
+      src="/favicon.svg"
+      alt="Blur-up glass demo"
+      style={{ width: '100%', borderRadius: '0.75rem', display: 'block' }}
+    />
+  </div>
+  <div>
+    <p className="text-sm text-secondary">Plain image (no blur-up)</p>
+    <img
+      src="/images/apple-glass-bg.svg"
+      alt="Standard glass background"
+      style={{ width: '100%', borderRadius: '0.75rem', display: 'block' }}
+    />
+  </div>
+</div>
+
+<script defer src="/scripts/enhancements.js"></script>
+
 ## 🚀 Getting Started
 
 Ready to start building? Check out these resources:

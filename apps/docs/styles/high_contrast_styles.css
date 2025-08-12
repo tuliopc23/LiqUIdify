@@ -1,0 +1,19 @@
+@media (prefers-contrast: more) {
+  :root {
+    --high-contrast-overlay: rgba(0, 0, 0, 0.1);
+  }
+  
+  .glass-skeleton {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      var(--high-contrast-overlay) 10px,
+      var(--high-contrast-overlay) 20px
+    );
+  }
+  
+  .reading-progress-bar {
+    background: currentColor;
+  }
+}

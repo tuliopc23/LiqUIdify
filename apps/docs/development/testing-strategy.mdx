@@ -45,7 +45,7 @@ LiqUIdify employs a comprehensive testing strategy to ensure component quality, 
 
 ### Configuration
 
-```typescript
+```js
 // vitest.config.ts
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
@@ -69,7 +69,7 @@ export default defineConfig({
 
 ### Component Testing Pattern
 
-```tsx
+```js
 // glass-button.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
@@ -118,7 +118,7 @@ describe("GlassButton", () => {
 
 ### Hook Testing Pattern
 
-```tsx
+```js
 // useTheme.test.tsx
 import { renderHook, act } from "@testing-library/react";
 import { ThemeProvider, useTheme } from "./theme";
@@ -152,7 +152,7 @@ describe("useTheme", () => {
 
 ### Automated A11y Tests
 
-```tsx
+```js
 // glass-button.a11y.test.tsx
 import { render } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
@@ -223,7 +223,7 @@ describe("GlassButton Accessibility", () => {
 
 ### Component Integration Tests
 
-```tsx
+```js
 // form-integration.test.tsx
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -269,7 +269,7 @@ describe("LoginForm Integration", () => {
 
 ### Playwright Configuration
 
-```typescript
+```js
 // playwright.config.ts
 import { defineConfig, devices } from "@playwright/test";
 
@@ -295,7 +295,7 @@ export default defineConfig({
 
 ### E2E Test Example
 
-```typescript
+```js
 // e2e/dashboard.spec.ts
 import { test, expect } from "@playwright/test";
 
@@ -333,12 +333,11 @@ test.describe("Dashboard", () => {
 
 ### Storybook Visual Tests
 
-```typescript
+```js
 // glass-button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
 import { GlassButton } from './glass-button'
 
-const meta: Meta<typeof GlassButton> = {
+const meta = {
   title: 'Components/GlassButton',
   component: GlassButton,
   parameters: {
@@ -348,16 +347,16 @@ const meta: Meta<typeof GlassButton> = {
 
 export default meta
 
-export const AllVariants: StoryObj = {
-  render: () => (
-    <div className="space-y-4">
-      <GlassButton variant="primary">Primary</GlassButton>
-      <GlassButton variant="secondary">Secondary</GlassButton>
-      <GlassButton variant="ghost">Ghost</GlassButton>
-      <GlassButton disabled>Disabled</GlassButton>
-      <GlassButton loading>Loading</GlassButton>
-    </div>
-  ),
+export const AllVariants = {
+  render: () => {
+    return React.createElement('div', { className: 'space-y-4' },
+      React.createElement(GlassButton, { variant: 'primary' }, 'Primary'),
+      React.createElement(GlassButton, { variant: 'secondary' }, 'Secondary'),
+      React.createElement(GlassButton, { variant: 'ghost' }, 'Ghost'),
+      React.createElement(GlassButton, { disabled: true }, 'Disabled'),
+      React.createElement(GlassButton, { loading: true }, 'Loading')
+    )
+  },
 }
 ```
 
@@ -375,7 +374,7 @@ npm run chromatic -- --auto-accept-changes
 
 ### Bundle Size Testing
 
-```typescript
+```js
 // test/bundle-size.test.ts
 import { readFileSync } from "fs";
 import { gzipSync } from "zlib";
@@ -392,25 +391,26 @@ describe("Bundle Size", () => {
 
 ### Runtime Performance Tests
 
-```tsx
+```js
 // performance.test.tsx
 import { render } from "@testing-library/react";
 import { measurePerformance } from "./test-utils";
 
 describe("Performance", () => {
   it("renders quickly", async () => {
+    const largeDataset = []; // Mock data
     const { duration } = await measurePerformance(() => {
-      render(<ComplexComponent data={largeDataset} />);
+      render(React.createElement(ComplexComponent, { data: largeDataset }));
     });
 
     expect(duration).toBeLessThan(100); // 100ms
   });
 
   it("updates efficiently", async () => {
-    const { rerender } = render(<Component prop="initial" />);
+    const { rerender } = render(React.createElement(Component, { prop: "initial" }));
 
     const { duration } = await measurePerformance(() => {
-      rerender(<Component prop="updated" />);
+      rerender(React.createElement(Component, { prop: "updated" }));
     });
 
     expect(duration).toBeLessThan(16); // 60fps
@@ -442,17 +442,19 @@ bun run test:coverage --coverage.thresholdAutoUpdate
 
 ### Coverage Configuration
 
-```json
-// vitest.config.ts
-{
-  "coverage": {
-    "branches": 80,
-    "functions": 80,
-    "lines": 80,
-    "statements": 80,
-    "exclude": ["**/*.stories.tsx", "**/*.test.tsx", "**/test/**"]
+```js
+// vitest.config.ts coverage configuration
+export default defineConfig({
+  test: {
+    coverage: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/test/**"]
+    }
   }
-}
+})
 ```
 
 ## 🔄 Continuous Integration
@@ -514,7 +516,7 @@ jobs:
 
 1. **Test Behavior, Not Implementation**
 
-   ```tsx
+   ```text
    // ✅ Good
    expect(screen.getByRole("button")).toBeDisabled();
 
@@ -524,7 +526,7 @@ jobs:
 
 2. **Use Testing Library Queries**
 
-   ```tsx
+   ```text
    // ✅ Good
    screen.getByRole("button", { name: "Submit" });
 
@@ -534,7 +536,7 @@ jobs:
 
 3. **Avoid Testing Library Details**
 
-   ```tsx
+   ```text
    // ✅ Good
    expect(screen.getByText("Loading...")).toBeInTheDocument();
 
@@ -544,7 +546,7 @@ jobs:
 
 4. **Test Error States**
 
-   ```tsx
+   ```text
    it("handles errors gracefully", async () => {
      server.use(
        rest.get("/api/data", (req, res, ctx) => {
@@ -562,9 +564,9 @@ jobs:
 
 ### Debug Utilities
 
-```tsx
+```text
 // Debug component rendering
-import { debug } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 test("debugging example", () => {
   const { debug } = render(<Component />);
@@ -572,7 +574,7 @@ test("debugging example", () => {
   debug(screen.getByRole("button")); // Prints specific element
 });
 
-// Visual debugging in headed mode
+// Visual debugging in headed mode (Playwright)
 test("visual debug", async ({ page }) => {
   await page.pause(); // Pauses execution for debugging
 });
@@ -582,7 +584,7 @@ test("visual debug", async ({ page }) => {
 
 **Issue**: Async state updates
 
-```tsx
+```text
 // Solution: Use waitFor
 await waitFor(() => {
   expect(screen.getByText("Updated")).toBeInTheDocument();
@@ -591,7 +593,7 @@ await waitFor(() => {
 
 **Issue**: Timer-based code
 
-```tsx
+```text
 // Solution: Use fake timers
 vi.useFakeTimers();
 act(() => {
@@ -602,7 +604,7 @@ vi.useRealTimers();
 
 **Issue**: External dependencies
 
-```tsx
+```text
 // Solution: Mock modules
 vi.mock("external-lib", () => ({
   default: vi.fn(),

@@ -689,7 +689,7 @@ body.dark {
 }
 
 /* High contrast mode */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .liquid-glass,
   .liquid-glass-container {
     backdrop-filter: none;
@@ -748,7 +748,7 @@ body.dark {
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .liquid-glass-container {
     backdrop-filter: none;
     background: rgba(255, 255, 255, 0.95);

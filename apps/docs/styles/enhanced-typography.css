@@ -660,7 +660,7 @@ td {
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   :root {
     --text-primary: #000000;
     --text-secondary: #000000;
