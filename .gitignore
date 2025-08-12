@@ -23,6 +23,7 @@ coverage/
 /scripts
 src/__tests__/
 tests/
+test-results/
 *.test.ts
 *.spec.js
 
