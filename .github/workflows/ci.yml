@@ -1,5 +1,6 @@
 name: CI
 
+# Fixed: Updated to use qltysh/qlty-action/install@v2 instead of broken v1
 on:
   push:
     branches: [main, develop]
