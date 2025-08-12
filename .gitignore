@@ -25,6 +25,7 @@ src/__tests__/
 tests/
 *.test.ts
 *.spec.js
+test-results/
 
 # IDE
 .vscode/
