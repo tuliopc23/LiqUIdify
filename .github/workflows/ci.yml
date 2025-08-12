@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Setup Qlty
-        uses: qltysh/qlty-action@v1
+      - name: Install Qlty CLI
+        uses: qltysh/qlty-action/install@v2
 
       - name: Type check
         run: bun run type-check
