@@ -1,0 +1,115 @@
+---
+title: "Theme System"
+description: "Master LiqUIdify's powerful theming capabilities and customization options"
+---
+
+# Theme System
+
+LiqUIdify provides a comprehensive theming system that adapts beautifully to both light and dark modes while maintaining the signature liquid glass aesthetic.
+
+## Theme Architecture
+
+### CSS Custom Properties
+```css
+:root {
+  /* Light Theme */
+  --lg-text: #1a1d21;
+  --lg-bg-color: rgba(255, 255, 255, 0.35);
+  --lg-accent: #007AFF;
+}
+
+.dark {
+  /* Dark Theme */
+  --lg-text: #ffffff;
+  --lg-bg-color: rgba(20, 20, 25, 0.35);
+  --lg-accent: #007AFF;
+}
+```
+
+### Automatic Theme Detection
+```tsx
+import { ThemeProvider } from "liquidify";
+
+export default function App() {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="liquidify-theme">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+## Theme Customization
+
+### Brand Colors
+```css
+:root {
+  --lg-accent: #your-brand-color;
+  --lg-accent-hover: #your-brand-hover;
+  --lg-accent-pressed: #your-brand-pressed;
+}
+```
+
+### Glass Effects
+```css
+:root {
+  --lg-blur-amount: 20px;
+  --lg-opacity: 0.35;
+  --lg-border-opacity: 0.12;
+}
+```
+
+### Animation Timings
+```css
+:root {
+  --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  --lg-transition-fast: all 0.2s ease-out;
+}
+```
+
+## Theme Toggle Component
+
+```tsx
+import { ThemeToggle } from "liquidify";
+
+<ThemeToggle 
+  className="liquid-glass"
+  variant="icon" // or "button"
+  size="md"
+/>
+```
+
+## Advanced Theming
+
+### Multiple Theme Support
+```tsx
+const themes = {
+  light: { /* light theme values */ },
+  dark: { /* dark theme values */ },
+  ocean: { /* custom ocean theme */ },
+  sunset: { /* custom sunset theme */ }
+};
+```
+
+### Theme Context Hook
+```tsx
+import { useTheme } from "liquidify";
+
+function MyComponent() {
+  const { theme, setTheme, themes } = useTheme();
+  
+  return (
+    <button onClick={() => setTheme("dark")}>
+      Switch to {theme === "light" ? "dark" : "light"}
+    </button>
+  );
+}
+```
+
+## Best Practices
+
+1. **Semantic Colors**: Use semantic color names (`accent`, `muted`, `destructive`)
+2. **Contrast Ratios**: Maintain WCAG AA compliance (4.5:1 minimum)
+3. **System Preference**: Respect user's system theme preference
+4. **Consistent Patterns**: Use the same theming approach across components
+

@@ -1,0 +1,44 @@
+---
+title: FAQ
+description: Answers to common questions about installing, using, and customizing LiqUIdify.
+---
+
+# Frequently Asked Questions
+
+## What is LiqUIdify?
+A TypeScript-first React component library with a Liquid Glass aesthetic and physics-based interactions.
+
+## How do I install it?
+Use your preferred package manager:
+
+```bash
+npm install liquidify
+# or
+yarn add liquidify
+# or
+pnpm add liquidify
+# or
+bun add liquidify
+```
+
+## How do I load styles?
+Import once at your app entry:
+
+```tsx
+import "liquidify/styles";
+```
+
+## Does it support dark mode?
+Yes. `GlassUIProvider` manages light/dark. Use the `useTheme` hook to toggle.
+
+## Is it accessible?
+Yes, components are built with accessibility in mind. See Guides → Accessibility.
+
+## Where can I see live examples?
+Open the hosted Storybook at https://liquidify-storybook.vercel.app or run `bun run storybook` locally.
+
+## Can I tree-shake the bundle?
+Yes. Import from the package entry; avoid wildcard imports. See Core Concepts → Performance.
+
+## How do I report bugs or request features?
+Open an issue on GitHub: https://github.com/tuliopc23/LiqUIdify

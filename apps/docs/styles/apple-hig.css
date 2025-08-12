@@ -759,3 +759,137 @@ code {
   pointer-events: none;
   z-index: -1;
 }
+
+
+/* ================================================================
+   ENHANCED TYPOGRAPHY INTEGRATION
+   ================================================================ */
+
+/* Import our enhanced typography system */
+@import url("./enhanced-typography.css");
+@import url("./mintlify-typography.css");
+
+/* Override any conflicting styles from the existing apple-hig.css */
+
+/* Ensure our enhanced typography takes precedence */
+body,
+html {
+  font-family: var(--font-text) !important;
+  font-size: var(--text-base) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--text-primary) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced liquid glass integration with typography */
+.liquid-glass-docs {
+  font-family: var(--font-text);
+  color: var(--text-primary);
+}
+
+.liquid-glass-docs h1,
+.liquid-glass-docs h2,
+.liquid-glass-docs h3,
+.liquid-glass-docs h4,
+.liquid-glass-docs h5,
+.liquid-glass-docs h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+/* Improved readability with liquid glass effects */
+.liquid-glass-text {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-text);
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .liquid-glass-text {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Typography for Apple-style components */
+.apple-card h3,
+.apple-card h4 {
+  font-family: var(--font-display) !important;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.apple-card p {
+  font-family: var(--font-text) !important;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.apple-button {
+  font-family: var(--font-text) !important;
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-normal);
+}
+
+.apple-input {
+  font-family: var(--font-text) !important;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+
+.apple-input::placeholder {
+  color: var(--text-tertiary);
+  font-weight: var(--font-normal);
+}
+
+.apple-table th {
+  font-family: var(--font-text) !important;
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.apple-table td {
+  font-family: var(--font-text) !important;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.apple-nav-item {
+  font-family: var(--font-text) !important;
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-normal);
+}
+
+.apple-badge {
+  font-family: var(--font-text) !important;
+  font-weight: var(--font-semibold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Responsive typography enhancements for Apple components */
+@media (max-width: 768px) {
+  .apple-card h3 {
+    font-size: var(--text-lg) !important;
+  }
+  
+  .apple-card p {
+    font-size: var(--text-sm) !important;
+  }
+  
+  .apple-button {
+    font-size: var(--text-sm) !important;
+  }
+  
+  .apple-nav-item {
+    font-size: var(--text-xs) !important;
+  }
+}
+

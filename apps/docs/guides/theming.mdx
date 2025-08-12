@@ -1,0 +1,111 @@
+---
+title: Theming
+description: Customize Liquid Glass appearance, colors, and tokens. Learn how ThemeProvider and design tokens work together.
+---
+
+# Theming
+
+LiqUIdify ships with a Theme system that controls light/dark, liquid-glass intensity, and design tokens (spacing, radii, typography).
+
+At the app root, wrap your tree with the provider and pass optional configuration.
+
+```tsx
+import { GlassUIProvider } from "liquidify";
+import "liquidify/styles";
+
+export default function App({ children }) {
+  return (
+    <GlassUIProvider
+      theme="light"
+      glassConfig={{ intensity: 0.7, blur: 20, saturation: 120 }}
+      hapticConfig={{ enableVibration: true }}
+    >
+      {children}
+    </GlassUIProvider>
+  );
+}
+```
+
+## Color Tokens
+
+The library exposes semantic tokens via CSS variables. You can override them globally in your app CSS.
+
+```css
+:root {
+  /* brand */
+  --liquid-color-primary: #007aff;
+  --liquid-color-primary-contrast: #ffffff;
+
+  /* surfaces */
+  --liquid-surface: rgba(255,255,255,0.7);
+  --liquid-surface-ghost: rgba(255,255,255,0.15);
+}
+
+:root.dark {
+  --liquid-surface: rgba(17,17,17,0.5);
+}
+```
+
+Most components reference these tokens in their classes (see classes like `liquid-glass-button-primary`).
+
+## Liquid Glass Intensity
+
+Set default intensity globally and adjust per‑component with className when needed.
+
+```tsx
+<Card className="liquid-glass liquid-glass-lg">
+  Content
+</Card>
+```
+
+Intensity presets often map to blur/saturation and specular highlights. Keep GPU-friendly values (see Performance guide).
+
+## Dark Mode
+
+The provider toggles a `dark` class on the document. You can react to this in CSS or via the `useTheme` hook.
+
+```tsx
+import { useTheme, GlassButton } from "liquidify";
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <GlassButton variant="ghost" onClick={() => setTheme(theme === "light" ? "dark" : "light")}> 
+      {theme === "light" ? "🌙" : "☀️"} Toggle Theme
+    </GlassButton>
+  );
+}
+```
+
+## Typography
+
+LiqUIdify aligns with Apple HIG. Use the system font stack or load SF Pro. Components inherit typography; override at app level if desired.
+
+```css
+:root {
+  --liquid-font-system: ui-sans-serif, system-ui, -apple-system, "SF Pro", Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+```
+
+## Spacing & Radii
+
+Components follow an 8pt grid. Radii tokens ensure consistent curvature that complements the glass effect.
+
+```css
+:root { 
+  --liquid-radius-sm: 8px;
+  --liquid-radius-md: 12px;
+  --liquid-radius-lg: 16px;
+}
+```
+
+## Extending Themes
+
+- Create utility classes that combine glass layers with your brand colors.
+- Prefer semantic tokens over hardcoded hex values.
+- Keep contrast ratios accessible (see Accessibility guide).
+
+## Next Steps
+
+- Explore component variants in Storybook
+- Review Performance and Accessibility guides

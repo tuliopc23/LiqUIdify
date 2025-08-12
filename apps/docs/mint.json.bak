@@ -31,26 +31,25 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "/quickstart",
+    "url": "/getting-started/quickstart",
     "style": "pill"
   },
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Getting Started",
       "pages": [
         "index",
-        "getting-started/installation",
-        "getting-started/quickstart",
-        "getting-started/project-setup"
+        "getting-started/Installation", 
+        "getting-started/quickstart"
       ]
     },
     {
-      "group": "Guides",
+      "group": "Core Concepts",
       "pages": [
-        "guides/theming",
-        "guides/accessibility",
-        "guides/recipes",
-        "guides/live-previews"
+        "core-concepts/liquid-glass-system",
+        "core-concepts/theme-system",
+        "core-concepts/performance",
+        "guides/accessibility"
       ]
     },
     {
@@ -61,25 +60,26 @@
           "group": "Core System",
           "pages": [
             "components/liquid-glass",
-            "components/theme-toggle",
-            "components/theme-provider"
+            "components/theme-provider",
+            "components/theme-toggle"
           ]
         },
         {
           "group": "Form Controls",
           "pages": [
             "components/button",
+            "components/responsive-button", 
             "components/input",
             "components/textarea",
             "components/select",
             "components/checkbox",
+            "components/checkbox-group",
             "components/radio-group",
             "components/switch",
             "components/slider",
             "components/file-upload",
             "components/date-picker",
-            "components/number-input",
-            "components/checkbox-group"
+            "components/number-input"
           ]
         },
         {
@@ -99,9 +99,9 @@
             "components/tabs",
             "components/breadcrumbs",
             "components/pagination",
-            "components/mobile-nav",
             "components/navbar",
-            "components/sidebar"
+            "components/sidebar",
+            "components/mobile-nav"
           ]
         },
         {
@@ -122,7 +122,7 @@
           "group": "Data Display",
           "pages": [
             "components/avatar",
-            "components/badge",
+            "components/badge", 
             "components/table",
             "components/timeline",
             "components/tree-view",
@@ -144,41 +144,36 @@
     },
     {
       "group": "API Reference",
-      "pages": ["api/index"]
+      "pages": [
+        "api/index"
+      ]
     },
     {
-      "group": "Integrations",
-      "pages": ["integrations/storybook"]
-    },
-    {
-      "group": "Migrate",
-      "pages": ["migrate/from-previous"]
-    },
-    {
-      "group": "Troubleshooting",
-      "pages": ["troubleshooting"]
+      "group": "Guides",
+      "pages": [
+        "guides/theming",
+        "guides/recipes",
+        "guides/live-previews",
+        "migrate/from-previous"
+      ]
     },
     {
       "group": "FAQ",
-      "pages": ["faq"]
+      "pages": [
+        "faq",
+        "troubleshooting"
+      ]
     },
     {
       "group": "Changelog",
-      "pages": ["changelog"]
-    },
-    {
-      "group": "Contributing",
-      "pages": ["contributing"]
-    },
-    {
-      "group": "Legal",
-      "pages": ["licenses"]
+      "pages": [
+        "changelog"
+      ]
     }
   ],
   "footerSocials": {
     "github": "https://github.com/tuliopc23/LiqUIdify"
   },
-  "backgroundImage": "/images/apple-glass-bg.svg",
   "theme": "venus",
   "layout": "topnav",
   "search": {
@@ -198,7 +193,7 @@
       "destination": "/"
     },
     {
-      "source": "/installation",
+      "source": "/installation", 
       "destination": "/getting-started/installation"
     },
     {
@@ -212,10 +207,6 @@
     {
       "source": "/migration",
       "destination": "/migrate/from-previous"
-    },
-    {
-      "source": "/old-path",
-      "destination": "/new-path"
     }
   ],
   "api": {

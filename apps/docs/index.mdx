@@ -1,0 +1,162 @@
+---
+title: "LiqUIdify - Premium React Component Library"
+description: "Production-ready React components with liquid glass design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready."
+---
+
+# Welcome to LiqUIdify
+
+<img
+  className="block dark:hidden"
+  src="/images/hero-light.png"
+  alt="LiqUIdify Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/hero-dark.png"
+  alt="LiqUIdify Hero Dark"
+/>
+
+**LiqUIdify** is a premium React component library that brings the future of UI design to your applications. With our signature **Liquid Glass** aesthetic and **physics-based interactions**, create interfaces that feel alive and respond naturally to user input.
+
+## ✨ Key Features
+
+<CardGroup cols={2}>
+  <Card
+    title="🌊 Liquid Glass Design"
+    icon="droplet"
+    href="/core-concepts/liquid-glass-system"
+  >
+    Signature glassmorphism effects with translucent backgrounds, backdrop blur, and layered depth
+  </Card>
+  <Card
+    title="⚡ Physics-Based Interactions"
+    icon="bolt"
+    href="/guides/recipes"
+  >
+    Magnetic hover effects, spring animations, and natural movement powered by Framer Motion
+  </Card>
+  <Card
+    title="🎯 Apple-Quality Polish"
+    icon="apple"
+    href="/core-concepts/theme-system"
+  >
+    SF Pro typography, 8pt grid system, and iOS/macOS interaction patterns
+  </Card>
+  <Card
+    title="♿ Accessibility First"
+    icon="universal-access"
+    href="/guides/accessibility"
+  >
+    WCAG 2.1 AA compliant, keyboard navigation, screen reader support, and high contrast mode
+  </Card>
+</CardGroup>
+
+## 🚀 Quick Start
+
+<Steps>
+  <Step title="Install LiqUIdify">
+    Add LiqUIdify to your React project with your preferred package manager
+    ```bash
+    npm install liquidify
+    ```
+  </Step>
+  <Step title="Setup Theme Provider">
+    Wrap your app with the ThemeProvider for automatic theme switching
+    ```tsx
+    import { ThemeProvider } from "liquidify";
+    import "liquidify/css";
+
+    export default function App() {
+      return (
+        <ThemeProvider>
+          <YourApp />
+        </ThemeProvider>
+      );
+    }
+    ```
+  </Step>
+  <Step title="Use Components">
+    Start building with beautiful, accessible components
+    ```tsx
+    import { Button, Card, LiquidGlass } from "liquidify";
+
+    function MyComponent() {
+      return (
+        <Card className="liquid-glass">
+          <h2>Welcome to LiqUIdify</h2>
+          <Button variant="primary">Get Started</Button>
+        </Card>
+      );
+    }
+    ```
+  </Step>
+</Steps>
+
+## 🎨 Component Preview
+
+<CardGroup cols={3}>
+  <Card title="Buttons" href="/components/button">
+    Interactive buttons with liquid glass effects and magnetic hover
+  </Card>
+  <Card title="Forms" href="/components/input">
+    Beautiful form controls with floating labels and validation
+  </Card>
+  <Card title="Navigation" href="/components/navbar">
+    Responsive navigation with smooth transitions
+  </Card>
+  <Card title="Feedback" href="/components/toast">
+    Elegant notifications and loading states
+  </Card>
+  <Card title="Data Display" href="/components/table">
+    Clean tables, cards, and data visualization
+  </Card>
+  <Card title="Layout" href="/components/modal">
+    Flexible layouts and container components
+  </Card>
+</CardGroup>
+
+## 💡 Why LiqUIdify?
+
+<AccordionGroup>
+  <Accordion title="🏆 Production Ready">
+    Battle-tested components used by **1000+ developers** in production applications. Comprehensive test coverage, performance optimized, and thoroughly documented.
+  </Accordion>
+  
+  <Accordion title="🔧 Developer Experience">
+    **TypeScript-first** with excellent IntelliSense support, **Storybook integration**, and **comprehensive documentation**. Hot reload support and detailed error messages.
+  </Accordion>
+  
+  <Accordion title="🎯 Design System">
+    Built on **Apple Human Interface Guidelines** with consistent spacing, typography, and interaction patterns. Maintains design consistency across your entire application.
+  </Accordion>
+  
+  <Accordion title="⚡ Performance">
+    **Tree-shakeable** bundle, **GPU-accelerated** animations, and **optimized rendering**. Minimal impact on your application's performance.
+</Accordion>
+</AccordionGroup>
+
+## 🌟 What's Next?
+
+<CardGroup cols={2}>
+<Card
+title="Browse Components"
+icon="shapes"
+href="/components"
+>
+Explore our comprehensive library of 40+ components with live examples
+</Card>
+<Card
+title="Read the Guides" 
+icon="book"
+href="/guides/theming"
+>
+Learn advanced techniques, best practices, and customization options
+</Card>
+</CardGroup>
+
+---
+
+<Note>
+**Ready to get started?** Check out our [Installation Guide](/getting-started/Installation) or jump straight to the [Quickstart](/getting-started/quickstart) for a hands-on introduction.
+</Note>
+

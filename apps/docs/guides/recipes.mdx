@@ -1,0 +1,129 @@
+---
+title: Recipes
+description: Practical patterns for building with LiqUIdify — magnetic hover, responsive cards, controlled inputs, and more.
+---
+
+# Recipes
+
+A collection of copy‑paste patterns built with LiqUIdify components.
+
+## Magnetic Hover Button
+
+```tsx
+import { GlassButton } from "liquidify";
+
+export function MagneticButton() {
+  return (
+    <div className="group relative inline-flex">
+      <div className="absolute inset-0 rounded-xl blur-xl bg-blue-500/20 opacity-0 group-hover:opacity-100 transition" />
+      <GlassButton className="[--magnetic-strength:8]">
+        Hover me
+      </GlassButton>
+    </div>
+  );
+}
+```
+
+## Responsive Card Grid
+
+```tsx
+import { GlassCard } from "liquidify";
+
+export function CardGrid() {
+  const cards = Array.from({ length: 6 }, (_, i) => i + 1);
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {cards.map((n) => (
+        <GlassCard key={n} variant="elevated" className="p-6">
+          <GlassCard.Title>Card {n}</GlassCard.Title>
+          <GlassCard.Description>
+            Liquid glass surface with soft depth
+          </GlassCard.Description>
+        </GlassCard>
+      ))}
+    </div>
+  );
+}
+```
+
+## Controlled Input with Validation
+
+```tsx
+import { GlassInput, GlassFormField, GlassButton } from "liquidify";
+
+export function EmailField() {
+  const [email, setEmail] = React.useState("");
+  const [error, setError] = React.useState<string | null>(null);
+
+  function onSubmit(e) {
+    e.preventDefault();
+    setError(/^[^@]+@[^@]+$/.test(email) ? null : "Enter a valid email");
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-3">
+      <GlassFormField label="Email" error={error ?? undefined}>
+        <GlassInput
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+        />
+      </GlassFormField>
+      <GlassButton type="submit">Submit</GlassButton>
+    </form>
+  );
+}
+```
+
+## Modal + Focus Trap
+
+```tsx
+import { GlassModal, GlassFocusTrap, GlassButton } from "liquidify";
+
+export function ModalExample() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <GlassButton onClick={() => setOpen(true)}>Open</GlassButton>
+      <GlassModal open={open} onOpenChange={setOpen}>
+        <GlassFocusTrap>
+          <div className="p-6 space-y-3">
+            <h3 className="text-lg font-semibold">Dialog</h3>
+            <p>Focus stays within the dialog.</p>
+            <GlassButton onClick={() => setOpen(false)}>Close</GlassButton>
+          </div>
+        </GlassFocusTrap>
+      </GlassModal>
+    </>
+  );
+}
+```
+
+## Toast on Action
+
+```tsx
+import { GlassToast, GlassButton } from "liquidify";
+
+export function ToastOnSave() {
+  const [toasts, setToasts] = React.useState<string[]>([]);
+  return (
+    <div>
+      <GlassButton onClick={() => setToasts((t) => ["Saved!", ...t])}>
+        Save
+      </GlassButton>
+      <div className="fixed bottom-4 right-4 space-y-2">
+        {toasts.map((t, i) => (
+          <GlassToast key={i}>{t}</GlassToast>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- Use `className` to fine‑tune glass intensity per component.
+- Prefer semantic tokens over raw colors.
+- See Storybook for more variations and controls.

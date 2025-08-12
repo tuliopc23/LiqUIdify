@@ -1,0 +1,592 @@
+/* ================================================================
+   ENHANCED TYPOGRAPHY SYSTEM FOR LIQUIDIFY DOCS
+   ================================================================ */
+
+/* Modern font loading with better performance and fallbacks */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+/* Apple SF Pro fonts with better fallbacks */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Text-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Mono";
+  src: url("https://developer.apple.com/fonts/SF-Mono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Enhanced Typography Variables */
+:root {
+  /* Font Families with better fallbacks */
+  --font-display: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, 
+                  "Segoe UI", system-ui, sans-serif;
+  --font-text: "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, 
+               "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", "Monaco", 
+               "Cascadia Code", "Consolas", monospace;
+
+  /* Enhanced Typography Scale - Perfect for documentation */
+  --text-xs: 0.75rem;    /* 12px - Captions, metadata */
+  --text-sm: 0.875rem;   /* 14px - Small text, labels */
+  --text-base: 1rem;     /* 16px - Body text */
+  --text-lg: 1.125rem;   /* 18px - Large body text */
+  --text-xl: 1.25rem;    /* 20px - Small headings */
+  --text-2xl: 1.5rem;    /* 24px - Section headings */
+  --text-3xl: 1.875rem;  /* 30px - Page headings */
+  --text-4xl: 2.25rem;   /* 36px - Hero headings */
+  --text-5xl: 3rem;      /* 48px - Display headings */
+  --text-6xl: 3.75rem;   /* 60px - Hero displays */
+  --text-7xl: 4.5rem;    /* 72px - Marketing displays */
+
+  /* Line Heights optimized for readability */
+  --leading-tight: 1.25;    /* For large headings */
+  --leading-snug: 1.375;    /* For medium headings */
+  --leading-normal: 1.5;    /* For body text */
+  --leading-relaxed: 1.625; /* For long-form content */
+  --leading-loose: 2;       /* For captions */
+
+  /* Letter Spacing (Apple-style) */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+
+  /* Font Weights */
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+
+  /* Text Colors with proper contrast */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-quaternary: #D1D5DB;
+  --text-accent: #007AFF;
+  --text-success: #059669;
+  --text-warning: #D97706;
+  --text-error: #DC2626;
+  --text-inverse: #FFFFFF;
+
+  /* Dark mode text colors */
+  --text-primary-dark: #F9FAFB;
+  --text-secondary-dark: #D1D5DB;
+  --text-tertiary-dark: #9CA3AF;
+  --text-quaternary-dark: #6B7280;
+  --text-accent-dark: #3B82F6;
+  --text-success-dark: #10B981;
+  --text-warning-dark: #F59E0B;
+  --text-error-dark: #EF4444;
+  --text-inverse-dark: #111827;
+}
+
+/* Dark mode color updates */
+[data-theme="dark"] {
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --text-tertiary: var(--text-tertiary-dark);
+  --text-quaternary: var(--text-quaternary-dark);
+  --text-accent: var(--text-accent-dark);
+  --text-success: var(--text-success-dark);
+  --text-warning: var(--text-warning-dark);
+  --text-error: var(--text-error-dark);
+  --text-inverse: var(--text-inverse-dark);
+}
+
+/* ================================================================
+   ENHANCED TYPOGRAPHY STYLES
+   ================================================================ */
+
+/* Base Typography */
+html {
+  font-size: 16px; /* Base font size */
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  font-weight: var(--font-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* Enhanced Heading Styles */
+h1, .text-6xl {
+  font-family: var(--font-display);
+  font-size: var(--text-6xl);
+  font-weight: var(--font-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  text-wrap: balance; /* Better line breaks */
+}
+
+h2, .text-5xl {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin: 2rem 0 1rem 0;
+  text-wrap: balance;
+}
+
+h3, .text-4xl {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin: 1.75rem 0 0.75rem 0;
+  text-wrap: balance;
+}
+
+h4, .text-3xl {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
+  margin: 1.5rem 0 0.5rem 0;
+  text-wrap: balance;
+}
+
+h5, .text-2xl {
+  font-family: var(--font-text);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
+  margin: 1.25rem 0 0.5rem 0;
+  text-wrap: balance;
+}
+
+h6, .text-xl {
+  font-family: var(--font-text);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
+  margin: 1rem 0 0.5rem 0;
+  text-wrap: balance;
+}
+
+/* Enhanced Body Text */
+p, .text-base {
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  font-weight: var(--font-normal);
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  text-wrap: pretty; /* Better paragraph breaks */
+}
+
+/* Large body text for intros */
+.text-lg, .lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  font-weight: var(--font-normal);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Small text */
+small, .text-sm {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--text-tertiary);
+}
+
+/* Enhanced Code Typography */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: var(--font-normal);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] code {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  background: #1e293b !important;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Enhanced Link Styles */
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  transition: all 0.2s ease;
+  border-radius: 0.125rem;
+  padding: 0.125rem 0.25rem;
+  margin: -0.125rem -0.25rem;
+}
+
+a:hover {
+  color: var(--text-accent);
+  background: rgba(59, 130, 246, 0.1);
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+/* List Typography */
+ul, ol {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+  margin: 0.25rem 0;
+}
+
+/* Blockquote Enhancement */
+blockquote {
+  font-family: var(--font-text);
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 2rem 0;
+  padding: 1rem 0 1rem 2rem;
+  border-left: 4px solid var(--text-accent);
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+[data-theme="dark"] blockquote {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Table Typography */
+table {
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+th {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+td {
+  color: var(--text-secondary);
+  padding: 0.75rem 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] td {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+
+/* Font Families */
+.font-display { font-family: var(--font-display); }
+.font-text { font-family: var(--font-text); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Font Weights */
+.font-thin { font-weight: var(--font-thin); }
+.font-extralight { font-weight: var(--font-extralight); }
+.font-light { font-weight: var(--font-light); }
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+.font-extrabold { font-weight: var(--font-extrabold); }
+.font-black { font-weight: var(--font-black); }
+
+/* Text Colors */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-quaternary { color: var(--text-quaternary); }
+.text-accent { color: var(--text-accent); }
+.text-success { color: var(--text-success); }
+.text-warning { color: var(--text-warning); }
+.text-error { color: var(--text-error); }
+.text-inverse { color: var(--text-inverse); }
+
+/* Line Heights */
+.leading-tight { line-height: var(--leading-tight); }
+.leading-snug { line-height: var(--leading-snug); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+.leading-loose { line-height: var(--leading-loose); }
+
+/* Letter Spacing */
+.tracking-tighter { letter-spacing: var(--tracking-tighter); }
+.tracking-tight { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide { letter-spacing: var(--tracking-wide); }
+.tracking-wider { letter-spacing: var(--tracking-wider); }
+
+/* Text Alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Text Decoration */
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* Text Transform */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* Special Typography Classes */
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+.text-nowrap { white-space: nowrap; }
+.text-ellipsis { 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Enhanced readability for long-form content */
+.prose {
+  max-width: 65ch; /* Optimal reading width */
+  margin: 0 auto;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.prose h1:first-child,
+.prose h2:first-child,
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose ul, 
+.prose ol {
+  margin: 1.25em 0;
+}
+
+.prose li {
+  margin: 0.5em 0;
+}
+
+/* ================================================================
+   RESPONSIVE TYPOGRAPHY
+   ================================================================ */
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px; /* Smaller base on mobile */
+  }
+  
+  h1, .text-6xl {
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+  }
+  
+  h2, .text-5xl {
+    font-size: var(--text-3xl);
+  }
+  
+  h3, .text-4xl {
+    font-size: var(--text-2xl);
+  }
+  
+  .prose {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* High resolution display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================================================ */
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-accent: #0000FF;
+  }
+  
+  [data-theme="dark"] {
+    --text-primary: #FFFFFF;
+    --text-secondary: #FFFFFF;
+    --text-accent: #00FFFF;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  code {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+

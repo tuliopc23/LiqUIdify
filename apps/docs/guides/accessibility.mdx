@@ -1,0 +1,78 @@
+---
+title: Accessibility
+description: How LiqUIdify helps you build accessible UIs and what to consider when composing components.
+---
+
+# Accessibility
+
+LiqUIdify aims for WCAG 2.1 AA alignment. Components ship with sensible roles, labels, and keyboard focus management. This guide summarizes patterns and responsibilities.
+
+## Provider & Live Regions
+
+`GlassUIProvider` orchestrates accessible helpers like live regions and haptics. Use `GlassToast`, `GlassErrorBoundary`, and `GlassFocusTrap` to improve feedback and focus containment.
+
+## Keyboard Navigation
+
+- All interactive components are tab-focusable
+- Arrow key navigation for menus, lists, and radio groups
+- Focus trap for modals/drawers via `GlassFocusTrap`
+
+```tsx
+import { GlassModal, GlassFocusTrap } from "liquidify";
+```
+
+## Labels & Descriptions
+
+Use `GlassFormField` to bind labels, descriptions, and errors to inputs.
+
+```tsx
+<GlassFormField label="Email" description="We’ll never share your email." error={error}>
+  <GlassInput type="email" />
+</GlassFormField>
+```
+
+## Color Contrast
+
+- Prefer semantic tokens; they’re tuned for contrast
+- Check custom brand overrides with a contrast checker (≥ 4.5:1 for body text)
+- Provide visible focus outlines (don’t remove focus ring)
+
+## Reduced Motion
+
+Respect user preferences. Animate properties that are GPU friendly and provide a reduced-motion path.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-interactive { transition: none !important; }
+}
+```
+
+## ARIA Patterns
+
+- Dialogs: `role="dialog"`, labelled by a heading, close button reachable
+- Tabs: roving tab index, `aria-selected`, `aria-controls`
+- Tooltips: describe only, not essential information
+
+Use the library primitives which encapsulate these details where possible.
+
+## Error Boundaries
+
+Wrap risky areas with `GlassErrorBoundary` to fail gracefully.
+
+```tsx
+import { GlassErrorBoundary } from "liquidify";
+
+<GlassErrorBoundary fallback={<p>Something went wrong.</p>}>
+  <DangerousArea />
+</GlassErrorBoundary>
+```
+
+## Checklist
+
+- [ ] Interactive targets ≥ 44px
+- [ ] Keyboard only flows
+- [ ] Visible focus states
+- [ ] Announce critical changes via toasts/live regions
+- [ ] Sufficient color contrast
+
+See also: Guides → Theming, Core Concepts → Performance.
