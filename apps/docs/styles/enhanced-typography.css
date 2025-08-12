@@ -8,7 +8,8 @@
 /* Apple SF Pro fonts with better fallbacks */
 @font-face {
   font-family: "SF Pro Display";
-  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Regular.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
@@ -16,7 +17,8 @@
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Medium.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Medium.woff2")
+    format("woff2");
   font-weight: 500;
   font-display: swap;
   font-style: normal;
@@ -24,7 +26,8 @@
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Semibold.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Semibold.woff2")
+    format("woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
@@ -32,7 +35,8 @@
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Bold.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Bold.woff2")
+    format("woff2");
   font-weight: 700;
   font-display: swap;
   font-style: normal;
@@ -40,7 +44,8 @@
 
 @font-face {
   font-family: "SF Pro Text";
-  src: url("https://developer.apple.com/fonts/SF-Pro-Text-Regular.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Pro-Text-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
@@ -48,7 +53,8 @@
 
 @font-face {
   font-family: "SF Mono";
-  src: url("https://developer.apple.com/fonts/SF-Mono-Regular.woff2") format("woff2");
+  src: url("https://developer.apple.com/fonts/SF-Mono-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
@@ -57,32 +63,35 @@
 /* Enhanced Typography Variables */
 :root {
   /* Font Families with better fallbacks */
-  --font-display: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, 
-                  "Segoe UI", system-ui, sans-serif;
-  --font-text: "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, 
-               "Segoe UI", system-ui, sans-serif;
-  --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", "Monaco", 
-               "Cascadia Code", "Consolas", monospace;
+  --font-display:
+    "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    system-ui, sans-serif;
+  --font-text:
+    "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    system-ui, sans-serif;
+  --font-mono:
+    "SF Mono", "Fira Code", "JetBrains Mono", "Monaco", "Cascadia Code",
+    "Consolas", monospace;
 
   /* Enhanced Typography Scale - Perfect for documentation */
-  --text-xs: 0.75rem;    /* 12px - Captions, metadata */
-  --text-sm: 0.875rem;   /* 14px - Small text, labels */
-  --text-base: 1rem;     /* 16px - Body text */
-  --text-lg: 1.125rem;   /* 18px - Large body text */
-  --text-xl: 1.25rem;    /* 20px - Small headings */
-  --text-2xl: 1.5rem;    /* 24px - Section headings */
-  --text-3xl: 1.875rem;  /* 30px - Page headings */
-  --text-4xl: 2.25rem;   /* 36px - Hero headings */
-  --text-5xl: 3rem;      /* 48px - Display headings */
-  --text-6xl: 3.75rem;   /* 60px - Hero displays */
-  --text-7xl: 4.5rem;    /* 72px - Marketing displays */
+  --text-xs: 0.75rem; /* 12px - Captions, metadata */
+  --text-sm: 0.875rem; /* 14px - Small text, labels */
+  --text-base: 1rem; /* 16px - Body text */
+  --text-lg: 1.125rem; /* 18px - Large body text */
+  --text-xl: 1.25rem; /* 20px - Small headings */
+  --text-2xl: 1.5rem; /* 24px - Section headings */
+  --text-3xl: 1.875rem; /* 30px - Page headings */
+  --text-4xl: 2.25rem; /* 36px - Hero headings */
+  --text-5xl: 3rem; /* 48px - Display headings */
+  --text-6xl: 3.75rem; /* 60px - Hero displays */
+  --text-7xl: 4.5rem; /* 72px - Marketing displays */
 
   /* Line Heights optimized for readability */
-  --leading-tight: 1.25;    /* For large headings */
-  --leading-snug: 1.375;    /* For medium headings */
-  --leading-normal: 1.5;    /* For body text */
+  --leading-tight: 1.25; /* For large headings */
+  --leading-snug: 1.375; /* For medium headings */
+  --leading-normal: 1.5; /* For body text */
   --leading-relaxed: 1.625; /* For long-form content */
-  --leading-loose: 2;       /* For captions */
+  --leading-loose: 2; /* For captions */
 
   /* Letter Spacing (Apple-style) */
   --tracking-tighter: -0.05em;
@@ -104,24 +113,24 @@
 
   /* Text Colors with proper contrast */
   --text-primary: #111827;
-  --text-secondary: #6B7280;
-  --text-tertiary: #9CA3AF;
-  --text-quaternary: #D1D5DB;
-  --text-accent: #007AFF;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-quaternary: #d1d5db;
+  --text-accent: #007aff;
   --text-success: #059669;
-  --text-warning: #D97706;
-  --text-error: #DC2626;
-  --text-inverse: #FFFFFF;
+  --text-warning: #d97706;
+  --text-error: #dc2626;
+  --text-inverse: #ffffff;
 
   /* Dark mode text colors */
-  --text-primary-dark: #F9FAFB;
-  --text-secondary-dark: #D1D5DB;
-  --text-tertiary-dark: #9CA3AF;
-  --text-quaternary-dark: #6B7280;
-  --text-accent-dark: #3B82F6;
-  --text-success-dark: #10B981;
-  --text-warning-dark: #F59E0B;
-  --text-error-dark: #EF4444;
+  --text-primary-dark: #f9fafb;
+  --text-secondary-dark: #d1d5db;
+  --text-tertiary-dark: #9ca3af;
+  --text-quaternary-dark: #6b7280;
+  --text-accent-dark: #3b82f6;
+  --text-success-dark: #10b981;
+  --text-warning-dark: #f59e0b;
+  --text-error-dark: #ef4444;
   --text-inverse-dark: #111827;
 }
 
@@ -161,7 +170,8 @@ body {
 }
 
 /* Enhanced Heading Styles */
-h1, .text-6xl {
+h1,
+.text-6xl {
   font-family: var(--font-display);
   font-size: var(--text-6xl);
   font-weight: var(--font-extrabold);
@@ -172,7 +182,8 @@ h1, .text-6xl {
   text-wrap: balance; /* Better line breaks */
 }
 
-h2, .text-5xl {
+h2,
+.text-5xl {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
   font-weight: var(--font-bold);
@@ -183,7 +194,8 @@ h2, .text-5xl {
   text-wrap: balance;
 }
 
-h3, .text-4xl {
+h3,
+.text-4xl {
   font-family: var(--font-display);
   font-size: var(--text-4xl);
   font-weight: var(--font-semibold);
@@ -194,7 +206,8 @@ h3, .text-4xl {
   text-wrap: balance;
 }
 
-h4, .text-3xl {
+h4,
+.text-3xl {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
   font-weight: var(--font-semibold);
@@ -205,7 +218,8 @@ h4, .text-3xl {
   text-wrap: balance;
 }
 
-h5, .text-2xl {
+h5,
+.text-2xl {
   font-family: var(--font-text);
   font-size: var(--text-2xl);
   font-weight: var(--font-medium);
@@ -216,7 +230,8 @@ h5, .text-2xl {
   text-wrap: balance;
 }
 
-h6, .text-xl {
+h6,
+.text-xl {
   font-family: var(--font-text);
   font-size: var(--text-xl);
   font-weight: var(--font-medium);
@@ -228,7 +243,8 @@ h6, .text-xl {
 }
 
 /* Enhanced Body Text */
-p, .text-base {
+p,
+.text-base {
   font-family: var(--font-text);
   font-size: var(--text-base);
   font-weight: var(--font-normal);
@@ -240,7 +256,8 @@ p, .text-base {
 }
 
 /* Large body text for intros */
-.text-lg, .lead {
+.text-lg,
+.lead {
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
   color: var(--text-secondary);
@@ -249,7 +266,8 @@ p, .text-base {
 }
 
 /* Small text */
-small, .text-sm {
+small,
+.text-sm {
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   color: var(--text-secondary);
@@ -322,7 +340,8 @@ a:focus {
 }
 
 /* List Typography */
-ul, ol {
+ul,
+ol {
   margin: 0 0 1rem 0;
   padding-left: 1.5rem;
 }
@@ -382,68 +401,158 @@ td {
    ================================================================ */
 
 /* Font Families */
-.font-display { font-family: var(--font-display); }
-.font-text { font-family: var(--font-text); }
-.font-mono { font-family: var(--font-mono); }
+.font-display {
+  font-family: var(--font-display);
+}
+.font-text {
+  font-family: var(--font-text);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
 
 /* Font Weights */
-.font-thin { font-weight: var(--font-thin); }
-.font-extralight { font-weight: var(--font-extralight); }
-.font-light { font-weight: var(--font-light); }
-.font-normal { font-weight: var(--font-normal); }
-.font-medium { font-weight: var(--font-medium); }
-.font-semibold { font-weight: var(--font-semibold); }
-.font-bold { font-weight: var(--font-bold); }
-.font-extrabold { font-weight: var(--font-extrabold); }
-.font-black { font-weight: var(--font-black); }
+.font-thin {
+  font-weight: var(--font-thin);
+}
+.font-extralight {
+  font-weight: var(--font-extralight);
+}
+.font-light {
+  font-weight: var(--font-light);
+}
+.font-normal {
+  font-weight: var(--font-normal);
+}
+.font-medium {
+  font-weight: var(--font-medium);
+}
+.font-semibold {
+  font-weight: var(--font-semibold);
+}
+.font-bold {
+  font-weight: var(--font-bold);
+}
+.font-extrabold {
+  font-weight: var(--font-extrabold);
+}
+.font-black {
+  font-weight: var(--font-black);
+}
 
 /* Text Colors */
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-.text-quaternary { color: var(--text-quaternary); }
-.text-accent { color: var(--text-accent); }
-.text-success { color: var(--text-success); }
-.text-warning { color: var(--text-warning); }
-.text-error { color: var(--text-error); }
-.text-inverse { color: var(--text-inverse); }
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+.text-quaternary {
+  color: var(--text-quaternary);
+}
+.text-accent {
+  color: var(--text-accent);
+}
+.text-success {
+  color: var(--text-success);
+}
+.text-warning {
+  color: var(--text-warning);
+}
+.text-error {
+  color: var(--text-error);
+}
+.text-inverse {
+  color: var(--text-inverse);
+}
 
 /* Line Heights */
-.leading-tight { line-height: var(--leading-tight); }
-.leading-snug { line-height: var(--leading-snug); }
-.leading-normal { line-height: var(--leading-normal); }
-.leading-relaxed { line-height: var(--leading-relaxed); }
-.leading-loose { line-height: var(--leading-loose); }
+.leading-tight {
+  line-height: var(--leading-tight);
+}
+.leading-snug {
+  line-height: var(--leading-snug);
+}
+.leading-normal {
+  line-height: var(--leading-normal);
+}
+.leading-relaxed {
+  line-height: var(--leading-relaxed);
+}
+.leading-loose {
+  line-height: var(--leading-loose);
+}
 
 /* Letter Spacing */
-.tracking-tighter { letter-spacing: var(--tracking-tighter); }
-.tracking-tight { letter-spacing: var(--tracking-tight); }
-.tracking-normal { letter-spacing: var(--tracking-normal); }
-.tracking-wide { letter-spacing: var(--tracking-wide); }
-.tracking-wider { letter-spacing: var(--tracking-wider); }
+.tracking-tighter {
+  letter-spacing: var(--tracking-tighter);
+}
+.tracking-tight {
+  letter-spacing: var(--tracking-tight);
+}
+.tracking-normal {
+  letter-spacing: var(--tracking-normal);
+}
+.tracking-wide {
+  letter-spacing: var(--tracking-wide);
+}
+.tracking-wider {
+  letter-spacing: var(--tracking-wider);
+}
 
 /* Text Alignment */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-.text-justify { text-align: justify; }
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-justify {
+  text-align: justify;
+}
 
 /* Text Decoration */
-.underline { text-decoration: underline; }
-.line-through { text-decoration: line-through; }
-.no-underline { text-decoration: none; }
+.underline {
+  text-decoration: underline;
+}
+.line-through {
+  text-decoration: line-through;
+}
+.no-underline {
+  text-decoration: none;
+}
 
 /* Text Transform */
-.uppercase { text-transform: uppercase; }
-.lowercase { text-transform: lowercase; }
-.capitalize { text-transform: capitalize; }
-.normal-case { text-transform: none; }
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.normal-case {
+  text-transform: none;
+}
 
 /* Special Typography Classes */
-.text-balance { text-wrap: balance; }
-.text-pretty { text-wrap: pretty; }
-.text-nowrap { white-space: nowrap; }
-.text-ellipsis { 
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -475,7 +584,7 @@ td {
   margin-bottom: 1.25em;
 }
 
-.prose ul, 
+.prose ul,
 .prose ol {
   margin: 1.25em 0;
 }
@@ -493,20 +602,23 @@ td {
   html {
     font-size: 14px; /* Smaller base on mobile */
   }
-  
-  h1, .text-6xl {
+
+  h1,
+  .text-6xl {
     font-size: var(--text-4xl);
     line-height: var(--leading-tight);
   }
-  
-  h2, .text-5xl {
+
+  h2,
+  .text-5xl {
     font-size: var(--text-3xl);
   }
-  
-  h3, .text-4xl {
+
+  h3,
+  .text-4xl {
     font-size: var(--text-2xl);
   }
-  
+
   .prose {
     max-width: 100%;
     padding: 0 1rem;
@@ -552,19 +664,19 @@ td {
   :root {
     --text-primary: #000000;
     --text-secondary: #000000;
-    --text-accent: #0000FF;
+    --text-accent: #0000ff;
   }
-  
+
   [data-theme="dark"] {
-    --text-primary: #FFFFFF;
-    --text-secondary: #FFFFFF;
-    --text-accent: #00FFFF;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #00ffff;
   }
-  
+
   a {
     text-decoration: underline;
   }
-  
+
   code {
     border: 2px solid currentColor;
   }
@@ -589,4 +701,3 @@ td {
   white-space: nowrap;
   border: 0;
 }
-

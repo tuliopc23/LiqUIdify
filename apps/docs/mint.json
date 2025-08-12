@@ -39,7 +39,7 @@
       "group": "Getting Started",
       "pages": [
         "index",
-        "getting-started/Installation", 
+        "getting-started/Installation",
         "getting-started/quickstart"
       ]
     },
@@ -69,7 +69,7 @@
           "group": "Form Controls",
           "pages": [
             "components/button",
-            "components/responsive-button", 
+            "components/responsive-button",
             "components/input",
             "components/textarea",
             "components/select",
@@ -123,7 +123,7 @@
           "group": "Data Display",
           "pages": [
             "components/avatar",
-            "components/badge", 
+            "components/badge",
             "components/table",
             "components/timeline",
             "components/tree-view",
@@ -144,10 +144,21 @@
       ]
     },
     {
-      "group": "API Reference",
+      "group": "Development",
       "pages": [
-        "api/index"
+        "development/onboarding",
+        "development/architecture",
+        "development/build-system",
+        "development/testing-strategy"
       ]
+    },
+    {
+      "group": "Advanced",
+      "pages": ["advanced/framework-integration"]
+    },
+    {
+      "group": "API Reference",
+      "pages": ["api/index"]
     },
     {
       "group": "Guides",
@@ -159,17 +170,51 @@
       ]
     },
     {
-      "group": "FAQ",
+      "group": "Examples",
       "pages": [
-        "faq",
-        "troubleshooting"
+        "examples/dashboard-example",
+        "examples/form-examples",
+        "examples/landing-page",
+        "examples/admin-panel",
+        "examples/integration-examples"
       ]
     },
     {
-      "group": "Changelog",
+      "group": "Tutorials",
       "pages": [
-        "changelog"
+        "tutorials/getting-started-tutorial",
+        "tutorials/theming-tutorial",
+        "tutorials/accessibility-tutorial",
+        "tutorials/performance-tutorial"
       ]
+    },
+    {
+      "group": "Design",
+      "pages": [
+        "design/design-principles",
+        "design/usage-guidelines",
+        "design/component-specs",
+        "design/brand-guidelines",
+        "design/design-resources"
+      ]
+    },
+    {
+      "group": "Production",
+      "pages": [
+        "production/deployment-guide",
+        "production/bundle-analysis",
+        "production/cdn-usage",
+        "production/version-migration",
+        "production/troubleshooting"
+      ]
+    },
+    {
+      "group": "FAQ",
+      "pages": ["faq", "troubleshooting"]
+    },
+    {
+      "group": "Changelog",
+      "pages": ["changelog"]
     }
   ],
   "footerSocials": {
@@ -194,7 +239,7 @@
       "destination": "/"
     },
     {
-      "source": "/installation", 
+      "source": "/installation",
       "destination": "/getting-started/installation"
     },
     {

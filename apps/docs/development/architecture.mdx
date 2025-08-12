@@ -1,0 +1,464 @@
+---
+title: Architecture
+description: Deep dive into LiqUIdify's internal architecture, design patterns, and technical decisions.
+---
+
+# Architecture
+
+This guide explains the internal architecture of LiqUIdify, including the component organization, build system, design patterns, and technical decisions that make the library performant and maintainable.
+
+## 🏗️ High-Level Architecture
+
+### Monorepo Structure
+
+LiqUIdify uses a Bun workspace monorepo architecture for efficient development:
+
+```
+LiqUIdify/
+├── apps/                     # Applications
+│   ├── docs/                # Documentation (Mintlify)
+│   └── storybook/           # Component playground
+├── libs/                    # Core libraries
+│   └── components/          # Main component library
+│       ├── src/
+│       │   ├── components/  # Component implementations
+│       │   ├── hooks/       # Custom React hooks
+│       │   ├── theme/       # Theme system
+│       │   ├── utils/       # Utilities
+│       │   └── index.ts     # Main export
+│       └── rolldown.config.ts
+├── examples/                # Example applications
+├── scripts/                 # Build and utility scripts
+└── package.json            # Workspace configuration
+```
+
+### Architecture Principles
+
+1. **Tree-Shakeable**: Every component is independently importable
+2. **Type-Safe**: Full TypeScript coverage with strict mode
+3. **Accessible**: WCAG 2.1 AA compliant by default
+4. **Performant**: Optimized bundle sizes and runtime performance
+5. **Themeable**: CSS variables and theme providers
+6. **Framework Agnostic**: Works with any React setup
+
+## 📦 Build System
+
+### Bundling Strategy
+
+LiqUIdify uses Vite with Rolldown configuration for optimal bundling:
+
+```typescript
+// libs/components/rolldown.config.ts
+export default defineConfig({
+  build: {
+    lib: {
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "LiquidifyComponents",
+      formats: ["es", "cjs"],
+      fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
+    },
+    rollupOptions: {
+      external: [
+        "react",
+        "react-dom",
+        "@radix-ui/*",
+        "framer-motion",
+        // Other peer dependencies
+      ],
+      output: [
+        { format: "es", entryFileNames: "index.mjs" },
+        { format: "cjs", entryFileNames: "index.cjs" },
+      ],
+    },
+  },
+});
+```
+
+### Bundle Structure
+
+The library produces multiple entry points for optimal tree-shaking:
+
+```
+dist/libs/components/
+├── index.mjs           # ESM entry point
+├── index.cjs           # CommonJS entry point
+├── index.d.ts          # TypeScript definitions
+├── liquidify.css       # Global styles
+└── bundles/
+    ├── core.d.ts       # Core components bundle
+    ├── forms.d.ts      # Form components bundle
+    ├── navigation.d.ts # Navigation components
+    └── feedback.d.ts   # Feedback components
+```
+
+### CSS Architecture
+
+LiqUIdify uses a hybrid CSS approach:
+
+1. **CSS Variables**: Theme tokens and customization
+2. **Utility Classes**: Optional Tailwind integration
+3. **Scoped Styles**: Component-specific styles
+4. **LightningCSS**: Modern CSS optimization
+
+```css
+/* Theme variables */
+:root {
+  --lg-primary: #007aff;
+  --lg-blur: 10px;
+  --lg-saturation: 120%;
+  --lg-bg-color: rgba(255, 255, 255, 0.1);
+  --lg-bg-readable: rgba(255, 255, 255, 0.7);
+}
+
+/* Component styles */
+.glass-button {
+  backdrop-filter: blur(var(--lg-blur));
+  background: var(--lg-bg-color);
+}
+```
+
+## 🧩 Component Architecture
+
+### Component Structure Pattern
+
+Each component follows a consistent structure:
+
+```
+glass-button/
+├── index.ts                 # Public exports
+├── glass-button.tsx         # Main component
+├── glass-button.test.tsx    # Unit tests
+├── glass-button.stories.tsx # Storybook stories
+├── types.ts                 # TypeScript types
+└── styles.css              # Component styles (optional)
+```
+
+### Component Patterns
+
+#### 1. Standard Component Pattern
+
+```tsx
+// glass-button.tsx
+export interface GlassButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+  loading?: boolean;
+}
+
+export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+  ({ variant = "primary", size = "md", className, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "glass-button",
+          `glass-button--${variant}`,
+          `glass-button--${size}`,
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+
+GlassButton.displayName = "GlassButton";
+```
+
+#### 2. Compound Component Pattern
+
+```tsx
+// glass-card.tsx
+const GlassCardRoot = ({ children, ...props }) => (
+  <div className="glass-card" {...props}>
+    {children}
+  </div>
+);
+
+const GlassCardHeader = ({ children, ...props }) => (
+  <div className="glass-card__header" {...props}>
+    {children}
+  </div>
+);
+
+export const GlassCard = Object.assign(GlassCardRoot, {
+  Header: GlassCardHeader,
+  Title: GlassCardTitle,
+  Content: GlassCardContent,
+  Footer: GlassCardFooter,
+});
+```
+
+#### 3. Provider Pattern
+
+```tsx
+// theme-provider.tsx
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  theme = "light",
+  glassConfig,
+}) => {
+  const [currentTheme, setTheme] = useState(theme);
+
+  return (
+    <ThemeContext.Provider
+      value={{ theme: currentTheme, setTheme, glassConfig }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within ThemeProvider");
+  }
+  return context;
+};
+```
+
+## 🎯 Design Patterns
+
+### 1. Accessibility-First Design
+
+Every component includes:
+
+- Proper ARIA attributes
+- Keyboard navigation support
+- Focus management
+- Screen reader announcements
+
+```tsx
+// Accessibility pattern example
+<button
+  role="button"
+  aria-pressed={isPressed}
+  aria-disabled={disabled}
+  aria-label={ariaLabel}
+  tabIndex={disabled ? -1 : 0}
+  onKeyDown={handleKeyDown}
+/>
+```
+
+### 2. Liquid Glass System
+
+The signature glassmorphism effect uses:
+
+- CSS backdrop-filter for blur
+- Layered gradients for depth
+- Dynamic opacity for readability
+- Motion effects for interactivity
+
+```tsx
+// Liquid glass configuration
+interface LiquidGlassConfig {
+  intensity?: number; // 0-100
+  blur?: number; // px
+  saturation?: number; // percentage
+  enableMagnetic?: boolean;
+  enableSpecular?: boolean;
+}
+```
+
+### 3. Performance Optimization
+
+Key performance strategies:
+
+1. **Code Splitting**: Components are independently loadable
+2. **Lazy Loading**: Dynamic imports for heavy components
+3. **Memoization**: React.memo for expensive renders
+4. **Virtual Scrolling**: For large lists (Table, TreeView)
+5. **CSS Containment**: Layout isolation for better performance
+
+```tsx
+// Performance optimization example
+const ExpensiveComponent = memo(({ data }) => {
+  const processedData = useMemo(() => heavyProcessing(data), [data]);
+
+  return <div>{/* Render */}</div>;
+});
+```
+
+## 🔌 Hook Architecture
+
+### Custom Hooks Organization
+
+```
+hooks/
+├── useTheme.ts           # Theme management
+├── useLiquidGlass.ts     # Glass effects configuration
+├── useHapticFeedback.ts  # Haptic feedback
+├── useMediaQuery.ts      # Responsive breakpoints
+├── useDebounce.ts        # Input debouncing
+└── useSsrSafe.ts        # SSR compatibility
+```
+
+### Hook Patterns
+
+```tsx
+// State management hook
+export const useControlledState = <T,>(
+  value?: T,
+  defaultValue?: T,
+  onChange?: (value: T) => void,
+) => {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isControlled = value !== undefined;
+  const currentValue = isControlled ? value : internalValue;
+
+  const setValue = useCallback(
+    (newValue: T) => {
+      if (!isControlled) {
+        setInternalValue(newValue);
+      }
+      onChange?.(newValue);
+    },
+    [isControlled, onChange],
+  );
+
+  return [currentValue, setValue] as const;
+};
+```
+
+## 🎨 Theme System Architecture
+
+### Theme Structure
+
+```typescript
+interface Theme {
+  colors: {
+    primary: string;
+    secondary: string;
+    background: string;
+    foreground: string;
+    glass: {
+      background: string;
+      border: string;
+      blur: string;
+    };
+  };
+  spacing: Record<string, string>;
+  radii: Record<string, string>;
+  animations: {
+    duration: string;
+    easing: string;
+  };
+}
+```
+
+### Theme Provider Hierarchy
+
+```
+<UnifiedGlassProvider>         # Root provider
+  <ThemeProvider>              # Theme configuration
+    <LiquidGlassProvider>      # Glass effects
+      <HapticProvider>         # Haptic feedback
+        <ToastProvider>        # Toast notifications
+          <App />
+        </ToastProvider>
+      </HapticProvider>
+    </LiquidGlassProvider>
+  </ThemeProvider>
+</UnifiedGlassProvider>
+```
+
+## 🧪 Testing Architecture
+
+### Testing Layers
+
+1. **Unit Tests**: Component logic and rendering
+2. **Integration Tests**: Component interactions
+3. **Accessibility Tests**: WCAG compliance
+4. **E2E Tests**: User workflows
+5. **Performance Tests**: Bundle size and runtime
+
+### Test Structure
+
+```typescript
+// Component test example
+describe('GlassButton', () => {
+  // Unit tests
+  it('renders correctly', () => {})
+  it('handles click events', () => {})
+
+  // Accessibility tests
+  it('meets WCAG standards', async () => {
+    const { container } = render(<GlassButton>Test</GlassButton>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  // Integration tests
+  it('works within forms', () => {})
+})
+```
+
+## 📊 Performance Metrics
+
+### Bundle Size Targets
+
+- **Core bundle**: < 30KB gzipped
+- **Full bundle**: < 60KB gzipped
+- **Individual components**: < 5KB gzipped
+- **CSS**: < 10KB gzipped
+
+### Runtime Performance
+
+- **First Paint**: < 100ms
+- **Time to Interactive**: < 200ms
+- **Animation FPS**: 60fps target
+- **Memory Usage**: < 50MB for typical app
+
+## 🔄 Dependency Management
+
+### Peer Dependencies
+
+Minimized to reduce bundle size:
+
+- `react`: ^18.0.0 || ^19.0.0
+- `react-dom`: ^18.0.0 || ^19.0.0
+
+### Production Dependencies
+
+Carefully selected for quality and size:
+
+- `@radix-ui/*`: Accessible primitives
+- `clsx`: Class name utility (2.4KB)
+- `framer-motion`: Animation library
+- `lucide-react`: Icon library
+
+### Development Dependencies
+
+- `vite`: Build tool
+- `vitest`: Testing framework
+- `@testing-library/*`: Testing utilities
+- `storybook`: Component development
+- `typescript`: Type safety
+
+## 🚀 Future Architecture Plans
+
+### Planned Improvements
+
+1. **Module Federation**: Micro-frontend support
+2. **Web Components**: Framework-agnostic components
+3. **Server Components**: React Server Component support
+4. **WASM Integration**: Performance-critical operations
+5. **AI-Powered Theming**: Automatic theme generation
+
+### Experimental Features
+
+- **Quantum Glass Effects**: Advanced visual effects
+- **Haptic Feedback API**: Enhanced touch interactions
+- **Voice UI Integration**: Accessibility improvements
+- **AR/VR Support**: Spatial UI components
+
+## 📚 Related Documentation
+
+- [Build System](./build-system): Detailed build configuration
+- [Testing Strategy](./testing-strategy): Testing approach
+- [Component Development](./component-development): Creating components
+- [Performance Guide](/guides/performance): Optimization tips

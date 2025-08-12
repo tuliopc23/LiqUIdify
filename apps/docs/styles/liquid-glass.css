@@ -25,6 +25,35 @@
   --lg-grey: #444739;
   --lg-accent: #fb4268;
 
+  /* Enhanced Depth and Motion Controls */
+  --lg-depth-scale: 1;
+  --lg-tilt-x: 0deg;
+  --lg-tilt-y: 0deg;
+  --lg-parallax: 0;
+  --lg-noise-opacity: 0.04;
+  --lg-glow-color: rgba(255, 255, 255, 0.5);
+  --lg-glow-intensity: 0.3;
+  --lg-spotlight-x: 50%;
+  --lg-spotlight-y: 50%;
+
+  /* Animation Durations */
+  --lg-duration-xxs: 80ms;
+  --lg-duration-xs: 140ms;
+  --lg-duration-sm: 220ms;
+  --lg-duration-md: 340ms;
+  --lg-duration-lg: 560ms;
+  --lg-duration-xl: 900ms;
+
+  /* Easing Functions */
+  --lg-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --lg-ease-emph: cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  --lg-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --lg-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Enhanced Focus States */
+  --lg-focus-outline: 0 0 0 3px rgba(0, 122, 255, 0.35);
+  --lg-focus-glow: 0 0 20px rgba(0, 122, 255, 0.4);
+
   /* Liquid Glass Layers - Transparent System */
   --lg-filter-blur: blur(4px);
   --lg-filter-enhance: saturate(120%) brightness(1.15);

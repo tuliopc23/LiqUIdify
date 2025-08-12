@@ -26,7 +26,11 @@ import { GlassModal, GlassFocusTrap } from "liquidify";
 Use `GlassFormField` to bind labels, descriptions, and errors to inputs.
 
 ```tsx
-<GlassFormField label="Email" description="We’ll never share your email." error={error}>
+<GlassFormField
+  label="Email"
+  description="We’ll never share your email."
+  error={error}
+>
   <GlassInput type="email" />
 </GlassFormField>
 ```
@@ -43,7 +47,9 @@ Respect user preferences. Animate properties that are GPU friendly and provide a
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  .liquid-glass-interactive { transition: none !important; }
+  .liquid-glass-interactive {
+    transition: none !important;
+  }
 }
 ```
 
@@ -64,7 +70,7 @@ import { GlassErrorBoundary } from "liquidify";
 
 <GlassErrorBoundary fallback={<p>Something went wrong.</p>}>
   <DangerousArea />
-</GlassErrorBoundary>
+</GlassErrorBoundary>;
 ```
 
 ## Checklist

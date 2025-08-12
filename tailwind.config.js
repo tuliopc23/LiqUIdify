@@ -62,19 +62,6 @@ export default {
             {},
         },
         ".glass-liquid": {
-          "@apply relative overflow-hidden": {},
-          "&::before": {
-            content: '""',
-            "@apply absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-50 pointer-events-none":
-              {},
-          },
-          "&::after": {
-            content: '""',
-            "@apply absolute -inset-1 bg-gradient-to-t from-transparent via-white/10 to-white/30 opacity-30 blur-sm pointer-events-none":
-              {},
-          },
-        },
-        ".glass-liquid": {
           "@apply glass": {},
           "&::before": {
             content: '""',

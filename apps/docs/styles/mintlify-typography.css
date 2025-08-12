@@ -9,108 +9,108 @@
 .markdown-body,
 .mdx-content,
 [data-theme] .mintlify-content {
-font-family: var(--font-text) !important;
-font-size: var(--text-base) !important;
-line-height: var(--leading-relaxed) !important;
-color: var(--text-primary) !important;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-base) !important;
+  line-height: var(--leading-relaxed) !important;
+  color: var(--text-primary) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Mintlify Headings */
 .mintlify-content h1,
 .markdown-body h1,
 .mdx-content h1 {
-font-family: var(--font-display) !important;
-font-size: var(--text-5xl) !important;
-font-weight: var(--font-extrabold) !important;
-line-height: var(--leading-tight) !important;
-letter-spacing: var(--tracking-tighter) !important;
-color: var(--text-primary) !important;
-margin: 0 0 2rem 0 !important;
-text-wrap: balance;
+  font-family: var(--font-display) !important;
+  font-size: var(--text-5xl) !important;
+  font-weight: var(--font-extrabold) !important;
+  line-height: var(--leading-tight) !important;
+  letter-spacing: var(--tracking-tighter) !important;
+  color: var(--text-primary) !important;
+  margin: 0 0 2rem 0 !important;
+  text-wrap: balance;
 }
 
 .mintlify-content h2,
 .markdown-body h2,
 .mdx-content h2 {
-font-family: var(--font-display) !important;
-font-size: var(--text-4xl) !important;
-font-weight: var(--font-bold) !important;
-line-height: var(--leading-tight) !important;
-letter-spacing: var(--tracking-tight) !important;
-color: var(--text-primary) !important;
-margin: 3rem 0 1.5rem 0 !important;
-text-wrap: balance;
-border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-padding-bottom: 0.5rem;
+  font-family: var(--font-display) !important;
+  font-size: var(--text-4xl) !important;
+  font-weight: var(--font-bold) !important;
+  line-height: var(--leading-tight) !important;
+  letter-spacing: var(--tracking-tight) !important;
+  color: var(--text-primary) !important;
+  margin: 3rem 0 1.5rem 0 !important;
+  text-wrap: balance;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
 }
 
 [data-theme="dark"] .mintlify-content h2,
 [data-theme="dark"] .markdown-body h2,
 [data-theme="dark"] .mdx-content h2 {
-border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .mintlify-content h3,
 .markdown-body h3,
 .mdx-content h3 {
-font-family: var(--font-display) !important;
-font-size: var(--text-3xl) !important;
-font-weight: var(--font-semibold) !important;
-line-height: var(--leading-snug) !important;
-letter-spacing: var(--tracking-tight) !important;
-color: var(--text-primary) !important;
-margin: 2.5rem 0 1rem 0 !important;
-text-wrap: balance;
+  font-family: var(--font-display) !important;
+  font-size: var(--text-3xl) !important;
+  font-weight: var(--font-semibold) !important;
+  line-height: var(--leading-snug) !important;
+  letter-spacing: var(--tracking-tight) !important;
+  color: var(--text-primary) !important;
+  margin: 2.5rem 0 1rem 0 !important;
+  text-wrap: balance;
 }
 
 .mintlify-content h4,
 .markdown-body h4,
 .mdx-content h4 {
-font-family: var(--font-text) !important;
-font-size: var(--text-2xl) !important;
-font-weight: var(--font-semibold) !important;
-line-height: var(--leading-snug) !important;
-color: var(--text-primary) !important;
-margin: 2rem 0 1rem 0 !important;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-2xl) !important;
+  font-weight: var(--font-semibold) !important;
+  line-height: var(--leading-snug) !important;
+  color: var(--text-primary) !important;
+  margin: 2rem 0 1rem 0 !important;
 }
 
 .mintlify-content h5,
 .markdown-body h5,
 .mdx-content h5 {
-font-family: var(--font-text) !important;
-font-size: var(--text-xl) !important;
-font-weight: var(--font-medium) !important;
-line-height: var(--leading-normal) !important;
-color: var(--text-primary) !important;
-margin: 1.5rem 0 0.75rem 0 !important;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: var(--font-medium) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--text-primary) !important;
+  margin: 1.5rem 0 0.75rem 0 !important;
 }
 
 .mintlify-content h6,
 .markdown-body h6,
 .mdx-content h6 {
-font-family: var(--font-text) !important;
-font-size: var(--text-lg) !important;
-font-weight: var(--font-medium) !important;
-line-height: var(--leading-normal) !important;
-color: var(--text-secondary) !important;
-margin: 1.5rem 0 0.75rem 0 !important;
-text-transform: uppercase;
-letter-spacing: var(--tracking-wide);
+  font-family: var(--font-text) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-medium) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--text-secondary) !important;
+  margin: 1.5rem 0 0.75rem 0 !important;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
 }
 
 /* Mintlify Paragraphs */
 .mintlify-content p,
 .markdown-body p,
 .mdx-content p {
-font-family: var(--font-text) !important;
-font-size: var(--text-base) !important;
-font-weight: var(--font-normal) !important;
-line-height: var(--leading-relaxed) !important;
-color: var(--text-primary) !important;
-margin: 0 0 1.5rem 0 !important;
-text-wrap: pretty;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-base) !important;
+  font-weight: var(--font-normal) !important;
+  line-height: var(--leading-relaxed) !important;
+  color: var(--text-primary) !important;
+  margin: 0 0 1.5rem 0 !important;
+  text-wrap: pretty;
 }
 
 /* Lead paragraphs (first paragraph after heading) */
@@ -118,66 +118,66 @@ text-wrap: pretty;
 .mintlify-content h2 + p,
 .markdown-body h1 + p,
 .markdown-body h2 + p {
-font-size: var(--text-lg) !important;
-color: var(--text-secondary) !important;
-font-weight: var(--font-normal) !important;
-margin-bottom: 2rem !important;
+  font-size: var(--text-lg) !important;
+  color: var(--text-secondary) !important;
+  font-weight: var(--font-normal) !important;
+  margin-bottom: 2rem !important;
 }
 
 /* Mintlify Navigation Typography */
 .mintlify-sidebar,
 .mintlify-sidebar * {
-font-family: var(--font-text) !important;
--webkit-font-smoothing: antialiased;
+  font-family: var(--font-text) !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 .mintlify-sidebar-item,
 .sidebar-item {
-font-size: var(--text-sm) !important;
-font-weight: var(--font-medium) !important;
-line-height: var(--leading-normal) !important;
-color: var(--text-secondary) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: var(--font-medium) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--text-secondary) !important;
 }
 
 .mintlify-sidebar-item.active,
 .sidebar-item.active {
-font-weight: var(--font-semibold) !important;
-color: var(--text-accent) !important;
+  font-weight: var(--font-semibold) !important;
+  color: var(--text-accent) !important;
 }
 
 .mintlify-sidebar-group,
 .sidebar-group {
-font-size: var(--text-xs) !important;
-font-weight: var(--font-bold) !important;
-text-transform: uppercase;
-letter-spacing: var(--tracking-wide);
-color: var(--text-tertiary) !important;
-margin: 1.5rem 0 0.5rem 0;
+  font-size: var(--text-xs) !important;
+  font-weight: var(--font-bold) !important;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-tertiary) !important;
+  margin: 1.5rem 0 0.5rem 0;
 }
 
 /* Mintlify Topbar Typography */
 .mintlify-topbar,
 .topbar {
-font-family: var(--font-text) !important;
+  font-family: var(--font-text) !important;
 }
 
 .mintlify-topbar-title,
 .topbar-title {
-font-size: var(--text-lg) !important;
-font-weight: var(--font-semibold) !important;
-color: var(--text-primary) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-semibold) !important;
+  color: var(--text-primary) !important;
 }
 
 .mintlify-topbar-link,
 .topbar-link {
-font-size: var(--text-sm) !important;
-font-weight: var(--font-medium) !important;
-color: var(--text-secondary) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: var(--font-medium) !important;
+  color: var(--text-secondary) !important;
 }
 
 .mintlify-topbar-link:hover,
 .topbar-link:hover {
-color: var(--text-accent) !important;
+  color: var(--text-accent) !important;
 }
 
 /* Enhanced Code Blocks for Mintlify */
@@ -185,49 +185,49 @@ color: var(--text-accent) !important;
 .markdown-body pre,
 .mdx-content pre,
 pre[data-theme] {
-font-family: var(--font-mono) !important;
-font-size: var(--text-sm) !important;
-line-height: var(--leading-relaxed) !important;
-background: #0f172a !important;
-color: #e2e8f0 !important;
-padding: 1.5rem !important;
-border-radius: 0.75rem !important;
-overflow-x: auto;
-margin: 2rem 0 !important;
-border: 1px solid rgba(255, 255, 255, 0.1) !important;
-position: relative;
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-sm) !important;
+  line-height: var(--leading-relaxed) !important;
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+  padding: 1.5rem !important;
+  border-radius: 0.75rem !important;
+  overflow-x: auto;
+  margin: 2rem 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  position: relative;
 }
 
 .mintlify-content pre code,
 .markdown-body pre code,
 .mdx-content pre code {
-font-family: var(--font-mono) !important;
-font-size: inherit !important;
-background: none !important;
-border: none !important;
-padding: 0 !important;
-color: inherit !important;
+  font-family: var(--font-mono) !important;
+  font-size: inherit !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
 }
 
 /* Inline code */
 .mintlify-content code:not(pre code),
 .markdown-body code:not(pre code),
 .mdx-content code:not(pre code) {
-font-family: var(--font-mono) !important;
-font-size: 0.875em !important;
-font-weight: var(--font-medium) !important;
-background: rgba(59, 130, 246, 0.1) !important;
-color: var(--text-accent) !important;
-padding: 0.125rem 0.375rem !important;
-border-radius: 0.375rem !important;
-border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.875em !important;
+  font-weight: var(--font-medium) !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+  color: var(--text-accent) !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.375rem !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
 }
 
 [data-theme="dark"] .mintlify-content code:not(pre code),
 [data-theme="dark"] .markdown-body code:not(pre code),
 [data-theme="dark"] .mdx-content code:not(pre code) {
-background: rgba(59, 130, 246, 0.2) !important;
-border-color: rgba(59, 130, 246, 0.3) !important;
+  background: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
 }
 
 /* Enhanced Lists */
@@ -235,169 +235,184 @@ border-color: rgba(59, 130, 246, 0.3) !important;
 .mintlify-content ol,
 .markdown-body ul,
 .markdown-body ol {
-margin: 1.5rem 0 !important;
-padding-left: 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  padding-left: 1.5rem !important;
 }
 
 .mintlify-content li,
 .markdown-body li {
-font-family: var(--font-text) !important;
-font-size: var(--text-base) !important;
-line-height: var(--leading-relaxed) !important;
-color: var(--text-primary) !important;
-margin: 0.5rem 0 !important;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-base) !important;
+  line-height: var(--leading-relaxed) !important;
+  color: var(--text-primary) !important;
+  margin: 0.5rem 0 !important;
 }
 
 .mintlify-content ul li {
-position: relative;
+  position: relative;
 }
 
 .mintlify-content ul li::marker {
-color: var(--text-accent);
-font-weight: var(--font-bold);
+  color: var(--text-accent);
+  font-weight: var(--font-bold);
 }
 
 /* Enhanced Tables */
 .mintlify-content table,
 .markdown-body table {
-font-family: var(--font-text) !important;
-font-size: var(--text-sm) !important;
-line-height: var(--leading-normal) !important;
-width: 100%;
-border-collapse: collapse;
-margin: 2rem 0;
-background: rgba(255, 255, 255, 0.02);
-border-radius: 0.5rem;
-overflow: hidden;
-border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: var(--font-text) !important;
+  font-size: var(--text-sm) !important;
+  line-height: var(--leading-normal) !important;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .mintlify-content table,
 [data-theme="dark"] .markdown-body table {
-background: rgba(255, 255, 255, 0.02);
-border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .mintlify-content th,
 .markdown-body th {
-font-weight: var(--font-semibold) !important;
-color: var(--text-primary) !important;
-text-align: left;
-padding: 1rem !important;
-background: rgba(0, 0, 0, 0.02);
-border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: var(--font-semibold) !important;
+  color: var(--text-primary) !important;
+  text-align: left;
+  padding: 1rem !important;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .mintlify-content th,
 [data-theme="dark"] .markdown-body th {
-background: rgba(255, 255, 255, 0.05);
-border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .mintlify-content td,
 .markdown-body td {
-color: var(--text-primary) !important;
-padding: 1rem !important;
-border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-primary) !important;
+  padding: 1rem !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="dark"] .mintlify-content td,
 [data-theme="dark"] .markdown-body td {
-border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Enhanced Blockquotes */
 .mintlify-content blockquote,
 .markdown-body blockquote {
-font-family: var(--font-text) !important;
-font-size: var(--text-lg) !important;
-font-style: italic !important;
-line-height: var(--leading-relaxed) !important;
-color: var(--text-secondary) !important;
-margin: 2rem 0 !important;
-padding: 1.5rem 2rem !important;
-border-left: 4px solid var(--text-accent) !important;
-background: rgba(59, 130, 246, 0.05) !important;
-border-radius: 0 0.5rem 0.5rem 0 !important;
-position: relative;
+  font-family: var(--font-text) !important;
+  font-size: var(--text-lg) !important;
+  font-style: italic !important;
+  line-height: var(--leading-relaxed) !important;
+  color: var(--text-secondary) !important;
+  margin: 2rem 0 !important;
+  padding: 1.5rem 2rem !important;
+  border-left: 4px solid var(--text-accent) !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+  position: relative;
 }
 
 [data-theme="dark"] .mintlify-content blockquote,
 [data-theme="dark"] .markdown-body blockquote {
-background: rgba(59, 130, 246, 0.1) !important;
+  background: rgba(59, 130, 246, 0.1) !important;
 }
 
 .mintlify-content blockquote::before {
-content: ;
-font-size: 3rem;
-font-family: serif;
-color: var(--text-accent);
-position: absolute;
-top: 0.5rem;
-left: 1rem;
-opacity: 0.3;
+  content:;
+  font-size: 3rem;
+  font-family: serif;
+  color: var(--text-accent);
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  opacity: 0.3;
 }
 
 /* Mintlify Cards Enhancement */
-.card, .mintlify-card {
-font-family: var(--font-text) !important;
+.card,
+.mintlify-card {
+  font-family: var(--font-text) !important;
 }
 
-.card h3, .mintlify-card h3 {
-font-family: var(--font-display) !important;
-font-size: var(--text-xl) !important;
-font-weight: var(--font-semibold) !important;
-line-height: var(--leading-snug) !important;
-color: var(--text-primary) !important;
-margin: 0 0 0.5rem 0 !important;
+.card h3,
+.mintlify-card h3 {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: var(--font-semibold) !important;
+  line-height: var(--leading-snug) !important;
+  color: var(--text-primary) !important;
+  margin: 0 0 0.5rem 0 !important;
 }
 
-.card p, .mintlify-card p {
-font-size: var(--text-sm) !important;
-line-height: var(--leading-normal) !important;
-color: var(--text-secondary) !important;
-margin: 0 !important;
+.card p,
+.mintlify-card p {
+  font-size: var(--text-sm) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
 }
 
 /* Enhanced Callouts/Admonitions */
-.callout, .admonition, .note, .warning, .tip {
-font-family: var(--font-text) !important;
-margin: 2rem 0 !important;
-padding: 1.5rem !important;
-border-radius: 0.75rem !important;
-border: 1px solid rgba(0, 0, 0, 0.1) !important;
-position: relative;
+.callout,
+.admonition,
+.note,
+.warning,
+.tip {
+  font-family: var(--font-text) !important;
+  margin: 2rem 0 !important;
+  padding: 1.5rem !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  position: relative;
 }
 
-.callout h4, .admonition h4, .note h4, .warning h4, .tip h4 {
-font-family: var(--font-display) !important;
-font-size: var(--text-lg) !important;
-font-weight: var(--font-semibold) !important;
-margin: 0 0 1rem 0 !important;
-color: var(--text-primary) !important;
+.callout h4,
+.admonition h4,
+.note h4,
+.warning h4,
+.tip h4 {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-semibold) !important;
+  margin: 0 0 1rem 0 !important;
+  color: var(--text-primary) !important;
 }
 
-.callout p, .admonition p, .note p, .warning p, .tip p {
-font-size: var(--text-base) !important;
-line-height: var(--leading-relaxed) !important;
-color: var(--text-primary) !important;
-margin: 0 !important;
+.callout p,
+.admonition p,
+.note p,
+.warning p,
+.tip p {
+  font-size: var(--text-base) !important;
+  line-height: var(--leading-relaxed) !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
 }
 
 /* Note variants */
 .note {
-background: rgba(59, 130, 246, 0.05) !important;
-border-color: rgba(59, 130, 246, 0.2) !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
 }
 
 .warning {
-background: rgba(245, 158, 11, 0.05) !important;
-border-color: rgba(245, 158, 11, 0.2) !important;
+  background: rgba(245, 158, 11, 0.05) !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
 }
 
 .tip {
-background: rgba(16, 185, 129, 0.05) !important;
-border-color: rgba(16, 185, 129, 0.2) !important;
+  background: rgba(16, 185, 129, 0.05) !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
 }
 
 /* Dark mode callouts */
@@ -406,22 +421,22 @@ border-color: rgba(16, 185, 129, 0.2) !important;
 [data-theme="dark"] .note,
 [data-theme="dark"] .warning,
 [data-theme="dark"] .tip {
-border-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 [data-theme="dark"] .note {
-background: rgba(59, 130, 246, 0.1) !important;
-border-color: rgba(59, 130, 246, 0.3) !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
 }
 
 [data-theme="dark"] .warning {
-background: rgba(245, 158, 11, 0.1) !important;
-border-color: rgba(245, 158, 11, 0.3) !important;
+  background: rgba(245, 158, 11, 0.1) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
 }
 
 [data-theme="dark"] .tip {
-background: rgba(16, 185, 129, 0.1) !important;
-border-color: rgba(16, 185, 129, 0.3) !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
 }
 
 /* ================================================================
@@ -429,43 +444,43 @@ MOBILE TYPOGRAPHY OPTIMIZATIONS FOR MINTLIFY
 ================================================================ */
 
 @media (max-width: 768px) {
-.mintlify-content h1,
-.markdown-body h1 {
-font-size: var(--text-3xl) !important;
-margin: 0 0 1.5rem 0 !important;
-}
+  .mintlify-content h1,
+  .markdown-body h1 {
+    font-size: var(--text-3xl) !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
 
-.mintlify-content h2,
-.markdown-body h2 {
-font-size: var(--text-2xl) !important;
-margin: 2rem 0 1rem 0 !important;
-}
+  .mintlify-content h2,
+  .markdown-body h2 {
+    font-size: var(--text-2xl) !important;
+    margin: 2rem 0 1rem 0 !important;
+  }
 
-.mintlify-content h3,
-.markdown-body h3 {
-font-size: var(--text-xl) !important;
-margin: 1.5rem 0 0.75rem 0 !important;
-}
+  .mintlify-content h3,
+  .markdown-body h3 {
+    font-size: var(--text-xl) !important;
+    margin: 1.5rem 0 0.75rem 0 !important;
+  }
 
-.mintlify-content pre,
-.markdown-body pre {
-padding: 1rem !important;
-margin: 1.5rem -1rem !important;
-border-radius: 0 !important;
-font-size: 0.8rem !important;
-}
+  .mintlify-content pre,
+  .markdown-body pre {
+    padding: 1rem !important;
+    margin: 1.5rem -1rem !important;
+    border-radius: 0 !important;
+    font-size: 0.8rem !important;
+  }
 
-.mintlify-content table,
-.markdown-body table {
-font-size: var(--text-xs) !important;
-}
+  .mintlify-content table,
+  .markdown-body table {
+    font-size: var(--text-xs) !important;
+  }
 
-.mintlify-content th,
-.mintlify-content td,
-.markdown-body th,
-.markdown-body td {
-padding: 0.5rem !important;
-}
+  .mintlify-content th,
+  .mintlify-content td,
+  .markdown-body th,
+  .markdown-body td {
+    padding: 0.5rem !important;
+  }
 }
 
 /* ================================================================
@@ -473,42 +488,41 @@ PRINT STYLES
 ================================================================ */
 
 @media print {
-.mintlify-content,
-.markdown-body {
-font-family: "Times New Roman", serif !important;
-font-size: 12pt !important;
-line-height: 1.5 !important;
-color: #000 !important;
-}
+  .mintlify-content,
+  .markdown-body {
+    font-family: "Times New Roman", serif !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+    color: #000 !important;
+  }
 
-.mintlify-content h1,
-.mintlify-content h2,
-.mintlify-content h3,
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3 {
-color: #000 !important;
-page-break-after: avoid;
-}
+  .mintlify-content h1,
+  .mintlify-content h2,
+  .mintlify-content h3,
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
 
-.mintlify-content pre,
-.markdown-body pre {
-background: #f5f5f5 !important;
-color: #000 !important;
-border: 1px solid #ccc !important;
-}
+  .mintlify-content pre,
+  .markdown-body pre {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
 
-.mintlify-content a,
-.markdown-body a {
-color: #000 !important;
-text-decoration: underline !important;
-}
+  .mintlify-content a,
+  .markdown-body a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
 
-.mintlify-content a::after,
-.markdown-body a::after {
-content: " (" attr(href) ")";
-font-size: 0.8em;
-color: #666;
+  .mintlify-content a::after,
+  .markdown-body a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
 }
-}
-

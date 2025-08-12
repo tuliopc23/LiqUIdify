@@ -10,28 +10,19 @@ LiqUIdify's typography system combines **Apple's Human Interface Guidelines** wi
 ## 🎯 Design Principles
 
 <CardGroup cols={2}>
-  <Card
-    title="🍎 Apple Quality"
-    icon="apple"
-  >
-    SF Pro font family with precise letter spacing and authentic Apple typography scales
+  <Card title="🍎 Apple Quality" icon="apple">
+    SF Pro font family with precise letter spacing and authentic Apple
+    typography scales
   </Card>
-  <Card
-    title="📖 Readability First"
-    icon="book-open"
-  >
-    Optimized line heights, contrast ratios, and reading widths for maximum comprehension
+  <Card title="📖 Readability First" icon="book-open">
+    Optimized line heights, contrast ratios, and reading widths for maximum
+    comprehension
   </Card>
-  <Card
-    title="♿ Accessibility Built-in"
-    icon="universal-access"
-  >
-    WCAG 2.1 AA compliant with proper contrast, focus indicators, and screen reader support
+  <Card title="♿ Accessibility Built-in" icon="universal-access">
+    WCAG 2.1 AA compliant with proper contrast, focus indicators, and screen
+    reader support
   </Card>
-  <Card
-    title="📱 Device Optimized"
-    icon="mobile"
-  >
+  <Card title="📱 Device Optimized" icon="mobile">
     Responsive typography that adapts beautifully from mobile to desktop
   </Card>
 </CardGroup>
@@ -39,21 +30,35 @@ LiqUIdify's typography system combines **Apple's Human Interface Guidelines** wi
 ## 📝 Font Families
 
 ### Display Fonts
+
 ```css
-font-family: "SF Pro Display", "Inter", -apple-system, system-ui;
+font-family:
+  "SF Pro Display",
+  "Inter",
+  -apple-system,
+  system-ui;
 ```
+
 Used for **headlines, titles, and large text** where impact and visual hierarchy are important.
 
-### Text Fonts  
+### Text Fonts
+
 ```css
-font-family: "SF Pro Text", "Inter", -apple-system, system-ui;
+font-family:
+  "SF Pro Text",
+  "Inter",
+  -apple-system,
+  system-ui;
 ```
+
 Optimized for **body text, paragraphs, and UI elements** with superior readability at smaller sizes.
 
 ### Monospace Fonts
-```css  
+
+```css
 font-family: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
 ```
+
 Perfect for **code blocks, technical content,** and data that requires fixed-width alignment.
 
 ---
@@ -62,17 +67,17 @@ Perfect for **code blocks, technical content,** and data that requires fixed-wid
 
 Our typography scale is based on a **modular scale** that ensures consistent visual hierarchy:
 
-| Class | Size | Use Case | Example |
-|-------|------|----------|---------|
-| `.text-xs` | 12px | Captions, metadata | <span className="text-xs">Small supporting text</span> |
-| `.text-sm` | 14px | Labels, small UI text | <span className="text-sm">Navigation items</span> |
-| `.text-base` | 16px | Body text | <span className="text-base">This is standard paragraph text</span> |
-| `.text-lg` | 18px | Lead paragraphs | <span className="text-lg">Important introductory text</span> |
-| `.text-xl` | 20px | Small headings | <span className="text-xl font-semibold">Section Headers</span> |
-| `.text-2xl` | 24px | Card titles | <span className="text-2xl font-semibold">Component Titles</span> |
-| `.text-3xl` | 30px | Page sections | <span className="text-3xl font-bold">Major Sections</span> |
-| `.text-4xl` | 36px | Page titles | <span className="text-4xl font-bold">Page Headlines</span> |
-| `.text-5xl` | 48px | Hero headings | <span className="text-5xl font-bold">Hero Titles</span> |
+| Class        | Size | Use Case              | Example                                                            |
+| ------------ | ---- | --------------------- | ------------------------------------------------------------------ |
+| `.text-xs`   | 12px | Captions, metadata    | <span className="text-xs">Small supporting text</span>             |
+| `.text-sm`   | 14px | Labels, small UI text | <span className="text-sm">Navigation items</span>                  |
+| `.text-base` | 16px | Body text             | <span className="text-base">This is standard paragraph text</span> |
+| `.text-lg`   | 18px | Lead paragraphs       | <span className="text-lg">Important introductory text</span>       |
+| `.text-xl`   | 20px | Small headings        | <span className="text-xl font-semibold">Section Headers</span>     |
+| `.text-2xl`  | 24px | Card titles           | <span className="text-2xl font-semibold">Component Titles</span>   |
+| `.text-3xl`  | 30px | Page sections         | <span className="text-3xl font-bold">Major Sections</span>         |
+| `.text-4xl`  | 36px | Page titles           | <span className="text-4xl font-bold">Page Headlines</span>         |
+| `.text-5xl`  | 48px | Hero headings         | <span className="text-5xl font-bold">Hero Titles</span>            |
 
 ---
 
@@ -82,16 +87,14 @@ Our color system ensures proper contrast ratios for accessibility:
 
 <CardGroup cols={2}>
   <Card title="Light Theme">
-    - **Primary**: `#111827` (AAA contrast)
-    - **Secondary**: `#6B7280` (AA contrast)  
-    - **Tertiary**: `#9CA3AF` (AA contrast)
-    - **Accent**: `#007AFF` (Apple blue)
+    - **Primary**: `#111827` (AAA contrast) - **Secondary**: `#6B7280` (AA
+    contrast) - **Tertiary**: `#9CA3AF` (AA contrast) - **Accent**: `#007AFF`
+    (Apple blue)
   </Card>
   <Card title="Dark Theme">
-    - **Primary**: `#F9FAFB` (AAA contrast)
-    - **Secondary**: `#D1D5DB` (AA contrast)
-    - **Tertiary**: `#9CA3AF` (AA contrast)  
-    - **Accent**: `#3B82F6` (Optimized blue)
+    - **Primary**: `#F9FAFB` (AAA contrast) - **Secondary**: `#D1D5DB` (AA
+    contrast) - **Tertiary**: `#9CA3AF` (AA contrast) - **Accent**: `#3B82F6`
+    (Optimized blue)
   </Card>
 </CardGroup>
 
@@ -99,10 +102,16 @@ Our color system ensures proper contrast ratios for accessibility:
 
 <div className="space-y-4">
   <p className="text-primary">This is primary text - used for main content</p>
-  <p className="text-secondary">This is secondary text - used for descriptions</p>
+  <p className="text-secondary">
+    This is secondary text - used for descriptions
+  </p>
   <p className="text-tertiary">This is tertiary text - used for metadata</p>
-  <p className="text-accent">This is accent text - used for links and highlights</p>
-  <p className="text-success">This is success text - used for positive states</p>
+  <p className="text-accent">
+    This is accent text - used for links and highlights
+  </p>
+  <p className="text-success">
+    This is success text - used for positive states
+  </p>
   <p className="text-warning">This is warning text - used for caution states</p>
   <p className="text-error">This is error text - used for error states</p>
 </div>
@@ -129,19 +138,29 @@ Carefully selected weights that work harmoniously together:
 Optimized for different content types:
 
 ```css
---leading-tight: 1.25;     /* Large headings */
---leading-snug: 1.375;     /* Medium headings */  
---leading-normal: 1.5;     /* UI text */
---leading-relaxed: 1.625;  /* Body paragraphs */
---leading-loose: 2;        /* Spaced content */
+--leading-tight: 1.25; /* Large headings */
+--leading-snug: 1.375; /* Medium headings */
+--leading-normal: 1.5; /* UI text */
+--leading-relaxed: 1.625; /* Body paragraphs */
+--leading-loose: 2; /* Spaced content */
 ```
 
 ### Line Height Examples
 
 <div className="space-y-4">
-  <h3 className="leading-tight">This heading uses tight line height (1.25) for better visual impact and space efficiency</h3>
-  <p className="leading-normal">This paragraph uses normal line height (1.5) which is perfect for user interface text and shorter content blocks.</p>
-  <p className="leading-relaxed">This paragraph uses relaxed line height (1.625) which provides superior readability for longer form content like documentation, articles, and detailed explanations where reading comfort is paramount.</p>
+  <h3 className="leading-tight">
+    This heading uses tight line height (1.25) for better visual impact and
+    space efficiency
+  </h3>
+  <p className="leading-normal">
+    This paragraph uses normal line height (1.5) which is perfect for user
+    interface text and shorter content blocks.
+  </p>
+  <p className="leading-relaxed">
+    This paragraph uses relaxed line height (1.625) which provides superior
+    readability for longer form content like documentation, articles, and
+    detailed explanations where reading comfort is paramount.
+  </p>
 </div>
 
 ---
@@ -151,11 +170,11 @@ Optimized for different content types:
 Subtle adjustments that improve readability:
 
 ```css
---tracking-tighter: -0.05em;  /* Large headings */
---tracking-tight: -0.025em;   /* Medium headings */
---tracking-normal: 0em;       /* Body text */
---tracking-wide: 0.025em;     /* Small caps, labels */
---tracking-wider: 0.05em;     /* Buttons, badges */
+--tracking-tighter: -0.05em; /* Large headings */
+--tracking-tight: -0.025em; /* Medium headings */
+--tracking-normal: 0em; /* Body text */
+--tracking-wide: 0.025em; /* Small caps, labels */
+--tracking-wider: 0.05em; /* Buttons, badges */
 ```
 
 ### Letter Spacing Examples
@@ -164,7 +183,9 @@ Subtle adjustments that improve readability:
   <h2 className="tracking-tighter">Hero Headline with Tighter Tracking</h2>
   <h3 className="tracking-tight">Section Header with Tight Tracking</h3>
   <p className="tracking-normal">Normal body text with standard tracking</p>
-  <p className="text-sm tracking-wide uppercase">Small caps with wide tracking</p>
+  <p className="text-sm tracking-wide uppercase">
+    Small caps with wide tracking
+  </p>
 </div>
 
 ---
@@ -174,6 +195,7 @@ Subtle adjustments that improve readability:
 Optimized for technical content with proper syntax highlighting:
 
 ### Inline Code
+
 Use `inline code` for short snippets, variable names, and technical terms.
 
 ```css
@@ -189,6 +211,7 @@ code {
 ```
 
 ### Code Blocks
+
 ```typescript
 // Multi-line code with syntax highlighting
 import { Button, Card, LiquidGlass } from "liquidify";
@@ -215,18 +238,21 @@ export function MyComponent({ title, variant = "primary", children }: ComponentP
 ## 📋 Lists & Content
 
 ### Unordered Lists
+
 - **Primary benefits** of the typography system
-- **Consistent visual hierarchy** across all components  
+- **Consistent visual hierarchy** across all components
 - **Improved readability** with optimized line heights
 - **Accessibility compliance** with proper contrast ratios
 
 ### Ordered Lists
+
 1. **Choose appropriate font family** for your content type
 2. **Select proper size** from the typography scale
 3. **Apply correct line height** for readability
 4. **Ensure sufficient color contrast** for accessibility
 
 ### Definition Lists
+
 **Typography Scale**
 : A harmonious progression of font sizes that creates visual hierarchy
 
@@ -242,18 +268,18 @@ export function MyComponent({ title, variant = "primary", children }: ComponentP
 
 Our typography system includes optimized table styles:
 
-| Component | Font Size | Weight | Line Height | Use Case |
-|-----------|-----------|---------|-------------|----------|
-| Table Header | 14px | Semibold | 1.25 | Column titles |
-| Table Cell | 14px | Normal | 1.5 | Data content |
-| Table Caption | 12px | Medium | 1.25 | Table description |
+| Component     | Font Size | Weight   | Line Height | Use Case          |
+| ------------- | --------- | -------- | ----------- | ----------------- |
+| Table Header  | 14px      | Semibold | 1.25        | Column titles     |
+| Table Cell    | 14px      | Normal   | 1.5         | Data content      |
+| Table Caption | 12px      | Medium   | 1.25        | Table description |
 
 ---
 
 ## 💬 Blockquotes
 
 > Our typography system is designed to be both beautiful and functional. Every decision is made with readability, accessibility, and user experience in mind.
-> 
+>
 > — LiqUIdify Design Team
 
 ---
@@ -262,18 +288,14 @@ Our typography system includes optimized table styles:
 
 <CardGroup cols={2}>
   <Card title="✅ Do" icon="check">
-    - Use semantic HTML elements (`h1`, `p`, `strong`)
-    - Maintain consistent line heights within sections
-    - Ensure 4.5:1 contrast ratio minimum
-    - Test readability on different devices
-    - Use appropriate font weights for emphasis
+    - Use semantic HTML elements (`h1`, `p`, `strong`) - Maintain consistent
+    line heights within sections - Ensure 4.5:1 contrast ratio minimum - Test
+    readability on different devices - Use appropriate font weights for emphasis
   </Card>
   <Card title="❌ Don't" icon="x">
-    - Mix different font families randomly
-    - Use too many font weights in one design
-    - Ignore mobile readability
-    - Create insufficient color contrast
-    - Override system fonts without good reason
+    - Mix different font families randomly - Use too many font weights in one
+    design - Ignore mobile readability - Create insufficient color contrast -
+    Override system fonts without good reason
   </Card>
 </CardGroup>
 
@@ -282,6 +304,7 @@ Our typography system includes optimized table styles:
 ## 🔧 Implementation
 
 ### CSS Custom Properties
+
 ```css
 /* Use our typography system */
 .my-component {
@@ -302,9 +325,12 @@ Our typography system includes optimized table styles:
 ```
 
 ### Utility Classes
+
 ```html
 <!-- Complete typography control -->
-<h1 class="font-display text-5xl font-bold leading-tight tracking-tighter text-primary">
+<h1
+  class="font-display text-5xl font-bold leading-tight tracking-tighter text-primary"
+>
   Hero Headline
 </h1>
 
@@ -324,17 +350,24 @@ Our typography system includes optimized table styles:
 Our typography automatically adapts to different screen sizes:
 
 - **Mobile (≤640px)**: Smaller base font size (14px), reduced heading sizes
-- **Tablet (641px-1024px)**: Medium base font size (15px), balanced proportions  
+- **Tablet (641px-1024px)**: Medium base font size (15px), balanced proportions
 - **Desktop (≥1025px)**: Full base font size (16px), optimal reading experience
 
 ### Mobile Optimizations
+
 ```css
 @media (max-width: 640px) {
-  html { font-size: 14px; }
-  
-  h1 { font-size: var(--text-4xl); }
-  h2 { font-size: var(--text-3xl); }
-  
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-3xl);
+  }
+
   .prose {
     padding: 0 1rem;
     max-width: 100%;
@@ -345,8 +378,9 @@ Our typography automatically adapts to different screen sizes:
 ---
 
 <Note>
-  **Performance Note**: Our typography system uses `font-display: swap` for better loading performance and includes comprehensive fallback fonts to ensure text remains readable even if custom fonts fail to load.
+  **Performance Note**: Our typography system uses `font-display: swap` for
+  better loading performance and includes comprehensive fallback fonts to ensure
+  text remains readable even if custom fonts fail to load.
 </Note>
 
 Ready to implement beautiful typography in your project? Check out our [Component Examples](/components) to see the typography system in action!
-

@@ -37,12 +37,12 @@ The library exposes semantic tokens via CSS variables. You can override them glo
   --liquid-color-primary-contrast: #ffffff;
 
   /* surfaces */
-  --liquid-surface: rgba(255,255,255,0.7);
-  --liquid-surface-ghost: rgba(255,255,255,0.15);
+  --liquid-surface: rgba(255, 255, 255, 0.7);
+  --liquid-surface-ghost: rgba(255, 255, 255, 0.15);
 }
 
 :root.dark {
-  --liquid-surface: rgba(17,17,17,0.5);
+  --liquid-surface: rgba(17, 17, 17, 0.5);
 }
 ```
 
@@ -53,9 +53,7 @@ Most components reference these tokens in their classes (see classes like `liqui
 Set default intensity globally and adjust per‑component with className when needed.
 
 ```tsx
-<Card className="liquid-glass liquid-glass-lg">
-  Content
-</Card>
+<Card className="liquid-glass liquid-glass-lg">Content</Card>
 ```
 
 Intensity presets often map to blur/saturation and specular highlights. Keep GPU-friendly values (see Performance guide).
@@ -70,7 +68,10 @@ import { useTheme, GlassButton } from "liquidify";
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <GlassButton variant="ghost" onClick={() => setTheme(theme === "light" ? "dark" : "light")}> 
+    <GlassButton
+      variant="ghost"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
       {theme === "light" ? "🌙" : "☀️"} Toggle Theme
     </GlassButton>
   );
@@ -83,7 +84,9 @@ LiqUIdify aligns with Apple HIG. Use the system font stack or load SF Pro. Compo
 
 ```css
 :root {
-  --liquid-font-system: ui-sans-serif, system-ui, -apple-system, "SF Pro", Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --liquid-font-system:
+    ui-sans-serif, system-ui, -apple-system, "SF Pro", Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 ```
 
@@ -92,7 +95,7 @@ LiqUIdify aligns with Apple HIG. Use the system font stack or load SF Pro. Compo
 Components follow an 8pt grid. Radii tokens ensure consistent curvature that complements the glass effect.
 
 ```css
-:root { 
+:root {
   --liquid-radius-sm: 8px;
   --liquid-radius-md: 12px;
   --liquid-radius-lg: 16px;

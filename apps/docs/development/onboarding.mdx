@@ -1,0 +1,363 @@
+---
+title: Developer Onboarding
+description: Complete guide for setting up LiqUIdify development environment and making your first contribution.
+---
+
+# Developer Onboarding
+
+Welcome to the LiqUIdify development team! This guide will help you set up your development environment and make your first contribution to the component library.
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Bun**: >= 1.0.0 (our primary package manager)
+- **Node.js**: >= 18.0.0 (for compatibility with certain tools)
+- **Git**: Latest version
+- **VS Code**: Recommended (with our workspace settings)
+
+### Installation Steps
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/tuliopc23/LiqUIdify.git
+   cd LiqUIdify
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   bun install
+   ```
+
+3. **Verify installation**:
+
+   ```bash
+   bun run type-check
+   bun run test
+   ```
+
+4. **Start development servers**:
+
+   ```bash
+   # Component library development
+   bun run dev
+
+   # Storybook (component playground)
+   bun run storybook
+
+   # Documentation site
+   bun run docs:dev
+   ```
+
+## 🏗️ Project Structure
+
+LiqUIdify uses a monorepo structure with Bun workspaces:
+
+```
+LiqUIdify/
+├── apps/                    # Applications
+│   ├── docs/               # Documentation site (Mintlify)
+│   └── storybook/          # Component playground
+├── libs/                   # Libraries
+│   └── components/         # Main component library
+├── examples/               # Example applications
+├── scripts/                # Build and utility scripts
+├── tests/                  # E2E and integration tests
+└── docs/                   # Additional guides (root level)
+```
+
+### Key Files
+
+- **`package.json`**: Root workspace configuration and scripts
+- **`libs/components/`**: Main component library source
+- **`apps/docs/mint.json`**: Documentation site configuration
+- **`vitest.config.ts`**: Testing configuration
+- **`tailwind.config.ts`**: Tailwind CSS configuration
+
+## 🛠️ Development Workflow
+
+### 1. Creating a New Component
+
+Follow this workflow to add a new component:
+
+1. **Create component directory**:
+
+   ```bash
+   mkdir libs/components/src/components/glass-[component-name]
+   ```
+
+2. **Component structure**:
+
+   ```
+   glass-[component-name]/
+   ├── index.ts              # Main export
+   ├── glass-[name].tsx      # Component implementation
+   ├── glass-[name].test.tsx # Unit tests
+   ├── glass-[name].stories.tsx # Storybook stories
+   └── types.ts              # TypeScript definitions
+   ```
+
+3. **Follow naming conventions**:
+   - Components: `Glass[ComponentName]` (PascalCase)
+   - Files: `glass-component-name` (kebab-case)
+   - Types: `Glass[ComponentName]Props`
+
+4. **Add to exports**:
+   - Update `libs/components/src/index.ts`
+   - Add to appropriate bundle (core, forms, navigation, etc.)
+
+### 2. Testing Your Component
+
+Run the full testing suite:
+
+```bash
+# Unit tests
+bun run test
+
+# Accessibility tests
+bun run test:a11y
+
+# E2E tests
+bun run test:e2e
+
+# Visual regression tests (Storybook)
+bun run test:storybook
+
+# Performance tests
+bun run test:performance
+```
+
+### 3. Documentation
+
+Every component needs documentation:
+
+1. **Storybook stories**: Interactive examples and controls
+2. **Component docs**: `apps/docs/components/[component-name].mdx`
+3. **API documentation**: Props, types, and usage examples
+
+### 4. Code Quality
+
+Before submitting a PR:
+
+```bash
+# Format code
+bun run format
+
+# Lint code
+bun run lint
+
+# Type check
+bun run type-check
+
+# Build verification
+bun run build
+```
+
+## 🎯 Your First Contribution
+
+### Good First Issues
+
+Look for issues labeled:
+
+- `good first issue`
+- `documentation`
+- `component enhancement`
+- `accessibility`
+
+### Step-by-Step Process
+
+1. **Find an issue**: Browse our [GitHub Issues](https://github.com/tuliopc23/LiqUIdify/issues)
+
+2. **Create a branch**:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/issue-description
+   ```
+
+3. **Make your changes**:
+   - Follow our coding standards
+   - Add tests for new functionality
+   - Update documentation
+
+4. **Test thoroughly**:
+
+   ```bash
+   bun run health-check  # Runs type-check + build
+   bun run test:all      # Full test suite
+   ```
+
+5. **Commit your changes**:
+
+   ```bash
+   git add .
+   git commit -m "feat: add new component feature"
+   ```
+
+6. **Push and create PR**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+## 🎨 Design System Conventions
+
+### Component Design Principles
+
+1. **Accessibility First**: WCAG 2.1 AA compliance by default
+2. **Liquid Glass Aesthetic**: Translucent surfaces with proper contrast
+3. **Performant**: 60fps animations, tree-shakeable bundles
+4. **TypeScript**: Full type safety and IntelliSense support
+5. **Composable**: Support compound component patterns
+
+### Styling Guidelines
+
+- **CSS-in-JS**: Use CSS variables for theming
+- **Tailwind Integration**: Components work with or without Tailwind
+- **Responsive Design**: Mobile-first approach
+- **Dark Mode**: Support light/dark themes
+- **Reduced Motion**: Respect `prefers-reduced-motion`
+
+### Component API Patterns
+
+```tsx
+// Standard component props pattern
+interface GlassComponentProps {
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  children: React.ReactNode
+  className?: string
+  // Always extend HTML element props
+} & React.ComponentProps<'div'>
+
+// Compound component pattern
+const GlassCard = {
+  Root: GlassCardRoot,
+  Header: GlassCardHeader,
+  Title: GlassCardTitle,
+  Description: GlassCardDescription,
+  Content: GlassCardContent,
+  Footer: GlassCardFooter,
+}
+```
+
+## 🧪 Testing Guidelines
+
+### Test Structure
+
+Each component should have:
+
+1. **Unit Tests** (`*.test.tsx`):
+
+   ```tsx
+   import { render, screen } from "@testing-library/react";
+   import { GlassButton } from "./glass-button";
+
+   describe("GlassButton", () => {
+     it("renders children correctly", () => {
+       render(<GlassButton>Click me</GlassButton>);
+       expect(screen.getByRole("button")).toHaveTextContent("Click me");
+     });
+   });
+   ```
+
+2. **Accessibility Tests**:
+
+   ```tsx
+   import { axe } from "@/test/axe";
+
+   it("meets accessibility standards", async () => {
+     const { container } = render(<GlassButton>Accessible</GlassButton>);
+     const results = await axe(container);
+     expect(results).toHaveNoViolations();
+   });
+   ```
+
+3. **Storybook Stories** (`*.stories.tsx`):
+
+   ```tsx
+   export default {
+     title: "Components/GlassButton",
+     component: GlassButton,
+     parameters: { docs: { page: null } },
+   };
+
+   export const Primary = {
+     args: { variant: "primary", children: "Primary Button" },
+   };
+   ```
+
+### Testing Commands
+
+```bash
+# Development testing
+bun run test --watch
+
+# CI testing (all tests)
+bun run test:all
+
+# Specific test patterns
+bun run test glass-button
+bun run test:a11y glass-button
+```
+
+## 📚 Learning Resources
+
+### Internal Documentation
+
+- **[Architecture Guide](./architecture)**: Understanding the codebase
+- **[Build System](./build-system)**: Rolldown and bundling
+- **[Testing Strategy](./testing-strategy)**: Testing approach and tools
+
+### External Resources
+
+- **[Storybook](https://liquidify-storybook.vercel.app)**: Component playground
+- **[WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)**: Accessibility standards
+- **[Bun Documentation](https://bun.sh/docs)**: Package manager and runtime
+- **[Vitest](https://vitest.dev/)**: Testing framework
+
+## 🤝 Getting Help
+
+### Communication Channels
+
+- **GitHub Issues**: Bug reports and feature requests
+- **GitHub Discussions**: General questions and ideas
+- **PR Reviews**: Code feedback and collaboration
+
+### Code Review Process
+
+1. **Automated checks**: CI runs tests, linting, and type checking
+2. **Manual review**: Team members review code quality and design
+3. **Accessibility review**: Ensure WCAG 2.1 AA compliance
+4. **Documentation review**: Verify docs are complete and accurate
+
+### Common Questions
+
+**Q: How do I debug failing tests?**
+A: Use `bun run test --watch` and add `console.log` or use VS Code debugger.
+
+**Q: My component doesn't appear in Storybook?**
+A: Ensure you've created a `.stories.tsx` file and it exports proper story objects.
+
+**Q: How do I add a new design token?**
+A: Update `tailwind.config.ts` and the theme system in `libs/components/src/theme/`.
+
+**Q: What's the difference between `variant` and `size` props?**
+A: `variant` controls visual style (primary, secondary), `size` controls dimensions (sm, md, lg).
+
+## 🎉 Welcome to the Team
+
+You're now ready to contribute to LiqUIdify! Remember:
+
+- **Start small**: Begin with documentation or minor enhancements
+- **Ask questions**: The team is here to help you succeed
+- **Follow conventions**: Consistency makes the codebase maintainable
+- **Test thoroughly**: Quality is our top priority
+- **Have fun**: Building beautiful, accessible UIs should be enjoyable!
+
+Happy coding! 🚀

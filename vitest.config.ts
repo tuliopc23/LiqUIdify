@@ -164,9 +164,4 @@ export default defineConfig({
 
   // Vite plugin configuration for testing environment
   plugins: [],
-
-  // Define configuration for different environments
-  define: {
-    "import.meta.vitest": "undefined",
-  },
 });

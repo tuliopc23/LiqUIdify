@@ -10,23 +10,25 @@ LiqUIdify provides a comprehensive theming system that adapts beautifully to bot
 ## Theme Architecture
 
 ### CSS Custom Properties
+
 ```css
 :root {
   /* Light Theme */
   --lg-text: #1a1d21;
   --lg-bg-color: rgba(255, 255, 255, 0.35);
-  --lg-accent: #007AFF;
+  --lg-accent: #007aff;
 }
 
 .dark {
   /* Dark Theme */
   --lg-text: #ffffff;
   --lg-bg-color: rgba(20, 20, 25, 0.35);
-  --lg-accent: #007AFF;
+  --lg-accent: #007aff;
 }
 ```
 
 ### Automatic Theme Detection
+
 ```tsx
 import { ThemeProvider } from "liquidify";
 
@@ -42,6 +44,7 @@ export default function App() {
 ## Theme Customization
 
 ### Brand Colors
+
 ```css
 :root {
   --lg-accent: #your-brand-color;
@@ -51,6 +54,7 @@ export default function App() {
 ```
 
 ### Glass Effects
+
 ```css
 :root {
   --lg-blur-amount: 20px;
@@ -60,6 +64,7 @@ export default function App() {
 ```
 
 ### Animation Timings
+
 ```css
 :root {
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
@@ -72,32 +77,42 @@ export default function App() {
 ```tsx
 import { ThemeToggle } from "liquidify";
 
-<ThemeToggle 
+<ThemeToggle
   className="liquid-glass"
   variant="icon" // or "button"
   size="md"
-/>
+/>;
 ```
 
 ## Advanced Theming
 
 ### Multiple Theme Support
+
 ```tsx
 const themes = {
-  light: { /* light theme values */ },
-  dark: { /* dark theme values */ },
-  ocean: { /* custom ocean theme */ },
-  sunset: { /* custom sunset theme */ }
+  light: {
+    /* light theme values */
+  },
+  dark: {
+    /* dark theme values */
+  },
+  ocean: {
+    /* custom ocean theme */
+  },
+  sunset: {
+    /* custom sunset theme */
+  },
 };
 ```
 
 ### Theme Context Hook
+
 ```tsx
 import { useTheme } from "liquidify";
 
 function MyComponent() {
   const { theme, setTheme, themes } = useTheme();
-  
+
   return (
     <button onClick={() => setTheme("dark")}>
       Switch to {theme === "light" ? "dark" : "light"}
@@ -112,4 +127,3 @@ function MyComponent() {
 2. **Contrast Ratios**: Maintain WCAG AA compliance (4.5:1 minimum)
 3. **System Preference**: Respect user's system theme preference
 4. **Consistent Patterns**: Use the same theming approach across components
-
