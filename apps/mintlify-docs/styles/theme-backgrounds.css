@@ -1,0 +1,25 @@
+/* Theme-specific background images for Mintlify */
+[data-theme="light"] body {
+  background-image: url("/images/apple-glass-bg.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+[data-theme="dark"] body {
+  background-image: url("/images/apple-glass-bg-dark.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* Default fallback for light theme */
+body:not([data-theme]) {
+  background-image: url("/images/apple-glass-bg.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}

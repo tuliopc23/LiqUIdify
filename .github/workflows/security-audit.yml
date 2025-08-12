@@ -2,7 +2,7 @@ name: Security Audit
 
 on:
   schedule:
-    - cron: '0 2 * * 1' # Weekly on Mondays at 2 AM
+    - cron: "0 2 * * 1" # Weekly on Mondays at 2 AM
   push:
     branches: [main]
   pull_request:
@@ -12,7 +12,9 @@ on:
 jobs:
   security-audit:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

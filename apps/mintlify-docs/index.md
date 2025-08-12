@@ -3,11 +3,7 @@ title: LiqUIdify
 description: Production-ready React components with Liquid Glass aesthetics.
 ---
 
-<a className="skip-link" href="#main-content">
-  Skip to content
-</a>
 
-<a id="main-content" />
 
 Build beautiful, accessible UIs fast. Glassmorphism, tokens, and 40+ components.
 

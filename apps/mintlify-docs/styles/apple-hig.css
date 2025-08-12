@@ -711,3 +711,51 @@ code {
     0 20px 40px rgba(0, 0, 0, 0.15),
     0 12px 20px rgba(0, 0, 0, 0.1);
 }
+
+/* ================================================================
+   THEME-SPECIFIC BACKGROUND IMAGES
+   ================================================================ */
+
+/* Light theme background */
+[data-theme="light"] body,
+:root:not([data-theme]) body {
+  background-image: url("/images/apple-glass-bg.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* Dark theme background */
+[data-theme="dark"] body {
+  background-image: url("/images/apple-glass-bg-dark.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* Enhanced background overlay for better text readability */
+[data-theme="light"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: -1;
+}
