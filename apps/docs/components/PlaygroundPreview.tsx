@@ -1,6 +1,6 @@
 // filepath: apps/docs/components/PlaygroundPreview.tsx
 import { SandpackProvider, SandpackPreview } from "@codesandbox/sandpack-react";
-import { githubLight } from "@codesandbox/sandpack-themes";
+import { githubLight, nightOwl } from "@codesandbox/sandpack-themes";
 
 // Sandpack files map: path -> code or object with code/flags
 export type Files = Record<string, string | { code: string; hidden?: boolean; active?: boolean }>;
@@ -23,12 +23,15 @@ export default function PlaygroundPreview({
   deps = {},
   externalCSS = DEFAULT_CSS,
   height = 320,
+  theme = typeof window !== "undefined" && document?.documentElement?.classList.contains("dark") ? "dark" : "light",
 }: {
   files: Files;
   deps?: Record<string, string>;
   externalCSS?: string[];
   height?: number;
+  theme?: "light" | "dark";
 }) {
+  const themeObj = theme === "dark" ? nightOwl : githubLight;
   const mergedFiles: Files = {
     "/index.html": { code: "<div id='root'></div>", hidden: true },
     "/main.tsx": {
@@ -44,7 +47,7 @@ createRoot(document.getElementById("root")!).render(<App />);`,
   return (
     <SandpackProvider
       template="react-ts"
-      theme={githubLight}
+      theme={themeObj}
       files={mergedFiles}
       customSetup={{ dependencies: { ...DEFAULT_DEPS, ...deps } }}
       options={{ recompileMode: "delayed", externalResources: externalCSS }}
