@@ -256,11 +256,7 @@
       "destination": "/migrate/from-previous"
     }
   ],
-  "api": {
-    "playground": {
-      "mode": "show"
-    }
-  },
+  "api": null,
   "modeToggle": {
     "default": "light",
     "isHidden": false

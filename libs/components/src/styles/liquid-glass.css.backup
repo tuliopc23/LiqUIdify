@@ -10,49 +10,17 @@
    ================================================================ */
 
 :root {
-  /* Light theme base (readability first) */
-  --lg-bg-color: rgba(255, 255, 255, 0.35);
-  /* decorative */
+  /* Core Liquid Glass Colors - EXACT MATCH to your snippets */
+  /* Decorative glass base */
+  --lg-bg-color: rgba(20, 20, 25, 0.35);
+  /* Readable surface background (higher contrast) */
   --lg-bg-readable: rgba(20, 20, 25, 0.65);
-  /* high contrast surface */
   --lg-highlight: rgba(255, 255, 255, 0.75);
-  --lg-text: #1a1d21;
-  /* dark text for light surfaces */
-  --lg-text-inverse: #ffffff;
-  --lg-text-secondary: rgba(26, 29, 33, 0.8);
-  --lg-text-tertiary: rgba(26, 29, 33, 0.6);
+  --lg-text: #ffffff;
   --lg-red: #fb4268;
   --lg-grey: #444739;
   --lg-accent: #fb4268;
-
-  /* Enhanced Depth and Motion Controls */
-  --lg-depth-scale: 1;
-  --lg-tilt-x: 0deg;
-  --lg-tilt-y: 0deg;
-  --lg-parallax: 0;
-  --lg-noise-opacity: 0.04;
-  --lg-glow-color: rgba(255, 255, 255, 0.5);
-  --lg-glow-intensity: 0.3;
-  --lg-spotlight-x: 50%;
-  --lg-spotlight-y: 50%;
-
-  /* Animation Durations */
-  --lg-duration-xxs: 80ms;
-  --lg-duration-xs: 140ms;
-  --lg-duration-sm: 220ms;
-  --lg-duration-md: 340ms;
-  --lg-duration-lg: 560ms;
-  --lg-duration-xl: 900ms;
-
-  /* Easing Functions */
-  --lg-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --lg-ease-emph: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-  --lg-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --lg-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  /* Enhanced Focus States */
-  --lg-focus-outline: 0 0 0 3px rgba(0, 122, 255, 0.35);
-  --lg-focus-glow: 0 0 20px rgba(0, 122, 255, 0.4);
+  /* Primary accent color - matches lg-red */
 
   /* Liquid Glass Layers - Transparent System */
   --lg-filter-blur: blur(4px);
@@ -108,25 +76,13 @@
 
 /* Dark Mode - Keep components transparent, only change text/accents */
 .dark {
-  --lg-bg-color: rgba(20, 20, 25, 0.35);
-  --lg-bg-readable: rgba(20, 20, 25, 0.75);
   --lg-text: #ffffff;
-  --lg-text-inverse: #1a1d21;
-  --lg-text-secondary: rgba(255, 255, 255, 0.8);
-  --lg-text-tertiary: rgba(255, 255, 255, 0.6);
+  /* Keep white text */
   --lg-red: #fb4268;
-  --lg-grey: #888b95;
-  --lg-accent: #fb4268;
-}
-
-/* Page backgrounds */
-body {
-  background: radial-gradient(circle at 30% 30%, #f7f9fc, #e5e9f1 70%) fixed;
-  color: var(--lg-text);
-}
-
-body.dark {
-  background: radial-gradient(circle at 30% 30%, #0d0f15, #141821 70%) fixed;
+  /* Keep same red accent */
+  --lg-grey: #444739;
+  /* Keep same grey */
+  /* All glass colors stay the same - components remain transparent */
 }
 
 /* ================================================================
@@ -145,21 +101,6 @@ body.dark {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Fix for Chrome nested backdrop-filter issue - Layer 1 */
-.liquid-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: inherit;
-  z-index: -2;
-  pointer-events: none;
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
 /* The Liquid Shine Effect - This is your signature trick! */
 .liquid-glass::after {
   content: "";
@@ -171,14 +112,11 @@ body.dark {
   background: rgba(255, 255, 255, 0.1);
   border-radius: inherit;
   backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px); /* Safari support */
   box-shadow: var(--lg-shine-shadow);
   opacity: 0.6;
   z-index: var(--lg-z-shine);
   filter: var(--lg-shine-filter);
   pointer-events: none;
-  will-change: transform, opacity;
-  transform: translateZ(0); /* GPU acceleration */
 }
 
 /* Layered Liquid Glass System */
@@ -206,11 +144,8 @@ body.dark {
 
 .liquid-glass-filter {
   z-index: var(--lg-z-filter);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%); /* Safari - fixed values */
+  backdrop-filter: var(--lg-filter-blur);
   filter: var(--lg-filter-enhance);
-  will-change: transform, opacity;
-  transform: translateZ(0); /* GPU acceleration */
 }
 
 .liquid-glass-overlay {
@@ -405,7 +340,7 @@ body.dark {
 }
 
 .liquid-glass-input::placeholder {
-  color: var(--lg-text-tertiary);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .liquid-glass-input:focus {
@@ -434,7 +369,6 @@ body.dark {
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px); /* Safari support */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -572,12 +506,9 @@ body.dark {
   border-radius: var(--lg-radius-md);
   padding: var(--lg-bento-padding);
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%); /* Safari support */
+  backdrop-filter: var(--lg-filter-blur);
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: var(--lg-transition);
-  will-change: transform, opacity;
-  transform: translateZ(0); /* GPU acceleration */
 }
 
 .liquid-glass-bento-item:hover {
@@ -615,11 +546,11 @@ body.dark {
 }
 
 .text-liquid-secondary {
-  color: var(--lg-text-secondary);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .text-liquid-tertiary {
-  color: var(--lg-text-tertiary);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .text-liquid-accent {
@@ -628,6 +559,11 @@ body.dark {
 
 .text-liquid-grey {
   color: var(--lg-grey);
+}
+
+/* Readable surface background */
+.bg-liquid-readable {
+  background: var(--lg-bg-readable);
 }
 
 /* Background utilities */
@@ -641,6 +577,11 @@ body.dark {
 
 .bg-liquid-accent {
   background: var(--lg-red);
+}
+
+/* Inverse text for accent surfaces */
+.text-liquid-inverse {
+  color: var(--lg-text-inverse, #ffffff);
 }
 
 /* Border utilities */
@@ -670,27 +611,6 @@ body.dark {
    ================================================================ */
 
 @media (max-width: 768px) {
-  /* Mobile-specific blur values for performance */
-  .liquid-glass-filter {
-    backdrop-filter: blur(4px) saturate(150%);
-    -webkit-backdrop-filter: blur(4px) saturate(150%);
-  }
-  
-  .liquid-glass-bento-item {
-    backdrop-filter: blur(4px) saturate(110%);
-    -webkit-backdrop-filter: blur(4px) saturate(110%);
-  }
-  
-  .liquid-glass::before {
-    backdrop-filter: blur(6px) saturate(150%);
-    -webkit-backdrop-filter: blur(6px) saturate(150%);
-  }
-  
-  .liquid-glass::after {
-    backdrop-filter: blur(0.5px);
-    -webkit-backdrop-filter: blur(0.5px);
-  }
-  
   .liquid-glass-container {
     min-width: auto;
   }
@@ -708,11 +628,6 @@ body.dark {
   .liquid-glass-modal {
     padding: 1.5rem;
     margin: 1rem;
-  }
-  
-  .liquid-glass-modal-backdrop {
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
   }
 }
 
@@ -824,87 +739,4 @@ body.dark {
 /* Keyboard navigation support */
 .liquid-glass-interactive:focus-visible:not(:active) {
   transform: scale(1.02);
-}
-
-/* ================================================================
-   SVG FILTER EFFECTS
-   ================================================================ */
-
-/* Apply distortion filter for premium glass effect */
-@supports (filter: url(#liquid-glass-distortion)) {
-  .liquid-glass-distortion {
-    filter: url(#liquid-glass-distortion);
-  }
-
-  .liquid-glass-refraction {
-    filter: url(#liquid-glass-refraction);
-  }
-  
-  /* Premium devices get full effects */
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    .liquid-glass-premium::before {
-      filter: url(#liquid-glass-chromatic);
-    }
-    
-    .liquid-glass-premium::after {
-      filter: url(#liquid-glass-edge) var(--lg-shine-filter);
-    }
-  }
-  
-  /* Mobile optimized filters */
-  @media (max-width: 768px) {
-    .liquid-glass-distortion {
-      filter: url(#liquid-glass-mobile);
-    }
-  }
-}
-
-/* Fallback for browsers without SVG filter support */
-@supports not (filter: url(#liquid-glass-distortion)) {
-  .liquid-glass-distortion {
-    /* Enhanced shadow fallback */
-    box-shadow: 
-      0 8px 16px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      inset 0 1px 2px rgba(255, 255, 255, 0.2);
-  }
-}
-
-/* Water ripple animation effect */
-.liquid-glass-ripple {
-  position: relative;
-}
-
-.liquid-glass-ripple::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  filter: url(#liquid-glass-ripple);
-  opacity: 0;
-  animation: rippleEffect 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes rippleEffect {
-  0%, 100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* Depth enhancement for hero elements */
-.liquid-glass-depth {
-  filter: url(#liquid-glass-depth);
-}
-
-/* Noise texture overlay for realism */
-.liquid-glass-noise::after {
-  filter: url(#liquid-glass-noise) var(--lg-shine-filter);
-}
-
-/* Specular highlight enhancement */
-.liquid-glass-specular-enhanced {
-  filter: url(#liquid-glass-specular);
 }
