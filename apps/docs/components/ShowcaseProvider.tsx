@@ -1,15 +1,8 @@
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 import { githubLight, nightOwl } from "@codesandbox/sandpack-themes";
-import type { Files } from "./PlaygroundPreview";
+import type { Files } from "./sandpackDefaults";
+import { DEFAULT_CSS, DEFAULT_DEPS, withBaseFiles } from "./sandpackDefaults";
 import React from "react";
-
-const DEFAULT_DEPS = { react: "18", "react-dom": "18", "@liquidify/components": "1.2.4" };
-const DEFAULT_CSS = [
-  "/styles/liquid-glass.css",
-  "/styles/visual-enhancements.css",
-  "/styles/enhanced-typography.css",
-  "/styles/theme-backgrounds.css",
-];
 
 export function ShowcaseProvider({
   files,
@@ -25,17 +18,7 @@ export function ShowcaseProvider({
   children: React.ReactNode;
 }) {
   const themeObj = theme === "dark" ? nightOwl : githubLight;
-  const mergedFiles: Files = {
-    "/index.html": { code: "<div id='root'></div>", hidden: true },
-    "/main.tsx": {
-      code: `import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-createRoot(document.getElementById("root")!).render(<App />);`,
-      hidden: true,
-    },
-    ...files,
-  };
+  const mergedFiles: Files = withBaseFiles(files);
 
   return (
     <SandpackProvider
