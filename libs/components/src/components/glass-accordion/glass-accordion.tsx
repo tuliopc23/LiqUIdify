@@ -43,7 +43,7 @@ const accordionItemVariants = cva({
 });
 
 const accordionTriggerVariants = cva({
-  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10",
+  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10 rounded-full",
   variants: {
     size: {
       sm: "p-3 text-sm",

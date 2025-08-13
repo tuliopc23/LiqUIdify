@@ -118,7 +118,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       className={cn(
         "liquid-glass",
         getGlassClass("elevated"),
-        "rounded-lg px-3 py-2 text-sm",
+        "rounded-full px-3 py-2 text-sm",
         "border border-white/20 dark:border-white/10",
         "text-gray-900 dark:text-white",
         "max-w-xs break-words",

@@ -108,7 +108,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
       "transition-all duration-200 will-change-transform",
       "disabled:cursor-not-allowed disabled:opacity-50",
       error
-        ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
+        ? "border-amber-400/50 focus:border-amber-500 focus:ring-amber-500/20"
         : "border-liquid focus:border-liquid-accent focus:ring-liquid-accent/20",
     );
 
@@ -219,7 +219,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-500" : "text-liquid-grey/80",
+              error ? "text-amber-500" : "text-liquid-grey/80",
             )}
           >
             {helperText}

@@ -16,10 +16,12 @@
   --lg-highlight: rgba(255, 255, 255, 0.75);
   --lg-text: #1a1d21;
   --lg-text-inverse: #ffffff;
-  --lg-red: #fb4268;
+  --lg-red: #e11d48; /* reserved for semantic error only, not brand */
   --lg-grey: #444739;
-  --lg-accent: #fb4268;
-  /* Primary accent color - matches lg-red */
+  --lg-accent: #007AFF; /* brand primary blue */
+  --lg-primary: #007AFF;
+  --lg-primary-light: #5AC8FA;
+  /* Primary brand colors (blue) */
 
   /* Liquid Glass Layers - Fixed values for Safari compatibility */
   --lg-filter-blur: 8px; /* Desktop blur value */
@@ -86,9 +88,9 @@
   --liquid-glass-border: rgba(255, 255, 255, 0.12);
   --liquid-glass-border-focus: rgba(255, 255, 255, 0.3);
   /* Primary accent bridges */
-  --liquid-glass-primary: #fb4268;
-  --liquid-glass-primary-hover: #ff5c80;
-  --liquid-glass-primary-active: #d93b58;
+  --liquid-glass-primary: #007AFF;
+  --liquid-glass-primary-hover: #2b8cff;
+  --liquid-glass-primary-active: #0062cc;
   /* Text token bridges */
   --text-primary: var(--lg-text);
   --text-secondary: var(--lg-text-secondary);
@@ -101,9 +103,9 @@
   --lg-bg-readable: rgba(20, 20, 25, 0.40);
   --lg-text: #ffffff;
   --lg-text-inverse: #1a1d21;
-  --lg-red: #fb4268;
+  --lg-red: #e11d48; /* reserved for semantic error only */
   --lg-grey: #888b95;
-  --lg-accent: #fb4268;
+  --lg-accent: #5AC8FA; /* lighter brand blue for dark mode accents */
 
   /* Theme-aware text tokens */
   --lg-text-secondary: rgba(255, 255, 255, 0.8);
@@ -353,8 +355,8 @@
 .liquid-glass-button-primary {
   background: linear-gradient(
     135deg,
-    var(--lg-accent) 0%,
-    rgba(251, 66, 104, 0.8) 100%
+    var(--lg-primary) 0%,
+    var(--lg-primary-light) 100%
   );
 }
 
@@ -641,7 +643,7 @@ h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
 }
 
 .text-liquid-accent {
-  color: var(--lg-red);
+  color: var(--lg-accent);
 }
 
 .text-liquid-grey {
@@ -841,7 +843,7 @@ h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
   outline-offset: 2px;
   box-shadow:
     var(--lg-shadow-main),
-    0 0 0 4px rgba(251, 66, 104, 0.2);
+    0 0 0 4px rgba(0, 122, 255, 0.25);
 }
 
 /* Keyboard navigation support */
@@ -1004,7 +1006,8 @@ h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
 
 @supports (color: color(display-p3 1 1 1)) {
   .liquid-glass-wide-gamut {
-    --lg-accent: color(display-p3 0.984 0.259 0.408);
+    /* Blue in display-p3 space (approximate to #007AFF) */
+    --lg-accent: color(display-p3 0.0 0.48 1.0);
   }
 }
 
@@ -1076,7 +1079,7 @@ h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
   inset: 0;
   background: radial-gradient(
     circle at 30% 50%,
-    rgba(251, 66, 104, 0.1) 0%,
+    color-mix(in oklab, var(--lg-primary) 20%, transparent) 0%,
     transparent 50%
   );
   pointer-events: none;
@@ -1187,5 +1190,5 @@ h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
 /* Ensure rounded corners by default for glass-prefixed classes */
 [class^="liquid-glass-"],
 [class*=" liquid-glass-"] {
-  border-radius: var(--lg-radius-lg);
+  border-radius: var(--lg-radius-xl);
 }

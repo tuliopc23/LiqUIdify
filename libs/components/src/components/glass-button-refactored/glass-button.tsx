@@ -86,7 +86,7 @@ const variantConfig: Record<
   destructive: {
     glassVariant: "solid" as LiquidGlassVariant,
     text: "text-white font-semibold",
-    customClass: "bg-gradient-to-b from-red-500 to-red-600",
+    customClass: "bg-gradient-to-b from-indigo-600 to-blue-700",
   },
 };
 

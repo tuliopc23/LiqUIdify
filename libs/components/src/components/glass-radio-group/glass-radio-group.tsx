@@ -29,7 +29,7 @@ const radioGroupVariants = cva({
 });
 
 const radioItemVariants = cva({
-  base: "group flex cursor-pointer items-center gap-2 rounded-lg p-2 transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg border border-white/10 backdrop-blur-md",
+  base: "group flex cursor-pointer items-center gap-2 rounded-full p-2 transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg border border-white/10 backdrop-blur-md",
   variants: {
     size: {
       sm: "gap-1.5 p-1.5 text-sm",

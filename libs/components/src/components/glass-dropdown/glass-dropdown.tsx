@@ -159,7 +159,7 @@ export const GlassDropdown = React.memo(
             }}
             aria-expanded={isOpen}
             aria-haspopup="true"
-            className="cursor-pointer"
+            className="cursor-pointer rounded-full"
           >
             {trigger}
           </button>
@@ -170,7 +170,7 @@ export const GlassDropdown = React.memo(
               style={dropdownStyle}
               className={cn(
                 getGlassClass("elevated"),
-                "rounded-xl border border-white/20 py-1 dark:border-white/10",
+                "rounded-full border border-white/20 py-1 dark:border-white/10",
                 "min-w-[160px] max-w-[300px]",
                 "fade-in-0 zoom-in-95 animate-in duration-200",
                 contentClassName,
@@ -197,6 +197,7 @@ export const GlassDropdown = React.memo(
                       "hover:bg-white/10 dark:hover:bg-white/5",
                       "focus:bg-white/10 focus:outline-none dark:focus:bg-white/5",
                       "flex items-center space-x-2",
+                      "rounded-full",
                       "text-gray-900 text-sm dark:text-white",
                       item.disabled && "cursor-not-allowed opacity-50",
                     )}

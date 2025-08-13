@@ -26,7 +26,7 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
             type="checkbox"
             id={checkboxId}
             className={cn(
-              "relative z-10 h-5 w-5 liquid-glass-sm border-2",
+              "relative z-10 h-5 w-5 liquid-glass-sm border-2 rounded-full",
               "border-liquid-glass-hl/50 bg-transparent",
               "transition-all duration-200 will-change-transform",
               "motion-safe:hover:scale-110 motion-safe:active:scale-95",

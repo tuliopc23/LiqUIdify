@@ -180,11 +180,11 @@ const config = {
     ${head}
     <style>
       .sb-show-main {
-        background: #ffffff;
+        background: transparent !important;
       }
 
       .dark .sb-show-main {
-        background: #1a1a1a;
+        background: transparent !important;
       }
 
       .sb-show-main.sb-main-padded {

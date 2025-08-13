@@ -5,9 +5,14 @@ import {
   SandpackCodeEditor,
   SandpackPreview,
 } from "@codesandbox/sandpack-react";
-import { githubLight, nightOwl } from "@codesandbox/sandpack-themes";
 import type { Files } from "./sandpackDefaults";
-import { DEFAULT_CSS, DEFAULT_DEPS, withBaseFiles } from "./sandpackDefaults";
+import {
+  DEFAULT_CSS,
+  DEFAULT_DEPS,
+  withBaseFiles,
+  LIQUID_GLASS_DARK_THEME,
+  LIQUID_GLASS_LIGHT_THEME,
+} from "./sandpackDefaults";
 
 export default function Playground({
   files,
@@ -31,7 +36,7 @@ export default function Playground({
   showLineNumbers?: boolean;
   showOpenExternal?: boolean;
 }) {
-  const themeObj = theme === "dark" ? nightOwl : githubLight;
+  const themeObj = theme === "dark" ? LIQUID_GLASS_DARK_THEME : LIQUID_GLASS_LIGHT_THEME;
   const mergedFiles: Files = withBaseFiles(files);
 
   return (

@@ -17,6 +17,69 @@ export const DEFAULT_CSS: string[] = [
   "/styles/theme-backgrounds.css",
 ];
 
+// Custom Sandpack themes aligned with Liquid Glass brand (blue) and rounded UI
+export const LIQUID_GLASS_LIGHT_THEME = {
+  colors: {
+    accent: "#007AFF",
+    surface1: "#ffffff",
+    surface2: "#f4f6fb",
+    surface3: "#eef2f7",
+    base: "#0d1117",
+    clickable: "#0b66ff",
+    hover: "#2b8cff",
+    disabled: "#9aa4b2",
+    error: "#FF9500",
+  },
+  syntax: {
+    plain: "#0f172a",
+    comment: { color: "#94a3b8", fontStyle: "italic" },
+    keyword: "#7c3aed",
+    tag: "#0ea5e9",
+    punctuation: "#0f172a",
+    definition: "#2563eb",
+    property: "#2563eb",
+    static: "#0284c7",
+    string: "#059669",
+  },
+  font: {
+    body: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+    mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    size: "13px",
+    lineHeight: "1.5",
+  },
+} as const;
+
+export const LIQUID_GLASS_DARK_THEME = {
+  colors: {
+    accent: "#5AC8FA",
+    surface1: "#0d1117",
+    surface2: "#0f1524",
+    surface3: "#111827",
+    base: "#e6edf3",
+    clickable: "#77aaff",
+    hover: "#a7c4ff",
+    disabled: "#6b7280",
+    error: "#FF9500",
+  },
+  syntax: {
+    plain: "#e6edf3",
+    comment: { color: "#94a3b8", fontStyle: "italic" },
+    keyword: "#c084fc",
+    tag: "#38bdf8",
+    punctuation: "#cbd5e1",
+    definition: "#93c5fd",
+    property: "#93c5fd",
+    static: "#7dd3fc",
+    string: "#34d399",
+  },
+  font: {
+    body: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+    mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    size: "13px",
+    lineHeight: "1.5",
+  },
+} as const;
+
 export function withBaseFiles(files: Files): Files {
   return {
     "/index.html": {

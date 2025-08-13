@@ -192,7 +192,7 @@ export const GlassSelect = React.memo(
           <div
             onClick={() => !disabled && setIsOpen(!isOpen)}
             className={cn(
-              "liquid-glass-input w-full liquid-glass-sm px-4 py-3 text-left",
+              "liquid-glass-input w-full liquid-glass-sm px-4 py-3 text-left rounded-full",
               "flex items-center justify-between relative",
               "transition-all duration-200 will-change-transform",
               "text-liquid-primary placeholder:text-liquid-grey/70",
@@ -285,7 +285,7 @@ export const GlassSelect = React.memo(
               ref={listRef}
               id="liquid-glass-select-options"
               className={cn(
-                "liquid-glass absolute z-50 mt-2 w-full radius-lg-m",
+                "liquid-glass absolute z-50 mt-2 w-full rounded-full",
                 "border border-liquid-glass-hl/30 max-h-60 overflow-auto",
                 "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
                 "shadow-liquid-glass",
@@ -324,7 +324,7 @@ export const GlassSelect = React.memo(
                           isSelected &&
                             "bg-text-liquid-accent/10 text-text-liquid-accent",
                           isFocused && "bg-liquid-glass-bg/20",
-                          "first:rounded-t-lg last:rounded-b-lg",
+                          "rounded-full",
                         )}
                         role="option"
                         aria-selected={isSelected}
