@@ -223,6 +223,13 @@
   },
   "theme": "venus",
   "layout": "topnav",
+  "styles": [
+    "./styles/liquid-glass.css",
+    "./styles/mintlify-typography.css",
+    "./styles/visual-enhancements.css",
+    "./styles/enhanced-typography.css",
+    "./styles/theme-backgrounds.css"
+  ],
   "search": {
     "prompt": "Search LiqUIdify docs..."
   },
@@ -256,7 +263,6 @@
       "destination": "/migrate/from-previous"
     }
   ],
-  "api": null,
   "modeToggle": {
     "default": "light",
     "isHidden": false

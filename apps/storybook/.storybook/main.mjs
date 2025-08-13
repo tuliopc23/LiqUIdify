@@ -42,6 +42,7 @@ const config = {
     "@storybook/addon-links",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
+    "@codesandbox/storybook-addon",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -121,7 +122,7 @@ const config = {
               return;
             }
             // Suppress "use client" warnings
-            if (warning.message && warning.message.includes('"use client"')) {
+            if (warning.message && warning.message.includes('\"use client\"')) {
               return;
             }
             warn(warning);

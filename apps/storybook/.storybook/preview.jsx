@@ -20,6 +20,14 @@ const darkBg = `
 
 // noinspection JSUnusedGlobalSymbols
 export const parameters = {
+  codesandbox: {
+apiToken: "csb_v1_TM4R_k01DU7Jg9Ct7aHqbbuZ57__kbVfbs6Uk6lhtsc",
+    dependencies: {
+      "@radix-ui/themes": "latest",
+      "@myscope/mypackage": "1.0.0",
+    },
+    fallbackImport: "@radix-ui/themes",
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
