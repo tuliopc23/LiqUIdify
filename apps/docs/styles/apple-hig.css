@@ -370,6 +370,7 @@ code, pre, .font-mono {
     color: var(--apple-blue);
     border: var(--glass-border-heavy);
     backdrop-filter: var(--glass-backdrop-blur-light);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .apple-button-secondary:hover {
@@ -381,6 +382,7 @@ code, pre, .font-mono {
 .apple-card {
     background: var(--glass-bg-light);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border: var(--glass-border);
     border-radius: var(--apple-radius-2xl);
     padding: var(--apple-spacing-8);
@@ -398,6 +400,7 @@ code, pre, .font-mono {
 .apple-nav {
     background: var(--glass-bg-heavy);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border-bottom: var(--glass-border-light);
     padding: var(--apple-spacing-4) 0;
 }
@@ -433,6 +436,7 @@ code, pre, .font-mono {
     font-size: var(--text-base);
     color: var(--apple-text-primary);
     backdrop-filter: var(--glass-backdrop-blur-light);
+    -webkit-backdrop-filter: blur(20px);
     transition: all var(--apple-timing-fast);
 }
 
@@ -450,6 +454,7 @@ code, pre, .font-mono {
 .apple-table {
     background: var(--glass-bg-heavy);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border: var(--glass-border-light);
     border-radius: var(--apple-radius-xl);
     overflow: hidden;
@@ -536,6 +541,7 @@ pre {
     border: var(--glass-border-light);
     border-radius: var(--apple-radius-lg);
     backdrop-filter: var(--glass-backdrop-blur-light);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 code {
@@ -550,6 +556,7 @@ code {
 .liquid-glass-docs {
     background: var(--glass-bg-light);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border: var(--glass-border);
     border-radius: var(--apple-radius-2xl);
     padding: var(--apple-spacing-8);
@@ -647,6 +654,7 @@ body, html {
 
 .liquid-glass-text {
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     background: var(--glass-bg-light);
     padding: 1rem 1.5rem;
     border-radius: 0.75rem;
@@ -664,12 +672,14 @@ body, html {
 .mintlify-sidebar {
     background: var(--glass-bg-heavy);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border-right: var(--glass-border-light);
 }
 
 .mintlify-topbar {
     background: var(--glass-bg-heavy);
     backdrop-filter: var(--glass-backdrop-blur);
+    -webkit-backdrop-filter: blur(40px);
     border-bottom: var(--glass-border-light);
 }
 

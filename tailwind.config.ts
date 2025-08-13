@@ -259,6 +259,7 @@ const config: Config = {
           background: "rgba(255, 255, 255, 0.1)",
           borderRadius: "inherit",
           backdropFilter: "blur(1px)",
+          "-webkit-backdrop-filter": "blur(1px)",
           boxShadow: theme("boxShadow.liquid-shine"),
           opacity: "0.6",
           zIndex: theme("zIndex.liquid-shine"),
@@ -286,6 +287,7 @@ const config: Config = {
           borderRadius: "inherit",
           zIndex: theme("zIndex.liquid-filter"),
           backdropFilter: "blur(4px)",
+          "-webkit-backdrop-filter": "blur(4px)",
           filter: "saturate(120%) brightness(1.15)",
         },
 
@@ -425,6 +427,7 @@ const config: Config = {
           inset: "0",
           background: "rgba(0, 0, 0, 0.5)",
           backdropFilter: "blur(4px)",
+          "-webkit-backdrop-filter": "blur(4px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

@@ -14,6 +14,7 @@
 /* Enhanced liquid glass effects for core components */
 .liquid-glass-core-enhanced {
   backdrop-filter: var(--lg-filter-blur) saturate(150%) brightness(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(150%) brightness(1.2);
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid var(--lg-highlight);
   box-shadow: var(--lg-shadow-main), var(--lg-specular-shadow);
@@ -98,6 +99,7 @@
   transform: translateY(-2px) scale(1.02);
   box-shadow: var(--lg-shadow-enhanced);
   backdrop-filter: blur(6px) saturate(130%) brightness(1.1);
+  -webkit-backdrop-filter: blur(6px) saturate(130%) brightness(1.1);
   transition: var(--lg-transition);
 }
 
@@ -106,6 +108,7 @@
   transform: translateY(0) scale(0.98);
   box-shadow: var(--lg-shadow-main);
   backdrop-filter: blur(3px) saturate(110%) brightness(1.05);
+  -webkit-backdrop-filter: blur(3px) saturate(110%) brightness(1.05);
   transition: var(--lg-transition-press);
 }
 
@@ -151,6 +154,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: var(--lg-filter-blur);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ================================================================
@@ -163,6 +167,7 @@
   pointer-events: none;
   cursor: not-allowed;
   backdrop-filter: blur(2px) saturate(80%) brightness(0.9);
+  -webkit-backdrop-filter: blur(2px) saturate(80%) brightness(0.9);
   transform: none !important;
 }
 
@@ -291,6 +296,7 @@
   .liquid-glass-core-primary,
   .liquid-glass-core-secondary {
     backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     border-width: 2px;
   }
 

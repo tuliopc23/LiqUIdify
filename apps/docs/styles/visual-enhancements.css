@@ -263,6 +263,7 @@
   background-size: 400% 100%;
   animation: glass-shimmer 1.4s linear infinite;
   backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -312,6 +313,7 @@
   height: 3px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
@@ -477,6 +479,7 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--lg-radius-lg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .color-picker-item {
@@ -562,6 +565,8 @@ img.loaded {
 /* Glass Morphism Depth */
 .glass-depth {
   backdrop-filter: blur(calc(4px + var(--scroll-depth, 0) * 8px));
+  /* Safari fallback with fixed value */
+  -webkit-backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, calc(0.05 + var(--scroll-depth, 0) * 0.1));
 }
 
