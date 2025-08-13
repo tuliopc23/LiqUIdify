@@ -47,13 +47,15 @@ bun add liquidify
 ### Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, UnifiedGlassProvider } from "liquidify";
+import { GlassButton, GlassCard, UnifiedGlassProvider, LiquidGlassDefs } from "liquidify";
 import "liquidify/css";
 
 function App() {
   return (
     <UnifiedGlassProvider>
-      <GlassCard variant="elevated">
+      {/* Injects SVG filter defs once so CSS filter:url(#...) works */}
+      <LiquidGlassDefs />
+      <GlassCard variant="elevated" className="liquid-glass">
         <h1>Welcome to LiqUIdify</h1>
         <p>Beautiful glassmorphism components for modern React apps.</p>
         <GlassButton variant="primary" size="large">

@@ -82,6 +82,14 @@
   --liquid-glass-bg-pressed: rgba(20, 20, 25, 0.5);
   --liquid-glass-border: rgba(255, 255, 255, 0.12);
   --liquid-glass-border-focus: rgba(255, 255, 255, 0.3);
+  /* Primary accent bridges */
+  --liquid-glass-primary: #fb4268;
+  --liquid-glass-primary-hover: #ff5c80;
+  --liquid-glass-primary-active: #d93b58;
+  /* Text token bridges */
+  --text-primary: var(--lg-text);
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-tertiary: rgba(255, 255, 255, 0.6);
 }
 
 /* Dark Mode - Keep components transparent, only change text/accents */
