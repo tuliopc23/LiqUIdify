@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Device capability types
@@ -7,14 +7,14 @@ export interface DeviceCapabilities {
   hasBackdropFilter: boolean;
   hasSVGFilters: boolean;
   hasGPUAcceleration: boolean;
-  performanceTier: 'high' | 'medium' | 'low';
+  performanceTier: "high" | "medium" | "low";
   prefersReducedMotion: boolean;
   prefersReducedTransparency: boolean;
-  prefersContrast: 'no-preference' | 'more' | 'less' | 'custom';
+  prefersContrast: "no-preference" | "more" | "less" | "custom";
   isTouch: boolean;
   devicePixelRatio: number;
-  connectionSpeed: 'slow' | 'medium' | 'fast' | 'unknown';
-  colorGamut: 'srgb' | 'p3' | 'rec2020';
+  connectionSpeed: "slow" | "medium" | "fast" | "unknown";
+  colorGamut: "srgb" | "p3" | "rec2020";
   hdr: boolean;
 }
 
@@ -26,126 +26,137 @@ export function useDeviceCapabilities(): DeviceCapabilities {
     hasBackdropFilter: false,
     hasSVGFilters: false,
     hasGPUAcceleration: false,
-    performanceTier: 'medium',
+    performanceTier: "medium",
     prefersReducedMotion: false,
     prefersReducedTransparency: false,
-    prefersContrast: 'no-preference',
+    prefersContrast: "no-preference",
     isTouch: false,
     devicePixelRatio: 1,
-    connectionSpeed: 'unknown',
-    colorGamut: 'srgb',
+    connectionSpeed: "unknown",
+    colorGamut: "srgb",
     hdr: false,
   });
 
   useEffect(() => {
     // Only run on client side
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const detectCapabilities = () => {
       // Check backdrop-filter support
-      const hasBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)') || 
-                                CSS.supports('-webkit-backdrop-filter', 'blur(10px)');
+      const hasBackdropFilter =
+        CSS.supports("backdrop-filter", "blur(10px)") ||
+        CSS.supports("-webkit-backdrop-filter", "blur(10px)");
 
       // Check SVG filter support
-      const hasSVGFilters = CSS.supports('filter', 'url(#test)');
+      const hasSVGFilters = CSS.supports("filter", "url(#test)");
 
       // Check GPU acceleration (WebGL support as proxy)
       let hasGPUAcceleration = false;
       try {
-        const canvas = document.createElement('canvas');
-        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        const canvas = document.createElement("canvas");
+        const gl =
+          canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         hasGPUAcceleration = !!gl;
       } catch (e) {
         hasGPUAcceleration = false;
       }
 
       // Detect performance tier based on various factors
-      const detectPerformanceTier = (): 'high' | 'medium' | 'low' => {
+      const detectPerformanceTier = (): "high" | "medium" | "low" => {
         // Check hardware concurrency (CPU cores)
         const cores = navigator.hardwareConcurrency || 1;
-        
+
         // Check device memory (if available)
         const memory = (navigator as any).deviceMemory || 4;
-        
+
         // Check connection type
         const connection = (navigator as any).connection;
-        const effectiveType = connection?.effectiveType || '4g';
-        
+        const effectiveType = connection?.effectiveType || "4g";
+
         // Score based on capabilities
         let score = 0;
-        
+
         // CPU cores scoring
         if (cores >= 8) score += 3;
         else if (cores >= 4) score += 2;
         else score += 1;
-        
+
         // Memory scoring
         if (memory >= 8) score += 3;
         else if (memory >= 4) score += 2;
         else score += 1;
-        
+
         // Connection scoring
-        if (effectiveType === '4g') score += 2;
-        else if (effectiveType === '3g') score += 1;
-        
+        if (effectiveType === "4g") score += 2;
+        else if (effectiveType === "3g") score += 1;
+
         // GPU scoring
         if (hasGPUAcceleration) score += 2;
-        
+
         // Backdrop filter support
         if (hasBackdropFilter) score += 1;
-        
+
         // Determine tier based on score
-        if (score >= 8) return 'high';
-        if (score >= 5) return 'medium';
-        return 'low';
+        if (score >= 8) return "high";
+        if (score >= 5) return "medium";
+        return "low";
       };
 
       // Check media queries
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const prefersReducedTransparency = window.matchMedia('(prefers-reduced-transparency: reduce)').matches;
-      
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const prefersReducedTransparency = window.matchMedia(
+        "(prefers-reduced-transparency: reduce)",
+      ).matches;
+
       // Check contrast preference
-      let prefersContrast: DeviceCapabilities['prefersContrast'] = 'no-preference';
-      if (window.matchMedia('(prefers-contrast: more)').matches) {
-        prefersContrast = 'more';
-      } else if (window.matchMedia('(prefers-contrast: less)').matches) {
-        prefersContrast = 'less';
-      } else if (window.matchMedia('(prefers-contrast: custom)').matches) {
-        prefersContrast = 'custom';
+      let prefersContrast: DeviceCapabilities["prefersContrast"] =
+        "no-preference";
+      if (window.matchMedia("(prefers-contrast: more)").matches) {
+        prefersContrast = "more";
+      } else if (window.matchMedia("(prefers-contrast: less)").matches) {
+        prefersContrast = "less";
+      } else if (window.matchMedia("(prefers-contrast: custom)").matches) {
+        prefersContrast = "custom";
       }
 
       // Check if touch device
-      const isTouch = 'ontouchstart' in window || 
-                     navigator.maxTouchPoints > 0 || 
-                     (navigator as any).msMaxTouchPoints > 0;
+      const isTouch =
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        (navigator as any).msMaxTouchPoints > 0;
 
       // Get device pixel ratio
       const devicePixelRatio = window.devicePixelRatio || 1;
 
       // Detect connection speed
-      const detectConnectionSpeed = (): DeviceCapabilities['connectionSpeed'] => {
-        const connection = (navigator as any).connection;
-        if (!connection) return 'unknown';
-        
-        const effectiveType = connection.effectiveType;
-        const downlink = connection.downlink;
-        
-        if (effectiveType === 'slow-2g' || downlink < 0.5) return 'slow';
-        if (effectiveType === '2g' || effectiveType === '3g' || downlink < 2) return 'medium';
-        if (effectiveType === '4g' || downlink >= 2) return 'fast';
-        
-        return 'unknown';
-      };
+      const detectConnectionSpeed =
+        (): DeviceCapabilities["connectionSpeed"] => {
+          const connection = (navigator as any).connection;
+          if (!connection) return "unknown";
+
+          const effectiveType = connection.effectiveType;
+          const downlink = connection.downlink;
+
+          if (effectiveType === "slow-2g" || downlink < 0.5) return "slow";
+          if (effectiveType === "2g" || effectiveType === "3g" || downlink < 2)
+            return "medium";
+          if (effectiveType === "4g" || downlink >= 2) return "fast";
+
+          return "unknown";
+        };
 
       // Detect color gamut
-      const detectColorGamut = (): DeviceCapabilities['colorGamut'] => {
-        if (window.matchMedia('(color-gamut: rec2020)').matches) return 'rec2020';
-        if (window.matchMedia('(color-gamut: p3)').matches) return 'p3';
-        return 'srgb';
+      const detectColorGamut = (): DeviceCapabilities["colorGamut"] => {
+        if (window.matchMedia("(color-gamut: rec2020)").matches)
+          return "rec2020";
+        if (window.matchMedia("(color-gamut: p3)").matches) return "p3";
+        return "srgb";
       };
 
       // Check HDR support
-      const hdr = window.matchMedia('(dynamic-range: high)').matches;
+      const hdr = window.matchMedia("(dynamic-range: high)").matches;
 
       setCapabilities({
         hasBackdropFilter,
@@ -166,17 +177,19 @@ export function useDeviceCapabilities(): DeviceCapabilities {
     detectCapabilities();
 
     // Listen for changes in media queries
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const transparencyQuery = window.matchMedia('(prefers-reduced-transparency: reduce)');
-    const contrastQuery = window.matchMedia('(prefers-contrast: more)');
-    
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const transparencyQuery = window.matchMedia(
+      "(prefers-reduced-transparency: reduce)",
+    );
+    const contrastQuery = window.matchMedia("(prefers-contrast: more)");
+
     const handleChange = () => detectCapabilities();
-    
+
     // Modern browsers
     if (motionQuery.addEventListener) {
-      motionQuery.addEventListener('change', handleChange);
-      transparencyQuery.addEventListener('change', handleChange);
-      contrastQuery.addEventListener('change', handleChange);
+      motionQuery.addEventListener("change", handleChange);
+      transparencyQuery.addEventListener("change", handleChange);
+      contrastQuery.addEventListener("change", handleChange);
     } else {
       // Legacy browsers
       motionQuery.addListener(handleChange);
@@ -187,22 +200,22 @@ export function useDeviceCapabilities(): DeviceCapabilities {
     // Listen for connection changes
     const connection = (navigator as any).connection;
     if (connection) {
-      connection.addEventListener('change', handleChange);
+      connection.addEventListener("change", handleChange);
     }
 
     return () => {
       if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener('change', handleChange);
-        transparencyQuery.removeEventListener('change', handleChange);
-        contrastQuery.removeEventListener('change', handleChange);
+        motionQuery.removeEventListener("change", handleChange);
+        transparencyQuery.removeEventListener("change", handleChange);
+        contrastQuery.removeEventListener("change", handleChange);
       } else {
         motionQuery.removeListener(handleChange);
         transparencyQuery.removeListener(handleChange);
         contrastQuery.removeListener(handleChange);
       }
-      
+
       if (connection) {
-        connection.removeEventListener('change', handleChange);
+        connection.removeEventListener("change", handleChange);
       }
     };
   }, []);
@@ -215,50 +228,53 @@ export function useDeviceCapabilities(): DeviceCapabilities {
  */
 export function getLiquidGlassClasses(
   capabilities: DeviceCapabilities,
-  variant?: 'default' | 'premium' | 'minimal',
-  additionalClasses?: string
+  variant?: "default" | "premium" | "minimal",
+  additionalClasses?: string,
 ): string {
-  const classes: string[] = ['liquid-glass'];
+  const classes: string[] = ["liquid-glass"];
 
   // Add performance tier classes
-  if (capabilities.performanceTier === 'high' && variant !== 'minimal') {
-    classes.push('liquid-glass-premium');
+  if (capabilities.performanceTier === "high" && variant !== "minimal") {
+    classes.push("liquid-glass-premium");
     if (capabilities.hasSVGFilters) {
-      classes.push('liquid-glass-distortion');
+      classes.push("liquid-glass-distortion");
     }
     if (capabilities.hdr) {
-      classes.push('liquid-glass-hdr');
+      classes.push("liquid-glass-hdr");
     }
-  } else if (capabilities.performanceTier === 'low' || variant === 'minimal') {
-    classes.push('liquid-glass-minimal');
+  } else if (capabilities.performanceTier === "low" || variant === "minimal") {
+    classes.push("liquid-glass-minimal");
   }
 
   // Add accessibility classes
   if (capabilities.prefersReducedMotion) {
-    classes.push('liquid-glass-reduced-motion');
+    classes.push("liquid-glass-reduced-motion");
   }
-  
+
   if (capabilities.prefersReducedTransparency) {
-    classes.push('liquid-glass-reduced-transparency');
+    classes.push("liquid-glass-reduced-transparency");
   }
-  
-  if (capabilities.prefersContrast === 'more') {
-    classes.push('liquid-glass-high-contrast');
+
+  if (capabilities.prefersContrast === "more") {
+    classes.push("liquid-glass-high-contrast");
   }
 
   // Add touch-specific classes
   if (capabilities.isTouch) {
-    classes.push('liquid-glass-touch');
+    classes.push("liquid-glass-touch");
   }
 
   // Add retina/high-dpi classes
   if (capabilities.devicePixelRatio >= 2) {
-    classes.push('liquid-glass-retina');
+    classes.push("liquid-glass-retina");
   }
 
   // Add color gamut classes
-  if (capabilities.colorGamut === 'p3' || capabilities.colorGamut === 'rec2020') {
-    classes.push('liquid-glass-wide-gamut');
+  if (
+    capabilities.colorGamut === "p3" ||
+    capabilities.colorGamut === "rec2020"
+  ) {
+    classes.push("liquid-glass-wide-gamut");
   }
 
   // Add custom classes
@@ -266,5 +282,5 @@ export function getLiquidGlassClasses(
     classes.push(additionalClasses);
   }
 
-  return classes.join(' ');
+  return classes.join(" ");
 }

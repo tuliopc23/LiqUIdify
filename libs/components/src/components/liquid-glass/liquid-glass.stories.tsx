@@ -6,7 +6,13 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { LiquidGlass, LiquidGlassCard, LiquidGlassButton, LiquidGlassNav, LiquidGlassHero } from "./liquid-glass";
+import {
+  LiquidGlass,
+  LiquidGlassCard,
+  LiquidGlassButton,
+  LiquidGlassNav,
+  LiquidGlassHero,
+} from "./liquid-glass";
 import { LiquidGlassDefs } from "../liquid-glass-defs/liquid-glass-defs";
 import { Heart, Home, Settings, User } from "lucide-react";
 
@@ -54,7 +60,8 @@ The Liquid Glass component is the foundation of LiqUIdify's design system, provi
         },
         {
           name: "mesh",
-          value: "radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%)",
+          value:
+            "radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%)",
         },
         {
           name: "dark",
@@ -70,7 +77,16 @@ The Liquid Glass component is the foundation of LiqUIdify's design system, provi
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["default", "solid", "translucent", "transparent", "holographic", "aurora", "frosted", "iridescent"],
+      options: [
+        "default",
+        "solid",
+        "translucent",
+        "transparent",
+        "holographic",
+        "aurora",
+        "frosted",
+        "iridescent",
+      ],
       description: "Visual variant of the liquid glass effect",
     },
     size: {
@@ -130,7 +146,18 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-4">
-      {(["default", "solid", "translucent", "transparent", "holographic", "aurora", "frosted", "iridescent"] as const).map((variant) => (
+      {(
+        [
+          "default",
+          "solid",
+          "translucent",
+          "transparent",
+          "holographic",
+          "aurora",
+          "frosted",
+          "iridescent",
+        ] as const
+      ).map((variant) => (
         <LiquidGlass key={variant} variant={variant} size="md">
           <div className="p-6">
             <h4 className="font-semibold capitalize">{variant}</h4>
@@ -143,7 +170,8 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: "All available liquid glass variants with unique visual characteristics.",
+        story:
+          "All available liquid glass variants with unique visual characteristics.",
       },
     },
   },
@@ -181,7 +209,7 @@ export const Interactive: Story = {
           <p className="text-sm opacity-75">Click or hover for effects</p>
         </button>
       </LiquidGlass>
-      
+
       <LiquidGlass variant="holographic" interactive>
         <button className="p-6 w-full text-left">
           <h4 className="font-semibold mb-1">Holographic Card</h4>
@@ -226,14 +254,26 @@ export const Animated: Story = {
 export const LayeredGlass: Story = {
   render: () => (
     <div className="flex gap-4">
-      <LiquidGlass variant="frosted" layered showFilter showOverlay showSpecular>
+      <LiquidGlass
+        variant="frosted"
+        layered
+        showFilter
+        showOverlay
+        showSpecular
+      >
         <div className="p-8">
           <h4 className="font-semibold mb-2">Full Layers</h4>
           <p className="text-sm opacity-75">All glass layers enabled</p>
         </div>
       </LiquidGlass>
-      
-      <LiquidGlass variant="frosted" layered showFilter={false} showOverlay showSpecular={false}>
+
+      <LiquidGlass
+        variant="frosted"
+        layered
+        showFilter={false}
+        showOverlay
+        showSpecular={false}
+      >
         <div className="p-8">
           <h4 className="font-semibold mb-2">Partial Layers</h4>
           <p className="text-sm opacity-75">Selected layers only</p>
@@ -260,7 +300,7 @@ export const ComponentVariants: Story = {
           <p className="text-sm opacity-75">Pre-configured card variant</p>
         </div>
       </LiquidGlassCard>
-      
+
       <LiquidGlassNav>
         <div className="flex gap-4 p-4">
           <button className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded">
@@ -274,11 +314,13 @@ export const ComponentVariants: Story = {
           </button>
         </div>
       </LiquidGlassNav>
-      
+
       <LiquidGlassHero>
         <div className="p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Hero Section</h2>
-          <p className="text-lg opacity-75">Large glass container for hero content</p>
+          <p className="text-lg opacity-75">
+            Large glass container for hero content
+          </p>
         </div>
       </LiquidGlassHero>
     </div>
@@ -302,14 +344,14 @@ export const PerformanceModes: Story = {
           <p className="text-sm opacity-75">All effects enabled</p>
         </div>
       </LiquidGlass>
-      
+
       <LiquidGlass variant="iridescent" performanceMode="medium">
         <div className="p-6">
           <h4 className="font-semibold">Medium Performance</h4>
           <p className="text-sm opacity-75">Balanced effects</p>
         </div>
       </LiquidGlass>
-      
+
       <LiquidGlass variant="iridescent" performanceMode="low">
         <div className="p-6">
           <h4 className="font-semibold">Low Performance</h4>
@@ -321,7 +363,8 @@ export const PerformanceModes: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Manual performance mode selection for different device capabilities.",
+        story:
+          "Manual performance mode selection for different device capabilities.",
       },
     },
   },
@@ -339,14 +382,19 @@ export const ComplexComposition: Story = {
             Settings
           </LiquidGlassButton>
         </div>
-        
+
         <div className="grid grid-cols-3 gap-4">
           {[
             { label: "Users", value: "2,847", change: "+12%" },
             { label: "Revenue", value: "$14,250", change: "+8%" },
             { label: "Orders", value: "384", change: "+23%" },
           ].map((stat) => (
-            <LiquidGlass key={stat.label} variant="frosted" size="sm" interactive>
+            <LiquidGlass
+              key={stat.label}
+              variant="frosted"
+              size="sm"
+              interactive
+            >
               <div className="p-4">
                 <p className="text-sm opacity-75">{stat.label}</p>
                 <p className="text-xl font-bold">{stat.value}</p>
@@ -361,7 +409,8 @@ export const ComplexComposition: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Complex composition demonstrating nested liquid glass components.",
+        story:
+          "Complex composition demonstrating nested liquid glass components.",
       },
     },
   },

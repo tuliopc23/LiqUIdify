@@ -12,67 +12,101 @@ A curated set of live previews of the most used components.
 
 ## Button
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Button } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Button } from "@liquidify/components";
 export default function App(){ return <div style={{display:'flex',gap:12}}>
   <Button variant="primary">Primary</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="ghost">Ghost</Button>
-</div>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Button } from "@liquidify/components";
+</div>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Button } from "@liquidify/components";
 export default function App(){ return <div style={{display:'flex',gap:12}}>
   <Button variant="primary">Primary</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="ghost">Ghost</Button>
-</div>; }` }} />
+</div>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Input with FormField
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Input, FormField } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Input, FormField } from "@liquidify/components";
 export default function App(){ return <FormField label="Email" helperText="We'll never share your email.">
   <Input placeholder="you@example.com" />
-</FormField>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Input, FormField } from "@liquidify/components";
+</FormField>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Input, FormField } from "@liquidify/components";
 export default function App(){ return <FormField label="Email" helperText="We'll never share your email.">
   <Input placeholder="you@example.com" />
-</FormField>; }` }} />
+</FormField>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Checkbox Group
 
-<ShowcaseProvider files={{ "/App.tsx": `import { CheckboxGroup, Checkbox } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { CheckboxGroup, Checkbox } from "@liquidify/components";
 export default function App(){ return <CheckboxGroup label="Fruits">
   <Checkbox value="apple">Apple</Checkbox>
   <Checkbox value="banana">Banana</Checkbox>
   <Checkbox value="orange">Orange</Checkbox>
-</CheckboxGroup>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { CheckboxGroup, Checkbox } from "@liquidify/components";
+</CheckboxGroup>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { CheckboxGroup, Checkbox } from "@liquidify/components";
 export default function App(){ return <CheckboxGroup label="Fruits">
   <Checkbox value="apple">Apple</Checkbox>
   <Checkbox value="banana">Banana</Checkbox>
   <Checkbox value="orange">Orange</Checkbox>
-</CheckboxGroup>; }` }} />
+</CheckboxGroup>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Combobox
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Combobox } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Combobox } from "@liquidify/components";
 export default function App(){ return <Combobox options={[
   { label: "Apple", value: "apple" },
   { label: "Banana", value: "banana" },
   { label: "Orange", value: "orange" },
-]} placeholder="Pick a fruit" /> }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Combobox } from "@liquidify/components";
+]} placeholder="Pick a fruit" /> }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Combobox } from "@liquidify/components";
 export default function App(){ return <Combobox options={[
   { label: "Apple", value: "apple" },
   { label: "Banana", value: "banana" },
   { label: "Orange", value: "orange" },
-]} placeholder="Pick a fruit" /> }` }} />
+]} placeholder="Pick a fruit" /> }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Modal
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Modal, Button } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Modal, Button } from "@liquidify/components";
 import { useState } from "react";
 export default function App(){
   const [open,setOpen]=useState(false);
@@ -82,8 +116,12 @@ export default function App(){
       Modal content goes here.
     </Modal>
   </div>;
-}` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Modal, Button } from "@liquidify/components";
+}`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Modal, Button } from "@liquidify/components";
 import { useState } from "react";
 export default function App(){
   const [open,setOpen]=useState(false);
@@ -93,71 +131,105 @@ export default function App(){
       Modal content goes here.
     </Modal>
   </div>;
-}` }} />
+}`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Tabs
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Tabs } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Tabs } from "@liquidify/components";
 export default function App(){ return <Tabs
   items={[
     { value: "a", label: "One", content: <div>Tab A</div> },
     { value: "b", label: "Two", content: <div>Tab B</div> },
   ]}
-/>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Tabs } from "@liquidify/components";
+/>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Tabs } from "@liquidify/components";
 export default function App(){ return <Tabs
   items={[
     { value: "a", label: "One", content: <div>Tab A</div> },
     { value: "b", label: "Two", content: <div>Tab B</div> },
   ]}
-/>; }` }} />
+/>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Tooltip
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Tooltip, Button } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Tooltip, Button } from "@liquidify/components";
 export default function App(){ return <Tooltip content="Helpful tip">
   <Button>Hover me</Button>
-</Tooltip>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Tooltip, Button } from "@liquidify/components";
+</Tooltip>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Tooltip, Button } from "@liquidify/components";
 export default function App(){ return <Tooltip content="Helpful tip">
   <Button>Hover me</Button>
-</Tooltip>; }` }} />
+</Tooltip>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Toast
 
-<ShowcaseProvider files={{ "/App.tsx": `import { ToastProvider, useToast, Button } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { ToastProvider, useToast, Button } from "@liquidify/components";
 function Demo(){
   const { toast } = useToast();
   return <Button onClick={()=>toast({ title:"Saved", description:"Changes persisted."})}>Show toast</Button>;
 }
-export default function App(){ return <ToastProvider><Demo/></ToastProvider>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { ToastProvider, useToast, Button } from "@liquidify/components";
+export default function App(){ return <ToastProvider><Demo/></ToastProvider>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { ToastProvider, useToast, Button } from "@liquidify/components";
 function Demo(){
   const { toast } = useToast();
   return <Button onClick={()=>toast({ title:"Saved", description:"Changes persisted."})}>Show toast</Button>;
 }
-export default function App(){ return <ToastProvider><Demo/></ToastProvider>; }` }} />
+export default function App(){ return <ToastProvider><Demo/></ToastProvider>; }`,
+    }}
+  />
 </ShowcaseProvider>
 
 ## Card and Badge
 
-<ShowcaseProvider files={{ "/App.tsx": `import { Card, Badge } from "@liquidify/components";
+<ShowcaseProvider
+  files={{
+    "/App.tsx": `import { Card, Badge } from "@liquidify/components";
 export default function App(){ return <Card>
   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
     <strong>Card title</strong>
     <Badge color="green">New</Badge>
   </div>
   <p>Card content…</p>
-</Card>; }` }}>
-  <PreviewWithToolbar initialFiles={{ "/App.tsx": `import { Card, Badge } from "@liquidify/components";
+</Card>; }`,
+  }}
+>
+  <PreviewWithToolbar
+    initialFiles={{
+      "/App.tsx": `import { Card, Badge } from "@liquidify/components";
 export default function App(){ return <Card>
   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
     <strong>Card title</strong>
     <Badge color="green">New</Badge>
   </div>
   <p>Card content…</p>
-</Card>; }` }} />
+</Card>; }`,
+    }}
+  />
 </ShowcaseProvider>

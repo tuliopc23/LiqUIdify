@@ -9,10 +9,13 @@
   --scroll-depth: 0;
   --mouse-x: 50%;
   --mouse-y: 50%;
-  
+
   /* Common transition patterns */
-  --transition-transform: transform var(--lg-duration-xs) var(--lg-ease-standard);
-  --transition-transform-shadow: transform var(--lg-duration-sm) var(--lg-ease-out), box-shadow var(--lg-duration-sm) var(--lg-ease-out);
+  --transition-transform: transform var(--lg-duration-xs)
+    var(--lg-ease-standard);
+  --transition-transform-shadow:
+    transform var(--lg-duration-sm) var(--lg-ease-out),
+    box-shadow var(--lg-duration-sm) var(--lg-ease-out);
   --transition-all-standard: all var(--lg-duration-sm) var(--lg-ease-standard);
 }
 
@@ -35,7 +38,9 @@
 
 /* Pressable Effect */
 .pressable {
-  transition: var(--transition-transform), box-shadow var(--lg-duration-xs) var(--lg-ease-standard);
+  transition:
+    var(--transition-transform),
+    box-shadow var(--lg-duration-xs) var(--lg-ease-standard);
   cursor: pointer;
 }
 
@@ -209,7 +214,9 @@
 
 .floating-card {
   transform: translateY(6px) translateZ(0);
-  transition: transform var(--lg-duration-sm) var(--lg-ease-emph), box-shadow var(--lg-duration-sm) var(--lg-ease-emph);
+  transition:
+    transform var(--lg-duration-sm) var(--lg-ease-emph),
+    box-shadow var(--lg-duration-sm) var(--lg-ease-emph);
   will-change: transform;
 }
 
@@ -646,23 +653,23 @@ body.focus-mode .content {
 
 /* High Contrast Mode Support */
 @media (prefers-contrast: more) {
-    :root {
-        --high-contrast-overlay: rgba(0, 0, 0, 0.1);
-    }
+  :root {
+    --high-contrast-overlay: rgba(0, 0, 0, 0.1);
+  }
 
-    .glass-skeleton {
-        background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 10px,
-                var(--high-contrast-overlay) 10px,
-                var(--high-contrast-overlay) 20px
-        );
-    }
+  .glass-skeleton {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      var(--high-contrast-overlay) 10px,
+      var(--high-contrast-overlay) 20px
+    );
+  }
 
-    .reading-progress-bar {
-        background: currentColor;
-    }
+  .reading-progress-bar {
+    background: currentColor;
+  }
 }
 
 /* ================================================================

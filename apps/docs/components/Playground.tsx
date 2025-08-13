@@ -14,7 +14,10 @@ export default function Playground({
   deps = {},
   externalCSS = DEFAULT_CSS,
   height = 360,
-  theme = typeof window !== "undefined" && document?.documentElement?.classList.contains("dark") ? "dark" : "light",
+  theme = typeof window !== "undefined" &&
+  document?.documentElement?.classList.contains("dark")
+    ? "dark"
+    : "light",
   showTabs = true,
   showLineNumbers = true,
   showOpenExternal = false,
@@ -40,7 +43,10 @@ export default function Playground({
       options={{ recompileMode: "delayed", externalResources: externalCSS }}
     >
       <SandpackLayout style={{ height }}>
-        <SandpackCodeEditor showTabs={showTabs} showLineNumbers={showLineNumbers} />
+        <SandpackCodeEditor
+          showTabs={showTabs}
+          showLineNumbers={showLineNumbers}
+        />
         <SandpackPreview showOpenInCodeSandbox={showOpenExternal} />
       </SandpackLayout>
     </SandpackProvider>

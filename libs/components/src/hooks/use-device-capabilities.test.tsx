@@ -19,7 +19,8 @@ describe("useDeviceCapabilities", () => {
     // Setup default mocks
     Object.defineProperty(global, "navigator", {
       value: {
-        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        userAgent:
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         hardwareConcurrency: 8,
         deviceMemory: 8,
         connection: {
@@ -145,7 +146,9 @@ describe("useDeviceCapabilities", () => {
     it("handles GPU adapter request failure", async () => {
       Object.defineProperty(global.navigator, "gpu", {
         value: {
-          requestAdapter: vi.fn().mockRejectedValue(new Error("GPU not available")),
+          requestAdapter: vi
+            .fn()
+            .mockRejectedValue(new Error("GPU not available")),
         },
         writable: true,
         configurable: true,
@@ -466,7 +469,7 @@ describe("useDeviceCapabilities", () => {
       delete (global as any).window;
 
       const { result } = renderHook(() => useDeviceCapabilities());
-      
+
       // Should return safe defaults
       expect(result.current.hasBackdropFilter).toBe(false);
       expect(result.current.hasSVGFilters).toBe(false);
@@ -511,7 +514,7 @@ describe("useDeviceCapabilities", () => {
       });
 
       const { result } = renderHook(() => useDeviceCapabilities());
-      
+
       expect(result.current.performanceTier).toBe("high");
       expect(result.current.devicePixelRatio).toBe(3);
       expect(result.current.colorGamut).toBe("p3");
@@ -546,10 +549,10 @@ describe("useDeviceCapabilities", () => {
         configurable: true,
       });
       CSS.supports = vi.fn(() => false);
-      window.matchMedia = vi.fn(() => ({ matches: false } as any));
+      window.matchMedia = vi.fn(() => ({ matches: false }) as any);
 
       const { result } = renderHook(() => useDeviceCapabilities());
-      
+
       expect(result.current.hasBackdropFilter).toBe(false);
       expect(result.current.hasSVGFilters).toBe(false);
       expect(result.current.performanceTier).toBe("low");
@@ -561,14 +564,16 @@ describe("useDeviceCapabilities", () => {
 
     it("detects accessibility-focused configuration", () => {
       window.matchMedia = vi.fn((query) => {
-        if (query === "(prefers-reduced-motion: reduce)") return { matches: true } as any;
-        if (query === "(prefers-reduced-transparency: reduce)") return { matches: true } as any;
+        if (query === "(prefers-reduced-motion: reduce)")
+          return { matches: true } as any;
+        if (query === "(prefers-reduced-transparency: reduce)")
+          return { matches: true } as any;
         if (query === "(pointer: coarse)") return { matches: true } as any;
         return { matches: false } as any;
       });
 
       const { result } = renderHook(() => useDeviceCapabilities());
-      
+
       expect(result.current.prefersReducedMotion).toBe(true);
       expect(result.current.prefersReducedTransparency).toBe(true);
       expect(result.current.isPointerDevice).toBe(false);

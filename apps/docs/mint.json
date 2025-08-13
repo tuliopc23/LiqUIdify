@@ -56,8 +56,8 @@
     {
       "group": "Components",
       "pages": [
-            "components/index",
-            "components/showcase",
+        "components/index",
+        "components/showcase",
         {
           "group": "Core System",
           "pages": [

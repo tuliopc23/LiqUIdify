@@ -9,7 +9,10 @@ export default function PlaygroundPreview({
   deps = {},
   externalCSS = DEFAULT_CSS,
   height = 320,
-  theme = typeof window !== "undefined" && document?.documentElement?.classList.contains("dark") ? "dark" : "light",
+  theme = typeof window !== "undefined" &&
+  document?.documentElement?.classList.contains("dark")
+    ? "dark"
+    : "light",
 }: {
   files: Files;
   deps?: Record<string, string>;
@@ -29,9 +32,11 @@ export default function PlaygroundPreview({
       options={{ recompileMode: "delayed", externalResources: externalCSS }}
     >
       <div style={{ height }}>
-        <SandpackPreview showOpenInCodeSandbox={false} style={{ height: "100%" }} />
+        <SandpackPreview
+          showOpenInCodeSandbox={false}
+          style={{ height: "100%" }}
+        />
       </div>
     </SandpackProvider>
   );
 }
-

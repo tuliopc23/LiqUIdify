@@ -523,7 +523,7 @@ const GlassChart = lazy(() =>
   (process.env.NODE_ENV === "production"
     ? import("liquidify/chart")
     : import("liquidify")
-  ).then((mod) => ({ default: mod.GlassChart }))
+  ).then((mod) => ({ default: mod.GlassChart })),
 );
 
 // Development-only features

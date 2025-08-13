@@ -26,7 +26,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass>
           <div>Test Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const content = screen.getByText("Test Content");
@@ -37,7 +37,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass className="custom-class">
           <div>Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByText("Content").parentElement;
@@ -48,7 +48,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass as="section">
           <div>Section Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const section = screen.getByText("Section Content").parentElement;
@@ -60,7 +60,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass ref={ref}>
           <div>Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       expect(ref).toHaveBeenCalledWith(expect.any(HTMLDivElement));
@@ -84,12 +84,12 @@ describe("LiquidGlass", () => {
         render(
           <LiquidGlass variant={variant}>
             <div data-testid="content">Content</div>
-          </LiquidGlass>
+          </LiquidGlass>,
         );
 
         const container = screen.getByTestId("content").parentElement;
         expect(container).toHaveClass("liquid-glass");
-        
+
         if (variant !== "default") {
           expect(container).toHaveClass(`liquid-glass-${variant}`);
         }
@@ -105,7 +105,7 @@ describe("LiquidGlass", () => {
         render(
           <LiquidGlass size={size}>
             <div data-testid="content">Content</div>
-          </LiquidGlass>
+          </LiquidGlass>,
         );
 
         const container = screen.getByTestId("content").parentElement;
@@ -119,7 +119,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass interactive>
           <div data-testid="content">Interactive Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -130,7 +130,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass interactive={false}>
           <div data-testid="content">Static Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -143,7 +143,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass animated>
           <div data-testid="content">Animated Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -154,7 +154,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass animated={false}>
           <div data-testid="content">Static Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -176,7 +176,7 @@ describe("LiquidGlass", () => {
         render(
           <LiquidGlass elevation={elevation}>
             <div data-testid="content">Content</div>
-          </LiquidGlass>
+          </LiquidGlass>,
         );
 
         const container = screen.getByTestId("content").parentElement;
@@ -192,7 +192,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass blur>
           <div data-testid="content">Blurred Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -203,7 +203,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass blur blurStrength="xl">
           <div data-testid="content">Blurred Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -216,7 +216,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass>
           <div data-testid="content">Adaptive Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -227,7 +227,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass adaptive={false}>
           <div data-testid="content">Non-adaptive Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -238,7 +238,7 @@ describe("LiquidGlass", () => {
       const { useDeviceCapabilities } = await import(
         "../../hooks/use-device-capabilities"
       );
-      
+
       (useDeviceCapabilities as any).mockReturnValue({
         hasBackdropFilter: true,
         hasSVGFilters: true,
@@ -256,7 +256,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass adaptive>
           <div data-testid="content">Low Performance Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -269,7 +269,7 @@ describe("LiquidGlass", () => {
       const { useDeviceCapabilities } = await import(
         "../../hooks/use-device-capabilities"
       );
-      
+
       (useDeviceCapabilities as any).mockReturnValue({
         hasBackdropFilter: true,
         hasSVGFilters: true,
@@ -287,7 +287,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass animated>
           <div data-testid="content">Reduced Motion Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -298,7 +298,7 @@ describe("LiquidGlass", () => {
       const { useDeviceCapabilities } = await import(
         "../../hooks/use-device-capabilities"
       );
-      
+
       (useDeviceCapabilities as any).mockReturnValue({
         hasBackdropFilter: true,
         hasSVGFilters: true,
@@ -316,7 +316,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass variant="transparent">
           <div data-testid="content">Reduced Transparency Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -331,7 +331,7 @@ describe("LiquidGlass", () => {
           aria-describedby="description"
         >
           <div>Accessible Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByRole("region");
@@ -345,12 +345,12 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass variant="holographic">
           <div data-testid="content">Holographic Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
       const style = window.getComputedStyle(container!);
-      
+
       // Check that the component would apply filter styles
       expect(container).toHaveClass("liquid-glass-holographic");
     });
@@ -359,7 +359,7 @@ describe("LiquidGlass", () => {
       const { useDeviceCapabilities } = await import(
         "../../hooks/use-device-capabilities"
       );
-      
+
       (useDeviceCapabilities as any).mockReturnValue({
         hasBackdropFilter: true,
         hasSVGFilters: false,
@@ -377,7 +377,7 @@ describe("LiquidGlass", () => {
       render(
         <LiquidGlass variant="holographic">
           <div data-testid="content">Fallback Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -400,7 +400,7 @@ describe("LiquidGlass", () => {
           data-testid="complex"
         >
           <div>Complex Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("complex");
@@ -412,7 +412,7 @@ describe("LiquidGlass", () => {
         "liquid-glass-interactive",
         "liquid-glass-animated",
         "backdrop-blur-lg",
-        "custom-class"
+        "custom-class",
       );
     });
 
@@ -420,7 +420,7 @@ describe("LiquidGlass", () => {
       const { useDeviceCapabilities } = await import(
         "../../hooks/use-device-capabilities"
       );
-      
+
       // Test with high-end device
       (useDeviceCapabilities as any).mockReturnValue({
         hasBackdropFilter: true,
@@ -439,7 +439,7 @@ describe("LiquidGlass", () => {
       const { rerender } = render(
         <LiquidGlass adaptive variant="iridescent" animated>
           <div data-testid="adaptive">High-end Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       let container = screen.getByTestId("adaptive").parentElement;
@@ -464,7 +464,7 @@ describe("LiquidGlass", () => {
       rerender(
         <LiquidGlass adaptive variant="iridescent" animated>
           <div data-testid="adaptive">Low-end Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       container = screen.getByTestId("adaptive").parentElement;

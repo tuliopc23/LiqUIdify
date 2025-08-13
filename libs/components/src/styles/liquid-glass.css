@@ -659,17 +659,17 @@
     backdrop-filter: blur(4px) saturate(150%);
     -webkit-backdrop-filter: blur(4px) saturate(150%);
   }
-  
+
   .liquid-glass-bento-item {
     backdrop-filter: blur(4px) saturate(110%);
     -webkit-backdrop-filter: blur(4px) saturate(110%);
   }
-  
+
   .liquid-glass::after {
     backdrop-filter: blur(0.5px);
     -webkit-backdrop-filter: blur(0.5px);
   }
-  
+
   .liquid-glass-container {
     min-width: auto;
   }
@@ -688,7 +688,7 @@
     padding: 1.5rem;
     margin: 1rem;
   }
-  
+
   .liquid-glass-modal-backdrop {
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
@@ -818,18 +818,18 @@
   .liquid-glass-refraction {
     filter: url(#liquid-glass-refraction);
   }
-  
+
   /* Premium devices get full effects */
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
     .liquid-glass-premium::before {
       filter: url(#liquid-glass-chromatic);
     }
-    
+
     .liquid-glass-premium::after {
       filter: url(#liquid-glass-edge) var(--lg-shine-filter);
     }
   }
-  
+
   /* Mobile optimized filters */
   @media (max-width: 768px) {
     .liquid-glass-distortion {
@@ -842,7 +842,7 @@
 @supports not (filter: url(#liquid-glass-distortion)) {
   .liquid-glass-distortion {
     /* Enhanced shadow fallback */
-    box-shadow: 
+    box-shadow:
       0 8px 16px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1),
       inset 0 1px 2px rgba(255, 255, 255, 0.2);
@@ -865,7 +865,8 @@
 }
 
 @keyframes rippleEffect {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   50% {
@@ -899,12 +900,12 @@
     backdrop-filter: none;
     background: rgba(255, 255, 255, 0.98);
   }
-  
+
   .dark .liquid-glass,
   .dark .liquid-glass-container {
     background: rgba(20, 20, 25, 0.98);
   }
-  
+
   .liquid-glass-filter,
   .liquid-glass-overlay {
     opacity: 1;
@@ -1025,7 +1026,7 @@
 }
 
 .liquid-glass-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
@@ -1057,7 +1058,7 @@
 
 /* Elevated variant */
 .liquid-glass-elevated {
-  box-shadow: 
+  box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04),
     0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -1066,7 +1067,7 @@
 
 .liquid-glass-elevated:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 25px 30px -5px rgba(0, 0, 0, 0.15),
     0 15px 15px -5px rgba(0, 0, 0, 0.06),
     0 0 0 1px rgba(255, 255, 255, 0.15);
@@ -1087,7 +1088,8 @@
 
 /* Pulse animation */
 @keyframes liquidPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -1104,7 +1106,6 @@
   .liquid-glass-hdr {
     --lg-highlight: rgba(255, 255, 255, 1);
     --lg-shadow-enhanced:
-      0 0 0 2px rgba(255, 255, 255, 0.9),
-      0 16px 32px rgba(0, 0, 0, 0.2);
+      0 0 0 2px rgba(255, 255, 255, 0.9), 0 16px 32px rgba(0, 0, 0, 0.2);
   }
 }

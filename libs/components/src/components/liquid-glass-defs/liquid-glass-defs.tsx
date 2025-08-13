@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react';
+import { useEffect, useId } from "react";
 
 /**
  * LiquidGlassDefs injects SVG filter <defs> once per document.
@@ -8,17 +8,20 @@ export function LiquidGlassDefs() {
   const id = useId();
 
   useEffect(() => {
-    if (typeof document === 'undefined') return;
-    const MARK = 'data-liquid-glass-defs';
+    if (typeof document === "undefined") return;
+    const MARK = "data-liquid-glass-defs";
     if (document.querySelector(`svg[${MARK}]`)) return;
 
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.setAttribute('focusable', 'false');
-    svg.setAttribute('width', '0');
-    svg.setAttribute('height', '0');
-    svg.setAttribute('style', 'position:absolute;width:0;height:0;overflow:hidden');
-    svg.setAttribute(MARK, '');
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.setAttribute("width", "0");
+    svg.setAttribute("height", "0");
+    svg.setAttribute(
+      "style",
+      "position:absolute;width:0;height:0;overflow:hidden",
+    );
+    svg.setAttribute(MARK, "");
 
     // Inline core filters (IDs must match CSS references)
     svg.innerHTML = `

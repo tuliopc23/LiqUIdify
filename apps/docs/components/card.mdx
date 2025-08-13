@@ -174,12 +174,20 @@ language="tsx"
 
 Use the slider below to compare the light and dark glass backgrounds. Move your cursor horizontally to reveal the other layer.
 
-<div className="before-after" style={{ '--split': '50%' }}>
+<div className="before-after" style={{ "--split": "50%" }}>
   <div className="before-after-before">
-    <img src="/images/apple-glass-bg.svg" alt="Light glass background" style={{ width: '100%', display: 'block' }} />
+    <img
+      src="/images/apple-glass-bg.svg"
+      alt="Light glass background"
+      style={{ width: "100%", display: "block" }}
+    />
   </div>
   <div className="before-after-after">
-    <img src="/images/apple-glass-bg-dark.svg" alt="Dark glass background" style={{ width: '100%', display: 'block' }} />
+    <img
+      src="/images/apple-glass-bg-dark.svg"
+      alt="Dark glass background"
+      style={{ width: "100%", display: "block" }}
+    />
   </div>
   <div className="before-after-handle" />
 </div>
@@ -192,7 +200,7 @@ The image below uses a blur-up technique. A low-quality placeholder loads first,
   data-src="/images/apple-glass-bg.svg"
   src="/favicon.svg"
   alt="Blur-up glass background demo"
-  style={{ width: '100%', borderRadius: '0.75rem', display: 'block' }}
+  style={{ width: "100%", borderRadius: "0.75rem", display: "block" }}
 />
 
 <Preview
@@ -223,8 +231,8 @@ export default function Demo() {
         </GlassCard.Content>
       </GlassCard>
 
-
 <script defer src="/scripts/enhancements.js"></script>
+
       <GlassCard variant="outlined">
         <GlassCard.Header>
           <GlassCard.Title>Outlined</GlassCard.Title>

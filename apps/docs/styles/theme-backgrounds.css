@@ -1,14 +1,14 @@
 /* Base background properties for all themes */
 body {
-    background: no-repeat fixed center / cover !important;
+  background: no-repeat fixed center / cover !important;
 }
 
 /* Theme-specific background images for Mintlify */
 [data-theme="light"] body,
 body:not([data-theme]) {
-    background-image: url("/images/apple-glass-bg.svg") !important;
+  background-image: url("/images/apple-glass-bg.svg") !important;
 }
 
 [data-theme="dark"] body {
-    background-image: url("/images/apple-glass-bg-dark.svg") !important;
+  background-image: url("/images/apple-glass-bg-dark.svg") !important;
 }

@@ -335,29 +335,31 @@ test.describe("Dashboard", () => {
 
 ```js
 // glass-button.stories.tsx
-import { GlassButton } from './glass-button'
+import { GlassButton } from "./glass-button";
 
 const meta = {
-  title: 'Components/GlassButton',
+  title: "Components/GlassButton",
   component: GlassButton,
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },
-}
+};
 
-export default meta
+export default meta;
 
 export const AllVariants = {
   render: () => {
-    return React.createElement('div', { className: 'space-y-4' },
-      React.createElement(GlassButton, { variant: 'primary' }, 'Primary'),
-      React.createElement(GlassButton, { variant: 'secondary' }, 'Secondary'),
-      React.createElement(GlassButton, { variant: 'ghost' }, 'Ghost'),
-      React.createElement(GlassButton, { disabled: true }, 'Disabled'),
-      React.createElement(GlassButton, { loading: true }, 'Loading')
-    )
+    return React.createElement(
+      "div",
+      { className: "space-y-4" },
+      React.createElement(GlassButton, { variant: "primary" }, "Primary"),
+      React.createElement(GlassButton, { variant: "secondary" }, "Secondary"),
+      React.createElement(GlassButton, { variant: "ghost" }, "Ghost"),
+      React.createElement(GlassButton, { disabled: true }, "Disabled"),
+      React.createElement(GlassButton, { loading: true }, "Loading"),
+    );
   },
-}
+};
 ```
 
 ### Visual Test Automation
@@ -407,7 +409,9 @@ describe("Performance", () => {
   });
 
   it("updates efficiently", async () => {
-    const { rerender } = render(React.createElement(Component, { prop: "initial" }));
+    const { rerender } = render(
+      React.createElement(Component, { prop: "initial" }),
+    );
 
     const { duration } = await measurePerformance(() => {
       rerender(React.createElement(Component, { prop: "updated" }));
@@ -451,10 +455,10 @@ export default defineConfig({
       functions: 80,
       lines: 80,
       statements: 80,
-      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/test/**"]
-    }
-  }
-})
+      exclude: ["**/*.stories.tsx", "**/*.test.tsx", "**/test/**"],
+    },
+  },
+});
 ```
 
 ## 🔄 Continuous Integration

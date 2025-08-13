@@ -47,7 +47,12 @@ bun add liquidify
 ### Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, UnifiedGlassProvider, LiquidGlassDefs } from "liquidify";
+import {
+  GlassButton,
+  GlassCard,
+  UnifiedGlassProvider,
+  LiquidGlassDefs,
+} from "liquidify";
 import "liquidify/css";
 
 function App() {

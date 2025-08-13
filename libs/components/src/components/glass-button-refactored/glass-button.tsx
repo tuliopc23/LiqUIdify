@@ -1,13 +1,16 @@
 /**
  * Liquid Glass Button Component
  *
- * Implements the signature liquid liquid-glass effect with layered approach,
- * specular highlights, and smooth interactions.
+ * Fully integrated with the LiquidGlass system for adaptive rendering,
+ * device capability detection, and enhanced visual effects.
  */
 
 import { Slot } from "@radix-ui/react-slot";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { cn } from "../../core/utils/classname";
+import { LiquidGlass } from "../liquid-glass/liquid-glass";
+import { useLiquidGlass } from "../../utils/liquid-glass-utils";
+import type { LiquidGlassVariant } from "../../types/liquid-glass";
 
 // Types
 type Size = "sm" | "md" | "lg" | "xl";
@@ -59,23 +62,31 @@ const sizeConfig = {
   },
 };
 
-// Variant configurations using liquid liquid-glass system
-const variantConfig = {
+// Variant configurations mapped to liquid glass variants
+const variantConfig: Record<
+  Variant,
+  {
+    glassVariant: LiquidGlassVariant;
+    text: string;
+    customClass?: string;
+  }
+> = {
   primary: {
-    base: "liquid-glass-button-primary",
+    glassVariant: "solid" as LiquidGlassVariant,
     text: "text-liquid-primary font-semibold",
   },
   secondary: {
-    base: "liquid-glass-button-secondary",
+    glassVariant: "frosted" as LiquidGlassVariant,
     text: "text-liquid-primary font-medium",
   },
   ghost: {
-    base: "liquid-glass-button-ghost",
+    glassVariant: "transparent" as LiquidGlassVariant,
     text: "text-liquid-primary font-medium",
   },
   destructive: {
-    base: "liquid-glass-button bg-gradient-to-b from-red-500 to-red-600",
+    glassVariant: "solid" as LiquidGlassVariant,
     text: "text-white font-semibold",
+    customClass: "bg-gradient-to-b from-red-500 to-red-600",
   },
 };
 
@@ -121,21 +132,38 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     },
     ref,
   ) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+
     const sizeStyles = sizeConfig[size];
     const variantStyles = variantConfig[variant];
 
-    const buttonClasses = cn(
-      // Base liquid liquid-glass styles
-      "liquid-glass liquid-glass-interactive liquid-glass-button",
+    // Use liquid glass hook for dynamic effects
+    const { getVariant, liquidGlassProps } = useLiquidGlass({
+      baseVariant: variantStyles.glassVariant,
+      hoverVariant: variant === "ghost" ? "translucent" : undefined,
+      activeVariant: variant === "primary" ? "iridescent" : undefined,
+      disabledVariant: "outlined",
+    });
 
-      // Size and variant styles
+    const currentVariant = getVariant({
+      isHovered,
+      isActive,
+      isFocused,
+      isDisabled: disabled || loading,
+    });
+
+    const buttonClasses = cn(
+      // Size and text styles
       sizeStyles.base,
-      variantStyles.base,
       variantStyles.text,
+      variantStyles.customClass,
 
       // Layout styles
       "inline-flex items-center justify-center gap-2",
       "font-system select-none outline-none border-none",
+      "transition-all duration-200",
 
       // State styles
       {
@@ -172,25 +200,59 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     );
 
     if (asChild) {
-      // When rendering asChild, forward classes/props directly to the single child element
-      // and do not inject our composed content fragment to avoid passing props to a Fragment.
+      // When rendering asChild, wrap with LiquidGlass and forward to child
       return (
-        <Slot className={buttonClasses} ref={ref} {...props}>
-          {children}
-        </Slot>
+        <LiquidGlass
+          variant={currentVariant}
+          size={size}
+          interactive
+          elevation={variant === "primary" ? "md" : "sm"}
+          blur={variant !== "ghost"}
+          blurStrength="sm"
+          {...liquidGlassProps}
+        >
+          <Slot
+            className={buttonClasses}
+            ref={ref}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onMouseDown={() => setIsActive(true)}
+            onMouseUp={() => setIsActive(false)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            {...props}
+          >
+            {children}
+          </Slot>
+        </LiquidGlass>
       );
     }
 
     return (
-      <button
-        ref={ref}
-        className={buttonClasses}
-        disabled={disabled || loading}
-        type="button"
-        {...props}
+      <LiquidGlass
+        variant={currentVariant}
+        size={size}
+        elevation={variant === "primary" ? "md" : "sm"}
+        blur={variant !== "ghost"}
+        blurStrength="sm"
+        {...liquidGlassProps}
       >
-        {content}
-      </button>
+        <button
+          ref={ref}
+          className={buttonClasses}
+          disabled={disabled || loading}
+          type="button"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onMouseDown={() => setIsActive(true)}
+          onMouseUp={() => setIsActive(false)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...props}
+        >
+          {content}
+        </button>
+      </LiquidGlass>
     );
   },
 );

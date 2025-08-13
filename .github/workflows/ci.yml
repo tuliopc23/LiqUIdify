@@ -33,7 +33,7 @@ jobs:
         run: |
           curl -s https://download.qlty.sh/qlty-cli/install.sh | sh
           echo "$HOME/.qlty/bin" >> $GITHUB_PATH
-          
+
       - name: Type check
         run: bun run type-check
 

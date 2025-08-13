@@ -675,22 +675,22 @@ body.dark {
     backdrop-filter: blur(4px) saturate(150%);
     -webkit-backdrop-filter: blur(4px) saturate(150%);
   }
-  
+
   .liquid-glass-bento-item {
     backdrop-filter: blur(4px) saturate(110%);
     -webkit-backdrop-filter: blur(4px) saturate(110%);
   }
-  
+
   .liquid-glass::before {
     backdrop-filter: blur(6px) saturate(150%);
     -webkit-backdrop-filter: blur(6px) saturate(150%);
   }
-  
+
   .liquid-glass::after {
     backdrop-filter: blur(0.5px);
     -webkit-backdrop-filter: blur(0.5px);
   }
-  
+
   .liquid-glass-container {
     min-width: auto;
   }
@@ -709,7 +709,7 @@ body.dark {
     padding: 1.5rem;
     margin: 1rem;
   }
-  
+
   .liquid-glass-modal-backdrop {
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
@@ -839,18 +839,18 @@ body.dark {
   .liquid-glass-refraction {
     filter: url(#liquid-glass-refraction);
   }
-  
+
   /* Premium devices get full effects */
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
     .liquid-glass-premium::before {
       filter: url(#liquid-glass-chromatic);
     }
-    
+
     .liquid-glass-premium::after {
       filter: url(#liquid-glass-edge) var(--lg-shine-filter);
     }
   }
-  
+
   /* Mobile optimized filters */
   @media (max-width: 768px) {
     .liquid-glass-distortion {
@@ -863,7 +863,7 @@ body.dark {
 @supports not (filter: url(#liquid-glass-distortion)) {
   .liquid-glass-distortion {
     /* Enhanced shadow fallback */
-    box-shadow: 
+    box-shadow:
       0 8px 16px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1),
       inset 0 1px 2px rgba(255, 255, 255, 0.2);
@@ -886,7 +886,8 @@ body.dark {
 }
 
 @keyframes rippleEffect {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   50% {

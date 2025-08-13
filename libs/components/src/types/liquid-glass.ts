@@ -17,7 +17,7 @@ export type LiquidGlassVariant =
   | "elevated"
   | "outlined";
 
-export type LiquidGlassComponentVariant = 
+export type LiquidGlassComponentVariant =
   | "card"
   | "button"
   | "modal"
@@ -27,9 +27,21 @@ export type LiquidGlassComponentVariant =
 
 export type LiquidGlassAnimation = "none" | "float" | "shimmer" | "pulse";
 
-export type LiquidGlassShape = "rounded" | "pill" | "circle" | "square" | "wide" | "card";
+export type LiquidGlassShape =
+  | "rounded"
+  | "pill"
+  | "circle"
+  | "square"
+  | "wide"
+  | "card";
 
-export type LiquidGlassEffect = "distortion" | "refraction" | "chromatic" | "ripple" | "depth" | "noise";
+export type LiquidGlassEffect =
+  | "distortion"
+  | "refraction"
+  | "chromatic"
+  | "ripple"
+  | "depth"
+  | "noise";
 
 export type LiquidGlassPerformance = "auto" | "high" | "medium" | "low";
 

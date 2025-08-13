@@ -8,7 +8,10 @@ export function ShowcaseProvider({
   files,
   deps = {},
   externalCSS = DEFAULT_CSS,
-  theme = typeof window !== "undefined" && document?.documentElement?.classList.contains("dark") ? "dark" : "light",
+  theme = typeof window !== "undefined" &&
+  document?.documentElement?.classList.contains("dark")
+    ? "dark"
+    : "light",
   children,
 }: {
   files: Files;

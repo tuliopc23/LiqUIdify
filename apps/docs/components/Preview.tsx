@@ -29,7 +29,16 @@ export const Preview: React.FC<PreviewProps> = ({
       </div>
       <div className="preview-code relative group">
         <CopyButton code={code} />
-        <Highlight code={code.trim()} language={language as any} theme={{ plain: { color: '#e6edf3', backgroundColor: '#0d1117' }, styles: [] } as any}>
+        <Highlight
+          code={code.trim()}
+          language={language as any}
+          theme={
+            {
+              plain: { color: "#e6edf3", backgroundColor: "#0d1117" },
+              styles: [],
+            } as any
+          }
+        >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <pre
               className={

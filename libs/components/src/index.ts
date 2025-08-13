@@ -75,6 +75,18 @@ export * from "./components/liquid-glass/liquid-glass";
 export * from "./components/liquid-glass-defs/liquid-glass-defs";
 export * from "./types/liquid-glass";
 
+// Liquid Glass Utilities
+export {
+  withLiquidGlass,
+  useLiquidGlass,
+  liquidGlassPresets,
+  mergeLiquidGlassClasses,
+  createLiquidGlassComponent,
+} from "./utils/liquid-glass-utils";
+
 // Liquid Glass Hooks
-export { useDeviceCapabilities, getLiquidGlassClasses } from "./hooks/use-device-capabilities";
+export {
+  useDeviceCapabilities,
+  getLiquidGlassClasses,
+} from "./hooks/use-device-capabilities";
 export type { DeviceCapabilities } from "./hooks/use-device-capabilities";

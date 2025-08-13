@@ -1,11 +1,8 @@
 import { X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef } from "react";
 import { cn } from "../../core/utils/classname";
-
-// Import other liquid-glass components (assuming they exist)
-// import { GlassFocusTrap } from "../liquid-glass-interactive:focus-visible-trap";
-// import { announcer } from "../liquid-glass-live-region";
-// import { GlassPortal } from "../liquid-glass-portal";
+import { LiquidGlass } from "../liquid-glass/liquid-glass";
+import { GlassButton } from "../glass-button-refactored/glass-button";
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -98,30 +95,34 @@ export function GlassModal({
 
   const modalContent = (
     <div
-      className="liquid-glass-modal-backdrop"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
       onClick={handleBackdropClick}
       aria-label="Modal backdrop"
     >
-      <div
-        ref={modalRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? titleId : undefined}
-        aria-describedby={descriptionId}
+      <LiquidGlass
+        variant="translucent"
+        size="lg"
+        elevation="xl"
+        layered
+        blur
+        blurStrength="lg"
+        interactive
         className={cn(
-          "liquid-glass-modal liquid-glass-container w-full max-w-md",
+          "w-full max-w-md",
           "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
           className,
         )}
-        onClick={(e) => e.stopPropagation()}
       >
-        {/* Liquid Glass Layers */}
-        <div className="liquid-glass-filter" />
-        <div className="liquid-glass-overlay" />
-        <div className="liquid-glass-specular" />
-
-        {/* Modal content */}
-        <div className="liquid-glass-content flex-col items-start justify-start">
+        <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? titleId : undefined}
+          aria-describedby={descriptionId}
+          className="p-6"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Modal header */}
           {title && (
             <div className="mb-4 flex items-center justify-between w-full">
               <h3
@@ -134,23 +135,20 @@ export function GlassModal({
                 {title}
               </h3>
 
-              <button
-                type="button"
+              <GlassButton
                 ref={closeButtonRef}
                 onClick={onClose}
                 aria-label="Close modal"
-                className={cn(
-                  "liquid-glass-button liquid-glass-sm p-2 text-liquid-grey",
-                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
-                  "motion-safe:active:scale-95 transition-all duration-200",
-                  "liquid-glass-interactive:focus-visible",
-                )}
+                variant="ghost"
+                size="sm"
+                iconOnly
               >
                 <X className="h-4 w-4" />
-              </button>
+              </GlassButton>
             </div>
           )}
 
+          {/* Modal body */}
           <div
             id={descriptionId}
             className={cn("text-liquid-primary", contentClassName)}
@@ -158,7 +156,7 @@ export function GlassModal({
             {children}
           </div>
         </div>
-      </div>
+      </LiquidGlass>
     </div>
   );
 

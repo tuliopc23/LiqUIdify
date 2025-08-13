@@ -39,13 +39,13 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="frosted">
             <GlassButton>Integrated Button</GlassButton>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const button = screen.getByRole("button", { name: "Integrated Button" });
       expect(button).toBeInTheDocument();
       expect(button).toHaveClass("liquid-glass-button");
-      
+
       const container = button.closest(".liquid-glass");
       expect(container).toBeInTheDocument();
       expect(container).toHaveClass("liquid-glass-frosted");
@@ -65,15 +65,18 @@ describe("Liquid Glass System Integration", () => {
               </GlassCard.Content>
             </GlassCard>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const card = screen.getByText("Integrated Card").closest(".glass-card");
       expect(card).toBeInTheDocument();
-      
+
       const container = card?.closest(".liquid-glass");
       expect(container).toBeInTheDocument();
-      expect(container).toHaveClass("liquid-glass-translucent", "liquid-glass-lg");
+      expect(container).toHaveClass(
+        "liquid-glass-translucent",
+        "liquid-glass-lg",
+      );
     });
 
     it("renders liquid glass with input component", () => {
@@ -81,20 +84,20 @@ describe("Liquid Glass System Integration", () => {
         <>
           <LiquidGlassDefs />
           <LiquidGlass variant="solid" interactive>
-            <GlassInput
-              placeholder="Enter text"
-              aria-label="Test Input"
-            />
+            <GlassInput placeholder="Enter text" aria-label="Test Input" />
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const input = screen.getByLabelText("Test Input");
       expect(input).toBeInTheDocument();
-      
+
       const container = input.closest(".liquid-glass");
       expect(container).toBeInTheDocument();
-      expect(container).toHaveClass("liquid-glass-solid", "liquid-glass-interactive");
+      expect(container).toHaveClass(
+        "liquid-glass-solid",
+        "liquid-glass-interactive",
+      );
     });
 
     it("renders nested liquid glass components", () => {
@@ -109,16 +112,22 @@ describe("Liquid Glass System Integration", () => {
               </LiquidGlass>
             </div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const outerContent = screen.getByText("Outer Container");
       const outerContainer = outerContent.closest(".liquid-glass");
-      expect(outerContainer).toHaveClass("liquid-glass-aurora", "liquid-glass-xl");
+      expect(outerContainer).toHaveClass(
+        "liquid-glass-aurora",
+        "liquid-glass-xl",
+      );
 
       const nestedContent = screen.getByText("Nested Content");
       const nestedContainer = nestedContent.closest(".liquid-glass");
-      expect(nestedContainer).toHaveClass("liquid-glass-holographic", "liquid-glass-sm");
+      expect(nestedContainer).toHaveClass(
+        "liquid-glass-holographic",
+        "liquid-glass-sm",
+      );
     });
   });
 
@@ -144,7 +153,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="iridescent" animated adaptive>
             <div data-testid="content">High Performance Content</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -174,7 +183,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="iridescent" animated adaptive>
             <div data-testid="content">Low Performance Content</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const container = screen.getByTestId("content").parentElement;
@@ -204,7 +213,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="transparent" animated adaptive>
             <GlassButton>Accessible Button</GlassButton>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const container = screen.getByRole("button").closest(".liquid-glass");
@@ -219,7 +228,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="aurora" adaptive>
             <div data-testid="dynamic">Dynamic Content</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       let container = screen.getByTestId("dynamic").parentElement;
@@ -246,7 +255,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="aurora" adaptive>
             <div data-testid="dynamic">Dynamic Content</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       container = screen.getByTestId("dynamic").parentElement;
@@ -258,28 +267,28 @@ describe("Liquid Glass System Integration", () => {
   describe("Interaction Patterns", () => {
     it("handles interactive liquid glass with buttons", async () => {
       const handleClick = vi.fn();
-      
+
       render(
         <>
           <LiquidGlassDefs />
           <LiquidGlass variant="frosted" interactive>
             <GlassButton onClick={handleClick}>Interactive Button</GlassButton>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const button = screen.getByRole("button");
       const container = button.closest(".liquid-glass");
-      
+
       expect(container).toHaveClass("liquid-glass-interactive");
-      
+
       fireEvent.click(button);
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
     it("handles form inputs within liquid glass", async () => {
       const handleChange = vi.fn();
-      
+
       render(
         <>
           <LiquidGlassDefs />
@@ -295,14 +304,14 @@ describe("Liquid Glass System Integration", () => {
               <GlassButton type="submit">Submit</GlassButton>
             </form>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const input = screen.getByLabelText("Email Input");
       const container = input.closest(".liquid-glass");
-      
+
       expect(container).toHaveClass("backdrop-blur-lg");
-      
+
       fireEvent.change(input, { target: { value: "test@example.com" } });
       expect(handleChange).toHaveBeenCalled();
     });
@@ -323,16 +332,16 @@ describe("Liquid Glass System Integration", () => {
               </GlassModal.Content>
             </LiquidGlass>
           </GlassModal>
-        </>
+        </>,
       );
 
       const modalContent = screen.getByText("Modal content with liquid glass");
       const liquidGlassContainer = modalContent.closest(".liquid-glass");
-      
+
       expect(liquidGlassContainer).toBeInTheDocument();
       expect(liquidGlassContainer).toHaveClass(
         "liquid-glass-translucent",
-        "liquid-glass-elevation-xl"
+        "liquid-glass-elevation-xl",
       );
     });
   });
@@ -355,7 +364,8 @@ describe("Liquid Glass System Integration", () => {
           prefersReducedTransparency: false,
           isPointerDevice: true,
           devicePixelRatio: tier === "high" ? 3 : tier === "medium" ? 2 : 1,
-          connectionSpeed: tier === "high" ? "5g" : tier === "medium" ? "4g" : "3g",
+          connectionSpeed:
+            tier === "high" ? "5g" : tier === "medium" ? "4g" : "3g",
           colorGamut: tier === "high" ? "p3" : "srgb",
           hasHDR: tier === "high",
         });
@@ -363,11 +373,12 @@ describe("Liquid Glass System Integration", () => {
         const { container } = render(
           <LiquidGlass variant="holographic" adaptive>
             <div data-testid={`perf-${tier}`}>Content</div>
-          </LiquidGlass>
+          </LiquidGlass>,
         );
 
-        const element = container.querySelector(`[data-testid="perf-${tier}"]`)
-          ?.parentElement;
+        const element = container.querySelector(
+          `[data-testid="perf-${tier}"]`,
+        )?.parentElement;
         expect(element).toHaveAttribute("data-quality", expectedQuality);
       });
     });
@@ -390,7 +401,7 @@ describe("Liquid Glass System Integration", () => {
       render(
         <LiquidGlass variant="aurora" animated adaptive>
           <div data-testid="low-perf">Content</div>
-        </LiquidGlass>
+        </LiquidGlass>,
       );
 
       const container = screen.getByTestId("low-perf").parentElement;
@@ -421,7 +432,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="holographic">
             <div data-testid="svg-content">Holographic Effect</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const container = screen.getByTestId("svg-content").parentElement;
@@ -450,7 +461,7 @@ describe("Liquid Glass System Integration", () => {
           <LiquidGlass variant="holographic">
             <div data-testid="no-svg">Fallback Effect</div>
           </LiquidGlass>
-        </>
+        </>,
       );
 
       const container = screen.getByTestId("no-svg").parentElement;
@@ -469,7 +480,7 @@ describe("Liquid Glass System Integration", () => {
             <LiquidGlass variant="solid" size="xl" as="header">
               <h1>Dashboard Header</h1>
             </LiquidGlass>
-            
+
             <div className="dashboard-content">
               <LiquidGlass variant="frosted" size="lg" as="aside">
                 <nav>
@@ -477,7 +488,7 @@ describe("Liquid Glass System Integration", () => {
                   <GlassButton variant="ghost">Menu Item 2</GlassButton>
                 </nav>
               </LiquidGlass>
-              
+
               <LiquidGlass variant="translucent" as="main">
                 <GlassCard>
                   <GlassCard.Header>
@@ -490,7 +501,7 @@ describe("Liquid Glass System Integration", () => {
               </LiquidGlass>
             </div>
           </div>
-        </>
+        </>,
       );
 
       // Verify header
@@ -530,7 +541,7 @@ describe("Liquid Glass System Integration", () => {
               </LiquidGlass>
             ))}
           </div>
-        </>
+        </>,
       );
 
       // Verify all grid items are rendered with correct variants
@@ -541,11 +552,16 @@ describe("Liquid Glass System Integration", () => {
       expect(item2).toHaveClass("liquid-glass-frosted");
 
       const item3 = screen.getByText("Grid Item 3").closest(".liquid-glass");
-      expect(item3).toHaveClass("liquid-glass-translucent", "liquid-glass-elevation-xl");
+      expect(item3).toHaveClass(
+        "liquid-glass-translucent",
+        "liquid-glass-elevation-xl",
+      );
 
       // All items should be interactive
       for (let i = 1; i <= 6; i++) {
-        const item = screen.getByText(`Grid Item ${i}`).closest(".liquid-glass");
+        const item = screen
+          .getByText(`Grid Item ${i}`)
+          .closest(".liquid-glass");
         expect(item).toHaveClass("liquid-glass-interactive");
       }
     });

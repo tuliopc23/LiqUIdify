@@ -83,9 +83,7 @@ export function GlassTabs({
           className={cn("tab-content focus:outline-none", tabPanelClassName)} // Added focus:outline-none for potential programmatic focus
         >
           {activeTab === tab.id && (
-            <div className="liquid-glass rounded-lg p-6">
-              {tab.content}
-            </div>
+            <div className="liquid-glass rounded-lg p-6">{tab.content}</div>
           )}
         </div>
       ))}
