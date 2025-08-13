@@ -205,7 +205,6 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         <LiquidGlass
           variant={currentVariant}
           size={size}
-          interactive
           elevation={variant === "primary" ? "md" : "sm"}
           blur={variant !== "ghost"}
           blurStrength="sm"

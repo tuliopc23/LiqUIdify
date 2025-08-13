@@ -10,13 +10,12 @@
    ================================================================ */
 
 :root {
-  /* Core Liquid Glass Colors - EXACT MATCH to your snippets */
-  /* Decorative glass base */
-  --lg-bg-color: rgba(20, 20, 25, 0.35);
-  /* Readable surface background (higher contrast) */
-  --lg-bg-readable: rgba(20, 20, 25, 0.65);
+  /* Light theme base (readability first) */
+  --lg-bg-color: rgba(255, 255, 255, 0.35);
+  --lg-bg-readable: rgba(255, 255, 255, 0.45);
   --lg-highlight: rgba(255, 255, 255, 0.75);
-  --lg-text: #ffffff;
+  --lg-text: #1a1d21;
+  --lg-text-inverse: #ffffff;
   --lg-red: #fb4268;
   --lg-grey: #444739;
   --lg-accent: #fb4268;
@@ -38,7 +37,7 @@
   --lg-shine-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
-  --lg-shine-filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+  --lg-shine-filter: blur(1px) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15)) brightness(110%);
 
   /* Transitions - Your exact timing */
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
@@ -73,6 +72,10 @@
   --lg-z-specular: 2;
   --lg-z-content: 3;
   --lg-z-shine: -1;
+
+  /* Theme-aware text tokens */
+  --lg-text-secondary: rgba(26, 29, 33, 0.7);
+  --lg-text-tertiary: rgba(26, 29, 33, 0.55);
 }
 
 /* Legacy CSS variable bridge for components still using --liquid-glass-* tokens */
@@ -88,19 +91,23 @@
   --liquid-glass-primary-active: #d93b58;
   /* Text token bridges */
   --text-primary: var(--lg-text);
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --text-tertiary: rgba(255, 255, 255, 0.6);
+  --text-secondary: var(--lg-text-secondary);
+  --text-tertiary: var(--lg-text-tertiary);
 }
 
-/* Dark Mode - Keep components transparent, only change text/accents */
+/* Dark Mode - transparent surfaces, dark-readable text */
 .dark {
+  --lg-bg-color: rgba(20, 20, 25, 0.35);
+  --lg-bg-readable: rgba(20, 20, 25, 0.40);
   --lg-text: #ffffff;
-  /* Keep white text */
+  --lg-text-inverse: #1a1d21;
   --lg-red: #fb4268;
-  /* Keep same red accent */
-  --lg-grey: #444739;
-  /* Keep same grey */
-  /* All glass colors stay the same - components remain transparent */
+  --lg-grey: #888b95;
+  --lg-accent: #fb4268;
+
+  /* Theme-aware text tokens */
+  --lg-text-secondary: rgba(255, 255, 255, 0.8);
+  --lg-text-tertiary: rgba(255, 255, 255, 0.6);
 }
 
 /* ================================================================
@@ -111,7 +118,7 @@
 .liquid-glass {
   position: relative;
   background: transparent;
-  border-radius: var(--lg-radius-md);
+  border-radius: var(--lg-radius-lg);
   overflow: hidden;
   box-shadow: var(--lg-shadow-main);
   color: var(--lg-text);
@@ -142,12 +149,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: inherit;
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px); /* Safari support */
   box-shadow: var(--lg-shine-shadow);
-  opacity: 0.6;
+  opacity: 0.35;
   z-index: var(--lg-z-shine);
   filter: var(--lg-shine-filter);
   pointer-events: none;
@@ -161,7 +168,7 @@
   display: flex;
   align-items: center;
   background: transparent;
-  border-radius: var(--lg-radius-md);
+  border-radius: var(--lg-radius-lg);
   overflow: hidden;
   flex: 1 1 auto;
   box-shadow: var(--lg-shadow-main);
@@ -297,7 +304,7 @@
 
 .liquid-glass-square {
   aspect-ratio: 1;
-  border-radius: var(--lg-radius-md);
+  border-radius: var(--lg-radius-lg);
 }
 
 .liquid-glass-wide {
@@ -307,7 +314,7 @@
 
 .liquid-glass-card {
   aspect-ratio: 4/3;
-  border-radius: var(--lg-radius-md);
+  border-radius: var(--lg-radius-lg);
 }
 
 /* ================================================================
@@ -331,6 +338,7 @@
   border: none;
   outline: none;
   gap: 0.5rem;
+  border-radius: var(--lg-radius-lg);
 }
 
 .liquid-glass-button:hover {
@@ -401,6 +409,7 @@
     0 24px 48px rgba(0, 0, 0, 0.2),
     0 0 40px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  border-radius: var(--lg-radius-xl);
 }
 
 .liquid-glass-modal-backdrop {
@@ -580,6 +589,41 @@
 }
 
 /* ================================================================
+   TYPOGRAPHY SCALE
+   ================================================================ */
+
+:root {
+  --lg-font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --lg-font-size-base: 16px;
+  --lg-line-height-base: 1.6;
+  --lg-heading-weight: 700;
+  --lg-body-weight: 450;
+}
+
+html, body {
+  font-family: var(--lg-font-sans);
+  font-size: var(--lg-font-size-base);
+  line-height: var(--lg-line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .lg-h1 { font-weight: var(--lg-heading-weight); font-size: clamp(1.75rem, 2.2vw + 1rem, 2.5rem); line-height: 1.15; margin: 0.35em 0; }
+h2, .lg-h2 { font-weight: var(--lg-heading-weight); font-size: clamp(1.5rem, 1.6vw + 1rem, 2rem); line-height: 1.2;  margin: 0.4em 0; }
+h3, .lg-h3 { font-weight: 650;                    font-size: clamp(1.25rem, 1vw + 1rem, 1.5rem); line-height: 1.25; margin: 0.45em 0; }
+h4, .lg-h4 { font-weight: 600;                    font-size: 1.125rem;                                     line-height: 1.35; margin: 0.5em 0; }
+
+p, .lg-body { font-weight: var(--lg-body-weight); font-size: 1rem; line-height: var(--lg-line-height-base); margin: 0.5em 0; }
+small, .lg-small { font-size: 0.875rem; line-height: 1.4; }
+
+/* Heading color should follow theme tokens */
+h1, h2, h3, h4, .lg-h1, .lg-h2, .lg-h3, .lg-h4 { color: var(--lg-text); }
+
+/* Slightly more readable placeholders in light theme */
+:root .liquid-glass-input::placeholder { color: rgba(26, 29, 33, 0.45); }
+.dark .liquid-glass-input::placeholder { color: rgba(255, 255, 255, 0.55); }
+
+/* ================================================================
    UTILITY CLASSES
    ================================================================ */
 
@@ -589,11 +633,11 @@
 }
 
 .text-liquid-secondary {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--lg-text-secondary);
 }
 
 .text-liquid-tertiary {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--lg-text-tertiary);
 }
 
 .text-liquid-accent {
@@ -948,8 +992,9 @@
 
 /* Retina/High-DPI optimizations */
 .liquid-glass-retina {
-  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 /* Wide color gamut support */
@@ -1102,10 +1147,45 @@
 }
 
 /* HDR enhancement for supported displays */
-@media (dynamic-range: high) {
+/* Replaced unsupported media query with display-p3 support check */
+@supports (color: color(display-p3 1 1 1)) {
   .liquid-glass-hdr {
     --lg-highlight: rgba(255, 255, 255, 1);
     --lg-shadow-enhanced:
       0 0 0 2px rgba(255, 255, 255, 0.9), 0 16px 32px rgba(0, 0, 0, 0.2);
   }
+}
+
+/* ================================================================
+   LEGACY SHIMS (for backward compatibility)
+   ================================================================ */
+
+/* Legacy .glass-effect maps to the new base liquid glass look */
+.glass-effect {
+  position: relative;
+  background: transparent;
+  border-radius: var(--lg-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--lg-shadow-main);
+  color: var(--lg-text);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+
+.glass-effect:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: var(--lg-shine-shadow);
+  filter: var(--lg-shine-filter);
+  opacity: 0.35;
+}
+
+/* Ensure rounded corners by default for glass-prefixed classes */
+[class^="liquid-glass-"],
+[class*=" liquid-glass-"] {
+  border-radius: var(--lg-radius-lg);
 }

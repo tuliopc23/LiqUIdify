@@ -5,6 +5,19 @@ import "liquidify/css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LiquidGlassDefs } from "liquidify";
 
+const lightBg = `
+  radial-gradient(1200px 800px at 10% 10%, rgba(255,255,255,0.9), rgba(247,249,252,0.85) 30%, rgba(235,240,247,0.75) 60%, rgba(229,233,241,0.7) 100%),
+  radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.25), transparent 60%),
+  radial-gradient(900px 700px at 20% 80%, rgba(251,66,104,0.15), transparent 60%),
+  linear-gradient(180deg, #eef2f7 0%, #e6ebf3 100%)
+`;
+const darkBg = `
+  radial-gradient(1200px 800px at 10% 10%, rgba(14,18,28,0.98), rgba(14,18,28,0.92) 30%, rgba(18,22,34,0.9) 60%, rgba(20,24,33,0.9) 100%),
+  radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.18), transparent 60%),
+  radial-gradient(900px 700px at 20% 80%, rgba(251,66,104,0.12), transparent 60%),
+  linear-gradient(180deg, #0d111a 0%, #121725 100%)
+`;
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -27,18 +40,9 @@ const preview = {
     backgrounds: {
       default: "light",
       values: [
-        {
-          name: "light",
-          value: "#ffffff", // Pure white for light theme
-        },
-        {
-          name: "dark",
-          value: "#1a1a1a", // Subtle dark grey for dark theme
-        },
-        {
-          name: "transparent",
-          value: "transparent",
-        },
+        { name: "light", value: lightBg },
+        { name: "dark", value: darkBg },
+        { name: "transparent", value: "transparent" },
       ],
     },
     viewport: {
@@ -108,8 +112,11 @@ const preview = {
           <div
             className={`${theme} min-h-screen p-4`}
             style={{
-              fontFamily: "system-ui, sans-serif",
-              background: theme === "dark" ? "#1a1a1a" : "#ffffff",
+              fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: "16px",
+              lineHeight: "1.5",
+              background: theme === "dark" ? darkBg : lightBg,
+              color: theme === "dark" ? "#ffffff" : "#000000",
             }}
           >
             <React.StrictMode>
