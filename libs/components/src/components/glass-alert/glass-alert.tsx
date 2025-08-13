@@ -21,8 +21,7 @@ const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
         ref={ref}
         role="alert"
         className={cn(
-          "liquid-glass-effect rounded-lg border p-4",
-          "backdrop-blur-md backdrop-saturate-150",
+          "liquid-glass rounded-lg border p-4",
           variantStyles[variant],
           className,
         )}

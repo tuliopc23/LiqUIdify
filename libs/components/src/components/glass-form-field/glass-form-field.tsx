@@ -26,7 +26,7 @@ const AccessibilityManager = {
 };
 
 // Mock functions since unified-liquid-glass-system was removed
-const generateGlassClasses = (options: any) => "liquid-glass-effect";
+const generateGlassClasses = (options: any) => "liquid-glass";
 const generateGlassVariables = (options: any) => ({});
 const useGlassStateTransitions = (animation: any) => ({
   transitionToState: (state: string) => {},

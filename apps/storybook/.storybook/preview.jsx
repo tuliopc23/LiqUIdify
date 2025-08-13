@@ -3,6 +3,7 @@ import React from "react";
 import "liquidify/css";
 // Wrap stories with the library's ThemeProvider so global theme toggle works
 import { ThemeProvider } from "@/hooks/use-theme";
+import { LiquidGlassDefs } from "liquidify";
 
 const preview = {
   parameters: {
@@ -103,6 +104,7 @@ const preview = {
 
       return (
         <ThemeProvider defaultTheme="light">
+          <LiquidGlassDefs />
           <div
             className={`${theme} min-h-screen p-4`}
             style={{

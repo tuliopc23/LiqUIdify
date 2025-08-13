@@ -22,8 +22,9 @@
   --lg-accent: #fb4268;
   /* Primary accent color - matches lg-red */
 
-  /* Liquid Glass Layers - Transparent System */
-  --lg-filter-blur: blur(4px);
+  /* Liquid Glass Layers - Fixed values for Safari compatibility */
+  --lg-filter-blur: 8px; /* Desktop blur value */
+  --lg-filter-blur-mobile: 4px; /* Mobile blur value */
   --lg-filter-enhance: saturate(120%) brightness(1.15);
   --lg-specular-shadow:
     inset 1px 1px 0 var(--lg-highlight), inset 0 0 5px var(--lg-highlight);
@@ -74,6 +75,15 @@
   --lg-z-shine: -1;
 }
 
+/* Legacy CSS variable bridge for components still using --liquid-glass-* tokens */
+:root {
+  --liquid-glass-bg: var(--lg-bg-color);
+  --liquid-glass-bg-elevated: var(--lg-bg-readable);
+  --liquid-glass-bg-pressed: rgba(20, 20, 25, 0.5);
+  --liquid-glass-border: rgba(255, 255, 255, 0.12);
+  --liquid-glass-border-focus: rgba(255, 255, 255, 0.3);
+}
+
 /* Dark Mode - Keep components transparent, only change text/accents */
 .dark {
   --lg-text: #ffffff;
@@ -101,6 +111,21 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Fix for Chrome nested backdrop-filter issue - Layer 1 */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: inherit;
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
 /* The Liquid Shine Effect - This is your signature trick! */
 .liquid-glass::after {
   content: "";
@@ -112,11 +137,14 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: inherit;
   backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px); /* Safari support */
   box-shadow: var(--lg-shine-shadow);
   opacity: 0.6;
   z-index: var(--lg-z-shine);
   filter: var(--lg-shine-filter);
   pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 /* Layered Liquid Glass System */
@@ -144,8 +172,11 @@
 
 .liquid-glass-filter {
   z-index: var(--lg-z-filter);
-  backdrop-filter: var(--lg-filter-blur);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%); /* Safari - fixed values */
   filter: var(--lg-filter-enhance);
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 .liquid-glass-overlay {
@@ -369,6 +400,7 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -506,9 +538,12 @@
   border-radius: var(--lg-radius-md);
   padding: var(--lg-bento-padding);
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: var(--lg-filter-blur);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%); /* Safari support */
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: var(--lg-transition);
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 .liquid-glass-bento-item:hover {
@@ -611,6 +646,22 @@
    ================================================================ */
 
 @media (max-width: 768px) {
+  /* Mobile-specific blur values for performance */
+  .liquid-glass-filter {
+    backdrop-filter: blur(4px) saturate(150%);
+    -webkit-backdrop-filter: blur(4px) saturate(150%);
+  }
+  
+  .liquid-glass-bento-item {
+    backdrop-filter: blur(4px) saturate(110%);
+    -webkit-backdrop-filter: blur(4px) saturate(110%);
+  }
+  
+  .liquid-glass::after {
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+  }
+  
   .liquid-glass-container {
     min-width: auto;
   }
@@ -628,6 +679,11 @@
   .liquid-glass-modal {
     padding: 1.5rem;
     margin: 1rem;
+  }
+  
+  .liquid-glass-modal-backdrop {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 }
 
@@ -739,4 +795,87 @@
 /* Keyboard navigation support */
 .liquid-glass-interactive:focus-visible:not(:active) {
   transform: scale(1.02);
+}
+
+/* ================================================================
+   SVG FILTER EFFECTS
+   ================================================================ */
+
+/* Apply distortion filter for premium glass effect */
+@supports (filter: url(#liquid-glass-distortion)) {
+  .liquid-glass-distortion {
+    filter: url(#liquid-glass-distortion);
+  }
+
+  .liquid-glass-refraction {
+    filter: url(#liquid-glass-refraction);
+  }
+  
+  /* Premium devices get full effects */
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .liquid-glass-premium::before {
+      filter: url(#liquid-glass-chromatic);
+    }
+    
+    .liquid-glass-premium::after {
+      filter: url(#liquid-glass-edge) var(--lg-shine-filter);
+    }
+  }
+  
+  /* Mobile optimized filters */
+  @media (max-width: 768px) {
+    .liquid-glass-distortion {
+      filter: url(#liquid-glass-mobile);
+    }
+  }
+}
+
+/* Fallback for browsers without SVG filter support */
+@supports not (filter: url(#liquid-glass-distortion)) {
+  .liquid-glass-distortion {
+    /* Enhanced shadow fallback */
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Water ripple animation effect */
+.liquid-glass-ripple {
+  position: relative;
+}
+
+.liquid-glass-ripple::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  filter: url(#liquid-glass-ripple);
+  opacity: 0;
+  animation: rippleEffect 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Depth enhancement for hero elements */
+.liquid-glass-depth {
+  filter: url(#liquid-glass-depth);
+}
+
+/* Noise texture overlay for realism */
+.liquid-glass-noise::after {
+  filter: url(#liquid-glass-noise) var(--lg-shine-filter);
+}
+
+/* Specular highlight enhancement */
+.liquid-glass-specular-enhanced {
+  filter: url(#liquid-glass-specular);
 }

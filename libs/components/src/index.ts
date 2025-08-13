@@ -70,5 +70,8 @@ export * from "./components/glass-skip-navigation";
 export * from "./components/theme-provider";
 export * from "./components/theme-toggle";
 
+// Liquid Glass runtime defs injector
+export * from "./components/liquid-glass-defs/liquid-glass-defs";
+
 // Liquid Glass Types
 export * from "./types/liquid-glass";

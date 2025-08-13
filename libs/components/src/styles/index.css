@@ -1,5 +1,6 @@
 /* LiqUIdify - Unified Liquid Glass Design System */
 @import "./liquid-glass.css";
+@import "./glass-core.css";
 
 /* Global Reset and Base Styles */
 * {
