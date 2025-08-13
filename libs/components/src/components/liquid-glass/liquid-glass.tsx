@@ -6,20 +6,32 @@ import type {
   LiquidGlassBaseProps, 
   LiquidGlassLayeredProps,
   LiquidGlassSize,
-  LiquidGlassVariant 
+  LiquidGlassVariant,
+  LiquidGlassComponentVariant,
+  LiquidGlassAnimation,
+  LiquidGlassShape,
+  LiquidGlassEffect,
+  LiquidGlassPerformance,
+  LiquidGlassElevation
 } from '../../types/liquid-glass';
 
-export interface LiquidGlassProps extends Omit<LiquidGlassLayeredProps, 'variant'> {
+export interface LiquidGlassProps extends Omit<LiquidGlassLayeredProps, 'variant' | 'animation'> {
   children?: React.ReactNode;
   as?: React.ElementType;
-  variant?: LiquidGlassVariant | 'card' | 'button' | 'modal' | 'nav' | 'hero' | 'input';
+  variant?: LiquidGlassVariant | LiquidGlassComponentVariant;
   size?: LiquidGlassSize;
-  shape?: 'rounded' | 'pill' | 'circle' | 'square' | 'wide' | 'card';
-  effect?: 'distortion' | 'refraction' | 'chromatic' | 'ripple' | 'depth' | 'noise';
-  performanceMode?: 'auto' | 'high' | 'medium' | 'low';
+  shape?: LiquidGlassShape;
+  effect?: LiquidGlassEffect;
+  elevation?: LiquidGlassElevation;
+  animation?: LiquidGlassAnimation;
+  performanceMode?: LiquidGlassPerformance;
+  blur?: boolean;
+  blurStrength?: 'sm' | 'md' | 'lg' | 'xl';
+  adaptive?: boolean;
   ariaLabel?: string;
   ariaDescribedBy?: string;
   role?: string;
+  [key: string]: any; // Allow additional props
 }
 
 /**
@@ -35,6 +47,7 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
       size = 'md',
       shape,
       effect,
+      elevation,
       animation = 'none',
       interactive = false,
       layered = false,
@@ -43,6 +56,9 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
       showSpecular = true,
       filterBlur,
       overlayOpacity,
+      blur = false,
+      blurStrength = 'md',
+      adaptive = true,
       performanceMode = 'auto',
       ariaLabel,
       ariaDescribedBy,
@@ -70,10 +86,18 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
       );
 
       const variantClasses = {
+        // Visual variants
         default: '',
+        solid: 'liquid-glass-solid',
+        translucent: 'liquid-glass-translucent',
+        transparent: 'liquid-glass-transparent',
+        holographic: 'liquid-glass-holographic',
+        aurora: 'liquid-glass-aurora',
+        frosted: 'liquid-glass-frosted',
+        iridescent: 'liquid-glass-iridescent',
         elevated: 'liquid-glass-elevated',
         outlined: 'liquid-glass-outlined',
-        interactive: 'liquid-glass-interactive',
+        // Component variants
         card: 'liquid-glass-card',
         button: 'liquid-glass-button',
         modal: 'liquid-glass-modal',
@@ -115,6 +139,21 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
         noise: 'liquid-glass-noise',
       };
 
+      const elevationClasses = {
+        none: '',
+        sm: 'liquid-glass-elevation-sm',
+        md: 'liquid-glass-elevation-md',
+        lg: 'liquid-glass-elevation-lg',
+        xl: 'liquid-glass-elevation-xl',
+      };
+
+      const blurClasses = {
+        sm: 'backdrop-blur-sm',
+        md: 'backdrop-blur-md',
+        lg: 'backdrop-blur-lg',
+        xl: 'backdrop-blur-xl',
+      };
+
       return cn(
         baseClasses,
         variantClasses[variant as keyof typeof variantClasses] || '',
@@ -122,8 +161,11 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
         shape && shapeClasses[shape],
         animation && animationClasses[animation],
         effect && effectClasses[effect],
+        elevation && elevationClasses[elevation],
+        blur && blurClasses[blurStrength],
         interactive && 'liquid-glass-interactive',
         layered && 'liquid-glass-container',
+        adaptive && 'data-adaptive',
         className
       );
     }, [
@@ -134,8 +176,12 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
       shape,
       animation,
       effect,
+      elevation,
+      blur,
+      blurStrength,
       interactive,
       layered,
+      adaptive,
       className,
     ]);
 

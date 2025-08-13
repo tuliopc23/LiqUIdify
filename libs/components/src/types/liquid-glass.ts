@@ -4,12 +4,36 @@
  */
 
 export type LiquidGlassSize = "sm" | "md" | "lg" | "xl" | "2xl";
+
 export type LiquidGlassVariant =
   | "default"
+  | "solid"
+  | "translucent"
+  | "transparent"
+  | "holographic"
+  | "aurora"
+  | "frosted"
+  | "iridescent"
   | "elevated"
-  | "outlined"
-  | "interactive";
+  | "outlined";
+
+export type LiquidGlassComponentVariant = 
+  | "card"
+  | "button"
+  | "modal"
+  | "nav"
+  | "hero"
+  | "input";
+
 export type LiquidGlassAnimation = "none" | "float" | "shimmer" | "pulse";
+
+export type LiquidGlassShape = "rounded" | "pill" | "circle" | "square" | "wide" | "card";
+
+export type LiquidGlassEffect = "distortion" | "refraction" | "chromatic" | "ripple" | "depth" | "noise";
+
+export type LiquidGlassPerformance = "auto" | "high" | "medium" | "low";
+
+export type LiquidGlassElevation = "none" | "sm" | "md" | "lg" | "xl";
 
 export interface LiquidGlassBaseProps {
   /** Size variant for the glass effect */
