@@ -1,236 +1,263 @@
 <!doctype html>
-<html data-theme="light" lang="en">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Tooltip Components - LiquidUI Components</title>
-    <meta content="Contextual information overlays" name="description" />
-    <meta
-      content="liquidui, glass morphism, react components, ui library"
-      name="keywords"
-    />
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- LiquidUI CSS -->
-    <link href="../dist/liquidui.css" rel="stylesheet" />
-
-    <!-- Custom theme styles -->
+    <meta charset="utf-8" />
+    <title>LiqUIdify • Liquid Glass Tooltips (Static Preview)</title>
+    <meta name="viewport" content="width</head>=device-width, initial-scale=1" />
+    <!-- Project CSS (tailwind.css, liquid-glass.css, glass-core.css) -->
+    <link rel="stylesheet" href="../libs/components/src/styles/index.css" />
     <style>
-      :root {
-        --glass-bg-canvas: #ffffff;
-        --glass-text-primary: #1a1a1a;
-        --glass-text-secondary: #666666;
-        --glass-border-primary: rgba(255, 255, 255, 0.2);
-        --glass-shadow-primary: rgba(0, 0, 0, 0.1);
+      /* Minimal tooltip logic, no JavaScript */
+      .tooltip {
+        position: relative;
+        display: inline</style>-block;
+      }
+      .tooltip-trigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tooltip-bubble {
+        position: absolute;
+        z-index: 50;
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+      .tooltip-arrow {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        transform: rotate(45deg);
       }
 
-      [data-theme="dark"] {
-        --glass-bg-canvas: #0a0a0a;
-        --glass-text-primary: #ffffff;
-        --glass-text-secondary: #cccccc;
-        --glass-border-primary: rgba(255, 255, 255, 0.1);
-        --glass-shadow-primary: rgba(0, 0, 0, 0.3);
+      /* Show on hover or keyboard focus */
+      .tooltip:hover .tooltip-bubble,
+      .tooltip:focus-within .tooltip-bubble {
+        opacity: 1;
       }
 
-      body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        color: var(--glass-text-primary);
+      /* Positioning: top */
+      .tooltip[data-position="top"] .tooltip-bubble {
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translate(-50%, 4px) scale(0.98);
+      }
+      .tooltip[data-position="top"]:hover .tooltip-bubble,
+      .tooltip[data-position="top"]:focus-within .tooltip-bubble {
+        transform: translate(-50%, 0) scale(1);
+      }
+      .tooltip[data-position="top"] .tooltip-arrow {
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
       }
 
-      [data-theme="dark"] body {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      /* Positioning: bottom */
+      .tooltip[data-position="bottom"] .tooltip-bubble {
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translate(-50%, -4px) scale(0.98);
+      }
+      .tooltip[data-position="bottom"]:hover .tooltip-bubble,
+      .tooltip[data-position="bottom"]:focus-within .tooltip-bubble {
+        transform: translate(-50%, 0) scale(1);
+      }
+      .tooltip[data-position="bottom"] .tooltip-arrow {
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
       }
 
-      .static-showcase {
-        max-width: 1200px;
+      /* Positioning: left */
+      .tooltip[data-position="left"] .tooltip-bubble {
+        right: calc(100% + 8px);
+        top: 50%;
+        transform: translate(4px, -50%) scale(0.98);
+      }
+      .tooltip[data-position="left"]:hover .tooltip-bubble,
+      .tooltip[data-position="left"]:focus-within .tooltip-bubble {
+        transform: translate(0, -50%) scale(1);
+      }
+      .tooltip[data-position="left"] .tooltip-arrow {
+        right: -5px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      /* Positioning: right */
+      .tooltip[data-position="right"] .tooltip-bubble {
+        left: calc(100% + 8px);
+        top: 50%;
+        transform: translate(-4px, -50%) scale(0.98);
+      }
+      .tooltip[data-position="right"]:hover .tooltip-bubble,
+      .tooltip[data-position="right"]:focus-within .tooltip-bubble {
+        transform: translate(0, -50%) scale(1);
+      }
+      .tooltip[data-position="right"] .tooltip-arrow {
+        left: -5px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      /* Page scaffolding */
+      .page {
+        max-width: 1120px;
         margin: 0 auto;
-        padding: 2rem;
-      }
-
-      .component-section {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        padding: 2rem;
-        margin: 2rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        color: var(--glass-text-primary);
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .theme-toggle:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .navigation {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .nav-link {
-        color: var(--glass-text-primary);
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-        display: inline-block;
-        margin: 0.25rem;
-      }
-
-      .nav-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .component-preview {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        padding: 2rem;
-        margin: 1rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .glass-effect {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .text-primary {
-        color: var(--glass-text-primary);
-      }
-
-      .text-secondary {
-        color: var(--glass-text-secondary);
       }
     </style>
   </head>
-  <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      🌓 Toggle Theme
-    </button>
 
-    <div class="static-showcase">
-      <header class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-primary mb-4">Tooltip Components</h1>
-        <p class="text-xl text-secondary">Contextual information overlays</p>
-        <div class="mt-4">
-          <span
-            class="inline-block bg-blue-500 text-white px-3 py-1 rounded-full text-sm"
-            >Overlays</span
-          >
-        </div>
-      </header>
+  <body class="bg-liquid-readable">
+    <header class="page my-6">
+      <h1 class="text-3xl font-semibold text-liquid-primary">Liquid Glass Tooltips</h1>
+      <p class="text-liquid-secondary mt-2">
+        Clean static preview using project CSS only. These examples are accessible, hover- and focusable, with no JavaScript.
+      </p>
+    </header>
 
-      <nav class="navigation">
-        <div class="text-center">
-          <a class="nav-link" href="index.html">← Back to Overview</a>
-          <a class="nav-link" href="storybook.html">📖 Storybook</a>
-          <a
-            class="nav-link"
-            href="https://github.com/tuliopc23/LiqUIdify"
-            target="_blank"
-            >🔗 GitHub</a
-          >
-        </div>
-      </nav>
-
-      <main class="component-section">
-        <div class="component-preview">
-          <h3 class="text-lg font-semibold mb-4 text-primary">
-            Component Preview
-          </h3>
-          <div class="bg-gray-100 rounded-lg p-8 text-center">
-            <p class="text-gray-600">
-              📦 Static HTML preview for <strong>tooltip</strong> component
-            </p>
-            <p class="text-sm text-gray-500 mt-2">
-              For interactive previews, visit the live demo or Storybook
-            </p>
+    <main class="page">
+      <!-- Basic (Top) -->
+      <section class="my-8">
+        <h2 class="text-xl font-medium text-liquid-primary mb-3">Basic (Top)</h2>
+        <div class="flex items-center gap-4">
+          <div class="tooltip" data-position="top">
+            <button
+              class="tooltip-trigger liquid-glass liquid-glass-button liquid-glass-button-primary liquid-glass-md liquid-glass-pill"
+              aria-describedby="tt-top-1"
+              type="button"
+            >
+              Hover me
+            </button>
+            <div
+              id="tt-top-1"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              Tooltip on top
+              <span
+                class="tooltip-arrow liquid-glass liquid-glass-elevated rounded"
+                aria-hidden="true"
+              ></span>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="mt-6">
-          <h4 class="text-lg font-semibold mb-3 text-primary">Usage Example</h4>
-          <pre
-            class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto"
-          ><code>import {{ "{" }} GlassTooltip } from '@tuliocunha23/liquidui';
+      <!-- Positions -->
+      <section class="my-8">
+        <h2 class="text-xl font-medium text-liquid-primary mb-3">Positions</h2>
+        <div class="flex flex-wrap items-center gap-6">
+          <!-- Top -->
+          <div class="tooltip" data-position="top">
+            <button
+              class="tooltip-trigger liquid-glass liquid-glass-button liquid-glass-button-secondary liquid-glass-md liquid-glass-pill"
+              aria-describedby="tt-top-2"
+              type="button"
+            >
+              Top
+            </button>
+            <div
+              id="tt-top-2"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              Appears above
+              <span class="tooltip-arrow liquid-glass liquid-glass-elevated rounded" aria-hidden="true"></span>
+            </div>
+          </div>
 
-function MyComponent() {{ "{" }}
-                return (
-    &lt;GlassTooltip&gt;
-      Example content
-    &lt;/GlassTooltip&gt;
-  );
-}</code></pre>
+          <!-- Right -->
+          <div class="tooltip" data-position="right">
+            <button
+              class="tooltip-trigger liquid-glass liquid-glass-button liquid-glass-button-primary liquid-glass-md liquid-glass-pill"
+              aria-describedby="tt-right-1"
+              type="button"
+            >
+              Right
+            </button>
+            <div
+              id="tt-right-1"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              Appears to the right
+              <span class="tooltip-arrow liquid-glass liquid-glass-elevated rounded" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <!-- Bottom -->
+          <div class="tooltip" data-position="bottom">
+            <button
+              class="tooltip-trigger liquid-glass liquid-glass-button liquid-glass-button-ghost liquid-glass-md liquid-glass-pill"
+              aria-describedby="tt-bottom-1"
+              type="button"
+            >
+              Bottom
+            </button>
+            <div
+              id="tt-bottom-1"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              Appears below
+              <span class="tooltip-arrow liquid-glass liquid-glass-elevated rounded" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <!-- Left -->
+          <div class="tooltip" data-position="left">
+            <button
+              class="tooltip-trigger liquid-glass liquid-glass-button liquid-glass-button-secondary liquid-glass-md liquid-glass-pill"
+              aria-describedby="tt-left-1"
+              type="button"
+            >
+              Left
+            </button>
+            <div
+              id="tt-left-1"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              Appears to the left
+              <span class="tooltip-arrow liquid-glass liquid-glass-elevated rounded" aria-hidden="true"></span>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="mt-6">
-          <h4 class="text-lg font-semibold mb-3 text-primary">Installation</h4>
-          <pre
-            class="bg-gray-800 text-blue-400 p-4 rounded-lg overflow-x-auto"
-          ><code>npm install @tuliocunha23/liquidui</code></pre>
-        </div>
-      </main>
-
-      <footer class="text-center mt-8 text-secondary">
-        <p>
-          &copy; 2024 LiquidUI Components. Built with React and Tailwind CSS.
+      <!-- Inline text example -->
+      <section class="my-8">
+        <h2 class="text-xl font-medium text-liquid-primary mb-3">Inline Text</h2>
+        <p class="text-liquid-secondary">
+          Hover the
+          <span class="tooltip" data-position="top">
+            <span
+              tabindex="0"
+              class="tooltip-trigger text-liquid-accent underline"
+              aria-describedby="tt-inline-1"
+            >
+              highlighted word
+            </span>
+            <span
+              id="tt-inline-1"
+              role="tooltip"
+              class="tooltip-bubble liquid-glass liquid-glass-elevated rounded-full px-3 py-2"
+            >
+              A simple inline tooltip
+              <span class="tooltip-arrow liquid-glass liquid-glass-elevated rounded" aria-hidden="true"></span>
+            </span>
+          </span>
+          to see the tooltip.
         </p>
-        <p class="mt-2">
-          <a
-            class="text-blue-400 hover:text-blue-300"
-            href="https://liquidify-fw9pi7oj6-tulio-pinheiro-cunha-s-projects.vercel.app"
-          >
-            View Live Demo
-          </a>
-        </p>
-      </footer>
-    </div>
+      </section>
 
-    <script>
-      function toggleTheme() {
-        const html = document.documentElement;
-        const currentTheme = html.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-        html.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-      }
-
-      // Load saved theme
-      const savedTheme = localStorage.getItem("theme") || "light";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      // Add smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-          }
-        });
-      });
-    </script>
+      <p class="text-liquid-secondary my-8">
+        Tip: The liquid-glass effect uses backdrop-filter and layered styles. Try this page over
+        different backgrounds (light/dark) to appreciate the visual depth.
+      </p>
+    </main>
   </body>
 </html>
