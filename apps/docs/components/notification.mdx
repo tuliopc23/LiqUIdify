@@ -2,6 +2,7 @@
 title: Notification
 description: Liquid Glass notification center with real-time updates and interactive management.
 ---
+
 # Notification
 
 The `NotificationCenter` component provides a comprehensive notification system with glassmorphism effects. It supports different notification types, real-time updates, and interactive management features.
@@ -74,29 +75,26 @@ return (
 ### Notification Types
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [notifications, setNotifications] = useState([]);
 
-const addNotification = (type) => {
-const messages = {
-success: {
-title: "Success!",
-message: "Operation completed successfully.",
-},
-error: {
-title: "Error",
-message: "Something went wrong. Please try again.",
-},
-warning: { title: "Warning", message: "Please review your settings." },
-info: {
-title: "Information",
-message: "Here's some helpful information.",
-},
-system: { title: "System", message: "System notification received." },
-};
+  const addNotification = (type) => {
+    const messages = {
+      success: {
+        title: "Success!",
+        message: "Operation completed successfully.",
+      },
+      error: {
+        title: "Error",
+        message: "Something went wrong. Please try again.",
+      },
+      warning: { title: "Warning", message: "Please review your settings." },
+      info: {
+        title: "Information",
+        message: "Here's some helpful information.",
+      },
+      system: { title: "System", message: "System notification received." },
+    };
 
     const newNotification = {
       id: Date.now().toString(),
@@ -107,45 +105,44 @@ system: { title: "System", message: "System notification received." },
     };
 
     setNotifications((prev) => [newNotification, ...prev]);
+  };
 
-};
+  const handleMarkAsRead = (id) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+    );
+  };
 
-const handleMarkAsRead = (id) => {
-setNotifications((prev) =>
-prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-);
-};
+  const handleDismiss = (id) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
 
-const handleDismiss = (id) => {
-setNotifications((prev) => prev.filter((n) => n.id !== id));
-};
-
-return (
-
-<div
-style={{
+  return (
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         gap: 16,
         alignItems: "center",
-      }} >
-<div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-<GlassButton size="sm" onClick={() => addNotification("success")}>
-Success
-</GlassButton>
-<GlassButton size="sm" onClick={() => addNotification("error")}>
-Error
-</GlassButton>
-<GlassButton size="sm" onClick={() => addNotification("warning")}>
-Warning
-</GlassButton>
-<GlassButton size="sm" onClick={() => addNotification("info")}>
-Info
-</GlassButton>
-<GlassButton size="sm" onClick={() => addNotification("system")}>
-System
-</GlassButton>
-</div>
+      }}
+    >
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <GlassButton size="sm" onClick={() => addNotification("success")}>
+          Success
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("error")}>
+          Error
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("warning")}>
+          Warning
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("info")}>
+          Info
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("system")}>
+          System
+        </GlassButton>
+      </div>
 
       <NotificationCenter
         notifications={notifications}
@@ -153,8 +150,7 @@ System
         onDismiss={handleDismiss}
       />
     </div>
-
-);
+  );
 }
 ```
 

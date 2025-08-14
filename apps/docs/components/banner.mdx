@@ -3,6 +3,7 @@ title: Banner
 description: Prominent messages and announcements with glassmorphism effects and dismissible functionality.
 icon: megaphone
 ---
+
 # Banner
 
 A glassmorphic banner component for displaying prominent messages, announcements, and system notifications. Features semantic variants, dismissible functionality, and Apple-inspired design.
@@ -14,7 +15,6 @@ A glassmorphic banner component for displaying prominent messages, announcements
 ### Basic Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="w-full max-w-2xl space-y-4">
@@ -34,8 +34,7 @@ export default function Demo() {
         🚨 Service disruption detected. Our team is investigating.
       </GlassBanner>
     </div>
-
-);
+  );
 }
 ```
 
@@ -44,22 +43,21 @@ export default function Demo() {
 ### Dismissible Banners
 
 ```tsx
-
 export default function Demo() {
   const [showInfo, setShowInfo] = useState(true);
   const [showWarning, setShowWarning] = useState(true);
 
-return (
-
-<div className="w-full max-w-2xl space-y-4">
-{showInfo && (
-<GlassBanner
-variant="info"
-dismissible
-onDismiss={() => setShowInfo(false)} >
-💡 Tip: You can dismiss this banner by clicking the X button.
-</GlassBanner>
-)}
+  return (
+    <div className="w-full max-w-2xl space-y-4">
+      {showInfo && (
+        <GlassBanner
+          variant="info"
+          dismissible
+          onDismiss={() => setShowInfo(false)}
+        >
+          💡 Tip: You can dismiss this banner by clicking the X button.
+        </GlassBanner>
+      )}
 
       {showWarning && (
         <GlassBanner
@@ -75,8 +73,7 @@ onDismiss={() => setShowInfo(false)} >
         {!showInfo && !showWarning && "All banners dismissed!"}
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -85,7 +82,6 @@ onDismiss={() => setShowInfo(false)} >
 ### With Actions
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="w-full max-w-2xl space-y-4">
@@ -117,8 +113,7 @@ export default function Demo() {
         🔄 A security update is available for your application.
       </GlassBanner>
     </div>
-
-);
+  );
 }
 ```
 
@@ -127,7 +122,6 @@ export default function Demo() {
 ### Custom Icons
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="w-full max-w-2xl space-y-4">
@@ -147,8 +141,7 @@ export default function Demo() {
         We appreciate your patience during this outage.
       </GlassBanner>
     </div>
-
-);
+  );
 }
 ```
 
@@ -170,8 +163,6 @@ export default function Demo() {
 ### System Announcements
 
 ```tsx
-;
-
 function SystemAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);
 
@@ -217,7 +208,6 @@ function SystemAnnouncements() {
 ### Feature Announcements
 
 ```tsx
-
 function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
   return (
     <GlassBanner
@@ -248,7 +238,6 @@ function FeatureAnnouncement({ feature, onDismiss, onTryFeature }) {
 ### Maintenance Notifications
 
 ```tsx
-
 function MaintenanceNotification({ maintenance }) {
   const getVariant = (status) => {
     switch (status) {
@@ -291,8 +280,6 @@ function MaintenanceNotification({ maintenance }) {
 ### Cookie Consent
 
 ```tsx
-;
-
 function CookieConsent() {
   const [isVisible, setIsVisible] = useState(true);
 

@@ -2,6 +2,7 @@
 title: Theming
 description: Customize Liquid Glass appearance, colors, and tokens. Learn how ThemeProvider and design tokens work together.
 ---
+
 # Theming
 
 LiqUIdify ships with a Theme system that controls light/dark, liquid-glass intensity, and design tokens (spacing, radii, typography).
@@ -9,7 +10,6 @@ LiqUIdify ships with a Theme system that controls light/dark, liquid-glass inten
 At the app root, wrap your tree with the provider and pass optional configuration.
 
 ```tsx
-;
 import "liquidify/styles";
 
 export default function App({ children }) {
@@ -62,8 +62,6 @@ Intensity presets often map to blur/saturation and specular highlights. Keep GPU
 The provider toggles a `dark` class on the document. You can react to this in CSS or via the `useTheme` hook.
 
 ```tsx
-;
-
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (

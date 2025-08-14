@@ -20,38 +20,33 @@ import { GlassTabs } from "liquidify";
 
 export default function Demo() {
   const tabs = [
-    { 
-      id: "overview", 
-      label: "Overview", 
-      content: <div>Overview content here...</div> 
+    {
+      id: "overview",
+      label: "Overview",
+      content: <div>Overview content here...</div>,
     },
-    { 
-      id: "details", 
-      label: "Details", 
-      content: <div>Detailed information...</div> 
+    {
+      id: "details",
+      label: "Details",
+      content: <div>Detailed information...</div>,
     },
-    { 
-      id: "settings", 
-      label: "Settings", 
-      content: <div>Settings panel...</div> 
+    {
+      id: "settings",
+      label: "Settings",
+      content: <div>Settings panel...</div>,
     },
   ];
 
-  return (
-    <GlassTabs 
-      tabs={tabs} 
-      defaultTab="details" 
-    />
-  );
+  return <GlassTabs tabs={tabs} defaultTab="details" />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `tabs` | `TabItem[]` | - | Array of tab configurations |
-| `defaultTab` | `string` | - | ID of initially active tab |
+| Prop         | Type        | Default | Description                 |
+| ------------ | ----------- | ------- | --------------------------- |
+| `tabs`       | `TabItem[]` | -       | Array of tab configurations |
+| `defaultTab` | `string`    | -       | ID of initially active tab  |
 
 ## Tab Item Structure
 

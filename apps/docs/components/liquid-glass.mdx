@@ -2,6 +2,7 @@
 title: LiquidGlass
 description: Core liquid glass effect system with layered transparency and content-aware adaptation.
 ---
+
 # LiquidGlass System
 
 The LiquidGlass system is the foundation of LiqUIdify's design language, providing Apple-inspired glassmorphism effects with layered transparency, specular highlights, and content-aware adaptation.
@@ -13,7 +14,6 @@ The LiquidGlass system is the foundation of LiqUIdify's design language, providi
 ### Basic Glass Container
 
 ```tsx
-
 function BasicGlassContainer({ children }) {
   return (
     <div className="liquid-glass-container liquid-glass-md">
@@ -58,7 +58,6 @@ export default function Demo() {
 ### Content-Aware Adaptation
 
 ```tsx
-
 function AdaptiveGlass({ bgColor, children }) {
   return (
     <div
@@ -81,19 +80,19 @@ export default function Demo() {
     { color: "rgba(239, 68, 68, 0.1)", name: "Red" },
   ];
 
-return (
-
-<GlassUIProvider glassConfig={{ adaptToContent: true }}>
-  <div className="grid grid-cols-2 gap-4">
-    {backgrounds.map((bg) => (
-      <AdaptiveGlass key={bg.name} bgColor={bg.color}>
-        <span className="text-liquid-primary font-medium">{bg.name}</span>
-        <p className="text-liquid-secondary text-sm">Adaptive glass</p>
-      </AdaptiveGlass>
-    ))}
-  </div>
-</GlassUIProvider>
-); }
+  return (
+    <GlassUIProvider glassConfig={{ adaptToContent: true }}>
+      <div className="grid grid-cols-2 gap-4">
+        {backgrounds.map((bg) => (
+          <AdaptiveGlass key={bg.name} bgColor={bg.color}>
+            <span className="text-liquid-primary font-medium">{bg.name}</span>
+            <p className="text-liquid-secondary text-sm">Adaptive glass</p>
+          </AdaptiveGlass>
+        ))}
+      </div>
+    </GlassUIProvider>
+  );
+}
 ```
 
 ### Apple Bento Box Layout
@@ -214,7 +213,6 @@ function App() {
 ### Custom Glass Component
 
 ```tsx
-;
 import { cn } from "liquidify/utils";
 
 interface CustomGlassProps {
@@ -253,8 +251,6 @@ const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
 ### Content-Aware Hook
 
 ```tsx
-;
-
 function ContentAwareComponent() {
   const contentRef = useRef<HTMLDivElement>(null);
   const { updateGlassStyle } = useLiquidGlass();

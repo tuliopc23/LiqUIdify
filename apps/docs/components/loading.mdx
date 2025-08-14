@@ -14,7 +14,6 @@ The `GlassLoading` component provides elegant loading indicators with glassmorph
 ### Basic Usage
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -39,7 +38,6 @@ export default function Demo() {
 ### With Text Labels
 
 ```tsx
-
 export default function Demo() {
   return (
     <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
@@ -57,7 +55,6 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -82,29 +79,28 @@ export default function Demo() {
 ### Interactive Demo
 
 ```tsx
-
 export default function Demo() {
   const [variant, setVariant] = useState("spinner");
   const [size, setSize] = useState("md");
   const [showText, setShowText] = useState(true);
 
-const variants = ["spinner", "dots", "pulse", "bars"];
-const sizes = ["sm", "md", "lg", "xl"];
+  const variants = ["spinner", "dots", "pulse", "bars"];
+  const sizes = ["sm", "md", "lg", "xl"];
 
-return (
-
-<div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-<div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-{variants.map((v) => (
-<GlassButton
-key={v}
-variant={variant === v ? "primary" : "ghost"}
-size="sm"
-onClick={() => setVariant(v)} >
-{v}
-</GlassButton>
-))}
-</div>
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        {variants.map((v) => (
+          <GlassButton
+            key={v}
+            variant={variant === v ? "primary" : "ghost"}
+            size="sm"
+            onClick={() => setVariant(v)}
+          >
+            {v}
+          </GlassButton>
+        ))}
+      </div>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {sizes.map((s) => (
@@ -137,8 +133,7 @@ onClick={() => setVariant(v)} >
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 

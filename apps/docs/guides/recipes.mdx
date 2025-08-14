@@ -2,6 +2,7 @@
 title: Recipes
 description: Practical patterns for building with LiqUIdify — magnetic hover, responsive cards, controlled inputs, and more.
 ---
+
 # Recipes
 
 A collection of copy‑paste patterns built with LiqUIdify components.
@@ -9,8 +10,6 @@ A collection of copy‑paste patterns built with LiqUIdify components.
 ## Magnetic Hover Button
 
 ```tsx
-;
-
 export function MagneticButton() {
   return (
     <div className="group relative inline-flex">
@@ -24,8 +23,6 @@ export function MagneticButton() {
 ## Responsive Card Grid
 
 ```tsx
-;
-
 export function CardGrid() {
   const cards = Array.from({ length: 6 }, (_, i) => i + 1);
   return (
@@ -46,8 +43,6 @@ export function CardGrid() {
 ## Controlled Input with Validation
 
 ```tsx
-;
-
 export function EmailField() {
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
@@ -76,8 +71,6 @@ export function EmailField() {
 ## Modal + Focus Trap
 
 ```tsx
-;
-
 export function ModalExample() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -100,8 +93,6 @@ export function ModalExample() {
 ## Toast on Action
 
 ```tsx
-;
-
 export function ToastOnSave() {
   const [toasts, setToasts] = React.useState<string[]>([]);
   return (

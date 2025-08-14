@@ -42,7 +42,7 @@ export const LIQUID_GLASS_LIGHT_THEME = {
     string: "#059669",
   },
   font: {
-    body: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+    body: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
     mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     size: "13px",
     lineHeight: "1.5",
@@ -73,7 +73,7 @@ export const LIQUID_GLASS_DARK_THEME = {
     string: "#34d399",
   },
   font: {
-    body: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+    body: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
     mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     size: "13px",
     lineHeight: "1.5",

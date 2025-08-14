@@ -2,6 +2,7 @@
 title: Live Component Previews
 description: Embed interactive React component previews above code blocks using a reusable Preview wrapper.
 ---
+
 ;
 ;
 
@@ -14,7 +15,7 @@ This guide shows how to add interactive React component previews above (or along
 ### Primary Button
 
 ```tsx
-<GlassButton onClick={() => alert('Clicked!')}>Click me</GlassButton>
+<GlassButton onClick={() => alert("Clicked!")}>Click me</GlassButton>
 ```
 
 ## Hook Support
@@ -22,13 +23,13 @@ This guide shows how to add interactive React component previews above (or along
 ### useState Toggle
 
 ```tsx
-function Example(){
-  const [on,setOn]=React.useState(false)
+function Example() {
+  const [on, setOn] = React.useState(false);
   return (
-    <GlassButton onClick={()=>setOn(o=>!o)}>
-      {on ? 'ON' : 'OFF'}
+    <GlassButton onClick={() => setOn((o) => !o)}>
+      {on ? "ON" : "OFF"}
     </GlassButton>
-  )
+  );
 }
 ```
 
@@ -37,9 +38,11 @@ function Example(){
 ### Controlled Input
 
 ```tsx
-function Example(){
-  const [value,setValue]=React.useState('')
-  return <GlassInput value={value} onChange={e=>setValue(e.target.value)} />
+function Example() {
+  const [value, setValue] = React.useState("");
+  return (
+    <GlassInput value={value} onChange={(e) => setValue(e.target.value)} />
+  );
 }
 ```
 

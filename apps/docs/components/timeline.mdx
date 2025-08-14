@@ -6,7 +6,6 @@ description: Display chronological events with status indicators and liquid glas
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const projectTimeline = [
     {
@@ -53,40 +52,39 @@ export default function Demo() {
     },
   ];
 
-const horizontalTimeline = [
-{
-id: "1",
-title: "Q1 2024",
-description: "Foundation",
-status: "completed",
-},
-{
-id: "2",
-title: "Q2 2024",
-description: "Growth",
-status: "active",
-},
-{
-id: "3",
-title: "Q3 2024",
-description: "Expansion",
-status: "pending",
-},
-{
-id: "4",
-title: "Q4 2024",
-description: "Optimization",
-status: "pending",
-},
-];
+  const horizontalTimeline = [
+    {
+      id: "1",
+      title: "Q1 2024",
+      description: "Foundation",
+      status: "completed",
+    },
+    {
+      id: "2",
+      title: "Q2 2024",
+      description: "Growth",
+      status: "active",
+    },
+    {
+      id: "3",
+      title: "Q3 2024",
+      description: "Expansion",
+      status: "pending",
+    },
+    {
+      id: "4",
+      title: "Q4 2024",
+      description: "Optimization",
+      status: "pending",
+    },
+  ];
 
-return (
-
-<div className="space-y-12 p-6">
-<div>
-<h3 className="text-white mb-6">Vertical Timeline</h3>
-<GlassTimeline items={projectTimeline} />
-</div>
+  return (
+    <div className="space-y-12 p-6">
+      <div>
+        <h3 className="text-white mb-6">Vertical Timeline</h3>
+        <GlassTimeline items={projectTimeline} />
+      </div>
 
       <div>
         <h3 className="text-white mb-6">Horizontal Timeline</h3>
@@ -98,8 +96,7 @@ return (
         <GlassTimeline items={projectTimeline} alternating={true} />
       </div>
     </div>
-
-);
+  );
 }
 ```
 

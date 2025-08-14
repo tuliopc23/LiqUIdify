@@ -6,62 +6,60 @@ description: Intelligent search input with suggestions, recent searches, and key
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const [query, setQuery] = useState("");
 
-const suggestions = [
-{
-id: "1",
-text: "React components",
-type: "suggestion",
-category: "Development",
-},
-{
-id: "2",
-text: "TypeScript guide",
-type: "suggestion",
-category: "Development",
-},
-{ id: "3", text: "Design system", type: "trending", count: 1250 },
-{
-id: "4",
-text: "Accessibility best practices",
-type: "suggestion",
-category: "UX",
-},
-{ id: "5", text: "Apple HIG", type: "trending", count: 890 },
-];
+  const suggestions = [
+    {
+      id: "1",
+      text: "React components",
+      type: "suggestion",
+      category: "Development",
+    },
+    {
+      id: "2",
+      text: "TypeScript guide",
+      type: "suggestion",
+      category: "Development",
+    },
+    { id: "3", text: "Design system", type: "trending", count: 1250 },
+    {
+      id: "4",
+      text: "Accessibility best practices",
+      type: "suggestion",
+      category: "UX",
+    },
+    { id: "5", text: "Apple HIG", type: "trending", count: 890 },
+  ];
 
-const recentSearches = [
-"liquid glass effects",
-"component documentation",
-"theme customization",
-];
+  const recentSearches = [
+    "liquid glass effects",
+    "component documentation",
+    "theme customization",
+  ];
 
-const handleSearch = (searchQuery) => {
-console.log("Searching for:", searchQuery);
-setQuery(searchQuery);
-};
+  const handleSearch = (searchQuery) => {
+    console.log("Searching for:", searchQuery);
+    setQuery(searchQuery);
+  };
 
-const handleSuggestionClick = (suggestion) => {
-console.log("Selected suggestion:", suggestion);
-setQuery(suggestion.text);
-};
+  const handleSuggestionClick = (suggestion) => {
+    console.log("Selected suggestion:", suggestion);
+    setQuery(suggestion.text);
+  };
 
-return (
-
-<div className="space-y-8 p-6">
-<div>
-<h3 className="text-white mb-4">Basic Search</h3>
-<GlassSearch
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Search</h3>
+        <GlassSearch
           placeholder="Search documentation..."
           suggestions={suggestions}
           recentSearches={recentSearches}
           onSearch={handleSearch}
           onSuggestionClick={handleSuggestionClick}
         />
-</div>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">E-commerce Search</h3>
@@ -92,8 +90,7 @@ return (
         <div className="text-white/70 text-sm">Current query: "{query}"</div>
       )}
     </div>
-
-);
+  );
 }
 ```
 
@@ -102,7 +99,6 @@ return (
 ### Example
 
 ```tsx
-
 export default function SearchTypesDemo() {
   const documentationSuggestions = [
     {
@@ -120,24 +116,23 @@ export default function SearchTypesDemo() {
     { id: "3", text: "Theming system", type: "trending", count: 456 },
   ];
 
-const userSuggestions = [
-{ id: "1", text: "John Doe", type: "suggestion", category: "Users" },
-{ id: "2", text: "Jane Smith", type: "suggestion", category: "Users" },
-{ id: "3", text: "Admin Dashboard", type: "recent" },
-];
+  const userSuggestions = [
+    { id: "1", text: "John Doe", type: "suggestion", category: "Users" },
+    { id: "2", text: "Jane Smith", type: "suggestion", category: "Users" },
+    { id: "3", text: "Admin Dashboard", type: "recent" },
+  ];
 
-return (
-
-<div className="space-y-8">
-<div>
-<h3 className="text-white mb-4">Documentation Search</h3>
-<GlassSearch
-placeholder="Search docs, guides, and API..."
-suggestions={documentationSuggestions}
-recentSearches={["installation", "dark mode", "accessibility"]}
-showTrending={true}
-/>
-</div>
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-white mb-4">Documentation Search</h3>
+        <GlassSearch
+          placeholder="Search docs, guides, and API..."
+          suggestions={documentationSuggestions}
+          recentSearches={["installation", "dark mode", "accessibility"]}
+          showTrending={true}
+        />
+      </div>
 
       <div>
         <h3 className="text-white mb-4">User Search</h3>
@@ -158,8 +153,7 @@ showTrending={true}
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 

@@ -3,6 +3,7 @@ title: Modal
 description: Overlay dialogs with liquid glass effects, focus management, and comprehensive accessibility.
 icon: square-stack
 ---
+
 # Modal
 
 A glassmorphic modal component with liquid glass effects, robust focus management, and comprehensive accessibility support. Features Apple-inspired design with smooth animations and proper dialog semantics.
@@ -14,14 +15,12 @@ A glassmorphic modal component with liquid glass effects, robust focus managemen
 ### Basic Usage
 
 ```tsx
-
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
 
-return (
-
-<div>
-<GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+  return (
+    <div>
+      <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -46,8 +45,7 @@ return (
         </div>
       </GlassModal>
     </div>
-
-);
+  );
 }
 ```
 
@@ -62,27 +60,23 @@ return (
 ### Confirmation Dialog
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-const handleDelete = async () => {
-setIsDeleting(true);
-// Simulate API call
-await new Promise((resolve) => setTimeout(resolve, 1000));
-setIsDeleting(false);
-setIsOpen(false);
-};
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsDeleting(false);
+    setIsOpen(false);
+  };
 
-return (
-
-<div>
-<GlassButton variant="destructive" onClick={() => setIsOpen(true)}>
-Delete Item
-</GlassButton>
+  return (
+    <div>
+      <GlassButton variant="destructive" onClick={() => setIsOpen(true)}>
+        Delete Item
+      </GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -127,8 +121,7 @@ Delete Item
         </div>
       </GlassModal>
     </div>
-
-);
+  );
 }
 ```
 
@@ -137,32 +130,29 @@ Delete Item
 ### Form Modal
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", role: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-const handleSubmit = async (e) => {
-e.preventDefault();
-setIsSubmitting(true);
-// Simulate API call
-await new Promise((resolve) => setTimeout(resolve, 1000));
-setIsSubmitting(false);
-setIsOpen(false);
-setFormData({ name: "", email: "", role: "" });
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsSubmitting(false);
+    setIsOpen(false);
+    setFormData({ name: "", email: "", role: "" });
+  };
 
-return (
-
-<div>
-<GlassButton
-leftIcon={<Plus className="w-4 h-4" />}
-onClick={() => setIsOpen(true)} >
-Add User
-</GlassButton>
+  return (
+    <div>
+      <GlassButton
+        leftIcon={<Plus className="w-4 h-4" />}
+        onClick={() => setIsOpen(true)}
+      >
+        Add User
+      </GlassButton>
 
       <GlassModal
         isOpen={isOpen}
@@ -223,8 +213,7 @@ Add User
         </form>
       </GlassModal>
     </div>
-
-);
+  );
 }
 ```
 
@@ -250,7 +239,6 @@ Add User
 ### Alert Dialog
 
 ```tsx
-
 function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
   return (
     <GlassModal
@@ -283,8 +271,6 @@ function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
 ### Image Gallery Modal
 
 ```tsx
-;
-
 function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 

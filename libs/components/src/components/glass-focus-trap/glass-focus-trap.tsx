@@ -31,6 +31,10 @@ interface GlassFocusTrapProps {
   restoreFocus?: boolean;
   focusOptions?: FocusOptions;
   trapStack?: boolean; // Support multiple nested traps
+  // Visual glass (optional, non-breaking)
+  withGlass?: boolean;
+  glassClassName?: string;
+  surfaceProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 interface FocusHistory {
@@ -462,7 +466,15 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     trapStack,
   ]);
 
-  return (
+  const surfaceClass = cn(
+    // Optional visual wrapper with liquid glass layers
+    "relative",
+    withGlass &&
+      "liquid-glass-container border border-liquid-glass-hl/40 shadow-liquid rounded-xl",
+    glassClassName,
+  );
+
+  const content = (
     <div
       ref={containerRef}
       className={cn("liquid-glass-interactive:focus-visible-trap", className)}
@@ -471,6 +483,17 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       role={isActive ? "dialog" : undefined}
     >
       {children}
+    </div>
+  );
+
+  if (!withGlass) return content;
+
+  return (
+    <div className={surfaceClass} {...(surfaceProps || {})}>
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content p-0">{content}</div>
     </div>
   );
 };

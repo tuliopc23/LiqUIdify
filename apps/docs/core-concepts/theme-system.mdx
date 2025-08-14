@@ -2,6 +2,7 @@
 title: "Theme System"
 description: "Master LiqUIdify's powerful theming capabilities and customization options"
 ---
+
 # Theme System
 
 LiqUIdify provides a comprehensive theming system that adapts beautifully to both light and dark modes while maintaining the signature liquid glass aesthetic.
@@ -29,8 +30,6 @@ LiqUIdify provides a comprehensive theming system that adapts beautifully to bot
 ### Automatic Theme Detection
 
 ```tsx
-;
-
 export default function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="liquidify-theme">
@@ -74,13 +73,11 @@ export default function App() {
 ## Theme Toggle Component
 
 ```tsx
-;
-
 <ThemeToggle
   className="liquid-glass"
   variant="icon" // or "button"
   size="md"
-/>;
+/>
 ```
 
 ## Advanced Theming
@@ -107,8 +104,6 @@ const themes = {
 ### Theme Context Hook
 
 ```tsx
-;
-
 function MyComponent() {
   const { theme, setTheme, themes } = useTheme();
 

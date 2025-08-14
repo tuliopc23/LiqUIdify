@@ -2,34 +2,30 @@
 title: Slider
 description: Interactive range slider with liquid glass styling and smooth animations.
 ---
+
 ;
 ;
 
 ### Example
 
 ```tsx
-;
-;
-
-
 export default function Demo() {
   const [value, setValue] = useState(50);
   const [volume, setVolume] = useState(75);
   const [price, setPrice] = useState(250);
 
-return (
-
-<div className="space-y-8 p-6">
-<div>
-<h3 className="text-white mb-4">Basic Slider</h3>
-<GlassSlider
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Slider</h3>
+        <GlassSlider
           value={value}
           onChange={setValue}
           min={0}
           max={100}
           step={1}
         />
-</div>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">Volume Control</h3>
@@ -55,8 +51,7 @@ return (
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 

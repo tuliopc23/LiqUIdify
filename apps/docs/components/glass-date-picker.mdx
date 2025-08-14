@@ -2,43 +2,38 @@
 title: Glass Date Picker
 description: Elegant date selection component with Apple-inspired liquid glass effects and comprehensive date/time functionality.
 ---
+
 ;
 ;
 
 ### Example
 
 ```tsx
-;
-;
-;
-
-
 export default function Demo() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDateTime, setSelectedDateTime] = useState(null);
   const [selectedRange, setSelectedRange] = useState(null);
 
-const today = new Date();
-const tomorrow = new Date(today);
-tomorrow.setDate(tomorrow.getDate() + 1);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
-const nextWeek = new Date(today);
-nextWeek.setDate(nextWeek.getDate() + 7);
+  const nextWeek = new Date(today);
+  nextWeek.setDate(nextWeek.getDate() + 7);
 
-return (
-
-<div className="space-y-6 max-w-md mx-auto">
-<div>
-<label className="block text-sm font-medium text-white mb-2">
-Select Date
-</label>
-<GlassDatePicker
+  return (
+    <div className="space-y-6 max-w-md mx-auto">
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">
+          Select Date
+        </label>
+        <GlassDatePicker
           value={selectedDate}
           onChange={setSelectedDate}
           placeholder="Choose a date..."
           minDate={today}
         />
-</div>
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-white mb-2">
@@ -82,8 +77,7 @@ Select Date
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

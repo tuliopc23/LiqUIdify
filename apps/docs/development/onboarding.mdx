@@ -2,6 +2,7 @@
 title: Developer Onboarding
 description: Complete guide for setting up LiqUIdify development environment and making your first contribution.
 ---
+
 # Developer Onboarding
 
 Welcome to the LiqUIdify development team! This guide will help you set up your development environment and make your first contribution to the component library.
@@ -254,7 +255,6 @@ Each component should have:
 1. **Unit Tests** (`*.test.tsx`):
 
    ```tsx
-   ;
    import { GlassButton } from "./glass-button";
 
    describe("GlassButton", () => {
@@ -268,8 +268,6 @@ Each component should have:
 2. **Accessibility Tests**:
 
    ```tsx
-   ;
-
    it("meets accessibility standards", async () => {
      const { container } = render(<GlassButton>Accessible</GlassButton>);
      const results = await axe(container);

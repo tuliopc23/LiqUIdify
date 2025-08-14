@@ -2,6 +2,7 @@
 title: Pagination
 description: Liquid Glass pagination with smooth animations and accessibility features.
 ---
+
 # Pagination
 
 The `GlassPagination` component provides elegant pagination controls with glassmorphism effects. It features smooth animations, intelligent ellipsis handling, and comprehensive accessibility support.
@@ -13,31 +14,30 @@ The `GlassPagination` component provides elegant pagination controls with glassm
 ### Basic Pagination
 
 ```tsx
-
 export default function Demo() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 10;
 
-return (
-
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    gap: 16,
-    alignItems: "center",
-  }}
->
-  <p>
-    Current Page: {currentPage} of {totalPages}
-  </p>
-  <GlassPagination
-    currentPage={currentPage}
-    totalPages={totalPages}
-    onPageChange={setCurrentPage}
-  />
-</div>
-); }
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        alignItems: "center",
+      }}
+    >
+      <p>
+        Current Page: {currentPage} of {totalPages}
+      </p>
+      <GlassPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+    </div>
+  );
+}
 ```
 
 ### Size Variants
@@ -45,31 +45,28 @@ return (
 ### Size Variants
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [currentPage, setCurrentPage] = useState(3);
   const totalPages = 8;
 
-return (
-
-<div
-style={{
+  return (
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         gap: 24,
         alignItems: "center",
-      }} >
-<div>
-<h4 style={{ marginBottom: 8 }}>Small</h4>
-<GlassPagination
+      }}
+    >
+      <div>
+        <h4 style={{ marginBottom: 8 }}>Small</h4>
+        <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
           size="sm"
         />
-</div>
+      </div>
 
       <div>
         <h4 style={{ marginBottom: 8 }}>Medium (Default)</h4>
@@ -91,8 +88,7 @@ style={{
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -101,31 +97,28 @@ style={{
 ### Variant Styles
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [currentPage, setCurrentPage] = useState(2);
   const totalPages = 6;
 
-return (
-
-<div
-style={{
+  return (
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         gap: 24,
         alignItems: "center",
-      }} >
-<div>
-<h4 style={{ marginBottom: 8 }}>Default</h4>
-<GlassPagination
+      }}
+    >
+      <div>
+        <h4 style={{ marginBottom: 8 }}>Default</h4>
+        <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
           variant="default"
         />
-</div>
+      </div>
 
       <div>
         <h4 style={{ marginBottom: 8 }}>Solid</h4>
@@ -147,8 +140,7 @@ style={{
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -157,9 +149,6 @@ style={{
 ### Configuration Options
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [currentPage, setCurrentPage] = useState(5);
   const [totalPages, setTotalPages] = useState(20);
@@ -168,41 +157,45 @@ export default function Demo() {
   const [showEllipsis, setShowEllipsis] = useState(true);
   const [siblingCount, setSiblingCount] = useState(1);
 
-return (
-
-<div
-style={{
+  return (
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         gap: 20,
         alignItems: "center",
-      }} >
-<div
-style={{
+      }}
+    >
+      <div
+        style={{
           display: "flex",
           gap: 12,
           flexWrap: "wrap",
           justifyContent: "center",
-        }} >
-<GlassButton
-size="sm"
-variant={showFirstLast ? "primary" : "ghost"}
-onClick={() => setShowFirstLast(!showFirstLast)} >
-First/Last
-</GlassButton>
-<GlassButton
-size="sm"
-variant={showPrevNext ? "primary" : "ghost"}
-onClick={() => setShowPrevNext(!showPrevNext)} >
-Prev/Next
-</GlassButton>
-<GlassButton
-size="sm"
-variant={showEllipsis ? "primary" : "ghost"}
-onClick={() => setShowEllipsis(!showEllipsis)} >
-Ellipsis
-</GlassButton>
-</div>
+        }}
+      >
+        <GlassButton
+          size="sm"
+          variant={showFirstLast ? "primary" : "ghost"}
+          onClick={() => setShowFirstLast(!showFirstLast)}
+        >
+          First/Last
+        </GlassButton>
+        <GlassButton
+          size="sm"
+          variant={showPrevNext ? "primary" : "ghost"}
+          onClick={() => setShowPrevNext(!showPrevNext)}
+        >
+          Prev/Next
+        </GlassButton>
+        <GlassButton
+          size="sm"
+          variant={showEllipsis ? "primary" : "ghost"}
+          onClick={() => setShowEllipsis(!showEllipsis)}
+        >
+          Ellipsis
+        </GlassButton>
+      </div>
 
       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <span>Siblings:</span>
@@ -245,8 +238,7 @@ Ellipsis
         siblingCount={siblingCount}
       />
     </div>
-
-);
+  );
 }
 ```
 

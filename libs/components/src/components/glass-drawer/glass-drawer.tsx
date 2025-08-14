@@ -7,8 +7,10 @@ import { createVariants as cva } from "../../lib/variant-system";
 
 const drawerVariants = cva({
   base: [
-    "fixed z-50 gap-4 bg-black/80 backdrop-blur-sm",
-    "border border-white/10 shadow-lg",
+    "fixed z-50 gap-4",
+    // liquid-glass styling for the content surface
+    "liquid-glass-container",
+    "border border-liquid-glass-hl/40 shadow-liquid backdrop-blur-md",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-[state=closed]:duration-300 data-[state=open]:duration-500",
   ].join(" "),
@@ -138,17 +140,17 @@ const drawerVariants = cva({
 });
 
 const drawerHeaderVariants = cva({
-  base: "flex items-center justify-between border-white/10 border-b bg-white/5 p-4",
+  base: "flex items-center justify-between border-b border-liquid-glass-hl/30 bg-transparent p-4",
   variants: {},
 });
 
 const drawerContentVariants = cva({
-  base: "flex-1 overflow-y-auto p-4 text-white",
+  base: "flex-1 overflow-y-auto p-4",
   variants: {},
 });
 
 const drawerFooterVariants = cva({
-  base: "flex items-center justify-end gap-2 border-white/10 border-t bg-white/5 p-4",
+  base: "flex items-center justify-end gap-2 border-t border-liquid-glass-hl/30 bg-transparent p-4",
   variants: {},
 });
 
@@ -242,16 +244,20 @@ const GlassDrawerContent = React.forwardRef<
         className={cn(drawerVariants({ ...{ side, size } } as any), className)}
         {...props}
       >
+        {/* glass layers */}
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="flex h-full flex-col"
+          className="liquid-glass-content p-0 flex h-full flex-col"
         >
           {children}
           {showCloseButton && closeButtonPosition === "overlay" && (
-            <GlassDrawerClose className="absolute top-4 right-4 rounded-md opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-white/10">
+            <GlassDrawerClose className="absolute top-4 right-4 rounded-md opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-text-liquid-accent/40">
               <X className="h-4 w-4" />
 
               <span className="sr-only">Close</span>

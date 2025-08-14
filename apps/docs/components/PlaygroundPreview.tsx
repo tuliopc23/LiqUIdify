@@ -25,7 +25,8 @@ export default function PlaygroundPreview({
   height?: number;
   theme?: "light" | "dark";
 }) {
-  const themeObj = theme === "dark" ? LIQUID_GLASS_DARK_THEME : LIQUID_GLASS_LIGHT_THEME;
+  const themeObj =
+    theme === "dark" ? LIQUID_GLASS_DARK_THEME : LIQUID_GLASS_LIGHT_THEME;
   const mergedFiles: Files = withBaseFiles(files);
 
   return (

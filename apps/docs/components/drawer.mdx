@@ -2,29 +2,28 @@
 title: Drawer
 description: Slide-out panel component with multiple positions, sizes, and glass effects.
 ---
+
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const [rightOpen, setRightOpen] = useState(false);
   const [leftOpen, setLeftOpen] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
 
-return (
-
-<div className="space-y-6 p-6">
-<div className="grid grid-cols-2 gap-4">
-<GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
-<GlassButton onClick={() => setRightOpen(true)}>
-Right Drawer
-</GlassButton>
-<GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
-<GlassButton onClick={() => setBottomOpen(true)}>
-Bottom Drawer
-</GlassButton>
-</div>
+  return (
+    <div className="space-y-6 p-6">
+      <div className="grid grid-cols-2 gap-4">
+        <GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
+        <GlassButton onClick={() => setRightOpen(true)}>
+          Right Drawer
+        </GlassButton>
+        <GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
+        <GlassButton onClick={() => setBottomOpen(true)}>
+          Bottom Drawer
+        </GlassButton>
+      </div>
 
       {/* Right Drawer */}
       <Drawer open={rightOpen} onOpenChange={setRightOpen}>
@@ -135,8 +134,7 @@ Bottom Drawer
         </Drawer.Content>
       </Drawer>
     </div>
-
-);
+  );
 }
 ```
 
@@ -145,30 +143,26 @@ Bottom Drawer
 ### Example
 
 ```tsx
-
-;
-
 export default function SizesDemo() {
   const [smallOpen, setSmallOpen] = useState(false);
   const [mediumOpen, setMediumOpen] = useState(false);
   const [largeOpen, setLargeOpen] = useState(false);
   const [fullOpen, setFullOpen] = useState(false);
 
-return (
-
-<div className="space-y-4">
-<div className="grid grid-cols-2 gap-4">
-<GlassButton onClick={() => setSmallOpen(true)}>
-Small Drawer
-</GlassButton>
-<GlassButton onClick={() => setMediumOpen(true)}>
-Medium Drawer
-</GlassButton>
-<GlassButton onClick={() => setLargeOpen(true)}>
-Large Drawer
-</GlassButton>
-<GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
-</div>
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <GlassButton onClick={() => setSmallOpen(true)}>
+          Small Drawer
+        </GlassButton>
+        <GlassButton onClick={() => setMediumOpen(true)}>
+          Medium Drawer
+        </GlassButton>
+        <GlassButton onClick={() => setLargeOpen(true)}>
+          Large Drawer
+        </GlassButton>
+        <GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
+      </div>
 
       {/* Small Drawer */}
       <Drawer open={smallOpen} onOpenChange={setSmallOpen}>
@@ -271,8 +265,7 @@ Large Drawer
         </Drawer.Content>
       </Drawer>
     </div>
-
-);
+  );
 }
 ```
 
@@ -316,9 +309,6 @@ Large Drawer
 ### Navigation Drawer
 
 ```tsx
-
-;
-
 function NavigationDrawer() {
   const [open, setOpen] = useState(false);
 

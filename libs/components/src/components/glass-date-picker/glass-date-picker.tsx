@@ -26,8 +26,9 @@ const datePickerVariants = cva({
 const triggerVariants = cva({
   base: cn(
     "flex w-full items-center justify-between px-4 py-3 text-left",
-    "rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm",
-    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
+    // glass trigger
+    "liquid-glass rounded-xl border border-liquid-glass-hl/40",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-liquid-accent/40",
     "transition-all duration-200",
     "disabled:cursor-not-allowed disabled:opacity-50",
   ),
@@ -51,9 +52,10 @@ const triggerVariants = cva({
 const calendarVariants = cva({
   base: cn(
     "absolute z-50 mt-1 p-4",
-    "rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl",
-    "shadow-black/20 shadow-xl",
-    "min-w-[280px]",
+    // glass popover
+    "liquid-glass-container",
+    "border border-liquid-glass-hl/40 backdrop-blur-md shadow-liquid",
+    "rounded-xl min-w-[280px]",
   ),
   variants: {},
 });
@@ -280,13 +282,13 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
         >
-          <div className="liquid-glass flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-white/60" />
+          <div className="flex items-center gap-2">
+            <Calendar className="h-4 w-4 text-liquid-secondary" />
 
             <span
               className={cn(
-                "flex-1 text-left",
-                !selectedDate && "text-white/60",
+                "flex-1 text-left text-liquid-primary",
+                !selectedDate && "text-liquid-secondary",
               )}
             >
               {formatDate(selectedDate ?? null) || placeholder}
@@ -363,10 +365,14 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                         disabled={disabled}
                         className={cn(
                           "rounded-lg p-2 text-center text-sm transition-all duration-200",
-                          "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
-                          !isCurrentMonth && "text-white/30",
-                          isSelected && "bg-blue-500/20 text-blue-400",
-                          isToday && !isSelected && "bg-white/10 text-white",
+                          // translucent hover/focus
+                          "hover:bg-liquid-glass-bg/20 focus:bg-liquid-glass-bg/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-liquid-accent/30",
+                          !isCurrentMonth && "text-liquid-secondary/60",
+                          isSelected &&
+                            "ring-1 ring-text-liquid-accent/30 text-text-liquid-accent",
+                          isToday &&
+                            !isSelected &&
+                            "ring-1 ring-inset ring-liquid-glass-hl/50",
                           disabled && "cursor-not-allowed opacity-50",
                         )}
                       >

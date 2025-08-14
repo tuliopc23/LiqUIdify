@@ -2,84 +2,78 @@
 title: Glass Combobox
 description: Searchable dropdown component with Apple-inspired liquid glass effects and advanced filtering capabilities.
 ---
+
 ;
 ;
 
 ### Example
 
 ```tsx
-;
-;
-;
-;
-
-
 export default function Demo() {
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
 
-const users = [
-{
-value: "john",
-label: "John Doe",
-description: "Software Engineer",
-icon: <User className="h-4 w-4" />,
-},
-{
-value: "jane",
-label: "Jane Smith",
-description: "Product Manager",
-icon: <User className="h-4 w-4" />,
-},
-{
-value: "bob",
-label: "Bob Johnson",
-description: "UX Designer",
-icon: <User className="h-4 w-4" />,
-},
-{
-value: "alice",
-label: "Alice Brown",
-description: "Data Scientist",
-icon: <User className="h-4 w-4" />,
-},
-];
+  const users = [
+    {
+      value: "john",
+      label: "John Doe",
+      description: "Software Engineer",
+      icon: <User className="h-4 w-4" />,
+    },
+    {
+      value: "jane",
+      label: "Jane Smith",
+      description: "Product Manager",
+      icon: <User className="h-4 w-4" />,
+    },
+    {
+      value: "bob",
+      label: "Bob Johnson",
+      description: "UX Designer",
+      icon: <User className="h-4 w-4" />,
+    },
+    {
+      value: "alice",
+      label: "Alice Brown",
+      description: "Data Scientist",
+      icon: <User className="h-4 w-4" />,
+    },
+  ];
 
-const locations = [
-{
-value: "ny",
-label: "New York",
-description: "United States",
-icon: <MapPin className="h-4 w-4" />,
-},
-{
-value: "london",
-label: "London",
-description: "United Kingdom",
-icon: <MapPin className="h-4 w-4" />,
-},
-{
-value: "tokyo",
-label: "Tokyo",
-description: "Japan",
-icon: <MapPin className="h-4 w-4" />,
-},
-{
-value: "paris",
-label: "Paris",
-description: "France",
-icon: <MapPin className="h-4 w-4" />,
-},
-];
+  const locations = [
+    {
+      value: "ny",
+      label: "New York",
+      description: "United States",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+    {
+      value: "london",
+      label: "London",
+      description: "United Kingdom",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+    {
+      value: "tokyo",
+      label: "Tokyo",
+      description: "Japan",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+    {
+      value: "paris",
+      label: "Paris",
+      description: "France",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+  ];
 
-return (
-
-<div className="space-y-6 max-w-md mx-auto">
-<div>
-<label className="block text-sm font-medium text-white mb-2">
-Select User
-</label>
-<GlassCombobox
+  return (
+    <div className="space-y-6 max-w-md mx-auto">
+      <div>
+        <label className="block text-sm font-medium text-white mb-2">
+          Select User
+        </label>
+        <GlassCombobox
           options={users}
           value={selectedUser}
           onChange={setSelectedUser}
@@ -87,7 +81,7 @@ Select User
           searchable
           clearable
         />
-</div>
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-white mb-2">
@@ -112,8 +106,7 @@ Select User
         </p>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

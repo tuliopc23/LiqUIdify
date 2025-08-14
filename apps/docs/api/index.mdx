@@ -2,6 +2,7 @@
 title: API Reference
 description: Complete public API of the liquidify package with usage notes.
 ---
+
 # Public API
 
 This page summarizes the exports from `liquidify` and points to common props and patterns.
@@ -11,7 +12,6 @@ This page summarizes the exports from `liquidify` and points to common props and
 - `GlassUIProvider` — Wraps your app and orchestrates Theme, Liquid Glass, Haptics, Live Region and Toast.
 
 ```tsx
-;
 import "liquidify/styles";
 
 export default function App({ children }) {
@@ -40,8 +40,6 @@ Props:
 Example (live):
 
 ```tsx
-;
-
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
@@ -68,11 +66,9 @@ export default function ThemeToggle() {
 Import and usage are consistent:
 
 ```tsx
-;
-
 <GlassButton variant="primary" size="lg">
   Label
-</GlassButton>;
+</GlassButton>
 ```
 
 For any component props, check your editor’s TypeScript hints — types ship with the package.

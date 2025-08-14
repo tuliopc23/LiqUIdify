@@ -16,9 +16,9 @@
   --lg-text-inverse: #ffffff;
   --lg-text-secondary: rgba(26, 29, 33, 0.8);
   --lg-text-tertiary: rgba(26, 29, 33, 0.6);
-  --lg-accent: #007AFF;
-  --lg-primary: #007AFF;
-  --lg-primary-light: #5AC8FA;
+  --lg-accent: #007aff;
+  --lg-primary: #007aff;
+  --lg-primary-light: #5ac8fa;
 
   /* Apple-style Border Radius */
   --lg-radius-xs: 0.75rem;
@@ -46,7 +46,7 @@
   --lg-text-inverse: #1a1d21;
   --lg-text-secondary: rgba(255, 255, 255, 0.8);
   --lg-text-tertiary: rgba(255, 255, 255, 0.6);
-  --lg-accent: #5AC8FA;
+  --lg-accent: #5ac8fa;
 }
 
 /* ================================================================
@@ -54,11 +54,16 @@
    ================================================================ */
 
 /* SF Pro Font Loading */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 .docs-content {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter", sans-serif;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter",
+    sans-serif;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,7 +81,11 @@
 
 .docs-content h1 {
   font-size: 2.5rem;
-  background: linear-gradient(135deg, var(--lg-primary) 0%, var(--lg-primary-light) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--lg-primary) 0%,
+    var(--lg-primary-light) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -157,7 +166,9 @@ pre[class*="language-"] {
 }
 
 code[class*="language-"] {
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+  font-family:
+    "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New",
+    monospace !important;
   font-size: 0.875rem !important;
   line-height: 1.6 !important;
 }
@@ -168,7 +179,7 @@ code:not([class*="language-"]) {
   color: var(--lg-primary) !important;
   padding: 0.2em 0.4em !important;
   border-radius: 4px !important;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace !important;
+  font-family: "SF Mono", Monaco, "Cascadia Code", monospace !important;
   font-size: 0.85em !important;
 }
 
@@ -224,7 +235,11 @@ code:not([class*="language-"]) {
 
 /* Hero section enhancements */
 .hero-section {
-  background: radial-gradient(circle at 50% 0%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(0, 122, 255, 0.1) 0%,
+    transparent 50%
+  );
   padding: 3rem 0;
   text-align: center;
 }
@@ -277,15 +292,15 @@ code:not([class*="language-"]) {
   .docs-content h1 {
     font-size: 2rem;
   }
-  
+
   .docs-content h2 {
     font-size: 1.5rem;
   }
-  
+
   .component-card {
     padding: 1rem;
   }
-  
+
   .card-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -308,7 +323,7 @@ code:not([class*="language-"]) {
   .liquid-glass {
     border: 2px solid var(--lg-text);
   }
-  
+
   .component-card {
     border: 2px solid var(--lg-text);
   }

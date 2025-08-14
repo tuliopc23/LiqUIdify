@@ -16,7 +16,7 @@ import { GlassButton } from "liquidify";
 
 export default function ButtonShowcase() {
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
+    <div style={{ display: "flex", gap: 12 }}>
       <GlassButton variant="primary">Primary</GlassButton>
       <GlassButton variant="secondary">Secondary</GlassButton>
       <GlassButton variant="ghost">Ghost</GlassButton>
@@ -34,10 +34,7 @@ import { FormField, Input } from "liquidify";
 
 export default function FormFieldShowcase() {
   return (
-    <FormField 
-      label="Email" 
-      helperText="We'll never share your email."
-    >
+    <FormField label="Email" helperText="We'll never share your email.">
       <Input placeholder="you@example.com" />
     </FormField>
   );
@@ -76,12 +73,7 @@ export default function ComboboxShowcase() {
     { label: "Orange", value: "orange" },
   ];
 
-  return (
-    <Combobox 
-      options={options} 
-      placeholder="Pick a fruit" 
-    />
-  );
+  return <Combobox options={options} placeholder="Pick a fruit" />;
 }
 ```
 
@@ -98,14 +90,8 @@ export default function ModalShowcase() {
 
   return (
     <div>
-      <GlassButton onClick={() => setOpen(true)}>
-        Open Modal
-      </GlassButton>
-      <Modal 
-        open={open} 
-        onOpenChange={setOpen} 
-        title="Hello"
-      >
+      <GlassButton onClick={() => setOpen(true)}>Open Modal</GlassButton>
+      <Modal open={open} onOpenChange={setOpen} title="Hello">
         Modal content goes here.
       </Modal>
     </div>
@@ -122,15 +108,15 @@ import { Tabs } from "liquidify";
 
 export default function TabsShowcase() {
   const items = [
-    { 
-      value: "a", 
-      label: "One", 
-      content: <div>Tab A Content</div> 
+    {
+      value: "a",
+      label: "One",
+      content: <div>Tab A Content</div>,
     },
-    { 
-      value: "b", 
-      label: "Two", 
-      content: <div>Tab B Content</div> 
+    {
+      value: "b",
+      label: "Two",
+      content: <div>Tab B Content</div>,
     },
   ];
 
@@ -165,17 +151,13 @@ function ToastDemo() {
   const { toast } = useToast();
 
   const showToast = () => {
-    toast({ 
-      title: "Saved", 
-      description: "Changes persisted." 
+    toast({
+      title: "Saved",
+      description: "Changes persisted.",
     });
   };
 
-  return (
-    <GlassButton onClick={showToast}>
-      Show Toast
-    </GlassButton>
-  );
+  return <GlassButton onClick={showToast}>Show Toast</GlassButton>;
 }
 
 export default function ToastShowcase() {
@@ -197,11 +179,13 @@ import { Card, Badge } from "liquidify";
 export default function CardBadgeShowcase() {
   return (
     <Card>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <strong>Card Title</strong>
         <Badge color="green">New</Badge>
       </div>

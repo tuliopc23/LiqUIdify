@@ -20,7 +20,7 @@ import { ToastProvider, useToast, GlassButton } from "liquidify";
 
 function ToastDemo() {
   const { addToast } = useToast();
-  
+
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
       <GlassButton
@@ -34,7 +34,7 @@ function ToastDemo() {
       >
         Success
       </GlassButton>
-      
+
       <GlassButton
         variant="ghost"
         onClick={() =>
@@ -47,7 +47,7 @@ function ToastDemo() {
       >
         Warning
       </GlassButton>
-      
+
       <GlassButton
         variant="destructive"
         onClick={() =>
@@ -79,10 +79,10 @@ export default function Demo() {
 
 Wrapper component that provides toast context.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop       | Type            | Default       | Description         |
+| ---------- | --------------- | ------------- | ------------------- |
 | `position` | `ToastPosition` | `'top-right'` | Where toasts appear |
-| `children` | `ReactNode` | - | App content |
+| `children` | `ReactNode`     | -             | App content         |
 
 ### useToast Hook
 
@@ -94,10 +94,10 @@ const { addToast, removeToast } = useToast();
 
 #### addToast Options
 
-| Option | Type | Description |
-|--------|------|--------------|
-| `title` | `string` | Toast title (optional) |
-| `description` | `string` | Toast message |
-| `type` | `'success' \| 'warning' \| 'error' \| 'info'` | Toast variant |
-| `duration` | `number` | Auto-dismiss time in ms |
-| `action` | `ReactNode` | Custom action element |
+| Option        | Type                                          | Description             |
+| ------------- | --------------------------------------------- | ----------------------- |
+| `title`       | `string`                                      | Toast title (optional)  |
+| `description` | `string`                                      | Toast message           |
+| `type`        | `'success' \| 'warning' \| 'error' \| 'info'` | Toast variant           |
+| `duration`    | `number`                                      | Auto-dismiss time in ms |
+| `action`      | `ReactNode`                                   | Custom action element   |

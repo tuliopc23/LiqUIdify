@@ -296,7 +296,8 @@ const config: Config = {
           inset: "0",
           borderRadius: "inherit",
           zIndex: theme("zIndex.liquid-overlay"),
-          background: theme("colors.liquid.bg"),
+          // Use CSS variable so dark/light can tune opacity without rebuilding
+          background: "var(--lg-bg-color)",
         },
 
         ".liquid-glass-specular": {

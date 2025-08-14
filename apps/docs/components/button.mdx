@@ -3,6 +3,7 @@ title: Button
 description: Interactive buttons with liquid glass effects, multiple variants, and comprehensive accessibility.
 icon: mouse-pointer-click
 ---
+
 # Button
 
 A versatile glassmorphic button component with liquid glass effects, multiple variants, sizes, and comprehensive interaction states. Features Apple-inspired design with smooth animations and full accessibility support.
@@ -16,15 +17,10 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-;
 import "liquidify/css";
 
 export default function Demo() {
-  return (
-    <GlassButton variant="primary">
-      Click me
-    </GlassButton>
-  );
+  return <GlassButton variant="primary">Click me</GlassButton>;
 }
 ```
 
@@ -33,8 +29,6 @@ export default function Demo() {
 ### Basic Variants
 
 ```tsx
-;
-
 export default function BasicVariants() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
@@ -50,8 +44,6 @@ export default function BasicVariants() {
 ### Size Variants
 
 ```tsx
-;
-
 export default function SizeVariants() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
@@ -67,15 +59,10 @@ export default function SizeVariants() {
 ### With Icons
 
 ```tsx
-;
-;
-
 export default function WithIcons() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton leftIcon={<Heart className="w-4 h-4" />}>
-        Like
-      </GlassButton>
+      <GlassButton leftIcon={<Heart className="w-4 h-4" />}>Like</GlassButton>
       <GlassButton rightIcon={<Download className="w-4 h-4" />}>
         Download
       </GlassButton>
@@ -93,10 +80,6 @@ export default function WithIcons() {
 ### Loading States
 
 ```tsx
-;
-;
-;
-
 export default function LoadingStates() {
   const [loading, setLoading] = useState(false);
 
@@ -108,7 +91,9 @@ export default function LoadingStates() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
       <GlassButton loading>Loading...</GlassButton>
-      <GlassButton loading loadingText="Saving...">Save</GlassButton>
+      <GlassButton loading loadingText="Saving...">
+        Save
+      </GlassButton>
       <GlassButton
         loading={loading}
         loadingText="Processing..."
@@ -144,9 +129,6 @@ export default function LoadingStates() {
 ### Form Actions
 
 ```tsx
-;
-;
-
 function FormActions({ onSave, onCancel, isLoading }) {
   return (
     <div className="flex justify-end gap-3">

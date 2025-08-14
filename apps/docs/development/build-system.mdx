@@ -2,6 +2,7 @@
 title: Build System
 description: Understanding LiqUIdify's build system, bundling strategy, and optimization techniques.
 ---
+
 # Build System
 
 LiqUIdify uses a modern build system powered by Vite and Rolldown to deliver optimized, tree-shakeable bundles. This guide explains the build configuration, bundling strategy, and optimization techniques.
@@ -71,7 +72,6 @@ dist/libs/components/
 ```typescript
 // libs/components/rolldown.config.ts
 import { defineConfig } from "vite";
-;
 import tsconfigPaths from "vite-tsconfig-paths";
 import lightningcss from "vite-plugin-lightningcss";
 
@@ -345,8 +345,6 @@ export default defineConfig(({ mode }) => ({
 
 ```typescript
 // Future: Module federation support
-;
-
 plugins: [
   federation({
     name: "liquidify",

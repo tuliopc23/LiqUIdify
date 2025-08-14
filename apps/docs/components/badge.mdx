@@ -15,7 +15,6 @@ A glassmorphic badge component for displaying status, counts, labels, and other 
 ### Basic Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="flex items-center gap-3 flex-wrap">
@@ -33,7 +32,6 @@ export default function Demo() {
 ### Status Indicators
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="space-y-4">
@@ -57,8 +55,7 @@ export default function Demo() {
         <GlassBadge variant="default">v2.1.0</GlassBadge>
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -67,7 +64,6 @@ export default function Demo() {
 ### Count Badges
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="space-y-4">
@@ -91,8 +87,7 @@ export default function Demo() {
         <GlassBadge variant="success">24</GlassBadge>
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -101,7 +96,6 @@ export default function Demo() {
 ### Category Tags
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="space-y-4">
@@ -124,8 +118,7 @@ export default function Demo() {
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -134,7 +127,6 @@ export default function Demo() {
 ### With Icons
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="flex items-center gap-3 flex-wrap">
@@ -158,8 +150,7 @@ export default function Demo() {
         Info
       </GlassBadge>
     </div>
-
-);
+  );
 }
 ```
 
@@ -212,7 +203,6 @@ function StatusDashboard({ services }) {
 ### Notification Counter
 
 ```tsx
-
 function NotificationButton({ count }) {
   return (
     <button className="relative p-2 rounded-lg hover:bg-white/10">

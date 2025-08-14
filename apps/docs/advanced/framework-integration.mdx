@@ -2,6 +2,7 @@
 title: Framework Integration
 description: Step-by-step integration guides for Next.js, Remix, Vite, and other React frameworks.
 ---
+
 # Framework Integration
 
 LiqUIdify works seamlessly with all modern React frameworks. This guide provides specific instructions for integrating the library with popular frameworks, handling SSR, and optimizing performance.
@@ -22,7 +23,6 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
 
    ```tsx
    // app/layout.tsx
-   ;
    import "liquidify/styles";
 
    export default function RootLayout({
@@ -45,7 +45,6 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
    ```tsx
    // pages/_app.tsx
    import type { AppProps } from "next/app";
-   ;
    import "liquidify/styles";
 
    export default function App({ Component, pageProps }: AppProps) {
@@ -80,9 +79,6 @@ LiqUIdify handles SSR automatically, but for optimal performance:
    ```tsx
    // app/providers.tsx
    "use client";
-
-   ;
-   ;
 
    export function Providers({ children }: { children: React.ReactNode }) {
      const [mounted, setMounted] = useState(false);
@@ -123,8 +119,6 @@ LiqUIdify handles SSR automatically, but for optimal performance:
 
    ```tsx
    import Image from "next/image";
-   ;
-
    export function ProductCard() {
      return (
        <GlassCard variant="elevated">
@@ -188,9 +182,7 @@ export default function RootLayout({
 
    ```tsx
    // src/main.tsx
-   ;
    import ReactDOM from "react-dom/client";
-   ;
    import App from "./App";
    import "liquidify/styles";
    import "./index.css";
@@ -209,8 +201,6 @@ export default function RootLayout({
    ```ts
    // vite.config.ts
    import { defineConfig } from "vite";
-   ;
-
    export default defineConfig({
      plugins: [react()],
      optimizeDeps: {
@@ -270,7 +260,6 @@ export default function RootLayout({
 
    ```tsx
    // app/root.tsx
-   ;
    import {
      Links,
      LiveReload,
@@ -279,7 +268,6 @@ export default function RootLayout({
      Scripts,
      ScrollRestoration,
    } from "@remix-run/react";
-   ;
    import liquidifyStyles from "liquidify/styles";
 
    export const links: LinksFunction = () => [
@@ -326,8 +314,6 @@ export default function RootLayout({
    }
 
    // Usage
-   ;
-
    export default function Dashboard() {
      return (
        <ClientOnly fallback={<div>Loading chart...</div>}>
@@ -343,9 +329,6 @@ export default function RootLayout({
    // app/entry.server.tsx
    import { PassThrough } from "stream";
    import { renderToPipeableStream } from "react-dom/server";
-   ;
-   ;
-
    export default function handleRequest(
      request: Request,
      responseStatusCode: number,
@@ -394,7 +377,6 @@ export default function RootLayout({
 
    ```tsx
    // src/App.tsx
-   ;
    import "liquidify/styles";
    import "./App.css";
 
@@ -413,7 +395,6 @@ export default function RootLayout({
 
    ```tsx
    // src/index.tsx
-   ;
    import ReactDOM from "react-dom/client";
    import "liquidify/styles"; // Import before your styles
    import "./index.css";
@@ -443,8 +424,6 @@ export default function RootLayout({
 
    ```js
    // gatsby-browser.js
-   ;
-   ;
    import "liquidify/styles";
 
    export const wrapRootElement = ({ element }) => (
@@ -548,9 +527,6 @@ const GlassTable = lazy(() =>
 ### 2. Optimize Re-renders
 
 ```tsx
-;
-;
-
 const MemoizedCard = memo(GlassCard);
 ```
 
@@ -586,7 +562,7 @@ const ClientComponent = dynamic(() => import("./Component"), {
 ```tsx
 // Solution: Ensure styles are imported before component usage
 import "liquidify/styles"; // First
-; // Second
+// Second
 ```
 
 **Issue**: TypeScript errors with imports

@@ -16,23 +16,59 @@
 
 <style>
   /* Canvas background controller (driven by globalTypes.canvasBg in preview.jsx) */
-  :root[data-canvas-bg="glass-dark"] .sb-show-main { background: #0b1220 !important; }
-  :root[data-canvas-bg="glass-light"] .sb-show-main { background: #e9eef6 !important; }
-  :root[data-canvas-bg="transparent"] .sb-show-main { background: transparent !important; }
+  :root[data-canvas-bg="glass-dark"] .sb-show-main {
+    background: #0b1220 !important;
+  }
+  :root[data-canvas-bg="glass-light"] .sb-show-main {
+    background: #e9eef6 !important;
+  }
+  :root[data-canvas-bg="transparent"] .sb-show-main {
+    background: transparent !important;
+  }
   :root[data-canvas-bg="light"] .sb-show-main {
-    background: radial-gradient(1200px 800px at 10% 10%, rgba(255,255,255,0.9), rgba(247,249,252,0.85) 30%, rgba(235,240,247,0.75) 60%, rgba(229,233,241,0.7) 100%),
-                radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.25), transparent 60%),
-                radial-gradient(900px 700px at 20% 80%, rgba(90,200,250,0.18), transparent 60%),
-                linear-gradient(180deg, #eef2f7 0%, #e6ebf3 100%) !important;
+    background:
+      radial-gradient(
+        1200px 800px at 10% 10%,
+        rgba(255, 255, 255, 0.9),
+        rgba(247, 249, 252, 0.85) 30%,
+        rgba(235, 240, 247, 0.75) 60%,
+        rgba(229, 233, 241, 0.7) 100%
+      ),
+      radial-gradient(
+        1000px 600px at 80% 20%,
+        rgba(102, 126, 234, 0.25),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 700px at 20% 80%,
+        rgba(90, 200, 250, 0.18),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #eef2f7 0%, #e6ebf3 100%) !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-attachment: fixed !important;
   }
   :root[data-canvas-bg="dark"] .sb-show-main {
-    background: radial-gradient(1200px 800px at 10% 10%, rgba(14,18,28,0.98), rgba(14,18,28,0.92) 30%, rgba(18,22,34,0.9) 60%, rgba(20,24,33,0.9) 100%),
-                radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.18), transparent 60%),
-                radial-gradient(900px 700px at 20% 80%, rgba(90,200,250,0.14), transparent 60%),
-                linear-gradient(180deg, #0d111a 0%, #121725 100%) !important;
+    background:
+      radial-gradient(
+        1200px 800px at 10% 10%,
+        rgba(14, 18, 28, 0.98),
+        rgba(14, 18, 28, 0.92) 30%,
+        rgba(18, 22, 34, 0.9) 60%,
+        rgba(20, 24, 33, 0.9) 100%
+      ),
+      radial-gradient(
+        1000px 600px at 80% 20%,
+        rgba(102, 126, 234, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 700px at 20% 80%,
+        rgba(90, 200, 250, 0.14),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #0d111a 0%, #121725 100%) !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-attachment: fixed !important;

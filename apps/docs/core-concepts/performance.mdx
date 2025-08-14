@@ -2,6 +2,7 @@
 title: "Performance Optimization"
 description: "Learn how LiqUIdify maximizes performance while delivering stunning visual effects"
 ---
+
 # Performance Optimization
 
 LiqUIdify is designed for **production performance** without compromising on visual quality. Our components are optimized for Core Web Vitals and deliver smooth 60fps animations.
@@ -26,8 +27,6 @@ Import only what you need:
 
 ```tsx
 // ✅ Good - Tree shakeable
-;
-
 // ❌ Avoid - Imports entire library
 import * as LiqUIdify from "liquidify";
 ```
@@ -101,8 +100,6 @@ const springConfig = {
 ### 1. Component Lazy Loading
 
 ```tsx
-;
-
 const HeavyComponent = lazy(() => import("./HeavyComponent"));
 
 function App() {
@@ -145,11 +142,9 @@ const [state, setState] = useState({ isOpen: false, data: {} });
 ### Performance Monitoring
 
 ```tsx
-;
-
 <Profiler id="LiquidGlass" onRender={onRenderCallback}>
   <LiquidGlass />
-</Profiler>;
+</Profiler>
 ```
 
 ### Bundle Analysis

@@ -36,7 +36,8 @@ export default function Playground({
   showLineNumbers?: boolean;
   showOpenExternal?: boolean;
 }) {
-  const themeObj = theme === "dark" ? LIQUID_GLASS_DARK_THEME : LIQUID_GLASS_LIGHT_THEME;
+  const themeObj =
+    theme === "dark" ? LIQUID_GLASS_DARK_THEME : LIQUID_GLASS_LIGHT_THEME;
   const mergedFiles: Files = withBaseFiles(files);
 
   return (

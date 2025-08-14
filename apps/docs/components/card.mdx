@@ -3,6 +3,7 @@ title: Card
 description: Structured content containers with layered liquid glass effects and compound components.
 icon: rectangle-horizontal
 ---
+
 # Card
 
 A versatile glassmorphic card component with layered liquid glass effects and a compound component API. Perfect for displaying structured content with Apple-inspired depth and transparency.
@@ -14,7 +15,6 @@ A versatile glassmorphic card component with layered liquid glass effects and a 
 ### Basic Usage
 
 ```tsx
-
 export default function Demo() {
   return (
     <GlassCard className="max-w-md">
@@ -44,7 +44,6 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
@@ -84,8 +83,7 @@ export default function Demo() {
         </GlassCard.Content>
       </GlassCard>
     </div>
-
-);
+  );
 }
 ```
 
@@ -127,7 +125,6 @@ The image below uses a blur-up technique. A low-quality placeholder loads first,
 ### Style Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -153,7 +150,6 @@ export default function Demo() {
         </GlassCard.Content>
       </GlassCard>
 
-
       <GlassCard variant="outlined">
         <GlassCard.Header>
           <GlassCard.Title>Outlined</GlassCard.Title>
@@ -176,8 +172,7 @@ export default function Demo() {
         </GlassCard.Content>
       </GlassCard>
     </div>
-
-);
+  );
 }
 ```
 
@@ -186,67 +181,68 @@ export default function Demo() {
 ### Interactive Cards
 
 ```tsx
-
 export default function Demo() {
   const [selected, setSelected] = useState(null);
 
-const cards = [
-{
-id: 1,
-title: "Basic Plan",
-price: "$9",
-features: ["5 Projects", "10GB Storage"],
-},
-{
-id: 2,
-title: "Pro Plan",
-price: "$29",
-features: ["Unlimited Projects", "100GB Storage"],
-},
-{
-id: 3,
-title: "Enterprise",
-price: "$99",
-features: ["Everything", "Priority Support"],
-},
-];
+  const cards = [
+    {
+      id: 1,
+      title: "Basic Plan",
+      price: "$9",
+      features: ["5 Projects", "10GB Storage"],
+    },
+    {
+      id: 2,
+      title: "Pro Plan",
+      price: "$29",
+      features: ["Unlimited Projects", "100GB Storage"],
+    },
+    {
+      id: 3,
+      title: "Enterprise",
+      price: "$99",
+      features: ["Everything", "Priority Support"],
+    },
+  ];
 
-return (
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-  {cards.map((card) => (
-    <GlassCard
-      key={card.id}
-      variant="interactive"
-      interactive
-      selected={selected === card.id}
-      onClick={() => setSelected(card.id)}
-      className="cursor-pointer"
-    >
-      <GlassCard.Header>
-        <div className="flex items-center justify-between">
-          <GlassCard.Title>{card.title}</GlassCard.Title>
-          {card.id === 2 && <GlassBadge variant="success">Popular</GlassBadge>}
-        </div>
-        <div className="text-2xl font-bold">
-          {card.price}
-          <span className="text-sm font-normal">/month</span>
-        </div>
-      </GlassCard.Header>
-      <GlassCard.Content>
-        <ul className="space-y-2">
-          {card.features.map((feature, index) => (
-            <li key={index} className="flex items-center gap-2">
-              <span className="text-green-500">✓</span>
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </GlassCard.Content>
-    </GlassCard>
-  ))}
-</div>
-); }
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+      {cards.map((card) => (
+        <GlassCard
+          key={card.id}
+          variant="interactive"
+          interactive
+          selected={selected === card.id}
+          onClick={() => setSelected(card.id)}
+          className="cursor-pointer"
+        >
+          <GlassCard.Header>
+            <div className="flex items-center justify-between">
+              <GlassCard.Title>{card.title}</GlassCard.Title>
+              {card.id === 2 && (
+                <GlassBadge variant="success">Popular</GlassBadge>
+              )}
+            </div>
+            <div className="text-2xl font-bold">
+              {card.price}
+              <span className="text-sm font-normal">/month</span>
+            </div>
+          </GlassCard.Header>
+          <GlassCard.Content>
+            <ul className="space-y-2">
+              {card.features.map((feature, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <span className="text-green-500">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </GlassCard.Content>
+        </GlassCard>
+      ))}
+    </div>
+  );
+}
 ```
 
 ### Rich Content
@@ -254,7 +250,6 @@ return (
 ### Rich Content
 
 ```tsx
-
 export default function Demo() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -327,8 +322,7 @@ export default function Demo() {
         </GlassCard.Footer>
       </GlassCard>
     </div>
-
-);
+  );
 }
 ```
 
@@ -361,7 +355,6 @@ All sub-components (`Header`, `Title`, `Description`, `Content`, `Footer`, `Acti
 ### Product Cards
 
 ```tsx
-
 function ProductCard({ product }) {
   return (
     <GlassCard>
@@ -409,7 +402,6 @@ function ProductCard({ product }) {
 ### Dashboard Widgets
 
 ```tsx
-
 function MetricCard({ metric }) {
   const isPositive = metric.change > 0;
 

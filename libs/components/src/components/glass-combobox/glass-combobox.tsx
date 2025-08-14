@@ -71,11 +71,11 @@ const optionVariants = cva({
     "border-b border-liquid-glass-hl/20 last:border-b-0",
   ),
   variants: {
-isSelected: {
+    isSelected: {
       true: "ring-2 ring-text-liquid-accent/30 text-text-liquid-accent font-medium",
       false: "",
     },
-isHighlighted: {
+    isHighlighted: {
       true: "bg-liquid-glass-bg/20",
       false: "",
     },

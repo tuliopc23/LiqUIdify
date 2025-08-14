@@ -37,19 +37,21 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
       <div
         className={cn(
           sizeClasses[size],
-          "animate-spin rounded-full border-2 border-gray-300 border-t-blue-500 dark:border-gray-600",
+          // Use theme tokens instead of hard-coded colors
+          "animate-spin rounded-full border-2 border-current/30 border-t-current",
+          "text-liquid-accent",
         )}
       />
     );
 
     const renderDots = () => (
-      <div className="flex space-x-1">
+      <div className="flex space-x-1 text-liquid-accent">
         {[0, 1, 2].map((index) => (
           <div
             key={generateStaticKey("dot", index)}
             className={cn(
               dotSizes[size],
-              "animate-pulse rounded-full bg-blue-500",
+              "animate-pulse rounded-full bg-current/70",
             )}
             style={{
               animationDelay: `${index * 0.2}s`,
@@ -64,17 +66,18 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
       <div
         className={cn(
           sizeClasses[size],
-          "animate-ping rounded-full bg-blue-500 opacity-75",
+          "animate-ping rounded-full bg-current/60",
+          "text-liquid-accent",
         )}
       />
     );
 
     const renderBars = () => (
-      <div className="flex items-end space-x-1">
+      <div className="flex items-end space-x-1 text-liquid-accent">
         {[0, 1, 2, 3].map((index) => (
           <div
             key={generateStaticKey("bar", index)}
-            className={cn(barSizes[size], "animate-pulse bg-blue-500")}
+            className={cn(barSizes[size], "animate-pulse bg-current/70")}
             style={{
               animationDelay: `${index * 0.15}s`,
               animationDuration: "0.8s",
@@ -105,17 +108,17 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
       <div
         ref={ref}
         className={cn(
-          "liquid-glass",
+          "relative liquid-glass",
           "flex flex-col items-center justify-center space-y-3",
           className,
         )}
         {...props}
       >
+        {/* subtle overlay to emphasize glass */}
+        <div className="pointer-events-none absolute inset-0 liquid-glass-overlay" />
         {renderVariant()}
         {text && (
-          <p className="animate-pulse text-gray-600 text-sm dark:text-gray-400">
-            {text}
-          </p>
+          <p className="animate-pulse text-liquid-secondary text-sm">{text}</p>
         )}
       </div>
     );

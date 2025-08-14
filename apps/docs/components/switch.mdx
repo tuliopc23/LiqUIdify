@@ -6,7 +6,6 @@ description: Toggle control with smooth handle animation and liquid glass stylin
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const [basicSwitch, setBasicSwitch] = useState(false);
   const [labeledSwitch, setLabeledSwitch] = useState(true);
@@ -17,18 +16,17 @@ export default function Demo() {
     autoSave: true,
   });
 
-return (
-
-<div className="space-y-8 p-6">
-<div>
-<h3 className="text-white mb-4">Basic Switch</h3>
-<div className="space-y-4">
-<GlassSwitch checked={basicSwitch} onChange={setBasicSwitch} />
-<div className="text-white/70 text-sm">
-State: {basicSwitch ? "enabled" : "disabled"}
-</div>
-</div>
-</div>
+  return (
+    <div className="space-y-8 p-6">
+      <div>
+        <h3 className="text-white mb-4">Basic Switch</h3>
+        <div className="space-y-4">
+          <GlassSwitch checked={basicSwitch} onChange={setBasicSwitch} />
+          <div className="text-white/70 text-sm">
+            State: {basicSwitch ? "enabled" : "disabled"}
+          </div>
+        </div>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">With Labels</h3>
@@ -83,8 +81,7 @@ State: {basicSwitch ? "enabled" : "disabled"}
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

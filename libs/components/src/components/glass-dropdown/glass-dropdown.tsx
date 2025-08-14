@@ -192,7 +192,7 @@ export const GlassDropdown = React.memo(
                     key={item.value}
                     onClick={() => handleSelect(item)}
                     disabled={item.disabled}
-className={cn(
+                    className={cn(
                       "w-full px-3 py-2 text-left transition-colors duration-200",
                       // Use transparent glass tokens instead of solid backgrounds
                       "hover:bg-liquid-glass-bg/20 focus:bg-liquid-glass-bg/20 focus:outline-none",

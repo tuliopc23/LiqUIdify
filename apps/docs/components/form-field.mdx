@@ -2,30 +2,29 @@
 title: Form Field
 description: Accessible form field wrapper with validation states, labels, and helper text.
 ---
+
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const [value, setValue] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-return (
-
-<div className="space-y-6" style={{ maxWidth: 420 }}>
-{/* Basic form field */}
-<GlassFormField
+  return (
+    <div className="space-y-6" style={{ maxWidth: 420 }}>
+      {/* Basic form field */}
+      <GlassFormField
         label="Full Name"
         required
         helperText="Enter your first and last name"
       >
-<GlassInput
-placeholder="John Doe"
-value={value}
-onChange={(e) => setValue(e.target.value)}
-/>
-</GlassFormField>
+        <GlassInput
+          placeholder="John Doe"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </GlassFormField>
 
       {/* Error state */}
       <GlassFormField
@@ -60,8 +59,7 @@ onChange={(e) => setValue(e.target.value)}
         <input type="checkbox" className="ml-auto" />
       </GlassFormField>
     </div>
-
-);
+  );
 }
 ```
 
@@ -70,7 +68,6 @@ onChange={(e) => setValue(e.target.value)}
 ### Example
 
 ```tsx
-
 export default function VariantsDemo() {
   return (
     <div className="space-y-6" style={{ maxWidth: 420 }}>
@@ -97,8 +94,7 @@ export default function VariantsDemo() {
         <GlassInput placeholder="Inline variant" />
       </GlassFormField>
     </div>
-
-);
+  );
 }
 ```
 
@@ -107,7 +103,6 @@ export default function VariantsDemo() {
 ### Example
 
 ```tsx
-
 export default function ValidationDemo() {
   return (
     <div className="space-y-6" style={{ maxWidth: 420 }}>
@@ -133,8 +128,7 @@ export default function ValidationDemo() {
         <GlassInput placeholder="Valid input" />
       </GlassFormField>
     </div>
-
-);
+  );
 }
 ```
 
@@ -216,8 +210,6 @@ function ContactForm() {
 ### Validation with Error Handling
 
 ```tsx
-;
-
 function ValidatedForm() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});

@@ -2,46 +2,45 @@
 title: Select
 description: Dropdown selection component with search, multi-select, and keyboard navigation.
 ---
+
 ### Example
 
 ```tsx
-
 export default function Demo() {
   const [singleValue, setSingleValue] = useState("");
   const [multiValue, setMultiValue] = useState([]);
   const [countryValue, setCountryValue] = useState("");
 
-const basicOptions = [
-{ value: "apple", label: "Apple" },
-{ value: "banana", label: "Banana" },
-{ value: "orange", label: "Orange" },
-{ value: "grape", label: "Grape" },
-];
+  const basicOptions = [
+    { value: "apple", label: "Apple" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Orange" },
+    { value: "grape", label: "Grape" },
+  ];
 
-const countryOptions = [
-{ value: "us", label: "United States" },
-{ value: "ca", label: "Canada" },
-{ value: "uk", label: "United Kingdom" },
-{ value: "de", label: "Germany" },
-{ value: "fr", label: "France" },
-{ value: "jp", label: "Japan" },
-];
+  const countryOptions = [
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "de", label: "Germany" },
+    { value: "fr", label: "France" },
+    { value: "jp", label: "Japan" },
+  ];
 
-return (
-
-<div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
-<div>
-<h3 className="text-white mb-4">Basic Select</h3>
-<GlassSelect
+  return (
+    <div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
+      <div>
+        <h3 className="text-white mb-4">Basic Select</h3>
+        <GlassSelect
           options={basicOptions}
           value={singleValue}
           onChange={setSingleValue}
           placeholder="Choose a fruit"
         />
-<p className="text-white/60 text-sm mt-2">
-Selected: {singleValue || "None"}
-</p>
-</div>
+        <p className="text-white/60 text-sm mt-2">
+          Selected: {singleValue || "None"}
+        </p>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">Multi-Select</h3>
@@ -72,8 +71,7 @@ Selected: {singleValue || "None"}
         </p>
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -82,32 +80,28 @@ Selected: {singleValue || "None"}
 ### Example
 
 ```tsx
-
-;
-
 export default function VariantsDemo() {
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("option2");
 
-const options = [
-{ value: "option1", label: "Option 1" },
-{ value: "option2", label: "Option 2" },
-{ value: "option3", label: "Option 3", disabled: true },
-{ value: "option4", label: "Option 4" },
-];
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3", disabled: true },
+    { value: "option4", label: "Option 4" },
+  ];
 
-return (
-
-<div className="space-y-8">
-<div>
-<h3 className="text-white mb-4">Default State</h3>
-<GlassSelect
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-white mb-4">Default State</h3>
+        <GlassSelect
           options={options}
           value={value1}
           onChange={setValue1}
           placeholder="Select an option"
         />
-</div>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">With Selection</h3>
@@ -140,8 +134,7 @@ return (
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -150,41 +143,37 @@ return (
 ### Example
 
 ```tsx
-
-;
-
 export default function AdvancedDemo() {
   const [userRole, setUserRole] = useState("");
   const [teamMembers, setTeamMembers] = useState([]);
 
-const roleOptions = [
-{ value: "admin", label: "Administrator" },
-{ value: "editor", label: "Editor" },
-{ value: "viewer", label: "Viewer" },
-{ value: "guest", label: "Guest", disabled: true },
-];
+  const roleOptions = [
+    { value: "admin", label: "Administrator" },
+    { value: "editor", label: "Editor" },
+    { value: "viewer", label: "Viewer" },
+    { value: "guest", label: "Guest", disabled: true },
+  ];
 
-const teamOptions = [
-{ value: "john", label: "John Doe" },
-{ value: "jane", label: "Jane Smith" },
-{ value: "bob", label: "Bob Johnson" },
-{ value: "alice", label: "Alice Brown" },
-{ value: "charlie", label: "Charlie Wilson" },
-];
+  const teamOptions = [
+    { value: "john", label: "John Doe" },
+    { value: "jane", label: "Jane Smith" },
+    { value: "bob", label: "Bob Johnson" },
+    { value: "alice", label: "Alice Brown" },
+    { value: "charlie", label: "Charlie Wilson" },
+  ];
 
-return (
-
-<div className="space-y-8">
-<div>
-<h3 className="text-white mb-4">User Role Selection</h3>
-<GlassSelect
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-white mb-4">User Role Selection</h3>
+        <GlassSelect
           options={roleOptions}
           value={userRole}
           onChange={setUserRole}
           placeholder="Select user role"
           aria-label="User role selection"
         />
-</div>
+      </div>
 
       <div>
         <h3 className="text-white mb-4">Team Members (Multi-select)</h3>
@@ -204,8 +193,7 @@ return (
         )}
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -309,8 +297,6 @@ function UserForm() {
 ### Dynamic Options
 
 ```tsx
-;
-
 function DynamicSelect() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);

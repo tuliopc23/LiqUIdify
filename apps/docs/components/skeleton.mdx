@@ -2,6 +2,7 @@
 title: Skeleton
 description: Liquid Glass skeleton loaders with multiple variants and pre-built patterns.
 ---
+
 # Skeleton
 
 The `GlassSkeleton` component provides elegant loading placeholders with glassmorphism effects. It includes multiple animation variants, shapes, and pre-built patterns for common use cases.
@@ -13,7 +14,6 @@ The `GlassSkeleton` component provides elegant loading placeholders with glassmo
 ### Basic Skeleton
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -32,7 +32,6 @@ export default function Demo() {
 ### Shape Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -59,8 +58,7 @@ export default function Demo() {
         <GlassSkeleton shape="line" width={200} />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -69,7 +67,6 @@ export default function Demo() {
 ### Animation Variants
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -95,8 +92,7 @@ export default function Demo() {
         <GlassSkeleton animated={false} width={300} height={20} />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -105,21 +101,22 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx
-
 export default function Demo() {
   const sizes = ["sm", "md", "lg", "xl"];
 
-return (
-
-<div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}>
-  {sizes.map((size) => (
-    <div key={size}>
-      <h4 style={{ marginBottom: 8 }}>{size.toUpperCase()}</h4>
-      <GlassSkeleton size={size} width={200} variant="shimmer" />
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}
+    >
+      {sizes.map((size) => (
+        <div key={size}>
+          <h4 style={{ marginBottom: 8 }}>{size.toUpperCase()}</h4>
+          <GlassSkeleton size={size} width={200} variant="shimmer" />
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-); }
+  );
+}
 ```
 
 ### Multiple Skeletons
@@ -127,7 +124,6 @@ return (
 ### Multiple Skeletons
 
 ```tsx
-
 export default function Demo() {
   return (
     <div style={{ padding: 20 }}>
@@ -149,7 +145,6 @@ export default function Demo() {
 ### Pre-built Patterns
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -170,8 +165,7 @@ export default function Demo() {
         <SkeletonTable rows={3} columns={4} />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -180,16 +174,13 @@ export default function Demo() {
 ### Real-world Example
 
 ```tsx
-
-;
-
 export default function Demo() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
-const loadData = () => {
-setLoading(true);
-setData(null);
+  const loadData = () => {
+    setLoading(true);
+    setData(null);
 
     // Simulate API call
     setTimeout(() => {
@@ -203,21 +194,19 @@ setData(null);
       });
       setLoading(false);
     }, 2000);
+  };
 
-};
+  useEffect(() => {
+    loadData();
+  }, []);
 
-useEffect(() => {
-loadData();
-}, []);
-
-return (
-
-<div style={{ maxWidth: 400, margin: "0 auto", padding: 20 }}>
-<div style={{ marginBottom: 16 }}>
-<GlassButton onClick={loadData} disabled={loading}>
-{loading ? "Loading..." : "Reload Data"}
-</GlassButton>
-</div>
+  return (
+    <div style={{ maxWidth: 400, margin: "0 auto", padding: 20 }}>
+      <div style={{ marginBottom: 16 }}>
+        <GlassButton onClick={loadData} disabled={loading}>
+          {loading ? "Loading..." : "Reload Data"}
+        </GlassButton>
+      </div>
 
       <div
         style={{
@@ -295,8 +284,7 @@ return (
         )}
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -305,40 +293,40 @@ return (
 ### Interactive Demo
 
 ```tsx
-
 export default function Demo() {
   const [variant, setVariant] = useState("shimmer");
   const [shape, setShape] = useState("rectangle");
   const [animated, setAnimated] = useState(true);
   const [count, setCount] = useState(1);
 
-const variants = ["default", "shimmer", "pulse"];
-const shapes = ["rectangle", "circle", "line"];
+  const variants = ["default", "shimmer", "pulse"];
+  const shapes = ["rectangle", "circle", "line"];
 
-return (
-
-<div style={{ padding: 20 }}>
-<div
-style={{
+  return (
+    <div style={{ padding: 20 }}>
+      <div
+        style={{
           display: "flex",
           flexDirection: "column",
           gap: 16,
           marginBottom: 24,
-        }} >
-<div>
-<h4 style={{ marginBottom: 8 }}>Variant</h4>
-<div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-{variants.map((v) => (
-<GlassButton
-key={v}
-size="sm"
-variant={variant === v ? "primary" : "ghost"}
-onClick={() => setVariant(v)} >
-{v}
-</GlassButton>
-))}
-</div>
-</div>
+        }}
+      >
+        <div>
+          <h4 style={{ marginBottom: 8 }}>Variant</h4>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {variants.map((v) => (
+              <GlassButton
+                key={v}
+                size="sm"
+                variant={variant === v ? "primary" : "ghost"}
+                onClick={() => setVariant(v)}
+              >
+                {v}
+              </GlassButton>
+            ))}
+          </div>
+        </div>
 
         <div>
           <h4 style={{ marginBottom: 8 }}>Shape</h4>
@@ -406,8 +394,7 @@ onClick={() => setVariant(v)} >
         />
       </div>
     </div>
-
-);
+  );
 }
 ```
 

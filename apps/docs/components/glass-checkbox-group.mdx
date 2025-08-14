@@ -2,17 +2,13 @@
 title: Glass Checkbox Group
 description: Elegant checkbox group component with Apple-inspired liquid glass effects and flexible layout options.
 ---
+
 ;
 ;
 
 ### Example
 
 ```tsx
-;
-;
-;
-
-
 export default function Demo() {
   const [selectedFeatures, setSelectedFeatures] = useState([
     "notifications",
@@ -20,41 +16,40 @@ export default function Demo() {
   ]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-const features = [
-{
-value: "notifications",
-label: "Push Notifications",
-description: "Receive real-time updates and alerts",
-},
-{
-value: "analytics",
-label: "Advanced Analytics",
-description: "Detailed insights and reporting",
-},
-{
-value: "api",
-label: "API Access",
-description: "Programmatic access to your data",
-},
-{
-value: "support",
-label: "Priority Support",
-description: "24/7 dedicated customer support",
-},
-];
+  const features = [
+    {
+      value: "notifications",
+      label: "Push Notifications",
+      description: "Receive real-time updates and alerts",
+    },
+    {
+      value: "analytics",
+      label: "Advanced Analytics",
+      description: "Detailed insights and reporting",
+    },
+    {
+      value: "api",
+      label: "API Access",
+      description: "Programmatic access to your data",
+    },
+    {
+      value: "support",
+      label: "Priority Support",
+      description: "24/7 dedicated customer support",
+    },
+  ];
 
-const categories = [
-{ value: "tech", label: "Technology" },
-{ value: "design", label: "Design" },
-{ value: "business", label: "Business" },
-{ value: "marketing", label: "Marketing" },
-];
+  const categories = [
+    { value: "tech", label: "Technology" },
+    { value: "design", label: "Design" },
+    { value: "business", label: "Business" },
+    { value: "marketing", label: "Marketing" },
+  ];
 
-return (
-
-<div className="space-y-8 max-w-lg mx-auto">
-<div>
-<GlassCheckboxGroup
+  return (
+    <div className="space-y-8 max-w-lg mx-auto">
+      <div>
+        <GlassCheckboxGroup
           label="Premium Features"
           description="Select the features you'd like to enable"
           options={features}
@@ -62,7 +57,7 @@ return (
           onChange={setSelectedFeatures}
           size="md"
         />
-</div>
+      </div>
 
       <div>
         <GlassCheckboxGroup
@@ -84,8 +79,7 @@ return (
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

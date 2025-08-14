@@ -2,6 +2,7 @@
 title: Progress
 description: Liquid Glass progress indicators with animations and multiple variants.
 ---
+
 # Progress
 
 The `GlassProgress` component provides elegant progress indicators with glassmorphism effects. It supports different sizes, colors, variants, and includes smooth animations with shimmer effects.
@@ -13,7 +14,6 @@ The `GlassProgress` component provides elegant progress indicators with glassmor
 ### Basic Progress
 
 ```tsx
-
 export default function Demo() {
   return (
     <div
@@ -33,18 +33,17 @@ export default function Demo() {
 ### Size Variants
 
 ```tsx
-
 export default function Demo() {
   const value = 65;
 
-return (
-
-<div
-style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
-<div>
-<h4 style={{ marginBottom: 8 }}>Small</h4>
-<GlassProgress value={value} size="sm" showValue />
-</div>
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
+    >
+      <div>
+        <h4 style={{ marginBottom: 8 }}>Small</h4>
+        <GlassProgress value={value} size="sm" showValue />
+      </div>
 
       <div>
         <h4 style={{ marginBottom: 8 }}>Medium (Default)</h4>
@@ -56,8 +55,7 @@ style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
         <GlassProgress value={value} size="lg" showValue />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -66,22 +64,25 @@ style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
 ### Color Variants
 
 ```tsx
-
 export default function Demo() {
   const value = 70;
   const colors = ["blue", "green", "purple", "red", "yellow"];
 
-return (
-
-<div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}>
-  {colors.map((color) => (
-    <div key={color}>
-      <h4 style={{ marginBottom: 8, textTransform: "capitalize" }}>{color}</h4>
-      <GlassProgress value={value} color={color} showValue />
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}
+    >
+      {colors.map((color) => (
+        <div key={color}>
+          <h4 style={{ marginBottom: 8, textTransform: "capitalize" }}>
+            {color}
+          </h4>
+          <GlassProgress value={value} color={color} showValue />
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-); }
+  );
+}
 ```
 
 ### Style Variants
@@ -89,18 +90,17 @@ return (
 ### Style Variants
 
 ```tsx
-
 export default function Demo() {
   const value = 60;
 
-return (
-
-<div
-style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
-<div>
-<h4 style={{ marginBottom: 8 }}>Default (Glass)</h4>
-<GlassProgress value={value} variant="default" showValue />
-</div>
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
+    >
+      <div>
+        <h4 style={{ marginBottom: 8 }}>Default (Glass)</h4>
+        <GlassProgress value={value} variant="default" showValue />
+      </div>
 
       <div>
         <h4 style={{ marginBottom: 8 }}>Gradient</h4>
@@ -112,8 +112,7 @@ style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
         <GlassProgress value={value} variant="minimal" showValue />
       </div>
     </div>
-
-);
+  );
 }
 ```
 
@@ -272,28 +271,27 @@ showValue
 ### Custom Max Value
 
 ```tsx
-
 export default function Demo() {
   const [current, setCurrent] = useState(150);
   const max = 500;
 
-return (
-
-<div style={{ padding: 20 }}>
-<div style={{ marginBottom: 16 }}>
-<div
-style={{
+  return (
+    <div style={{ padding: 20 }}>
+      <div style={{ marginBottom: 16 }}>
+        <div
+          style={{
             display: "flex",
             justifyContent: "space-between",
             marginBottom: 8,
-          }} >
-<span>File Size Progress</span>
-<span>
-{current} / {max} MB
-</span>
-</div>
-<GlassProgress value={current} max={max} color="purple" />
-</div>
+          }}
+        >
+          <span>File Size Progress</span>
+          <span>
+            {current} / {max} MB
+          </span>
+        </div>
+        <GlassProgress value={current} max={max} color="purple" />
+      </div>
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         <GlassButton
@@ -316,8 +314,7 @@ style={{
         </GlassButton>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

@@ -2,17 +2,13 @@
 title: Glass Textarea
 description: Elegant multi-line text input component with Apple-inspired liquid glass effects and auto-resize functionality.
 ---
+
 ;
 ;
 
 ### Example
 
 ```tsx
-;
-;
-;
-
-
 export default function Demo() {
   const [message, setMessage] = useState("");
   const [feedback, setFeedback] = useState(
@@ -20,11 +16,10 @@ export default function Demo() {
   );
   const [notes, setNotes] = useState("");
 
-return (
-
-<div className="space-y-6 max-w-lg mx-auto">
-<div>
-<GlassTextarea
+  return (
+    <div className="space-y-6 max-w-lg mx-auto">
+      <div>
+        <GlassTextarea
           label="Message"
           placeholder="Type your message here..."
           value={message}
@@ -33,7 +28,7 @@ return (
           showCharacterCount
           helperText="Share your thoughts with us"
         />
-</div>
+      </div>
 
       <div>
         <GlassTextarea
@@ -70,8 +65,7 @@ return (
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 
