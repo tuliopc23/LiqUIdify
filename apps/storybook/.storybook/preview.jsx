@@ -90,7 +90,7 @@ export const parameters = {
   },
   // Automated accessibility testing with axe-core
   a11y: {
-    // Limit run to WCAG 2.0/2.1 A & AA rules for quicker feedback
+    // Limit run to WCAG 2.0/2.1 A  AA rules for quicker feedback
     options: {
       runOnly: ["wcag2a", "wcag21a", "wcag2aa", "wcag21aa"],
     },
@@ -121,14 +121,37 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  canvasBg: {
+    description: "Canvas background for the preview (gradients supported)",
+    defaultValue: "glass-dark",
+    toolbar: {
+      title: "Canvas BG",
+      icon: "photo",
+      items: [
+        { value: "glass-dark", title: "Glass Dark (solid)" },
+        { value: "glass-light", title: "Glass Light (solid)" },
+        { value: "light", title: "Light Gradient" },
+        { value: "dark", title: "Dark Gradient" },
+        { value: "transparent", title: "Transparent" },
+      ],
+      dynamicTitle: true,
+    },
+  },
 };
 
 // noinspection JSUnusedGlobalSymbols
 export const decorators = [
+  // 1) Canvas background controller: set a data attribute on the preview document
+  (Story, context) => {
+    const canvasBg = context.globals.canvasBg || "glass-dark";
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-canvas-bg", canvasBg);
+    }
+    return <Story />;
+  },
+  // 2) UI wrapper: theme provider and typography only (transparent wrapper)
   (Story, context) => {
     const theme = context.globals.theme || "light";
-    // Background is controlled by the Backgrounds addon; keep wrapper transparent
-
     return (
       <ThemeProvider defaultTheme="light">
         <LiquidGlassDefs />
@@ -139,7 +162,6 @@ export const decorators = [
               "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontSize: "16px",
             lineHeight: "1.5",
-
             color: theme === "dark" ? "#ffffff" : "#000000",
           }}
         >

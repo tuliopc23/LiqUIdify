@@ -48,7 +48,8 @@ const listboxVariants = cva({
     "absolute top-full left-0 right-0 mt-2 z-50",
     "liquid-glass-container liquid-glass-md",
     "max-h-60 overflow-auto",
-    "border border-liquid",
+    // Transparent, subtle outline
+    "border border-liquid-glass-hl/30",
   ),
   variants: {
     size: {
@@ -65,16 +66,17 @@ const listboxVariants = cva({
 const optionVariants = cva({
   base: cn(
     "flex items-center gap-3 px-4 py-3 cursor-pointer relative z-10",
-    "text-liquid-primary hover:bg-liquid transition-colors duration-200",
-    "border-b border-liquid last:border-b-0",
+    "text-liquid-primary hover:bg-liquid-glass-bg/20 transition-colors duration-200",
+    // Transparent separators
+    "border-b border-liquid-glass-hl/20 last:border-b-0",
   ),
   variants: {
-    isSelected: {
-      true: "bg-liquid text-liquid-accent font-medium",
+isSelected: {
+      true: "ring-2 ring-text-liquid-accent/30 text-text-liquid-accent font-medium",
       false: "",
     },
-    isHighlighted: {
-      true: "bg-liquid",
+isHighlighted: {
+      true: "bg-liquid-glass-bg/20",
       false: "",
     },
   },

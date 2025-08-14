@@ -321,8 +321,8 @@ export const GlassSelect = React.memo(
                           "motion-safe:hover:bg-liquid-glass-bg/20 liquid-glass-interactive:focus-visible",
                           "flex items-center justify-between text-liquid-primary",
                           option.disabled && "cursor-not-allowed opacity-50",
-                          isSelected &&
-                            "bg-text-liquid-accent/10 text-text-liquid-accent",
+isSelected &&
+                            "ring-2 ring-text-liquid-accent/30 text-text-liquid-accent",
                           isFocused && "bg-liquid-glass-bg/20",
                           "rounded-full",
                         )}
