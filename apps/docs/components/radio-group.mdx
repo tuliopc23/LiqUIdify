@@ -2,14 +2,9 @@
 title: Radio Group
 description: Accessible radio button group with smooth animations and multiple layout options.
 ---
+### Example
 
-import Preview from "./Preview";
-import * as React from "react";
-
-<Preview
-  title="Example"
-  code={`import { GlassRadioGroup } from "liquidify";
-import { useState } from "react";
+```tsx
 
 export default function Demo() {
   const [value, setValue] = useState("option1");
@@ -70,81 +65,16 @@ Option Three
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [value, setValue] = useState("option1");
-      const [payment, setPayment] = useState("card");
-
-      return (
-        <div className="space-y-8" style={{ maxWidth: 420 }}>
-          {/* Basic radio group */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Choose an option</h3>
-            <GlassRadioGroup value={value} onValueChange={setValue}>
-              <GlassRadioGroup.Item value="option1">
-                Option One
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="option2">
-                Option Two
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="option3">
-                Option Three
-              </GlassRadioGroup.Item>
-            </GlassRadioGroup>
-            <p className="text-white/60 text-sm mt-2">Selected: {value}</p>
-          </div>
-
-          {/* Payment method example */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Payment Method</h3>
-            <GlassRadioGroup value={payment} onValueChange={setPayment} size="lg">
-              <GlassRadioGroup.Item value="card" variant="solid">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white text-sm font-bold">
-                    💳
-                  </div>
-                  <div>
-                    <div className="font-medium">Credit Card</div>
-                    <div className="text-white/60 text-sm">
-                      Visa, Mastercard, Amex
-                    </div>
-                  </div>
-                </div>
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="paypal" variant="solid">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white text-sm font-bold">
-                    P
-                  </div>
-                  <div>
-                    <div className="font-medium">PayPal</div>
-                    <div className="text-white/60 text-sm">
-                      Pay with your PayPal account
-                    </div>
-                  </div>
-                </div>
-              </GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Orientations
 
-<Preview
-  title="Example"
-  code={`import { GlassRadioGroup } from "liquidify";
-import { useState } from "react";
+### Example
+
+```tsx
+
+;
 
 export default function OrientationDemo() {
   const [vertical, setVertical] = useState("a");
@@ -183,60 +113,16 @@ return (
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function OrientationDemo() {
-      const [vertical, setVertical] = useState("a");
-      const [horizontal, setHorizontal] = useState("x");
-
-      return (
-        <div className="space-y-8">
-          {/* Vertical (default) */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Vertical Layout</h3>
-            <GlassRadioGroup
-              value={vertical}
-              onValueChange={setVertical}
-              orientation="vertical"
-            >
-              <GlassRadioGroup.Item value="a">Option A</GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="b">Option B</GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="c">Option C</GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-
-          {/* Horizontal */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Horizontal Layout</h3>
-            <GlassRadioGroup
-              value={horizontal}
-              onValueChange={setHorizontal}
-              orientation="horizontal"
-            >
-              <GlassRadioGroup.Item value="x">X</GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="y">Y</GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="z">Z</GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-        </div>
-      );
-    }
-    return <OrientationDemo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Sizes and Variants
 
-<Preview
-  title="Example"
-  code={`import { GlassRadioGroup } from "liquidify";
-import { useState } from "react";
-import { GlassFormField, GlassRadioGroup } from 'liquidify'
+### Example
+
+```tsx
+
+;
 
 export default function SizesDemo() {
   const [small, setSmall] = useState("sm1");
@@ -287,64 +173,8 @@ Small Option 2
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function SizesDemo() {
-      const [small, setSmall] = useState("sm1");
-      const [medium, setMedium] = useState("md1");
-      const [large, setLarge] = useState("lg1");
-
-      return (
-        <div className="space-y-8">
-          {/* Small size */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Small Size</h3>
-            <GlassRadioGroup value={small} onValueChange={setSmall} size="sm">
-              <GlassRadioGroup.Item value="sm1" variant="ghost">
-                Small Option 1
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="sm2" variant="ghost">
-                Small Option 2
-              </GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-
-          {/* Medium size (default) */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Medium Size</h3>
-            <GlassRadioGroup value={medium} onValueChange={setMedium} size="md">
-              <GlassRadioGroup.Item value="md1">
-                Medium Option 1
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="md2">
-                Medium Option 2
-              </GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-
-          {/* Large size */}
-          <div>
-            <h3 className="text-white mb-3 font-medium">Large Size</h3>
-            <GlassRadioGroup value={large} onValueChange={setLarge} size="lg">
-              <GlassRadioGroup.Item value="lg1" variant="solid">
-                Large Option 1
-              </GlassRadioGroup.Item>
-              <GlassRadioGroup.Item value="lg2" variant="solid">
-                Large Option 2
-              </GlassRadioGroup.Item>
-            </GlassRadioGroup>
-          </div>
-        </div>
-      );
-    }
-    return <SizesDemo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 

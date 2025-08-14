@@ -3,16 +3,11 @@ title: Checkbox Group
 description: Grouped selection of related options with descriptions.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassCheckboxGroup } from "liquidify";
-
 # Checkbox Group
 
-<Preview
-  title="Example"
-  code={`import { GlassCheckboxGroup } from "liquidify";
-import { useState } from "react";
+### Example
+
+```tsx
 
 export default function Demo() {
   const [value, setValue] = useState(["analytics"]);
@@ -29,30 +24,8 @@ export default function Demo() {
       onChange={setValue}
     />
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function Demo() {
-      const [value, setValue] = useState(["analytics"]);
-      return (
-        <GlassCheckboxGroup
-          label="Features"
-          description="Enable the modules you need"
-          options={[
-            { value: "analytics", label: "Analytics" },
-            { value: "notifications", label: "Notifications" },
-            { value: "api", label: "API Access" },
-          ]}
-          value={value}
-          onChange={setValue}
-        />
-      );
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

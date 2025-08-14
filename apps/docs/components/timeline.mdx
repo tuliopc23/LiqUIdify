@@ -3,14 +3,9 @@ title: Timeline
 description: Display chronological events with status indicators and liquid glass styling.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassTimeline } from "liquidify";
-import { Calendar, Code, Rocket, Users } from "lucide-react";
-import { GlassTimeline } from 'liquidify'
+```tsx
 
 export default function Demo() {
   const projectTimeline = [
@@ -105,108 +100,8 @@ return (
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const projectTimeline = [
-        {
-          id: "1",
-          title: "Project Planning",
-          description: "Initial project scope and requirements gathering",
-          date: "Jan 15, 2024",
-          status: "completed",
-          icon: <Calendar className="h-4 w-4" />,
-        },
-        {
-          id: "2",
-          title: "Development Phase",
-          description: "Core feature implementation and testing",
-          date: "Feb 1, 2024",
-          status: "completed",
-          icon: <Code className="h-4 w-4" />,
-          content: (
-            <div className="text-sm text-white/70">
-              <p>Key milestones:</p>
-              <ul className="list-disc list-inside mt-2 space-y-1">
-                <li>API integration complete</li>
-                <li>UI components finalized</li>
-                <li>Testing framework setup</li>
-              </ul>
-            </div>
-          ),
-        },
-        {
-          id: "3",
-          title: "Beta Testing",
-          description: "User acceptance testing and feedback collection",
-          date: "Mar 1, 2024",
-          status: "active",
-          icon: <Users className="h-4 w-4" />,
-        },
-        {
-          id: "4",
-          title: "Production Launch",
-          description: "Deploy to production and monitor performance",
-          date: "Mar 15, 2024",
-          status: "pending",
-          icon: <Rocket className="h-4 w-4" />,
-        },
-      ];
-
-      const horizontalTimeline = [
-        {
-          id: "1",
-          title: "Q1 2024",
-          description: "Foundation",
-          status: "completed",
-        },
-        {
-          id: "2",
-          title: "Q2 2024",
-          description: "Growth",
-          status: "active",
-        },
-        {
-          id: "3",
-          title: "Q3 2024",
-          description: "Expansion",
-          status: "pending",
-        },
-        {
-          id: "4",
-          title: "Q4 2024",
-          description: "Optimization",
-          status: "pending",
-        },
-      ];
-
-      return (
-        <div className="space-y-12 p-6">
-          <div>
-            <h3 className="text-white mb-6">Vertical Timeline</h3>
-            <GlassTimeline items={projectTimeline} />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-6">Horizontal Timeline</h3>
-            <GlassTimeline items={horizontalTimeline} orientation="horizontal" />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-6">Alternating Layout</h3>
-            <GlassTimeline items={projectTimeline} alternating={true} />
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 

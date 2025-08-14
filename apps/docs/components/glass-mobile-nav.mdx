@@ -2,17 +2,17 @@
 title: Glass Mobile Nav
 description: Apple-inspired mobile navigation drawer with liquid glass effects and smooth animations.
 ---
+;
+;
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassMobileNav } from "liquidify";
-import { useState } from "react";
-import { GlassMobileNav } from "@liquidify/components";
-import { Home, Settings, User, Bell, Search, Heart } from "lucide-react";
-import { GlassMobileNav } from 'liquidify'
+```tsx
+;
+;
+;
+;
+
 
 export default function Demo() {
   const [activeItem, setActiveItem] = useState("home");
@@ -81,85 +81,8 @@ return (
   />
   <span className="text-white/80">Active: {activeItem}</span>
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [activeItem, setActiveItem] = useState("home");
-
-      const navItems = [
-        {
-          id: "home",
-          label: "Home",
-          icon: <Home className="h-5 w-5" />,
-          href: "#home",
-        },
-        {
-          id: "search",
-          label: "Search",
-          icon: <Search className="h-5 w-5" />,
-          href: "#search",
-          badge: "3",
-        },
-        {
-          id: "notifications",
-          label: "Notifications",
-          icon: <Bell className="h-5 w-5" />,
-          href: "#notifications",
-          badge: 12,
-        },
-        {
-          id: "favorites",
-          label: "Favorites",
-          icon: <Heart className="h-5 w-5" />,
-          children: [
-            {
-              id: "recent",
-              label: "Recent",
-              href: "#recent",
-            },
-            {
-              id: "saved",
-              label: "Saved",
-              href: "#saved",
-            },
-          ],
-        },
-        {
-          id: "profile",
-          label: "Profile",
-          icon: <User className="h-5 w-5" />,
-          href: "#profile",
-        },
-        {
-          id: "settings",
-          label: "Settings",
-          icon: <Settings className="h-5 w-5" />,
-          href: "#settings",
-        },
-      ];
-
-      return (
-        <div className="flex items-center gap-4">
-          <GlassMobileNav
-            items={navItems}
-            activeItemId={activeItem}
-            onItemClick={(item) => setActiveItem(item.id)}
-            header={
-              <h2 className="text-lg font-semibold text-white">Navigation</h2>
-            }
-            footer={<p className="text-sm text-white/60">v1.0.0</p>}
-          />
-          <span className="text-white/80">Active: {activeItem}</span>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ## Overview
 

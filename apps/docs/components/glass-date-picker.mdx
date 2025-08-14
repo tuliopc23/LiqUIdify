@@ -2,16 +2,16 @@
 title: Glass Date Picker
 description: Elegant date selection component with Apple-inspired liquid glass effects and comprehensive date/time functionality.
 ---
+;
+;
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassDatePicker } from "liquidify";
-import { useState } from "react";
-import { GlassDatePicker } from "@liquidify/components";
-import { GlassDatePicker } from 'liquidify'
+```tsx
+;
+;
+;
+
 
 export default function Demo() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -84,86 +84,8 @@ Select Date
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [selectedDate, setSelectedDate] = useState(null);
-      const [selectedDateTime, setSelectedDateTime] = useState(null);
-      const [selectedRange, setSelectedRange] = useState(null);
-
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      const nextWeek = new Date(today);
-      nextWeek.setDate(nextWeek.getDate() + 7);
-
-      return (
-        <div className="space-y-6 max-w-md mx-auto">
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">
-              Select Date
-            </label>
-            <GlassDatePicker
-              value={selectedDate}
-              onChange={setSelectedDate}
-              placeholder="Choose a date..."
-              minDate={today}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">
-              Date & Time
-            </label>
-            <GlassDatePicker
-              value={selectedDateTime}
-              onChange={setSelectedDateTime}
-              placeholder="Select date and time..."
-              showTime
-              size="lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">
-              Small Date Picker
-            </label>
-            <GlassDatePicker
-              value={selectedRange}
-              onChange={setSelectedRange}
-              placeholder="Pick a date..."
-              size="sm"
-              maxDate={nextWeek}
-            />
-          </div>
-
-          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-            <h3 className="font-medium text-white mb-2">Selected Values:</h3>
-            <div className="text-white/70 text-sm space-y-1">
-              <p>
-                Date: {selectedDate ? selectedDate.toLocaleDateString() : "None"}
-              </p>
-              <p>
-                Date & Time:{" "}
-                {selectedDateTime ? selectedDateTime.toLocaleString() : "None"}
-              </p>
-              <p>
-                Range: {selectedRange ? selectedRange.toLocaleDateString() : "None"}
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Overview
 

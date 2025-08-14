@@ -3,14 +3,21 @@ title: Dropdown
 description: Menu-style selection anchored to a trigger.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+# Dropdown
 
-<Preview
-  title="Example"
-  code={`import { GlassButton, GlassDropdown } from "liquidify";
+Menu-style selection component anchored to a trigger element.
+
+## Installation
+
+```bash
+npm install liquidify
+```
+
+## Basic Usage
+
+```tsx
+import { GlassDropdown, GlassButton } from "liquidify";
 import { useState } from "react";
-import { GlassButton, GlassDropdown } from 'liquidify'
 
 export default function Demo() {
   const [value, setValue] = useState("");
@@ -20,6 +27,7 @@ export default function Demo() {
     { separator: true },
     { label: "Sign out", value: "logout" },
   ];
+  
   return (
     <div className="space-y-2">
       <GlassDropdown
@@ -27,37 +35,28 @@ export default function Demo() {
         items={items}
         onSelect={setValue}
       />
-      <div className="text-white/80 text-sm">Selected: {value || "—"}</div>
+      <div className="text-sm">Selected: {value || "—"}</div>
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function Demo() {
-      const [value, setValue] = useState("");
-      const items = [
-        { label: "Profile", value: "profile" },
-        { label: "Settings", value: "settings" },
-        { separator: true },
-        { label: "Sign out", value: "logout" },
-      ];
-      return (
-        <div className="space-y-2">
-          <GlassDropdown
-            trigger={<GlassButton variant="ghost">Open menu</GlassButton>}
-            items={items}
-            onSelect={setValue}
-          />
-          <div className="text-white/80 text-sm">Selected: {value || "—"}</div>
-        </div>
-      );
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
-Props
+## Props
 
-- trigger: ReactNode, items: { label, value, disabled?, icon?, separator? }[], onSelect?: (value) => void
+| Prop | Type | Description |
+|------|------|--------------|
+| `trigger` | `ReactNode` | Element that triggers the dropdown |
+| `items` | `DropdownItem[]` | Array of menu items |
+| `onSelect` | `(value: string) => void` | Callback when item is selected |
+
+## Item Structure
+
+```typescript
+type DropdownItem = {
+  label: string;
+  value: string;
+  disabled?: boolean;
+  icon?: ReactNode;
+  separator?: boolean;
+};
+```

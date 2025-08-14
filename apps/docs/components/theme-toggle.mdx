@@ -3,10 +3,6 @@ title: ThemeToggle
 description: Apple-inspired theme toggle with smooth transitions and accessibility support.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassButton } from "liquidify";
-
 # ThemeToggle
 
 A beautifully crafted theme toggle component that switches between light and dark modes with smooth animations and proper accessibility support. Follows Apple Human Interface Guidelines for intuitive user experience.
@@ -15,9 +11,10 @@ A beautifully crafted theme toggle component that switches between light and dar
 
 ### Basic Usage
 
-<Preview
-  title="Basic Usage"
-  code={`
+### Basic Usage
+
+```tsx
+
 export default function Demo() {
   const { theme } = useTheme();
   return (
@@ -26,104 +23,21 @@ export default function Demo() {
       <span className="text-liquid-secondary">Current theme: {theme}</span>
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      const { theme } = useTheme();
-      return (
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
-          <span className="text-liquid-secondary">Current theme: {theme}</span>
-        </div>
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ### Custom Styling
 
-<Preview
-  title="Custom Styling"
-  code={`import { Moon, Sun } from "lucide-react";
-
-function CustomThemeToggle() {
-const { theme, setTheme } = useTheme();
-
-return (
-
-<button
-type="button"
-onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-className="liquid-glass-container liquid-glass-interactive p-3 rounded-xl"
-aria-label={\`Switch to ${theme === "light" ? "dark" : "light"} mode\`} >
-<div className="liquid-glass-filter" />
-<div className="liquid-glass-overlay" />
-<div className="liquid-glass-specular" />
-<div className="liquid-glass-content">
-{theme === "light" ? (
-<Moon className="h-5 w-5 text-liquid-primary" />
-) : (
-<Sun className="h-5 w-5 text-liquid-accent" />
-)}
-</div>
-</button>
-);
-}
-
-export default function Demo() {
-  return (
-    <div className="flex gap-4">
-      <CustomThemeToggle />
-    </div>
-  );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function CustomThemeToggle() {
-      const { theme, setTheme } = useTheme();
-    
-      return (
-        <button
-          type="button"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          className="liquid-glass-container liquid-glass-interactive p-3 rounded-xl"
-          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-        >
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content">
-            {theme === "light" ? (
-              <Moon className="h-5 w-5 text-liquid-primary" />
-            ) : (
-              <Sun className="h-5 w-5 text-liquid-accent" />
-            )}
-          </div>
-        </button>
-      );
-    }
-    
-    function Demo() {
-      return (
-        <div className="flex gap-4">
-          <CustomThemeToggle />
-        </div>
-      );
-    }
-    return <CustomThemeToggle />
-  })()}
-</Preview>
+```tsx
+// Preview component removed - needs manual conversion
+```
 
 ### Integration with Navigation
 
-<Preview
-  title="Integration with Navigation"
-  code={`import { GlassButton } from "liquidify";
+### Integration with Navigation
+
+```tsx
+
 export default function Demo() {
   return (
     <nav className="liquid-glass-container p-4 rounded-2xl">
@@ -140,30 +54,8 @@ export default function Demo() {
       </div>
     </nav>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return (
-        <nav className="liquid-glass-container p-4 rounded-2xl">
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content justify-between">
-            <div className="flex gap-4">
-              <GlassButton variant="ghost">Home</GlassButton>
-              <GlassButton variant="ghost">About</GlassButton>
-              <GlassButton variant="ghost">Contact</GlassButton>
-            </div>
-            <ThemeToggle />
-          </div>
-        </nav>
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ## Props
 
@@ -364,6 +256,6 @@ The ThemeToggle integrates with the complete liquid glass theme system:
 ## Related Components
 
 - [ThemeProvider](/components/theme-provider) - Required context provider
-- [useTheme](/hooks/use-theme) - Theme management hook
+- [ThemeProvider](/components/theme-provider) - Theme management integration
 - [GlassButton](/components/button) - For custom toggle implementations
 - [LiquidGlass](/components/liquid-glass) - Core glass effect system

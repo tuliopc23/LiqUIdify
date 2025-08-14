@@ -1,4 +1,5 @@
 /* LiqUIdify - Unified Liquid Glass Design System */
+@import "./tailwind.css";
 @import "./liquid-glass.css";
 @import "./glass-core.css";
 

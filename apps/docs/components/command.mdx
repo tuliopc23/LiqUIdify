@@ -3,15 +3,12 @@ title: Command Palette
 description: Spotlight-style command menu with fuzzy filtering.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassCommand } from "liquidify";
-
 # Command Palette
 
-<Preview
-  title="Example"
-  code={`import { GlassCommand } from "liquidify";
+### Example
+
+```tsx
+
 const ITEMS = [
   { id: "new", label: "New File" },
   { id: "open", label: "Open..." },
@@ -20,23 +17,8 @@ const ITEMS = [
 
 export default function Demo() {
   return <GlassCommand items={ITEMS} placeholder="Type a command" />;
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    const ITEMS = [
-      { id: "new", label: "New File" },
-      { id: "open", label: "Open..." },
-      { id: "save", label: "Save" },
-    ];
-    
-    function Demo() {
-      return <GlassCommand items={ITEMS} placeholder="Type a command" />;
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

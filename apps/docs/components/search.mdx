@@ -3,13 +3,9 @@ title: Search
 description: Intelligent search input with suggestions, recent searches, and keyboard navigation.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassSearch } from "liquidify";
-import { useState } from "react";
+```tsx
 
 export default function Demo() {
   const [query, setQuery] = useState("");
@@ -98,108 +94,15 @@ return (
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [query, setQuery] = useState("");
-
-      const suggestions = [
-        {
-          id: "1",
-          text: "React components",
-          type: "suggestion",
-          category: "Development",
-        },
-        {
-          id: "2",
-          text: "TypeScript guide",
-          type: "suggestion",
-          category: "Development",
-        },
-        { id: "3", text: "Design system", type: "trending", count: 1250 },
-        {
-          id: "4",
-          text: "Accessibility best practices",
-          type: "suggestion",
-          category: "UX",
-        },
-        { id: "5", text: "Apple HIG", type: "trending", count: 890 },
-      ];
-
-      const recentSearches = [
-        "liquid glass effects",
-        "component documentation",
-        "theme customization",
-      ];
-
-      const handleSearch = (searchQuery) => {
-        console.log("Searching for:", searchQuery);
-        setQuery(searchQuery);
-      };
-
-      const handleSuggestionClick = (suggestion) => {
-        console.log("Selected suggestion:", suggestion);
-        setQuery(suggestion.text);
-      };
-
-      return (
-        <div className="space-y-8 p-6">
-          <div>
-            <h3 className="text-white mb-4">Basic Search</h3>
-            <GlassSearch
-              placeholder="Search documentation..."
-              suggestions={suggestions}
-              recentSearches={recentSearches}
-              onSearch={handleSearch}
-              onSuggestionClick={handleSuggestionClick}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">E-commerce Search</h3>
-            <GlassSearch
-              placeholder="Search products..."
-              suggestions={[
-                {
-                  id: "1",
-                  text: "iPhone 15 Pro",
-                  type: "suggestion",
-                  category: "Electronics",
-                },
-                { id: "2", text: "MacBook Air", type: "trending", count: 2340 },
-                {
-                  id: "3",
-                  text: "AirPods Pro",
-                  type: "suggestion",
-                  category: "Audio",
-                },
-              ]}
-              recentSearches={["wireless headphones", "laptop stand"]}
-              onSearch={handleSearch}
-              maxSuggestions={5}
-            />
-          </div>
-
-          {query && (
-            <div className="text-white/70 text-sm">Current query: "{query}"</div>
-          )}
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Search Types
 
-<Preview
-  title="Example"
-  code={`import { GlassSearch } from "liquidify";
+### Example
+
+```tsx
+
 export default function SearchTypesDemo() {
   const documentationSuggestions = [
     {
@@ -257,72 +160,8 @@ showTrending={true}
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function SearchTypesDemo() {
-      const documentationSuggestions = [
-        {
-          id: "1",
-          text: "Getting started guide",
-          type: "suggestion",
-          category: "Guides",
-        },
-        {
-          id: "2",
-          text: "Component API",
-          type: "suggestion",
-          category: "Reference",
-        },
-        { id: "3", text: "Theming system", type: "trending", count: 456 },
-      ];
-
-      const userSuggestions = [
-        { id: "1", text: "John Doe", type: "suggestion", category: "Users" },
-        { id: "2", text: "Jane Smith", type: "suggestion", category: "Users" },
-        { id: "3", text: "Admin Dashboard", type: "recent" },
-      ];
-
-      return (
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-white mb-4">Documentation Search</h3>
-            <GlassSearch
-              placeholder="Search docs, guides, and API..."
-              suggestions={documentationSuggestions}
-              recentSearches={["installation", "dark mode", "accessibility"]}
-              showTrending={true}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">User Search</h3>
-            <GlassSearch
-              placeholder="Search users and teams..."
-              suggestions={userSuggestions}
-              recentSearches={["development team", "project managers"]}
-              maxSuggestions={6}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">Minimal Search</h3>
-            <GlassSearch
-              placeholder="Quick search..."
-              suggestions={[]}
-              recentSearches={[]}
-            />
-          </div>
-        </div>
-      );
-    }
-    return <SearchTypesDemo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 
@@ -572,7 +411,6 @@ function AppSearch() {
 ```tsx
 // Debounced search implementation
 import { useDebouncedCallback } from "use-debounce";
-import { GlassSearch } from "liquidify";
 
 const debouncedSearch = useDebouncedCallback(async (query) => {
   const results = await searchAPI(query);

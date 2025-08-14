@@ -3,15 +3,24 @@ title: Toast
 description: Notifications via ToastProvider and useToast hook.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassButton } from "liquidify";
+# Toast
 
-<Preview
-  title="Example"
-  code={`import { GlassButton } from "liquidify";
-function DemoInner() {
+Toast notification system with provider and hook for displaying temporary messages.
+
+## Installation
+
+```bash
+npm install liquidify
+```
+
+## Basic Usage
+
+```tsx
+import { ToastProvider, useToast, GlassButton } from "liquidify";
+
+function ToastDemo() {
   const { addToast } = useToast();
+  
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
       <GlassButton
@@ -25,6 +34,7 @@ function DemoInner() {
       >
         Success
       </GlassButton>
+      
       <GlassButton
         variant="ghost"
         onClick={() =>
@@ -37,6 +47,7 @@ function DemoInner() {
       >
         Warning
       </GlassButton>
+      
       <GlassButton
         variant="destructive"
         onClick={() =>
@@ -56,69 +67,37 @@ function DemoInner() {
 export default function Demo() {
   return (
     <ToastProvider>
-      <DemoInner />
+      <ToastDemo />
     </ToastProvider>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function DemoInner() {
-      const { addToast } = useToast();
-      return (
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <GlassButton
-            onClick={() =>
-              addToast({
-                title: "Saved",
-                description: "Changes persisted",
-                type: "success",
-              })
-            }
-          >
-            Success
-          </GlassButton>
-          <GlassButton
-            variant="ghost"
-            onClick={() =>
-              addToast({
-                title: "Heads up",
-                description: "Check your input",
-                type: "warning",
-              })
-            }
-          >
-            Warning
-          </GlassButton>
-          <GlassButton
-            variant="destructive"
-            onClick={() =>
-              addToast({
-                title: "Error",
-                description: "Something went wrong",
-                type: "error",
-              })
-            }
-          >
-            Error
-          </GlassButton>
-        </div>
-      );
-    }
-    
-    function Demo() {
-      return (
-        <ToastProvider>
-          <DemoInner />
-        </ToastProvider>
-      );
-    }
-    return <DemoInner />
-  })()}
-</Preview>
+}
+```
 
-API
+## API
 
-- ToastProvider: wraps app/section; position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'
-- useToast(): { addToast({ title?, description, type?, duration?, action? }), removeToast(id) }
+### ToastProvider
+
+Wrapper component that provides toast context.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `ToastPosition` | `'top-right'` | Where toasts appear |
+| `children` | `ReactNode` | - | App content |
+
+### useToast Hook
+
+Returns toast management functions:
+
+```typescript
+const { addToast, removeToast } = useToast();
+```
+
+#### addToast Options
+
+| Option | Type | Description |
+|--------|------|--------------|
+| `title` | `string` | Toast title (optional) |
+| `description` | `string` | Toast message |
+| `type` | `'success' \| 'warning' \| 'error' \| 'info'` | Toast variant |
+| `duration` | `number` | Auto-dismiss time in ms |
+| `action` | `ReactNode` | Custom action element |

@@ -2,16 +2,16 @@
 title: Glass File Upload
 description: Elegant drag-and-drop file upload component with Apple-inspired liquid glass effects and comprehensive file handling.
 ---
+;
+;
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassFileUpload } from "liquidify";
-import { useState } from "react";
-import { GlassFileUpload } from "@liquidify/components";
-import { GlassFileUpload } from 'liquidify'
+```tsx
+;
+;
+;
+
 
 export default function Demo() {
   const [files, setFiles] = useState([]);
@@ -102,103 +102,8 @@ browseText="Choose Files"
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [files, setFiles] = useState([]);
-      const [uploadProgress, setUploadProgress] = useState({});
-
-      const handleFilesChange = (newFiles) => {
-        setFiles(newFiles);
-      };
-
-      const handleUpload = async (filesToUpload) => {
-        // Simulate upload progress
-        for (const fileItem of filesToUpload) {
-          setUploadProgress((prev) => ({ ...prev, [fileItem.id]: 0 }));
-
-          // Simulate progress updates
-          for (let progress = 0; progress <= 100; progress += 10) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            setUploadProgress((prev) => ({ ...prev, [fileItem.id]: progress }));
-          }
-        }
-
-        // Clear progress after completion
-        setTimeout(() => {
-          setUploadProgress({});
-        }, 1000);
-      };
-
-      return (
-        <div className="space-y-6 max-w-lg mx-auto">
-          <div>
-            <h3 className="text-lg font-medium text-white mb-4">
-              Basic File Upload
-            </h3>
-            <GlassFileUpload
-              onFilesChange={handleFilesChange}
-              onUpload={handleUpload}
-              accept="image/*,application/pdf"
-              maxFiles={3}
-              maxFileSize={5 * 1024 * 1024} // 5MB
-              dropzoneText="Drop images or PDFs here"
-              browseText="Choose Files"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-medium text-white mb-4">Compact Upload</h3>
-            <GlassFileUpload
-              size="sm"
-              multiple={false}
-              accept=".csv,.xlsx"
-              dropzoneText="Drop spreadsheet here"
-              browseText="Select File"
-              showPreview={false}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-medium text-white mb-4">
-              Large Upload Area
-            </h3>
-            <GlassFileUpload
-              size="lg"
-              accept="*/*"
-              maxFiles={10}
-              dropzoneText="Drop any files here or click to browse"
-              browseText="Browse Files"
-              showProgress
-            />
-          </div>
-
-          {files.length > 0 && (
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-              <h4 className="font-medium text-white mb-2">Uploaded Files:</h4>
-              <ul className="text-white/70 text-sm space-y-1">
-                {files.map((file) => (
-                  <li key={file.id} className="flex justify-between">
-                    <span>{file.file.name}</span>
-                    <span className="text-white/50">
-                      {(file.file.size / 1024).toFixed(1)} KB
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Overview
 

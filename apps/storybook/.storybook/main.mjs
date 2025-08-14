@@ -42,7 +42,7 @@ const config = {
     "@storybook/addon-links",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
-    "@codesandbox/storybook-addon",
+    "@storybook/addon-essentials",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -180,13 +180,9 @@ const config = {
   previewHead: (head) => `
     ${head}
     <style>
-      .sb-show-main {
-        background: transparent !important;
-      }
+      /* .sb-show-main background removed to allow Backgrounds addon to control canvas */
 
-      .dark .sb-show-main {
-        background: transparent !important;
-      }
+      /* .dark .sb-show-main background removed to allow Backgrounds addon to control canvas */
 
       .sb-show-main.sb-main-padded {
         padding: 1rem;

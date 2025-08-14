@@ -3,10 +3,6 @@ title: Popover
 description: Liquid Glass popover with intelligent positioning and interactive content.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassButton, GlassPopover } from "liquidify";
-
 # Popover
 
 The `GlassPopover` component provides floating content containers with glassmorphism effects. It features intelligent positioning, viewport awareness, and comprehensive interaction handling.
@@ -15,9 +11,10 @@ The `GlassPopover` component provides floating content containers with glassmorp
 
 ### Basic Popover
 
-<Preview
-  title="Basic Popover"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
+### Basic Popover
+
+```tsx
+
 export default function Demo() {
   return (
     <div
@@ -41,43 +38,15 @@ export default function Demo() {
       />
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return (
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            justifyContent: "center",
-            padding: 40,
-          }}
-        >
-          <GlassPopover
-            trigger={<GlassButton>Click me</GlassButton>}
-            content={
-              <div>
-                <h4 style={{ margin: "0 0 8px 0" }}>Popover Content</h4>
-                <p style={{ margin: 0, fontSize: "0.875rem", opacity: 0.8 }}>
-                  This is a basic popover with glassmorphism effects.
-                </p>
-              </div>
-            }
-          />
-        </div>
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ### Position Variants
 
-<Preview
-  title="Position Variants"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
+### Position Variants
+
+```tsx
+
 export default function Demo() {
   const positions = ["top", "bottom", "left", "right"];
 
@@ -108,52 +77,15 @@ return (
     />
   ))}
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const positions = ["top", "bottom", "left", "right"];
-
-      return (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 32,
-            padding: 60,
-            justifyItems: "center",
-          }}
-        >
-          {positions.map((position) => (
-            <GlassPopover
-              key={position}
-              position={position}
-              trigger={<GlassButton>{position}</GlassButton>}
-              content={
-                <div style={{ minWidth: 120 }}>
-                  <h4 style={{ margin: "0 0 8px 0" }}>Position: {position}</h4>
-                  <p style={{ margin: 0, fontSize: "0.875rem", opacity: 0.8 }}>
-                    Popover positioned {position} of trigger.
-                  </p>
-                </div>
-              }
-            />
-          ))}
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ### Alignment Options
 
-<Preview
-  title="Alignment Options"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
+### Alignment Options
+
+```tsx
+
 export default function Demo() {
   const alignments = ["start", "center", "end"];
 
@@ -188,56 +120,15 @@ return (
     ))}
   </div>
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const alignments = ["start", "center", "end"];
-
-      return (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 24,
-            alignItems: "center",
-            padding: 40,
-          }}
-        >
-          <h4>Bottom Position with Different Alignments</h4>
-          <div style={{ display: "flex", gap: 16 }}>
-            {alignments.map((align) => (
-              <GlassPopover
-                key={align}
-                position="bottom"
-                align={align}
-                trigger={<GlassButton>Align {align}</GlassButton>}
-                content={
-                  <div style={{ minWidth: 160 }}>
-                    <h4 style={{ margin: "0 0 8px 0" }}>Align: {align}</h4>
-                    <p style={{ margin: 0, fontSize: "0.875rem", opacity: 0.8 }}>
-                      This popover is aligned to the {align} of the trigger.
-                    </p>
-                  </div>
-                }
-              />
-            ))}
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ### Rich Content
 
-<Preview
-  title="Rich Content"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
+### Rich Content
+
+```tsx
+
 export default function Demo() {
   return (
     <div
@@ -306,89 +197,14 @@ export default function Demo() {
       />
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return (
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            justifyContent: "center",
-            padding: 40,
-          }}
-        >
-          <GlassPopover
-            trigger={<GlassButton>User Profile</GlassButton>}
-            content={
-              <div style={{ minWidth: 240 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 12,
-                    marginBottom: 12,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      background:
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "white",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    JD
-                  </div>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: "1rem" }}>John Doe</h4>
-                    <p style={{ margin: 0, fontSize: "0.75rem", opacity: 0.7 }}>
-                      Software Engineer
-                    </p>
-                  </div>
-                </div>
-                <p
-                  style={{
-                    margin: "0 0 12px 0",
-                    fontSize: "0.875rem",
-                    opacity: 0.8,
-                  }}
-                >
-                  Passionate about creating beautiful user interfaces with
-                  modern web technologies.
-                </p>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <GlassButton size="sm" variant="ghost">
-                    View Profile
-                  </GlassButton>
-                  <GlassButton size="sm" variant="ghost">
-                    Send Message
-                  </GlassButton>
-                </div>
-              </div>
-            }
-          />
-        </div>
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ### Controlled Popover
 
-<Preview
-  title="Controlled Popover"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
-import { useState } from "react";
+### Controlled Popover
+
+```tsx
 
 export default function Demo() {
   const [open, setOpen] = useState(false);
@@ -435,280 +251,14 @@ Close Popover
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [open, setOpen] = useState(false);
-
-      return (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-            alignItems: "center",
-            padding: 40,
-          }}
-        >
-          <div style={{ display: "flex", gap: 12 }}>
-            <GlassButton onClick={() => setOpen(true)}>Open Popover</GlassButton>
-            <GlassButton variant="ghost" onClick={() => setOpen(false)}>
-              Close Popover
-            </GlassButton>
-          </div>
-
-          <GlassPopover
-            open={open}
-            onOpenChange={setOpen}
-            trigger={<GlassButton>Controlled Trigger</GlassButton>}
-            content={
-              <div>
-                <h4 style={{ margin: "0 0 8px 0" }}>Controlled Popover</h4>
-                <p
-                  style={{
-                    margin: "0 0 12px 0",
-                    fontSize: "0.875rem",
-                    opacity: 0.8,
-                  }}
-                >
-                  This popover's state is controlled externally.
-                </p>
-                <GlassButton size="sm" onClick={() => setOpen(false)}>
-                  Close
-                </GlassButton>
-              </div>
-            }
-          />
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### Form in Popover
 
-<Preview
-  title="Form in Popover"
-  code={`import { GlassButton, GlassPopover } from "liquidify";
-import { useState } from "react";
-
-export default function Demo() {
-  const [formData, setFormData] = useState({ name: "", email: "" });
-  const [open, setOpen] = useState(false);
-
-const handleSubmit = (e) => {
-e.preventDefault();
-alert(\`Submitted: ${formData.name} (${formData.email})\`);
-setOpen(false);
-setFormData({ name: "", email: "" });
-};
-
-return (
-
-<div style={{ display: "flex", justifyContent: "center", padding: 40 }}>
-<GlassPopover
-open={open}
-onOpenChange={setOpen}
-trigger={<GlassButton>Quick Signup</GlassButton>}
-content={
-<form onSubmit={handleSubmit} style={{ minWidth: 240 }}>
-<h4 style={{ margin: "0 0 16px 0" }}>Quick Signup</h4>
-
-            <div style={{ marginBottom: 12 }}>
-              <label
-                style={{
-                  display: "block",
-                  marginBottom: 4,
-                  fontSize: "0.875rem",
-                }}
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, name: e.target.value }))
-                }
-                style={{
-                  width: "100%",
-                  padding: "8px 12px",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                  background: "rgba(255,255,255,0.1)",
-                  color: "white",
-                  fontSize: "0.875rem",
-                }}
-                required
-              />
-            </div>
-
-            <div style={{ marginBottom: 16 }}>
-              <label
-                style={{
-                  display: "block",
-                  marginBottom: 4,
-                  fontSize: "0.875rem",
-                }}
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
-                style={{
-                  width: "100%",
-                  padding: "8px 12px",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                  background: "rgba(255,255,255,0.1)",
-                  color: "white",
-                  fontSize: "0.875rem",
-                }}
-                required
-              />
-            </div>
-
-            <div
-              style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}
-            >
-              <GlassButton
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </GlassButton>
-              <GlassButton type="submit" size="sm">
-                Sign Up
-              </GlassButton>
-            </div>
-          </form>
-        }
-      />
-    </div>
-
-);
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [formData, setFormData] = useState({ name: "", email: "" });
-      const [open, setOpen] = useState(false);
-
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(`Submitted: ${formData.name} (${formData.email})`);
-        setOpen(false);
-        setFormData({ name: "", email: "" });
-      };
-
-      return (
-        <div style={{ display: "flex", justifyContent: "center", padding: 40 }}>
-          <GlassPopover
-            open={open}
-            onOpenChange={setOpen}
-            trigger={<GlassButton>Quick Signup</GlassButton>}
-            content={
-              <form onSubmit={handleSubmit} style={{ minWidth: 240 }}>
-                <h4 style={{ margin: "0 0 16px 0" }}>Quick Signup</h4>
-
-                <div style={{ marginBottom: 12 }}>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: 4,
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, name: e.target.value }))
-                    }
-                    style={{
-                      width: "100%",
-                      padding: "8px 12px",
-                      border: "1px solid rgba(255,255,255,0.2)",
-                      borderRadius: "8px",
-                      background: "rgba(255,255,255,0.1)",
-                      color: "white",
-                      fontSize: "0.875rem",
-                    }}
-                    required
-                  />
-                </div>
-
-                <div style={{ marginBottom: 16 }}>
-                  <label
-                    style={{
-                      display: "block",
-                      marginBottom: 4,
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, email: e.target.value }))
-                    }
-                    style={{
-                      width: "100%",
-                      padding: "8px 12px",
-                      border: "1px solid rgba(255,255,255,0.2)",
-                      borderRadius: "8px",
-                      background: "rgba(255,255,255,0.1)",
-                      color: "white",
-                      fontSize: "0.875rem",
-                    }}
-                    required
-                  />
-                </div>
-
-                <div
-                  style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}
-                >
-                  <GlassButton
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    Cancel
-                  </GlassButton>
-                  <GlassButton type="submit" size="sm">
-                    Sign Up
-                  </GlassButton>
-                </div>
-              </form>
-            }
-          />
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+```tsx
+// Preview component removed - needs manual conversion
+```
 
 ## Props
 

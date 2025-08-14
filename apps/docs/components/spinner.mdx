@@ -2,22 +2,12 @@
 title: Spinner
 description: Loading indicators with multiple variants and liquid glass styling.
 ---
+;
 
-import Preview from "./Preview";
-import * as React from "react";
-import {
-  DotsSpinner,
-  GlassButton,
-  GlassSpinner,
-  PulseSpinner,
-  RingSpinner,
-  WaveSpinner,
-} from "liquidify";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { useState } from 'react';
-import { DotsSpinner, GlassButton, GlassSpinner, PulseSpinner, RingSpinner, WaveSpinner } from 'liquidify';
+```tsx
+;
 
 export default function Demo() {
   const [loading, setLoading] = useState(false);
@@ -74,69 +64,8 @@ export default function Demo() {
       </div>
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      const [loading, setLoading] = React.useState(false);
-      const simulateLoading = () => {
-        setLoading(true);
-        setTimeout(() => setLoading(false), 3000);
-      };
-      return (
-        <div className="space-y-8 p-6">
-          <div>
-            <h3 className="text-white mb-4">Default Spinner Variants</h3>
-            <div className="flex gap-6 items-center flex-wrap">
-              <GlassSpinner variant="default" size="md" />
-              <GlassSpinner variant="primary" size="md" />
-              <GlassSpinner variant="success" size="md" />
-              <GlassSpinner variant="warning" size="md" />
-              <GlassSpinner variant="error" size="md" />
-            </div>
-          </div>
-          <div>
-            <h3 className="text-white mb-4">Sizes</h3>
-            <div className="flex gap-6 items-center">
-              <GlassSpinner size="xs" />
-              <GlassSpinner size="sm" />
-              <GlassSpinner size="md" />
-              <GlassSpinner size="lg" />
-              <GlassSpinner size="xl" />
-              <GlassSpinner size="2xl" />
-            </div>
-          </div>
-          <div>
-            <h3 className="text-white mb-4">Alternative Spinners</h3>
-            <div className="flex gap-8 items-center flex-wrap">
-              <PulseSpinner size="md" />
-              <DotsSpinner size="md" count={4} />
-              <RingSpinner size="md" thickness={3} />
-              <WaveSpinner bars={5} />
-            </div>
-          </div>
-          <div>
-            <h3 className="text-white mb-4">With Labels</h3>
-            <div className="space-y-4">
-              <GlassSpinner showLabel label="Loading data..." orientation="horizontal" />
-              <GlassSpinner showLabel label="Processing..." orientation="vertical" variant="primary" />
-            </div>
-          </div>
-          <div>
-            <h3 className="text-white mb-4">Centered Overlay</h3>
-            <div className="relative h-32 bg-white/5 rounded-lg border border-white/10">
-              <div className="p-4 text-white/70">Content behind spinner</div>
-              {loading && <GlassSpinner centered showLabel label="Loading..." />}
-            </div>
-            <GlassButton onClick={simulateLoading} className="mt-4">Show Overlay Spinner</GlassButton>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

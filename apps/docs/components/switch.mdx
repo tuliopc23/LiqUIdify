@@ -3,14 +3,9 @@ title: Switch
 description: Toggle control with smooth handle animation and liquid glass styling.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassSwitch } from "liquidify";
-import { useState } from "react";
-import { GlassSwitch } from 'liquidify'
+```tsx
 
 export default function Demo() {
   const [basicSwitch, setBasicSwitch] = useState(false);
@@ -90,93 +85,8 @@ State: {basicSwitch ? "enabled" : "disabled"}
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [basicSwitch, setBasicSwitch] = useState(false);
-      const [labeledSwitch, setLabeledSwitch] = useState(true);
-      const [disabledSwitch, setDisabledSwitch] = useState(false);
-      const [settings, setSettings] = useState({
-        notifications: true,
-        darkMode: false,
-        autoSave: true,
-      });
-
-      return (
-        <div className="space-y-8 p-6">
-          <div>
-            <h3 className="text-white mb-4">Basic Switch</h3>
-            <div className="space-y-4">
-              <GlassSwitch checked={basicSwitch} onChange={setBasicSwitch} />
-              <div className="text-white/70 text-sm">
-                State: {basicSwitch ? "enabled" : "disabled"}
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">With Labels</h3>
-            <div className="space-y-4">
-              <GlassSwitch
-                label="Enable notifications"
-                checked={labeledSwitch}
-                onChange={setLabeledSwitch}
-              />
-              <GlassSwitch
-                label={basicSwitch ? "On" : "Off"}
-                checked={basicSwitch}
-                onChange={setBasicSwitch}
-              />
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">Disabled State</h3>
-            <GlassSwitch
-              label="Disabled switch"
-              checked={disabledSwitch}
-              onChange={setDisabledSwitch}
-              disabled={true}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">Settings Panel</h3>
-            <div className="space-y-4 bg-white/5 rounded-lg p-4 border border-white/10">
-              <GlassSwitch
-                label="Push notifications"
-                checked={settings.notifications}
-                onChange={(checked) =>
-                  setSettings((prev) => ({ ...prev, notifications: checked }))
-                }
-              />
-              <GlassSwitch
-                label="Dark mode"
-                checked={settings.darkMode}
-                onChange={(checked) =>
-                  setSettings((prev) => ({ ...prev, darkMode: checked }))
-                }
-              />
-              <GlassSwitch
-                label="Auto-save documents"
-                checked={settings.autoSave}
-                onChange={(checked) =>
-                  setSettings((prev) => ({ ...prev, autoSave: checked }))
-                }
-              />
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 

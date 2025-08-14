@@ -3,14 +3,9 @@ title: Tree View
 description: Hierarchical data display with expandable nodes and selection support.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassTreeView } from "liquidify";
-import { useState } from "react";
-import { Folder, File, Database, Code, Image, Music } from "lucide-react";
+```tsx
 
 export default function Demo() {
   const [selectedNode, setSelectedNode] = useState(null);
@@ -192,195 +187,8 @@ Click a node to see details
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [selectedNode, setSelectedNode] = useState(null);
-      const [expandedNodes, setExpandedNodes] = useState(["root", "src"]);
-
-      const fileSystemNodes = [
-        {
-          id: "root",
-          label: "my-project",
-          icon: <Folder className="h-4 w-4" />,
-          defaultExpanded: true,
-          children: [
-            {
-              id: "src",
-              label: "src",
-              icon: <Folder className="h-4 w-4" />,
-              defaultExpanded: true,
-              children: [
-                {
-                  id: "components",
-                  label: "components",
-                  icon: <Folder className="h-4 w-4" />,
-                  children: [
-                    {
-                      id: "button.tsx",
-                      label: "Button.tsx",
-                      icon: <Code className="h-4 w-4" />,
-                    },
-                    {
-                      id: "modal.tsx",
-                      label: "Modal.tsx",
-                      icon: <Code className="h-4 w-4" />,
-                    },
-                  ],
-                },
-                {
-                  id: "utils",
-                  label: "utils",
-                  icon: <Folder className="h-4 w-4" />,
-                  children: [
-                    {
-                      id: "helpers.ts",
-                      label: "helpers.ts",
-                      icon: <Code className="h-4 w-4" />,
-                    },
-                  ],
-                },
-                {
-                  id: "app.tsx",
-                  label: "App.tsx",
-                  icon: <Code className="h-4 w-4" />,
-                },
-              ],
-            },
-            {
-              id: "public",
-              label: "public",
-              icon: <Folder className="h-4 w-4" />,
-              children: [
-                {
-                  id: "logo.png",
-                  label: "logo.png",
-                  icon: <Image className="h-4 w-4" />,
-                },
-                {
-                  id: "favicon.ico",
-                  label: "favicon.ico",
-                  icon: <Image className="h-4 w-4" />,
-                },
-              ],
-            },
-            {
-              id: "package.json",
-              label: "package.json",
-              icon: <File className="h-4 w-4" />,
-            },
-          ],
-        },
-      ];
-
-      const databaseNodes = [
-        {
-          id: "db",
-          label: "Production Database",
-          icon: <Database className="h-4 w-4" />,
-          children: [
-            {
-              id: "users",
-              label: "users",
-              icon: <Database className="h-4 w-4" />,
-              data: { type: "table", records: 1250 },
-            },
-            {
-              id: "products",
-              label: "products",
-              icon: <Database className="h-4 w-4" />,
-              data: { type: "table", records: 89 },
-            },
-            {
-              id: "orders",
-              label: "orders",
-              icon: <Database className="h-4 w-4" />,
-              data: { type: "table", records: 3421 },
-            },
-          ],
-        },
-      ];
-
-      const handleNodeSelect = (node) => {
-        setSelectedNode(node);
-        console.log("Selected:", node);
-      };
-
-      const handleNodeExpand = (node, expanded) => {
-        console.log("Expanded:", node.label, expanded);
-      };
-
-      return (
-        <div className="space-y-8 p-6">
-          <div>
-            <h3 className="text-white mb-4">File System Explorer</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <GlassTreeView
-                nodes={fileSystemNodes}
-                onNodeSelect={handleNodeSelect}
-                onNodeExpand={handleNodeExpand}
-                selectedNodeId={selectedNode?.id}
-                showIcons={true}
-              />
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <h4 className="text-white font-medium mb-2">Selected Node</h4>
-                {selectedNode ? (
-                  <div className="text-white/70 text-sm space-y-1">
-                    <p>
-                      <strong>ID:</strong> {selectedNode.id}
-                    </p>
-                    <p>
-                      <strong>Label:</strong> {selectedNode.label}
-                    </p>
-                    <p>
-                      <strong>Type:</strong>{" "}
-                      {selectedNode.children ? "Folder" : "File"}
-                    </p>
-                    {selectedNode.data && (
-                      <p>
-                        <strong>Data:</strong> {JSON.stringify(selectedNode.data)}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <p className="text-white/50 text-sm">
-                    Click a node to see details
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">Database Schema</h3>
-            <GlassTreeView
-              nodes={databaseNodes}
-              onNodeSelect={handleNodeSelect}
-              showIcons={true}
-              indentSize={24}
-            />
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4">Without Icons</h3>
-            <GlassTreeView
-              nodes={fileSystemNodes}
-              onNodeSelect={handleNodeSelect}
-              showIcons={false}
-              indentSize={16}
-            />
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 
@@ -412,7 +220,6 @@ language="tsx"
 ### File Explorer
 
 ```tsx
-import { Folder, File } from 'lucide-react'
 
 const fileNodes = [
   {
@@ -439,8 +246,6 @@ const fileNodes = [
 ### Navigation Menu
 
 ```tsx
-import { LayoutDashboard, Settings, User, Lock } from 'lucide-react'
-import { GlassTreeView } from 'liquidify'
 
 const menuNodes = [
   {

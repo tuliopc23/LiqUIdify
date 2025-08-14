@@ -3,251 +3,124 @@ title: Button
 description: Interactive buttons with liquid glass effects, multiple variants, and comprehensive accessibility.
 icon: mouse-pointer-click
 ---
-
-import { GlassButton } from "liquidify";
-
 # Button
 
 A versatile glassmorphic button component with liquid glass effects, multiple variants, sizes, and comprehensive interaction states. Features Apple-inspired design with smooth animations and full accessibility support.
 
-import Preview from "./Preview";
-import * as React from "react";
-import {
-  Heart,
-  Download,
-  ArrowRight,
-  Plus,
-  Save,
-  Settings,
-  Search,
-} from "lucide-react";
+## Installation
 
-## Live Examples
+```bash
+npm install liquidify
+```
+
+## Basic Usage
+
+```tsx
+;
+import "liquidify/css";
+
+export default function Demo() {
+  return (
+    <GlassButton variant="primary">
+      Click me
+    </GlassButton>
+  );
+}
+```
+
+## Examples
 
 ### Basic Variants
 
-<Preview
-  title="Basic Variants"
-  code={`import { GlassButton } from "liquidify";
-<div className=\"flex items-center gap-4 flex-wrap\">
-  <GlassButton variant=\"primary\">Primary</GlassButton>
-  <GlassButton variant=\"secondary\">Secondary</GlassButton>
-  <GlassButton variant=\"ghost\">Ghost</GlassButton>
-  <GlassButton variant=\"destructive\">Destructive</GlassButton>
-</div>`}
->
-  <div className="flex items-center gap-4 flex-wrap">
-    <GlassButton variant="primary">Primary</GlassButton>
-    <GlassButton variant="secondary">Secondary</GlassButton>
-    <GlassButton variant="ghost">Ghost</GlassButton>
-    <GlassButton variant="destructive">Destructive</GlassButton>
-  </div>
-</Preview>
+```tsx
+;
+
+export default function BasicVariants() {
+  return (
+    <div className="flex items-center gap-4 flex-wrap">
+      <GlassButton variant="primary">Primary</GlassButton>
+      <GlassButton variant="secondary">Secondary</GlassButton>
+      <GlassButton variant="ghost">Ghost</GlassButton>
+      <GlassButton variant="destructive">Destructive</GlassButton>
+    </div>
+  );
+}
+```
 
 ### Size Variants
 
-<Preview
-  title="Size Variants"
-  code={`import { GlassButton } from "liquidify";
-<div className=\"flex items-center gap-4 flex-wrap\">
-  <GlassButton size=\"sm\">Small</GlassButton>
-  <GlassButton size=\"md\">Medium</GlassButton>
-  <GlassButton size=\"lg\">Large</GlassButton>
-  <GlassButton size=\"xl\">Extra Large</GlassButton>
-</div>`}
->
-  <div className="flex items-center gap-4 flex-wrap">
-    <GlassButton size="sm">Small</GlassButton>
-    <GlassButton size="md">Medium</GlassButton>
-    <GlassButton size="lg">Large</GlassButton>
-    <GlassButton size="xl">Extra Large</GlassButton>
-  </div>
-</Preview>
+```tsx
+;
+
+export default function SizeVariants() {
+  return (
+    <div className="flex items-center gap-4 flex-wrap">
+      <GlassButton size="sm">Small</GlassButton>
+      <GlassButton size="md">Medium</GlassButton>
+      <GlassButton size="lg">Large</GlassButton>
+      <GlassButton size="xl">Extra Large</GlassButton>
+    </div>
+  );
+}
+```
 
 ### With Icons
 
-<Preview
-  title="With Icons"
-  code={`import { GlassButton } from "liquidify";
-import { Heart, Download, ArrowRight, Plus } from 'lucide-react'
+```tsx
+;
+;
 
-export default function Demo() {
+export default function WithIcons() {
   return (
-    <div className=\"flex items-center gap-4 flex-wrap\">
-      <GlassButton leftIcon={<Heart className=\"w-4 h-4\" />}>Like</GlassButton>
-      <GlassButton rightIcon={<Download className=\"w-4 h-4\" />}>Download</GlassButton>
-      <GlassButton leftIcon={<Plus className=\"w-4 h-4\" />} rightIcon={<ArrowRight className=\"w-4 h-4\" />}>Add & Continue</GlassButton>
+    <div className="flex items-center gap-4 flex-wrap">
+      <GlassButton leftIcon={<Heart className="w-4 h-4" />}>
+        Like
+      </GlassButton>
+      <GlassButton rightIcon={<Download className="w-4 h-4" />}>
+        Download
+      </GlassButton>
+      <GlassButton
+        leftIcon={<Plus className="w-4 h-4" />}
+        rightIcon={<ArrowRight className="w-4 h-4" />}
+      >
+        Add & Continue
+      </GlassButton>
     </div>
-  )
-}`}
->
-  <div className="flex items-center gap-4 flex-wrap">
-    <GlassButton leftIcon={<Heart className="w-4 h-4" />}>Like</GlassButton>
-    <GlassButton rightIcon={<Download className="w-4 h-4" />}>Download</GlassButton>
-    <GlassButton
-      leftIcon={<Plus className="w-4 h-4" />}
-      rightIcon={<ArrowRight className="w-4 h-4" />}
-    >
-      Add & Continue
-    </GlassButton>
-  </div>
-</Preview>
-
-### Icon Only Buttons
-
-<Preview
-  title="Icon Only Buttons"
-  code={`import { GlassButton } from "liquidify";
-import { Heart, Download, Settings, Search } from 'lucide-react'
-
-export default function Demo() {
-  return (
-    <div className=\"flex items-center gap-4\">
-      <GlassButton iconOnly size=\"sm\"><Heart className=\"w-4 h-4\" /></GlassButton>
-      <GlassButton iconOnly size=\"md\"><Download className=\"w-4 h-4\" /></GlassButton>
-      <GlassButton iconOnly size=\"lg\"><Settings className=\"w-5 h-5\" /></GlassButton>
-      <GlassButton iconOnly size=\"xl\"><Search className=\"w-6 h-6\" /></GlassButton>
-    </div>
-  )
-}`}
->
-  <div className="flex items-center gap-4">
-    <GlassButton iconOnly size="sm">
-      <Heart className="w-4 h-4" />
-    </GlassButton>
-    <GlassButton iconOnly size="md">
-      <Download className="w-4 h-4" />
-    </GlassButton>
-    <GlassButton iconOnly size="lg">
-      <Settings className="w-5 h-5" />
-    </GlassButton>
-    <GlassButton iconOnly size="xl">
-      <Search className="w-6 h-6" />
-    </GlassButton>
-  </div>
-</Preview>
+  );
+}
+```
 
 ### Loading States
 
-<Preview
-  title="Loading States"
-  code={`import { GlassButton } from "liquidify";
-import { useState } from 'react'
-import { Save } from 'lucide-react'
+```tsx
+;
+;
+;
 
-export default function Demo() {
-  const [loading, setLoading] = useState(false)
+export default function LoadingStates() {
+  const [loading, setLoading] = useState(false);
+
   const handleClick = () => {
-    setLoading(true)
-    setTimeout(() => setLoading(false), 2000)
-  }
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
   return (
-    <div className=\"flex items-center gap-4 flex-wrap\">
+    <div className="flex items-center gap-4 flex-wrap">
       <GlassButton loading>Loading...</GlassButton>
-      <GlassButton loading loadingText=\"Saving...\">Save</GlassButton>
-      <GlassButton loading={loading} loadingText=\"Processing...\" leftIcon={<Save className=\"w-4 h-4\" />} onClick={handleClick}>
-        {loading ? 'Processing...' : 'Process Data'}
+      <GlassButton loading loadingText="Saving...">Save</GlassButton>
+      <GlassButton
+        loading={loading}
+        loadingText="Processing..."
+        leftIcon={<Save className="w-4 h-4" />}
+        onClick={handleClick}
+      >
+        {loading ? "Processing..." : "Process Data"}
       </GlassButton>
-      <GlassButton loading iconOnly><Save className=\"w-4 h-4\" /></GlassButton>
     </div>
-  )
-}`}
->
-  {(() => {
-    const [loading, setLoading] = React.useState(false)
-    const handleClick = () => {
-      setLoading(true)
-      setTimeout(() => setLoading(false), 2000)
-    }
-    return (
-      <div className="flex items-center gap-4 flex-wrap">
-        <GlassButton loading>Loading...</GlassButton>
-        <GlassButton loading loadingText="Saving...">Save</GlassButton>
-        <GlassButton
-          loading={loading}
-          loadingText="Processing..."
-          leftIcon={<Save className="w-4 h-4" />}
-          onClick={handleClick}
-        >
-          {loading ? 'Processing...' : 'Process Data'}
-        </GlassButton>
-        <GlassButton loading iconOnly>
-          <Save className="w-4 h-4" />
-        </GlassButton>
-      </div>
-    )
-  })()}
-</Preview>
-
-### Interactive States
-
-<Preview
-  title="Interactive States"
-  code={`import { GlassButton } from "liquidify";
-import { useState } from 'react'
-
-export default function Demo() {
-  const [count, setCount] = useState(0)
-  return (
-    <div className=\"space-y-4\">
-      <div className=\"flex items-center gap-4 flex-wrap\">
-        <GlassButton onClick={() => setCount(c => c + 1)}>Clicked {count} times</GlassButton>
-        <GlassButton disabled>Disabled</GlassButton>
-        <GlassButton variant=\"destructive\" disabled>Disabled Destructive</GlassButton>
-      </div>
-      <div className=\"text-sm text-gray-600\">Hover and click the buttons to see the liquid glass effects in action!</div>
-    </div>
-  )
-}`}
->
-  {(() => {
-    const [count, setCount] = React.useState(0)
-    return (
-      <div className="space-y-4">
-        <div className="flex items-center gap-4 flex-wrap">
-          <GlassButton onClick={() => setCount(c => c + 1)}>Clicked {count} times</GlassButton>
-          <GlassButton disabled>Disabled</GlassButton>
-          <GlassButton variant="destructive" disabled>
-            Disabled Destructive
-          </GlassButton>
-        </div>
-        <div className="text-sm text-gray-600">
-          Hover and click the buttons to see the liquid glass effects in action!
-        </div>
-      </div>
-    )
-  })()}
-</Preview>
-
-### Full Width
-
-<Preview
-  title="Full Width"
-  code={`import { GlassButton } from "liquidify";
-import { ArrowRight } from 'lucide-react'
-
-export default function Demo() {
-  return (
-    <div className=\"w-full max-w-md space-y-3\">
-      <GlassButton fullWidth variant=\"primary\">Primary Full Width</GlassButton>
-      <GlassButton fullWidth variant=\"secondary\">Secondary Full Width</GlassButton>
-      <GlassButton fullWidth variant=\"ghost\" rightIcon={<ArrowRight className=\"w-4 h-4\" />}>Ghost with Icon</GlassButton>
-    </div>
-  )
-}`}
->
-  <div className="w-full max-w-md space-y-3">
-    <GlassButton fullWidth variant="primary">Primary Full Width</GlassButton>
-    <GlassButton fullWidth variant="secondary">Secondary Full Width</GlassButton>
-    <GlassButton
-      fullWidth
-      variant="ghost"
-      rightIcon={<ArrowRight className="w-4 h-4" />}
-    >
-      Ghost with Icon
-    </GlassButton>
-  </div>
-</Preview>
+  );
+}
+```
 
 ## Props
 
@@ -261,7 +134,6 @@ export default function Demo() {
 | `loadingText` | `string`                                               | -           | Text to show during loading state      |
 | `fullWidth`   | `boolean`                                              | `false`     | Make button full width                 |
 | `iconOnly`    | `boolean`                                              | `false`     | Icon-only button (square aspect ratio) |
-| `asChild`     | `boolean`                                              | `false`     | Render as child component              |
 | `disabled`    | `boolean`                                              | `false`     | Disabled state                         |
 | `children`    | `ReactNode`                                            | -           | Button content                         |
 | `className`   | `string`                                               | -           | Additional CSS classes                 |
@@ -272,8 +144,8 @@ export default function Demo() {
 ### Form Actions
 
 ```tsx
-import { useState } from "react";
-import { Save, X } from "lucide-react";
+;
+;
 
 function FormActions({ onSave, onCancel, isLoading }) {
   return (
@@ -281,7 +153,6 @@ function FormActions({ onSave, onCancel, isLoading }) {
       <GlassButton variant="ghost" onClick={onCancel} disabled={isLoading}>
         Cancel
       </GlassButton>
-
       <GlassButton
         variant="primary"
         leftIcon={<Save className="w-4 h-4" />}
@@ -291,121 +162,6 @@ function FormActions({ onSave, onCancel, isLoading }) {
       >
         Save Changes
       </GlassButton>
-    </div>
-  );
-}
-```
-
-### Navigation Actions
-
-```tsx
-import { ArrowLeft, ArrowRight } from "lucide-react";
-
-function NavigationButtons({ onPrevious, onNext, canGoPrevious, canGoNext }) {
-  return (
-    <div className="flex justify-between">
-      <GlassButton
-        variant="ghost"
-        leftIcon={<ArrowLeft className="w-4 h-4" />}
-        onClick={onPrevious}
-        disabled={!canGoPrevious}
-      >
-        Previous
-      </GlassButton>
-
-      <GlassButton
-        variant="primary"
-        rightIcon={<ArrowRight className="w-4 h-4" />}
-        onClick={onNext}
-        disabled={!canGoNext}
-      >
-        Next
-      </GlassButton>
-    </div>
-  );
-}
-```
-
-### Action Groups
-
-```tsx
-import { Edit, Trash2, Copy, Share } from "lucide-react";
-
-function ActionGroup({ item, onEdit, onDelete, onCopy, onShare }) {
-  return (
-    <div className="flex gap-2">
-      <GlassButton
-        size="sm"
-        variant="ghost"
-        iconOnly
-        onClick={() => onEdit(item)}
-      >
-        <Edit className="w-4 h-4" />
-      </GlassButton>
-
-      <GlassButton
-        size="sm"
-        variant="ghost"
-        iconOnly
-        onClick={() => onCopy(item)}
-      >
-        <Copy className="w-4 h-4" />
-      </GlassButton>
-
-      <GlassButton
-        size="sm"
-        variant="ghost"
-        iconOnly
-        onClick={() => onShare(item)}
-      >
-        <Share className="w-4 h-4" />
-      </GlassButton>
-
-      <GlassButton
-        size="sm"
-        variant="destructive"
-        iconOnly
-        onClick={() => onDelete(item)}
-      >
-        <Trash2 className="w-4 h-4" />
-      </GlassButton>
-    </div>
-  );
-}
-```
-
-### Call-to-Action
-
-```tsx
-import { Sparkles, ArrowRight } from "lucide-react";
-
-function CallToAction({ onGetStarted, onLearnMore }) {
-  return (
-    <div className="text-center space-y-4">
-      <h2 className="text-2xl font-bold mb-2">Ready to get started?</h2>
-      <p className="text-gray-600 mb-6">
-        Join thousands of users already using our platform.
-      </p>
-
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <GlassButton
-          size="lg"
-          variant="primary"
-          leftIcon={<Sparkles className="w-5 h-5" />}
-          onClick={onGetStarted}
-        >
-          Get Started Free
-        </GlassButton>
-
-        <GlassButton
-          size="lg"
-          variant="ghost"
-          rightIcon={<ArrowRight className="w-5 h-5" />}
-          onClick={onLearnMore}
-        >
-          Learn More
-        </GlassButton>
-      </div>
     </div>
   );
 }
@@ -428,42 +184,6 @@ The GlassButton component follows WCAG 2.1 guidelines:
 - Disabled state handling
 - Icon descriptions when needed
 
-### Focus Management
-
-- Clear focus indicators
-- Logical tab order
-- Focus trapping in modals
-- Appropriate focus restoration
-
-### Visual Accessibility
-
-- High contrast ratios
-- Clear visual hierarchy
-- Sufficient touch targets (44px minimum)
-- Color is not the sole indicator
-
-## Apple HIG Guidelines
-
-Following Apple's Human Interface Guidelines for buttons:
-
-### Visual Design
-
-- **Clarity**: Clear, readable button labels
-- **Depth**: Subtle glass effects create visual hierarchy
-- **Consistency**: Uniform styling across variants
-
-### Interaction
-
-- **Responsiveness**: Immediate visual feedback
-- **Predictability**: Consistent behavior patterns
-- **Feedback**: Clear loading and disabled states
-
-### Content
-
-- **Concise**: Brief, action-oriented labels
-- **Descriptive**: Clear purpose and outcome
-- **Consistent**: Uniform terminology
-
 ## Best Practices
 
 ### Button Labels
@@ -480,116 +200,6 @@ Following Apple's Human Interface Guidelines for buttons:
 - Group related actions together
 - Maintain consistent spacing
 
-### Loading States
+## Storybook
 
-- Show loading for actions taking >500ms
-- Provide meaningful loading text
-- Disable button during loading
-- Consider progress indicators for long operations
-
-### Responsive Design
-
-- Ensure adequate touch targets
-- Stack buttons on mobile when needed
-- Consider full-width on small screens
-- Test with various content lengths
-
-## Examples
-
-### E-commerce Actions
-
-```tsx
-function ProductActions({ product, onAddToCart, onBuyNow, isLoading }) {
-  return (
-    <div className="space-y-3">
-      <GlassButton
-        fullWidth
-        size="lg"
-        variant="primary"
-        loading={isLoading}
-        loadingText="Adding to cart..."
-        onClick={() => onAddToCart(product)}
-      >
-        Add to Cart - ${product.price}
-      </GlassButton>
-
-      <GlassButton
-        fullWidth
-        size="lg"
-        variant="secondary"
-        onClick={() => onBuyNow(product)}
-        disabled={isLoading}
-      >
-        Buy Now
-      </GlassButton>
-    </div>
-  );
-}
-```
-
-### File Upload
-
-```tsx
-function FileUpload({ onUpload, isUploading, progress }) {
-  return (
-    <div className="text-center p-8 border-2 border-dashed border-gray-300 rounded-lg">
-      <div className="space-y-4">
-        <div className="text-gray-600">
-          {isUploading
-            ? `Uploading... ${progress}%`
-            : "Drag files here or click to browse"}
-        </div>
-
-        <GlassButton
-          variant="primary"
-          loading={isUploading}
-          loadingText={`Uploading... ${progress}%`}
-          onClick={onUpload}
-          leftIcon={!isUploading && <Upload className="w-4 h-4" />}
-        >
-          {isUploading ? `${progress}%` : "Choose Files"}
-        </GlassButton>
-      </div>
-    </div>
-  );
-}
-```
-
-### Social Actions
-
-```tsx
-function SocialActions({ post, onLike, onShare, onComment, isLiked }) {
-  return (
-    <div className="flex items-center gap-2">
-      <GlassButton
-        size="sm"
-        variant={isLiked ? "primary" : "ghost"}
-        leftIcon={
-          <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
-        }
-        onClick={() => onLike(post)}
-      >
-        {post.likes}
-      </GlassButton>
-
-      <GlassButton
-        size="sm"
-        variant="ghost"
-        leftIcon={<MessageCircle className="w-4 h-4" />}
-        onClick={() => onComment(post)}
-      >
-        {post.comments}
-      </GlassButton>
-
-      <GlassButton
-        size="sm"
-        variant="ghost"
-        leftIcon={<Share className="w-4 h-4" />}
-        onClick={() => onShare(post)}
-      >
-        Share
-      </GlassButton>
-    </div>
-  );
-}
-```
+For interactive examples and component playground, visit our [Storybook](https://liquidify-storybook.vercel.app/?path=/docs/components-button--docs).

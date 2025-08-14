@@ -2,11 +2,6 @@
 title: Notification
 description: Liquid Glass notification center with real-time updates and interactive management.
 ---
-
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassButton } from "liquidify";
-
 # Notification
 
 The `NotificationCenter` component provides a comprehensive notification system with glassmorphism effects. It supports different notification types, real-time updates, and interactive management features.
@@ -15,9 +10,9 @@ The `NotificationCenter` component provides a comprehensive notification system 
 
 ### Basic Notification Center
 
-<Preview
-  title="Basic Notification Center"
-  code={`import { useState } from "react";
+### Basic Notification Center
+
+```tsx
 
 export default function Demo() {
   const [notifications, setNotifications] = useState([
@@ -71,75 +66,16 @@ return (
     onDismiss={handleDismiss}
   />
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [notifications, setNotifications] = useState([
-        {
-          id: "1",
-          title: "Welcome!",
-          message: "Thanks for trying our notification system.",
-          type: "success",
-          timestamp: new Date(Date.now() - 5 * 60 * 1000),
-          read: false,
-        },
-        {
-          id: "2",
-          title: "System Update",
-          message: "A new version is available for download.",
-          type: "info",
-          timestamp: new Date(Date.now() - 15 * 60 * 1000),
-          read: true,
-        },
-        {
-          id: "3",
-          title: "Warning",
-          message: "Your storage is almost full.",
-          type: "warning",
-          timestamp: new Date(Date.now() - 30 * 60 * 1000),
-          read: false,
-        },
-      ]);
-
-      const handleMarkAsRead = (id) => {
-        setNotifications((prev) =>
-          prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-        );
-      };
-
-      const handleMarkAllAsRead = () => {
-        setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-      };
-
-      const handleDismiss = (id) => {
-        setNotifications((prev) => prev.filter((n) => n.id !== id));
-      };
-
-      return (
-        <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-          <NotificationCenter
-            notifications={notifications}
-            onMarkAsRead={handleMarkAsRead}
-            onMarkAllAsRead={handleMarkAllAsRead}
-            onDismiss={handleDismiss}
-          />
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ### Notification Types
 
-<Preview
-  title="Notification Types"
-  code={`import { GlassButton } from "liquidify";
-import { useState } from "react";
+### Notification Types
+
+```tsx
+
+;
 
 export default function Demo() {
   const [notifications, setNotifications] = useState([]);
@@ -219,99 +155,15 @@ System
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [notifications, setNotifications] = useState([]);
-
-      const addNotification = (type) => {
-        const messages = {
-          success: {
-            title: "Success!",
-            message: "Operation completed successfully.",
-          },
-          error: {
-            title: "Error",
-            message: "Something went wrong. Please try again.",
-          },
-          warning: { title: "Warning", message: "Please review your settings." },
-          info: {
-            title: "Information",
-            message: "Here's some helpful information.",
-          },
-          system: { title: "System", message: "System notification received." },
-        };
-
-        const newNotification = {
-          id: Date.now().toString(),
-          ...messages[type],
-          type,
-          timestamp: new Date(),
-          read: false,
-        };
-
-        setNotifications((prev) => [newNotification, ...prev]);
-      };
-
-      const handleMarkAsRead = (id) => {
-        setNotifications((prev) =>
-          prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-        );
-      };
-
-      const handleDismiss = (id) => {
-        setNotifications((prev) => prev.filter((n) => n.id !== id));
-      };
-
-      return (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-            alignItems: "center",
-          }}
-        >
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <GlassButton size="sm" onClick={() => addNotification("success")}>
-              Success
-            </GlassButton>
-            <GlassButton size="sm" onClick={() => addNotification("error")}>
-              Error
-            </GlassButton>
-            <GlassButton size="sm" onClick={() => addNotification("warning")}>
-              Warning
-            </GlassButton>
-            <GlassButton size="sm" onClick={() => addNotification("info")}>
-              Info
-            </GlassButton>
-            <GlassButton size="sm" onClick={() => addNotification("system")}>
-              System
-            </GlassButton>
-          </div>
-
-          <NotificationCenter
-            notifications={notifications}
-            onMarkAsRead={handleMarkAsRead}
-            onDismiss={handleDismiss}
-          />
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### With Actions
 
-<Preview
-  title="With Actions"
-  code={`import { useState } from "react";
+### With Actions
+
+```tsx
+;
 
 export default function Demo() {
   const [notifications, setNotifications] = useState([
@@ -360,63 +212,8 @@ return (
     onDismiss={handleDismiss}
   />
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [notifications, setNotifications] = useState([
-        {
-          id: "1",
-          title: "Friend Request",
-          message: "John Doe wants to connect with you.",
-          type: "info",
-          timestamp: new Date(Date.now() - 2 * 60 * 1000),
-          read: false,
-          action: {
-            label: "Accept",
-            onClick: () => alert("Friend request accepted!"),
-          },
-        },
-        {
-          id: "2",
-          title: "Update Available",
-          message: "Version 2.0 is ready to install.",
-          type: "system",
-          timestamp: new Date(Date.now() - 10 * 60 * 1000),
-          read: false,
-          action: {
-            label: "Install",
-            onClick: () => alert("Starting installation..."),
-          },
-        },
-      ]);
-
-      const handleMarkAsRead = (id) => {
-        setNotifications((prev) =>
-          prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-        );
-      };
-
-      const handleDismiss = (id) => {
-        setNotifications((prev) => prev.filter((n) => n.id !== id));
-      };
-
-      return (
-        <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-          <NotificationCenter
-            notifications={notifications}
-            onMarkAsRead={handleMarkAsRead}
-            onDismiss={handleDismiss}
-          />
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ## Props
 

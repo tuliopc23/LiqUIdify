@@ -2,24 +2,17 @@
 title: "LiqUIdify - Premium React Component Library"
 description: "Production-ready React components with liquid glass design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready."
 ---
-
-<!-- Liquid Glass SVG filter defs are injected globally via /scripts/enhancements.js -->
-
-import "@/styles/liquid-glass.css";
-import "@/styles/enhanced-typography.css";
-import "@/styles/visual-enhancements.css";
-
 # Welcome to LiqUIdify
 
 <section data-hero className="hero-tilt spotlight preserve-3d">
   <img
     className="block dark:hidden"
-    src="/images/hero-light.png"
+    src="/images/apple-glass-bg.svg"
     alt="LiqUIdify Hero Light"
   />
   <img
     className="hidden dark:block"
-    src="/images/hero-dark.png"
+    src="/images/apple-glass-bg-dark.svg"
     alt="LiqUIdify Hero Dark"
   />
 </section>
@@ -74,7 +67,7 @@ import "@/styles/visual-enhancements.css";
   <Step title="Setup Theme Provider">
     Wrap your app with the ThemeProvider for automatic theme switching
     ```tsx
-    import { ThemeProvider } from "liquidify";
+    ;
     import "liquidify/css";
 
     export default function App() {
@@ -90,7 +83,7 @@ import "@/styles/visual-enhancements.css";
   <Step title="Use Components">
     Start building with beautiful, accessible components
     ```tsx
-    import { Button, Card, LiquidGlass } from "liquidify";
+    ;
 
     function MyComponent() {
       return (
@@ -165,13 +158,9 @@ import "@/styles/visual-enhancements.css";
     Learn advanced techniques, best practices, and customization options
   </Card>
 </CardGroup>
-
 ---
 
 <Note>
-  **Ready to get started?** Check out our [Installation
-  Guide](/getting-started/Installation) or jump straight to the
+  **Ready to get started?** Check out our [Installation Guide](/getting-started/installation) or jump straight to the
   [Quickstart](/getting-started/quickstart) for a hands-on introduction.
 </Note>
-
-<script defer src="/scripts/enhancements.js"></script>

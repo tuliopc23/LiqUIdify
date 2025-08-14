@@ -2,11 +2,6 @@
 title: LiquidGlass
 description: Core liquid glass effect system with layered transparency and content-aware adaptation.
 ---
-
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassUIProvider } from "liquidify";
-
 # LiquidGlass System
 
 The LiquidGlass system is the foundation of LiqUIdify's design language, providing Apple-inspired glassmorphism effects with layered transparency, specular highlights, and content-aware adaptation.
@@ -15,9 +10,10 @@ The LiquidGlass system is the foundation of LiqUIdify's design language, providi
 
 ### Basic Glass Container
 
-<Preview
-  title="Basic Glass Container"
-  code={`
+### Basic Glass Container
+
+```tsx
+
 function BasicGlassContainer({ children }) {
   return (
     <div className="liquid-glass-container liquid-glass-md">
@@ -42,198 +38,27 @@ export default function Demo() {
       </div>
     </GlassUIProvider>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function BasicGlassContainer({ children }) {
-      return (
-        <div className="liquid-glass-container liquid-glass-md">
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content">{children}</div>
-        </div>
-      );
-    }
-    
-    function Demo() {
-      return (
-        <GlassUIProvider>
-          <div className="space-y-4">
-            <BasicGlassContainer>
-              <h3 className="text-liquid-primary font-semibold">Glass Container</h3>
-              <p className="text-liquid-secondary">
-                Layered transparency with specular highlights
-              </p>
-            </BasicGlassContainer>
-          </div>
-        </GlassUIProvider>
-      );
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
 ### Size Variants
 
-<Preview
-  title="Size Variants"
-  code={`
-function GlassBox({ size, children }) {
-  return (
-    <div className={\`liquid-glass-container liquid-glass-${size}\`}>
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">{children}</div>
-    </div>
-  );
-}
-
-export default function Demo() {
-  const sizes = ["xs", "sm", "md", "lg", "xl"];
-
-return (
-
-<GlassUIProvider>
-  <div className="flex flex-wrap gap-4">
-    {sizes.map((size) => (
-      <GlassBox key={size} size={size}>
-        <span className="text-liquid-primary font-medium">{size}</span>
-      </GlassBox>
-    ))}
-  </div>
-</GlassUIProvider>
-); }`} language="tsx"
-
-> {(() => {
-
-    function GlassBox({ size, children }) {
-      return (
-        <div className={`liquid-glass-container liquid-glass-${size}`}>
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content">{children}</div>
-        </div>
-      );
-    }
-
-    function Demo() {
-      const sizes = ["xs", "sm", "md", "lg", "xl"];
-
-      return (
-        <GlassUIProvider>
-          <div className="flex flex-wrap gap-4">
-            {sizes.map((size) => (
-              <GlassBox key={size} size={size}>
-                <span className="text-liquid-primary font-medium">{size}</span>
-              </GlassBox>
-            ))}
-          </div>
-        </GlassUIProvider>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+```tsx
+// Preview component removed - needs manual conversion
+```
 
 ### Interactive Glass Elements
 
-<Preview
-  title="Interactive Glass Elements"
-  code={`import { useState } from "react";
-
-function InteractiveGlass({ children, onClick, active }) {
-return (
-
-<div
-className={\`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
-active ? "ring-2 ring-liquid-accent" : ""
-}\`}
-onClick={onClick} >
-<div className="liquid-glass-filter" />
-<div className="liquid-glass-overlay" />
-<div className="liquid-glass-specular" />
-<div className="liquid-glass-content">{children}</div>
-</div>
-);
-}
-
-export default function Demo() {
-  const [active, setActive] = useState(0);
-  const items = ["Design", "Develop", "Deploy"];
-
-return (
-
-<GlassUIProvider>
-  <div className="flex gap-4">
-    {items.map((item, index) => (
-      <InteractiveGlass
-        key={item}
-        onClick={() => setActive(index)}
-        active={active === index}
-      >
-        <span className="text-liquid-primary font-medium">{item}</span>
-      </InteractiveGlass>
-    ))}
-  </div>
-</GlassUIProvider>
-); }`} language="tsx"
-
-> {(() => {
-
-    function InteractiveGlass({ children, onClick, active }) {
-      return (
-        <div
-          className={`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
-            active ? "ring-2 ring-liquid-accent" : ""
-          }`}
-          onClick={onClick}
-        >
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content">{children}</div>
-        </div>
-      );
-    }
-
-    function Demo() {
-      const [active, setActive] = useState(0);
-      const items = ["Design", "Develop", "Deploy"];
-
-      return (
-        <GlassUIProvider>
-          <div className="flex gap-4">
-            {items.map((item, index) => (
-              <InteractiveGlass
-                key={item}
-                onClick={() => setActive(index)}
-                active={active === index}
-              >
-                <span className="text-liquid-primary font-medium">{item}</span>
-              </InteractiveGlass>
-            ))}
-          </div>
-        </GlassUIProvider>
-      );
-    }
-    return <InteractiveGlass />
-
-})()}
-
-</Preview>
+```tsx
+// Preview component removed - needs manual conversion
+```
 
 ### Content-Aware Adaptation
 
-<Preview
-  title="Content-Aware Adaptation"
-  code={`
+### Content-Aware Adaptation
+
+```tsx
+
 function AdaptiveGlass({ bgColor, children }) {
   return (
     <div
@@ -268,129 +93,14 @@ return (
     ))}
   </div>
 </GlassUIProvider>
-); }`} language="tsx"
-
-> {(() => {
-
-    function AdaptiveGlass({ bgColor, children }) {
-      return (
-        <div
-          className="liquid-glass-container liquid-glass-md"
-          style={{ backgroundColor: bgColor }}
-        >
-          <div className="liquid-glass-filter" />
-          <div className="liquid-glass-overlay" />
-          <div className="liquid-glass-specular" />
-          <div className="liquid-glass-content">{children}</div>
-        </div>
-      );
-    }
-
-    function Demo() {
-      const backgrounds = [
-        { color: "rgba(59, 130, 246, 0.1)", name: "Blue" },
-        { color: "rgba(168, 85, 247, 0.1)", name: "Purple" },
-        { color: "rgba(34, 197, 94, 0.1)", name: "Green" },
-        { color: "rgba(239, 68, 68, 0.1)", name: "Red" },
-      ];
-
-      return (
-        <GlassUIProvider glassConfig={{ adaptToContent: true }}>
-          <div className="grid grid-cols-2 gap-4">
-            {backgrounds.map((bg) => (
-              <AdaptiveGlass key={bg.name} bgColor={bg.color}>
-                <span className="text-liquid-primary font-medium">{bg.name}</span>
-                <p className="text-liquid-secondary text-sm">Adaptive glass</p>
-              </AdaptiveGlass>
-            ))}
-          </div>
-        </GlassUIProvider>
-      );
-    }
-    return <AdaptiveGlass />
-
-})()}
-
-</Preview>
+); }
+```
 
 ### Apple Bento Box Layout
 
-<Preview
-  title="Apple Bento Box Layout"
-  code={`
-function BentoItem({ span, children, className = "" }) {
-  return (
-    <div className={\`liquid-glass-bento-item ${span} ${className}\`}>
-      {children}
-    </div>
-  );
-}
-
-export default function Demo() {
-  return (
-    <GlassUIProvider>
-      <div className="liquid-glass-bento liquid-glass-bento-3x3 max-w-2xl">
-        <BentoItem span="liquid-glass-bento-span-2">
-          <h3 className="text-liquid-primary font-semibold mb-2">Featured</h3>
-          <p className="text-liquid-secondary text-sm">Large feature card</p>
-        </BentoItem>
-        <BentoItem>
-          <h4 className="text-liquid-primary font-medium">Quick</h4>
-        </BentoItem>
-        <BentoItem>
-          <h4 className="text-liquid-primary font-medium">Action</h4>
-        </BentoItem>
-        <BentoItem>
-          <h4 className="text-liquid-primary font-medium">Stats</h4>
-        </BentoItem>
-        <BentoItem span="liquid-glass-bento-span-2">
-          <h4 className="text-liquid-primary font-medium">Wide Card</h4>
-          <p className="text-liquid-secondary text-sm">Spans two columns</p>
-        </BentoItem>
-      </div>
-    </GlassUIProvider>
-  );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function BentoItem({ span, children, className = "" }) {
-      return (
-        <div className={`liquid-glass-bento-item ${span} ${className}`}>
-          {children}
-        </div>
-      );
-    }
-    
-    function Demo() {
-      return (
-        <GlassUIProvider>
-          <div className="liquid-glass-bento liquid-glass-bento-3x3 max-w-2xl">
-            <BentoItem span="liquid-glass-bento-span-2">
-              <h3 className="text-liquid-primary font-semibold mb-2">Featured</h3>
-              <p className="text-liquid-secondary text-sm">Large feature card</p>
-            </BentoItem>
-            <BentoItem>
-              <h4 className="text-liquid-primary font-medium">Quick</h4>
-            </BentoItem>
-            <BentoItem>
-              <h4 className="text-liquid-primary font-medium">Action</h4>
-            </BentoItem>
-            <BentoItem>
-              <h4 className="text-liquid-primary font-medium">Stats</h4>
-            </BentoItem>
-            <BentoItem span="liquid-glass-bento-span-2">
-              <h4 className="text-liquid-primary font-medium">Wide Card</h4>
-              <p className="text-liquid-secondary text-sm">Spans two columns</p>
-            </BentoItem>
-          </div>
-        </GlassUIProvider>
-      );
-    }
-    return <BentoItem />
-  })()}
-</Preview>
+```tsx
+// Preview component removed - needs manual conversion
+```
 
 ## Provider Configuration
 
@@ -504,7 +214,7 @@ function App() {
 ### Custom Glass Component
 
 ```tsx
-import { forwardRef } from "react";
+;
 import { cn } from "liquidify/utils";
 
 interface CustomGlassProps {
@@ -543,7 +253,7 @@ const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
 ### Content-Aware Hook
 
 ```tsx
-import { useRef, useEffect } from "react";
+;
 
 function ContentAwareComponent() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -717,4 +427,4 @@ The system exposes CSS variables for customization:
 - [GlassButton](/components/button) - Button with glass effects
 - [GlassModal](/components/modal) - Modal with glass backdrop
 - [ThemeToggle](/components/theme-toggle) - Theme switching with glass
-- [useTheme](/hooks/use-theme) - Theme management integration
+- [ThemeProvider](/components/theme-provider) - Theme management integration

@@ -2,16 +2,16 @@
 title: Glass Textarea
 description: Elegant multi-line text input component with Apple-inspired liquid glass effects and auto-resize functionality.
 ---
+;
+;
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { GlassTextarea } from "liquidify";
-import { useState } from "react";
-import { GlassTextarea } from "@liquidify/components";
-import { GlassTextarea } from 'liquidify'
+```tsx
+;
+;
+;
+
 
 export default function Demo() {
   const [message, setMessage] = useState("");
@@ -72,74 +72,8 @@ return (
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [message, setMessage] = useState("");
-      const [feedback, setFeedback] = useState(
-        "This component looks amazing! The liquid glass effects really make it stand out.",
-      );
-      const [notes, setNotes] = useState("");
-
-      return (
-        <div className="space-y-6 max-w-lg mx-auto">
-          <div>
-            <GlassTextarea
-              label="Message"
-              placeholder="Type your message here..."
-              value={message}
-              onChange={setMessage}
-              maxLength={500}
-              showCharacterCount
-              helperText="Share your thoughts with us"
-            />
-          </div>
-
-          <div>
-            <GlassTextarea
-              label="Feedback"
-              description="Tell us what you think about this component"
-              value={feedback}
-              onChange={setFeedback}
-              size="lg"
-              minRows={4}
-              maxRows={8}
-              showCharacterCount
-              characterCountPosition="bottom-left"
-            />
-          </div>
-
-          <div>
-            <GlassTextarea
-              label="Quick Notes"
-              placeholder="Jot down some notes..."
-              value={notes}
-              onChange={setNotes}
-              size="sm"
-              autoResize={false}
-              minRows={2}
-            />
-          </div>
-
-          <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-            <h3 className="font-medium text-white mb-2">Character Counts:</h3>
-            <div className="text-white/70 text-sm space-y-1">
-              <p>Message: {message.length}/500</p>
-              <p>Feedback: {feedback.length}</p>
-              <p>Notes: {notes.length}</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Overview
 

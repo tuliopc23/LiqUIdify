@@ -2,11 +2,6 @@
 title: Progress
 description: Liquid Glass progress indicators with animations and multiple variants.
 ---
-
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassButton, GlassProgress } from "liquidify";
-
 # Progress
 
 The `GlassProgress` component provides elegant progress indicators with glassmorphism effects. It supports different sizes, colors, variants, and includes smooth animations with shimmer effects.
@@ -15,9 +10,10 @@ The `GlassProgress` component provides elegant progress indicators with glassmor
 
 ### Basic Progress
 
-<Preview
-  title="Basic Progress"
-  code={`import { GlassProgress } from "liquidify";
+### Basic Progress
+
+```tsx
+
 export default function Demo() {
   return (
     <div
@@ -29,36 +25,15 @@ export default function Demo() {
       <GlassProgress value={100} showValue />
     </div>
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-            padding: 20,
-          }}
-        >
-          <GlassProgress value={25} showValue />
-          <GlassProgress value={50} showValue />
-          <GlassProgress value={75} showValue />
-          <GlassProgress value={100} showValue />
-        </div>
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ### Size Variants
 
-<Preview
-  title="Size Variants"
-  code={`import { GlassProgress } from "liquidify";
+### Size Variants
+
+```tsx
+
 export default function Demo() {
   const value = 65;
 
@@ -83,46 +58,15 @@ style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const value = 65;
-
-      return (
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
-        >
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Small</h4>
-            <GlassProgress value={value} size="sm" showValue />
-          </div>
-
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Medium (Default)</h4>
-            <GlassProgress value={value} size="md" showValue />
-          </div>
-
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Large</h4>
-            <GlassProgress value={value} size="lg" showValue />
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### Color Variants
 
-<Preview
-  title="Color Variants"
-  code={`import { GlassProgress } from "liquidify";
+### Color Variants
+
+```tsx
+
 export default function Demo() {
   const value = 70;
   const colors = ["blue", "green", "purple", "red", "yellow"];
@@ -137,40 +81,15 @@ return (
     </div>
   ))}
 </div>
-); }`} language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const value = 70;
-      const colors = ["blue", "green", "purple", "red", "yellow"];
-
-      return (
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: 16, padding: 20 }}
-        >
-          {colors.map((color) => (
-            <div key={color}>
-              <h4 style={{ marginBottom: 8, textTransform: "capitalize" }}>
-                {color}
-              </h4>
-              <GlassProgress value={value} color={color} showValue />
-            </div>
-          ))}
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+); }
+```
 
 ### Style Variants
 
-<Preview
-  title="Style Variants"
-  code={`import { GlassProgress } from "liquidify";
+### Style Variants
+
+```tsx
+
 export default function Demo() {
   const value = 60;
 
@@ -195,47 +114,16 @@ style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }} >
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const value = 60;
-
-      return (
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
-        >
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Default (Glass)</h4>
-            <GlassProgress value={value} variant="default" showValue />
-          </div>
-
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Gradient</h4>
-            <GlassProgress value={value} variant="gradient" showValue />
-          </div>
-
-          <div>
-            <h4 style={{ marginBottom: 8 }}>Minimal</h4>
-            <GlassProgress value={value} variant="minimal" showValue />
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### Animated Progress
 
-<Preview
-  title="Animated Progress"
-  code={`import { GlassButton, GlassProgress } from "liquidify";
-import { useState, useEffect } from "react";
+### Animated Progress
+
+```tsx
+
+;
 
 export default function Demo() {
   const [progress, setProgress] = useState(0);
@@ -284,69 +172,16 @@ return (
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [progress, setProgress] = useState(0);
-      const [isRunning, setIsRunning] = useState(false);
-
-      useEffect(() => {
-        let interval;
-        if (isRunning && progress < 100) {
-          interval = setInterval(() => {
-            setProgress((prev) => {
-              const next = prev + Math.random() * 5;
-              if (next >= 100) {
-                setIsRunning(false);
-                return 100;
-              }
-              return next;
-            });
-          }, 200);
-        }
-        return () => clearInterval(interval);
-      }, [isRunning, progress]);
-
-      const reset = () => {
-        setProgress(0);
-        setIsRunning(false);
-      };
-
-      return (
-        <div style={{ padding: 20 }}>
-          <div style={{ marginBottom: 16 }}>
-            <GlassProgress value={progress} color="green" showValue />
-          </div>
-
-          <div style={{ display: "flex", gap: 8 }}>
-            <GlassButton
-              onClick={() => setIsRunning(!isRunning)}
-              disabled={progress >= 100}
-            >
-              {isRunning ? "Pause" : "Start"}
-            </GlassButton>
-            <GlassButton variant="ghost" onClick={reset}>
-              Reset
-            </GlassButton>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### Multiple Progress Bars
 
-<Preview
-  title="Multiple Progress Bars"
-  code={`import { GlassButton, GlassProgress } from "liquidify";
-import { useState, useEffect } from "react";
+### Multiple Progress Bars
+
+```tsx
+
+;
 
 export default function Demo() {
   const [tasks, setTasks] = useState([
@@ -429,103 +264,14 @@ showValue
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [tasks, setTasks] = useState([
-        { id: 1, name: "Downloading files", progress: 0, color: "blue" },
-        { id: 2, name: "Processing data", progress: 0, color: "purple" },
-        { id: 3, name: "Uploading results", progress: 0, color: "green" },
-      ]);
-      const [isRunning, setIsRunning] = useState(false);
-
-      useEffect(() => {
-        let interval;
-        if (isRunning) {
-          interval = setInterval(() => {
-            setTasks((prev) =>
-              prev.map((task) => {
-                if (task.progress >= 100) return task;
-                return {
-                  ...task,
-                  progress: Math.min(100, task.progress + Math.random() * 3),
-                };
-              }),
-            );
-          }, 150);
-        }
-        return () => clearInterval(interval);
-      }, [isRunning]);
-
-      const allComplete = tasks.every((task) => task.progress >= 100);
-      const overallProgress =
-        tasks.reduce((sum, task) => sum + task.progress, 0) / tasks.length;
-
-      const reset = () => {
-        setTasks((prev) => prev.map((task) => ({ ...task, progress: 0 })));
-        setIsRunning(false);
-      };
-
-      return (
-        <div style={{ padding: 20 }}>
-          <div style={{ marginBottom: 20 }}>
-            <h4 style={{ marginBottom: 8 }}>Overall Progress</h4>
-            <GlassProgress
-              value={overallProgress}
-              color={allComplete ? "green" : "blue"}
-              showValue
-            />
-          </div>
-
-          <div style={{ marginBottom: 20 }}>
-            {tasks.map((task) => (
-              <div key={task.id} style={{ marginBottom: 12 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: 4,
-                  }}
-                >
-                  <span style={{ fontSize: "0.875rem" }}>{task.name}</span>
-                  <span style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-                    {Math.round(task.progress)}%
-                  </span>
-                </div>
-                <GlassProgress value={task.progress} color={task.color} size="sm" />
-              </div>
-            ))}
-          </div>
-
-          <div style={{ display: "flex", gap: 8 }}>
-            <GlassButton
-              onClick={() => setIsRunning(!isRunning)}
-              disabled={allComplete}
-            >
-              {isRunning ? "Pause" : "Start"} Tasks
-            </GlassButton>
-            <GlassButton variant="ghost" onClick={reset}>
-              Reset All
-            </GlassButton>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ### Custom Max Value
 
-<Preview
-  title="Custom Max Value"
-  code={`import { GlassButton, GlassProgress } from "liquidify";
-import { useState } from "react";
+### Custom Max Value
+
+```tsx
 
 export default function Demo() {
   const [current, setCurrent] = useState(150);
@@ -572,61 +318,8 @@ style={{
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [current, setCurrent] = useState(150);
-      const max = 500;
-
-      return (
-        <div style={{ padding: 20 }}>
-          <div style={{ marginBottom: 16 }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: 8,
-              }}
-            >
-              <span>File Size Progress</span>
-              <span>
-                {current} / {max} MB
-              </span>
-            </div>
-            <GlassProgress value={current} max={max} color="purple" />
-          </div>
-
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <GlassButton
-              size="sm"
-              onClick={() => setCurrent((prev) => Math.max(0, prev - 50))}
-            >
-              -50 MB
-            </GlassButton>
-            <GlassButton
-              size="sm"
-              onClick={() => setCurrent((prev) => Math.min(max, prev + 50))}
-            >
-              +50 MB
-            </GlassButton>
-            <GlassButton size="sm" variant="ghost" onClick={() => setCurrent(0)}>
-              Reset
-            </GlassButton>
-            <GlassButton size="sm" variant="ghost" onClick={() => setCurrent(max)}>
-              Complete
-            </GlassButton>
-          </div>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 

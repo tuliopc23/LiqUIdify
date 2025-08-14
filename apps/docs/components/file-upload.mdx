@@ -3,27 +3,16 @@ title: File Upload
 description: Drag & drop or browse file selection component.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassFileUpload } from "liquidify";
-
 # File Upload
 
-<Preview
-  title="Example"
-  code={`import { GlassFileUpload } from "liquidify";
+### Example
+
+```tsx
+
 export default function Demo() {
   return <GlassFileUpload accept="image/*" multiple />;
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return <GlassFileUpload accept="image/*" multiple />;
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

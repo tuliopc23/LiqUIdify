@@ -3,7 +3,6 @@ title: Quick Start
 description: Get up and running with LiqUIdify's Liquid Glass components in under 5 minutes.
 icon:
 ---
-
 # Quick Start Guide
 
 Get up and running with LiqUIdify’s liquid glass UI in minutes. Install, wrap your app with the provider, and drop in a component.
@@ -19,7 +18,7 @@ bun add liquidify
 Wrap your app with `GlassUIProvider` and import the CSS once:
 
 ```tsx
-import { GlassUIProvider } from "liquidify";
+;
 import "liquidify/styles";
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
 ## 🌊 Your First Liquid Glass Component
 
 ```tsx
-import { GlassCard, GlassButton } from "liquidify";
+;
 
 export default function WelcomeCard() {
   return (
@@ -62,7 +61,7 @@ export default function WelcomeCard() {
 ## 🎯 Button Variants
 
 ```tsx
-import { GlassButton } from "liquidify";
+;
 
 export function ButtonShowcase() {
   return (
@@ -79,7 +78,7 @@ export function ButtonShowcase() {
 ## 🌙 Theme Toggle
 
 ```tsx
-import { UnifiedGlassProvider, useTheme, GlassButton } from "liquidify";
+;
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();

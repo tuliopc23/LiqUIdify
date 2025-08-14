@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "LiqUIdify",
   "logo": {
-    "dark": "/logo-dark.svg",
-    "light": "/logo-light.svg"
+    "dark": "logo-dark.svg",
+    "light": "logo-light.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "favicon.svg",
   "colors": {
     "primary": "#007AFF",
     "light": "#5AC8FA",
@@ -39,7 +39,7 @@
       "group": "Getting Started",
       "pages": [
         "index",
-        "getting-started/Installation",
+        "getting-started/installation",
         "getting-started/quickstart"
       ]
     },
@@ -171,45 +171,6 @@
       ]
     },
     {
-      "group": "Examples",
-      "pages": [
-        "examples/dashboard-example",
-        "examples/form-examples",
-        "examples/landing-page",
-        "examples/admin-panel",
-        "examples/integration-examples"
-      ]
-    },
-    {
-      "group": "Tutorials",
-      "pages": [
-        "tutorials/getting-started-tutorial",
-        "tutorials/theming-tutorial",
-        "tutorials/accessibility-tutorial",
-        "tutorials/performance-tutorial"
-      ]
-    },
-    {
-      "group": "Design",
-      "pages": [
-        "design/design-principles",
-        "design/usage-guidelines",
-        "design/component-specs",
-        "design/brand-guidelines",
-        "design/design-resources"
-      ]
-    },
-    {
-      "group": "Production",
-      "pages": [
-        "production/deployment-guide",
-        "production/bundle-analysis",
-        "production/cdn-usage",
-        "production/version-migration",
-        "production/troubleshooting"
-      ]
-    },
-    {
       "group": "FAQ",
       "pages": ["faq", "troubleshooting"]
     },
@@ -223,13 +184,7 @@
   },
   "theme": "venus",
   "layout": "topnav",
-  "styles": [
-    "./styles/liquid-glass.css",
-    "./styles/mintlify-typography.css",
-    "./styles/visual-enhancements.css",
-    "./styles/enhanced-typography.css",
-    "./styles/theme-backgrounds.css"
-  ],
+  "styles": ["styles/bundle.css"],
   "search": {
     "prompt": "Search LiqUIdify docs..."
   },

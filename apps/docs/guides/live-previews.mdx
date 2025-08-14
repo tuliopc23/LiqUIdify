@@ -2,9 +2,8 @@
 title: Live Component Previews
 description: Embed interactive React component previews above code blocks using a reusable Preview wrapper.
 ---
-
-import { GlassButton, GlassInput } from "liquidify";
-import { Preview } from "../components/Preview";
+;
+;
 
 # Live Component Previews
 
@@ -12,50 +11,42 @@ This guide shows how to add interactive React component previews above (or along
 
 ## Quick Example
 
-<Preview
-  title="Primary Button"
-  code={`<GlassButton onClick={() => alert('Clicked!')}>Click me</GlassButton>`}
-  language="tsx"
->
-  <GlassButton onClick={() => alert("Clicked!")}>Click me</GlassButton>
-</Preview>
+### Primary Button
+
+```tsx
+<GlassButton onClick={() => alert('Clicked!')}>Click me</GlassButton>
+```
 
 ## Hook Support
 
-<Preview
-  title="useState Toggle"
-  code={`function Example(){\n  const [on,setOn]=React.useState(false)\n  return (\n    <GlassButton onClick={()=>setOn(o=>!o)}>\n      {on ? 'ON' : 'OFF'}\n    </GlassButton>\n  )\n}`}
-  language="tsx"
->
-  {(() => {
-    const [on, setOn] = React.useState(false);
-    return (
-      <GlassButton onClick={() => setOn((o) => !o)}>
-        {on ? "ON" : "OFF"}
-      </GlassButton>
-    );
-  })()}
-</Preview>
+### useState Toggle
+
+```tsx
+function Example(){
+  const [on,setOn]=React.useState(false)
+  return (
+    <GlassButton onClick={()=>setOn(o=>!o)}>
+      {on ? 'ON' : 'OFF'}
+    </GlassButton>
+  )
+}
+```
 
 ## Controlled Input
 
-<Preview
-  title="Controlled Input"
-  code={`function Example(){\n  const [value,setValue]=React.useState('')\n  return <GlassInput value={value} onChange={e=>setValue(e.target.value)} />\n}`}
-  language="tsx"
->
-  {(() => {
-    const [value, setValue] = React.useState("");
-    return (
-      <GlassInput value={value} onChange={(e) => setValue(e.target.value)} />
-    );
-  })()}
-</Preview>
+### Controlled Input
+
+```tsx
+function Example(){
+  const [value,setValue]=React.useState('')
+  return <GlassInput value={value} onChange={e=>setValue(e.target.value)} />
+}
+```
 
 ## Usage
 
 1. Create `Preview.tsx` in `apps/docs/components`.
-2. Import it inside any MDX page: `import { Preview } from '../components/Preview'`.
+2. Import it inside any MDX page: ``.
 3. Wrap a live example + code string.
 4. Keep the code prop in sync with what you render.
 

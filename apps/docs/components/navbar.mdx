@@ -3,13 +3,9 @@ title: Navbar
 description: Responsive navigation bar with Apple-inspired design and advanced scroll behaviors.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+### Example
 
-<Preview
-  title="Example"
-  code={`import { useState } from "react";
-import { Search, Bell, User, Menu } from "lucide-react";
+```tsx
 
 export default function Demo() {
   const [activeItem, setActiveItem] = useState("home");
@@ -81,90 +77,8 @@ Contact
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [activeItem, setActiveItem] = useState("home");
-
-      return (
-        <div className="space-y-4">
-          {/* Basic Navbar */}
-          <Navbar
-            brand={
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-blue-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">L</span>
-                </div>
-                <span className="font-semibold text-white">LiqUIdify</span>
-              </div>
-            }
-            actions={
-              <div className="flex items-center gap-2">
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-                  <Search className="h-5 w-5 text-white/70" />
-                </button>
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-colors relative">
-                  <Bell className="h-5 w-5 text-white/70" />
-                  <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
-                </button>
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-                  <User className="h-5 w-5 text-white/70" />
-                </button>
-              </div>
-            }
-          >
-            <NavbarItem
-              active={activeItem === "home"}
-              onClick={() => setActiveItem("home")}
-            >
-              Home
-            </NavbarItem>
-            <NavbarItem
-              active={activeItem === "products"}
-              onClick={() => setActiveItem("products")}
-            >
-              Products
-            </NavbarItem>
-            <NavbarItem
-              active={activeItem === "about"}
-              onClick={() => setActiveItem("about")}
-            >
-              About
-            </NavbarItem>
-            <NavbarItem
-              active={activeItem === "contact"}
-              onClick={() => setActiveItem("contact")}
-            >
-              Contact
-            </NavbarItem>
-          </Navbar>
-
-          {/* Transparent Navbar */}
-          <Navbar
-            transparent
-            height="sm"
-            brand={<span className="font-bold text-white">Transparent</span>}
-            actions={
-              <button className="p-1.5 rounded-lg hover:bg-white/10">
-                <Menu className="h-4 w-4 text-white/70" />
-              </button>
-            }
-          >
-            <NavbarItem>Docs</NavbarItem>
-            <NavbarItem>Blog</NavbarItem>
-            <NavbarItem>Support</NavbarItem>
-          </Navbar>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Overview
 

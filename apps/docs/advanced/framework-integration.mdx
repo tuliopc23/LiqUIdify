@@ -2,7 +2,6 @@
 title: Framework Integration
 description: Step-by-step integration guides for Next.js, Remix, Vite, and other React frameworks.
 ---
-
 # Framework Integration
 
 LiqUIdify works seamlessly with all modern React frameworks. This guide provides specific instructions for integrating the library with popular frameworks, handling SSR, and optimizing performance.
@@ -23,7 +22,7 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
 
    ```tsx
    // app/layout.tsx
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
    import "liquidify/styles";
 
    export default function RootLayout({
@@ -46,7 +45,7 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
    ```tsx
    // pages/_app.tsx
    import type { AppProps } from "next/app";
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
    import "liquidify/styles";
 
    export default function App({ Component, pageProps }: AppProps) {
@@ -82,8 +81,8 @@ LiqUIdify handles SSR automatically, but for optimal performance:
    // app/providers.tsx
    "use client";
 
-   import { UnifiedGlassProvider } from "liquidify";
-   import { useEffect, useState } from "react";
+   ;
+   ;
 
    export function Providers({ children }: { children: React.ReactNode }) {
      const [mounted, setMounted] = useState(false);
@@ -124,7 +123,7 @@ LiqUIdify handles SSR automatically, but for optimal performance:
 
    ```tsx
    import Image from "next/image";
-   import { GlassCard } from "liquidify";
+   ;
 
    export function ProductCard() {
      return (
@@ -189,9 +188,9 @@ export default function RootLayout({
 
    ```tsx
    // src/main.tsx
-   import React from "react";
+   ;
    import ReactDOM from "react-dom/client";
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
    import App from "./App";
    import "liquidify/styles";
    import "./index.css";
@@ -210,7 +209,7 @@ export default function RootLayout({
    ```ts
    // vite.config.ts
    import { defineConfig } from "vite";
-   import react from "@vitejs/plugin-react";
+   ;
 
    export default defineConfig({
      plugins: [react()],
@@ -271,7 +270,7 @@ export default function RootLayout({
 
    ```tsx
    // app/root.tsx
-   import type { LinksFunction } from "@remix-run/node";
+   ;
    import {
      Links,
      LiveReload,
@@ -280,7 +279,7 @@ export default function RootLayout({
      Scripts,
      ScrollRestoration,
    } from "@remix-run/react";
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
    import liquidifyStyles from "liquidify/styles";
 
    export const links: LinksFunction = () => [
@@ -327,7 +326,7 @@ export default function RootLayout({
    }
 
    // Usage
-   import { GlassChart } from "liquidify";
+   ;
 
    export default function Dashboard() {
      return (
@@ -344,8 +343,8 @@ export default function RootLayout({
    // app/entry.server.tsx
    import { PassThrough } from "stream";
    import { renderToPipeableStream } from "react-dom/server";
-   import { RemixServer } from "@remix-run/react";
-   import { Response } from "@remix-run/node";
+   ;
+   ;
 
    export default function handleRequest(
      request: Request,
@@ -395,7 +394,7 @@ export default function RootLayout({
 
    ```tsx
    // src/App.tsx
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
    import "liquidify/styles";
    import "./App.css";
 
@@ -414,7 +413,7 @@ export default function RootLayout({
 
    ```tsx
    // src/index.tsx
-   import React from "react";
+   ;
    import ReactDOM from "react-dom/client";
    import "liquidify/styles"; // Import before your styles
    import "./index.css";
@@ -444,8 +443,8 @@ export default function RootLayout({
 
    ```js
    // gatsby-browser.js
-   import React from "react";
-   import { UnifiedGlassProvider } from "liquidify";
+   ;
+   ;
    import "liquidify/styles";
 
    export const wrapRootElement = ({ element }) => (
@@ -549,8 +548,8 @@ const GlassTable = lazy(() =>
 ### 2. Optimize Re-renders
 
 ```tsx
-import { memo } from "react";
-import { GlassCard } from "liquidify";
+;
+;
 
 const MemoizedCard = memo(GlassCard);
 ```
@@ -587,7 +586,7 @@ const ClientComponent = dynamic(() => import("./Component"), {
 ```tsx
 // Solution: Ensure styles are imported before component usage
 import "liquidify/styles"; // First
-import { GlassButton } from "liquidify"; // Second
+; // Second
 ```
 
 **Issue**: TypeScript errors with imports
@@ -616,5 +615,5 @@ module.exports = {
 
 - [Getting Started](/getting-started/installation): Basic installation
 - [Project Setup](/getting-started/project-setup): Tailwind configuration
-- [Performance Guide](/guides/performance): Optimization tips
-- [SSR Guide](/guides/ssr): Server-side rendering details
+- [Performance Guide](/core-concepts/performance): Optimization tips
+- [SSR Guide](/advanced/framework-integration#ssr-considerations): Server-side rendering details

@@ -3,40 +3,63 @@ title: Tabs
 description: Switch content panels using accessible tablist.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
+# Tabs
+
+Accessible tabbed interface for switching between content panels.
+
+## Installation
+
+```bash
+npm install liquidify
+```
+
+## Basic Usage
+
+```tsx
 import { GlassTabs } from "liquidify";
 
-<Preview
-  title="Example"
-  code={`import { GlassTabs } from "liquidify";
-const tabs = [
-  { id: "overview", label: "Overview", content: <div>Overview content</div> },
-  { id: "details", label: "Details", content: <div>Details content</div> },
-  { id: "settings", label: "Settings", content: <div>Settings content</div> },
-];
-
 export default function Demo() {
-  return <GlassTabs tabs={tabs} defaultTab="details" />;
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    const tabs = [
-      { id: "overview", label: "Overview", content: <div>Overview content</div> },
-      { id: "details", label: "Details", content: <div>Details content</div> },
-      { id: "settings", label: "Settings", content: <div>Settings content</div> },
-    ];
-    
-    function Demo() {
-      return <GlassTabs tabs={tabs} defaultTab="details" />;
-    }
-    return <Demo />
-  })()}
-</Preview>
+  const tabs = [
+    { 
+      id: "overview", 
+      label: "Overview", 
+      content: <div>Overview content here...</div> 
+    },
+    { 
+      id: "details", 
+      label: "Details", 
+      content: <div>Detailed information...</div> 
+    },
+    { 
+      id: "settings", 
+      label: "Settings", 
+      content: <div>Settings panel...</div> 
+    },
+  ];
 
-Props
+  return (
+    <GlassTabs 
+      tabs={tabs} 
+      defaultTab="details" 
+    />
+  );
+}
+```
 
-- tabs: Array<{ id, label, content, disabled? }>
-- defaultTab?: string
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tabs` | `TabItem[]` | - | Array of tab configurations |
+| `defaultTab` | `string` | - | ID of initially active tab |
+
+## Tab Item Structure
+
+```typescript
+type TabItem = {
+  id: string;
+  label: string;
+  content: ReactNode;
+  disabled?: boolean;
+};
+```

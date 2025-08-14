@@ -1,6 +1,8 @@
 import React from "react";
 // Use package CSS export to mirror consumer usage
 import "liquidify/css";
+// Load Tailwind utilities from the library's entry to enable utility classes
+import "@/styles/tailwind.css";
 // Wrap stories with the library's ThemeProvider so global theme toggle works
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LiquidGlassDefs } from "liquidify";
@@ -18,10 +20,14 @@ const darkBg = `
   linear-gradient(180deg, #0d111a 0%, #121725 100%)
 `;
 
+// Solid canvas colors that enhance glass effects (high contrast, low noise)
+const glassCanvasLight = "#e9eef6"; // soft cool light for subtle shadows
+const glassCanvasDark = "#0b1220"; // deep midnight blue to make glass pop
+
 // noinspection JSUnusedGlobalSymbols
 export const parameters = {
   codesandbox: {
-apiToken: "csb_v1_TM4R_k01DU7Jg9Ct7aHqbbuZ57__kbVfbs6Uk6lhtsc",
+    apiToken: "csb_v1_TM4R_k01DU7Jg9Ct7aHqbbuZ57__kbVfbs6Uk6lhtsc",
     dependencies: {
       "@radix-ui/themes": "latest",
       "@myscope/mypackage": "1.0.0",
@@ -48,8 +54,10 @@ apiToken: "csb_v1_TM4R_k01DU7Jg9Ct7aHqbbuZ57__kbVfbs6Uk6lhtsc",
     },
   },
   backgrounds: {
-    default: "light",
+    default: "glass-dark",
     values: [
+      { name: "glass-dark", value: glassCanvasDark },
+      { name: "glass-light", value: glassCanvasLight },
       { name: "light", value: lightBg },
       { name: "dark", value: darkBg },
       { name: "transparent", value: "transparent" },
@@ -119,6 +127,7 @@ export const globalTypes = {
 export const decorators = [
   (Story, context) => {
     const theme = context.globals.theme || "light";
+    // Background is controlled by the Backgrounds addon; keep wrapper transparent
 
     return (
       <ThemeProvider defaultTheme="light">
@@ -130,7 +139,7 @@ export const decorators = [
               "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontSize: "16px",
             lineHeight: "1.5",
-            background: theme === "dark" ? darkBg : lightBg,
+
             color: theme === "dark" ? "#ffffff" : "#000000",
           }}
         >

@@ -3,16 +3,12 @@ title: Checkbox
 description: Single boolean selection control.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassCheckbox } from "liquidify";
-
 # Checkbox
 
-<Preview
-  title="Example"
-  code={`import { GlassCheckbox } from "liquidify";
-import { useState } from "react";
+### Example
+
+```tsx
+
 export default function Demo() {
   const [c, setC] = useState(false);
   return (
@@ -22,23 +18,8 @@ export default function Demo() {
       label={c ? "Enabled" : "Enable feature"}
     />
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      const [c, setC] = useState(false);
-      return (
-        <GlassCheckbox
-          checked={c}
-          onChange={setC}
-          label={c ? "Enabled" : "Enable feature"}
-        />
-      );
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

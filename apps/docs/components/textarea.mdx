@@ -3,27 +3,16 @@ title: Textarea
 description: Multi-line text input with liquid glass styling.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassTextarea } from "liquidify";
-
 # Textarea
 
-<Preview
-  title="Example"
-  code={`import { GlassTextarea } from "liquidify";
+### Example
+
+```tsx
+
 export default function Demo() {
   return <GlassTextarea placeholder="Write something..." />;
-}`}
-  language="tsx"
->
-  {(() => {
-    function Demo() {
-      return <GlassTextarea placeholder="Write something..." />;
-    }
-    return <Demo />;
-  })()}
-</Preview>
+}
+```
 
 ## Props
 

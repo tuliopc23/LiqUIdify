@@ -2,7 +2,6 @@
 title: Accessibility
 description: How LiqUIdify helps you build accessible UIs and what to consider when composing components.
 ---
-
 # Accessibility
 
 LiqUIdify aims for WCAG 2.1 AA alignment. Components ship with sensible roles, labels, and keyboard focus management. This guide summarizes patterns and responsibilities.
@@ -18,7 +17,7 @@ LiqUIdify aims for WCAG 2.1 AA alignment. Components ship with sensible roles, l
 - Focus trap for modals/drawers via `GlassFocusTrap`
 
 ```tsx
-import { GlassModal, GlassFocusTrap } from "liquidify";
+;
 ```
 
 ## Labels & Descriptions
@@ -66,7 +65,7 @@ Use the library primitives which encapsulate these details where possible.
 Wrap risky areas with `GlassErrorBoundary` to fail gracefully.
 
 ```tsx
-import { GlassErrorBoundary } from "liquidify";
+;
 
 <GlassErrorBoundary fallback={<p>Something went wrong.</p>}>
   <DangerousArea />

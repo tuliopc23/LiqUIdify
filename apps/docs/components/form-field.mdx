@@ -2,14 +2,9 @@
 title: Form Field
 description: Accessible form field wrapper with validation states, labels, and helper text.
 ---
+### Example
 
-import Preview from "./Preview";
-import * as React from "react";
-
-<Preview
-  title="Example"
-  code={`import { GlassFormField, GlassInput } from "liquidify";
-import { useState } from "react";
+```tsx
 
 export default function Demo() {
   const [value, setValue] = useState("");
@@ -67,77 +62,15 @@ onChange={(e) => setValue(e.target.value)}
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function Demo() {
-      const [value, setValue] = useState("");
-      const [email, setEmail] = useState("");
-      const [password, setPassword] = useState("");
-
-      return (
-        <div className="space-y-6" style={{ maxWidth: 420 }}>
-          {/* Basic form field */}
-          <GlassFormField
-            label="Full Name"
-            required
-            helperText="Enter your first and last name"
-          >
-            <GlassInput
-              placeholder="John Doe"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </GlassFormField>
-
-          {/* Error state */}
-          <GlassFormField
-            label="Email Address"
-            required
-            error="Please enter a valid email address"
-          >
-            <GlassInput
-              type="email"
-              placeholder="john@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </GlassFormField>
-
-          {/* Success state */}
-          <GlassFormField label="Password" success="Password meets requirements">
-            <GlassInput
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </GlassFormField>
-
-          {/* Inline variant */}
-          <GlassFormField
-            variant="inline"
-            label="Newsletter"
-            helperText="Receive updates"
-          >
-            <input type="checkbox" className="ml-auto" />
-          </GlassFormField>
-        </div>
-      );
-    }
-    return <Demo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Variants
 
-<Preview
-  title="Example"
-  code={`import { GlassFormField, GlassInput } from "liquidify";
+### Example
+
+```tsx
+
 export default function VariantsDemo() {
   return (
     <div className="space-y-6" style={{ maxWidth: 420 }}>
@@ -166,50 +99,15 @@ export default function VariantsDemo() {
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function VariantsDemo() {
-      return (
-        <div className="space-y-6" style={{ maxWidth: 420 }}>
-          {/* Default variant */}
-          <GlassFormField label="Default" helperText="Standard form field">
-            <GlassInput placeholder="Default variant" />
-          </GlassFormField>
-
-          {/* Card variant */}
-          <GlassFormField
-            variant="card"
-            label="Card"
-            helperText="Elevated card appearance"
-          >
-            <GlassInput placeholder="Card variant" />
-          </GlassFormField>
-
-          {/* Inline variant */}
-          <GlassFormField
-            variant="inline"
-            label="Inline"
-            helperText="Side-by-side layout"
-          >
-            <GlassInput placeholder="Inline variant" />
-          </GlassFormField>
-        </div>
-      );
-    }
-    return <VariantsDemo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Validation States
 
-<Preview
-  title="Example"
-  code={`import { GlassFormField, GlassInput } from "liquidify";
+### Example
+
+```tsx
+
 export default function ValidationDemo() {
   return (
     <div className="space-y-6" style={{ maxWidth: 420 }}>
@@ -237,43 +135,8 @@ export default function ValidationDemo() {
     </div>
 
 );
-}`}
-language="tsx"
-
-> {(() => {
-
-    function ValidationDemo() {
-      return (
-        <div className="space-y-6" style={{ maxWidth: 420 }}>
-          {/* Error state */}
-          <GlassFormField
-            label="Error State"
-            error="This field is required"
-            required
-          >
-            <GlassInput placeholder="Enter value" />
-          </GlassFormField>
-
-          {/* Warning state */}
-          <GlassFormField
-            label="Warning State"
-            warning="This value might be incorrect"
-          >
-            <GlassInput placeholder="Check this value" />
-          </GlassFormField>
-
-          {/* Success state */}
-          <GlassFormField label="Success State" success="Looks good!">
-            <GlassInput placeholder="Valid input" />
-          </GlassFormField>
-        </div>
-      );
-    }
-    return <ValidationDemo />
-
-})()}
-
-</Preview>
+}
+```
 
 ## Props
 
@@ -353,7 +216,7 @@ function ContactForm() {
 ### Validation with Error Handling
 
 ```tsx
-import { useState } from "react";
+;
 
 function ValidatedForm() {
   const [email, setEmail] = useState("");
@@ -482,7 +345,6 @@ function ValidatedForm() {
 ```tsx
 // Debounced validation example
 import { useDebouncedCallback } from "use-debounce";
-import { GlassButton, GlassFormField, GlassInput } from "liquidify";
 
 const debouncedValidate = useDebouncedCallback((value) => {
   // Perform validation

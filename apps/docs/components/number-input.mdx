@@ -3,36 +3,19 @@ title: Number Input
 description: Numeric input with increment / decrement controls.
 ---
 
-import Preview from "./Preview";
-import * as React from "react";
-import { GlassNumberInput } from "liquidify";
-
 # Number Input
 
-<Preview
-  title="Example"
-  code={`import { GlassNumberInput } from "liquidify";
-import { useState } from "react";
+### Example
+
+```tsx
 
 export default function Demo() {
   const [value, setValue] = useState(10);
   return (
     <GlassNumberInput value={value} onChange={setValue} min={0} max={20} />
   );
-}`}
-  language="tsx"
->
-  {(() => {
-    
-    function Demo() {
-      const [value, setValue] = useState(10);
-      return (
-        <GlassNumberInput value={value} onChange={setValue} min={0} max={20} />
-      );
-    }
-    return <Demo />
-  })()}
-</Preview>
+}
+```
 
 ## Props
 
