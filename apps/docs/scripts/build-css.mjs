@@ -17,10 +17,11 @@
  *
  * Notes:
  * - File order:
- *   1) Styles listed in apps/docs/mint.json "styles" (if present), in that order
- *   2) Remaining CSS files in apps/docs/styles (alphabetically)
- *   3) Optional library CSS if requested
+ *   1) If apps/docs/mint.json has "styles", use exactly that list in that order
+ *   2) Otherwise, include all CSS files in apps/docs/styles (alphabetically)
+ *   3) Optional library CSS if requested (appended)
  *
+ * - The output file (bundle.css) is never included as an input.
  * - Missing files are skipped with a warning (non-fatal).
  */
 
@@ -66,9 +67,7 @@ const outPath = path.resolve(
 );
 
 const wantMinify =
-  flags.minify === true ||
-  process.env.DOCS_MINIFY_CSS === "1" ||
-  false;
+  flags.minify === true || process.env.DOCS_MINIFY_CSS === "1" || false;
 
 const silent =
   flags.silent === true || process.env.DOCS_BUNDLE_SILENT === "1" || false;
@@ -125,7 +124,8 @@ async function readMintStyles() {
     return styles
       .map(String)
       .map(normalizeStylePath)
-      .filter(isCssFile);
+      .filter(isCssFile)
+      .filter((p) => path.resolve(p) !== path.resolve(outPath));
   } catch (e) {
     warn("Failed to parse mint.json styles:", e?.message ?? e);
     return [];
@@ -137,7 +137,8 @@ async function listDocsStylesDir() {
     const entries = await readdir(docsStylesDir, { withFileTypes: true });
     return entries
       .filter((d) => d.isFile() && isCssFile(d.name))
-      .map((d) => path.join(docsStylesDir, d.name));
+      .map((d) => path.join(docsStylesDir, d.name))
+      .filter((p) => path.resolve(p) !== path.resolve(outPath));
   } catch (e) {
     warn("Failed to read styles directory:", docsStylesDir, e?.message ?? e);
     return [];
@@ -182,20 +183,20 @@ async function ensureOutDir(p) {
 async function main() {
   log("📦 Building docs CSS bundle...");
 
-  // 1) From mint.json 'styles' in order
+  // 1) From mint.json 'styles' in order (strict). If absent, fallback to all CSS in styles dir (alphabetical)
   const mintStyles = await readMintStyles();
-
-  // 2) All CSS in styles dir (alphabetical), excluding those already listed
   const dirStyles = await listDocsStylesDir();
 
-  // Order: mint.json styles first, then remaining (alphabetical)
-  const mintSet = new Set(mintStyles.map((p) => path.resolve(p)));
-  const remaining = dirStyles
-    .map((p) => path.resolve(p))
-    .filter((p) => !mintSet.has(p))
-    .sort((a, b) => a.localeCompare(b));
+  let orderedStyles = [];
+  if (mintStyles.length > 0) {
+    orderedStyles = mintStyles.map((p) => path.resolve(p));
+  } else {
+    orderedStyles = dirStyles
+      .map((p) => path.resolve(p))
+      .sort((a, b) => a.localeCompare(b));
+  }
 
-  // 3) Optional library CSS
+  // 2) Optional library CSS appended
   let libCssFiles = [];
   if (includeLib && (await fileExists(libCssPath))) {
     libCssFiles = [libCssPath];
@@ -204,13 +205,14 @@ async function main() {
   }
 
   const allFiles = unique([
-    ...mintStyles.map((p) => path.resolve(p)),
-    ...remaining,
-    ...libCssFiles,
+    ...orderedStyles,
+    ...libCssFiles.map((p) => path.resolve(p)),
   ]);
 
   log("🗂️  Files to bundle:");
-  allFiles.forEach((f, i) => log(`   ${String(i + 1).padStart(2, "0")}. ${path.relative(repoRoot, f)}`));
+  allFiles.forEach((f, i) =>
+    log(`   ${String(i + 1).padStart(2, "0")}. ${path.relative(repoRoot, f)}`),
+  );
 
   const chunks = [];
   const banner = `/* LiqUIdify Docs CSS Bundle
@@ -234,7 +236,9 @@ async function main() {
   await ensureOutDir(outPath);
   await writeFile(outPath, finalOut, "utf8");
 
-  log(`✅ Wrote bundle: ${path.relative(repoRoot, outPath)} (${Math.round(finalOut.length / 1024)} KB)`);
+  log(
+    `✅ Wrote bundle: ${path.relative(repoRoot, outPath)} (${Math.round(finalOut.length / 1024)} KB)`,
+  );
   process.exit(0);
 }
 
