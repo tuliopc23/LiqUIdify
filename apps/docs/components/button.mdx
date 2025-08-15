@@ -1,111 +1,51 @@
 ---
-title: Button
-description: Interactive buttons with liquid glass effects, multiple variants, and comprehensive accessibility.
-icon: mouse-pointer-click
----
-
-# Button
+ title: Button
+ description: Interactive buttons with liquid glass effects, multiple variants, and comprehensive accessibility.
+ icon: mouse-pointer-click
+ ---
+ 
+ import { LiquidButtonDemo } from "/snippets/liquid-button-demo.jsx"
+ 
+ # Button
 
 A versatile glassmorphic button component with liquid glass effects, multiple variants, sizes, and comprehensive interaction states. Features Apple-inspired design with smooth animations and full accessibility support.
 
-## Installation
+<LiquidButtonDemo />
 
-```bash
+<RequestExample>
+
+```bash Install
 npm install liquidify
 ```
 
-## Basic Usage
-
-```tsx
+```tsx Usage
 import "liquidify/css";
+import { GlassButton } from "liquidify";
 
 export default function Demo() {
   return <GlassButton variant="primary">Click me</GlassButton>;
 }
 ```
 
-## Examples
-
-### Basic Variants
-
-```tsx
-export default function BasicVariants() {
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton variant="primary">Primary</GlassButton>
-      <GlassButton variant="secondary">Secondary</GlassButton>
-      <GlassButton variant="ghost">Ghost</GlassButton>
-      <GlassButton variant="destructive">Destructive</GlassButton>
-    </div>
-  );
-}
+```tsx Variants
+<GlassButton size="sm">Small</GlassButton>
+<GlassButton size="md">Medium</GlassButton>
+<GlassButton size="lg">Large</GlassButton>
 ```
 
-### Size Variants
+</RequestExample>
 
-```tsx
-export default function SizeVariants() {
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton size="sm">Small</GlassButton>
-      <GlassButton size="md">Medium</GlassButton>
-      <GlassButton size="lg">Large</GlassButton>
-      <GlassButton size="xl">Extra Large</GlassButton>
-    </div>
-  );
-}
-```
 
-### With Icons
 
-```tsx
-export default function WithIcons() {
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton leftIcon={<Heart className="w-4 h-4" />}>Like</GlassButton>
-      <GlassButton rightIcon={<Download className="w-4 h-4" />}>
-        Download
-      </GlassButton>
-      <GlassButton
-        leftIcon={<Plus className="w-4 h-4" />}
-        rightIcon={<ArrowRight className="w-4 h-4" />}
-      >
-        Add & Continue
-      </GlassButton>
-    </div>
-  );
-}
-```
+## Examples (inline, optional)
 
-### Loading States
 
-```tsx
-export default function LoadingStates() {
-  const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-  };
 
-  return (
-    <div className="flex items-center gap-4 flex-wrap">
-      <GlassButton loading>Loading...</GlassButton>
-      <GlassButton loading loadingText="Saving...">
-        Save
-      </GlassButton>
-      <GlassButton
-        loading={loading}
-        loadingText="Processing..."
-        leftIcon={<Save className="w-4 h-4" />}
-        onClick={handleClick}
-      >
-        {loading ? "Processing..." : "Process Data"}
-      </GlassButton>
-    </div>
-  );
-}
-```
+
+
+
+
 
 ## Props
 
