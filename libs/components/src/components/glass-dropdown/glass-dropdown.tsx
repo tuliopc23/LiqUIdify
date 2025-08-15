@@ -211,7 +211,9 @@ export const GlassDropdown = React.memo(
                       )}
                     >
                       {item.icon && (
-                        <span className="h-4 w-4 flex-shrink-0">{item.icon}</span>
+                        <span className="h-4 w-4 flex-shrink-0">
+                          {item.icon}
+                        </span>
                       )}
                       <span className="truncate">{item.label}</span>
                     </button>

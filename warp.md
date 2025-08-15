@@ -5,13 +5,15 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 Repository scope: LiqUIdify monorepo (Bun workspaces) with a React component library, a Storybook app, and a Mintlify documentation site.
 
 Guardrails for future agents
+
 - Do not downgrade dependencies without explicit permission. Prefer latest or latest stable when adding/upgrading.
 - Treat package.json scripts as the source of truth. Run tasks via bun run scripts rather than ad‑hoc flags.
 - Shell is fish; prefer invoking scripts (fish-safe). Avoid inline POSIX-only syntax in ad-hoc commands.
 - Aim for test-first changes: fix failing tests and keep the test suite green.
 
 Monorepo at a glance
-- Workspaces: apps/*, libs/* (configured at root workspaces)
+
+- Workspaces: apps/_, libs/_ (configured at root workspaces)
 - Component library: libs/components
   - Build: Vite + rolldown (libs/components/rolldown.config.ts) → dist/libs/components
   - Types: tsc project libs/components/tsconfig.lib.json
@@ -28,6 +30,7 @@ Monorepo at a glance
 - CI: GitHub Actions for CI, coverage, contrast/a11y audit, security audit, build validation, and release
 
 Common commands (run from repo root)
+
 - Install
   - bun install
 - Lint and format
@@ -45,11 +48,11 @@ Common commands (run from repo root)
   - Dev (rolldown/vite): bun run dev
   - Watch build: bun run build:watch
 - Storybook
-  - Dev: bun run storybook  (http://localhost:6006)
-  - Build static: bun run build:storybook  (outputs to apps/storybook/storybook-static)
+  - Dev: bun run storybook (http://localhost:6006)
+  - Build static: bun run build:storybook (outputs to apps/storybook/storybook-static)
   - Preview built bundle locally: bun run storybook:preview
 - Documentation (Mintlify)
-  - Dev: bun run docs:dev  (runs CSS pipeline first, then Mintlify dev)
+  - Dev: bun run docs:dev (runs CSS pipeline first, then Mintlify dev)
   - Build: bun run docs:build (runs CSS pipeline, broken-links check)
   - Preview: bun run docs:preview (alias to docs:dev in this repo)
   - Check links only: bun run docs:links
@@ -76,15 +79,16 @@ Common commands (run from repo root)
   - Validate config presence: bun run validate:config
 
 High-level architecture and flows
+
 - Build flow
   - Library builds via Vite/rolldown config (libs/components/rolldown.config.ts), then types via tsc.
   - Storybook builds against the library sources with Vite builder, output under apps/storybook/storybook-static.
   - Docs build triggers a CSS pipeline (build-css.mjs) to ensure the library CSS is available to Mintlify, then runs Mintlify commands (dev/build/broken-links) scoped to apps/docs.
 - Testing strategy
-  - Vitest run in CI and locally; specialized test files live under libs/components/src/test/* for integration, a11y, performance, and workflow validation.
+  - Vitest run in CI and locally; specialized test files live under libs/components/src/test/\* for integration, a11y, performance, and workflow validation.
   - Accessibility checks also run through Vitest and a separate contrast audit script.
 - TypeScript and module resolution
-  - Root tsconfig.json sets strict options and path aliases (e.g., @/* → libs/components/src/*; also an alias for "liquidify" to local source for development).
+  - Root tsconfig.json sets strict options and path aliases (e.g., @/_→ libs/components/src/_; also an alias for "liquidify" to local source for development).
   - Package exports in root package.json map multiple entry points to built outputs under dist/libs/components.
 - CI highlights (GitHub Actions)
   - CI (push/PR to main, develop): bun install (frozen), type-check, lint (non-blocking), build:lib, test, build Storybook, then upload artifacts.
@@ -95,18 +99,22 @@ High-level architecture and flows
   - Release: tag-triggered; runs full test suite, builds, publishes to npm with provenance, creates GitHub release.
 
 Fish shell notes
+
 - Prefer bun run scripts to avoid shell differences. Scripts encapsulate any POSIX syntax.
 - For ad-hoc Vitest runs, use bunx vitest … to avoid relying on a global binary.
 
 Troubleshooting
+
 - If Storybook dev fails on port 6006, ensure no process is holding the port or change the port with "-p <port>".
 - If docs dev/build shows missing CSS, run bun run build:lib first, or rely on the docs scripts which already invoke the CSS pipeline.
 - Clear build artifacts with bun run clean; for a deeper reset, bun run clean:node then bun install.
 
 Pointers to app-specific guidance
+
 - Documentation-specific guidance exists at apps/docs/WARP.md. See that file for deeper Mintlify authoring patterns and the Preview component conventions.
 
 Suggested improvements to apps/docs/WARP.md (do not auto-apply)
+
 - At the top, add: “For monorepo-wide commands (install, lint, tests, Storybook, library builds), see /WARP.md.”
 - Under Quickstart Commands, clarify that docs:preview currently aliases docs:dev in this repo.
 - In Technical Context → Scripts, match current root scripts:
@@ -115,8 +123,9 @@ Suggested improvements to apps/docs/WARP.md (do not auto-apply)
 - Consider a short “Local Ports” note: Storybook 6006; Mintlify dev (default, printed by Mintlify) to help agents quickly find UIs.
 
 References
+
 - Root package.json scripts and exports
 - apps/storybook/.storybook configuration files
-- apps/docs/scripts/build-css.mjs and apps/docs/styles/*
-- .github/workflows/* for CI lifecycle
+- apps/docs/scripts/build-css.mjs and apps/docs/styles/\*
+- .github/workflows/\* for CI lifecycle
 - README.md for public-facing component overview and quick starts
