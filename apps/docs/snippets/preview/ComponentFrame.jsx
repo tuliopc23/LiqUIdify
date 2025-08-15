@@ -1,5 +1,5 @@
 import React from "react";
-import ProviderWrapper from "../preview/ProviderWrapper";
+import ProviderWrapper from "/snippets/preview/ProviderWrapper";
 
 export default function ComponentFrame({ title, intro, code, children }) {
   return (

@@ -195,6 +195,14 @@
   "seo": {
     "indexing": "navigable"
   },
+  "snippets": {
+    "path": "snippets",
+    "dependencies": {
+      "react": "^19.1.1",
+      "react-dom": "^19.1.1",
+      "liquidify": "file:../../liquidify-1.2.4.tgz"
+    }
+  },
   "redirects": [
     {
       "source": "/introduction",

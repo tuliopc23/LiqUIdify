@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+import ComponentFrame from "/snippets/preview/ComponentFrame";
 import { GlassModal, GlassButton } from "liquidify";
 
 const USAGE = `import "liquidify/styles";

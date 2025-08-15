@@ -1,5 +1,5 @@
 import React from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+import ComponentFrame from "/snippets/preview/ComponentFrame";
 import { GlassInput } from "liquidify";
 
 const USAGE = `import "liquidify/styles";
