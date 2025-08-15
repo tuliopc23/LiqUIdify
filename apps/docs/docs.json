@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "Mint",
   "name": "LiqUIdify",
-  "description": "LiqUIdify design system documentation",
+  "description": "LiqUIdify UI Component Library Documentation",
   "logo": {
     "dark": "logo-dark.svg",
     "light": "logo-light.svg"
