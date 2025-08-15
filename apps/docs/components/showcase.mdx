@@ -5,195 +5,67 @@ description: "Interactive examples of the most commonly used LiqUIdify component
 
 # Components Showcase
 
-A curated collection of the most commonly used LiqUIdify components with code examples. For interactive previews, visit our [Storybook](https://liquidify-storybook.vercel.app).
+A curated collection of the most commonly used LiqUIdify components with live snippet previews (rendered) followed by their code blocks. For more examples, visit our [Storybook](https://liquidify-storybook.vercel.app).
 
 ## Button
 
 Multiple button variants with different styles and interactions.
 
-```tsx
-import { GlassButton } from "liquidify";
+import { LiquidButtonDemo } from "/snippets/liquid-button-demo.jsx";
 
-export default function ButtonShowcase() {
-  return (
-    <div style={{ display: "flex", gap: 12 }}>
-      <GlassButton variant="primary">Primary</GlassButton>
-      <GlassButton variant="secondary">Secondary</GlassButton>
-      <GlassButton variant="ghost">Ghost</GlassButton>
-    </div>
-  );
-}
-```
+<LiquidButtonDemo />
 
 ## Form Field with Input
 
 Complete form field with label, input, and helper text.
 
-```tsx
-import { FormField, Input } from "liquidify";
+import { InputDemo } from "/snippets/input-demo.jsx";
 
-export default function FormFieldShowcase() {
-  return (
-    <FormField label="Email" helperText="We'll never share your email.">
-      <Input placeholder="you@example.com" />
-    </FormField>
-  );
-}
-```
+<InputDemo />
 
 ## Checkbox Group
 
 Group of checkboxes with shared label and validation.
 
-```tsx
-import { CheckboxGroup, Checkbox } from "liquidify";
-
-export default function CheckboxGroupShowcase() {
-  return (
-    <CheckboxGroup label="Fruits">
-      <Checkbox value="apple">Apple</Checkbox>
-      <Checkbox value="banana">Banana</Checkbox>
-      <Checkbox value="orange">Orange</Checkbox>
-    </CheckboxGroup>
-  );
-}
-```
+> Coming soon: interactive Checkbox Group demo snippet.
 
 ## Combobox
 
 Searchable dropdown with options filtering.
 
-```tsx
-import { Combobox } from "liquidify";
-
-export default function ComboboxShowcase() {
-  const options = [
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-    { label: "Orange", value: "orange" },
-  ];
-
-  return <Combobox options={options} placeholder="Pick a fruit" />;
-}
-```
+> Coming soon: interactive Combobox demo snippet.
 
 ## Modal
 
 Modal dialog with backdrop and close functionality.
 
-```tsx
-import { Modal, GlassButton } from "liquidify";
-import { useState } from "react";
-
-export default function ModalShowcase() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div>
-      <GlassButton onClick={() => setOpen(true)}>Open Modal</GlassButton>
-      <Modal open={open} onOpenChange={setOpen} title="Hello">
-        Modal content goes here.
-      </Modal>
-    </div>
-  );
-}
-```
+> Coming soon: interactive Modal demo snippet.
 
 ## Tabs
 
 Tabbed interface with multiple content panels.
 
-```tsx
-import { Tabs } from "liquidify";
-
-export default function TabsShowcase() {
-  const items = [
-    {
-      value: "a",
-      label: "One",
-      content: <div>Tab A Content</div>,
-    },
-    {
-      value: "b",
-      label: "Two",
-      content: <div>Tab B Content</div>,
-    },
-  ];
-
-  return <Tabs items={items} />;
-}
-```
+> Coming soon: interactive Tabs demo snippet.
 
 ## Tooltip
 
 Contextual tooltip with hover trigger.
 
-```tsx
-import { Tooltip, GlassButton } from "liquidify";
-
-export default function TooltipShowcase() {
-  return (
-    <Tooltip content="Helpful tip">
-      <GlassButton>Hover me</GlassButton>
-    </Tooltip>
-  );
-}
-```
+> Coming soon: interactive Tooltip demo snippet.
 
 ## Toast Notifications
 
 Toast system with provider and hook.
 
-```tsx
-import { ToastProvider, useToast, GlassButton } from "liquidify";
-
-function ToastDemo() {
-  const { toast } = useToast();
-
-  const showToast = () => {
-    toast({
-      title: "Saved",
-      description: "Changes persisted.",
-    });
-  };
-
-  return <GlassButton onClick={showToast}>Show Toast</GlassButton>;
-}
-
-export default function ToastShowcase() {
-  return (
-    <ToastProvider>
-      <ToastDemo />
-    </ToastProvider>
-  );
-}
-```
+> Coming soon: interactive Toast demo snippet.
 
 ## Card with Badge
 
 Card layout with status badge.
 
-```tsx
-import { Card, Badge } from "liquidify";
+import { CardDemo } from "/snippets/card-demo.jsx";
 
-export default function CardBadgeShowcase() {
-  return (
-    <Card>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <strong>Card Title</strong>
-        <Badge color="green">New</Badge>
-      </div>
-      <p>Card content with additional information...</p>
-    </Card>
-  );
-}
-```
+<CardDemo />
 
 ## Interactive Examples
 
