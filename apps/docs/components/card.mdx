@@ -1,12 +1,53 @@
 ---
-title: Card
-description: Structured content containers with layered liquid glass effects and compound components.
-icon: rectangle-horizontal
----
-
-# Card
+ title: Card
+ description: Structured content containers with layered liquid glass effects and compound components.
+ icon: rectangle-horizontal
+ ---
+ 
+ import { CardDemo } from "/snippets/card-demo.jsx"
+ 
+ # Card
 
 A versatile glassmorphic card component with layered liquid glass effects and a compound component API. Perfect for displaying structured content with Apple-inspired depth and transparency.
+
+<CardDemo />
+
+<RequestExample>
+
+```bash Install
+npm install liquidify
+```
+
+```tsx Usage
+import "liquidify/css";
+import { GlassCard, GlassButton } from "liquidify";
+
+export default function Demo() {
+  return (
+    <GlassCard>
+      <GlassCard.Header>
+        <GlassCard.Title>Glass Card</GlassCard.Title>
+        <GlassCard.Description>Standard glass effect</GlassCard.Description>
+      </GlassCard.Header>
+      <GlassCard.Content>
+        <p>Content</p>
+      </GlassCard.Content>
+      <GlassCard.Actions>
+        <GlassButton variant="primary">Action</GlassButton>
+      </GlassCard.Actions>
+    </GlassCard>
+  );
+}
+```
+
+```tsx Variants
+<GlassCard variant="default" />
+<GlassCard variant="elevated" />
+<GlassCard variant="outlined" />
+<GlassCard variant="interactive" />
+```
+
+</RequestExample>
 
 ## Live Examples
 
