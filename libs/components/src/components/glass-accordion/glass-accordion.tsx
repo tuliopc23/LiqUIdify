@@ -29,7 +29,7 @@ const accordionVariants = cva({
 });
 
 const accordionItemVariants = cva({
-  base: "overflow-hidden liquid-glass-container liquid-glass-md liquid-glass-interactive transition-all duration-200 mb-2",
+  base: "overflow-hidden liquid-glass-container liquid-glass-md liquid-glass-interactive transition-all duration-200 mb-2 rounded-xl",
   variants: {
     size: {
       sm: "liquid-glass-sm",
@@ -43,7 +43,7 @@ const accordionItemVariants = cva({
 });
 
 const accordionTriggerVariants = cva({
-  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10 rounded-full",
+  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10 rounded-xl",
   variants: {
     size: {
       sm: "p-3 text-sm",
@@ -57,7 +57,7 @@ const accordionTriggerVariants = cva({
 });
 
 const accordionContentVariants = cva({
-  base: "overflow-hidden text-liquid-secondary relative z-10",
+  base: "overflow-hidden text-liquid-secondary relative z-10 rounded-b-xl",
   variants: {
     size: {
       sm: "text-xs px-3 pb-3",
@@ -149,20 +149,14 @@ const GlassAccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   GlassAccordionItemProps
 >(({ className, size, ...props }, ref) => (
-  <AccordionPrimitive.Item
-    ref={ref}
-    className="relative"
-    value={`item-${Math.random()}`}
-  >
-    <div
-      className={cn(accordionItemVariants({ ...{ size } } as any), className)}
-    >
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content p-0">{props.children}</div>
-    </div>
-  </AccordionPrimitive.Item>
+    <AccordionPrimitive.Item ref={ref} className="relative" value={`item-${Math.random()}`}>
+      <div className={cn(accordionItemVariants({ ...( { size } as any) }), className)}>
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
+        <div className="liquid-glass-content p-0 rounded-xl">{props.children}</div>
+      </div>
+    </AccordionPrimitive.Item>
 ));
 
 const GlassAccordionTrigger = React.forwardRef<
@@ -195,21 +189,25 @@ const GlassAccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   GlassAccordionContentProps
 >(({ className, children, size, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className={cn(accordionContentVariants({ ...{ size } } as any), className)}
-    {...props}
-  >
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="border-t border-liquid/20"
+    <AccordionPrimitive.Content
+      ref={ref}
+      className={cn(
+        "backdrop-blur-sm bg-transparent data-[state=open]:rounded-b-xl",
+        accordionContentVariants({ ...( { size } as any) }),
+        className,
+      )}
+      {...props}
     >
-      {children}
-    </motion.div>
-  </AccordionPrimitive.Content>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="border-t border-liquid/20"
+      >
+        {children}
+      </motion.div>
+    </AccordionPrimitive.Content>
 ));
 
 GlassAccordion.displayName = "GlassAccordion";

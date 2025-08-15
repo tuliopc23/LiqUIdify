@@ -187,27 +187,35 @@ export const GlassDropdown = React.memo(
                 }
 
                 return (
-                  <button
-                    type="button"
+                  <div
                     key={item.value}
-                    onClick={() => handleSelect(item)}
-                    disabled={item.disabled}
                     className={cn(
-                      "w-full px-3 py-2 text-left transition-colors duration-200",
-                      // Use transparent glass tokens instead of solid backgrounds
-                      "hover:bg-liquid-glass-bg/20 focus:bg-liquid-glass-bg/20 focus:outline-none",
-                      "flex items-center space-x-2",
-                      "rounded-full",
-                      "text-gray-900 text-sm dark:text-white",
-                      item.disabled && "cursor-not-allowed opacity-50",
+                      "liquid-glass-container rounded-full",
+                      "transition-all duration-200",
+                      item.disabled && "opacity-60",
                     )}
                   >
-                    {item.icon && (
-                      <span className="h-4 w-4 flex-shrink-0">{item.icon}</span>
-                    )}
-
-                    <span className="truncate">{item.label}</span>
-                  </button>
+                    <div className="liquid-glass-filter" />
+                    <div className="liquid-glass-overlay" />
+                    <div className="liquid-glass-specular" />
+                    <button
+                      type="button"
+                      onClick={() => handleSelect(item)}
+                      disabled={item.disabled}
+                      className={cn(
+                        "liquid-glass-content w-full px-3 py-2 text-left",
+                        "flex items-center gap-2 rounded-full bg-transparent",
+                        "text-gray-900 text-sm dark:text-white",
+                        "hover:scale-[1.02] active:scale-[0.98] outline-none",
+                        item.disabled && "cursor-not-allowed",
+                      )}
+                    >
+                      {item.icon && (
+                        <span className="h-4 w-4 flex-shrink-0">{item.icon}</span>
+                      )}
+                      <span className="truncate">{item.label}</span>
+                    </button>
+                  </div>
                 );
               })}
             </div>

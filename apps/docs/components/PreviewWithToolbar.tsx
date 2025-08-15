@@ -1,7 +1,7 @@
-import {
+ Pimport {
   SandpackCodeViewer,
-  SandpackPreview,
-  useSandpack,
+    SandpackPreview,
+    useSandpack,
 } from "@codesandbox/sandpack-react";
 import React from "react";
 
@@ -39,7 +39,7 @@ export function PreviewWithToolbar({
       await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
-    } catch {}
+    } catch { }
   };
 
   return (

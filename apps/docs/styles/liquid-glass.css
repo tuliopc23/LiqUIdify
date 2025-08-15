@@ -611,6 +611,135 @@ body.dark {
    UTILITY CLASSES
    ================================================================ */
 
+/* Apply liquid-glass to all direct children of a container without touching component code.
+   Use this on wrappers like dropdown lists, accordion contents, menus, etc.
+   Example: <ul class="apply-liquid-glass-children"> ... <li>Option</li> ... </ul>
+*/
+.apply-liquid-glass-children > * {
+  position: relative;
+  background: transparent;
+  border-radius: var(--lg-radius-md);
+  overflow: hidden;
+  box-shadow: var(--lg-shadow-main);
+  color: var(--lg-text);
+  transition: var(--lg-transition-fast);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.apply-liquid-glass-children > *::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(8px) saturate(170%);
+  -webkit-backdrop-filter: blur(8px) saturate(170%);
+  background: rgba(255, 255, 255, 0.02);
+  z-index: -2;
+}
+.apply-liquid-glass-children > *::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--lg-shine-shadow);
+  filter: var(--lg-shine-filter);
+  opacity: 0.55;
+  z-index: -1;
+}
+.apply-liquid-glass-children.interactive > * {
+  cursor: pointer;
+}
+.apply-liquid-glass-children.interactive > *:hover { transform: scale(1.02); }
+.apply-liquid-glass-children.interactive > *:active { transform: scale(0.98); }
+
+/* Force pill rounding for menus/options */
+.apply-liquid-glass-children.rounded > * { border-radius: 9999px; }
+
+/* Make children transparent text/spacing defaults for list-like controls */
+.apply-liquid-glass-children.menu > * {
+  padding: 8px 12px;
+  margin: 6px 8px;
+}
+
+/* ================================================================
+   ROLE-BASED OPTION LISTS (menus, listboxes, etc.)
+   Auto-layer options rendered by common primitives without code changes
+   ================================================================ */
+
+/* Ensure parent containers remain transparent */
+[role="menu"],
+[role="listbox"],
+ul.menu, ul.options, .options-list, .menu-list {
+  background: transparent !important;
+}
+
+/* Direct options become liquid glass pills */
+[role="menu"] > *,
+[role="listbox"] > *,
+ul.menu > li,
+ul.options > li,
+.options-list > *,
+.menu-list > * {
+  position: relative;
+  background: transparent;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: var(--lg-shadow-main);
+  color: var(--lg-text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: var(--lg-transition-fast);
+}
+[role="menu"] > *::before,
+[role="listbox"] > *::before,
+ul.menu > li::before,
+ul.options > li::before,
+.options-list > *::before,
+.menu-list > *::before {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit;
+  backdrop-filter: blur(8px) saturate(170%);
+  -webkit-backdrop-filter: blur(8px) saturate(170%);
+  background: rgba(255, 255, 255, 0.02);
+  z-index: -2;
+}
+[role="menu"] > *::after,
+[role="listbox"] > *::after,
+ul.menu > li::after,
+ul.options > li::after,
+.options-list > *::after,
+.menu-list > *::after {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--lg-shine-shadow);
+  filter: var(--lg-shine-filter);
+  opacity: 0.55;
+  z-index: -1;
+}
+
+/* Spacing and interactive affordances */
+[role="menu"] > *,
+[role="listbox"] > *,
+ul.menu > li,
+ul.options > li,
+.options-list > *,
+.menu-list > * {
+  padding: 8px 12px;
+  margin: 6px 8px;
+}
+[role="menu"] > *:hover,
+[role="listbox"] > *:hover,
+ul.menu > li:hover,
+ul.options > li:hover,
+.options-list > *:hover,
+.menu-list > *:hover { transform: scale(1.02); }
+[role="menu"] > *:active,
+[role="listbox"] > *:active,
+ul.menu > li:active,
+ul.options > li:active,
+.options-list > *:active,
+.menu-list > *:active { transform: scale(0.98); }
+
 /* Text colors */
 .text-liquid-primary {
   color: var(--lg-text);
