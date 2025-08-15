@@ -649,11 +649,17 @@ body.dark {
 .apply-liquid-glass-children.interactive > * {
   cursor: pointer;
 }
-.apply-liquid-glass-children.interactive > *:hover { transform: scale(1.02); }
-.apply-liquid-glass-children.interactive > *:active { transform: scale(0.98); }
+.apply-liquid-glass-children.interactive > *:hover {
+  transform: scale(1.02);
+}
+.apply-liquid-glass-children.interactive > *:active {
+  transform: scale(0.98);
+}
 
 /* Force pill rounding for menus/options */
-.apply-liquid-glass-children.rounded > * { border-radius: 9999px; }
+.apply-liquid-glass-children.rounded > * {
+  border-radius: 9999px;
+}
 
 /* Make children transparent text/spacing defaults for list-like controls */
 .apply-liquid-glass-children.menu > * {
@@ -669,7 +675,10 @@ body.dark {
 /* Ensure parent containers remain transparent */
 [role="menu"],
 [role="listbox"],
-ul.menu, ul.options, .options-list, .menu-list {
+ul.menu,
+ul.options,
+.options-list,
+.menu-list {
   background: transparent !important;
 }
 
@@ -696,7 +705,9 @@ ul.options > li::before,
 .options-list > *::before,
 .menu-list > *::before {
   content: "";
-  position: absolute; inset: 0; border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   backdrop-filter: blur(8px) saturate(170%);
   -webkit-backdrop-filter: blur(8px) saturate(170%);
   background: rgba(255, 255, 255, 0.02);
@@ -709,7 +720,9 @@ ul.options > li::after,
 .options-list > *::after,
 .menu-list > *::after {
   content: "";
-  position: absolute; inset: 0; border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: var(--lg-shine-shadow);
   filter: var(--lg-shine-filter);
@@ -732,13 +745,17 @@ ul.options > li,
 ul.menu > li:hover,
 ul.options > li:hover,
 .options-list > *:hover,
-.menu-list > *:hover { transform: scale(1.02); }
+.menu-list > *:hover {
+  transform: scale(1.02);
+}
 [role="menu"] > *:active,
 [role="listbox"] > *:active,
 ul.menu > li:active,
 ul.options > li:active,
 .options-list > *:active,
-.menu-list > *:active { transform: scale(0.98); }
+.menu-list > *:active {
+  transform: scale(0.98);
+}
 
 /* Text colors */
 .text-liquid-primary {
