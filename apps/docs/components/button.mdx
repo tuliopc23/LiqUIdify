@@ -4,13 +4,14 @@ description: Interactive buttons with liquid glass effects, multiple variants, a
 icon: mouse-pointer-click
 ---
 
-import { LiquidButtonDemo } from "/snippets/liquid-button-demo.jsx";
+import ButtonExample from "/snippets/components/ButtonExample.jsx";
 
 # Button
 
 A versatile glassmorphic button component with liquid glass effects, multiple variants, sizes, and comprehensive interaction states. Features Apple-inspired design with smooth animations and full accessibility support.
 
-<LiquidButtonDemo />
+{/* Live preview */}
+<ButtonExample />
 
 <RequestExample>
 
@@ -19,7 +20,7 @@ npm install liquidify
 ```
 
 ```tsx Usage
-import "liquidify/css";
+import "liquidify/styles";
 import { GlassButton } from "liquidify";
 
 export default function Demo() {

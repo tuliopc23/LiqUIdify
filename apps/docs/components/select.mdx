@@ -3,77 +3,11 @@ title: Select
 description: Dropdown selection component with search, multi-select, and keyboard navigation.
 ---
 
+import SelectExample from "/snippets/components/SelectExample.jsx";
+
 ### Example
 
-```tsx
-export default function Demo() {
-  const [singleValue, setSingleValue] = useState("");
-  const [multiValue, setMultiValue] = useState([]);
-  const [countryValue, setCountryValue] = useState("");
-
-  const basicOptions = [
-    { value: "apple", label: "Apple" },
-    { value: "banana", label: "Banana" },
-    { value: "orange", label: "Orange" },
-    { value: "grape", label: "Grape" },
-  ];
-
-  const countryOptions = [
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "de", label: "Germany" },
-    { value: "fr", label: "France" },
-    { value: "jp", label: "Japan" },
-  ];
-
-  return (
-    <div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
-      <div>
-        <h3 className="text-white mb-4">Basic Select</h3>
-        <GlassSelect
-          options={basicOptions}
-          value={singleValue}
-          onChange={setSingleValue}
-          placeholder="Choose a fruit"
-        />
-        <p className="text-white/60 text-sm mt-2">
-          Selected: {singleValue || "None"}
-        </p>
-      </div>
-
-      <div>
-        <h3 className="text-white mb-4">Multi-Select</h3>
-        <GlassSelect
-          options={basicOptions}
-          value={multiValue}
-          onChange={setMultiValue}
-          placeholder="Choose multiple fruits"
-          multiple={true}
-          maxSelections={3}
-        />
-        <p className="text-white/60 text-sm mt-2">
-          Selected: {multiValue.length > 0 ? multiValue.join(", ") : "None"}
-        </p>
-      </div>
-
-      <div>
-        <h3 className="text-white mb-4">Searchable Select</h3>
-        <GlassSelect
-          options={countryOptions}
-          value={countryValue}
-          onChange={setCountryValue}
-          placeholder="Search countries..."
-          searchable={true}
-        />
-        <p className="text-white/60 text-sm mt-2">
-          Selected: {countryValue || "None"}
-        </p>
-      </div>
-    </div>
-  );
-}
-```
+<SelectExample />
 
 ## Variants and States
 

@@ -4,13 +4,14 @@ description: Text input fields with liquid glass effects, validation states, and
 icon: type
 ---
 
-import { InputDemo } from "/snippets/input-demo.jsx";
+import InputExample from "/snippets/components/InputExample.jsx";
 
 # Input
 
 A glassmorphic input component with liquid glass effects, validation states, and comprehensive accessibility support. Features Apple-inspired design with smooth focus transitions and clear visual feedback.
 
-<InputDemo />
+{/* Live preview */}
+<InputExample />
 
 <RequestExample>
 
@@ -19,7 +20,7 @@ npm install liquidify
 ```
 
 ```tsx Usage
-import "liquidify/css";
+import "liquidify/styles";
 import { GlassInput } from "liquidify";
 
 export default function Demo() {

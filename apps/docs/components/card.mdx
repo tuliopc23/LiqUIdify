@@ -4,13 +4,14 @@ description: Structured content containers with layered liquid glass effects and
 icon: rectangle-horizontal
 ---
 
-import { CardDemo } from "/snippets/card-demo.jsx";
+import CardExample from "/snippets/components/CardExample.jsx";
 
 # Card
 
 A versatile glassmorphic card component with layered liquid glass effects and a compound component API. Perfect for displaying structured content with Apple-inspired depth and transparency.
 
-<CardDemo />
+{/* Live preview */}
+<CardExample />
 
 <RequestExample>
 
@@ -19,7 +20,7 @@ npm install liquidify
 ```
 
 ```tsx Usage
-import "liquidify/css";
+import "liquidify/styles";
 import { GlassCard, GlassButton } from "liquidify";
 
 export default function Demo() {

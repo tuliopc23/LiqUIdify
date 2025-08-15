@@ -3,42 +3,14 @@ title: Pagination
 description: Liquid Glass pagination with smooth animations and accessibility features.
 ---
 
+import PaginationExample from "/snippets/components/PaginationExample.jsx";
+
 # Pagination
 
 The `GlassPagination` component provides elegant pagination controls with glassmorphism effects. It features smooth animations, intelligent ellipsis handling, and comprehensive accessibility support.
 
-## Live Examples
-
-### Basic Pagination
-
-### Basic Pagination
-
-```tsx
-export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        alignItems: "center",
-      }}
-    >
-      <p>
-        Current Page: {currentPage} of {totalPages}
-      </p>
-      <GlassPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
-    </div>
-  );
-}
-```
+{/* Live preview */}
+<PaginationExample />
 
 ### Size Variants
 
