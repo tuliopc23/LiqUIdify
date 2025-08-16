@@ -70,6 +70,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   restoreFocus = true,
   focusOptions = {},
   trapStack = true,
+  withGlass = false,
+  glassClassName,
+  surfaceProps,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
