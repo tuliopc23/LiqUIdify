@@ -372,7 +372,6 @@ code:not([class*="language-"]) {
 
 /* ====== End:   apps/docs/styles/custom.css ====== */
 
-
 /* ====== Begin: apps/docs/styles/enhanced-typography.css ====== */
 /* Enhanced Typography for LiqUIdify Docs
    - Readability-first, Apple-like rhythm
@@ -625,7 +624,6 @@ hr {
 }
 
 /* ====== End:   apps/docs/styles/enhanced-typography.css ====== */
-
 
 /* ====== Begin: apps/docs/styles/liquid-glass.css ====== */
 /**
@@ -1690,7 +1688,6 @@ ul.options > li:active,
 
 /* ====== End:   apps/docs/styles/liquid-glass.css ====== */
 
-
 /* ====== Begin: apps/docs/styles/mintlify-overrides.css ====== */
 /* Mintlify-specific overrides using platform identifiers/selectors
    - Applies Liquid Glass consistently to core UI (navbar, sidebar, footer, toc, tabs, panels)
@@ -1928,7 +1925,6 @@ footer,
 }
 
 /* ====== End:   apps/docs/styles/mintlify-overrides.css ====== */
-
 
 /* ====== Begin: apps/docs/styles/mintlify-typography.css ====== */
 /* ================================================================
@@ -2467,7 +2463,6 @@ PRINT STYLES
 
 /* ====== End:   apps/docs/styles/mintlify-typography.css ====== */
 
-
 /* ====== Begin: apps/docs/styles/theme-backgrounds.css ====== */
 /* Base background properties for all themes */
 body {
@@ -2527,7 +2522,6 @@ main,
 }
 
 /* ====== End:   apps/docs/styles/theme-backgrounds.css ====== */
-
 
 /* ====== Begin: apps/docs/styles/visual-enhancements.css ====== */
 /* Visual Enhancements for LiqUIdify Docs
