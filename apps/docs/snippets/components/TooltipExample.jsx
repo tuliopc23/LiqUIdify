@@ -1,3 +1,5 @@
+import { GlassTooltip, GlassButton } from 'liquidify'
+
 export const TooltipExample = () => (
   <div className="not-prose">
     <GlassTooltip content="Tooltip text">

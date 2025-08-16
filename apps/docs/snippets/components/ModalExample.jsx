@@ -1,3 +1,6 @@
+import React from 'react'
+import { GlassButton, GlassModal } from 'liquidify'
+
 export const ModalExample = () => {
   const [open, setOpen] = React.useState(false)
   return (

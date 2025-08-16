@@ -1,3 +1,5 @@
+import { GlassToastProvider, GlassButton, GlassToast } from 'liquidify'
+
 export const ToastExample = () => (
   <div className="not-prose">
     <GlassToastProvider>

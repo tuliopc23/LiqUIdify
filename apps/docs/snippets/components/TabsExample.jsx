@@ -1,3 +1,5 @@
+import { GlassTabs } from 'liquidify'
+
 export const TabsExample = () => (
   <div className="not-prose">
     <GlassTabs

@@ -1,3 +1,5 @@
+import { GlassBreadcrumbs } from 'liquidify'
+
 export const BreadcrumbsExample = () => {
   const items = [
     { label: 'Home', onClick: () => console.log('Home') },

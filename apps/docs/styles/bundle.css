@@ -1,4 +1,21 @@
+/* LiqUIdify Docs CSS Bundle
+ * Generated: 2025-08-16T18:24:20.685Z
+ * Files: 7
+ * include-lib: no (dist/libs/components/liquidify.css)
+ */
+
+/* ====== Begin: apps/docs/styles/custom.css ====== */
+/**
+ * LiqUIdify Documentation Custom Styles
+ * Consolidated styles for Mintlify compatibility
+ */
+
+/* ================================================================
+   LIQUID GLASS CSS VARIABLES
+   ================================================================ */
+
 :root {
+  /* Light theme base */
   --lg-bg-color: rgba(255, 255, 255, 0.35);
   --lg-bg-readable: rgba(20, 20, 25, 0.65);
   --lg-highlight: rgba(255, 255, 255, 0.75);
@@ -9,17 +26,25 @@
   --lg-accent: #007aff;
   --lg-primary: #007aff;
   --lg-primary-light: #5ac8fa;
+
+  /* Apple-style Border Radius */
   --lg-radius-xs: 0.75rem;
   --lg-radius-sm: 1rem;
   --lg-radius-md: 1.25rem;
   --lg-radius-lg: 1.5rem;
   --lg-radius-xl: 2rem;
+
+  /* Transitions */
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   --lg-transition-fast: all 0.2s ease-out;
+
+  /* Shadows */
   --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
   --lg-shine-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+
+  /* Bridge variables for Mintlify UI and typography system */
   --text-primary: var(--lg-text);
   --text-secondary: var(--lg-text-secondary);
   --text-tertiary: var(--lg-text-tertiary);
@@ -29,6 +54,8 @@
   --border-muted: rgba(0, 0, 0, 0.1);
   --border-strong: rgba(0, 0, 0, 0.18);
 }
+
+/* Dark Mode */
 [data-theme="dark"] {
   --lg-bg-color: rgba(20, 20, 25, 0.35);
   --lg-bg-readable: rgba(20, 20, 25, 0.75);
@@ -37,6 +64,8 @@
   --lg-text-secondary: rgba(255, 255, 255, 0.8);
   --lg-text-tertiary: rgba(255, 255, 255, 0.6);
   --lg-accent: #5ac8fa;
+
+  /* Bridge variables for Mintlify UI in dark theme */
   --text-primary: var(--lg-text);
   --text-secondary: var(--lg-text-secondary);
   --text-tertiary: var(--lg-text-tertiary);
@@ -46,7 +75,14 @@
   --border-muted: rgba(255, 255, 255, 0.1);
   --border-strong: rgba(255, 255, 255, 0.18);
 }
+
+/* ================================================================
+   ENHANCED TYPOGRAPHY
+   ================================================================ */
+
+/* SF Pro Font Loading */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 .docs-content {
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter",
@@ -59,6 +95,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Typography Enhancements */
 .docs-content h1,
 .docs-content h2,
 .docs-content h3,
@@ -67,6 +105,7 @@
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
+
 .docs-content h1 {
   font-size: 2.5rem;
   background: linear-gradient(
@@ -78,18 +117,26 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 .docs-content h2 {
   font-size: 2rem;
   color: var(--text-primary);
   margin-top: 3rem;
   margin-bottom: 1rem;
 }
+
 .docs-content h3 {
   font-size: 1.5rem;
   color: var(--text-primary);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
+
+/* ================================================================
+   LIQUID GLASS EFFECTS
+   ================================================================ */
+
+/* Base Liquid Glass Effect */
 .liquid-glass {
   position: relative;
   background: transparent;
@@ -100,6 +147,8 @@
   transition: var(--lg-transition);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Backdrop filter layer */
 .liquid-glass::before {
   content: "";
   position: absolute;
@@ -111,6 +160,8 @@
   z-index: -2;
   pointer-events: none;
 }
+
+/* Liquid shine effect */
 .liquid-glass::after {
   content: "";
   position: absolute;
@@ -127,6 +178,12 @@
   z-index: -1;
   pointer-events: none;
 }
+
+/* ================================================================
+   CODE BLOCK ENHANCEMENTS
+   ================================================================ */
+
+/* Enhanced code blocks */
 pre[class*="language-"] {
   border-radius: var(--lg-radius-sm) !important;
   background: rgba(0, 0, 0, 0.05) !important;
@@ -134,6 +191,7 @@ pre[class*="language-"] {
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
 }
+
 code[class*="language-"] {
   font-family:
     "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New",
@@ -141,6 +199,8 @@ code[class*="language-"] {
   font-size: 0.875rem !important;
   line-height: 1.6 !important;
 }
+
+/* Inline code */
 code:not([class*="language-"]) {
   background: color-mix(
     in srgb,
@@ -153,22 +213,36 @@ code:not([class*="language-"]) {
   font-family: "SF Mono", Monaco, "Cascadia Code", monospace !important;
   font-size: 0.85em !important;
 }
+
+/* ================================================================
+   NAVIGATION ENHANCEMENTS
+   ================================================================ */
+
+/* Enhanced navigation sidebar */
 .docs-sidebar {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.8);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 [data-theme="dark"] .docs-sidebar {
   background: rgba(20, 20, 25, 0.8);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* ================================================================
+   COMPONENT CARDS
+   ================================================================ */
+
+/* Card grid enhancements */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
 }
+
 .component-card {
   position: relative;
   padding: 1.5rem;
@@ -179,11 +253,18 @@ code:not([class*="language-"]) {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--lg-transition-fast);
 }
+
 .component-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border-color: rgba(0, 122, 255, 0.3);
 }
+
+/* ================================================================
+   VISUAL ENHANCEMENTS
+   ================================================================ */
+
+/* Hero section enhancements */
 .hero-section {
   background: radial-gradient(
     circle at 50% 0%,
@@ -193,6 +274,8 @@ code:not([class*="language-"]) {
   padding: 3rem 0;
   text-align: center;
 }
+
+/* Badge styles */
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -204,6 +287,8 @@ code:not([class*="language-"]) {
   color: var(--lg-primary);
   border: 1px solid rgba(0, 122, 255, 0.2);
 }
+
+/* Table enhancements */
 .docs-table {
   width: 100%;
   border-collapse: separate;
@@ -215,6 +300,7 @@ code:not([class*="language-"]) {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .docs-table th {
   background: rgba(0, 122, 255, 0.1);
   color: var(--lg-text);
@@ -223,38 +309,58 @@ code:not([class*="language-"]) {
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .docs-table td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* ================================================================
+   RESPONSIVE DESIGN
+   ================================================================ */
+
 @media (max-width: 768px) {
   .docs-content h1 {
     font-size: 2rem;
   }
+
   .docs-content h2 {
     font-size: 1.5rem;
   }
+
   .component-card {
     padding: 1rem;
   }
+
   .card-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 }
+
+/* ================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================================================ */
+
+/* Focus states */
 *:focus {
   outline: 2px solid var(--lg-primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* High contrast mode support */
 @media (prefers-contrast: high) {
   .liquid-glass {
     border: 2px solid var(--lg-text);
   }
+
   .component-card {
     border: 2px solid var(--lg-text);
   }
 }
+
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass,
   .component-card,
@@ -263,24 +369,41 @@ code:not([class*="language-"]) {
     animation: none !important;
   }
 }
+
+/* ====== End:   apps/docs/styles/custom.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/enhanced-typography.css ====== */
+/* Enhanced Typography for LiqUIdify Docs
+   - Readability-first, Apple-like rhythm
+   - Works in both light/dark themes
+   - Complements Liquid Glass visuals without overpowering them */
+
 :root {
+  /* Font stacks */
   --font-system:
     -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Inter, system-ui,
     Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji,
     sans-serif;
-  --type-xs: 0.8125rem;
-  --type-sm: 0.875rem;
-  --type-base: 1rem;
-  --type-lg: 1.125rem;
-  --type-xl: 1.25rem;
-  --type-2xl: 1.5rem;
-  --type-3xl: 1.875rem;
-  --type-4xl: 2.25rem;
+
+  /* Type scale */
+  --type-xs: 0.8125rem; /* 13px */
+  --type-sm: 0.875rem; /* 14px */
+  --type-base: 1rem; /* 16px */
+  --type-lg: 1.125rem; /* 18px */
+  --type-xl: 1.25rem; /* 20px */
+  --type-2xl: 1.5rem; /* 24px */
+  --type-3xl: 1.875rem; /* 30px */
+  --type-4xl: 2.25rem; /* 36px */
+
+  /* Leading and spacing */
   --leading-tight: 1.2;
   --leading-normal: 1.6;
   --leading-relaxed: 1.75;
   --letter-tight: -0.01em;
   --letter-normal: 0;
+
+  /* Colors (inherit most from liquid glass tokens when available) */
   --type-color: #1a1d21;
   --type-color-muted: rgba(26, 29, 33, 0.7);
   --type-color-subtle: rgba(26, 29, 33, 0.55);
@@ -288,6 +411,7 @@ code:not([class*="language-"]) {
   --type-link-hover: #084ecc;
   --type-hr: rgba(0, 0, 0, 0.1);
 }
+
 .dark {
   --type-color: #eaeef2;
   --type-color-muted: rgba(234, 238, 242, 0.75);
@@ -296,6 +420,8 @@ code:not([class*="language-"]) {
   --type-link-hover: #a7c4ff;
   --type-hr: rgba(255, 255, 255, 0.12);
 }
+
+/* Base text */
 html,
 body {
   font-family: var(--font-system);
@@ -305,6 +431,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Page containers benefit from slight max-width for readability */
 main,
 .mintlify-content,
 .docs-container,
@@ -313,6 +441,8 @@ main,
   margin-inline: auto;
   padding-inline: 1rem;
 }
+
+/* Headings */
 h1,
 h2,
 h3,
@@ -325,6 +455,7 @@ h6 {
   margin: 1.25em 0 0.6em;
   font-weight: 700;
 }
+
 h1 {
   font-size: var(--type-4xl);
 }
@@ -344,6 +475,7 @@ h6 {
   font-size: var(--type-base);
   font-weight: 600;
 }
+
 @media (min-width: 768px) {
   h1 {
     font-size: clamp(2.25rem, 2.2rem + 0.5vw, 3rem);
@@ -352,6 +484,7 @@ h6 {
     font-size: clamp(1.875rem, 1.8rem + 0.4vw, 2.25rem);
   }
 }
+
 p,
 ul,
 ol,
@@ -361,6 +494,8 @@ table,
 figure {
   margin: 0.75em 0 1em;
 }
+
+/* Paragraph and muted text */
 p {
   color: var(--type-color);
 }
@@ -369,6 +504,8 @@ p {
 p.muted {
   color: var(--type-color-subtle);
 }
+
+/* Links */
 a {
   color: var(--type-link);
   text-underline-offset: 2px;
@@ -377,10 +514,13 @@ a {
     color 120ms ease-out,
     text-decoration-color 120ms ease-out;
 }
+
 a:hover {
   color: var(--type-link-hover);
   text-decoration-color: currentColor;
 }
+
+/* Lists */
 ul,
 ol {
   padding-left: 1.25rem;
@@ -388,6 +528,8 @@ ol {
 li {
   margin-block: 0.25rem;
 }
+
+/* Code and pre */
 code,
 kbd {
   font-family:
@@ -395,16 +537,19 @@ kbd {
     "Courier New", monospace;
   font-size: 0.925em;
 }
+
 code {
   background: rgba(127, 127, 127, 0.08);
   border: 1px solid rgba(127, 127, 127, 0.15);
   border-radius: 0.375rem;
   padding: 0.125rem 0.375rem;
 }
+
 .dark code {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.12);
 }
+
 pre {
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -412,16 +557,21 @@ pre {
   padding: 1rem;
   overflow: auto;
 }
+
 .dark pre {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Blockquote */
 blockquote {
   border-left: 3px solid var(--type-hr);
   padding-left: 1rem;
   color: var(--type-color-muted);
   font-style: italic;
 }
+
+/* Tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -435,11 +585,15 @@ th {
   text-align: left;
   font-weight: 600;
 }
+
+/* Horizontal rule */
 hr {
   border: 0;
   border-top: 1px solid var(--type-hr);
   margin: 2rem 0;
 }
+
+/* Callouts / Notes (works with Mintlify-like shortcodes) */
 .Note,
 .Tip,
 .Warning,
@@ -453,6 +607,8 @@ hr {
   border: 1px solid var(--type-hr);
   background: rgba(127, 127, 127, 0.06);
 }
+
+/* Focus states */
 :focus-visible {
   outline: none;
   box-shadow:
@@ -460,24 +616,48 @@ hr {
     var(--lg-focus-glow, 0 0 20px rgba(0, 122, 255, 0.4));
   border-radius: 0.5rem;
 }
+
+/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;
   }
 }
+
+/* ====== End:   apps/docs/styles/enhanced-typography.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/liquid-glass.css ====== */
+/**
+ * LiqUIdify - Unified Liquid Glass Design System
+ *
+ * This is the core liquid glass implementation that creates the signature
+ * liquid glass effect with layered approach and specular highlights.
+ */
+
+/* ================================================================
+   LIQUID GLASS CSS VARIABLES
+   ================================================================ */
+
 :root {
+  /* Light theme base (readability first) */
   --lg-bg-color: rgba(255, 255, 255, 0.35);
+  /* decorative */
   --lg-bg-readable: rgba(20, 20, 25, 0.65);
+  /* high contrast surface */
   --lg-highlight: rgba(255, 255, 255, 0.75);
   --lg-text: #1a1d21;
+  /* dark text for light surfaces */
   --lg-text-inverse: #ffffff;
   --lg-text-secondary: rgba(26, 29, 33, 0.8);
   --lg-text-tertiary: rgba(26, 29, 33, 0.6);
-  --lg-red: #e11d48;
+  --lg-red: #e11d48; /* reserved for semantic error only */
   --lg-grey: #444739;
-  --lg-accent: #007aff;
+  --lg-accent: #007aff; /* brand primary blue */
   --lg-primary: #007aff;
   --lg-primary-light: #5ac8fa;
+
+  /* Enhanced Depth and Motion Controls */
   --lg-depth-scale: 1;
   --lg-tilt-x: 0deg;
   --lg-tilt-y: 0deg;
@@ -487,47 +667,78 @@ hr {
   --lg-glow-intensity: 0.3;
   --lg-spotlight-x: 50%;
   --lg-spotlight-y: 50%;
+
+  /* Animation Durations */
   --lg-duration-xxs: 80ms;
   --lg-duration-xs: 140ms;
   --lg-duration-sm: 220ms;
   --lg-duration-md: 340ms;
   --lg-duration-lg: 560ms;
   --lg-duration-xl: 900ms;
+
+  /* Easing Functions */
   --lg-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
   --lg-ease-emph: cubic-bezier(0.175, 0.885, 0.32, 2.2);
   --lg-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --lg-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Enhanced Focus States */
   --lg-focus-outline: 0 0 0 3px rgba(0, 122, 255, 0.35);
   --lg-focus-glow: 0 0 20px rgba(0, 122, 255, 0.4);
+
+  /* Liquid Glass Layers - Transparent System */
   --lg-filter-blur: blur(4px);
   --lg-filter-enhance: saturate(120%) brightness(1.15);
   --lg-specular-shadow:
     inset 1px 1px 0 var(--lg-highlight), inset 0 0 5px var(--lg-highlight);
+
+  /* Liquid Glass Shadows - From your snippets */
   --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
   --lg-shadow-enhanced:
     0 0 0 2px rgba(255, 255, 255, 0.6), 0 16px 32px rgba(0, 0, 0, 0.12);
+
+  /* The Liquid Shine Effect - Your exact implementation */
   --lg-shine-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
   --lg-shine-filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+
+  /* Transitions - Your exact timing */
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   --lg-transition-fast: all 0.2s ease-out;
   --lg-transition-press: all 0.1s ease-in;
+
+  /* Apple-style Border Radius - Authentic Bento Box Design */
   --lg-radius-xs: 0.75rem;
+  /* 12px - Small elements */
   --lg-radius-sm: 1rem;
+  /* 16px - Standard elements */
   --lg-radius-md: 1.25rem;
+  /* 20px - Cards, containers */
   --lg-radius-lg: 1.5rem;
+  /* 24px - Large cards */
   --lg-radius-xl: 2rem;
+  /* 32px - Hero elements */
   --lg-radius-2xl: 2.5rem;
+  /* 40px - Modal, overlays */
   --lg-radius-3xl: 3rem;
+  /* 48px - Special cases */
+
+  /* Apple Bento Box Grid System */
   --lg-bento-gap: 1rem;
+  /* Standard gap between bento items */
   --lg-bento-padding: 1.5rem;
+  /* Internal padding for bento items */
+
+  /* Z-Index Layers - Your exact system */
   --lg-z-filter: 0;
   --lg-z-overlay: 1;
   --lg-z-specular: 2;
   --lg-z-content: 3;
   --lg-z-shine: -1;
 }
+
+/* Dark Mode - Keep components transparent, only change text/accents */
 .dark {
   --lg-bg-color: rgba(20, 20, 25, 0.35);
   --lg-bg-readable: rgba(20, 20, 25, 0.75);
@@ -535,17 +746,26 @@ hr {
   --lg-text-inverse: #1a1d21;
   --lg-text-secondary: rgba(255, 255, 255, 0.8);
   --lg-text-tertiary: rgba(255, 255, 255, 0.6);
-  --lg-red: #e11d48;
+  --lg-red: #e11d48; /* reserved for semantic error only */
   --lg-grey: #888b95;
-  --lg-accent: #5ac8fa;
+  --lg-accent: #5ac8fa; /* lighter brand blue for dark */
 }
+
+/* Page backgrounds */
 body {
   background: radial-gradient(circle at 30% 30%, #f7f9fc, #e5e9f1 70%) fixed;
   color: var(--lg-text);
 }
+
 body.dark {
   background: radial-gradient(circle at 30% 30%, #0d0f15, #141821 70%) fixed;
 }
+
+/* ================================================================
+   CORE LIQUID GLASS SYSTEM
+   ================================================================ */
+
+/* Base Liquid Glass Effect - Apple Bento Style */
 .liquid-glass {
   position: relative;
   background: transparent;
@@ -556,6 +776,8 @@ body.dark {
   transition: var(--lg-transition);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Fix for Chrome nested backdrop-filter issue - Layer 1 */
 .liquid-glass::before {
   content: "";
   position: absolute;
@@ -569,6 +791,8 @@ body.dark {
   will-change: transform, opacity;
   transform: translateZ(0);
 }
+
+/* The Liquid Shine Effect - This is your signature trick! */
 .liquid-glass::after {
   content: "";
   position: absolute;
@@ -579,15 +803,17 @@ body.dark {
   background: rgba(255, 255, 255, 0.1);
   border-radius: inherit;
   backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px); /* Safari support */
   box-shadow: var(--lg-shine-shadow);
   opacity: 0.6;
   z-index: var(--lg-z-shine);
   filter: var(--lg-shine-filter);
   pointer-events: none;
   will-change: transform, opacity;
-  transform: translateZ(0);
+  transform: translateZ(0); /* GPU acceleration */
 }
+
+/* Layered Liquid Glass System */
 .liquid-glass-container {
   position: relative;
   display: flex;
@@ -601,6 +827,7 @@ body.dark {
   transition: var(--lg-transition);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
 .liquid-glass-filter,
 .liquid-glass-overlay,
 .liquid-glass-specular {
@@ -608,22 +835,26 @@ body.dark {
   inset: 0;
   border-radius: inherit;
 }
+
 .liquid-glass-filter {
   z-index: var(--lg-z-filter);
   backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%); /* Safari - fixed values */
   filter: var(--lg-filter-enhance);
   will-change: transform, opacity;
-  transform: translateZ(0);
+  transform: translateZ(0); /* GPU acceleration */
 }
+
 .liquid-glass-overlay {
   z-index: var(--lg-z-overlay);
   background: var(--lg-bg-readable);
 }
+
 .liquid-glass-specular {
   z-index: var(--lg-z-specular);
   box-shadow: var(--lg-specular-shadow);
 }
+
 .liquid-glass-content {
   position: relative;
   z-index: var(--lg-z-content);
@@ -635,80 +866,113 @@ body.dark {
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+/* ================================================================
+   INTERACTIVE STATES
+   ================================================================ */
+
 .liquid-glass-interactive {
   cursor: pointer;
   transition: var(--lg-transition-fast);
 }
+
 .liquid-glass-interactive:hover {
   transform: scale(1.05);
 }
+
 .liquid-glass-interactive:active {
   transform: scale(0.95);
   transition: var(--lg-transition-press);
 }
+
 .liquid-glass-interactive:focus-visible {
   outline: none;
   box-shadow:
     var(--lg-shadow-main),
     0 0 0 2px var(--lg-accent);
 }
+
+/* ================================================================
+   SIZE VARIANTS
+   ================================================================ */
+
+/* Apple Bento Box Size Variants */
 .liquid-glass-xs {
   border-radius: var(--lg-radius-xs);
   padding: 0.75rem;
   min-height: 2.5rem;
 }
+
 .liquid-glass-sm {
   border-radius: var(--lg-radius-sm);
   padding: 1rem;
   min-height: 3rem;
 }
+
 .liquid-glass-md {
   border-radius: var(--lg-radius-md);
   padding: var(--lg-bento-padding);
   min-height: 3.5rem;
 }
+
 .liquid-glass-lg {
   border-radius: var(--lg-radius-lg);
   padding: 2rem;
   min-height: 4rem;
 }
+
 .liquid-glass-xl {
   border-radius: var(--lg-radius-xl);
   padding: 2.5rem;
   min-height: 5rem;
 }
+
 .liquid-glass-2xl {
   border-radius: var(--lg-radius-2xl);
   padding: 3rem;
   min-height: 6rem;
 }
+
 .liquid-glass-3xl {
   border-radius: var(--lg-radius-3xl);
   padding: 3.5rem;
   min-height: 7rem;
 }
+
+/* Apple Bento Box Shape Variants */
 .liquid-glass-rounded {
   border-radius: var(--lg-radius-xl);
 }
+
 .liquid-glass-pill {
   border-radius: 9999px;
 }
+
 .liquid-glass-circle {
   border-radius: 50%;
   aspect-ratio: 1;
 }
+
 .liquid-glass-square {
   aspect-ratio: 1;
   border-radius: var(--lg-radius-md);
 }
+
 .liquid-glass-wide {
   aspect-ratio: 16/9;
   border-radius: var(--lg-radius-lg);
 }
+
 .liquid-glass-card {
   aspect-ratio: 4/3;
   border-radius: var(--lg-radius-md);
 }
+
+/* ================================================================
+   COMPONENT VARIANTS
+   ================================================================ */
+
+/* Liquid Glass Button */
 .liquid-glass-button {
   display: inline-flex;
   align-items: center;
@@ -726,12 +990,16 @@ body.dark {
   outline: none;
   gap: 0.5rem;
 }
+
 .liquid-glass-button:hover {
   transform: scale(1.05);
 }
+
 .liquid-glass-button:active {
   transform: scale(0.95);
 }
+
+/* Button variants */
 .liquid-glass-button-primary {
   background: linear-gradient(
     135deg,
@@ -739,18 +1007,24 @@ body.dark {
     var(--lg-primary-light) 100%
   );
 }
+
 .liquid-glass-button-secondary {
   background: var(--lg-bg-color);
 }
+
 .liquid-glass-button-ghost {
   background: transparent;
 }
+
+/* Liquid Glass Card */
 .liquid-glass-card {
   display: flex;
   flex-direction: column;
   padding: var(--lg-radius-lg);
   gap: 1rem;
 }
+
+/* Liquid Glass Input */
 .liquid-glass-input {
   padding: 12px 16px;
   font-family: system-ui, sans-serif;
@@ -761,14 +1035,18 @@ body.dark {
   background: transparent;
   width: 100%;
 }
+
 .liquid-glass-input::placeholder {
   color: var(--lg-text-tertiary);
 }
+
 .liquid-glass-input:focus {
   box-shadow:
     var(--lg-shadow-main),
     0 0 0 2px var(--lg-accent);
 }
+
+/* Liquid Glass Modal */
 .liquid-glass-modal {
   position: fixed;
   top: 50%;
@@ -782,17 +1060,24 @@ body.dark {
     0 0 40px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
+
 .liquid-glass-modal-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
 }
+
+/* ================================================================
+   SPECIAL EFFECTS
+   ================================================================ */
+
+/* Liquid Glass Item (from your examples) */
 .liquid-glass-item {
   display: flex;
   flex-direction: column;
@@ -802,6 +1087,7 @@ body.dark {
   transition: color 0.3s ease;
   cursor: pointer;
 }
+
 .liquid-glass-item svg {
   fill: var(--lg-grey);
   height: 50px;
@@ -809,12 +1095,15 @@ body.dark {
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.25));
   transition: transform 0.25s ease-out;
 }
+
 .liquid-glass-item:hover svg {
   transform: scale(1.1);
 }
+
 .liquid-glass-item:active svg {
   transform: scale(0.95);
 }
+
 .liquid-glass-item--active {
   background: rgba(0, 0, 0, 0.25);
   color: var(--lg-accent);
@@ -822,28 +1111,38 @@ body.dark {
   padding: 0.5rem 2.5rem;
   border-radius: var(--lg-radius-2xl);
 }
+
 .liquid-glass-item--active svg {
   fill: var(--lg-accent);
 }
+
+/* Enhanced Glass Effect */
 .liquid-glass-enhanced {
   box-shadow: var(--lg-shadow-enhanced);
 }
+
+/* Floating Effect */
 .liquid-glass-float {
   animation: liquidFloat 3s ease-in-out infinite;
 }
+
 @keyframes liquidFloat {
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-4px);
   }
 }
+
+/* Shimmer Effect */
 .liquid-glass-shimmer {
   position: relative;
   overflow: hidden;
 }
+
 .liquid-glass-shimmer::before {
   content: "";
   position: absolute;
@@ -861,63 +1160,91 @@ body.dark {
   pointer-events: none;
   z-index: var(--lg-z-content);
 }
+
 @keyframes shimmer {
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
 }
+
+/* ================================================================
+   APPLE BENTO BOX GRID SYSTEM
+   ================================================================ */
+
+/* Bento Grid Container */
 .liquid-glass-bento {
   display: grid;
   gap: var(--lg-bento-gap);
   padding: var(--lg-bento-gap);
   border-radius: var(--lg-radius-lg);
 }
+
 .liquid-glass-bento-2x2 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
 }
+
 .liquid-glass-bento-3x3 {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+
 .liquid-glass-bento-4x4 {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
+
+/* Bento Items */
 .liquid-glass-bento-item {
   position: relative;
   border-radius: var(--lg-radius-md);
   padding: var(--lg-bento-padding);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%); /* Safari support */
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: var(--lg-transition);
   will-change: transform, opacity;
-  transform: translateZ(0);
+  transform: translateZ(0); /* GPU acceleration */
 }
+
 .liquid-glass-bento-item:hover {
   background: rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
   box-shadow: var(--lg-shadow-enhanced);
 }
+
+/* Bento Item Spans */
 .liquid-glass-bento-span-2 {
   grid-column: span 2;
 }
+
 .liquid-glass-bento-span-3 {
   grid-column: span 3;
 }
+
 .liquid-glass-bento-span-row-2 {
   grid-row: span 2;
 }
+
 .liquid-glass-bento-feature {
   grid-column: span 2;
   grid-row: span 2;
   padding: calc(var(--lg-bento-padding) * 1.5);
 }
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+
+/* Apply liquid-glass to all direct children of a container without touching component code.
+   Use this on wrappers like dropdown lists, accordion contents, menus, etc.
+   Example: <ul class="apply-liquid-glass-children"> ... <li>Option</li> ... </ul>
+*/
 .apply-liquid-glass-children > * {
   position: relative;
   background: transparent;
@@ -958,13 +1285,24 @@ body.dark {
 .apply-liquid-glass-children.interactive > *:active {
   transform: scale(0.98);
 }
+
+/* Force pill rounding for menus/options */
 .apply-liquid-glass-children.rounded > * {
   border-radius: 9999px;
 }
+
+/* Make children transparent text/spacing defaults for list-like controls */
 .apply-liquid-glass-children.menu > * {
   padding: 8px 12px;
   margin: 6px 8px;
 }
+
+/* ================================================================
+   ROLE-BASED OPTION LISTS (menus, listboxes, etc.)
+   Auto-layer options rendered by common primitives without code changes
+   ================================================================ */
+
+/* Ensure parent containers remain transparent */
 [role="menu"],
 [role="listbox"],
 ul.menu,
@@ -973,6 +1311,8 @@ ul.options,
 .menu-list {
   background: transparent !important;
 }
+
+/* Direct options become liquid glass pills */
 [role="menu"] > *,
 [role="listbox"] > *,
 ul.menu > li,
@@ -1019,6 +1359,8 @@ ul.options > li::after,
   opacity: 0.55;
   z-index: -1;
 }
+
+/* Spacing and interactive affordances */
 [role="menu"] > *,
 [role="listbox"] > *,
 ul.menu > li,
@@ -1044,82 +1386,119 @@ ul.options > li:active,
 .menu-list > *:active {
   transform: scale(0.98);
 }
+
+/* Text colors */
 .text-liquid-primary {
   color: var(--lg-text);
 }
+
 .text-liquid-secondary {
   color: var(--lg-text-secondary);
 }
+
 .text-liquid-tertiary {
   color: var(--lg-text-tertiary);
 }
+
 .text-liquid-accent {
   color: var(--lg-accent);
 }
+
 .text-liquid-grey {
   color: var(--lg-grey);
 }
+
+/* Background utilities */
 .bg-liquid {
   background: var(--lg-bg-color);
 }
+
 .bg-liquid-highlight {
   background: var(--lg-highlight);
 }
+
 .bg-liquid-accent {
   background: var(--lg-accent);
 }
+
+/* Border utilities */
 .border-liquid {
   border-color: rgba(255, 255, 255, 0.12);
 }
+
 .border-liquid-accent {
   border-color: var(--lg-accent);
 }
+
+/* Apple-style spacing utilities */
 .space-liquid > * + * {
   margin-top: var(--lg-bento-gap);
 }
+
 .gap-liquid {
   gap: var(--lg-bento-gap);
 }
+
 .p-liquid {
   padding: var(--lg-bento-padding);
 }
+
+/* ================================================================
+   RESPONSIVE DESIGN
+   ================================================================ */
+
 @media (max-width: 768px) {
+  /* Mobile-specific blur values for performance */
   .liquid-glass-filter {
     backdrop-filter: blur(4px) saturate(150%);
     -webkit-backdrop-filter: blur(4px) saturate(150%);
   }
+
   .liquid-glass-bento-item {
     backdrop-filter: blur(4px) saturate(110%);
     -webkit-backdrop-filter: blur(4px) saturate(110%);
   }
+
   .liquid-glass::before {
     backdrop-filter: blur(6px) saturate(150%);
     -webkit-backdrop-filter: blur(6px) saturate(150%);
   }
+
   .liquid-glass::after {
     backdrop-filter: blur(0.5px);
     -webkit-backdrop-filter: blur(0.5px);
   }
+
   .liquid-glass-container {
     min-width: auto;
   }
+
   .liquid-glass-content {
     padding: 8px 16px;
     gap: 0.5rem;
   }
+
   .liquid-glass-button {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
+
   .liquid-glass-modal {
     padding: 1.5rem;
     margin: 1rem;
   }
+
   .liquid-glass-modal-backdrop {
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
   }
 }
+
+/* ================================================================
+   ACCESSIBILITY
+   ================================================================ */
+
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass,
   .liquid-glass-container,
@@ -1128,13 +1507,17 @@ ul.options > li:active,
     transition: none;
     animation: none;
   }
+
   .liquid-glass-shimmer::before {
     display: none;
   }
+
   .liquid-glass-float {
     animation: none;
   }
 }
+
+/* High contrast mode */
 @media (prefers-contrast: more) {
   .liquid-glass,
   .liquid-glass-container {
@@ -1142,34 +1525,49 @@ ul.options > li:active,
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(0, 0, 0, 0.8);
   }
+
   .dark .liquid-glass,
   .dark .liquid-glass-container {
     background: rgba(0, 0, 0, 0.95);
     border-color: rgba(255, 255, 255, 0.8);
   }
 }
+
+/* Focus visible support */
 .liquid-glass-interactive:focus-visible {
   outline: 2px solid var(--lg-accent);
   outline-offset: 2px;
 }
+
+/* ================================================================
+   BACKGROUND ANIMATION (from your examples)
+   ================================================================ */
+
 .liquid-glass-bg-animated {
   animation: bgMove 5s ease-in-out infinite alternate;
 }
+
 @keyframes bgMove {
   from {
     background-position: center center;
   }
+
   to {
     background-position: center top;
   }
 }
+
+/* Performance Optimizations */
 .liquid-glass-container,
 .liquid-glass-filter,
 .liquid-glass-overlay,
 .liquid-glass-specular {
   will-change: transform, opacity;
   transform: translateZ(0);
+  /* Force GPU acceleration */
 }
+
+/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass-container,
   .liquid-glass-interactive {
@@ -1177,17 +1575,22 @@ ul.options > li:active,
     animation: none !important;
   }
 }
+
+/* High contrast mode support */
 @media (prefers-contrast: more) {
   .liquid-glass-container {
     backdrop-filter: none;
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(0, 0, 0, 0.8);
   }
+
   .dark .liquid-glass-container {
     background: rgba(0, 0, 0, 0.95);
     border-color: rgba(255, 255, 255, 0.8);
   }
 }
+
+/* Enhanced Focus States */
 .liquid-glass-interactive:focus-visible {
   outline: 2px solid var(--lg-accent);
   outline-offset: 2px;
@@ -1195,41 +1598,61 @@ ul.options > li:active,
     var(--lg-shadow-main),
     0 0 0 4px rgba(251, 66, 104, 0.2);
 }
+
+/* Keyboard navigation support */
 .liquid-glass-interactive:focus-visible:not(:active) {
   transform: scale(1.02);
 }
+
+/* ================================================================
+   SVG FILTER EFFECTS
+   ================================================================ */
+
+/* Apply distortion filter for premium glass effect */
 @supports (filter: url(#liquid-glass-distortion)) {
   .liquid-glass-distortion {
     filter: url(#liquid-glass-distortion);
   }
+
   .liquid-glass-refraction {
     filter: url(#liquid-glass-refraction);
   }
+
+  /* Premium devices get full effects */
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
     .liquid-glass-premium::before {
       filter: url(#liquid-glass-chromatic);
     }
+
     .liquid-glass-premium::after {
       filter: url(#liquid-glass-edge) var(--lg-shine-filter);
     }
   }
+
+  /* Mobile optimized filters */
   @media (max-width: 768px) {
     .liquid-glass-distortion {
       filter: url(#liquid-glass-mobile);
     }
   }
 }
+
+/* Fallback for browsers without SVG filter support */
 @supports not (filter: url(#liquid-glass-distortion)) {
   .liquid-glass-distortion {
+    /* Enhanced shadow fallback */
     box-shadow:
       0 8px 16px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1),
       inset 0 1px 2px rgba(255, 255, 255, 0.2);
   }
 }
+
+/* Water ripple animation effect */
 .liquid-glass-ripple {
   position: relative;
 }
+
 .liquid-glass-ripple::before {
   content: "";
   position: absolute;
@@ -1239,6 +1662,7 @@ ul.options > li:active,
   animation: rippleEffect 3s ease-in-out infinite;
   pointer-events: none;
 }
+
 @keyframes rippleEffect {
   0%,
   100% {
@@ -1248,15 +1672,32 @@ ul.options > li:active,
     opacity: 0.5;
   }
 }
+
+/* Depth enhancement for hero elements */
 .liquid-glass-depth {
   filter: url(#liquid-glass-depth);
 }
+
+/* Noise texture overlay for realism */
 .liquid-glass-noise::after {
   filter: url(#liquid-glass-noise) var(--lg-shine-filter);
 }
+
+/* Specular highlight enhancement */
 .liquid-glass-specular-enhanced {
   filter: url(#liquid-glass-specular);
 }
+
+/* ====== End:   apps/docs/styles/liquid-glass.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/mintlify-overrides.css ====== */
+/* Mintlify-specific overrides using platform identifiers/selectors
+   - Applies Liquid Glass consistently to core UI (navbar, sidebar, footer, toc, tabs, panels)
+   - Safe for both light/dark via existing --lg-* tokens
+*/
+
+/* NAVBAR / HEADER */
 #navbar,
 header#navbar,
 header[role="banner"],
@@ -1337,6 +1778,8 @@ header#navbar::before,
   position: relative;
   z-index: 1;
 }
+
+/* SIDEBAR */
 #sidebar,
 .sidebar,
 .mintlify-sidebar,
@@ -1353,6 +1796,8 @@ header#navbar::before,
 [data-theme="dark"] .mintlify-sidebar {
   border-right-color: var(--border-muted, rgba(255, 255, 255, 0.12));
 }
+
+/* CONTENT CONTAINER */
 #content-container,
 .content,
 .content-area,
@@ -1360,8 +1805,10 @@ header#navbar::before,
 .mintlify-content,
 [data-identifier="content-container"],
 [data-identifier="content-area"] {
-  background: transparent !important;
+  background: transparent !important; /* let themed bg show through */
 }
+
+/* TABLE OF CONTENTS */
 #table-of-contents,
 .toc,
 [data-identifier="table-of-contents"],
@@ -1378,6 +1825,8 @@ header#navbar::before,
 [data-identifier="toc-item"][data-active="true"] {
   color: var(--lg-accent, #007aff);
 }
+
+/* PANELS / CARDS */
 .panel,
 [data-identifier="panel"],
 .card,
@@ -1394,6 +1843,8 @@ header#navbar::before,
     0 0 20px rgba(0, 0, 0, 0.1)
   );
 }
+
+/* CODE BLOCKS */
 .code-block,
 [data-identifier="code-block"] pre,
 pre[class*="language-"] {
@@ -1403,6 +1854,8 @@ pre[class*="language-"] {
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
 }
+
+/* TABS */
 .nav-tabs,
 [data-identifier="nav-tabs"] {
   display: flex;
@@ -1438,6 +1891,8 @@ pre[class*="language-"] {
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1)
   );
 }
+
+/* PAGINATION */
 .pagination,
 [data-identifier="pagination"],
 .pagination-prev,
@@ -1450,6 +1905,8 @@ pre[class*="language-"] {
 [data-identifier="pagination-title"] {
   color: var(--lg-text-secondary);
 }
+
+/* FOOTER */
 footer,
 #footer,
 [data-identifier="footer"] {
@@ -1458,6 +1915,8 @@ footer,
   background: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
+
+/* DARK MODE TWEAKS */
 [data-theme="dark"] #navbar,
 [data-theme="dark"] .topbar,
 [data-theme="dark"] .mintlify-topbar {
@@ -1467,6 +1926,18 @@ footer,
 [data-theme="dark"] [data-identifier="table-of-contents"] {
   border-color: rgba(255, 255, 255, 0.12);
 }
+
+/* ====== End:   apps/docs/styles/mintlify-overrides.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/mintlify-typography.css ====== */
+/* ================================================================
+   MINTLIFY-SPECIFIC TYPOGRAPHY ENHANCEMENTS
+   ================================================================ */
+
+/* Override Mintlify's default typography with our enhanced system */
+
+/* Mintlify Body Content */
 .mintlify-content,
 .markdown-body,
 .mdx-content,
@@ -1478,6 +1949,8 @@ footer,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Mintlify Headings */
 .mintlify-content h1,
 .markdown-body h1,
 .mdx-content h1 {
@@ -1490,6 +1963,7 @@ footer,
   margin: 0 0 2rem 0 !important;
   text-wrap: balance;
 }
+
 .mintlify-content h2,
 .markdown-body h2,
 .mdx-content h2 {
@@ -1504,11 +1978,13 @@ footer,
   border-bottom: 1px solid var(--border-muted, rgba(0, 0, 0, 0.1));
   padding-bottom: 0.5rem;
 }
+
 [data-theme="dark"] .mintlify-content h2,
 [data-theme="dark"] .markdown-body h2,
 [data-theme="dark"] .mdx-content h2 {
   border-bottom-color: var(--border-muted, rgba(255, 255, 255, 0.1));
 }
+
 .mintlify-content h3,
 .markdown-body h3,
 .mdx-content h3 {
@@ -1521,6 +1997,7 @@ footer,
   margin: 2.5rem 0 1rem 0 !important;
   text-wrap: balance;
 }
+
 .mintlify-content h4,
 .markdown-body h4,
 .mdx-content h4 {
@@ -1531,6 +2008,7 @@ footer,
   color: var(--text-primary) !important;
   margin: 2rem 0 1rem 0 !important;
 }
+
 .mintlify-content h5,
 .markdown-body h5,
 .mdx-content h5 {
@@ -1541,6 +2019,7 @@ footer,
   color: var(--text-primary) !important;
   margin: 1.5rem 0 0.75rem 0 !important;
 }
+
 .mintlify-content h6,
 .markdown-body h6,
 .mdx-content h6 {
@@ -1553,6 +2032,8 @@ footer,
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
 }
+
+/* Mintlify Paragraphs */
 .mintlify-content p,
 .markdown-body p,
 .mdx-content p {
@@ -1564,6 +2045,8 @@ footer,
   margin: 0 0 1.5rem 0 !important;
   text-wrap: pretty;
 }
+
+/* Lead paragraphs (first paragraph after heading) */
 .mintlify-content h1 + p,
 .mintlify-content h2 + p,
 .markdown-body h1 + p,
@@ -1573,11 +2056,14 @@ footer,
   font-weight: var(--font-normal) !important;
   margin-bottom: 2rem !important;
 }
+
+/* Mintlify Navigation Typography */
 .mintlify-sidebar,
 .mintlify-sidebar * {
   font-family: var(--font-text) !important;
   -webkit-font-smoothing: antialiased;
 }
+
 .mintlify-sidebar-item,
 .sidebar-item {
   font-size: var(--text-sm) !important;
@@ -1585,11 +2071,13 @@ footer,
   line-height: var(--leading-normal) !important;
   color: var(--text-secondary) !important;
 }
+
 .mintlify-sidebar-item.active,
 .sidebar-item.active {
   font-weight: var(--font-semibold) !important;
   color: var(--text-accent) !important;
 }
+
 .mintlify-sidebar-group,
 .sidebar-group {
   font-size: var(--text-xs) !important;
@@ -1599,26 +2087,33 @@ footer,
   color: var(--text-tertiary) !important;
   margin: 1.5rem 0 0.5rem 0;
 }
+
+/* Mintlify Topbar Typography */
 .mintlify-topbar,
 .topbar {
   font-family: var(--font-text) !important;
 }
+
 .mintlify-topbar-title,
 .topbar-title {
   font-size: var(--text-lg) !important;
   font-weight: var(--font-semibold) !important;
   color: var(--text-primary) !important;
 }
+
 .mintlify-topbar-link,
 .topbar-link {
   font-size: var(--text-sm) !important;
   font-weight: var(--font-medium) !important;
   color: var(--text-secondary) !important;
 }
+
 .mintlify-topbar-link:hover,
 .topbar-link:hover {
   color: var(--text-accent) !important;
 }
+
+/* Enhanced Code Blocks for Mintlify */
 .mintlify-content pre,
 .markdown-body pre,
 .mdx-content pre,
@@ -1635,6 +2130,7 @@ pre[data-theme] {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   position: relative;
 }
+
 .mintlify-content pre code,
 .markdown-body pre code,
 .mdx-content pre code {
@@ -1645,6 +2141,8 @@ pre[data-theme] {
   padding: 0 !important;
   color: inherit !important;
 }
+
+/* Inline code */
 .mintlify-content code:not(pre code),
 .markdown-body code:not(pre code),
 .mdx-content code:not(pre code) {
@@ -1657,12 +2155,15 @@ pre[data-theme] {
   border-radius: 0.375rem !important;
   border: 1px solid rgba(59, 130, 246, 0.2) !important;
 }
+
 [data-theme="dark"] .mintlify-content code:not(pre code),
 [data-theme="dark"] .markdown-body code:not(pre code),
 [data-theme="dark"] .mdx-content code:not(pre code) {
   background: rgba(59, 130, 246, 0.2) !important;
   border-color: rgba(59, 130, 246, 0.3) !important;
 }
+
+/* Enhanced Lists */
 .mintlify-content ul,
 .mintlify-content ol,
 .markdown-body ul,
@@ -1670,6 +2171,7 @@ pre[data-theme] {
   margin: 1.5rem 0 !important;
   padding-left: 1.5rem !important;
 }
+
 .mintlify-content li,
 .markdown-body li {
   font-family: var(--font-text) !important;
@@ -1678,13 +2180,17 @@ pre[data-theme] {
   color: var(--text-primary) !important;
   margin: 0.5rem 0 !important;
 }
+
 .mintlify-content ul li {
   position: relative;
 }
+
 .mintlify-content ul li::marker {
   color: var(--text-accent);
   font-weight: var(--font-bold);
 }
+
+/* Enhanced Tables */
 .mintlify-content table,
 .markdown-body table {
   font-family: var(--font-text) !important;
@@ -1698,11 +2204,13 @@ pre[data-theme] {
   overflow: hidden;
   border: 1px solid var(--border-muted, rgba(0, 0, 0, 0.1));
 }
+
 [data-theme="dark"] .mintlify-content table,
 [data-theme="dark"] .markdown-body table {
   background: rgba(255, 255, 255, 0.02);
   border-color: rgba(255, 255, 255, 0.1);
 }
+
 .mintlify-content th,
 .markdown-body th {
   font-weight: var(--font-semibold) !important;
@@ -1712,11 +2220,13 @@ pre[data-theme] {
   background: rgba(0, 0, 0, 0.02);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 [data-theme="dark"] .mintlify-content th,
 [data-theme="dark"] .markdown-body th {
   background: rgba(255, 255, 255, 0.05);
   border-bottom-color: var(--border-muted, rgba(255, 255, 255, 0.1));
 }
+
 .mintlify-content td,
 .markdown-body td {
   color: var(--text-primary) !important;
@@ -1724,6 +2234,7 @@ pre[data-theme] {
   border-bottom: 1px solid
     color-mix(in srgb, var(--border-muted, rgba(0, 0, 0, 0.1)) 50%, transparent);
 }
+
 [data-theme="dark"] .mintlify-content td,
 [data-theme="dark"] .markdown-body td {
   border-bottom-color: color-mix(
@@ -1732,6 +2243,8 @@ pre[data-theme] {
     transparent
   );
 }
+
+/* Enhanced Blockquotes */
 .mintlify-content blockquote,
 .markdown-body blockquote {
   font-family: var(--font-text) !important;
@@ -1746,10 +2259,12 @@ pre[data-theme] {
   border-radius: 0 0.5rem 0.5rem 0 !important;
   position: relative;
 }
+
 [data-theme="dark"] .mintlify-content blockquote,
 [data-theme="dark"] .markdown-body blockquote {
   background: rgba(59, 130, 246, 0.1) !important;
 }
+
 .mintlify-content blockquote::before {
   content: "\201C";
   font-size: 3rem;
@@ -1760,10 +2275,13 @@ pre[data-theme] {
   left: 1rem;
   opacity: 0.3;
 }
+
+/* Mintlify Cards Enhancement */
 .card,
 .mintlify-card {
   font-family: var(--font-text) !important;
 }
+
 .card h3,
 .mintlify-card h3 {
   font-family: var(--font-display) !important;
@@ -1773,6 +2291,7 @@ pre[data-theme] {
   color: var(--text-primary) !important;
   margin: 0 0 0.5rem 0 !important;
 }
+
 .card p,
 .mintlify-card p {
   font-size: var(--text-sm) !important;
@@ -1780,6 +2299,8 @@ pre[data-theme] {
   color: var(--text-secondary) !important;
   margin: 0 !important;
 }
+
+/* Enhanced Callouts/Admonitions */
 .callout,
 .admonition,
 .note,
@@ -1792,6 +2313,7 @@ pre[data-theme] {
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   position: relative;
 }
+
 .callout h4,
 .admonition h4,
 .note h4,
@@ -1803,6 +2325,7 @@ pre[data-theme] {
   margin: 0 0 1rem 0 !important;
   color: var(--text-primary) !important;
 }
+
 .callout p,
 .admonition p,
 .note p,
@@ -1813,18 +2336,24 @@ pre[data-theme] {
   color: var(--text-primary) !important;
   margin: 0 !important;
 }
+
+/* Note variants */
 .note {
   background: rgba(59, 130, 246, 0.05) !important;
   border-color: rgba(59, 130, 246, 0.2) !important;
 }
+
 .warning {
   background: rgba(245, 158, 11, 0.05) !important;
   border-color: rgba(245, 158, 11, 0.2) !important;
 }
+
 .tip {
   background: rgba(16, 185, 129, 0.05) !important;
   border-color: rgba(16, 185, 129, 0.2) !important;
 }
+
+/* Dark mode callouts */
 [data-theme="dark"] .callout,
 [data-theme="dark"] .admonition,
 [data-theme="dark"] .note,
@@ -1832,34 +2361,45 @@ pre[data-theme] {
 [data-theme="dark"] .tip {
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+
 [data-theme="dark"] .note {
   background: rgba(59, 130, 246, 0.1) !important;
   border-color: rgba(59, 130, 246, 0.3) !important;
 }
+
 [data-theme="dark"] .warning {
   background: rgba(245, 158, 11, 0.1) !important;
   border-color: rgba(245, 158, 11, 0.3) !important;
 }
+
 [data-theme="dark"] .tip {
   background: rgba(16, 185, 129, 0.1) !important;
   border-color: rgba(16, 185, 129, 0.3) !important;
 }
+
+/* ================================================================
+MOBILE TYPOGRAPHY OPTIMIZATIONS FOR MINTLIFY
+================================================================ */
+
 @media (max-width: 768px) {
   .mintlify-content h1,
   .markdown-body h1 {
     font-size: var(--text-3xl) !important;
     margin: 0 0 1.5rem 0 !important;
   }
+
   .mintlify-content h2,
   .markdown-body h2 {
     font-size: var(--text-2xl) !important;
     margin: 2rem 0 1rem 0 !important;
   }
+
   .mintlify-content h3,
   .markdown-body h3 {
     font-size: var(--text-xl) !important;
     margin: 1.5rem 0 0.75rem 0 !important;
   }
+
   .mintlify-content pre,
   .markdown-body pre {
     padding: 1rem !important;
@@ -1867,10 +2407,12 @@ pre[data-theme] {
     border-radius: 0 !important;
     font-size: 0.8rem !important;
   }
+
   .mintlify-content table,
   .markdown-body table {
     font-size: var(--text-xs) !important;
   }
+
   .mintlify-content th,
   .mintlify-content td,
   .markdown-body th,
@@ -1878,6 +2420,11 @@ pre[data-theme] {
     padding: 0.5rem !important;
   }
 }
+
+/* ================================================================
+PRINT STYLES
+================================================================ */
+
 @media print {
   .mintlify-content,
   .markdown-body {
@@ -1886,6 +2433,7 @@ pre[data-theme] {
     line-height: 1.5 !important;
     color: #000 !important;
   }
+
   .mintlify-content h1,
   .mintlify-content h2,
   .mintlify-content h3,
@@ -1895,17 +2443,20 @@ pre[data-theme] {
     color: #000 !important;
     page-break-after: avoid;
   }
+
   .mintlify-content pre,
   .markdown-body pre {
     background: #f5f5f5 !important;
     color: #000 !important;
     border: 1px solid #ccc !important;
   }
+
   .mintlify-content a,
   .markdown-body a {
     color: #000 !important;
     text-decoration: underline !important;
   }
+
   .mintlify-content a::after,
   .markdown-body a::after {
     content: " (" attr(href) ")";
@@ -1913,26 +2464,40 @@ pre[data-theme] {
     color: #666;
   }
 }
+
+/* ====== End:   apps/docs/styles/mintlify-typography.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/theme-backgrounds.css ====== */
+/* Base background properties for all themes */
 body {
   background: no-repeat fixed center / cover !important;
 }
+
+/* Theme-specific background images for Mintlify */
 [data-theme="light"] body,
 body:not([data-theme]) {
   background-image: url("/images/apple-glass-bg.svg") !important;
 }
+
 [data-theme="dark"] body {
   background-image: url("/images/apple-glass-bg-dark.svg") !important;
 }
+
+/* Defensive CSS: ensure Mintlify allows blur backgrounds and glass effects */
 html,
 body {
   min-height: 100%;
   background-color: var(--docs-bg, #eef2f7) !important;
 }
+
 [data-theme="dark"] html,
 [data-theme="dark"] body {
   --docs-bg: #0d111a;
   background-color: var(--docs-bg) !important;
 }
+
+/* Let the app wrappers be transparent so the page background shows through */
 #__next,
 main,
 .mintlify-content,
@@ -1941,6 +2506,8 @@ main,
   background: transparent !important;
   overflow: visible !important;
 }
+
+/* Improve backdrop-filter reliability for glass containers inside docs */
 .mintlify-content .liquid-glass,
 .mintlify-content .liquid-glass-container,
 .mdx-content .liquid-glass,
@@ -1950,32 +2517,49 @@ main,
   -webkit-backface-visibility: hidden;
   will-change: transform, opacity, backdrop-filter;
 }
+
+/* Accessibility: fallback when transparency is reduced */
 @media (prefers-reduced-transparency: reduce) {
   body {
     background-image: none !important;
     background-color: var(--docs-bg, #ffffff) !important;
   }
 }
+
+/* ====== End:   apps/docs/styles/theme-backgrounds.css ====== */
+
+
+/* ====== Begin: apps/docs/styles/visual-enhancements.css ====== */
+/* Visual Enhancements for LiqUIdify Docs
+   - Bridges docs layout with the Liquid Glass system
+   - Provides glass utilities for sections, cards, nav, and hero
+   - Includes Safari-safe backdrop-filter usage and accessibility fallbacks */
+
 :root {
   --ve-surface: rgba(255, 255, 255, 0.08);
   --ve-border: rgba(255, 255, 255, 0.16);
   --ve-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   --ve-radius: 1.25rem;
 }
+
 .dark {
   --ve-surface: rgba(0, 0, 0, 0.18);
   --ve-border: rgba(255, 255, 255, 0.14);
 }
+
+/* 1) Hero area with subtle 3D tilt + spotlight (hooks into enhancements.js vars) */
 .hero-tilt {
   transform-style: preserve-3d;
   transform: perspective(1200px) rotateX(var(--lg-tilt-x, 0deg))
     rotateY(var(--lg-tilt-y, 0deg));
   transition: transform 300ms var(--lg-ease-out, cubic-bezier(0.22, 1, 0.36, 1));
 }
+
 .spotlight {
   position: relative;
   isolation: isolate;
 }
+
 .spotlight::before {
   content: "";
   position: absolute;
@@ -1989,6 +2573,8 @@ main,
   mix-blend-mode: screen;
   z-index: 0;
 }
+
+/* 2) Generic glass utilities aligned with liquid-glass system */
 .glass-surface {
   background: var(--lg-bg-color, var(--ve-surface));
   border: 1px solid var(--liquid-glass-border, var(--ve-border));
@@ -1997,13 +2583,16 @@ main,
   border-radius: var(--ve-radius);
   box-shadow: var(--lg-shadow-main, var(--ve-shadow));
 }
+
 .glass-card {
   position: relative;
   border-radius: var(--ve-radius);
   overflow: hidden;
   box-shadow: var(--lg-shadow-main, var(--ve-shadow));
 }
+
 .glass-card .glass-filter {
+  /* Background blur layer */
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -2011,14 +2600,18 @@ main,
   -webkit-backdrop-filter: blur(6px);
   z-index: var(--lg-z-filter, 0);
 }
+
 .glass-card .glass-overlay {
+  /* Translucent overlay */
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: var(--lg-bg-color, rgba(255, 255, 255, 0.18));
   z-index: var(--lg-z-overlay, 1);
 }
+
 .glass-card .glass-specular {
+  /* Specular highlight */
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -2028,11 +2621,14 @@ main,
   );
   z-index: var(--lg-z-specular, 2);
 }
+
 .glass-card .glass-content {
   position: relative;
   z-index: var(--lg-z-content, 3);
   padding: 1rem 1.25rem;
 }
+
+/* 3) Buttons and interactive elements */
 .glass-button {
   display: inline-flex;
   align-items: center;
@@ -2052,7 +2648,9 @@ main,
     transform 120ms var(--lg-ease-standard, ease),
     filter 120ms ease;
 }
+
 .glass-button::before {
+  /* blur layer */
   content: "";
   position: absolute;
   inset: 0;
@@ -2061,7 +2659,9 @@ main,
   -webkit-backdrop-filter: blur(5px) saturate(120%);
   z-index: 0;
 }
+
 .glass-button::after {
+  /* overlay */
   content: "";
   position: absolute;
   inset: 0;
@@ -2075,16 +2675,20 @@ main,
   z-index: 1;
   opacity: 0.8;
 }
+
 .glass-button > * {
   position: relative;
   z-index: 2;
 }
+
 .glass-button:hover {
   transform: translateY(-1px) scale(1.02);
 }
 .glass-button:active {
   transform: translateY(0) scale(0.98);
 }
+
+/* Variants */
 .glass-button.primary {
   color: #fff;
 }
@@ -2097,6 +2701,8 @@ main,
 .glass-button.accent::after {
   background: rgba(251, 66, 104, 0.22);
 }
+
+/* 4) Navigation header/footer polish */
 .nav-glass {
   position: sticky;
   top: 0;
@@ -2104,6 +2710,7 @@ main,
   background: transparent;
   border-bottom: 1px solid var(--ve-border);
 }
+
 .nav-glass::before {
   content: "";
   position: absolute;
@@ -2112,6 +2719,8 @@ main,
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
 }
+
+/* 5) Elevated sections (wrap content in a glass surface) */
 .section-glass {
   padding: 1rem;
   border-radius: var(--ve-radius);
@@ -2121,6 +2730,8 @@ main,
   -webkit-backdrop-filter: blur(8px);
   box-shadow: var(--lg-shadow-main, var(--ve-shadow));
 }
+
+/* 6) Tables - soft glass headers */
 .table-glass th {
   background: linear-gradient(
     to bottom,
@@ -2135,6 +2746,8 @@ main,
     rgba(0, 0, 0, 0.14)
   );
 }
+
+/* 7) High contrast mode */
 @media (forced-colors: active) {
   .glass-surface,
   .glass-card,
@@ -2148,9 +2761,13 @@ main,
     border: 1px solid ButtonText;
   }
 }
+
+/* 8) Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .glass-button,
   .hero-tilt {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ====== End:   apps/docs/styles/visual-enhancements.css ====== */

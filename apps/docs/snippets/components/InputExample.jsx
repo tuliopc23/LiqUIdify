@@ -1,3 +1,5 @@
+import { GlassFormField } from 'liquidify'
+
 export const InputExample = () => (
   <div className="not-prose space-y-2">
     <GlassFormField label="Email">

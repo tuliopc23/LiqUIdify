@@ -1,3 +1,5 @@
+import { GlassButton } from 'liquidify'
+
 export const ButtonExample = () => (
   <div className="not-prose flex gap-2">
     <GlassButton>Default</GlassButton>

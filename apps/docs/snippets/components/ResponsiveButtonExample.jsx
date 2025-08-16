@@ -1,3 +1,5 @@
+import { ResponsiveButton } from 'liquidify'
+
 export const ResponsiveButtonExample = () => (
   <div className="not-prose flex flex-wrap gap-2">
     <ResponsiveButton>Default</ResponsiveButton>
