@@ -36,6 +36,16 @@
   --lg-shine-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+
+  /* Bridge variables for Mintlify UI and typography system */
+  --text-primary: var(--lg-text);
+  --text-secondary: var(--lg-text-secondary);
+  --text-tertiary: var(--lg-text-tertiary);
+  --text-accent: var(--lg-accent);
+  --surface-glass: var(--lg-bg-color);
+  --surface-readable: var(--lg-bg-readable);
+  --border-muted: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.18);
 }
 
 /* Dark Mode */
@@ -47,6 +57,16 @@
   --lg-text-secondary: rgba(255, 255, 255, 0.8);
   --lg-text-tertiary: rgba(255, 255, 255, 0.6);
   --lg-accent: #5ac8fa;
+
+  /* Bridge variables for Mintlify UI in dark theme */
+  --text-primary: var(--lg-text);
+  --text-secondary: var(--lg-text-secondary);
+  --text-tertiary: var(--lg-text-tertiary);
+  --text-accent: var(--lg-accent);
+  --surface-glass: var(--lg-bg-color);
+  --surface-readable: var(--lg-bg-readable);
+  --border-muted: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
 }
 
 /* ================================================================
@@ -93,14 +113,14 @@
 
 .docs-content h2 {
   font-size: 2rem;
-  color: var(--lg-text);
+  color: var(--text-primary);
   margin-top: 3rem;
   margin-bottom: 1rem;
 }
 
 .docs-content h3 {
   font-size: 1.5rem;
-  color: var(--lg-text);
+  color: var(--text-primary);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
@@ -175,8 +195,8 @@ code[class*="language-"] {
 
 /* Inline code */
 code:not([class*="language-"]) {
-  background: rgba(0, 122, 255, 0.1) !important;
-  color: var(--lg-primary) !important;
+  background: color-mix(in srgb, var(--text-accent) 12%, transparent) !important;
+  color: var(--text-accent) !important;
   padding: 0.2em 0.4em !important;
   border-radius: 4px !important;
   font-family: "SF Mono", Monaco, "Cascadia Code", monospace !important;

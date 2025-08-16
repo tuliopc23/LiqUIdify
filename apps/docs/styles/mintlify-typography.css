@@ -42,14 +42,14 @@
   color: var(--text-primary) !important;
   margin: 3rem 0 1.5rem 0 !important;
   text-wrap: balance;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-muted, rgba(0, 0, 0, 0.1));
   padding-bottom: 0.5rem;
 }
 
 [data-theme="dark"] .mintlify-content h2,
 [data-theme="dark"] .markdown-body h2,
 [data-theme="dark"] .mdx-content h2 {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: var(--border-muted, rgba(255, 255, 255, 0.1));
 }
 
 .mintlify-content h3,
@@ -269,7 +269,7 @@ pre[data-theme] {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 0.5rem;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-muted, rgba(0, 0, 0, 0.1));
 }
 
 [data-theme="dark"] .mintlify-content table,
@@ -291,19 +291,19 @@ pre[data-theme] {
 [data-theme="dark"] .mintlify-content th,
 [data-theme="dark"] .markdown-body th {
   background: rgba(255, 255, 255, 0.05);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: var(--border-muted, rgba(255, 255, 255, 0.1));
 }
 
 .mintlify-content td,
 .markdown-body td {
   color: var(--text-primary) !important;
   padding: 1rem !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-muted, rgba(0,0,0,0.1)) 50%, transparent);
 }
 
 [data-theme="dark"] .mintlify-content td,
 [data-theme="dark"] .markdown-body td {
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: color-mix(in srgb, var(--border-muted, rgba(255,255,255,0.1)) 50%, transparent);
 }
 
 /* Enhanced Blockquotes */

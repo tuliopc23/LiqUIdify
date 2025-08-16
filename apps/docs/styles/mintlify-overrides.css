@@ -16,7 +16,7 @@ header[role="banner"],
   top: 0;
   z-index: 40;
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid var(--border-muted, rgba(255, 255, 255, 0.14));
 }
 #navbar::before,
 header#navbar::before,
@@ -90,11 +90,11 @@ header#navbar::before,
   backdrop-filter: blur(16px) saturate(120%);
   -webkit-backdrop-filter: blur(16px) saturate(120%);
   background: var(--lg-bg-color, rgba(255, 255, 255, 0.8));
-  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid var(--border-muted, rgba(255, 255, 255, 0.14));
 }
 [data-theme="dark"] #sidebar,
 [data-theme="dark"] .sidebar,
-[data-theme="dark"] .mintlify-sidebar { border-right-color: rgba(255, 255, 255, 0.12); }
+[data-theme="dark"] .mintlify-sidebar { border-right-color: var(--border-muted, rgba(255, 255, 255, 0.12)); }
 
 /* CONTENT CONTAINER */
 #content-container,
@@ -114,7 +114,7 @@ header#navbar::before,
 [data-identifier="table-of-contents-content"],
 [data-identifier="table-of-contents-layout"] {
   background: var(--lg-bg-color, rgba(255, 255, 255, 0.12));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-muted, rgba(255, 255, 255, 0.12));
   border-radius: 1rem;
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
@@ -133,7 +133,7 @@ header#navbar::before,
   position: relative;
   border-radius: var(--lg-radius-lg, 1.5rem);
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-muted, rgba(255, 255, 255, 0.12));
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
   box-shadow: var(--lg-shadow-main, 0 6px 6px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.1));
@@ -160,7 +160,7 @@ pre[class*="language-"] {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-muted, rgba(255, 255, 255, 0.12));
 }
 .nav-tabs-item,
 [data-identifier="nav-tabs-item"] {
@@ -210,6 +210,6 @@ footer,
 /* DARK MODE TWEAKS */
 [data-theme="dark"] #navbar,
 [data-theme="dark"] .topbar,
-[data-theme="dark"] .mintlify-topbar { border-bottom-color: rgba(255, 255, 255, 0.12); }
+[data-theme="dark"] .mintlify-topbar { border-bottom-color: var(--border-muted, rgba(255, 255, 255, 0.12)); }
 [data-theme="dark"] .toc,
 [data-theme="dark"] [data-identifier="table-of-contents"] { border-color: rgba(255, 255, 255, 0.12); }
