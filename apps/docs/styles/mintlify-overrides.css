@@ -1,0 +1,215 @@
+/* Mintlify-specific overrides using platform identifiers/selectors
+   - Applies Liquid Glass consistently to core UI (navbar, sidebar, footer, toc, tabs, panels)
+   - Safe for both light/dark via existing --lg-* tokens
+*/
+
+/* NAVBAR / HEADER */
+#navbar,
+header#navbar,
+header[role="banner"],
+.mintlify-topbar,
+.topbar,
+[data-identifier="navbar"],
+[data-identifier="header"],
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+#navbar::before,
+header#navbar::before,
+.mintlify-topbar::before,
+.topbar::before,
+[data-identifier="navbar"]::before,
+[data-identifier="header"]::before,
+#header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 0;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+.topbar-link,
+.mintlify-topbar-link,
+#topbar-cta-button,
+[data-identifier="topbar-cta-button"],
+.tryit-button,
+[data-identifier="tryit-button"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--lg-text, #111);
+  transition: transform 120ms var(--lg-ease-standard, ease);
+}
+#topbar-cta-button::before,
+[data-identifier="topbar-cta-button"]::before,
+.tryit-button::before,
+[data-identifier="tryit-button"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(5px) saturate(120%);
+  -webkit-backdrop-filter: blur(5px) saturate(120%);
+}
+#topbar-cta-button::after,
+[data-identifier="topbar-cta-button"]::after,
+.tryit-button::after,
+[data-identifier="tryit-button"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--lg-bg-color, rgba(255, 255, 255, 0.2));
+  box-shadow: var(--lg-shine-shadow,
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 1));
+  opacity: 0.8;
+}
+#topbar-cta-button > *,
+[data-identifier="topbar-cta-button"] > *,
+.tryit-button > *,
+[data-identifier="tryit-button"] > * { position: relative; z-index: 1; }
+
+/* SIDEBAR */
+#sidebar,
+.sidebar,
+.mintlify-sidebar,
+[data-identifier="sidebar"],
+[data-identifier="sidebar-content"],
+#sidebar-content {
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  background: var(--lg-bg-color, rgba(255, 255, 255, 0.8));
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+[data-theme="dark"] #sidebar,
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .mintlify-sidebar { border-right-color: rgba(255, 255, 255, 0.12); }
+
+/* CONTENT CONTAINER */
+#content-container,
+.content,
+.content-area,
+.mdx-content,
+.mintlify-content,
+[data-identifier="content-container"],
+[data-identifier="content-area"] {
+  background: transparent !important; /* let themed bg show through */
+}
+
+/* TABLE OF CONTENTS */
+#table-of-contents,
+.toc,
+[data-identifier="table-of-contents"],
+[data-identifier="table-of-contents-content"],
+[data-identifier="table-of-contents-layout"] {
+  background: var(--lg-bg-color, rgba(255, 255, 255, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+.toc-item[data-active="true"],
+.toc .active,
+[data-identifier="toc-item"][data-active="true"] {
+  color: var(--lg-accent, #007aff);
+}
+
+/* PANELS / CARDS */
+.panel,
+[data-identifier="panel"],
+.card,
+.mintlify-card {
+  position: relative;
+  border-radius: var(--lg-radius-lg, 1.5rem);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: var(--lg-shadow-main, 0 6px 6px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.1));
+}
+
+/* CODE BLOCKS */
+.code-block,
+[data-identifier="code-block"] pre,
+pre[class*="language-"] {
+  border-radius: var(--lg-radius-sm, 1rem) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* TABS */
+.nav-tabs,
+[data-identifier="nav-tabs"] {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.nav-tabs-item,
+[data-identifier="nav-tabs-item"] {
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  color: var(--lg-text-secondary, rgba(26,29,33,0.8));
+}
+.nav-tabs-item[aria-selected="true"],
+[data-identifier="nav-tabs-item"][aria-selected="true"] {
+  color: var(--lg-text, #111);
+  position: relative;
+}
+.nav-tabs-item[aria-selected="true"]::before,
+[data-identifier="nav-tabs-item"][aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--lg-bg-color, rgba(255, 255, 255, 0.25));
+  box-shadow: var(--lg-shine-shadow,
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 1));
+}
+
+/* PAGINATION */
+.pagination,
+[data-identifier="pagination"],
+.pagination-prev,
+.pagination-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pagination-title,
+[data-identifier="pagination-title"] { color: var(--lg-text-secondary); }
+
+/* FOOTER */
+footer,
+#footer,
+[data-identifier="footer"] {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* DARK MODE TWEAKS */
+[data-theme="dark"] #navbar,
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .mintlify-topbar { border-bottom-color: rgba(255, 255, 255, 0.12); }
+[data-theme="dark"] .toc,
+[data-theme="dark"] [data-identifier="table-of-contents"] { border-color: rgba(255, 255, 255, 0.12); }

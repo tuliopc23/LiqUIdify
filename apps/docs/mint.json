@@ -1,0 +1,21 @@
+{
+  "name": "LiqUIdify",
+  "logo": {
+    "dark": "logo-dark.svg",
+    "light": "logo-light.svg"
+  },
+  "colors": {
+    "primary": "#007AFF"
+  },
+  "styles": [
+    "/styles/theme-backgrounds.css",
+    "/styles/mintlify-typography.css",
+    "/styles/enhanced-typography.css",
+    "/styles/visual-enhancements.css",
+    "/styles/custom.css",
+    "/styles/mintlify-overrides.css"
+  ],
+  "scripts": [
+    "/scripts/enhancements.js"
+  ]
+}

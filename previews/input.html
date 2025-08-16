@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liquid Glass Input Preview</title>
+    <style>
+      /* Page backdrop (the injector will scope this stylesheet when embedding) */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(
+            80rem 60rem at 20% 20%,
+            rgba(162, 210, 255, 0.28),
+            transparent 60%
+          ),
+          radial-gradient(
+            80rem 60rem at 80% 30%,
+            rgba(255, 183, 248, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #0f172a;
+      }
+
+      /* Tokens */
+      :root {
+        --lg-text: #0f172a;
+        --lg-text-subtle: #334155;
+        --lg-text-inverse: #ffffff;
+
+        --lg-border: rgba(255, 255, 255, 0.22);
+        --lg-border-strong: rgba(255, 255, 255, 0.32);
+        --lg-bg-tint: rgba(255, 255, 255, 0.05);
+
+        --lg-primary: #007aff;
+        --lg-success: #16a34a;
+        --lg-error: #ef4444;
+        --lg-warning: #d97706;
+
+        --lg-shadow:
+          0 12px 22px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+
+        --lg-radius-sm: 10px;
+        --lg-radius-md: 12px;
+
+        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .theme-dark {
+        --lg-text: #f8fafc;
+        --lg-text-subtle: #cbd5e1;
+        --lg-border: rgba(255, 255, 255, 0.18);
+        --lg-border-strong: rgba(255, 255, 255, 0.3);
+        --lg-bg-tint: rgba(255, 255, 255, 0.03);
+      }
+
+      /* Layout helpers */
+      .canvas {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        gap: 18px;
+      }
+      .row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .label {
+        color: #111827cc;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .theme-dark .label {
+        color: #e5e7ebcc;
+      }
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        width: 100%;
+      }
+
+      /* Field block: label + control + message */
+      .field-block {
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+        color: var(--lg-text-subtle);
+      }
+      .field-msg {
+        font-size: 12px;
+        line-height: 1.3;
+        color: var(--lg-text-subtle);
+        min-height: 1em;
+      }
+      .field-msg.success {
+        color: #16a34a;
+      }
+      .field-msg.error {
+        color: #ef4444;
+      }
+      .field-msg.warning {
+        color: #d97706;
+      }
+
+      /* Liquid-glass field wrapper */
+      .field {
+        position: relative;
+        border-radius: var(--lg-radius-md);
+        border: 1px solid var(--lg-border);
+        background: transparent;
+        overflow: hidden;
+        isolation: isolate;
+        box-shadow: var(--lg-shadow);
+        transition:
+          border-color var(--lg-transition),
+          box-shadow var(--lg-transition);
+      }
+      .field::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: blur(12px) saturate(175%);
+        -webkit-backdrop-filter: blur(12px) saturate(175%);
+        background: var(--lg-bg-tint);
+        z-index: -2;
+        pointer-events: none;
+        transform: translateZ(0);
+      }
+      .field::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.16),
+          rgba(255, 255, 255, 0.07)
+        );
+        filter: brightness(1.04);
+        opacity: 0.55;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Input element */
+      .input {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 12px 12px 40px;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--lg-text);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        caret-color: var(--lg-primary);
+      }
+      .input::placeholder {
+        color: rgba(51, 65, 85, 0.7);
+      }
+
+      /* Leading icon (decorative) */
+      .icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        opacity: 0.9;
+        color: var(--lg-text-subtle);
+        pointer-events: none;
+      }
+      .icon svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Focus ring (pure CSS) */
+      .focus-ring {
+        position: absolute;
+        inset: -3px;
+        border-radius: calc(var(--lg-radius-md) + 3px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity var(--lg-transition);
+        box-shadow:
+          0 0 0 3px rgba(0, 122, 255, 0.15),
+          0 0 0 1px rgba(0, 122, 255, 0.6) inset;
+      }
+      .input:focus-visible ~ .focus-ring {
+        opacity: 1;
+      }
+
+      /* Semantic states */
+      .field.is-success {
+        border-color: rgba(22, 163, 74, 0.6);
+      }
+      .field.is-error {
+        border-color: rgba(239, 68, 68, 0.65);
+      }
+      .field.is-warning {
+        border-color: rgba(217, 119, 6, 0.65);
+      }
+
+      /* Disabled / read-only */
+      .input:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .input[readonly] {
+        opacity: 0.95;
+      }
+
+      /* Demo surface container (kept translucent) */
+      .surface {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 480px) {
+        .surface {
+          padding: 12px;
+        }
+        .input {
+          font-size: 13.5px;
+          padding: 10px 10px 10px 38px;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .field,
+        .focus-ring {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="row">
+        <span class="label">Liquid Glass Input — Dark Mode</span>
+      </div>
+
+      <div class="theme-dark surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass input preview (dark)"
+        >
+          <!-- Default -->
+          <div class="field-block">
+            <label class="field-label" for="dark-name">Name</label>
+            <div class="field">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </span>
+              <input
+                id="dark-name"
+                class="input"
+                type="text"
+                placeholder="Enter your name"
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite"></div>
+          </div>
+
+          <!-- Email (success) -->
+          <div class="field-block">
+            <label class="field-label" for="dark-email">Email Address</label>
+            <div class="field is-success">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 8l8 5 8-5" />
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                </svg>
+              </span>
+              <input
+                id="dark-email"
+                class="input"
+                type="email"
+                placeholder="name@domain.com"
+                value="hello@liquidify.dev"
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg success" aria-live="polite">Looks good</div>
+          </div>
+
+          <!-- Password (error) -->
+          <div class="field-block">
+            <label class="field-label" for="dark-pass">Password</label>
+            <div class="field is-error">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 9v4m0 4h.01" />
+                  <path
+                    d="M10.29 3.86l-7.5 12.99A2 2 0 004.5 20h15a2 2 0 001.71-3.15l-7.5-12.99a2 2 0 00-3.42 0z"
+                  />
+                </svg>
+              </span>
+              <input
+                id="dark-pass"
+                class="input"
+                type="password"
+                placeholder="Enter a strong password"
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg error" aria-live="polite">
+              This field is required
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div class="field-block">
+            <label class="field-label" for="dark-disabled">Disabled</label>
+            <div class="field">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M4.93 4.93l14.14 14.14" />
+                </svg>
+              </span>
+              <input
+                id="dark-disabled"
+                class="input"
+                type="text"
+                placeholder="Disabled input"
+                disabled
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="label">Light Mode</span>
+      </div>
+
+      <div class="surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass input preview (light)"
+        >
+          <!-- Default -->
+          <div class="field-block">
+            <label class="field-label" for="light-name">Name</label>
+            <div class="field">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </span>
+              <input
+                id="light-name"
+                class="input"
+                type="text"
+                placeholder="Enter your name"
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite"></div>
+          </div>
+
+          <!-- Email (read-only) -->
+          <div class="field-block">
+            <label class="field-label" for="light-email">Email Address</label>
+            <div class="field">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 8l8 5 8-5" />
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                </svg>
+              </span>
+              <input
+                id="light-email"
+                class="input"
+                type="email"
+                value="read-only@liquidify.dev"
+                readonly
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite">Read-only value</div>
+          </div>
+
+          <!-- Warning -->
+          <div class="field-block">
+            <label class="field-label" for="light-website">Website</label>
+            <div class="field is-warning">
+              <span class="icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4m0 4h.01" />
+                </svg>
+              </span>
+              <input
+                id="light-website"
+                class="input"
+                type="url"
+                placeholder="https://"
+              />
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg warning" aria-live="polite">
+              Please include protocol (e.g., https://)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

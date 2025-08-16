@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liquid Glass Card Preview</title>
+    <style>
+      /* Page</head></title></style> backdrop (will be scoped during injection) */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(
+            80rem 60rem at 15% 20%,
+            rgba(162, 210, 255, 0.26),
+            transparent 60%
+          ),
+          radial-gradient(
+            80rem 60rem at 85% 30%,
+            rgba(255, 183, 248, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #0f172a;
+      }
+
+      /* Design tokens */
+      :root {
+        --lg-text: #0f172a;
+        --lg-text-subtle: #334155;
+        --lg-text-weak: #64748b;
+        --lg-text-inverse: #ffffff;
+
+        --lg-border: rgba(255, 255, 255, 0.22);
+        --lg-border-strong: rgba(255, 255, 255, 0.32);
+        --lg-bg-tint: rgba(255, 255, 255, 0.05);
+        --lg-bg-readable: rgba(255, 255, 255, 0.6);
+
+        --lg-primary: #007aff;
+        --lg-accent: #5ac8fa;
+        --lg-success: #16a34a;
+
+        --lg-shadow:
+          0 14px 28px rgba(0, 0, 0, 0.16),
+          0 4px 10px rgba(0, 0, 0, 0.1);
+
+        --lg-radius-sm: 12px;
+        --lg-radius-md: 16px;
+        --lg-radius-lg: 20px;
+
+        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .theme-dark {
+        --lg-text: #f8fafc;
+        --lg-text-subtle: #cbd5e1;
+        --lg-text-weak: #94a3b8;
+        --lg-border: rgba(255, 255, 255, 0.18);
+        --lg-border-strong: rgba(255, 255, 255, 0.3);
+        --lg-bg-tint: rgba(255, 255, 255, 0.03);
+        --lg-bg-readable: rgba(255, 255, 255, 0.09);
+      }
+
+      /* Layout */
+      .canvas {
+        width: 100%;
+        max-width: 1100px;
+        display: grid;
+        gap: 18px;
+      }
+      .row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .label {
+        color: #111827cc;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .theme-dark .label {
+        color: #e5e7ebcc;
+      }
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        width: 100%;
+      }
+      .surface {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      /* Liquid glass card */
+      .card {
+        position: relative;
+        border-radius: var(--lg-radius-lg);
+        border: 1px solid var(--lg-border);
+        background: transparent;
+        overflow: clip;
+        isolation: isolate;
+        box-shadow: var(--lg-shadow);
+        transition:
+          border-color var(--lg-transition),
+          box-shadow var(--lg-transition),
+          transform var(--lg-transition);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: blur(14px) saturate(180%);
+        -webkit-backdrop-filter: blur(14px) saturate(180%);
+        background: var(--lg-bg-tint);
+        z-index: -2;
+        pointer-events: none;
+        transform: translateZ(0);
+      }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.16),
+          rgba(255, 255, 255, 0.08)
+        );
+        filter: brightness(1.06);
+        opacity: 0.55;
+        z-index: -1;
+        pointer-events: none;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 18px 36px rgba(0, 0, 0, 0.18),
+          0 6px 12px rgba(0, 0, 0, 0.12);
+        border-color: var(--lg-border-strong);
+      }
+
+      /* Card sections */
+      .card-media {
+        position: relative;
+        block-size: 120px;
+        background:
+          radial-gradient(
+            50% 60% at 30% 30%,
+            rgba(90, 200, 250, 0.35),
+            transparent 60%
+          ),
+          radial-gradient(
+            40% 60% at 80% 40%,
+            rgba(0, 122, 255, 0.25),
+            transparent 60%
+          );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          80% 80% at 50% -20%,
+          rgba(255, 255, 255, 0.25),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .card-inner {
+        padding: 18px 18px 6px 18px;
+      }
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .avatar {
+        inline-size: 40px;
+        block-size: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--lg-border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.22),
+          rgba(255, 255, 255, 0.08)
+        );
+        display: grid;
+        place-items: center;
+        color: var(--lg-text-subtle);
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+      .title {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        color: var(--lg-text);
+      }
+      .subtitle {
+        font-size: 12px;
+        color: var(--lg-text-weak);
+        margin-top: 2px;
+      }
+      .card-body {
+        color: var(--lg-text-subtle);
+        font-size: 13px;
+        line-height: 1.5;
+        padding: 0 18px 14px 18px;
+      }
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px 14px 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 0 0 var(--lg-radius-lg) var(--lg-radius-lg);
+      }
+
+      /* Buttons (static, no JS) */
+      .actions {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .btn {
+        appearance: none;
+        -webkit-appearance: none;
+        border: 1px solid var(--lg-border);
+        outline: none;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 10px 14px;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        overflow: clip;
+        color: var(--lg-text);
+        background: rgba(255, 255, 255, 0.28);
+        transition:
+          transform var(--lg-transition),
+          box-shadow var(--lg-transition),
+          border-color var(--lg-transition);
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(10px) saturate(160%);
+        -webkit-backdrop-filter: blur(10px) saturate(160%);
+        background: rgba(255, 255, 255, 0.02);
+        z-index: -1;
+        pointer-events: none;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: var(--lg-border-strong);
+        box-shadow:
+          0 8px 16px rgba(0, 0, 0, 0.14),
+          0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+      .btn:active {
+        transform: translateY(0);
+        transition-duration: 80ms;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--lg-primary), var(--lg-accent));
+        color: var(--lg-text-inverse);
+        border-color: rgba(255, 255, 255, 0.32);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--lg-text);
+      }
+
+      /* Variants */
+      .card--elevated {
+        box-shadow:
+          0 24px 48px rgba(0, 0, 0, 0.22),
+          0 6px 14px rgba(0, 0, 0, 0.12);
+      }
+      .card--outlined {
+        border-color: var(--lg-border-strong);
+      }
+      .card--accent {
+        border-image: linear-gradient(
+            180deg,
+            var(--lg-primary),
+            rgba(255, 255, 255, 0.4)
+          )
+          1;
+      }
+
+      /* Stat pill */
+      .stat-row {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        padding: 0 18px 16px 18px;
+      }
+      .stat-value {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        color: var(--lg-text);
+      }
+      .stat-delta {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--lg-success);
+        background: rgba(16, 185, 129, 0.14);
+        border: 1px solid rgba(16, 185, 129, 0.28);
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 520px) {
+        .card-inner {
+          padding: 14px 14px 4px 14px;
+        }
+        .card-body {
+          padding: 0 14px 12px 14px;
+        }
+        .card-footer {
+          padding: 10px 12px 12px 12px;
+        }
+        .avatar {
+          inline-size: 36px;
+          block-size: 36px;
+          font-size: 12px;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        .btn {
+          transition: none;
+        }
+        .card:hover,
+        .btn:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="row">
+        <span class="label"></body>Liquid Glass Card — Dark Mode</span>
+      </div>
+
+      <div class="theme-dark surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass card preview (dark)"
+        >
+          <!-- Dark: Default Card -->
+          <article class="card" role="article" aria-label="Profile overview">
+            <div class="card-media" aria-hidden="true"></div>
+            <div class="card-inner">
+              <header class="card-header">
+                <div class="avatar" aria-hidden="true">LG</div>
+                <div class="text">
+                  <div class="title">Project Aurora</div>
+                  <div class="subtitle">Liquid glass design system</div>
+                </div>
+              </header>
+            </div>
+            <div class="card-body">
+              Build elegant, high-performance UIs with layered transparency,
+              depth, and buttery-smooth interactions. Fully accessible and
+              production ready.
+            </div>
+            <div class="stat-row" aria-hidden="false">
+              <div class="stat-value">12,480</div>
+              <div class="stat-delta">+8.4%</div>
+            </div>
+            <footer class="card-footer">
+              <span class="subtitle">Updated 2 hours ago</span>
+              <div class="actions">
+                <button type="button" class="btn btn-ghost">Details</button>
+                <button type="button" class="btn btn-primary">Open</button>
+              </div>
+            </footer>
+          </article>
+
+          <!-- Dark: Elevated / Outlined -->
+          <article
+            class="card card--elevated card--outlined"
+            role="article"
+            aria-label="Release notes"
+          >
+            <div class="card-inner">
+              <header class="card-header">
+                <div class="avatar" aria-hidden="true">RN</div>
+                <div class="text">
+                  <div class="title">Release 1.3.0</div>
+                  <div class="subtitle">
+                    Stability, accessibility, performance
+                  </div>
+                </div>
+              </header>
+            </div>
+            <div class="card-body">
+              This update improves typography contrast, reduces motion for
+              sensitive users, and optimizes backdrop filters across mobile
+              devices for better battery life.
+            </div>
+            <footer class="card-footer">
+              <span class="subtitle">Changelog • 7 items</span>
+              <div class="actions">
+                <button type="button" class="btn">Compare</button>
+                <button type="button" class="btn btn-primary">Update</button>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="label">Light Mode</span>
+      </div>
+
+      <div class="surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass card preview (light)"
+        >
+          <!-- Light: Accent border -->
+          <article
+            class="card card--accent"
+            role="article"
+            aria-label="Team summary"
+          >
+            <div class="card-inner">
+              <header class="card-header">
+                <div class="avatar" aria-hidden="true">TS</div>
+                <div class="text">
+                  <div class="title">Team Summary</div>
+                  <div class="subtitle">5 active members • 2 pending</div>
+                </div>
+              </header>
+            </div>
+            <div class="card-body">
+              Collaboration at a glance. Track progress, share insights, and
+              coordinate delivery with confidence using consistent components.
+            </div>
+            <footer class="card-footer">
+              <span class="subtitle">Synced · just now</span>
+              <div class="actions">
+                <button type="button" class="btn btn-ghost">Invite</button>
+                <button type="button" class="btn btn-primary">View</button>
+              </div>
+            </footer>
+          </article>
+
+          <!-- Light: Compact outline -->
+          <article
+            class="card card--outlined"
+            role="article"
+            aria-label="Metric card"
+          >
+            <div class="card-inner">
+              <header class="card-header">
+                <div class="avatar" aria-hidden="true">AN</div>
+                <div class="text">
+                  <div class="title">Analytics</div>
+                  <div class="subtitle">Last 24 hours</div>
+                </div>
+              </header>
+            </div>
+            <div class="card-body">
+              Visitors increased with higher engagement on documentation pages.
+              Liquid glass visuals maintain clarity while adding depth.
+            </div>
+            <div class="stat-row">
+              <div class="stat-value">4.7k</div>
+              <div class="stat-delta">+3.1%</div>
+            </div>
+            <footer class="card-footer">
+              <span class="subtitle">Performance • 98/100</span>
+              <div class="actions">
+                <button type="button" class="btn">Report</button>
+                <button type="button" class="btn btn-primary">Explore</button>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
