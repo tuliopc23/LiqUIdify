@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf</head>-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liquid Glass Select Preview</title</title>>
+    <style>
+      /* Page backdrop</style> (the injector will scope this stylesheet when embedding) */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(
+            80rem 60rem at 20% 20%,
+            rgba(162, 210, 255, 0.28),
+            transparent 60%
+          ),
+          radial-gradient(
+            80rem 60rem at 80% 30%,
+            rgba(255, 183, 248, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #0f172a;
+      }
+
+      /* Design tokens */
+      :root {
+        --lg-text: #0f172a;
+        --lg-text-subtle: #334155;
+
+        --lg-border: rgba(255, 255, 255, 0.22);
+        --lg-border-strong: rgba(255, 255, 255, 0.32);
+        --lg-bg-tint: rgba(255, 255, 255, 0.05);
+
+        --lg-primary: #007aff;
+
+        --lg-shadow:
+          0 12px 22px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+
+        --lg-radius-sm: 10px;
+        --lg-radius-md: 12px;
+
+        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .theme-dark {
+        --lg-text: #f8fafc;
+        --lg-text-subtle: #cbd5e1;
+        --lg-border: rgba(255, 255, 255, 0.18);
+        --lg-border-strong: rgba(255, 255, 255, 0.28);
+        --lg-bg-tint: rgba(255, 255, 255, 0.03);
+      }
+
+      /* Layout helpers */
+      .canvas {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        gap: 18px;
+      }
+      .row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .label {
+        color: #111827cc;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .theme-dark .label {
+        color: #e5e7ebcc;
+      }
+      .surface {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      /* Field block: label + control */
+      .field-block {
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+        color: var(--lg-text-subtle);
+      }
+
+      /* Liquid-glass field wrapper */
+      .field {
+        position: relative;
+        border-radius: var(--lg-radius-md);
+        border: 1px solid var(--lg-border);
+        background: transparent;
+        overflow: hidden;
+        isolation: isolate;
+        box-shadow: var(--lg-shadow);
+      }
+      .field::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: blur(12px) saturate(175%);
+        -webkit-backdrop-filter: blur(12px) saturate(175%);
+        background: var(--lg-bg-tint);
+        z-index: -2;
+        pointer-events: none;
+      }
+      .field::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.16),
+          rgba(255, 255, 255, 0.07)
+        );
+        filter: brightness(1.04);
+        opacity: 0.55;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Select control */
+      .select {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 40px 12px 12px;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--lg-text);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .select:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      /* Dropdown arrow (decorative) */
+      .arrow {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: var(--lg-text-subtle);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+      .arrow svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Focus ring (pure CSS) */
+      .focus-ring {
+        position: absolute;
+        inset: -3px;
+        border-radius: calc(var(--lg-radius-md) + 3px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity var(--lg-transition);
+        box-shadow:
+          0 0 0 3px rgba(0, 122, 255, 0.15),
+          0 0 0 1px rgba(0, 122, 255, 0.6) inset;
+      }
+      .select:focus-visible ~ .focus-ring {
+        opacity: 1;
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 480px) {
+        .surface {
+          padding: 12px;
+        }
+        .select {
+          font-size: 13.5px;
+          padding: 10px 36px 10px 10px;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .focus-ring {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="</body>canvas">
+      <div class="row">
+        <span class="label">Liquid Glass Select — Dark Mode</span>
+      </div>
+
+      <div class="theme-dark surface">
+        <div class="field-block">
+          <label class="field-label" for="sel-dark-country">Country</label>
+          <div class="field">
+            <select id="sel-dark-country" class="select">
+              <option>United States</</option>option>
+              <option></option>Germany</option>
+              <option>Japan</option</option>>
+              <option>Brazil</option</option>>
+            </select>
+            <span class="arrow" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+            <span class="focus-ring" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="field-block">
+          <label class="field-label" for="sel-dark-disabled">Disabled</label>
+          <div class="field">
+            <select id="sel-dark-disabled" class="select" disabled>
+              <option></select></option>Unavailable</option>
+            </select>
+            <span class="arrow" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+            <span class="focus-ring" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="label">Light Mode</span>
+      </div>
+
+      <div class="surface">
+        <div class="field-block">
+          <label class="field-label" for="sel-light-language">Language</label>
+          <div class="field">
+            <select id="sel-light-language" class="select">
+              <option>English</</option>option>
+              <option>Português</option</option>>
+              <option>Deutsch</option></option>
+              <option>日本</option>語</option>
+            </select>
+            <span class="arrow" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+            <span class="focus-ring" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liquid Glass Textarea Preview</title>
+    <style>
+      /* Page backdrop (the injector will scope this</head></title></style> stylesheet when embedding) */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(
+            80rem 60rem at 20% 20%,
+            rgba(162, 210, 255, 0.28),
+            transparent 60%
+          ),
+          radial-gradient(
+            80rem 60rem at 80% 30%,
+            rgba(255, 183, 248, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #0f172a;
+      }
+
+      /* Design tokens */
+      :root {
+        --lg-text: #0f172a;
+        --lg-text-subtle: #334155;
+
+        --lg-border: rgba(255, 255, 255, 0.22);
+        --lg-border-strong: rgba(255, 255, 255, 0.32);
+        --lg-bg-tint: rgba(255, 255, 255, 0.05);
+
+        --lg-primary: #007aff;
+        --lg-success: #16a34a;
+        --lg-warning: #d97706;
+        --lg-error: #ef4444;
+
+        --lg-shadow:
+          0 12px 22px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+
+        --lg-radius-sm: 10px;
+        --lg-radius-md: 12px;
+
+        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .theme-dark {
+        --lg-text: #f8fafc;
+        --lg-text-subtle: #cbd5e1;
+        --lg-border: rgba(255, 255, 255, 0.18);
+        --lg-border-strong: rgba(255, 255, 255, 0.3);
+        --lg-bg-tint: rgba(255, 255, 255, 0.03);
+      }
+
+      /* Layout helpers */
+      .canvas {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        gap: 18px;
+      }
+      .row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .label {
+        color: #111827cc;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .theme-dark .label {
+        color: #e5e7ebcc;
+      }
+      .surface {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .stack {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      /* Field block: label + control + message */
+      .field-block {
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+        color: var(--lg-text-subtle);
+      }
+      .field-msg {
+        font-size: 12px;
+        line-height: 1.3;
+        color: var(--lg-text-subtle);
+        min-height: 1em;
+      }
+      .field-msg.success {
+        color: var(--lg-success);
+      }
+      .field-msg.warning {
+        color: var(--lg-warning);
+      }
+      .field-msg.error {
+        color: var(--lg-error);
+      }
+
+      /* Liquid-glass field wrapper */
+      .field {
+        position: relative;
+        border-radius: var(--lg-radius-md);
+        border: 1px solid var(--lg-border);
+        background: transparent;
+        overflow: hidden;
+        isolation: isolate;
+        box-shadow: var(--lg-shadow);
+        transition:
+          border-color var(--lg-transition),
+          box-shadow var(--lg-transition);
+      }
+      .field::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: blur(12px) saturate(175%);
+        -webkit-backdrop-filter: blur(12px) saturate(175%);
+        background: var(--lg-bg-tint);
+        z-index: -2;
+        pointer-events: none;
+        transform: translateZ(0);
+      }
+      .field::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.16),
+          rgba(255, 255, 255, 0.07)
+        );
+        filter: brightness(1.04);
+        opacity: 0.55;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Textarea element */
+      .ta {
+        width: 100%;
+        min-height: 110px;
+        resize: vertical;
+        padding: 12px;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--lg-text);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        line-height: 1.45;
+        caret-color: var(--lg-primary);
+      }
+      .ta::placeholder {
+        color: rgba(51, 65, 85, 0.7);
+      }
+      .ta:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .ta[readonly] {
+        opacity: 0.95;
+      }
+
+      /* Focus ring (pure CSS) */
+      .focus-ring {
+        position: absolute;
+        inset: -3px;
+        border-radius: calc(var(--lg-radius-md) + 3px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity var(--lg-transition);
+        box-shadow:
+          0 0 0 3px rgba(0, 122, 255, 0.15),
+          0 0 0 1px rgba(0, 122, 255, 0.6) inset;
+      }
+      .ta:focus-visible ~ .focus-ring {
+        opacity: 1;
+      }
+
+      /* Semantic states via wrapper */
+      .field.is-success {
+        border-color: rgba(22, 163, 74, 0.6);
+      }
+      .field.is-warning {
+        border-color: rgba(217, 119, 6, 0.65);
+      }
+      .field.is-error {
+        border-color: rgba(239, 68, 68, 0.65);
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 480px) {
+        .surface {
+          padding: 12px;
+        }
+        .ta {
+          font-size: 13.5px;
+          padding: 10px;
+          min-height: 96px;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .field,
+        .focus-ring {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body></body>
+    <div class="canvas">
+      <div class="row">
+        <span class="label">Liquid Glass Textarea — Dark Mode</span>
+      </div>
+
+      <div class="theme-dark surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass textarea preview (dark)"
+        >
+          <!-- Default -->
+          <div class="field-block">
+            <label class="field-label" for="ta-dark-msg">Message</label>
+            <div class="field">
+              <textarea
+                id="ta-dark-msg"
+                class="ta"
+                placeholder="Write your message..."
+                rows="5"
+              ></textarea>
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite">Max 500 characters</div>
+          </div>
+
+          <!-- Error -->
+          <div class="field-block">
+            <label class="field-label" for="ta-dark-err">Feedback</label>
+            <div class="field is-error">
+              <textarea id="ta-dark-err" class="ta" rows="4">Too short</textarea>
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg error" aria-live="polite">
+              Please provide at least 10 characters
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div class="field-block">
+            <label class="field-label" for="ta-dark-disabled">Disabled</label>
+            <div class="field">
+              <textarea
+                id="ta-dark-disabled"
+                class="ta"
+                placeholder="Disabled textarea"
+                disabled
+                rows="3"
+              ></textarea>
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="label">Light Mode</span>
+      </div>
+
+      <div class="surface">
+        <div
+          class="stack"
+          role="group"
+          aria-label="Static liquid glass textarea preview (light)"
+        >
+          <!-- Prefilled -->
+          <div class="field-block">
+            <label class="field-label" for="ta-light-notes">Notes</label>
+            <div class="field is-success">
+              <textarea id="ta-light-notes" class="ta" rows="5">Line 1
+Line 2</textarea>
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg success" aria-live="polite">Looks good</div>
+          </div>
+
+          <!-- Read-only -->
+          <div class="field-block">
+            <label class="field-label" for="ta-light-readonly">Read-only</label>
+            <div class="field">
+              <textarea
+                id="ta-light-readonly"
+                class="ta"
+                rows="3"
+                readonly
+              >This content is read-only.</textarea>
+              <span class="focus-ring" aria-hidden="true"></span>
+            </div>
+            <div class="field-msg" aria-live="polite">You can't edit this</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
