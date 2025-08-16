@@ -1,4 +1,4 @@
-import React from "react";
+import React from "/snippets/react";
 import ProviderWrapper from "/snippets/preview/ProviderWrapper";
 
 export default function ComponentFrame({ title, intro, code, children }) {

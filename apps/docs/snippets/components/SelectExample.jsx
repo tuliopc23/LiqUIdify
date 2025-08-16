@@ -1,6 +1,6 @@
-import React from "react";
+import React from "/snippets/react";
 import ComponentFrame from "/snippets/preview/ComponentFrame";
-import { GlassSelect } from "liquidify";
+import { GlassSelect } from "/snippets/liquidify";
 
 const USAGE = `import "liquidify/styles";
 import { GlassSelect } from "liquidify";

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "/snippets/react";
 import { DemoFrame } from "/snippets/DemoFrame.jsx";
 
 // Minimal interactive demo for Liquid/Glass Button

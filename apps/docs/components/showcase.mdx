@@ -29,9 +29,7 @@ A primary action trigger with hover, focus, and active states.
 import { Button } from "liquidify";
 
 export default function Example() {
-  return (
-    <Button variant="primary">Click me</Button>
-  );
+  return <Button variant="primary">Click me</Button>;
 }
 ```
 
@@ -60,7 +58,9 @@ import { Card } from "liquidify";
 
 export default function Example() {
   return (
-    <Card title="Card title" subtitle="Subtitle">Content</Card>
+    <Card title="Card title" subtitle="Subtitle">
+      Content
+    </Card>
   );
 }
 ```
@@ -79,7 +79,9 @@ export default function Example() {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <Button variant="primary" onClick={() => setOpen(true)}>Open modal</Button>
+      <Button variant="primary" onClick={() => setOpen(true)}>
+        Open modal
+      </Button>
       <Modal open={open} onOpenChange={setOpen} title="Modal title">
         <p>Modal content</p>
       </Modal>
@@ -144,11 +146,17 @@ export default function Example() {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Show toast</Button>
-      <Toast open={open} onOpenChange={setOpen} title="Saved" description="Your changes have been saved." />
+      <Toast
+        open={open}
+        onOpenChange={setOpen}
+        title="Saved"
+        description="Your changes have been saved."
+      />
     </>
   );
 }
 ```
+
 ## More examples
 
 For a full playground, visit our [Storybook](https://liquidify-storybook.vercel.app).

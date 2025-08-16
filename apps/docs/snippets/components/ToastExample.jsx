@@ -1,6 +1,6 @@
-import React from "react";
+import React from "/snippets/react";
 import ComponentFrame from "/snippets/preview/ComponentFrame";
-import { ToastProvider, useToast, GlassButton } from "liquidify";
+import { ToastProvider, useToast, GlassButton } from "/snippets/liquidify";
 
 const USAGE = `import "liquidify/styles";
 import { ToastProvider, useToast, GlassButton } from "liquidify";

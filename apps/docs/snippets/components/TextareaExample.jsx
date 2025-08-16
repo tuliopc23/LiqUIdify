@@ -1,6 +1,6 @@
-import React from "react";
+import React from "/snippets/react";
 import ComponentFrame from "/snippets/preview/ComponentFrame";
-import { GlassTextarea } from "liquidify";
+import { GlassTextarea } from "/snippets/liquidify";
 
 const USAGE = `import "liquidify/styles";
 import { GlassTextarea } from "liquidify";

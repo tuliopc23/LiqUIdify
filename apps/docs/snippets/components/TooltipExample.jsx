@@ -1,6 +1,6 @@
-import React from "react";
+import React from "/snippets/react";
 import ComponentFrame from "/snippets/preview/ComponentFrame";
-import { GlassTooltip, GlassButton } from "liquidify";
+import { GlassTooltip, GlassButton } from "/snippets/liquidify";
 
 const USAGE = `import "liquidify/styles";
 import { GlassTooltip, GlassButton } from "liquidify";
