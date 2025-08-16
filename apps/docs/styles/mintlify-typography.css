@@ -298,12 +298,17 @@ pre[data-theme] {
 .markdown-body td {
   color: var(--text-primary) !important;
   padding: 1rem !important;
-  border-bottom: 1px solid color-mix(in srgb, var(--border-muted, rgba(0,0,0,0.1)) 50%, transparent);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--border-muted, rgba(0, 0, 0, 0.1)) 50%, transparent);
 }
 
 [data-theme="dark"] .mintlify-content td,
 [data-theme="dark"] .markdown-body td {
-  border-bottom-color: color-mix(in srgb, var(--border-muted, rgba(255,255,255,0.1)) 50%, transparent);
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--border-muted, rgba(255, 255, 255, 0.1)) 50%,
+    transparent
+  );
 }
 
 /* Enhanced Blockquotes */
