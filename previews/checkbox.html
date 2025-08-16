@@ -5,58 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Liquid Glass Checkbox Preview</title>
     <style>
-      html, body { height: 100%; margin: 0; }
+      html,
       body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
         background:
-          radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.28), transparent 60%),
-          radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.22), transparent 60%),
+          radial-gradient(
+            80rem 60rem at 20% 20%,
+            rgba(162, 210, 255, 0.28),
+            transparent 60%
+          ),
+          radial-gradient(
+            80rem 60rem at 80% 30%,
+            rgba(255, 183, 248, 0.22),
+            transparent 60%
+          ),
           linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
-        display: grid; place-items: center; padding: 24px; color: #0f172a;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #0f172a;
       }
 
       :root {
-        --lg-text: #0f172a; --lg-text-subtle: #334155;
-        --lg-border: rgba(255, 255, 255, 0.22); --lg-bg-tint: rgba(255, 255, 255, 0.05);
-        --lg-primary: #007aff; --lg-success: #16a34a; --lg-error: #ef4444;
-        --lg-shadow: 0 12px 22px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.1);
-        --lg-radius-md: 12px; --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        --lg-text: #0f172a;
+        --lg-text-subtle: #334155;
+        --lg-border: rgba(255, 255, 255, 0.22);
+        --lg-bg-tint: rgba(255, 255, 255, 0.05);
+        --lg-primary: #007aff;
+        --lg-success: #16a34a;
+        --lg-error: #ef4444;
+        --lg-shadow:
+          0 12px 22px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+        --lg-radius-md: 12px;
+        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
       }
-      .theme-dark { --lg-text: #f8fafc; --lg-text-subtle: #cbd5e1; --lg-border: rgba(255,255,255,0.18); --lg-bg-tint: rgba(255,255,255,0.03); }
+      .theme-dark {
+        --lg-text: #f8fafc;
+        --lg-text-subtle: #cbd5e1;
+        --lg-border: rgba(255, 255, 255, 0.18);
+        --lg-bg-tint: rgba(255, 255, 255, 0.03);
+      }
 
-      .canvas { width: 100%; max-width: 900px; display: grid; gap: 18px; }
-      .row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-      .label { color: #111827cc; font-weight: 600; letter-spacing: 0.02em; }
-      .theme-dark .label { color: #e5e7ebcc; }
-      .surface { padding: 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-      .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 18px; }
-      .group { display: grid; gap: 10px; }
-      .field-label { font-size: 12px; font-weight: 600; letter-spacing: 0.015em; color: var(--lg-text-subtle); }
+      .canvas {
+        width: 100%;
+        max-width: 900px;
+        display: grid;
+        gap: 18px;
+      }
+      .row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .label {
+        color: #111827cc;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .theme-dark .label {
+        color: #e5e7ebcc;
+      }
+      .surface {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 14px 18px;
+      }
+      .group {
+        display: grid;
+        gap: 10px;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+        color: var(--lg-text-subtle);
+      }
 
-      .chk { --size: 18px; display: inline-flex; align-items: center; gap: 10px; user-select: none; cursor: pointer; color: var(--lg-text); font-weight: 500; letter-spacing: 0.01em; }
-      .box { position: relative; width: var(--size); height: var(--size); border-radius: 6px; border: 1px solid var(--lg-border); background: transparent; box-shadow: var(--lg-shadow); overflow: hidden; isolation: isolate; }
-      .box::before { content: ""; position: absolute; inset: 0; border-radius: inherit; backdrop-filter: blur(10px) saturate(170%); -webkit-backdrop-filter: blur(10px) saturate(170%); background: var(--lg-bg-tint); z-index: -2; }
-      .box::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.06)); opacity: 0.6; z-index: -1; }
+      .chk {
+        --size: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        user-select: none;
+        cursor: pointer;
+        color: var(--lg-text);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .box {
+        position: relative;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 6px;
+        border: 1px solid var(--lg-border);
+        background: transparent;
+        box-shadow: var(--lg-shadow);
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: blur(10px) saturate(170%);
+        -webkit-backdrop-filter: blur(10px) saturate(170%);
+        background: var(--lg-bg-tint);
+        z-index: -2;
+      }
+      .box::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0.06)
+        );
+        opacity: 0.6;
+        z-index: -1;
+      }
 
-      .native { position: absolute; opacity: 0; pointer-events: none; }
-      .mark { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: scale(0.7); transition: opacity var(--lg-transition), transform var(--lg-transition); color: white; }
-      .check-bg { position: absolute; inset: 0; border-radius: 6px; background: linear-gradient(135deg, #2ea0ff, #007aff 60%); opacity: 0; transition: opacity var(--lg-transition); }
+      .native {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mark {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        transform: scale(0.7);
+        transition:
+          opacity var(--lg-transition),
+          transform var(--lg-transition);
+        color: white;
+      }
+      .check-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #2ea0ff, #007aff 60%);
+        opacity: 0;
+        transition: opacity var(--lg-transition);
+      }
 
-      .native:focus-visible + .box { outline: 2px solid rgba(0, 122, 255, 0.6); outline-offset: 2px; }
-      .native:checked + .box .check-bg { opacity: 1; }
-      .native:checked + .box .mark { opacity: 1; transform: scale(1); }
+      .native:focus-visible + .box {
+        outline: 2px solid rgba(0, 122, 255, 0.6);
+        outline-offset: 2px;
+      }
+      .native:checked + .box .check-bg {
+        opacity: 1;
+      }
+      .native:checked + .box .mark {
+        opacity: 1;
+        transform: scale(1);
+      }
 
-      .chk.disabled { opacity: 0.65; cursor: not-allowed; }
-      .variant-success .check-bg { background: linear-gradient(135deg, #28d37a, #16a34a 60%); }
-      .variant-error .check-bg { background: linear-gradient(135deg, #ff7a7a, #ef4444 60%); }
+      .chk.disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+      .variant-success .check-bg {
+        background: linear-gradient(135deg, #28d37a, #16a34a 60%);
+      }
+      .variant-error .check-bg {
+        background: linear-gradient(135deg, #ff7a7a, #ef4444 60%);
+      }
 
-      @media (max-width: 480px) { .surface { padding: 12px; } }
-      @media (prefers-reduced-motion: reduce) { .mark, .check-bg { transition: none; } }
+      @media (max-width: 480px) {
+        .surface {
+          padding: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .mark,
+        .check-bg {
+          transition: none;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="canvas">
-      <div class="row"><span class="label">Liquid Glass Checkbox — Dark</span></div>
+      <div class="row">
+        <span class="label">Liquid Glass Checkbox — Dark</span>
+      </div>
       <div class="theme-dark surface">
         <div class="stack" role="group" aria-label="Checkbox dark examples">
           <div class="group">
@@ -66,7 +223,16 @@
               <span class="box">
                 <span class="check-bg"></span>
                 <span class="mark" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -78,7 +244,16 @@
               <span class="box">
                 <span class="check-bg"></span>
                 <span class="mark" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -94,7 +269,16 @@
               <span class="box">
                 <span class="check-bg"></span>
                 <span class="mark" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -110,7 +294,16 @@
               <span class="box">
                 <span class="check-bg"></span>
                 <span class="mark" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -126,7 +319,16 @@
               <span class="box">
                 <span class="check-bg"></span>
                 <span class="mark" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -145,7 +347,16 @@
             <span class="box">
               <span class="check-bg"></span>
               <span class="mark" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
@@ -157,7 +368,16 @@
             <span class="box">
               <span class="check-bg"></span>
               <span class="mark" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>

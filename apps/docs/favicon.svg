@@ -1,5 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32" height="32" version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
- <rect width="32" height="32" rx="6" fill="#3b82f6"/>
- <text x="8" y="24" fill="#ffffff" font-family="sans-serif" font-size="20" font-weight="bold">L</text>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(100,150,255,0.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(150,100,255,0.3);stop-opacity:1" />
+    </linearGradient>
+    <filter id="faviconGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with glass effect -->
+  <circle cx="16" cy="16" r="14" 
+          fill="rgba(255,255,255,0.1)" 
+          stroke="rgba(255,255,255,0.2)" 
+          stroke-width="1"/>
+  
+  <!-- Simplified droplet -->
+  <path d="M16 8 C12 12, 12 18, 16 22 C20 18, 20 12, 16 8 Z" 
+        fill="url(#faviconGradient)" 
+        filter="url(#faviconGlow)"/>
+  
+  <!-- Small highlight -->
+  <ellipse cx="14" cy="12" rx="2" ry="3" fill="rgba(255,255,255,0.6)" opacity="0.8"/>
 </svg>
