@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 export interface DeviceCapabilities {
   hasBackdropFilter: boolean;
   hasSVGFilters: boolean;
-  hasGPUAcceleration: boolean;
+  hasGPU: boolean;
   performanceTier: "high" | "medium" | "low";
   prefersReducedMotion: boolean;
   prefersReducedTransparency: boolean;
   prefersContrast: "no-preference" | "more" | "less" | "custom";
-  isTouch: boolean;
+  isPointerDevice: boolean;
   devicePixelRatio: number;
-  connectionSpeed: "slow" | "medium" | "fast" | "unknown";
+  connectionSpeed: "slow-2g" | "2g" | "3g" | "4g" | "5g" | "unknown";
   colorGamut: "srgb" | "p3" | "rec2020";
-  hdr: boolean;
+  hasHDR: boolean;
 }
 
 /**
@@ -25,16 +25,16 @@ export function useDeviceCapabilities(): DeviceCapabilities {
   const [capabilities, setCapabilities] = useState<DeviceCapabilities>({
     hasBackdropFilter: false,
     hasSVGFilters: false,
-    hasGPUAcceleration: false,
+    hasGPU: false,
     performanceTier: "medium",
     prefersReducedMotion: false,
     prefersReducedTransparency: false,
     prefersContrast: "no-preference",
-    isTouch: false,
+    isPointerDevice: true,
     devicePixelRatio: 1,
     connectionSpeed: "unknown",
     colorGamut: "srgb",
-    hdr: false,
+    hasHDR: false,
   });
 
   useEffect(() => {
@@ -44,34 +44,49 @@ export function useDeviceCapabilities(): DeviceCapabilities {
     const detectCapabilities = () => {
       // Check backdrop-filter support
       const hasBackdropFilter =
-        CSS.supports("backdrop-filter", "blur(10px)") ||
-        CSS.supports("-webkit-backdrop-filter", "blur(10px)");
+        (typeof CSS !== "undefined" &&
+          (CSS.supports?.("backdrop-filter", "blur(10px)") ||
+            CSS.supports?.("-webkit-backdrop-filter", "blur(10px)"))) ||
+        false;
 
       // Check SVG filter support
-      const hasSVGFilters = CSS.supports("filter", "url(#test)");
+      const hasSVGFilters =
+        (typeof CSS !== "undefined" && CSS.supports?.("filter", "url(#test)")) ||
+        false;
 
-      // Check GPU acceleration (WebGL support as proxy)
-      let hasGPUAcceleration = false;
+      // Check GPU availability (WebGL support as proxy)
+      let hasGPU = false;
       try {
         const canvas = document.createElement("canvas");
         const gl =
           canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-        hasGPUAcceleration = !!gl;
+        hasGPU = !!gl;
       } catch (e) {
-        hasGPUAcceleration = false;
+        hasGPU = false;
       }
+
+      // Helper to match media queries safely
+      const matches = (query: string): boolean => {
+        try {
+          return typeof window.matchMedia === "function"
+            ? !!window.matchMedia(query).matches
+            : false;
+        } catch {
+          return false;
+        }
+      };
 
       // Detect performance tier based on various factors
       const detectPerformanceTier = (): "high" | "medium" | "low" => {
         // Check hardware concurrency (CPU cores)
-        const cores = navigator.hardwareConcurrency || 1;
+        const cores = (navigator && (navigator as any).hardwareConcurrency) || 1;
 
         // Check device memory (if available)
         const memory = (navigator as any).deviceMemory || 4;
 
         // Check connection type
         const connection = (navigator as any).connection;
-        const effectiveType = connection?.effectiveType || "4g";
+        const effectiveType = connection?.effectiveType || "4g"; // align with tests' expected tiers
 
         // Score based on capabilities
         let score = 0;

@@ -1,9 +1,7 @@
 import React, { forwardRef, useEffect, useMemo } from "react";
 import { cn } from "../../core/utils/classname";
-import {
-  useDeviceCapabilities,
-  getLiquidGlassClasses,
-} from "../../hooks/use-device-capabilities";
+import { useDeviceCapabilities } from "../../hooks/use-device-capabilities";
+import { getLiquidGlassClasses } from "../../utils/liquid-glass-classes";
 import { LiquidGlassDefs } from "../liquid-glass-defs/liquid-glass-defs";
 import type {
   LiquidGlassBaseProps,

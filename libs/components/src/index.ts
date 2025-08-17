@@ -83,10 +83,8 @@ export {
   mergeLiquidGlassClasses,
   createLiquidGlassComponent,
 } from "./utils/liquid-glass-utils";
+export { getLiquidGlassClasses } from "./utils/liquid-glass-classes";
 
 // Liquid Glass Hooks
-export {
-  useDeviceCapabilities,
-  getLiquidGlassClasses,
-} from "./hooks/use-device-capabilities";
+export { useDeviceCapabilities } from "./hooks/use-device-capabilities";
 export type { DeviceCapabilities } from "./hooks/use-device-capabilities";
