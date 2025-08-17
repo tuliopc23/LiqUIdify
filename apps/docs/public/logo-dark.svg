@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 8H24C26.2091 8 28 9.79086 28 12V28C28 30.2091 26.2091 32 24 32H10C7.79086 32 6 30.2091 6 28V12C6 9.79086 7.79086 8 10 8Z" fill="#5AC8FA" fill-opacity="0.2" stroke="#5AC8FA" stroke-width="2"/>
+  <text x="34" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">LiqUIdify</text>
+</svg>

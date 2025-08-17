@@ -11,14 +11,6 @@
   "icons": {
     "library": "lucide"
   },
-  "styles": [
-    "/styles/bundle.css"
-  ],
-  "colors": {
-    "primary": "#007AFF",
-    "light": "#5AC8FA",
-    "dark": "#0051D5"
-  },
   "navbar": {
     "links": [
       {
