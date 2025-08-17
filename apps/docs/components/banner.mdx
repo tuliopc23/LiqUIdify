@@ -1,7 +1,7 @@
 ---
-title: Banner
-description: Prominent messages and announcements with glassmorphism effects and dismissible functionality.
-icon: megaphone
+title: "Banner"
+description: "Prominent messages and announcements with glassmorphism effects and dismissible functionality."
+icon: "megaphone"
 ---
 
 # Banner
@@ -9,8 +9,6 @@ icon: megaphone
 A glassmorphic banner component for displaying prominent messages, announcements, and system notifications. Features semantic variants, dismissible functionality, and Apple-inspired design.
 
 ## Live Examples
-
-### Basic Variants
 
 ### Basic Variants
 
@@ -147,16 +145,16 @@ export default function Demo() {
 
 ## Props
 
-| Prop          | Type                                          | Default   | Description                                  |
-| ------------- | --------------------------------------------- | --------- | -------------------------------------------- |
-| `variant`     | `"info" \| "success" \| "warning" \| "error"` | `"info"`  | Semantic variant affecting color and styling |
-| `dismissible` | `boolean`                                     | `false`   | Show dismiss button                          |
-| `onDismiss`   | `() => void`                                  | -         | Callback when banner is dismissed            |
-| `icon`        | `ReactNode`                                   | -         | Custom icon (overrides default variant icon) |
-| `action`      | `ReactNode`                                   | -         | Action buttons or content                    |
-| `children`    | `ReactNode`                                   | -         | **Required.** Banner content                 |
-| `className`   | `string`                                      | -         | Additional CSS classes                       |
-| `role`        | `string`                                      | `"alert"` | ARIA role for accessibility                  |
+| Prop          | Type                                       | Default   | Description                                  |
+| ------------- | ------------------------------------------ | --------- | -------------------------------------------- |
+| `variant`     | `"info" | "success" | "warning" | "error"` | `"info"`  | Semantic variant affecting color and styling |
+| `dismissible` | `boolean`                                  | `false`   | Show dismiss button                          |
+| `onDismiss`   | `() => void`                               | -         | Callback when banner is dismissed            |
+| `icon`        | `ReactNode`                                | -         | Custom icon (overrides default variant icon) |
+| `action`      | `ReactNode`                                | -         | Action buttons or content                    |
+| `children`    | `ReactNode`                                | -         | **Required.** Banner content                 |
+| `className`   | `string`                                   | -         | Additional CSS classes                       |
+| `role`        | `string`                                   | `"alert"` | ARIA role for accessibility                  |
 
 ## Usage Patterns
 
