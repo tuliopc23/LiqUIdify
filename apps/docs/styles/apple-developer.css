@@ -50,7 +50,7 @@
 }
 
 /* Dark Mode Variables - Apple's exact dark theme */
-[data-theme="dark"] {
+html[data-theme="dark"] {
   --apple-bg: #1d1d1f;
   --apple-bg-secondary: #2a2a2c;
   --apple-text-primary: #f5f5f7;
@@ -76,11 +76,11 @@
    APPLE-STYLE TYPOGRAPHY - EXACT MATCH
    ================================================================ */
 
-body {
+html body {
   font-family: var(--apple-font);
   font-size: 17px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.5;
   color: var(--apple-text-primary);
   background-color: var(--apple-bg);
   -webkit-font-smoothing: auto;
@@ -95,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: normal;
   color: var(--apple-text-primary);
-  line-height: normal;
+  line-height: 1.25;
 }
 
 h1 { font-size: 40px; font-weight: 700; margin-bottom: 1.5rem; }
@@ -107,7 +107,7 @@ p {
   color: var(--apple-text-secondary);
   font-size: 17px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.6;
 }
 
 code, pre {
@@ -124,7 +124,8 @@ code, pre {
 header[role="banner"],
 header[role="banner"],
 header[data-identifier="topnav"],
-.mintlify-topbar {
+.mintlify-topbar,
+nav.mintlify-topbar {
   background: var(--apple-nav-bg) !important;
   backdrop-filter: blur(var(--apple-blur));
   -webkit-backdrop-filter: blur(var(--apple-blur));
@@ -135,7 +136,9 @@ header[data-identifier="topnav"],
 /* Sidebar - Apple's exact sidebar styling */
 aside[data-identifier="sidebar"],
 .sidebar,
-[data-identifier="sidebar"] {
+[data-identifier="sidebar"],
+nav[aria-label="Sidebar"],
+aside[aria-label="Sidebar"] {
   background: var(--apple-nav-bg) !important;
   backdrop-filter: blur(var(--apple-blur));
   -webkit-backdrop-filter: blur(var(--apple-blur));
@@ -455,7 +458,9 @@ td {
    ================================================================ */
 
 /* Card component override - Uses apple-card styling */
-.card {
+.card,
+.mdx-card,
+.Card {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -482,7 +487,8 @@ td {
 }
 
 /* Tab component override - Apple's exact styling */
-.tab-button {
+.tab-button,
+button[role="tab"] {
   border: 1px solid var(--apple-border) !important;
   background: var(--apple-bg) !important;
   color: var(--apple-text-secondary) !important;
@@ -493,11 +499,13 @@ td {
   padding: 8px 16px !important;
 }
 
-.tab-button:hover {
+.tab-button:hover,
+button[role="tab"]:hover {
   background: var(--apple-bg-secondary) !important;
 }
 
-.tab-button[aria-selected="true"] {
+.tab-button[aria-selected="true"],
+button[role="tab"][aria-selected="true"] {
   background: var(--apple-bg-secondary) !important;
   color: var(--apple-text-primary) !important;
   border-color: var(--apple-blue) !important;
@@ -587,6 +595,6 @@ td {
    DARK MODE ENHANCEMENTS - APPLE EXACT MATCH
    ================================================================ */
 
-[data-theme="dark"] body {
+html[data-theme="dark"] body {
   background: var(--apple-bg);
 }
