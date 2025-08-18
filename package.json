@@ -25,6 +25,7 @@
     "dev": "^0.1.3",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
+    "puppertino": "git@github.com:codedgar/Puppertino.git#master",
     "tailwind-merge": "^3.3.1"
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
@@ -200,7 +201,7 @@
     "build-storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "storybook:preview": "serve apps/storybook/storybook-static -l 6006",
     "storybook:verify": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static && node -e \"const fs=require('fs');if(!fs.existsSync('apps/storybook/storybook-static/index.html')){process.exit(1)}\"",
-    "test": "vitest run",
+    "test": "vitest -c vitest.config.mts run",
     "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
     "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
     "test:build": "bun run build:lib && vitest run libs/components/src/test/build-validation.test.ts",

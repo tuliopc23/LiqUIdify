@@ -1,7 +1,6 @@
 ---
 title: Quick Start
-description: Get up and running with LiqUIdify's Liquid Glass components in under 5 minutes.
-icon:
+description: Get up and running with Liquidify's Liquid Glass components in under 5 minutes.
 ---
 
 # Quick Start Guide
@@ -16,19 +15,22 @@ bun add liquidify
 
 ## 🎨 Setup Provider
 
-Wrap your app with `GlassUIProvider` and import the CSS once:
+Wrap your app with `ThemeProvider` and import the CSS once:
 
 ```tsx
 import "liquidify/styles";
+import { ThemeProvider } from "liquidify";
 
 function App() {
-  return <GlassUIProvider>{/* your app */}</GlassUIProvider>;
+  return <ThemeProvider>{/* your app */}</ThemeProvider>;
 }
 ```
 
 ## 🌊 Your First Liquid Glass Component
 
 ```tsx
+import { Card, Button } from "liquidify";
+
 export default function WelcomeCard() {
   return (
     <GlassCard variant="elevated" className="p-8 max-w-md mx-auto">
@@ -51,7 +53,7 @@ export default function WelcomeCard() {
         </GlassButton>
         <GlassButton variant="ghost">Learn More</GlassButton>
       </GlassCard.Actions>
-    </GlassCard>
+    </Card>
   );
 }
 ```
@@ -59,6 +61,8 @@ export default function WelcomeCard() {
 ## 🎯 Button Variants
 
 ```tsx
+import { Button } from "liquidify";
+
 export function ButtonShowcase() {
   return (
     <div className="flex gap-4 flex-wrap">
@@ -74,6 +78,8 @@ export function ButtonShowcase() {
 ## 🌙 Theme Toggle
 
 ```tsx
+import { useTheme, Button } from "liquidify";
+
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (

@@ -14,6 +14,7 @@
         "clsx": "^2.1.1",
         "dev": "^0.1.3",
         "framer-motion": "^12.23.12",
+        "puppertino": "git@github.com:codedgar/Puppertino.git#master",
         "lucide-react": "^0.539.0",
         "tailwind-merge": "^3.3.1",
       },
@@ -2065,6 +2066,8 @@
     "pump": ["pump@3.0.3", "", { "dependencies": { "end-of-stream": "^1.1.0", "once": "^1.3.1" } }, "sha512-todwxLMY7/heScKmntwQG8CXVkWUOdYxIvY2s0VWAAMh/nd8SoYiRaKjlr7+iCs984f2P8zvrfWcDDYVb73NfA=="],
 
     "punycode": ["punycode@2.3.1", "", {}, "sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg=="],
+
+    "puppertino": ["puppertino@git+ssh://git@github.com:codedgar/Puppertino.git#bf8ae2031f4d1d0f194969749d8ed69cf3114bb7", {}, "bf8ae2031f4d1d0f194969749d8ed69cf3114bb7"],
 
     "puppeteer": ["puppeteer@22.15.0", "", { "dependencies": { "@puppeteer/browsers": "2.3.0", "cosmiconfig": "^9.0.0", "devtools-protocol": "0.0.1312386", "puppeteer-core": "22.15.0" }, "bin": { "puppeteer": "lib/esm/puppeteer/node/cli.js" } }, "sha512-XjCY1SiSEi1T7iSYuxS82ft85kwDJUS7wj1Z0eGVXKdtr5g4xnVcbjwxhq5xBnpK/E7x1VZZoJDxpjAOasHT4Q=="],
 

@@ -9,7 +9,7 @@ import TabsExample from "/snippets/components/TabsExample.jsx";
 
 Accessible tabbed interface for switching between content panels.
 
-{/_Live preview_/}
+{/* Live preview */}
 
 <TabsExample />
 
@@ -22,7 +22,7 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-import { GlassTabs } from "liquidify";
+import { Tabs } from "liquidify";
 
 export default function Demo() {
   const tabs = [
@@ -43,7 +43,7 @@ export default function Demo() {
     },
   ];
 
-  return <GlassTabs tabs={tabs} defaultTab="details" />;
+  return <Tabs tabs={tabs} defaultTab="details" />;
 }
 ```
 

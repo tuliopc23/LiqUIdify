@@ -1,0 +1,41 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "LiqUIdify",
+  "logo": {
+    "dark": "logo-dark.svg",
+    "light": "logo-light.svg"
+  },
+  "favicon": "favicon.svg",
+  "colors": {
+    "primary": "#0066cc",
+    "light": "#0a84ff",
+    "dark": "#0055b3"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@useliquidify.dev"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://github.com/tuliopc23/LiqUIdify"
+  },
+  "style": "./styles/apple-developer-theme.css",
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "index",
+        "getting-started/installation",
+        "getting-started/quickstart"
+      ]
+    },
+    {
+      "group": "Components",
+      "pages": [
+        "components/showcase"
+      ]
+    }
+  ]
+}

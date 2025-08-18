@@ -70,6 +70,19 @@ export * from "./components/glass-skip-navigation";
 export * from "./components/theme-provider";
 export * from "./components/theme-toggle";
 
+// Convenience alias exports for docs/snippets (Mintlify)
+// These map simplified names used in examples to the actual Glass* exports.
+export { GlassButton as Button } from "./components/glass-button-refactored";
+export { GlassCard as Card } from "./components/glass-card-refactored";
+export { GlassInput as Input } from "./components/glass-input";
+export { GlassTabs as Tabs } from "./components/glass-tabs";
+export { GlassTooltip as Tooltip } from "./components/glass-tooltip";
+export { GlassToast as Toast } from "./components/glass-toast";
+export { GlassModal as Modal } from "./components/glass-modal";
+export { GlassSelect as Select } from "./components/glass-select";
+export { GlassTextarea as Textarea } from "./components/glass-textarea";
+export { GlassResponsiveButton as ResponsiveButton } from "./components/glass-responsive-button";
+
 // Liquid Glass System
 export * from "./components/liquid-glass/liquid-glass";
 export * from "./components/liquid-glass-defs/liquid-glass-defs";

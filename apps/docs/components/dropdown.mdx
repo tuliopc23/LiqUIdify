@@ -16,7 +16,7 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-import { GlassDropdown, GlassButton } from "liquidify";
+import { GlassDropdown, Button } from "liquidify";
 import { useState } from "react";
 
 export default function Demo() {
@@ -31,7 +31,7 @@ export default function Demo() {
   return (
     <div className="space-y-2">
       <GlassDropdown
-        trigger={<GlassButton variant="ghost">Open menu</GlassButton>}
+        trigger={<Button variant="ghost">Open menu</Button>}
         items={items}
         onSelect={setValue}
       />
