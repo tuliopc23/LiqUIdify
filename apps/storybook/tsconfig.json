@@ -26,10 +26,7 @@
       "@/types/*": ["../../libs/components/src/types/*"]
     }
   },
-  "include": [
-    "./**/*",
-    "../../reset.d.ts"
-  ],
+  "include": ["./**/*", "../../reset.d.ts"],
   "exclude": [
     "node_modules",
     "storybook-static",

@@ -167,7 +167,7 @@
     "docs:links": "bun run --filter @liquidify/docs links",
     "docs:preview": "bun run --filter @liquidify/docs preview",
     "format": "qlty fmt -a",
-    "format:fix": "qlty fmt -- --fix",
+    "format:fix": "qlty fmt -a",
     "health-check": "bun run type-check && bun run build:lib",
     "lint": "qlty check -a",
     "preview": "bun run build && bun run docs:preview",

@@ -5,6 +5,7 @@ Welcome to the LiqUIdify development environment! This guide will help you get u
 ## 🏃‍♂️ Quick Start
 
 ### 1. One-Command Setup
+
 ```bash
 # Clone and setup everything
 git clone <repo-url>
@@ -13,6 +14,7 @@ node scripts/setup-dev.mjs
 ```
 
 ### 2. Start Development
+
 ```bash
 # Start all development servers (recommended)
 bun run dev:all
@@ -23,6 +25,7 @@ bun run docs:dev       # Documentation only
 ```
 
 ### 3. Open Your Tools
+
 - 🎨 **Storybook**: http://localhost:6006
 - 📚 **Documentation**: http://localhost:3000
 - 💻 **VS Code**: Open `liquidify.code-workspace`
@@ -30,6 +33,7 @@ bun run docs:dev       # Documentation only
 ## 🛠️ Development Commands
 
 ### 🚀 Quick Development
+
 ```bash
 bun run dev:all        # Start everything (lib watch + storybook + docs)
 bun run dev:quick      # Start lib + storybook only (faster)
@@ -38,6 +42,7 @@ bun run docs:dev       # Documentation only
 ```
 
 ### 🔨 Building
+
 ```bash
 bun run build:all      # Build everything
 bun run build:lib      # Build component library
@@ -46,6 +51,7 @@ bun run build:docs     # Build documentation
 ```
 
 ### 🔍 Quality Checks
+
 ```bash
 bun run type-check     # TypeScript checking
 bun run type-check:watch # TypeScript checking (watch mode)
@@ -56,6 +62,7 @@ bun run format:fix     # Format code
 ```
 
 ### 📊 Workspace Management
+
 ```bash
 bun run workspace:info    # Show workspace information
 bun run workspace:verify  # Verify workspace setup
@@ -103,12 +110,15 @@ bun run --filter @liquidify/docs build:css
 ## 💻 VS Code Setup
 
 ### 1. Open Workspace
+
 ```bash
 code liquidify.code-workspace
 ```
 
 ### 2. Recommended Extensions
+
 The workspace file includes recommended extensions:
+
 - Prettier (code formatting)
 - Tailwind CSS IntelliSense
 - TypeScript support
@@ -117,7 +127,9 @@ The workspace file includes recommended extensions:
 - Playwright (for testing)
 
 ### 3. Built-in Tasks
+
 Use `Cmd+Shift+P` → "Tasks: Run Task":
+
 - 🚀 Start All Development Servers
 - 📦 Build Component Library
 - 🎨 Start Storybook
@@ -131,6 +143,7 @@ Use `Cmd+Shift+P` → "Tasks: Run Task":
 ### Adding New Components
 
 1. **Create Component**
+
    ```bash
    # In libs/components/src/components/
    mkdir my-component
@@ -139,12 +152,14 @@ Use `Cmd+Shift+P` → "Tasks: Run Task":
    ```
 
 2. **Add Story**
+
    ```bash
    # In apps/storybook/src/stories/
    touch MyComponent.stories.tsx
    ```
 
 3. **Add Documentation**
+
    ```bash
    # In apps/docs/components/
    touch my-component.mdx
@@ -173,6 +188,7 @@ Use `Cmd+Shift+P` → "Tasks: Run Task":
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 bun run test              # Run all tests
 bun run test:coverage     # With coverage report
@@ -182,6 +198,7 @@ bun run test:performance  # Performance tests
 ```
 
 ### Test Structure
+
 ```
 libs/components/src/test/
 ├── accessibility-integration.test.tsx
@@ -196,11 +213,13 @@ libs/components/src/test/
 ### Common Issues
 
 1. **"Cannot find module '@liquidify/components'"**
+
    ```bash
    bun install  # Reinstall workspace links
    ```
 
 2. **Build Failures**
+
    ```bash
    bun run clean:all  # Clean everything
    bun install        # Reinstall
@@ -208,6 +227,7 @@ libs/components/src/test/
    ```
 
 3. **TypeScript Errors**
+
    ```bash
    bun run type-check  # Check all workspaces
    ```
@@ -221,12 +241,14 @@ libs/components/src/test/
 ### Getting Help
 
 1. **Check Workspace Status**
+
    ```bash
    bun run workspace:verify
    bun run workspace:info
    ```
 
 2. **View Logs**
+
    ```bash
    bun run dev:all  # Shows all logs in one terminal
    ```
@@ -239,17 +261,21 @@ libs/components/src/test/
 ## 🎨 Customization
 
 ### Environment Variables
+
 Create `.env.local` for local overrides:
+
 ```bash
 # Storybook port
 STORYBOOK_PORT=6006
 
-# Documentation port  
+# Documentation port
 DOCS_PORT=3000
 ```
 
 ### VS Code Settings
+
 Customize in `.vscode/settings.json`:
+
 ```json
 {
   "editor.formatOnSave": true,

@@ -19,10 +19,7 @@ export function getLiquidGlassClasses(
     if ((capabilities as any).hasHDR ?? capabilities.hdr) {
       classes.push("liquid-glass-hdr");
     }
-  } else if (
-    capabilities.performanceTier === "low" ||
-    variant === "minimal"
-  ) {
+  } else if (capabilities.performanceTier === "low" || variant === "minimal") {
     classes.push("liquid-glass-minimal");
   }
 

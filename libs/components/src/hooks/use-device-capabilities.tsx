@@ -57,7 +57,8 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 
       // Check SVG filter support
       const hasSVGFilters =
-        (typeof CSS !== "undefined" && CSS.supports?.("filter", "url(#test)")) ||
+        (typeof CSS !== "undefined" &&
+          CSS.supports?.("filter", "url(#test)")) ||
         false;
 
       // Check GPU availability (WebGL support as proxy)
@@ -88,7 +89,8 @@ export function useDeviceCapabilities(): DeviceCapabilities {
       // Detect performance tier based on various factors
       const detectPerformanceTier = (): "high" | "medium" | "low" => {
         // Check hardware concurrency (CPU cores)
-        const cores = (navigator && (navigator as any).hardwareConcurrency) || 1;
+        const cores =
+          (navigator && (navigator as any).hardwareConcurrency) || 1;
 
         // Check device memory (if available)
         const memory = (navigator as any).deviceMemory || 4;

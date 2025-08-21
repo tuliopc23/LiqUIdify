@@ -125,6 +125,7 @@ glass-component/
 ```
 
 Components use a combination of:
+
 - TypeScript for type safety
 - React hooks for state management
 - CSS variables for theming
@@ -198,10 +199,11 @@ import { GlassButton, LiquidGlassDefs, UnifiedGlassProvider } from "liquidify";
   <GlassButton variant="primary" className="liquid-glass">
     Click Me
   </GlassButton>
-</UnifiedGlassProvider>
+</UnifiedGlassProvider>;
 ```
 
 When implementing glass effects:
+
 - Use the `liquid-glass` class for decorative surfaces
 - Use `liquid-glass-readable` for text content to ensure contrast
 - Test on various backgrounds
@@ -250,6 +252,7 @@ bun run docs:build
 ## Contribution Guidelines
 
 When contributing new code:
+
 1. Follow TypeScript practices with proper types
 2. Ensure WCAG 2.1 AA compliance
 3. Include unit tests and Storybook stories
@@ -263,47 +266,55 @@ When contributing new code:
 To match the Apple Developer Documentation style in our Mintlify docs:
 
 ### Typography
+
 - Use SF Pro font family (or close alternative like Inter)
 - Large, bold headings with generous spacing
 - Clean, readable body text with increased line height (1.5-1.6)
 - Hierarchical heading structure (H1, H2, H3) with consistent sizing
 
 ### Color Scheme
+
 - Light theme: Clean white background with subtle gray accents (#f5f5f7)
 - Dark theme: Rich dark background (#1d1d1f) with soft contrasts
 - Accent colors: Use Apple's blue (#0066cc), purple (#5e5ce6) for links/buttons
 - Support high contrast mode for accessibility
 
 ### Component Design
+
 - Cards with subtle shadows and rounded corners (border-radius: 12px)
 - Glass effect with backdrop-filter: blur(20px)
 - Minimal borders, using light gray separators (#e5e5e5)
 - Clean spacing system (8pt grid) with consistent margins
 
 ### Navigation
+
 - Sidebar navigation with collapsible groups
 - Hierarchical organization mirroring Apple's docs
 - Filter/search functionality with instant results
 
 ### Content Layout
+
 - Use 3-column card grids for feature showcases
 - Implement "Steps" component for sequential instructions
 - Create focused content blocks with plenty of whitespace
 - Include visual dividers between major sections
 
 ### Code Examples
+
 - Syntax highlighting with Apple-like color scheme
 - Copy code button functionality
 - Tabbed code examples for different use cases
 - Interactive code snippets where possible
 
 ### Interactive Elements
+
 - Subtle hover effects with scale/opacity changes
 - Smooth transitions for interactive elements (0.2s ease)
 - Consistent button styling with rounded corners
 - Support for light/dark mode toggle
 
 ### Custom Components
+
 - Implement CardGroup and Card components with Apple styling
 - Create Apple-styled Accordion components
 - Design custom callouts/notes with Apple's information hierarchy

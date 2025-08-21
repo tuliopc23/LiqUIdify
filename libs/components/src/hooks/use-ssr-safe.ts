@@ -103,7 +103,7 @@ function useSSRSafeLocalStorage<T>(
       try {
         const item = localStorage.getItem(key);
         if (item) {
-          setStoredValue(JSON.parse(item));
+          setStoredValue(JSON.parse(item) as T);
         }
       } catch {
         // Logging disabled
@@ -145,7 +145,7 @@ function useSSRSafeSessionStorage<T>(
       try {
         const item = sessionStorage.getItem(key);
         if (item) {
-          setStoredValue(JSON.parse(item));
+          setStoredValue(JSON.parse(item) as T);
         }
       } catch {
         // Logging disabled

@@ -73,14 +73,14 @@ export const createVariants = <T extends VariantConfig>(
           const classValue = variantValue[value as string];
           if (classValue) {
             if (Array.isArray(classValue)) {
-              classes.push(...classValue);
+              classes.push(...(classValue as string[]));
             } else if (typeof classValue === "object") {
               // Handle compound variants
               if (classValue.class) {
-                classes.push(classValue.class);
+                classes.push(classValue.class as string);
               }
             } else {
-              classes.push(classValue);
+              classes.push(classValue as string);
             }
           }
         } else if (typeof variantValue === "string") {

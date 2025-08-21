@@ -13,9 +13,7 @@
     "dark": "#0055b3"
   },
   "theme": "mint",
-  "style": [
-    "styles/apple-developer.css"
-  ],
+  "style": ["styles/apple-developer.css"],
   "navigation": {
     "groups": [
       {

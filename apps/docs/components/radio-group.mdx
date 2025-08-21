@@ -1,555 +1,98 @@
 ---
-title: Radio Group
-description: Accessible radio button group with smooth animations and multiple layout options.
+title: "Radio Group"
+description: "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time."
 ---
 
-### Example
+# Radio Group
+
+A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+
+## Installation
+
+```bash
+npm install liquidify
+```
+
+## Usage
 
 ```tsx
-export default function Demo() {
+import { GlassRadioGroup } from "liquidify";
+
+function Example() {
   const [value, setValue] = useState("option1");
-  const [payment, setPayment] = useState("card");
 
   return (
-    <div className="space-y-8" style={{ maxWidth: 420 }}>
-      {/* Basic radio group */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Choose an option</h3>
-        <GlassRadioGroup value={value} onValueChange={setValue}>
-          <GlassRadioGroup.Item value="option1">
-            Option One
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="option2">
-            Option Two
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="option3">
-            Option Three
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-        <p className="text-white/60 text-sm mt-2">Selected: {value}</p>
-      </div>
-
-      {/* Payment method example */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Payment Method</h3>
-        <GlassRadioGroup value={payment} onValueChange={setPayment} size="lg">
-          <GlassRadioGroup.Item value="card" variant="solid">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white text-sm font-bold">
-                💳
-              </div>
-              <div>
-                <div className="font-medium">Credit Card</div>
-                <div className="text-white/60 text-sm">
-                  Visa, Mastercard, Amex
-                </div>
-              </div>
-            </div>
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="paypal" variant="solid">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white text-sm font-bold">
-                P
-              </div>
-              <div>
-                <div className="font-medium">PayPal</div>
-                <div className="text-white/60 text-sm">
-                  Pay with your PayPal account
-                </div>
-              </div>
-            </div>
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-    </div>
-  );
-}
-```
-
-## Orientations
-
-### Example
-
-```tsx
-export default function OrientationDemo() {
-  const [vertical, setVertical] = useState("a");
-  const [horizontal, setHorizontal] = useState("x");
-
-  return (
-    <div className="space-y-8">
-      {/* Vertical (default) */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Vertical Layout</h3>
-        <GlassRadioGroup
-          value={vertical}
-          onValueChange={setVertical}
-          orientation="vertical"
-        >
-          <GlassRadioGroup.Item value="a">Option A</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="b">Option B</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="c">Option C</GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-
-      {/* Horizontal */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Horizontal Layout</h3>
-        <GlassRadioGroup
-          value={horizontal}
-          onValueChange={setHorizontal}
-          orientation="horizontal"
-        >
-          <GlassRadioGroup.Item value="x">X</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="y">Y</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="z">Z</GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-    </div>
-  );
-}
-```
-
-## Sizes and Variants
-
-### Example
-
-```tsx
-export default function SizesDemo() {
-  const [small, setSmall] = useState("sm1");
-  const [medium, setMedium] = useState("md1");
-  const [large, setLarge] = useState("lg1");
-
-  return (
-    <div className="space-y-8">
-      {/* Small size */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Small Size</h3>
-        <GlassRadioGroup value={small} onValueChange={setSmall} size="sm">
-          <GlassRadioGroup.Item value="sm1" variant="ghost">
-            Small Option 1
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="sm2" variant="ghost">
-            Small Option 2
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-
-      {/* Medium size (default) */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Medium Size</h3>
-        <GlassRadioGroup value={medium} onValueChange={setMedium} size="md">
-          <GlassRadioGroup.Item value="md1">
-            Medium Option 1
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="md2">
-            Medium Option 2
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-
-      {/* Large size */}
-      <div>
-        <h3 className="text-white mb-3 font-medium">Large Size</h3>
-        <GlassRadioGroup value={large} onValueChange={setLarge} size="lg">
-          <GlassRadioGroup.Item value="lg1" variant="solid">
-            Large Option 1
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="lg2" variant="solid">
-            Large Option 2
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </div>
-    </div>
+    <GlassRadioGroup
+      value={value}
+      onValueChange={setValue}
+      options={[
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+        { value: "option3", label: "Option 3" },
+      ]}
+    />
   );
 }
 ```
 
 ## Props
 
-### GlassRadioGroup
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The controlled value of the radio group |
+| `onValueChange` | `(value: string) => void` | - | Callback fired when the value changes |
+| `options` | `Array<{value: string, label: string}>` | - | Array of radio options |
+| `disabled` | `boolean` | `false` | Whether the radio group is disabled |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` | The orientation of the radio group |
 
-| Prop            | Type                         | Default      | Description                     |
-| --------------- | ---------------------------- | ------------ | ------------------------------- |
-| `value`         | `string`                     | -            | Currently selected value        |
-| `onValueChange` | `(value: string) => void`    | -            | Callback when selection changes |
-| `orientation`   | `'horizontal' \| 'vertical'` | `'vertical'` | Layout orientation              |
-| `size`          | `'sm' \| 'md' \| 'lg'`       | `'md'`       | Size variant                    |
-| `disabled`      | `boolean`                    | `false`      | Disabled state                  |
-| `name`          | `string`                     | -            | Form name attribute             |
-| `required`      | `boolean`                    | `false`      | Required field                  |
-| `children`      | `ReactNode`                  | -            | Radio items                     |
+## Examples
 
-### GlassRadioGroup.Item
-
-| Prop       | Type                              | Default     | Description    |
-| ---------- | --------------------------------- | ----------- | -------------- |
-| `value`    | `string`                          | -           | Item value     |
-| `disabled` | `boolean`                         | `false`     | Disabled state |
-| `size`     | `'sm' \| 'md' \| 'lg'`            | `'md'`      | Size variant   |
-| `variant`  | `'default' \| 'solid' \| 'ghost'` | `'default'` | Visual variant |
-| `children` | `ReactNode`                       | -           | Item content   |
-
-## Usage Patterns
-
-### Form Integration
+### Basic Radio Group
 
 ```tsx
-function PreferencesForm() {
-  const [theme, setTheme] = useState("system");
-  const [notifications, setNotifications] = useState("all");
-
-  return (
-    <form className="space-y-6">
-      <GlassFormField
-        label="Theme Preference"
-        helperText="Choose your preferred color scheme"
-      >
-        <GlassRadioGroup value={theme} onValueChange={setTheme}>
-          <GlassRadioGroup.Item value="light">Light Mode</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="dark">Dark Mode</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="system">
-            System Default
-          </GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </GlassFormField>
-
-      <GlassFormField
-        label="Notifications"
-        helperText="How would you like to receive notifications?"
-      >
-        <GlassRadioGroup value={notifications} onValueChange={setNotifications}>
-          <GlassRadioGroup.Item value="all">
-            All Notifications
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="important">
-            Important Only
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="none">None</GlassRadioGroup.Item>
-        </GlassRadioGroup>
-      </GlassFormField>
-    </form>
-  );
-}
+<GlassRadioGroup
+  value={value}
+  onValueChange={setValue}
+  options={[
+    { value: "small", label: "Small" },
+    { value: "medium", label: "Medium" },
+    { value: "large", label: "Large" },
+  ]}
+/>
 ```
 
-### Rich Content Items
+### Horizontal Layout
 
 ```tsx
-function PlanSelector() {
-  const [plan, setPlan] = useState("pro");
+<GlassRadioGroup
+  orientation="horizontal"
+  value={value}
+  onValueChange={setValue}
+  options={[
+    { value: "left", label: "Left" },
+    { value: "center", label: "Center" },
+    { value: "right", label: "Right" },
+  ]}
+/>
+```
 
-  return (
-    <GlassRadioGroup value={plan} onValueChange={setPlan} size="lg">
-      <GlassRadioGroup.Item value="basic" variant="solid">
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="font-semibold text-lg">Basic Plan</div>
-            <div className="text-white/60 text-sm">Perfect for individuals</div>
-            <div className="mt-2">
-              <span className="text-2xl font-bold">$9</span>
-              <span className="text-white/60">/month</span>
-            </div>
-          </div>
-          <div className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">
-            Popular
-          </div>
-        </div>
-      </GlassRadioGroup.Item>
+### Disabled State
 
-      <GlassRadioGroup.Item value="pro" variant="solid">
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="font-semibold text-lg">Pro Plan</div>
-            <div className="text-white/60 text-sm">For growing teams</div>
-            <div className="mt-2">
-              <span className="text-2xl font-bold">$29</span>
-              <span className="text-white/60">/month</span>
-            </div>
-          </div>
-          <div className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">
-            Recommended
-          </div>
-        </div>
-      </GlassRadioGroup.Item>
-    </GlassRadioGroup>
-  );
-}
+```tsx
+<GlassRadioGroup
+  disabled
+  value={value}
+  onValueChange={setValue}
+  options={[
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+  ]}
+/>
 ```
 
 ## Accessibility
 
-### WCAG Compliance
-
-- **Keyboard Navigation**: Full keyboard support with arrow keys
-- **Screen Reader**: Proper ARIA attributes and announcements
-- **Focus Management**: Clear focus indicators and logical tab order
-- **Grouping**: Proper radio group semantics
-
-### Keyboard Shortcuts
-
-| Key          | Action                         |
-| ------------ | ------------------------------ |
-| `Tab`        | Move focus to/from radio group |
-| `Arrow Keys` | Navigate between radio options |
-| `Space`      | Select focused radio option    |
-
-### Screen Reader Support
-
-```tsx
-// Automatic ARIA attributes
-<GlassRadioGroup value={value} onValueChange={setValue}>
-  <GlassRadioGroup.Item value="option1">Option One</GlassRadioGroup.Item>
-  <GlassRadioGroup.Item value="option2">Option Two</GlassRadioGroup.Item>
-</GlassRadioGroup>
-
-// Generates:
-// <div role="radiogroup" aria-labelledby="group-label">
-//   <div role="radio" aria-checked="true" tabindex="0">
-//     Option One
-//   </div>
-//   <div role="radio" aria-checked="false" tabindex="-1">
-//     Option Two
-//   </div>
-// </div>
-```
-
-### ARIA Attributes
-
-- **`role="radiogroup"`**: Identifies the container as a radio group
-- **`role="radio"`**: Identifies each option as a radio button
-- **`aria-checked`**: Indicates the checked state of each radio
-- **`aria-labelledby`**: Associates the group with its label
-- **`aria-describedby`**: Links to helper text when provided
-- **`tabindex`**: Manages focus within the group (0 for selected, -1 for others)
-
-## Apple HIG Guidelines
-
-### Visual Design
-
-- **Clarity**: Clear visual distinction between selected and unselected states
-- **Depth**: Subtle glass effects that enhance the selection metaphor
-- **Consistency**: Consistent spacing and alignment across options
-- **Hierarchy**: Clear visual hierarchy within rich content items
-
-### Interaction Design
-
-- **Immediate Feedback**: Instant visual response to selection changes
-- **Touch Targets**: Appropriate size for touch interaction
-- **States**: Clear visual states for normal, hover, focus, and disabled
-- **Animations**: Smooth transitions that feel natural and responsive
-
-### Content Organization
-
-- **Logical Grouping**: Related options grouped together
-- **Clear Labels**: Descriptive text for each option
-- **Progressive Disclosure**: Additional details revealed when appropriate
-- **Scannable Layout**: Easy to scan and compare options
-
-## Best Practices
-
-### Do's
-
-- ✅ Use radio groups for mutually exclusive choices
-- ✅ Provide clear, descriptive labels for each option
-- ✅ Group related options logically
-- ✅ Use consistent styling across all options
-- ✅ Consider the default selection carefully
-
-### Don'ts
-
-- ❌ Don't use radio groups for multiple selections (use checkboxes)
-- ❌ Don't make radio groups too long (consider dropdowns)
-- ❌ Don't rely only on color to indicate selection
-- ❌ Don't use radio groups for binary choices (use switches)
-- ❌ Don't forget to handle the unselected state
-
-### Performance
-
-- **Efficient Rendering**: Optimized for large option lists
-- **Smooth Animations**: GPU-accelerated transitions
-- **Minimal Re-renders**: Efficient state management
-
-```tsx
-// Optimized for performance
-const options = useMemo(
-  () => [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-  ],
-  [],
-);
-
-const handleChange = useCallback((value) => {
-  setValue(value);
-}, []);
-```
-
-<$-- STATIC_PREVIEW_radio-group:start -->
-
-<div id="liquidify-static-radio-group-preview">
-  <style>
-#liquidify-static-radio-group-preview </title>> /* Page backdrop (the injector will scope this stylesheet when embedding) */ html, #liquidify-static-radio-group-preview{
-        height: 100%;
-        margin: 0;
-      }#liquidify-static-radio-group-preview{
-        font-family:
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        background:
-          radial-gradient(
-            80rem 60rem at 20% 20%,
-            rgba(162, 210, 255, 0.28),
-            transparent 60%
-          ),
-          radial-gradient(
-            80rem 60rem at 80% 30%,
-            rgba(255, 183, 248, 0.22),
-            transparent 60%
-          ),
-          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        color: #0f172a;
-      }#liquidify-static-radio-group-preview /* Design tokens */ #liquidify-static-radio-group-preview{
-        --lg-text: #0f172a;
-        --lg-text-subtle: #334155;
-
-        --lg-border: rgba(255, 255, 255, 0.22);
-        --lg-border-strong: rgba(255, 255, 255, 0.32);
-        --lg-bg-tint: rgba(255, 255, 255, 0.05);
-
-        --lg-primary: #007aff;
-
-        --lg-shadow:
-          0 12px 22px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
-
-        --lg-radius-md: 12px;
-
-        --lg-transition: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
-      }#liquidify-static-radio-group-preview .theme-dark{
-        --lg-text: #f8fafc;
-        --lg-text-subtle: #cbd5e1;
-        --lg-border: rgba(255, 255, 255, 0.18);
-        --lg-border-strong: rgba(255, 255, 255, 0.28);
-        --lg-bg-tint: rgba(255, 255, 255, 0.03);
-      }#liquidify-static-radio-group-preview /* Layout helpers */ .canvas{
-        width: 100%;
-        max-width: 1000px;
-        display: grid;
-        gap: 18px;
-      }#liquidify-static-radio-group-preview .row{
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        flex-wrap: wrap;
-      }#liquidify-static-radio-group-preview .label{
-        color: #111827cc;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-      }#liquidify-static-radio-group-preview .theme-dark .label{
-        color: #e5e7ebcc;
-      }#liquidify-static-radio-group-preview .surface{
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-      }#liquidify-static-radio-group-preview /* Fieldset + legend for grouping */ .fieldset{
-        border: 1px dashed rgba(255, 255, 255, 0.18);
-        border-radius: 14px;
-        padding: 14px 16px;
-      }#liquidify-static-radio-group-preview .legend{
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        color: var(--lg-text-subtle);
-        text-transform: uppercase;
-        padding: 0 6px;
-      }#liquidify-static-radio-group-preview .options{
-        display: grid;
-        gap: 10px;
-        margin-top: 10px;
-      }#liquidify-static-radio-group-preview /* Radio control */ .rad{
-        --size: 18px;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        user-select: none;
-        cursor: pointer;
-        color: var(--lg-text);
-        font-weight: 500;
-        letter-spacing: 0.01em;
-      }#liquidify-static-radio-group-preview .dotbox{
-        position: relative;
-        width: var(--size);
-        height: var(--size);
-        border-radius: 999px;
-        border: 1px solid var(--lg-border);
-        background: transparent;
-        box-shadow: var(--lg-shadow);
-        overflow: hidden;
-        isolation: isolate;
-      }#liquidify-static-radio-group-preview .dotbox::before{
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        backdrop-filter: blur(10px) saturate(170%);
-        -webkit-backdrop-filter: blur(10px) saturate(170%);
-        background: var(--lg-bg-tint);
-        z-index: -2;
-      }#liquidify-static-radio-group-preview .dotbox::after{
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.18),
-          rgba(255, 255, 255, 0.06)
-        );
-        opacity: 0.6;
-        z-index: -1;
-      }#liquidify-static-radio-group-preview /* Visually hide native input while keeping it accessible */ .native{
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }#liquidify-static-radio-group-preview .indicator{
-        position: absolute;
-        inset: 3px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #2ea0ff, #007aff 60%);
-        opacity: 0;
-        transform: scale(0.7);
-        transition: opacity var(--lg-transition), transform var(--lg-transition);
-      }#liquidify-static-radio-group-preview /* Focus + checked states */ .native:checked + .dotbox .indicator{
-        opacity: 1;
-        transform: scale(1);
-      }#liquidify-static-radio-group-preview .native:focus-visible + .dotbox{
-        outline: 2px solid rgba(0, 122, 255, 0.6);
-        outline-offset: 2px;
-      }#liquidify-static-radio-group-preview /* Disabled (optional example) */ .rad[aria-disabled="true"]{
-        opacity: 0.65;
-        cursor: not-allowed;
-      }#liquidify-static-radio-group-preview /* Mobile tweaks */ @media (max-width: 480px){
-        .surface {
-          padding: 12px;
-        }
-      }#liquidify-static-radio-group-preview /* Reduced motion */ @media (prefers-reduced-motion: reduce){
-        .indicator {
-          transition: none;
-        }
-      }
-
-  </style>
-  <div class="canvas">
-      <div
-</div>
-<!-- STATIC_PREVIEW:radio-group:end -->
+- Uses proper ARIA attributes for screen readers
+- Supports keyboard navigation with arrow keys
+- Follows WAI-ARIA Radio Group pattern
+- Provides focus management and visual indicators

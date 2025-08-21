@@ -10,9 +10,13 @@
 
 :root {
   /* Typography - Exact Apple Specs */
-  --apple-font: "SF Pro Text", system-ui, -apple-system, "system-ui", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --apple-font-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  
+  --apple-font:
+    "SF Pro Text", system-ui, -apple-system, "system-ui", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  --apple-font-mono:
+    "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+
   /* Colors - Light Mode (Apple's exact values) */
   --apple-bg: #ffffff;
   --apple-bg-secondary: #f5f5f7;
@@ -25,26 +29,27 @@
   --apple-card-bg: rgba(255, 255, 255, 0.8);
   --apple-border: rgba(0, 0, 0, 0.1);
   --apple-nav-bg: rgba(255, 255, 255, 0.8);
-  
+
   /* Apple's exact color system */
-  --foreground-color: oklch(92.96% .007 106.53);
-  --foreground-quiet-color: oklch(92.96% .007 106.53 / .55);
-  --foreground-quieter-color: oklch(92.96% .007 106.53 / .35);
-  --background-base-color: oklch(99.02% .004 106.47);
-  --background-raised-color: oklch(99.62% .004 106.47);
-  --border-color: oklch(88.28% .012 106.65);
-  
+  --foreground-color: oklch(92.96% 0.007 106.53);
+  --foreground-quiet-color: oklch(92.96% 0.007 106.53 / 0.55);
+  --foreground-quieter-color: oklch(92.96% 0.007 106.53 / 0.35);
+  --background-base-color: oklch(99.02% 0.004 106.47);
+  --background-raised-color: oklch(99.62% 0.004 106.47);
+  --border-color: oklch(88.28% 0.012 106.65);
+
   /* Border Radius - Apple Standard */
   --apple-radius-small: 8px;
   --apple-radius-medium: 12px;
   --apple-radius-large: 16px;
   --apple-radius-xlarge: 20px;
-  
+
   /* Shadows and Effects - Apple Standard */
   --apple-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 0 1px rgba(0, 0, 0, 0.1);
-  --apple-shadow-strong: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.1);
+  --apple-shadow-strong:
+    0 8px 20px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.1);
   --apple-blur: 20px;
-  
+
   /* Transitions - Apple Standard */
   --apple-transition: all 0.3s cubic-bezier(0.42, 0, 0.58, 1);
 }
@@ -62,14 +67,14 @@ html[data-theme="dark"] {
   --apple-card-bg: rgba(46, 46, 48, 0.8);
   --apple-border: rgba(255, 255, 255, 0.1);
   --apple-nav-bg: rgba(29, 29, 31, 0.8);
-  
+
   /* Apple's exact dark color system */
-  --foreground-color: oklch(92.96% .007 106.53);
-  --foreground-quiet-color: oklch(92.96% .007 106.53 / .55);
-  --foreground-quieter-color: oklch(92.96% .007 106.53 / .35);
-  --background-base-color: oklch(21.67% .002 197.04);
-  --background-raised-color: oklch(34.26% .003 197.03);
-  --border-color: oklch(36.61% .003 228.87);
+  --foreground-color: oklch(92.96% 0.007 106.53);
+  --foreground-quiet-color: oklch(92.96% 0.007 106.53 / 0.55);
+  --foreground-quieter-color: oklch(92.96% 0.007 106.53 / 0.35);
+  --background-base-color: oklch(21.67% 0.002 197.04);
+  --background-raised-color: oklch(34.26% 0.003 197.03);
+  --border-color: oklch(36.61% 0.003 228.87);
 }
 
 /* ================================================================
@@ -90,7 +95,12 @@ html body {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--apple-font);
   font-weight: 600;
   letter-spacing: normal;
@@ -98,9 +108,21 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
 }
 
-h1 { font-size: 40px; font-weight: 700; margin-bottom: 1.5rem; }
-h2 { font-size: 32px; margin-top: 2.5rem; margin-bottom: 1rem; }
-h3 { font-size: 24px; margin-top: 2rem; margin-bottom: 0.75rem; }
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: 32px;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+h3 {
+  font-size: 24px;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
 
 p {
   margin-bottom: 1.25rem;
@@ -110,7 +132,8 @@ p {
   line-height: 1.6;
 }
 
-code, pre {
+code,
+pre {
   font-family: var(--apple-font-mono);
   font-size: 14px;
 }
@@ -191,11 +214,11 @@ aside[aria-label="Sidebar"] {
   display: flex;
   flex-direction: column;
   position: relative;
-  
+
   /* Box model */
   box-sizing: border-box;
   height: 100%;
-  
+
   /* Visual - Apple's exact styling */
   background: var(--apple-card-bg);
   border: 1px solid var(--apple-border);
@@ -204,11 +227,11 @@ aside[aria-label="Sidebar"] {
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   overflow: hidden;
-  
+
   /* Interaction */
   transition: var(--apple-transition);
   cursor: pointer;
-  
+
   /* Transform */
   transform: none;
   transform-origin: 50% 50%;
@@ -335,24 +358,24 @@ aside[aria-label="Sidebar"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   /* Box model */
   box-sizing: border-box;
   padding: 8px 20px;
   margin: 0;
   border: none;
-  
+
   /* Visual */
   border-radius: 980px;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-  
+
   /* Interaction */
   cursor: pointer;
   transition: var(--apple-transition);
   user-select: none;
-  
+
   /* Transform */
   transform: none;
   transform-origin: 50% 50%;
@@ -526,47 +549,83 @@ button[role="tab"][aria-selected="true"] {
    ================================================================ */
 
 /* Apple's exact border radius system */
-.apple-radius-4 { border-radius: 4px; }
-.apple-radius-8 { border-radius: 8px; }
-.apple-radius-12 { border-radius: 12px; }
-.apple-radius-16 { border-radius: 16px; }
-.apple-radius-20 { border-radius: 20px; }
+.apple-radius-4 {
+  border-radius: 4px;
+}
+.apple-radius-8 {
+  border-radius: 8px;
+}
+.apple-radius-12 {
+  border-radius: 12px;
+}
+.apple-radius-16 {
+  border-radius: 16px;
+}
+.apple-radius-20 {
+  border-radius: 20px;
+}
 
 /* Apple's exact spacing system */
-.apple-gap-16 { gap: 16px; }
-.apple-gap-20 { gap: 20px; }
-.apple-gap-24 { gap: 24px; }
+.apple-gap-16 {
+  gap: 16px;
+}
+.apple-gap-20 {
+  gap: 20px;
+}
+.apple-gap-24 {
+  gap: 24px;
+}
 
-.apple-p-16 { padding: 16px; }
-.apple-p-20 { padding: 20px; }
-.apple-p-24 { padding: 24px; }
+.apple-p-16 {
+  padding: 16px;
+}
+.apple-p-20 {
+  padding: 20px;
+}
+.apple-p-24 {
+  padding: 24px;
+}
 
-.apple-m-16 { margin: 16px; }
-.apple-m-20 { margin: 20px; }
-.apple-m-32 { margin: 32px; }
+.apple-m-16 {
+  margin: 16px;
+}
+.apple-m-20 {
+  margin: 20px;
+}
+.apple-m-32 {
+  margin: 32px;
+}
 
 /* Text Styles */
-.apple-text-primary { 
-  color: var(--apple-text-primary); 
+.apple-text-primary {
+  color: var(--apple-text-primary);
   font-size: 17px;
   font-weight: 400;
 }
-.apple-text-secondary { 
-  color: var(--apple-text-secondary); 
+.apple-text-secondary {
+  color: var(--apple-text-secondary);
   font-size: 17px;
   font-weight: 400;
 }
-.apple-text-blue { 
-  color: var(--apple-blue); 
+.apple-text-blue {
+  color: var(--apple-blue);
   font-size: 17px;
   font-weight: 400;
 }
 
 /* Layout utilities */
-.apple-flex { display: flex; }
-.apple-flex-col { flex-direction: column; }
-.apple-grid { display: grid; }
-.apple-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.apple-flex {
+  display: flex;
+}
+.apple-flex-col {
+  flex-direction: column;
+}
+.apple-grid {
+  display: grid;
+}
+.apple-grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 /* ================================================================
    RESPONSIVE DESIGN - APPLE EXACT MATCH
@@ -577,15 +636,15 @@ button[role="tab"][aria-selected="true"] {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .apple-card {
     border-radius: 12px;
   }
-  
+
   body {
     font-size: 17px; /* Maintain Apple's font size on mobile */
   }
-  
+
   .sidebar {
     width: 100% !important;
   }

@@ -21,6 +21,7 @@ LiqUIdify/
 ### Root Package (`package.json`)
 
 The root package.json defines:
+
 - **Workspaces**: `["apps/*", "examples/*", "libs/*"]`
 - **Shared devDependencies**: Testing, TypeScript, build tools
 - **Workspace scripts**: Orchestrates builds across all packages
@@ -96,6 +97,7 @@ Workspaces reference each other using the `workspace:*` protocol:
 ```
 
 Benefits:
+
 - **Always uses local version** during development
 - **Automatic version resolution** during publishing
 - **Prevents version conflicts** between workspaces
@@ -103,6 +105,7 @@ Benefits:
 ### Dependency Hoisting
 
 Bun automatically hoists shared dependencies to the root `node_modules`:
+
 - React, TypeScript, testing libraries → Root level
 - Storybook-specific deps → `apps/storybook/node_modules`
 - Component-specific deps → `libs/components/node_modules`
@@ -173,6 +176,7 @@ node scripts/verify-workspaces.mjs
 ```
 
 This checks:
+
 - ✅ Workspace configuration
 - ✅ Package.json files exist
 - ✅ Workspace dependencies are configured
@@ -197,21 +201,25 @@ npm publish
 ## 🎯 Benefits of This Setup
 
 ### ✅ Dependency Management
+
 - **No version conflicts** between packages
 - **Shared dependencies** are hoisted and deduplicated
 - **Workspace protocol** ensures local development uses local packages
 
 ### ✅ Build Orchestration
+
 - **Proper build order**: Library → Applications
 - **Parallel builds** where possible
 - **Incremental builds** with watch mode
 
 ### ✅ Development Experience
+
 - **Hot reloading** across workspaces
 - **Type safety** between packages
 - **Consistent tooling** (TypeScript, ESLint, Prettier)
 
 ### ✅ CI/CD Optimization
+
 - **Selective builds** with `--filter` flag
 - **Caching strategies** per workspace
 - **Parallel testing** and linting
