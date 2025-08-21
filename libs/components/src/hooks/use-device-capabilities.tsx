@@ -7,15 +7,18 @@ export interface DeviceCapabilities {
   hasBackdropFilter: boolean;
   hasSVGFilters: boolean;
   hasGPU: boolean;
+  hasGPUAcceleration: boolean;
   performanceTier: "high" | "medium" | "low";
   prefersReducedMotion: boolean;
   prefersReducedTransparency: boolean;
   prefersContrast: "no-preference" | "more" | "less" | "custom";
   isPointerDevice: boolean;
+  isTouch: boolean;
   devicePixelRatio: number;
   connectionSpeed: "slow-2g" | "2g" | "3g" | "4g" | "5g" | "unknown";
   colorGamut: "srgb" | "p3" | "rec2020";
   hasHDR: boolean;
+  hdr: boolean;
 }
 
 /**
@@ -26,15 +29,18 @@ export function useDeviceCapabilities(): DeviceCapabilities {
     hasBackdropFilter: false,
     hasSVGFilters: false,
     hasGPU: false,
+    hasGPUAcceleration: false,
     performanceTier: "medium",
     prefersReducedMotion: false,
     prefersReducedTransparency: false,
     prefersContrast: "no-preference",
     isPointerDevice: true,
+    isTouch: false,
     devicePixelRatio: 1,
     connectionSpeed: "unknown",
     colorGamut: "srgb",
     hasHDR: false,
+    hdr: false,
   });
 
   useEffect(() => {
@@ -56,13 +62,16 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 
       // Check GPU availability (WebGL support as proxy)
       let hasGPU = false;
+      let hasGPUAcceleration = false;
       try {
         const canvas = document.createElement("canvas");
         const gl =
           canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         hasGPU = !!gl;
+        hasGPUAcceleration = hasGPU;
       } catch (e) {
         hasGPU = false;
+        hasGPUAcceleration = false;
       }
 
       // Helper to match media queries safely
@@ -154,10 +163,10 @@ export function useDeviceCapabilities(): DeviceCapabilities {
           const effectiveType = connection.effectiveType;
           const downlink = connection.downlink;
 
-          if (effectiveType === "slow-2g" || downlink < 0.5) return "slow";
+          if (effectiveType === "slow-2g" || downlink < 0.5) return "slow-2g";
           if (effectiveType === "2g" || effectiveType === "3g" || downlink < 2)
-            return "medium";
-          if (effectiveType === "4g" || downlink >= 2) return "fast";
+            return "3g";
+          if (effectiveType === "4g" || downlink >= 2) return "4g";
 
           return "unknown";
         };
@@ -176,15 +185,18 @@ export function useDeviceCapabilities(): DeviceCapabilities {
       setCapabilities({
         hasBackdropFilter,
         hasSVGFilters,
+        hasGPU: hasGPUAcceleration,
         hasGPUAcceleration,
         performanceTier: detectPerformanceTier(),
         prefersReducedMotion,
         prefersReducedTransparency,
         prefersContrast,
+        isPointerDevice: !isTouch,
         isTouch,
         devicePixelRatio,
         connectionSpeed: detectConnectionSpeed(),
         colorGamut: detectColorGamut(),
+        hasHDR: hdr,
         hdr,
       });
     };

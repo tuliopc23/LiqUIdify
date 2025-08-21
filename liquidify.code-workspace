@@ -1,0 +1,207 @@
+{
+  "folders": [
+    {
+      "name": "🌊 LiqUIdify (Root)",
+      "path": "."
+    },
+    {
+      "name": "📦 Components Library",
+      "path": "./libs/components"
+    },
+    {
+      "name": "🎨 Storybook",
+      "path": "./apps/storybook"
+    },
+    {
+      "name": "📚 Documentation",
+      "path": "./apps/docs"
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.suggest.autoImports": true,
+    "typescript.workspaceSymbols.scope": "allOpenProjects",
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.next": true,
+      "**/storybook-static": true,
+      "**/coverage": true,
+      "**/.turbo": true,
+      "**/bun.lock": true
+    },
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.next": true,
+      "**/storybook-static": true,
+      "**/coverage": true,
+      "**/.turbo": true
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "emmet.includeLanguages": {
+      "typescript": "html",
+      "typescriptreact": "html"
+    },
+    "tailwindCSS.includeLanguages": {
+      "typescript": "html",
+      "typescriptreact": "html"
+    },
+    "tailwindCSS.experimental.classRegex": [
+      ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+      ["classnames\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+      ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next",
+      "formulahendry.auto-rename-tag",
+      "christian-kohler.path-intellisense",
+      "ms-vscode.vscode-json",
+      "yoavbls.pretty-ts-errors",
+      "usernamehw.errorlens",
+      "ms-vscode.vscode-eslint",
+      "steoates.autoimport-es6-ts",
+      "ms-playwright.playwright"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🚀 Start All Development Servers",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "dev:all"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📦 Build Component Library",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "build:lib"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "🎨 Start Storybook",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "storybook"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Start Documentation",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "docs:dev"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔍 Type Check All",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "type-check"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "🧪 Run Tests",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "test"],
+        "group": "test",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "✨ Format Code",
+        "type": "shell",
+        "command": "bun",
+        "args": ["run", "format:fix"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🎨 Debug Storybook",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/node_modules/.bin/storybook",
+        "args": ["dev", "-p", "6006", "-c", "apps/storybook/.storybook"],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+      }
+    ]
+  }
+}

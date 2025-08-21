@@ -26,15 +26,9 @@
       "@/types/*": ["../../libs/components/src/types/*"]
     }
   },
-  "files": [
-    "./.storybook/main.ts",
-    "./.storybook/preview.tsx",
-    "../../libs/components/src/components/glass-button-refactored/glass-button.stories.tsx",
-    "../../libs/components/src/components/glass-card-refactored/glass-card.stories.tsx",
-    "../../libs/components/src/components/glass-button-refactored/glass-button.tsx",
-    "../../libs/components/src/components/glass-button-refactored/index.ts",
-    "../../libs/components/src/components/glass-card-refactored/glass-card.tsx",
-    "../../libs/components/src/components/glass-card-refactored/index.ts"
+  "include": [
+    "./**/*",
+    "../../reset.d.ts"
   ],
   "exclude": [
     "node_modules",
