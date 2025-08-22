@@ -10,11 +10,12 @@
   "metadata": {
     "og:title": "LiqUIdify - Liquid Glass UI Components",
     "og:description": "Production-ready React components implementing Apple's Liquid Glass design language",
-    "og:url": "https://liquidify.dev",
-    "og:image": "https://liquidify.dev/og-image.png",
+    "og:url": "https://docs.useliquidify.dev",
+    "og:image": "https://docs.useliquidify.dev/og-image.png",
     "twitter:card": "summary_large_image",
     "twitter:title": "LiqUIdify - Liquid Glass UI Components", 
-    "twitter:description": "Production-ready React components implementing Apple's Liquid Glass design language"
+    "twitter:description": "Production-ready React components implementing Apple's Liquid Glass design language",
+    "twitter:site": "@useliquidify"
   },
   "footer": {
     "socials": {
@@ -30,7 +31,7 @@
           },
           {
             "label": "Storybook",
-            "href": "https://liquidify-storybook.vercel.app"
+            "href": "https://storybook.useliquidify.dev"
           }
         ]
       },
@@ -59,7 +60,7 @@
       {
         "anchor": "Storybook",
         "icon": "book-open",
-        "href": "https://liquidify-storybook.vercel.app"
+        "href": "https://storybook.useliquidify.dev"
       }
     ],
     "groups": [
@@ -87,6 +88,8 @@
         "icon": "puzzle-piece",
         "pages": [
           "components/showcase",
+          "components/liquid-glass-reference",
+          "components/glass-button",
           "components/breadcrumbs",
           "components/modal",
           "components/responsive-button",
@@ -112,7 +115,8 @@
     "prompt": "Search components, guides, and examples..."
   },
   "styles": [
-    "styles/bundle.css"
+    "styles/bundle.css",
+    "liquid-glass-components.css"
   ],
   "theme": "mint",
   "head": [
@@ -120,6 +124,13 @@
       "tag": "script",
       "attrs": {
         "src": "scripts/enhancements.js",
+        "defer": true
+      }
+    },
+    {
+      "tag": "script",
+      "attrs": {
+        "src": "component-preview.js",
         "defer": true
       }
     }

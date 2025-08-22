@@ -1,8 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { GlassCard } from "@/components/glass-card-refactored/glass-card";
-import { GlassButton } from "@/components/glass-button-refactored/glass-button";
-import { GlassBadge } from "@/components/glass-badge/glass-badge";
 
 const meta = {
   title: "Design System/Glassmorphism",
@@ -11,41 +8,42 @@ const meta = {
     docs: {
       description: {
         component: `
-# LiqUIdify Glassmorphism Design System
+# High-Fidelity Liquid Glass Design System
 
-## Core Principles
+## Apple-Quality Implementation
 
-### 1. **Transparency & Blur**
-Our glassmorphism effect creates depth through carefully balanced transparency and backdrop blur, 
-creating a sophisticated layered interface.
+### **Layered Glass Architecture**
+Our system uses sophisticated pseudo-element layers to create true depth and realism:
+- **::before** - Advanced backdrop filter with saturation
+- **::after** - Specular highlights and shine effects
 
-### 2. **Subtle Borders**
-Semi-transparent borders enhance the glass effect while maintaining clear component boundaries.
+### **Dynamic Theming**
+CSS custom properties enable seamless light/dark theme transitions:
+- **Light Theme**: Reduced opacity, enhanced saturation
+- **Dark Theme**: Stronger contrast, deeper shadows
 
-### 3. **Responsive Effects**
-All glassmorphism effects adapt to different backgrounds and color schemes automatically.
+### **Hardware Acceleration**
+All effects are GPU-optimized for smooth 60fps performance:
+- **transform: translateZ(0)** for layer promotion
+- **will-change** optimization where needed
 
-### 4. **Performance Optimized**
-Uses GPU-accelerated CSS properties for smooth, efficient rendering.
+## High-Fidelity Design Tokens
 
-## Design Tokens
+### **Core CSS Variables**
+- **--lg-bg-color**: Dynamic background transparency
+- **--lg-primary**: Apple system blue (#007aff)
+- **--lg-transition**: cubic-bezier(0.175, 0.885, 0.32, 2.2)
 
-### Glass Effects
-- **Base Glass**: \`rgba(255, 255, 255, 0.1)\` with \`backdrop-blur: 12px\`
-- **Glass Border**: \`rgba(255, 255, 255, 0.2)\`
-- **Glass Hover**: \`rgba(255, 255, 255, 0.15)\`
+### **Advanced Blur System**
+- **Light Theme**: blur(10px) saturate(160%)
+- **Dark Theme**: blur(12px) saturate(180%)
+- **Ghost Light**: blur(8px) saturate(140%)
+- **Ghost Dark**: blur(12px) saturate(185%)
 
-### Blur Levels
-- **Subtle**: \`8px\` - For minimal glass effect
-- **Standard**: \`12px\` - Default for most components
-- **Strong**: \`20px\` - For prominent overlays
-- **Maximum**: \`40px\` - For full-screen modals
-
-### Border Radius
-- **Small**: \`8px\` - Compact components
-- **Medium**: \`12px\` - Standard components
-- **Large**: \`16px\` - Cards and containers
-- **Extra Large**: \`24px\` - Hero sections
+### **Shadow Stacks**
+- **Main**: 0 6px 6px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.1)
+- **Shine**: inset -10px -8px 0 -11px white, inset 0 -9px 0 -8px white
+- **Focus**: Main + 0 0 0 4px rgba(0,122,255,0.2)
         `,
       },
     },
@@ -60,164 +58,226 @@ export const Overview: Story = {
     <div
       className="min-h-screen p-8"
       style={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+        background: `
+          radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
+          radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), 
+          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
+        `,
       }}
     >
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Hero Section */}
         <div className="text-center text-white mb-12">
           <h1 className="text-5xl font-bold mb-4">
-            Glassmorphism Design System
+            High-Fidelity Liquid Glass System
           </h1>
           <p className="text-xl opacity-90">
-            Beautiful, modern UI components with liquid glass effects
+            Apple-quality glassmorphism with advanced layered effects
           </p>
         </div>
 
-        {/* Glass Effect Showcase */}
-        <section>
-          <h2 className="text-2xl font-bold text-white mb-6">
-            Glass Effect Variations
-          </h2>
+        {/* High-Fidelity Glass Showcase */}
+        <section className="theme-dark">
+          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+            Dark Mode - High-Fidelity Implementation
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold mb-2">Subtle Glass</h3>
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Primary Button</h3>
               <p className="text-sm opacity-75 mb-4">
-                Light transparency with minimal blur for subtle depth
+                Blue gradient with layered glass effects
               </p>
-              <div
-                className="h-20 rounded-lg mb-4"
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
-              />
-              <code className="text-xs">blur: 8px, opacity: 0.05</code>
-            </GlassCard>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-primary">
+                Primary
+              </button>
+              <div className="mt-4 text-xs opacity-75">
+                <code>liquid-glass-button-primary</code>
+              </div>
+            </div>
 
-            <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold mb-2">Standard Glass</h3>
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Secondary Glass</h3>
               <p className="text-sm opacity-75 mb-4">
-                Balanced transparency and blur for most use cases
+                Pure glass with backdrop blur and shine
               </p>
-              <div
-                className="h-20 rounded-lg mb-4"
-                style={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
-              />
-              <code className="text-xs">blur: 12px, opacity: 0.1</code>
-            </GlassCard>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+                Secondary
+              </button>
+              <div className="mt-4 text-xs opacity-75">
+                <code>liquid-glass-button-secondary</code>
+              </div>
+            </div>
 
-            <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold mb-2">Strong Glass</h3>
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Ghost Glass</h3>
               <p className="text-sm opacity-75 mb-4">
-                Heavy blur with higher opacity for prominent elements
+                Ultra-transparent with enhanced depth
               </p>
-              <div
-                className="h-20 rounded-lg mb-4"
-                style={{
-                  background: "rgba(255, 255, 255, 0.15)",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                }}
-              />
-              <code className="text-xs">blur: 20px, opacity: 0.15</code>
-            </GlassCard>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-ghost">
+                Ghost
+              </button>
+              <div className="mt-4 text-xs opacity-75">
+                <code>liquid-glass-button-ghost</code>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Color System */}
-        <section>
-          <h2 className="text-2xl font-bold text-white mb-6">Color System</h2>
-          <GlassCard className="p-8">
+        {/* Light Theme Showcase */}
+        <section className="theme-light">
+          <div style={{ color: '#64748b', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+            Light Mode - Adaptive Transparency
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Primary Light</h3>
+              <p className="text-sm opacity-75 mb-4">
+                Apple blue with light theme adaptation
+              </p>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-primary">
+                Primary
+              </button>
+            </div>
+
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Secondary Light</h3>
+              <p className="text-sm opacity-75 mb-4">
+                Reduced opacity for light backgrounds
+              </p>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+                Secondary
+              </button>
+            </div>
+
+            <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+              <h3 className="text-lg font-semibold mb-2">Ghost Light</h3>
+              <p className="text-sm opacity-75 mb-4">
+                Barely-there transparency
+              </p>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-ghost">
+                Ghost
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Apple Color System */}
+        <section className="theme-dark">
+          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+            Apple Color System
+          </div>
+          <div className="liquid-glass liquid-glass-card liquid-glass-lg">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: "#007AFF" }}
+                  style={{ 
+                    background: "linear-gradient(135deg, #007aff 0%, #5ac8fa 100%)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)"
+                  }}
                 />
-                <h4 className="font-medium mb-1">Primary</h4>
-                <code className="text-xs opacity-75">#007AFF</code>
+                <h4 className="font-medium mb-1">Primary System</h4>
+                <code className="text-xs opacity-75">#007aff → #5ac8fa</code>
               </div>
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: "#34C759" }}
+                  style={{ 
+                    background: "var(--lg-bg-color)",
+                    backdropFilter: "blur(12px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                  }}
                 />
-                <h4 className="font-medium mb-1">Success</h4>
-                <code className="text-xs opacity-75">#34C759</code>
+                <h4 className="font-medium mb-1">Glass Background</h4>
+                <code className="text-xs opacity-75">--lg-bg-color</code>
               </div>
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: "#FF9500" }}
+                  style={{ 
+                    background: "rgba(255, 255, 255, 0.1)",
+                    boxShadow: "inset -10px -8px 0 -11px rgba(255,255,255,1), inset 0 -9px 0 -8px rgba(255,255,255,1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                  }}
                 />
-                <h4 className="font-medium mb-1">Warning</h4>
-                <code className="text-xs opacity-75">#FF9500</code>
+                <h4 className="font-medium mb-1">Shine Effect</h4>
+                <code className="text-xs opacity-75">--lg-shine-shadow</code>
               </div>
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: "#FF3B30" }}
+                  style={{ 
+                    background: "transparent",
+                    backdropFilter: "blur(12px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)"
+                  }}
                 />
-                <h4 className="font-medium mb-1">Error</h4>
-                <code className="text-xs opacity-75">#FF3B30</code>
+                <h4 className="font-medium mb-1">Pure Glass</h4>
+                <code className="text-xs opacity-75">transparent</code>
               </div>
             </div>
-          </GlassCard>
+          </div>
         </section>
 
-        {/* Typography Scale */}
-        <section>
-          <h2 className="text-2xl font-bold text-white mb-6">
-            Typography Scale
-          </h2>
-          <GlassCard className="p-8 space-y-4">
-            <div className="text-4xl font-bold">Display Heading</div>
-            <div className="text-3xl font-semibold">Page Title</div>
-            <div className="text-2xl font-semibold">Section Heading</div>
-            <div className="text-xl font-medium">Subsection</div>
-            <div className="text-lg">Large Body Text</div>
-            <div className="text-base">Default Body Text</div>
-            <div className="text-sm opacity-75">Small Text</div>
-            <div className="text-xs opacity-50">Caption Text</div>
-          </GlassCard>
-        </section>
-
-        {/* Spacing System */}
-        <section>
-          <h2 className="text-2xl font-bold text-white mb-6">Spacing System</h2>
-          <GlassCard className="p-8">
-            <div className="space-y-4">
-              {[1, 2, 4, 6, 8, 12, 16, 20, 24].map((spacing) => (
-                <div key={spacing} className="flex items-center gap-4">
-                  <code className="text-sm w-16">{spacing * 4}px</code>
-                  <div
-                    className="bg-blue-500/30 rounded"
-                    style={{
-                      width: `${spacing * 4}px`,
-                      height: "24px",
-                    }}
-                  />
-                  <span className="text-sm opacity-75">
-                    {spacing === 1 && "Micro"}
-                    {spacing === 2 && "Tiny"}
-                    {spacing === 4 && "Small"}
-                    {spacing === 6 && "Medium"}
-                    {spacing === 8 && "Large"}
-                    {spacing === 12 && "Extra Large"}
-                    {spacing === 16 && "Huge"}
-                    {spacing === 20 && "Gigantic"}
-                    {spacing === 24 && "Massive"}
-                  </span>
-                </div>
-              ))}
+        {/* Size Variants */}
+        <section className="theme-dark">
+          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+            Size Variants - Consistent Scaling
+          </div>
+          <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-xs liquid-glass-button-xs liquid-glass-button-primary">
+                XS
+              </button>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-sm liquid-glass-button-sm liquid-glass-button-primary">
+                Small
+              </button>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-md liquid-glass-button-primary">
+                Medium
+              </button>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-lg liquid-glass-button-lg liquid-glass-button-primary">
+                Large
+              </button>
+              <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-xl liquid-glass-button-xl liquid-glass-button-primary">
+                XL
+              </button>
             </div>
-          </GlassCard>
+            
+            <div className="text-sm opacity-75 space-y-2">
+              <div><code>.liquid-glass-button-xs</code> - Extra small button (8px 16px)</div>
+              <div><code>.liquid-glass-button-sm</code> - Small button (10px 20px)</div>
+              <div><code>.liquid-glass-button-md</code> - Medium button (12px 28px)</div>
+              <div><code>.liquid-glass-button-lg</code> - Large button (16px 36px)</div>
+              <div><code>.liquid-glass-button-xl</code> - Extra large button (20px 44px)</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Border Radius System */}
+        <section className="theme-dark">
+          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+            Border Radius System
+          </div>
+          <div className="liquid-glass liquid-glass-card liquid-glass-lg">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="liquid-glass liquid-glass-xs" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <code className="text-xs">xs: 12px</code>
+              </div>
+              <div className="liquid-glass liquid-glass-sm" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <code className="text-xs">sm: 16px</code>
+              </div>
+              <div className="liquid-glass liquid-glass-md" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <code className="text-xs">md: 20px</code>
+              </div>
+              <div className="liquid-glass liquid-glass-lg" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <code className="text-xs">lg: 24px</code>
+              </div>
+              <div className="liquid-glass liquid-glass-xl" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <code className="text-xs">xl: 32px</code>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>

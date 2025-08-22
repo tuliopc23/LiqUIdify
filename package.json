@@ -31,6 +31,7 @@
     "@types/react-dom": "~19.1.7",
     "@vitest/expect": "^3.2.4",
     "@vitest/ui": "3.2.4",
+    "autoprefixer": "^10.4.21",
     "chalk": "^5.6.0",
     "concurrently": "^9.2.0",
     "glob": "^11.0.3",
@@ -38,9 +39,12 @@
     "jiti": "2.5.1",
     "jsdom": "^26.1.0",
     "oxc": "^1.0.1",
+    "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rollup-plugin-visualizer": "^6.0.3",
+    "tailwindcss": "^4.1.12",
+    "tailwindcss-filters": "^3.0.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
@@ -108,7 +112,7 @@
     "type": "github",
     "url": "https://github.com/sponsors/tuliopc23"
   },
-  "homepage": "https://liquidify.dev",
+  "homepage": "https://docs.useliquidify.dev",
   "keywords": [
     "react",
     "typescript",
@@ -150,7 +154,7 @@
     "build": "bun run build:lib && bun run build:storybook",
     "build:lib": "bun run --filter @liquidify/components build",
     "build:storybook": "bun run --filter @liquidify/storybook-app build",
-    "build:docs": "bun run --filter @liquidify/docs build",
+    "build:docs": "echo 'Docs are built and deployed via Mintlify platform'",
     "build:all": "bun run build:lib && bun run build:storybook && bun run build:docs",
     "build:types": "bun run --filter @liquidify/components build:types",
     "build:watch": "bun run --filter @liquidify/components build:watch",

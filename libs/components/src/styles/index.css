@@ -1,7 +1,7 @@
-/* LiqUIdify - Unified Liquid Glass Design System */
+/* LiqUIdify - High-Fidelity Liquid Glass Design System */
+/* Based on reference: previews/liquid-glass-button.html */
 @import "./tailwind.css";
-@import "./liquid-glass.css";
-@import "./glass-core.css";
+@import "./liquid-glass-system.css";
 
 /* Global Reset and Base Styles */
 * {
