@@ -1,4 +1,4 @@
-import { GlassCard } from 'liquidify'
+import {GlassCard} from '/snippets/components/glass-card.jsx'
 
 export const CardExample = () => (
   <div className="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -1,8 +1,8 @@
-import React from 'react'
-import { GlassButton, GlassModal } from 'liquidify'
+import {GlassButton} from '/snippets/components/glass-button.jsx'
+import {GlassModal} from '/snippets/components/glass-modal.jsx'
 
 export const ModalExample = () => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   return (
     <div className="not-prose space-x-2">
       <GlassButton onClick={() => setOpen(true)}>Open modal</GlassButton>

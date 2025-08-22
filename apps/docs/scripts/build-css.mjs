@@ -25,7 +25,7 @@
  * - Missing files are skipped with a warning (non-fatal).
  */
 
-import { readFile, writeFile, readdir, access, mkdir } from "node:fs/promises";
+import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -112,13 +112,17 @@ function normalizeStylePath(p) {
 }
 
 async function readMintStyles() {
+  // Try docs.json first, then mint.json for backwards compatibility
+  const docsPath = path.join(docsDir, "docs.json");
   const mintPath = path.join(docsDir, "mint.json");
-  if (!(await fileExists(mintPath))) {
+  
+  const configPath = (await fileExists(docsPath)) ? docsPath : mintPath;
+  if (!(await fileExists(configPath))) {
     return [];
   }
 
   try {
-    const raw = await readFile(mintPath, "utf8");
+    const raw = await readFile(configPath, "utf8");
     const json = JSON.parse(raw);
     const styles = Array.isArray(json.styles) ? json.styles : [];
     return styles
@@ -127,7 +131,7 @@ async function readMintStyles() {
       .filter(isCssFile)
       .filter((p) => path.resolve(p) !== path.resolve(outPath));
   } catch (e) {
-    warn("Failed to parse mint.json styles:", e?.message ?? e);
+    warn(`Failed to parse ${path.basename(configPath)} styles:`, e?.message ?? e);
     return [];
   }
 }

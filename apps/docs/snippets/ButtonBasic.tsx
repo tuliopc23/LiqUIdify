@@ -1,4 +1,4 @@
-import { GlassUIProvider, GlassResponsiveButton } from "liquidify";
+import { GlassResponsiveButton, GlassUIProvider } from "liquidify";
 
 export default function Example() {
   return (

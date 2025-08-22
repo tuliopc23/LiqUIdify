@@ -17,12 +17,44 @@ A glassmorphic modal component with liquid glass effects, robust focus managemen
 ### Size Variants
 
 ```tsx
-// Preview component removed - needs manual conversion
+// Sizes: sm | md | lg | xl | full
+function SizesDemo() {
+  const [size, setSize] = useState("md");
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="space-x-2 space-y-2">
+      {(["sm", "md", "lg", "xl", "full"] as const).map((s) => (
+        <GlassButton
+          key={s}
+          variant={s === size ? "primary" : "ghost"}
+          onClick={() => {
+            setSize(s);
+            setOpen(true);
+          }}
+        >
+          Open {s}
+        </GlassButton>
+      ))}
+      <GlassModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title={`Modal ${size}`}
+        size={size}
+      >
+        <p className="text-sm text-gray-600">This is a {size} modal.</p>
+        <div className="mt-4 flex justify-end">
+          <GlassButton variant="primary" onClick={() => setOpen(false)}>
+            Close
+          </GlassButton>
+        </div>
+      </GlassModal>
+    </div>
+  );
+}
 ```
 
 ### Confirmation Dialog
 
-### Confirmation Dialog
 
 ```tsx
 export default function Demo() {
@@ -92,7 +124,6 @@ export default function Demo() {
 
 ### Form Modal
 
-### Form Modal
 
 ```tsx
 export default function Demo() {

@@ -25,14 +25,7 @@
  *   node apps/docs/scripts/inject-static-previews.mjs --previews=previews --docs=apps/docs/components --index=apps/docs/components/index.mdx
  */
 
-import {
-  readFile,
-  writeFile,
-  readdir,
-  stat,
-  mkdir,
-  access,
-} from "node:fs/promises";
+import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 

@@ -4,22 +4,33 @@ description: Liquid Glass responsive button with adaptive sizing and enhanced to
 ---
 
 import ResponsiveButtonExample from "/snippets/components/ResponsiveButtonExample.jsx";
+import PreviewCodeTabs from "./PreviewCodeTabs.tsx";
 
 # Responsive Button
 
 The `GlassResponsiveButton` component provides an enhanced button experience with responsive sizing, adaptive touch interactions, and glassmorphism effects. It automatically adjusts for mobile devices and provides optimal touch targets.
 
-{/_Live preview_/}
+## Basic Usage
 
-<ResponsiveButtonExample />
+<PreviewCodeTabs
+  code={`import { GlassResponsiveButton, GlassUIProvider } from "liquidify";
 
-### Basic Usage
-
-<Snippet file="ButtonBasic.tsx" />
+export default function Example() {
+  return (
+    <GlassUIProvider>
+      <GlassResponsiveButton variant="primary" size="md">
+        Click me
+      </GlassResponsiveButton>
+    </GlassUIProvider>
+  );
+}`}
+  language="tsx"
+>
+  <ResponsiveButtonExample />
+</PreviewCodeTabs>
 
 ### Size Variants
 
-### Size Variants
 
 ```tsx
 export default function Demo() {
@@ -47,7 +58,6 @@ export default function Demo() {
 
 ### With Icons
 
-### With Icons
 
 ```tsx
 export default function Demo() {
@@ -79,7 +89,6 @@ export default function Demo() {
 
 ### Loading States
 
-### Loading States
 
 ```tsx
 export default function Demo() {
@@ -121,7 +130,6 @@ export default function Demo() {
 
 ### Responsive Behavior
 
-### Responsive Behavior
 
 ```tsx
 export default function Demo() {
@@ -163,7 +171,6 @@ export default function Demo() {
 
 ### Interactive Demo
 
-### Interactive Demo
 
 ```tsx
 export default function Demo() {
@@ -231,7 +238,6 @@ export default function Demo() {
 
 ### Touch Interaction Demo
 
-### Touch Interaction Demo
 
 ```tsx
 export default function Demo() {
@@ -421,7 +427,6 @@ const ActionBar = ({ actions }) => (
 - **Large (lg)**: Primary actions, important buttons
 - **Extra Large (xl)**: Call-to-action buttons, hero sections
 
-### Responsive Behavior
 
 - **Mobile First**: Larger touch targets on mobile devices
 - **Adaptive**: Automatically adjusts for device capabilities
@@ -436,7 +441,6 @@ const ActionBar = ({ actions }) => (
 - **Responsive Detection**: Efficient device capability detection
 - **Memory Efficient**: Minimal JavaScript overhead
 
-### Best Practices
 
 - Use CSS transforms for animations instead of changing layout properties
 - Implement proper event delegation for touch interactions
@@ -452,7 +456,7 @@ const OptimizedButton = React.memo(({ children, ...props }) => (
 
 ## Related Components
 
-- [Button](/components/button) - For standard button functionality
+- [Responsive Button](/components/responsive-button) - For standard button functionality
 - [Loading](/components/loading) - For loading state indicators
 
 - [Form Field](/components/form-field) - For form integration

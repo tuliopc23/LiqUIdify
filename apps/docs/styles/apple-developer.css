@@ -81,6 +81,8 @@ html[data-theme="dark"] {
    APPLE-STYLE TYPOGRAPHY - EXACT MATCH
    ================================================================ */
 
+/* Scope Apple styles to avoid conflicts with Mintlify */
+.liquidify-docs body,
 html body {
   font-family: var(--apple-font);
   font-size: 17px;
@@ -88,13 +90,19 @@ html body {
   line-height: 1.5;
   color: var(--apple-text-primary);
   background-color: var(--apple-bg);
-  -webkit-font-smoothing: auto;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: auto;
+  text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
 }
 
+.liquidify-docs h1,
+.liquidify-docs h2,
+.liquidify-docs h3,
+.liquidify-docs h4,
+.liquidify-docs h5,
+.liquidify-docs h6,
 h1,
 h2,
 h3,
@@ -656,4 +664,55 @@ button[role="tab"][aria-selected="true"] {
 
 html[data-theme="dark"] body {
   background: var(--apple-bg);
+}
+
+/* ================================================================
+   PREVIEW/CODE TABS - LIGHTWEIGHT STYLES
+   ================================================================ */
+.preview-code-tabs {
+  border: 1px solid var(--apple-border);
+  border-radius: var(--apple-radius-medium);
+  background: var(--apple-card-bg);
+  box-shadow: var(--apple-shadow);
+  overflow: hidden;
+  margin: 16px 0 24px;
+}
+.pct-tablist {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--apple-bg);
+  border-bottom: 1px solid var(--apple-border);
+}
+.pct-tab {
+  border: 1px solid var(--apple-border);
+  background: var(--apple-bg);
+  color: var(--apple-text-secondary);
+  border-radius: var(--apple-radius-medium);
+  transition: var(--apple-transition);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+.pct-tab[aria-selected="true"] {
+  background: var(--apple-bg-secondary);
+  color: var(--apple-text-primary);
+  border-color: var(--apple-blue);
+}
+.pct-panels {
+  padding: 12px;
+}
+.pct-panel {
+  width: 100%;
+}
+.pct-preview {
+  /* keep previews clean */
+}
+.pct-code pre {
+  border-radius: var(--apple-radius-medium);
+  background: var(--apple-bg-secondary);
+  border: 1px solid var(--apple-border);
+  font-family: var(--apple-font-mono);
+  font-size: 14px;
+  margin: 0;
 }

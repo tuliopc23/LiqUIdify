@@ -1,4 +1,4 @@
-import { GlassBreadcrumbs } from 'liquidify'
+import {GlassBreadcrumbs} from '/snippets/components/glass-breadcrumbs.jsx'
 
 export const BreadcrumbsExample = () => {
   const items = [

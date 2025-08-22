@@ -1,4 +1,4 @@
-import { GlassButton } from 'liquidify'
+import {GlassButton} from '/snippets/components/glass-button.jsx'
 
 export const ButtonExample = () => (
   <div className="not-prose flex gap-2">

@@ -1,4 +1,4 @@
-import { GlassTabs } from 'liquidify'
+import {GlassTabs} from '/snippets/components/glass-tabs.jsx'
 
 export const TabsExample = () => (
   <div className="not-prose">

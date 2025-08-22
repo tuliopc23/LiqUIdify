@@ -1,5 +1,5 @@
 import React from "react";
-import { Highlight, PrismTheme } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 
 export type PreviewProps = {
   title?: string;

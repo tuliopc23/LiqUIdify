@@ -1,4 +1,4 @@
-import { GlassFormField } from 'liquidify'
+import {GlassFormField} from '/snippets/components/glass-form-field.jsx'
 
 export const InputExample = () => (
   <div className="not-prose space-y-2">
