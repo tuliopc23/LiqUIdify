@@ -40,7 +40,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
-    "puppertino": "git@github.com:codedgar/Puppertino.git#master",
+    "puppertino": "git+https://github.com/codedgar/Puppertino.git#master",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
