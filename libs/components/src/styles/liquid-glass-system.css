@@ -248,6 +248,125 @@
 .liquid-glass-card-sm { padding: 1rem; border-radius: var(--lg-radius-md); }
 .liquid-glass-card-lg { padding: 2rem; border-radius: var(--lg-radius-xl); }
 
+/* ===== Layered Container (compat for docs/components) ===== */
+/* Mirrors the high-fidelity pseudo-element version using separate layers */
+.liquid-glass-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-radius: var(--lg-radius-md);
+  overflow: hidden;
+  flex: 1 1 auto;
+  box-shadow: var(--lg-shadow-main);
+  color: var(--lg-text);
+  transition: var(--lg-transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass-filter,
+.liquid-glass-overlay,
+.liquid-glass-specular {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.liquid-glass-filter {
+  z-index: -2;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 0.02);
+  transform: translateZ(0);
+}
+
+.liquid-glass-overlay {
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  box-shadow: var(--lg-shine-shadow);
+  filter: var(--lg-shine-filter);
+  opacity: 0.6;
+  transform: translateZ(0);
+}
+
+.liquid-glass-specular {
+  z-index: 0;
+}
+
+.liquid-glass-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Light/Dark refinements for layered container */
+.theme-light .liquid-glass-container,
+.liquid-theme-light .liquid-glass-container {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.theme-light .liquid-glass-overlay,
+.liquid-theme-light .liquid-glass-overlay {
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0.45;
+}
+
+.theme-light .liquid-glass-filter,
+.liquid-theme-light .liquid-glass-filter {
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+.theme-dark .liquid-glass-overlay,
+.liquid-theme-dark .liquid-glass-overlay {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
+}
+
+/* ===== Minimal Core Variants used by components ===== */
+.liquid-glass-core-enhanced {
+  /* Subtle enhancement when active/open */
+  border-color: var(--lg-highlight);
+  box-shadow: var(--lg-shadow-main), var(--lg-shine-shadow);
+}
+
+.liquid-glass-core-success {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.2) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(34, 197, 94, 0.1) 100%
+  );
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.liquid-glass-core-warning {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.2) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.liquid-glass-core-error {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.2) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(239, 68, 68, 0.1) 100%
+  );
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
 /* ===== Input Component ===== */
 .liquid-glass-input {
   padding: var(--lg-padding-md);
