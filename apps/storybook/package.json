@@ -6,9 +6,10 @@
   "description": "LiqUIdify Storybook - Interactive component playground",
   "scripts": {
     "dev": "storybook dev -p 6006 -c .storybook",
-    "build": "storybook build -c .storybook -o storybook-static",
+    "build": "bun run --cwd ../../libs/components build && storybook build -c .storybook -o storybook-static",
+    "prepreview": "bun run build",
     "preview": "serve storybook-static -l 6006",
-    "verify": "storybook build -c .storybook -o storybook-static && node -e \"const fs=require('fs');if(!fs.existsSync('storybook-static/index.html')){process.exit(1)}\"",
+    "verify": "bun run --cwd ../../libs/components build && storybook build -c .storybook -o storybook-static && node -e \"const fs=require('fs');if(!fs.existsSync('storybook-static/index.html')){process.exit(1)}\"",
     "typecheck": "bunx tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

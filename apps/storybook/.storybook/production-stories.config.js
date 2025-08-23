@@ -1,146 +1,56 @@
-/**
- * Production Components Configuration
- * Only showcase stable, production-ready components
- */
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+// Compute absolute path to the components directory relative to this config file
+const baseDir = path.dirname(fileURLToPath(import.meta.url));
+const componentsDir = path.resolve(
+  baseDir,
+  "../../../libs/components/src/components",
+);
+
+function safeReadDir(dir) {
+  try {
+    return fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+}
+
+// Optionally force-exclude specific folders regardless of contents
+const IGNORE = new Set([
+  // "liquid-glass-defs",
+  // "theme-provider",
+]);
+
+function hasStoryFilesRec(dir) {
+  const entries = safeReadDir(dir);
+  for (const e of entries) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      if (hasStoryFilesRec(full)) return true;
+    } else if (e.isFile()) {
+      if (/\.(stories)\.(jsx?|tsx?|mdx)$/.test(e.name)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function findComponentDirsWithStories() {
+  const entries = safeReadDir(componentsDir);
+  return entries
+    .filter((e) => e.isDirectory())
+    .map((d) => d.name)
+    .filter((name) => !IGNORE.has(name))
+    .filter((name) => hasStoryFilesRec(path.join(componentsDir, name)));
+}
+
+// Export an object grouping all components under a single key.
+// main.mjs will flatten this structure for production story globs.
 export const PRODUCTION_COMPONENTS = {
-  // Core UI Components
-  core: [
-    "glass-button-refactored",
-    "glass-card-refactored",
-    "glass-input",
-    "glass-responsive-button",
-    "glass-responsive-card",
-    "glass-modal",
-    "glass-badge",
-    "glass-avatar",
-    "glass-banner",
-  ],
-
-  // Form Components
-  forms: [
-    "glass-checkbox",
-    "glass-radio-group",
-    "glass-select",
-    "glass-textarea",
-    "glass-switch",
-    "glass-form-field",
-    "glass-checkbox-group",
-  ],
-
-  // Input-Helpers / Pickers
-  inputs: [
-    "glass-number-input",
-    "glass-date-picker",
-    "glass-combobox",
-    "glass-command",
-    "glass-file-upload",
-    "glass-search",
-  ],
-
-  // Layout Components
-  layout: [
-    "glass-accordion",
-    "glass-tabs",
-    "glass-drawer",
-    "glass-breadcrumbs",
-    "glass-slider",
-  ],
-
-  // Feedback Components
-  feedback: [
-    "glass-alert",
-    "glass-toast",
-    "glass-notification",
-    "glass-loading",
-    "glass-progress",
-    "glass-spinner",
-  ],
-
-  // Navigation Components
-  navigation: [
-    "glass-dropdown",
-    "glass-pagination",
-    "glass-mobile-nav",
-    "navbar",
-    "sidebar",
-    "theme-toggle",
-    "glass-tree-view",
-    "glass-timeline",
-  ],
-
-  // Data Display
-  dataDisplay: [
-    "glass-table",
-    "glass-chart",
-    "glass-badge",
-    "glass-tooltip",
-    "glass-popover",
-    "glass-skeleton",
-  ],
+  all: findComponentDirsWithStories(),
 };
 
-// Components to exclude from Storybook (experimental/demo)
-export const EXCLUDED_COMPONENTS = [
-  "glass-playground",
-  "glass-demo",
-  "glass-accessible-demo",
-  "glass-focus-demo",
-  "glass-performance-dashboard",
-  "glass-visually-hidden",
-  "glass-error-boundary",
-  "glass-live-region",
-  "glass-focus-trap",
-  "glass-portal",
-  "glass-skip-navigation",
-  "theme-provider",
-];
-
-// Design system configuration
-export const DESIGN_SYSTEM = {
-  colors: {
-    primary: {
-      glass: "rgba(255, 255, 255, 0.1)",
-      glassBorder: "rgba(255, 255, 255, 0.2)",
-      glassHover: "rgba(255, 255, 255, 0.15)",
-      accent: "#007AFF",
-      accentHover: "#0051D5",
-    },
-    semantic: {
-      success: "#34C759",
-      warning: "#FF9500",
-      error: "#FF3B30",
-      info: "#5AC8FA",
-    },
-  },
-
-  effects: {
-    blur: {
-      sm: "8px",
-      md: "12px",
-      lg: "20px",
-      xl: "40px",
-    },
-    borderRadius: {
-      sm: "8px",
-      md: "12px",
-      lg: "16px",
-      xl: "24px",
-    },
-  },
-
-  typography: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif',
-    sizes: {
-      xs: "12px",
-      sm: "14px",
-      base: "16px",
-      lg: "18px",
-      xl: "20px",
-      "2xl": "24px",
-      "3xl": "30px",
-      "4xl": "36px",
-    },
-  },
-};
+export default PRODUCTION_COMPONENTS;
