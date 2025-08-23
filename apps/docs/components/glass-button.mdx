@@ -19,7 +19,7 @@ The GlassButton component provides a beautiful glassmorphism effect with interac
 <CodeGroup>
 
 ```jsx Preview
-import React from 'react';
+import React from "react";
 
 function GlassButtonPreview() {
   return (
@@ -51,7 +51,7 @@ import { GlassButton } from 'liquidify';
 
 function MyApp() {
   return (
-    <GlassButton 
+    <GlassButton
       variant="primary"
       size="md"
       onClick={() => console.log('Button clicked!')}
@@ -63,8 +63,8 @@ function MyApp() {
 ```
 
 ```tsx TypeScript
-import { GlassButton } from 'liquidify';
-import type { GlassButtonProps } from 'liquidify';
+import { GlassButton } from "liquidify";
+import type { GlassButtonProps } from "liquidify";
 
 interface ButtonDemoProps {
   label: string;
@@ -74,15 +74,11 @@ interface ButtonDemoProps {
 function ButtonDemo({ label, action }: ButtonDemoProps) {
   const handleClick = () => {
     action();
-    console.log('Glass button clicked!');
+    console.log("Glass button clicked!");
   };
 
   return (
-    <GlassButton 
-      variant="primary"
-      size="lg"
-      onClick={handleClick}
-    >
+    <GlassButton variant="primary" size="lg" onClick={handleClick}>
       {label}
     </GlassButton>
   );
@@ -127,16 +123,16 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
       </button>
     </div>
   </div>
-  
-  <div className="component-variant">
-    <h4>Secondary</h4>
-    <div className="interactive-demo">
-      <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
-        Secondary
-      </button>
-    </div>
+
+<div className="component-variant">
+  <h4>Secondary</h4>
+  <div className="interactive-demo">
+    <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+      Secondary
+    </button>
   </div>
-  
+</div>
+
   <div className="component-variant">
     <h4>Ghost</h4>
     <div className="interactive-demo">
@@ -158,16 +154,16 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
       </button>
     </div>
   </div>
-  
-  <div className="component-variant">
-    <h4>Secondary</h4>
-    <div className="interactive-demo">
-      <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
-        Secondary
-      </button>
-    </div>
+
+<div className="component-variant">
+  <h4>Secondary</h4>
+  <div className="interactive-demo">
+    <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+      Secondary
+    </button>
   </div>
-  
+</div>
+
   <div className="component-variant">
     <h4>Ghost</h4>
     <div className="interactive-demo">
@@ -187,28 +183,28 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
       XS
     </button>
   </div>
-  
-  <div className="component-variant">
-    <h4>Small</h4>
-    <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-sm liquid-glass-button-sm liquid-glass-button-primary">
-      Small
-    </button>
-  </div>
-  
-  <div className="component-variant">
-    <h4>Medium</h4>
-    <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-md liquid-glass-button-primary">
-      Medium
-    </button>
-  </div>
-  
-  <div className="component-variant">
-    <h4>Large</h4>
-    <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-lg liquid-glass-button-lg liquid-glass-button-primary">
-      Large
-    </button>
-  </div>
-  
+
+<div className="component-variant">
+  <h4>Small</h4>
+  <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-sm liquid-glass-button-sm liquid-glass-button-primary">
+    Small
+  </button>
+</div>
+
+<div className="component-variant">
+  <h4>Medium</h4>
+  <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-md liquid-glass-button-primary">
+    Medium
+  </button>
+</div>
+
+<div className="component-variant">
+  <h4>Large</h4>
+  <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-lg liquid-glass-button-lg liquid-glass-button-primary">
+    Large
+  </button>
+</div>
+
   <div className="component-variant">
     <h4>Extra Large</h4>
     <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-xl liquid-glass-button-xl liquid-glass-button-primary">
@@ -230,39 +226,77 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
   </thead>
   <tbody>
     <tr>
-      <td><code className="prop-name">variant</code></td>
-      <td><code className="prop-type">"primary" | "secondary" | "success" | "danger"</code></td>
-      <td><code>"primary"</code></td>
+      <td>
+        <code className="prop-name">variant</code>
+      </td>
+      <td>
+        <code className="prop-type">
+          "primary" | "secondary" | "success" | "danger"
+        </code>
+      </td>
+      <td>
+        <code>"primary"</code>
+      </td>
       <td>The visual style variant of the button</td>
     </tr>
     <tr>
-      <td><code className="prop-name">size</code></td>
-      <td><code className="prop-type">"sm" | "md" | "lg"</code></td>
-      <td><code>"md"</code></td>
+      <td>
+        <code className="prop-name">size</code>
+      </td>
+      <td>
+        <code className="prop-type">"sm" | "md" | "lg"</code>
+      </td>
+      <td>
+        <code>"md"</code>
+      </td>
       <td>The size of the button</td>
     </tr>
     <tr>
-      <td><code className="prop-name">disabled</code></td>
-      <td><code className="prop-type">boolean</code></td>
-      <td><code>false</code></td>
+      <td>
+        <code className="prop-name">disabled</code>
+      </td>
+      <td>
+        <code className="prop-type">boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
       <td>Whether the button is disabled</td>
     </tr>
     <tr>
-      <td><code className="prop-name">loading</code></td>
-      <td><code className="prop-type">boolean</code></td>
-      <td><code>false</code></td>
+      <td>
+        <code className="prop-name">loading</code>
+      </td>
+      <td>
+        <code className="prop-type">boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
       <td>Shows loading spinner when true</td>
     </tr>
     <tr>
-      <td><code className="prop-name">onClick</code></td>
-      <td><code className="prop-type">(event: MouseEvent) => void</code></td>
-      <td><code>undefined</code></td>
+      <td>
+        <code className="prop-name">onClick</code>
+      </td>
+      <td>
+        <code className="prop-type">(event: MouseEvent) => void</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
       <td>Click event handler</td>
     </tr>
     <tr>
-      <td><code className="prop-name">children</code></td>
-      <td><code className="prop-type">ReactNode</code></td>
-      <td><code>undefined</code></td>
+      <td>
+        <code className="prop-name">children</code>
+      </td>
+      <td>
+        <code className="prop-type">ReactNode</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
       <td>Button content</td>
     </tr>
   </tbody>
@@ -272,8 +306,12 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
 
 <div className="glass-demo">
   <h3>✨ Liquid Glass Aesthetic</h3>
-  <p>This component showcases our signature glass effect with backdrop blur, subtle transparency, and smooth animations that create depth and visual hierarchy.</p>
-  
+  <p>
+    This component showcases our signature glass effect with backdrop blur,
+    subtle transparency, and smooth animations that create depth and visual
+    hierarchy.
+  </p>
+
   <div className="flex gap-4 mt-6 justify-center flex-wrap">
     <div className="text-center">
       <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
@@ -303,37 +341,35 @@ function ButtonDemo({ label, action }: ButtonDemoProps) {
 The simplest way to use the GlassButton:
 
 ```jsx
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 
-<GlassButton>
-  Click me!
-</GlassButton>
+<GlassButton>Click me!</GlassButton>;
 ```
 
 ### With Loading State
 
 ```jsx
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 
 <GlassButton loading={isLoading} onClick={handleSubmit}>
-  {isLoading ? 'Submitting...' : 'Submit Form'}
-</GlassButton>
+  {isLoading ? "Submitting..." : "Submit Form"}
+</GlassButton>;
 ```
 
 ### Custom Styling
 
 ```jsx
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 
-<GlassButton 
+<GlassButton
   className="custom-glass-button"
-  style={{ 
-    background: 'rgba(139, 92, 246, 0.3)',
-    borderColor: 'rgba(139, 92, 246, 0.5)'
+  style={{
+    background: "rgba(139, 92, 246, 0.3)",
+    borderColor: "rgba(139, 92, 246, 0.5)",
   }}
 >
   Custom Style
-</GlassButton>
+</GlassButton>;
 ```
 
 ## Accessibility
@@ -349,13 +385,15 @@ The GlassButton component is built with accessibility in mind:
 ## Best Practices
 
 <Callout type="info">
-Use glass buttons on backgrounds with sufficient contrast to maintain readability and visual hierarchy.
+  Use glass buttons on backgrounds with sufficient contrast to maintain
+  readability and visual hierarchy.
 </Callout>
 
 <Callout type="warning">
-Avoid using multiple glass elements in close proximity as it can reduce visual clarity.
+  Avoid using multiple glass elements in close proximity as it can reduce visual
+  clarity.
 </Callout>
 
 <Callout type="tip">
-Combine with subtle animations and hover effects for enhanced user experience.
+  Combine with subtle animations and hover effects for enhanced user experience.
 </Callout>

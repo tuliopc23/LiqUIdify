@@ -5,7 +5,7 @@ This guide covers setting up custom domains for all LiqUIdify deployment targets
 ## 🌐 Domain Structure
 
 - **Documentation**: `docs.useliquidify.dev` (Mintlify)
-- **Storybook**: `storybook.useliquidify.dev` (Vercel)  
+- **Storybook**: `storybook.useliquidify.dev` (Vercel)
 - **Main Site**: `useliquidify.dev` (Future - main marketing site)
 
 ## 📚 Documentation Domain (Mintlify)
@@ -57,7 +57,7 @@ TTL: Auto (or 300)
 Add the following DNS record with your domain provider:
 
 ```dns
-Type: CNAME  
+Type: CNAME
 Name: storybook
 Value: cname.vercel-dns.com.
 TTL: Auto (or 300)
@@ -95,7 +95,7 @@ If using Cloudflare for DNS:
    - Go to **My Products** → **DNS**
    - Add CNAME records as specified above
 
-2. **Propagation Time**: 
+2. **Propagation Time**:
    - Typically 1-24 hours for full propagation
 
 ### Namecheap Users
@@ -135,6 +135,7 @@ openssl s_client -connect storybook.useliquidify.dev:443 -servername storybook.u
 The following configuration files have been updated with the new domains:
 
 ### Documentation (`apps/docs/docs.json`)
+
 ```json
 {
   "metadata": {
@@ -144,7 +145,7 @@ The following configuration files have been updated with the new domains:
   "navigation": {
     "anchors": [
       {
-        "anchor": "Storybook", 
+        "anchor": "Storybook",
         "href": "https://storybook.useliquidify.dev"
       }
     ]
@@ -153,6 +154,7 @@ The following configuration files have been updated with the new domains:
 ```
 
 ### Library Package (`package.json`)
+
 ```json
 {
   "homepage": "https://docs.useliquidify.dev"
@@ -160,6 +162,7 @@ The following configuration files have been updated with the new domains:
 ```
 
 ### Storybook (`apps/storybook/vercel.json`)
+
 - Domain will be configured in Vercel dashboard
 - DNS points to Vercel's infrastructure
 
@@ -168,18 +171,21 @@ The following configuration files have been updated with the new domains:
 After configuring both domains, verify the complete setup:
 
 ### 1. Documentation Site
+
 - ✅ `https://docs.useliquidify.dev` loads correctly
 - ✅ Custom CSS and component previews work
 - ✅ Search functionality works
 - ✅ All internal links resolve correctly
 
-### 2. Storybook Site  
+### 2. Storybook Site
+
 - ✅ `https://storybook.useliquidify.dev` loads correctly
 - ✅ All stories render properly
 - ✅ Interactive controls work
 - ✅ Component documentation displays
 
 ### 3. Cross-Site Links
+
 - ✅ Documentation → Storybook links work
 - ✅ Storybook → Documentation references work
 - ✅ Social media meta tags display correct URLs
@@ -213,23 +219,27 @@ After configuring both domains, verify the complete setup:
 ## 📈 Monitoring
 
 ### Performance Monitoring
+
 - **Documentation**: Monitor via Mintlify dashboard analytics
 - **Storybook**: Monitor via Vercel analytics dashboard
 
 ### Uptime Monitoring
+
 Consider setting up uptime monitoring for both domains:
+
 - UptimeRobot
-- Pingdom  
+- Pingdom
 - StatusPage
 
 ## 🔄 Future Considerations
 
 ### Main Domain (`useliquidify.dev`)
+
 When ready to set up the main marketing site:
 
 ```dns
 Type: A
-Name: @  
+Name: @
 Value: [hosting-provider-ip]
 
 Type: CNAME
@@ -238,7 +248,9 @@ Value: useliquidify.dev
 ```
 
 ### Additional Subdomains
+
 Potential future subdomains:
+
 - `api.useliquidify.dev` - API documentation
 - `blog.useliquidify.dev` - Company blog
 - `status.useliquidify.dev` - Status page

@@ -13,7 +13,7 @@
     "og:url": "https://docs.useliquidify.dev",
     "og:image": "https://docs.useliquidify.dev/og-image.png",
     "twitter:card": "summary_large_image",
-    "twitter:title": "LiqUIdify - Liquid Glass UI Components", 
+    "twitter:title": "LiqUIdify - Liquid Glass UI Components",
     "twitter:description": "Production-ready React components implementing Apple's Liquid Glass design language",
     "twitter:site": "@useliquidify"
   },
@@ -36,7 +36,7 @@
         ]
       },
       {
-        "header": "Resources", 
+        "header": "Resources",
         "items": [
           {
             "label": "Installation",
@@ -114,10 +114,7 @@
   "search": {
     "prompt": "Search components, guides, and examples..."
   },
-  "styles": [
-    "styles/bundle.css",
-    "liquid-glass-components.css"
-  ],
+  "styles": ["styles/bundle.css", "liquid-glass-components.css"],
   "theme": "mint",
   "head": [
     {

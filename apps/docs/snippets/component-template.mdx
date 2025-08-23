@@ -13,28 +13,23 @@ This template shows how to create component documentation with preview and code 
 <CodeGroup dropdown>
 
 ```jsx Preview
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 
 export default function ButtonPreview() {
   return (
     <div className="flex items-center justify-center min-h-32 py-4">
-      <GlassButton variant="primary">
-        Click Me
-      </GlassButton>
+      <GlassButton variant="primary">Click Me</GlassButton>
     </div>
   );
 }
 ```
 
 ```jsx React Code
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 
 function MyComponent() {
   return (
-    <GlassButton 
-      variant="primary"
-      onClick={() => console.log('Clicked!')}
-    >
+    <GlassButton variant="primary" onClick={() => console.log("Clicked!")}>
       Click Me
     </GlassButton>
   );
@@ -42,8 +37,8 @@ function MyComponent() {
 ```
 
 ```tsx TypeScript
-import { GlassButton } from 'liquidify';
-import type { GlassButtonProps } from 'liquidify';
+import { GlassButton } from "liquidify";
+import type { GlassButtonProps } from "liquidify";
 
 interface MyComponentProps {
   label: string;
@@ -53,14 +48,10 @@ interface MyComponentProps {
 function MyComponent({ label, onAction }: MyComponentProps) {
   const buttonProps: GlassButtonProps = {
     variant: "primary",
-    onClick: onAction
+    onClick: onAction,
   };
 
-  return (
-    <GlassButton {...buttonProps}>
-      {label}
-    </GlassButton>
-  );
+  return <GlassButton {...buttonProps}>{label}</GlassButton>;
 }
 ```
 
@@ -72,7 +63,7 @@ function MyComponent({ label, onAction }: MyComponentProps) {
 
 <style>
   /* Include liquidify.css in your HTML head */
-  @import 'liquidify/css';
+  @import "liquidify/css";
 </style>
 ```
 
@@ -83,23 +74,17 @@ function MyComponent({ label, onAction }: MyComponentProps) {
 <div className="component-variants">
   <div className="component-variant">
     <h4>Primary</h4>
-    <div className="interactive-demo">
-      {/* Primary variant demo */}
-    </div>
+    <div className="interactive-demo">{/* Primary variant demo */}</div>
   </div>
-  
-  <div className="component-variant">
-    <h4>Secondary</h4>
-    <div className="interactive-demo">
-      {/* Secondary variant demo */}
-    </div>
-  </div>
-  
+
+<div className="component-variant">
+  <h4>Secondary</h4>
+  <div className="interactive-demo">{/* Secondary variant demo */}</div>
+</div>
+
   <div className="component-variant">
     <h4>Ghost</h4>
-    <div className="interactive-demo">
-      {/* Ghost variant demo */}
-    </div>
+    <div className="interactive-demo">{/* Ghost variant demo */}</div>
   </div>
 </div>
 
@@ -116,21 +101,39 @@ function MyComponent({ label, onAction }: MyComponentProps) {
   </thead>
   <tbody>
     <tr>
-      <td><code className="prop-name">variant</code></td>
-      <td><code className="prop-type">string</code></td>
-      <td><code>"primary"</code></td>
+      <td>
+        <code className="prop-name">variant</code>
+      </td>
+      <td>
+        <code className="prop-type">string</code>
+      </td>
+      <td>
+        <code>"primary"</code>
+      </td>
       <td>The visual style variant of the button</td>
     </tr>
     <tr>
-      <td><code className="prop-name">size</code></td>
-      <td><code className="prop-type">"sm" | "md" | "lg" | "xl"</code></td>
-      <td><code>"md"</code></td>
+      <td>
+        <code className="prop-name">size</code>
+      </td>
+      <td>
+        <code className="prop-type">"sm" | "md" | "lg" | "xl"</code>
+      </td>
+      <td>
+        <code>"md"</code>
+      </td>
       <td>The size of the button</td>
     </tr>
     <tr>
-      <td><code className="prop-name">disabled</code></td>
-      <td><code className="prop-type">boolean</code></td>
-      <td><code>false</code></td>
+      <td>
+        <code className="prop-name">disabled</code>
+      </td>
+      <td>
+        <code className="prop-type">boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
       <td>Whether the button is disabled</td>
     </tr>
   </tbody>
@@ -148,5 +151,8 @@ function MyComponent({ label, onAction }: MyComponentProps) {
 
 <div className="glass-demo">
   <h3>Liquid Glass Effect</h3>
-  <p>This demonstrates the signature liquid glass aesthetic with backdrop blur and transparency.</p>
+  <p>
+    This demonstrates the signature liquid glass aesthetic with backdrop blur
+    and transparency.
+  </p>
 </div>

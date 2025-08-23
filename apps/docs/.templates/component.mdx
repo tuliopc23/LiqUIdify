@@ -35,12 +35,12 @@ Document different variants (size, color, style, etc.)
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `string` | `"primary"` | Visual style variant |
-| `size` | `string` | `"md"` | Component size |
-| `disabled` | `boolean` | `false` | Whether component is disabled |
-| `className` | `string` | `undefined` | Additional CSS classes |
+| Prop        | Type      | Default     | Description                   |
+| ----------- | --------- | ----------- | ----------------------------- |
+| `variant`   | `string`  | `"primary"` | Visual style variant          |
+| `size`      | `string`  | `"md"`      | Component size                |
+| `disabled`  | `boolean` | `false`     | Whether component is disabled |
+| `className` | `string`  | `undefined` | Additional CSS classes        |
 
 ## Usage Patterns
 
@@ -58,10 +58,7 @@ Common usage patterns and real-world examples.
 
 ```tsx
 // Accessible implementation example
-<ComponentName
-  aria-label="Descriptive label"
-  aria-describedby="help-text"
->
+<ComponentName aria-label="Descriptive label" aria-describedby="help-text">
   Content
 </ComponentName>
 ```

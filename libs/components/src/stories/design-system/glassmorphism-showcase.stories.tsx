@@ -58,7 +58,8 @@ export const Overview: Story = {
     <div
       className="min-h-screen p-8"
       style={{
-        fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+        fontFamily:
+          "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
         background: `
           radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
           radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), 
@@ -79,7 +80,14 @@ export const Overview: Story = {
 
         {/* High-Fidelity Glass Showcase */}
         <section className="theme-dark">
-          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              color: "#d7dbffcc",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              marginBottom: "1.5rem",
+            }}
+          >
             Dark Mode - High-Fidelity Implementation
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -126,7 +134,14 @@ export const Overview: Story = {
 
         {/* Light Theme Showcase */}
         <section className="theme-light">
-          <div style={{ color: '#64748b', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              color: "#64748b",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              marginBottom: "1.5rem",
+            }}
+          >
             Light Mode - Adaptive Transparency
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -164,7 +179,14 @@ export const Overview: Story = {
 
         {/* Apple Color System */}
         <section className="theme-dark">
-          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              color: "#d7dbffcc",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              marginBottom: "1.5rem",
+            }}
+          >
             Apple Color System
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
@@ -172,9 +194,10 @@ export const Overview: Story = {
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ 
-                    background: "linear-gradient(135deg, #007aff 0%, #5ac8fa 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #007aff 0%, #5ac8fa 100%)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                   }}
                 />
                 <h4 className="font-medium mb-1">Primary System</h4>
@@ -183,10 +206,10 @@ export const Overview: Story = {
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ 
+                  style={{
                     background: "var(--lg-bg-color)",
                     backdropFilter: "blur(12px) saturate(180%)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
                   }}
                 />
                 <h4 className="font-medium mb-1">Glass Background</h4>
@@ -195,10 +218,11 @@ export const Overview: Story = {
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ 
+                  style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    boxShadow: "inset -10px -8px 0 -11px rgba(255,255,255,1), inset 0 -9px 0 -8px rgba(255,255,255,1)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)"
+                    boxShadow:
+                      "inset -10px -8px 0 -11px rgba(255,255,255,1), inset 0 -9px 0 -8px rgba(255,255,255,1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
                   }}
                 />
                 <h4 className="font-medium mb-1">Shine Effect</h4>
@@ -207,10 +231,10 @@ export const Overview: Story = {
               <div>
                 <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ 
+                  style={{
                     background: "transparent",
                     backdropFilter: "blur(12px) saturate(180%)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)"
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                   }}
                 />
                 <h4 className="font-medium mb-1">Pure Glass</h4>
@@ -222,7 +246,14 @@ export const Overview: Story = {
 
         {/* Size Variants */}
         <section className="theme-dark">
-          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              color: "#d7dbffcc",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              marginBottom: "1.5rem",
+            }}
+          >
             Size Variants - Consistent Scaling
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
@@ -243,37 +274,96 @@ export const Overview: Story = {
                 XL
               </button>
             </div>
-            
+
             <div className="text-sm opacity-75 space-y-2">
-              <div><code>.liquid-glass-button-xs</code> - Extra small button (8px 16px)</div>
-              <div><code>.liquid-glass-button-sm</code> - Small button (10px 20px)</div>
-              <div><code>.liquid-glass-button-md</code> - Medium button (12px 28px)</div>
-              <div><code>.liquid-glass-button-lg</code> - Large button (16px 36px)</div>
-              <div><code>.liquid-glass-button-xl</code> - Extra large button (20px 44px)</div>
+              <div>
+                <code>.liquid-glass-button-xs</code> - Extra small button (8px
+                16px)
+              </div>
+              <div>
+                <code>.liquid-glass-button-sm</code> - Small button (10px 20px)
+              </div>
+              <div>
+                <code>.liquid-glass-button-md</code> - Medium button (12px 28px)
+              </div>
+              <div>
+                <code>.liquid-glass-button-lg</code> - Large button (16px 36px)
+              </div>
+              <div>
+                <code>.liquid-glass-button-xl</code> - Extra large button (20px
+                44px)
+              </div>
             </div>
           </div>
         </section>
 
         {/* Border Radius System */}
         <section className="theme-dark">
-          <div style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              color: "#d7dbffcc",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              marginBottom: "1.5rem",
+            }}
+          >
             Border Radius System
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="liquid-glass liquid-glass-xs" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                className="liquid-glass liquid-glass-xs"
+                style={{
+                  height: "60px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <code className="text-xs">xs: 12px</code>
               </div>
-              <div className="liquid-glass liquid-glass-sm" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                className="liquid-glass liquid-glass-sm"
+                style={{
+                  height: "60px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <code className="text-xs">sm: 16px</code>
               </div>
-              <div className="liquid-glass liquid-glass-md" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                className="liquid-glass liquid-glass-md"
+                style={{
+                  height: "60px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <code className="text-xs">md: 20px</code>
               </div>
-              <div className="liquid-glass liquid-glass-lg" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                className="liquid-glass liquid-glass-lg"
+                style={{
+                  height: "60px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <code className="text-xs">lg: 24px</code>
               </div>
-              <div className="liquid-glass liquid-glass-xl" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                className="liquid-glass liquid-glass-xl"
+                style={{
+                  height: "60px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <code className="text-xs">xl: 32px</code>
               </div>
             </div>

@@ -15,7 +15,7 @@ const preview: Preview = {
           class: "theme-dark",
         },
         {
-          name: "Light Theme", 
+          name: "Light Theme",
           value: "#f8fafc",
           class: "theme-light",
         },
@@ -42,23 +42,23 @@ const preview: Preview = {
     layout: "centered",
     docs: {
       theme: {
-        base: 'dark',
-        brandTitle: 'LiqUIdify',
-        brandUrl: 'https://docs.useliquidify.dev',
+        base: "dark",
+        brandTitle: "LiqUIdify",
+        brandUrl: "https://docs.useliquidify.dev",
       },
     },
   },
   globalTypes: {
     liquidTheme: {
-      description: 'Liquid Glass Theme',
-      defaultValue: 'dark',
+      description: "Liquid Glass Theme",
+      defaultValue: "dark",
       toolbar: {
-        title: 'Theme',
-        icon: 'paintbrush',
+        title: "Theme",
+        icon: "paintbrush",
         items: [
-          { value: 'light', title: 'Light Theme', left: '☀️' },
-          { value: 'dark', title: 'Dark Theme', left: '🌙' },
-          { value: 'auto', title: 'Auto Theme', left: '🔄' },
+          { value: "light", title: "Light Theme", left: "☀️" },
+          { value: "dark", title: "Dark Theme", left: "🌙" },
+          { value: "auto", title: "Auto Theme", left: "🔄" },
         ],
         dynamicTitle: true,
       },
@@ -66,11 +66,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.liquidTheme || 'dark';
-      const themeClass = theme === 'light' ? 'theme-light' : 'theme-dark';
-      
+      const theme = context.globals.liquidTheme || "dark";
+      const themeClass = theme === "light" ? "theme-light" : "theme-dark";
+
       return (
-        <div className={themeClass} style={{ minHeight: '100vh', padding: '1rem' }}>
+        <div
+          className={themeClass}
+          style={{ minHeight: "100vh", padding: "1rem" }}
+        >
           <Story />
         </div>
       );

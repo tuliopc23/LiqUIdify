@@ -5,6 +5,7 @@ Complete setup checklist for deploying the LiqUIdify component library ecosystem
 ## ✅ Pre-Deployment Setup
 
 ### 1. Repository Configuration
+
 - ✅ **Monorepo Structure**: Bun workspaces configured
 - ✅ **TypeScript Setup**: Strict mode with proper path aliases
 - ✅ **Build Pipeline**: Library → Storybook → Docs workflow
@@ -12,6 +13,7 @@ Complete setup checklist for deploying the LiqUIdify component library ecosystem
 - ✅ **Testing Setup**: Vitest with React Testing Library
 
 ### 2. Component Library (`libs/components/`)
+
 - ✅ **Build System**: Vite + Rolldown for optimal bundles
 - ✅ **Output Formats**: ESM + CJS + TypeScript definitions
 - ✅ **Peer Dependencies**: React 18+ || 19+ support
@@ -19,6 +21,7 @@ Complete setup checklist for deploying the LiqUIdify component library ecosystem
 - ✅ **Bundle Sizes**: ESM (268KB), CJS (293KB)
 
 ### 3. Storybook (`apps/storybook/`)
+
 - ✅ **Version**: Storybook 9.1.2 with Vite builder
 - ✅ **Production Stories**: Filtered story list for production builds
 - ✅ **Vercel Config**: `vercel.json` with Bun support
@@ -26,6 +29,7 @@ Complete setup checklist for deploying the LiqUIdify component library ecosystem
 - ✅ **Accessibility**: A11y addon configured
 
 ### 4. Documentation (`apps/docs/`)
+
 - ✅ **Mintlify Config**: `docs.json` with custom domain setup
 - ✅ **Custom CSS**: Enhanced component preview styling
 - ✅ **Interactive JS**: Theme toggles and copy functionality
@@ -42,7 +46,7 @@ Type: CNAME
 Name: docs
 Value: cname.vercel-dns.com.
 
-# Storybook (Vercel)  
+# Storybook (Vercel)
 Type: CNAME
 Name: storybook
 Value: cname.vercel-dns.com.
@@ -51,11 +55,13 @@ Value: cname.vercel-dns.com.
 ### Platform Configurations
 
 #### Mintlify Dashboard
+
 1. Login to [dashboard.mintlify.com](https://dashboard.mintlify.com)
 2. **Settings** → **Domain Setup**
 3. Enter: `docs.useliquidify.dev`
 
-#### Vercel Dashboard  
+#### Vercel Dashboard
+
 1. Login to [vercel.com/dashboard](https://vercel.com/dashboard)
 2. Select Storybook project
 3. **Settings** → **Domains** → **Add Domain**
@@ -64,6 +70,7 @@ Value: cname.vercel-dns.com.
 ## 🚀 Deployment Commands
 
 ### Complete Deployment Workflow
+
 ```bash
 # 1. Build everything
 bun run build:all
@@ -79,6 +86,7 @@ git push origin main
 ```
 
 ### Individual Deployments
+
 ```bash
 # Library to NPM
 bun run build:lib
@@ -96,11 +104,12 @@ git add . && git commit -m "Update docs" && git push
 ## 🔍 Verification Steps
 
 ### 1. Build Verification
+
 ```bash
 # ✅ All builds pass
 bun run build:all
 
-# ✅ TypeScript compilation clean  
+# ✅ TypeScript compilation clean
 bunx tsc -b --pretty false
 
 # ✅ No dependency issues
@@ -108,6 +117,7 @@ bunx depcheck --skip-missing
 ```
 
 ### 2. Local Testing
+
 ```bash
 # ✅ Library builds correctly
 bun run build:lib
@@ -116,11 +126,12 @@ ls -la dist/libs/components/
 # ✅ Storybook runs locally
 cd apps/storybook && bun run dev
 
-# ✅ Docs run locally  
+# ✅ Docs run locally
 cd apps/docs && bun run dev
 ```
 
 ### 3. Deployment Testing
+
 ```bash
 # ✅ Storybook deploys successfully
 cd apps/storybook && bun run build && bun run verify
@@ -132,13 +143,15 @@ cd apps/docs && bun run build:css
 ## 🌟 Post-Deployment Validation
 
 ### Expected Live URLs
+
 - 📚 **Documentation**: https://docs.useliquidify.dev
-- 📖 **Storybook**: https://storybook.useliquidify.dev  
+- 📖 **Storybook**: https://storybook.useliquidify.dev
 - 📦 **NPM Package**: https://npmjs.com/package/liquidify
 
 ### Functionality Checks
 
 #### Documentation Site
+
 - [ ] Site loads at custom domain
 - [ ] Component previews render with glass effects
 - [ ] Code tabs work (Preview + React + CSS)
@@ -150,6 +163,7 @@ cd apps/docs && bun run build:css
 - [ ] SEO meta tags correct
 
 #### Storybook Site
+
 - [ ] Site loads at custom domain
 - [ ] All component stories render
 - [ ] Interactive controls work
@@ -160,6 +174,7 @@ cd apps/docs && bun run build:css
 - [ ] Mobile responsive
 
 #### NPM Package
+
 - [ ] Package publishes successfully
 - [ ] ESM imports work: `import { GlassButton } from 'liquidify'`
 - [ ] CJS imports work: `const { GlassButton } = require('liquidify')`
@@ -170,12 +185,14 @@ cd apps/docs && bun run build:css
 ## 🎯 Success Criteria
 
 ### Performance Targets
+
 - ✅ **Bundle Sizes**: Library <300KB ESM, <350KB CJS
 - ✅ **CSS Bundle**: <60KB minified
 - ✅ **Build Time**: <2 minutes complete build
 - ✅ **Type Check**: <30 seconds
 
 ### Quality Metrics
+
 - ✅ **TypeScript**: Strict mode enabled, no errors
 - ✅ **Accessibility**: A11y addon passing
 - ✅ **Browser Support**: Modern browsers (>0.5%, last 2 versions)
@@ -186,6 +203,7 @@ cd apps/docs && bun run build:css
 If issues occur during deployment:
 
 ### Library Rollback
+
 ```bash
 # Unpublish if needed (within 24h)
 npm unpublish liquidify@<version>
@@ -195,6 +213,7 @@ npm deprecate liquidify@<version> "Rollback due to issues"
 ```
 
 ### Storybook Rollback
+
 ```bash
 # Revert to previous deployment
 vercel rollback storybook.useliquidify.dev
@@ -205,6 +224,7 @@ cd apps/storybook && ./deploy.sh
 ```
 
 ### Documentation Rollback
+
 ```bash
 # Revert Git changes
 git revert <commit-hash>

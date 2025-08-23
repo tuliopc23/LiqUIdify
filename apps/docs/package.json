@@ -6,7 +6,6 @@
   "description": "LiqUIdify documentation site built with Mintlify",
   "scripts": {
     "dev": "bun run build:css && npx -y mintlify@latest dev",
-
     "build": "bun run build:css && npx -y mintlify@latest broken-links",
     "build:css": "bun run --cwd ../../libs/components build && node scripts/build-css.mjs --include-lib --minify",
     "preview": "bun run dev",

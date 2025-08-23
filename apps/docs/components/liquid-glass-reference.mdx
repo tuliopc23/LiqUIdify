@@ -43,7 +43,7 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
           Light Mode
         </span>
       </div>
-      
+
       <div className="theme-light" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
         <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
           Secondary
@@ -55,8 +55,9 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
           Ghost
         </button>
       </div>
-      
+
     </div>
+
   </div>
 </div>
 
@@ -65,12 +66,14 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
 The reference implementation uses:
 
 ### Core CSS Architecture
+
 - **Layered Pseudo-elements**: `::before` for backdrop blur, `::after` for shine effects
 - **CSS Custom Properties**: Dynamic theming with `--lg-*` variables
 - **Hardware Acceleration**: `transform: translateZ(0)` for smooth animations
 - **Advanced Filters**: `blur(12px) saturate(180%)` for realistic glass
 
 ### Color System
+
 ```css
 :root {
   /* Light Theme */
@@ -87,15 +90,17 @@ The reference implementation uses:
 }
 ```
 
-### Animation System  
+### Animation System
+
 ```css
 --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 ```
 
 ### Shadow Stack
+
 ```css
 --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
---lg-shine-shadow: 
+--lg-shine-shadow:
   inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
   inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
 ```
@@ -103,21 +108,25 @@ The reference implementation uses:
 ## CSS Classes Available
 
 ### Core Classes
+
 - `.liquid-glass` - Base glass container
 - `.liquid-glass-interactive` - Interactive behaviors
 - `.liquid-theme-light` / `.liquid-theme-dark` - Theme contexts
 
 ### Button System
+
 - `.liquid-glass-button` - Button base
-- `.liquid-glass-button-primary` - Primary variant 
+- `.liquid-glass-button-primary` - Primary variant
 - `.liquid-glass-button-secondary` - Secondary variant
 - `.liquid-glass-button-ghost` - Ghost variant
 
 ### Size Variants
+
 - `.liquid-glass-xs` through `.liquid-glass-xl`
 - `.liquid-glass-button-xs` through `.liquid-glass-button-xl`
 
 ### Utility Classes
+
 - `.liquid-elevated` - Enhanced shadow depth
 - `.liquid-surface` - Subtle surface grouping
 
@@ -128,4 +137,4 @@ The reference implementation uses:
 ⚡ **Optimized Performance**: Hardware-accelerated animations  
 📱 **Responsive Design**: Mobile-optimized touch targets  
 ♿ **Accessibility**: Full keyboard navigation and screen reader support  
-🖥️ **Cross-browser**: WebKit and standards-compliant filters  
+🖥️ **Cross-browser**: WebKit and standards-compliant filters

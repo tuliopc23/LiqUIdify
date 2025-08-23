@@ -115,7 +115,7 @@ async function readMintStyles() {
   // Try docs.json first, then mint.json for backwards compatibility
   const docsPath = path.join(docsDir, "docs.json");
   const mintPath = path.join(docsDir, "mint.json");
-  
+
   const configPath = (await fileExists(docsPath)) ? docsPath : mintPath;
   if (!(await fileExists(configPath))) {
     return [];
@@ -131,7 +131,10 @@ async function readMintStyles() {
       .filter(isCssFile)
       .filter((p) => path.resolve(p) !== path.resolve(outPath));
   } catch (e) {
-    warn(`Failed to parse ${path.basename(configPath)} styles:`, e?.message ?? e);
+    warn(
+      `Failed to parse ${path.basename(configPath)} styles:`,
+      e?.message ?? e,
+    );
     return [];
   }
 }

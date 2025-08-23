@@ -3,17 +3,21 @@
 ## Immediate Fixes (1-2 hours)
 
 ### 1. Fix Navigation Casing
+
 ```json
 // In docs.json, change:
 "getting-started/Installation" → "getting-started/installation"
 ```
 
 ### 2. Remove Duplicate Headings
+
 Search and fix these patterns in MDX files:
+
 - Multiple "### Size Variants" sections
 - Repeated section headings
 
 ### 3. Fix Script Path
+
 ```json
 // In docs.json head section:
 "src": "scripts/enhancements.js" // Remove 'public/' prefix
@@ -22,7 +26,9 @@ Search and fix these patterns in MDX files:
 ## Quick CSS Improvements (2-3 hours)
 
 ### 1. Scope Apple Styles
+
 Wrap your CSS with:
+
 ```css
 .liquidify-docs {
   /* All current Apple styles here */
@@ -32,6 +38,7 @@ Wrap your CSS with:
 Then add class to body in MDX layout.
 
 ### 2. Add Copy Button Styles
+
 ```css
 .code-block-header {
   position: relative;
@@ -47,6 +54,7 @@ Then add class to body in MDX layout.
 ## Content Template (30 minutes)
 
 Create `/apps/docs/.templates/component.mdx`:
+
 ```mdx
 ---
 title: Component Name
@@ -62,10 +70,7 @@ Brief description of the component and its purpose.
 
 ## Basic Usage
 
-<PreviewCodeTabs
-  code={`// Basic usage example`}
-  language="tsx"
->
+<PreviewCodeTabs code={`// Basic usage example`} language="tsx">
   <ComponentExample />
 </PreviewCodeTabs>
 
@@ -81,6 +86,7 @@ Brief description of the component and its purpose.
 ## Automated Checks
 
 Add to CI:
+
 ```yaml
 # .github/workflows/docs-quality.yml
 - name: Check for duplicate headings
