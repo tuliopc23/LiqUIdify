@@ -85,7 +85,8 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
           orientation === "horizontal"
             ? "flex-row space-x-2"
             : "flex-col space-y-2",
-          centered && "fixed inset-0 z-50 bg-liquid-bg/20 backdrop-blur-liquid-main",
+          centered &&
+            "fixed inset-0 z-50 bg-liquid-bg/20 backdrop-blur-liquid-main",
           className,
         )}
         {...props}

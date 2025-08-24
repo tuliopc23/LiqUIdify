@@ -79,7 +79,7 @@ export const GlassAvatar = React.memo(
             sizeClasses[size],
             variantClasses[variant],
             showBorder && getGlassClass("default"),
-            showBorder && "border border-liquid-highlight/20", 
+            showBorder && "border border-liquid-highlight/20",
             "overflow-hidden",
             className,
           )}

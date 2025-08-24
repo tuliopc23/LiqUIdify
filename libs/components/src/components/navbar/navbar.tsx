@@ -184,6 +184,4 @@ NavbarItem.displayName = "NavbarItem";
 // NavbarDivider for visual separation
 export const NavbarDivider: React.FC<{ className?: string }> = ({
   className,
-}) => (
-  <div className={cn("h-6 w-px bg-liquid-highlight/30", className)} />
-);
+}) => <div className={cn("h-6 w-px bg-liquid-highlight/30", className)} />;

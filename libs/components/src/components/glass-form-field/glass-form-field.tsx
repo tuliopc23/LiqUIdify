@@ -60,16 +60,16 @@ const formFieldVariants = cva({
 });
 
 const labelVariants = cva({
-  base: "block font-medium text-liquid-primary transition-colors duration-200",
+  base: "block font-medium text-liquid-primary transition-colors duration-200 leading-tight",
   variants: {
     required: {
       true: "after:ml-1 after:text-red-400 after:content-['*']",
       false: "",
     },
     size: {
-      sm: "text-xs",
-      md: "text-sm",
-      lg: "text-base",
+      sm: "text-xs leading-4",
+      md: "text-sm leading-5",
+      lg: "text-base leading-6",
     },
   },
   defaultVariants: {
@@ -79,7 +79,7 @@ const labelVariants = cva({
 });
 
 const helperTextVariants = cva({
-  base: "flex items-center gap-1.5 text-xs transition-colors duration-200",
+  base: "flex items-start gap-1.5 text-xs transition-colors duration-200 leading-4 mt-1",
   variants: {
     state: {
       default: "text-liquid-tertiary",
@@ -379,6 +379,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
                 size: size as "sm" | "md" | "lg",
               }),
               disabled && "cursor-not-allowed",
+              "mb-2",
             )}
           >
             {label}
@@ -398,9 +399,8 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
             role={error ? "alert" : undefined}
             aria-live={error ? "polite" : undefined}
           >
-            {getIcon()}
-
-            <span className="flex-1">{message}</span>
+            <div className="flex-shrink-0 mt-0.5">{getIcon()}</div>
+            <span className="flex-1 leading-4">{message}</span>
           </div>
         )}
       </div>

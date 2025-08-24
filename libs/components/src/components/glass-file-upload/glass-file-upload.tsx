@@ -40,7 +40,7 @@ const fileItemVariants = cva({
   base: "flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3 backdrop-blur-sm transition-all duration-200",
   variants: {
     status: {
-      pending: "border-white/10",
+      pending: "border-white/10 bg-white/5",
       uploading: "border-blue-400/50 bg-blue-500/10",
       success: "border-green-400/50 bg-green-500/10",
       error: "border-red-400/50 bg-red-500/10",
@@ -388,6 +388,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
               "bg-blue-500/20 text-blue-400 hover:bg-blue-500/30",
               "border border-blue-400/30 hover:border-blue-400/50",
               "disabled:cursor-not-allowed disabled:opacity-50",
+              "focus:outline-none focus:ring-2 focus:ring-blue-400/50",
             )}
           >
             {browseText}
@@ -424,10 +425,12 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                         <img
                           src={fileItem.preview}
                           alt={fileItem.file.name}
-                          className="h-10 w-10 rounded object-cover"
+                          className="h-10 w-10 rounded object-cover border border-white/10"
                         />
                       ) : (
-                        <Icon className="h-10 w-10 text-white/60" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded bg-white/10 border border-white/10">
+                          <Icon className="h-6 w-6 text-white/60" />
+                        </div>
                       )}
                     </div>
 
@@ -465,10 +468,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                     <button
                       type="button"
                       onClick={() => removeFile(fileItem.id)}
-                      className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10"
+                      className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
                       aria-label="Remove file"
                     >
-                      <X className="h-4 w-4 text-white/60" />
+                      <X className="h-4 w-4 text-white/60 hover:text-white/90" />
                     </button>
                   </motion.div>
                 );

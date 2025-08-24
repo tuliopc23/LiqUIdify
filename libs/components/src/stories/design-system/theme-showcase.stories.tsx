@@ -366,9 +366,7 @@ export const DarkTheme: Story = {
   render: () => (
     <div className="min-h-screen p-8">
       <div className="mx-auto max-w-4xl space-y-8">
-        <h2 className="mb-8 font-bold text-3xl">
-          Dark Theme Components
-        </h2>
+        <h2 className="mb-8 font-bold text-3xl">Dark Theme Components</h2>
         <ComponentGrid />
       </div>
     </div>

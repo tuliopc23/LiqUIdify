@@ -67,7 +67,10 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const sel = context.globals.liquidTheme || "dark";
-      const prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
       const resolved = sel === "auto" ? (prefersDark ? "dark" : "light") : sel;
       const isDark = resolved === "dark";
 
@@ -83,7 +86,11 @@ const preview: Preview = {
       return (
         <div
           className={isDark ? "theme-dark" : "theme-light"}
-          style={{ minHeight: "100vh", padding: "1rem", color: isDark ? "#ffffff" : "#000000" }}
+          style={{
+            minHeight: "100vh",
+            padding: "1rem",
+            color: isDark ? "#ffffff" : "#000000",
+          }}
         >
           <Story />
         </div>

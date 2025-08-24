@@ -16,6 +16,19 @@
   --lg-primary: #007aff;
   --lg-primary-light: #5ac8fa;
 
+  /* ===== Tailwind-compatible aliases ===== */
+  --liquid-primary: var(--lg-primary);
+  --liquid-text: var(--lg-text);
+  --liquid-accent: var(--lg-accent);
+  --liquid-bg: var(--lg-bg-color);
+  --liquid-highlight: var(--lg-highlight);
+  --liquid-tertiary: rgba(var(--lg-text-rgb), 0.6);
+  --liquid-grey: rgba(var(--lg-text-rgb), 0.5);
+  
+  /* RGB values for opacity calculations */
+  --lg-text-rgb: 26, 29, 33;
+  --lg-accent-rgb: 0, 122, 255;
+
   /* ===== Shadow System ===== */
   --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
   --lg-shine-shadow:
@@ -52,6 +65,19 @@
   --lg-text: #ffffff;
   --lg-text-inverse: #1a1d21;
   --lg-accent: #5ac8fa;
+  
+  /* Update RGB values for dark theme */
+  --lg-text-rgb: 255, 255, 255;
+  --lg-accent-rgb: 90, 200, 250;
+  
+  /* Update aliases */
+  --liquid-primary: var(--lg-primary);
+  --liquid-text: var(--lg-text);
+  --liquid-accent: var(--lg-accent);
+  --liquid-bg: var(--lg-bg-color);
+  --liquid-highlight: var(--lg-highlight);
+  --liquid-tertiary: rgba(var(--lg-text-rgb), 0.6);
+  --liquid-grey: rgba(var(--lg-text-rgb), 0.5);
 }
 
 .theme-light,
@@ -63,6 +89,15 @@
   --lg-text: #1a1d21;
   --lg-text-inverse: #ffffff;
   --lg-accent: #007aff;
+  
+  /* Update aliases for light theme */
+  --liquid-primary: var(--lg-primary);
+  --liquid-text: var(--lg-text);
+  --liquid-accent: var(--lg-accent);
+  --liquid-bg: var(--lg-bg-color);
+  --liquid-highlight: var(--lg-highlight);
+  --liquid-tertiary: rgba(var(--lg-text-rgb), 0.6);
+  --liquid-grey: rgba(var(--lg-text-rgb), 0.5);
 }
 
 /* ===== Core Liquid Glass Component ===== */

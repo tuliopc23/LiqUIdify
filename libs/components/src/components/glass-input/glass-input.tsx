@@ -103,7 +103,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     // Base classes using proper liquid liquid-glass system
     const baseClasses = cn(
-      "liquid-glass-input w-full px-4 py-3",
+      "liquid-glass-input w-full px-4 py-3 leading-tight",
       "text-liquid-primary placeholder:text-liquid-tertiary",
       "transition-all duration-200 will-change-transform",
       "disabled:cursor-not-allowed disabled:opacity-50",
@@ -144,10 +144,10 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
           <div className="liquid-glass-content relative flex w-full items-center p-0">
             {variant === "search" && !leftIcon && (
-              <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-liquid-grey z-10" />
+              <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-liquid-grey z-10 flex-shrink-0" />
             )}
             {leftIcon && (
-              <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-liquid-grey z-10">
+              <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-liquid-grey z-10 flex-shrink-0">
                 {leftIcon}
               </div>
             )}
@@ -177,7 +177,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                   onClick={handleClearInput}
                   aria-label="Clear input"
                   className={cn(
-                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey flex-shrink-0",
                     "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                     "motion-safe:active:scale-95 transition-all duration-200",
                     "liquid-glass-interactive:focus-visible",
@@ -193,7 +193,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
                   className={cn(
-                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey flex-shrink-0",
                     "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                     "motion-safe:active:scale-95 transition-all duration-200",
                     "liquid-glass-interactive:focus-visible",
@@ -207,7 +207,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 </button>
               )}
               {rightIcon && variant !== "password" && !clearable && (
-                <div className="pointer-events-none text-liquid-grey">
+                <div className="pointer-events-none text-liquid-grey flex-shrink-0">
                   {rightIcon}
                 </div>
               )}
@@ -218,7 +218,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
           <p
             id={helperTextId}
             className={cn(
-              "mt-1.5 text-xs",
+              "mt-1.5 text-xs leading-4",
               error ? "text-amber-500" : "text-liquid-grey/80",
             )}
           >

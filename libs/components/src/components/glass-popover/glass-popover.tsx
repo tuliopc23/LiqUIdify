@@ -218,9 +218,10 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       className={cn(
         "liquid-glass",
         getGlassClass("elevated"),
-        "rounded-full p-4",
+        "rounded-xl p-4",
         "border border-white/20 dark:border-white/10",
-        "shadow-black/10 shadow-lg dark:shadow-black/30",
+        "bg-white/10 dark:bg-black/20 backdrop-blur-md",
+        "shadow-lg shadow-black/10 dark:shadow-black/30",
         "fade-in-0 zoom-in-95 animate-in duration-200",
         "max-w-sm",
         contentClassName,

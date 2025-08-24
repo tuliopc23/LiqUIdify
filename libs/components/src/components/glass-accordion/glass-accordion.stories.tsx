@@ -147,7 +147,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Small</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Small</h3>
         <GlassAccordion type="single" size="sm" collapsible>
           <GlassAccordionItem value="item-1" size="sm">
             <GlassAccordionTrigger size="sm">
@@ -162,7 +162,7 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
           Medium (Default)
         </h3>
         <GlassAccordion type="single" size="md" collapsible>
@@ -178,7 +178,7 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Large</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Large</h3>
         <GlassAccordion type="single" size="lg" collapsible>
           <GlassAccordionItem value="item-1" size="lg">
             <GlassAccordionTrigger size="lg">
@@ -204,7 +204,7 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Default</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Default</h3>
         <GlassAccordion type="single" variant="default" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Default Style</GlassAccordionTrigger>
@@ -216,7 +216,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Enhanced</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Enhanced</h3>
         <GlassAccordion type="single" variant="enhanced" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Enhanced Style</GlassAccordionTrigger>
@@ -228,7 +228,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Ghost</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Ghost</h3>
         <GlassAccordion type="single" variant="ghost" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Ghost Style</GlassAccordionTrigger>
@@ -287,24 +287,21 @@ export const Controlled: Story = {
           <button
             type="button"
             onClick={() => setValue("item-1")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
-            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
           >
             Open First
           </button>
           <button
             type="button"
             onClick={() => setValue("item-2")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
-            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
           >
             Open Second
           </button>
           <button
             type="button"
             onClick={() => setValue("item-3")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
-            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
           >
             Open Third
           </button>
@@ -355,19 +352,19 @@ export const ComplexContent: Story = {
           <GlassAccordionContent>
             <div className="space-y-4">
               <div>
-                <h4 className="mb-2 font-semibold text-white">Props</h4>
+                <h4 className="mb-2 font-semibold text-liquid-primary">Props</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-1">
-                    <code className="text-blue-400">type</code>
-                    <span className="text-white/60">"single" | "multiple"</span>
+                    <code className="text-liquid-accent">type</code>
+                    <span className="text-liquid-text opacity-70">"single" | "multiple"</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <code className="text-blue-400">size</code>
-                    <span className="text-white/60">"sm" | "md" | "lg"</span>
+                    <code className="text-liquid-accent">size</code>
+                    <span className="text-liquid-text opacity-70">"sm" | "md" | "lg"</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <code className="text-blue-400">variant</code>
-                    <span className="text-white/60">
+                    <code className="text-liquid-accent">variant</code>
+                    <span className="text-liquid-text opacity-70">
                       "default" | "solid" | "ghost"
                     </span>
                   </div>
@@ -380,7 +377,7 @@ export const ComplexContent: Story = {
           <GlassAccordionTrigger>Code Example</GlassAccordionTrigger>
           <GlassAccordionContent>
             <pre className="overflow-x-auto rounded-lg liquid-glass p-3 text-sm">
-              <code className="text-green-400">{`<GlassAccordion type="single" collapsible>
+              <code className="text-liquid-accent">{`<GlassAccordion type="single" collapsible>
   <GlassAccordionItem value="item-1">
     <GlassAccordionTrigger>
       Click me
@@ -434,8 +431,8 @@ export const ThemeShowcase: Story = {
   },
   render: () => (
     <div className="w-[600px] space-y-8">
-      <div className="rounded-lg bg-white/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-white">
+      <div className="rounded-lg bg-liquid-bg/10 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-primary">
           Light Background
         </h3>
         <GlassAccordion type="single" collapsible>
@@ -450,8 +447,8 @@ export const ThemeShowcase: Story = {
         </GlassAccordion>
       </div>
 
-      <div className="rounded-lg bg-black/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-white">
+      <div className="rounded-lg bg-liquid-bg/30 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-primary">
           Dark Background
         </h3>
         <GlassAccordion type="single" collapsible>

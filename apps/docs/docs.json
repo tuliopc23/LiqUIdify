@@ -14,9 +14,7 @@
   },
   "favicon": "favicon.svg",
   "navigationStyle": "section",
-  "styles": [
-    "styles/bundle.css"
-  ],
+  "styles": ["styles/bundle.css"],
   "head": [
     {
       "tag": "script",
@@ -57,9 +55,7 @@
       {
         "group": "Overview",
         "icon": "home",
-        "pages": [
-          "index"
-        ]
+        "pages": ["index"]
       },
       {
         "group": "Getting Started",
@@ -92,9 +88,7 @@
       {
         "group": "Components Overview",
         "icon": "puzzle-piece",
-        "pages": [
-          "components/showcase"
-        ]
+        "pages": ["components/showcase"]
       },
       {
         "group": "Layout & Navigation",
@@ -155,10 +149,7 @@
       {
         "group": "Interactions",
         "icon": "cursor-arrow-rays",
-        "pages": [
-          "components/responsive-button",
-          "components/command"
-        ]
+        "pages": ["components/responsive-button", "components/command"]
       },
       {
         "group": "Utilities",
@@ -191,23 +182,17 @@
       {
         "group": "Examples",
         "icon": "sparkles",
-        "pages": [
-          "examples/dashboard-example"
-        ]
+        "pages": ["examples/dashboard-example"]
       },
       {
         "group": "API Reference",
         "icon": "code-bracket",
-        "pages": [
-          "api/index"
-        ]
+        "pages": ["api/index"]
       },
       {
         "group": "Advanced",
         "icon": "cog-6-tooth",
-        "pages": [
-          "advanced/framework-integration"
-        ]
+        "pages": ["advanced/framework-integration"]
       },
       {
         "group": "Development",
@@ -222,28 +207,18 @@
       {
         "group": "Migration",
         "icon": "arrow-path",
-        "pages": [
-          "migrate/from-previous"
-        ]
+        "pages": ["migrate/from-previous"]
       },
       {
         "group": "Integrations",
         "icon": "puzzle-piece",
-        "pages": [
-          "integrations/storybook"
-        ]
+        "pages": ["integrations/storybook"]
       },
-      {
-        "group": "Resources",
-        "icon": "link",
-        "pages": [
-          "contributing",
-          "styleguides",
-          "changelog",
-          "faq",
-          "licenses"
-        ]
-      }
+        {
+          "group": "Resources",
+          "icon": "link",
+          "pages": ["contributing", "styleguides", "changelog", "faq", "licenses", "snippets/component-template"]
+        }
     ]
   },
   "footer": {
@@ -256,7 +231,7 @@
         "items": [
           {
             "label": "Components",
-            "href": "/components/showcase"
+            "href": "https://docs.useliquidify.dev/components/showcase"
           },
           {
             "label": "Storybook",
@@ -269,7 +244,7 @@
         "items": [
           {
             "label": "Installation",
-            "href": "/getting-started/installation"
+            "href": "https://docs.useliquidify.dev/getting-started/installation"
           },
           {
             "label": "GitHub",

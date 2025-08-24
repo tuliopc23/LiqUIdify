@@ -64,14 +64,16 @@ const config: Config = {
 
         // Liquid glass system colors (CSS custom properties)
         liquid: {
-          primary: "var(--lg-primary, #007aff)",
+          primary: "var(--liquid-primary, #007aff)",
           "primary-light": "var(--lg-primary-light, #5ac8fa)",
-          text: "var(--lg-text, #1a1d21)",
+          text: "var(--liquid-text, #1a1d21)",
           "text-inverse": "var(--lg-text-inverse, #ffffff)",
-          accent: "var(--lg-accent, #007aff)",
-          bg: "var(--lg-bg-color, rgba(255, 255, 255, 0.4))",
+          accent: "var(--liquid-accent, #007aff)",
+          bg: "var(--liquid-bg, rgba(255, 255, 255, 0.4))",
           "bg-readable": "var(--lg-bg-readable, rgba(255, 255, 255, 0.75))",
-          highlight: "var(--lg-highlight, rgba(255, 255, 255, 0.85))",
+          highlight: "var(--liquid-highlight, rgba(255, 255, 255, 0.85))",
+          tertiary: "var(--liquid-tertiary, rgba(26, 29, 33, 0.6))",
+          grey: "var(--liquid-grey, rgba(26, 29, 33, 0.5))",
         },
 
         // Environment backgrounds (for pages, not components)

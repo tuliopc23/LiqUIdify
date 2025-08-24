@@ -56,9 +56,7 @@ export const GlassProgress = React.memo(
           <div className="liquid-glass-content">
             {showValue && (
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-liquid-text text-sm">
-                  Progress
-                </span>
+                <span className="text-liquid-text text-sm">Progress</span>
 
                 <span className="font-medium text-liquid-primary text-sm">
                   {Math.round(percentage)}%

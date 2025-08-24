@@ -108,9 +108,7 @@ export const GlassSlider = React.memo(
         >
           {showValue && (
             <div className="mb-3 flex items-center justify-between">
-              <span className="text-liquid-text/70 text-sm">
-                Value
-              </span>
+              <span className="text-liquid-text/70 text-sm">Value</span>
 
               <span className="font-medium text-liquid-primary text-sm">
                 {currentValue}

@@ -201,7 +201,9 @@ function UserProfile({ user }) {
       />
       <div>
         <h3 className="font-semibold">{user.name}</h3>
-        <p className="text-sm text-[var(--apple-text-secondary)]">{user.role}</p>
+        <p className="text-sm text-[var(--apple-text-secondary)]">
+          {user.role}
+        </p>
       </div>
     </div>
   );
@@ -228,10 +230,14 @@ function TeamMembersList({ members }) {
             />
             <div>
               <h4 className="font-medium">{member.name}</h4>
-              <p className="text-sm text-[var(--apple-text-secondary)]">{member.email}</p>
+              <p className="text-sm text-[var(--apple-text-secondary)]">
+                {member.email}
+              </p>
             </div>
           </div>
-          <span className="text-sm text-[var(--apple-text-secondary)]">{member.role}</span>
+          <span className="text-sm text-[var(--apple-text-secondary)]">
+            {member.role}
+          </span>
         </div>
       ))}
     </div>
@@ -286,7 +292,9 @@ function Comment({ comment }) {
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-1">
           <span className="font-medium text-sm">{comment.author.name}</span>
-          <span className="text-xs text-[var(--apple-text-secondary)]">{comment.timestamp}</span>
+          <span className="text-xs text-[var(--apple-text-secondary)]">
+            {comment.timestamp}
+          </span>
         </div>
         <p className="text-sm">{comment.content}</p>
       </div>
@@ -409,7 +417,9 @@ function MessageThread({ messages }) {
                 <span className="font-medium text-sm">
                   {message.sender.name}
                 </span>
-                <span className="text-xs text-[var(--apple-text-secondary)]">{message.time}</span>
+                <span className="text-xs text-[var(--apple-text-secondary)]">
+                  {message.time}
+                </span>
               </div>
               <p className="text-sm">{message.content}</p>
             </div>
@@ -437,8 +447,12 @@ function ProfileCard({ user }) {
         className="mx-auto mb-4"
       />
       <h3 className="font-semibold text-lg mb-1">{user.name}</h3>
-      <p className="text-[var(--apple-text-secondary)] text-sm mb-2">{user.role}</p>
-      <p className="text-[var(--apple-text-secondary)] text-xs">{user.department}</p>
+      <p className="text-[var(--apple-text-secondary)] text-sm mb-2">
+        {user.role}
+      </p>
+      <p className="text-[var(--apple-text-secondary)] text-xs">
+        {user.department}
+      </p>
     </div>
   );
 }

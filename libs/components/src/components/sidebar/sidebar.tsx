@@ -274,7 +274,8 @@ export const SidebarItem = React.forwardRef<
           className={cn(
             "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all",
             "hover:bg-liquid-bg/20 active:bg-liquid-bg/30",
-            active && "ring-1 ring-liquid-accent/30 text-liquid-accent font-medium",
+            active &&
+              "ring-1 ring-liquid-accent/30 text-liquid-accent font-medium",
             disabled && "opacity-50 cursor-not-allowed",
             !active && !disabled && "text-liquid-primary",
             className,
