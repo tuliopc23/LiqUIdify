@@ -32,7 +32,7 @@
       if (preview.dataset.themeToggle === "true") {
         const toggleButton = document.createElement("button");
         toggleButton.className =
-          "absolute top-4 right-4 px-3 py-1 text-xs font-medium bg-white/20 backdrop-blur-sm border border-white/20 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-white/30 transition-all duration-200";
+          "absolute top-4 right-4 px-3 py-1 text-xs font-medium bg-liquid-bg/20 backdrop-blur-sm border border-liquid-highlight/20 rounded-lg text-liquid-text hover:bg-liquid-bg/30 transition-all duration-200";
         toggleButton.textContent = "Toggle Theme";
         toggleButton.onclick = () => togglePreviewTheme(preview);
 
@@ -111,7 +111,7 @@
       if (!block.querySelector(".copy-button")) {
         const copyButton = document.createElement("button");
         copyButton.className =
-          "copy-button absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded opacity-0 hover:opacity-100 transition-opacity duration-200";
+          "copy-button absolute top-2 right-2 px-2 py-1 text-xs bg-liquid-bg/40 text-liquid-text rounded opacity-0 hover:opacity-100 transition-opacity duration-200";
         copyButton.textContent = "Copy";
         copyButton.onclick = () =>
           copyToClipboard(block.textContent, copyButton);
@@ -136,15 +136,15 @@
       const originalText = button.textContent;
       button.textContent = "Copied!";
       button.className = button.className.replace(
-        "bg-gray-700",
-        "bg-green-600",
+        "bg-liquid-bg/40",
+        "bg-apple-blue-500/40",
       );
 
       setTimeout(() => {
         button.textContent = originalText;
         button.className = button.className.replace(
-          "bg-green-600",
-          "bg-gray-700",
+          "bg-apple-blue-500/40",
+          "bg-liquid-bg/40",
         );
       }, 2000);
     });

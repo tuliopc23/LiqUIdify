@@ -5,7 +5,7 @@
 
 /* Component Preview Container */
 .liquid-component-preview {
-  @apply rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-gray-50/50 to-gray-100/30 dark:from-gray-900/50 dark:to-gray-800/30 p-8 mb-6;
+  @apply rounded-2xl border border-liquid-highlight/20 bg-liquid-bg/10 p-8 mb-6;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: relative;
@@ -41,7 +41,7 @@
 
 /* Component Preview Dark Mode Background */
 .liquid-component-preview.dark-preview {
-  @apply bg-gradient-to-br from-gray-900 to-gray-800 border-gray-600;
+  @apply bg-liquid-bg/20 border-liquid-highlight/30;
 }
 
 .liquid-component-preview.dark-preview::before {
@@ -60,7 +60,7 @@
 
 /* Component Preview Light Mode Background */
 .liquid-component-preview.light-preview {
-  @apply bg-gradient-to-br from-white to-gray-50 border-gray-200;
+  @apply bg-liquid-bg-readable border-liquid-highlight/20;
 }
 
 /* Center components in preview */
@@ -70,7 +70,7 @@
 
 /* Code Group Enhancement for Component Previews */
 .code-group.component-demo {
-  @apply mt-0 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700;
+  @apply mt-0 rounded-2xl overflow-hidden border border-liquid-highlight/20;
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -86,12 +86,12 @@
 }
 
 .code-group.component-demo [data-tab="Code"] {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300;
+  @apply bg-liquid-bg/20 text-liquid-text;
 }
 
 /* Interactive Preview Elements */
 .interactive-preview {
-  @apply p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg;
+  @apply p-6 rounded-xl border border-liquid-highlight/20 bg-liquid-bg-readable shadow-lg;
   position: relative;
   overflow: hidden;
 }
@@ -118,13 +118,13 @@
 }
 
 .component-variant {
-  @apply p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50;
+  @apply p-4 rounded-xl border border-liquid-highlight/20 bg-liquid-bg/20;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .component-variant h4 {
-  @apply text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3;
+  @apply text-sm font-semibold text-liquid-text mb-3;
 }
 
 /* Glass Effect Demonstration */
@@ -156,15 +156,15 @@
 
 /* Property Table Styling */
 .props-table {
-  @apply w-full border-collapse rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700;
+  @apply w-full border-collapse rounded-xl overflow-hidden border border-liquid-highlight/20;
 }
 
 .props-table th {
-  @apply bg-gray-50 dark:bg-gray-800 px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300;
+  @apply bg-liquid-bg/20 px-4 py-3 text-left text-sm font-semibold text-liquid-text;
 }
 
 .props-table td {
-  @apply px-4 py-3 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700;
+  @apply px-4 py-3 text-sm text-liquid-text/70 border-t border-liquid-highlight/20;
 }
 
 .props-table .prop-name {
@@ -207,11 +207,11 @@
 
 /* Code syntax highlighting enhancement for liquid glass theme */
 .code-group.component-demo pre {
-  @apply bg-gray-900 dark:bg-gray-950;
+  @apply bg-liquid-bg/30;
 }
 
 .code-group.component-demo code {
-  @apply text-gray-100;
+  @apply text-liquid-text;
 }
 
 /* Custom scrollbar for code blocks */
@@ -221,16 +221,16 @@
 }
 
 .code-group.component-demo pre::-webkit-scrollbar-track {
-  @apply bg-gray-800 dark:bg-gray-900 rounded;
+  @apply bg-liquid-bg/20 rounded;
 }
 
 .code-group.component-demo pre::-webkit-scrollbar-thumb {
-  @apply bg-gray-600 dark:bg-gray-700 rounded hover:bg-gray-500 dark:hover:bg-gray-600;
+  @apply rounded bg-liquid-highlight/30 hover:bg-liquid-accent/40;
 }
 
 /* Focus states for accessibility */
 .liquid-component-preview button:focus,
 .interactive-preview button:focus,
 .component-variant button:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+  @apply outline-none ring-2 ring-liquid-accent ring-offset-2;
 }

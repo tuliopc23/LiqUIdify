@@ -47,7 +47,7 @@ export const GlassAvatar = React.memo(
 
       const statusColors = {
         online: "bg-green-500",
-        offline: "bg-gray-400",
+        offline: "bg-liquid-highlight/40",
         away: "bg-yellow-500",
         busy: "bg-red-500",
       };
@@ -79,7 +79,7 @@ export const GlassAvatar = React.memo(
             sizeClasses[size],
             variantClasses[variant],
             showBorder && getGlassClass("default"),
-            showBorder && "border border-white/20 dark:border-white/10",
+            showBorder && "border border-liquid-highlight/20", 
             "overflow-hidden",
             className,
           )}
@@ -108,8 +108,8 @@ export const GlassAvatar = React.memo(
             ) : fallback ? (
               <span
                 className={cn(
-                  "font-medium text-gray-900 dark:text-white",
-                  "bg-gradient-to-br from-blue-500 to-purple-500 text-white",
+                  "font-medium text-liquid-primary",
+                  "bg-gradient-to-br from-apple-blue-500 to-apple-blue-400 text-liquid-text-inverse",
                 )}
               >
                 {getInitials(fallback)}
@@ -117,8 +117,8 @@ export const GlassAvatar = React.memo(
             ) : (
               <User
                 className={cn(
-                  "h-1/2 w-1/2 text-gray-400",
-                  "rounded-full bg-gray-200 p-1 dark:bg-gray-700",
+                  "h-1/2 w-1/2 text-liquid-text/60",
+                  "rounded-full bg-liquid-bg/20 p-1",
                 )}
               />
             )}
@@ -127,7 +127,7 @@ export const GlassAvatar = React.memo(
             {status && (
               <div
                 className={cn(
-                  "absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-gray-900",
+                  "absolute right-0 bottom-0 rounded-full border-2 border-liquid-highlight/40",
                   statusSizes[size],
                   statusColors[status],
                 )}

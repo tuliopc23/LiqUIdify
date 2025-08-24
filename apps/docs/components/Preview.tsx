@@ -16,15 +16,15 @@ export const Preview: React.FC<PreviewProps> = ({
   children,
 }) => {
   return (
-    <div className="preview-block not-prose my-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-white/5 backdrop-blur-md p-4 shadow-sm">
+    <div className="preview-block not-prose my-6 rounded-xl border border-liquid-highlight/20 bg-liquid-bg-readable backdrop-blur-md p-4 shadow-sm">
       {title && (
         <div className="preview-title mb-3 flex items-center justify-between">
-          <div className="font-medium text-gray-900 dark:text-gray-100 text-sm tracking-wide">
+          <div className="font-medium text-liquid-primary text-sm tracking-wide">
             {title}
           </div>
         </div>
       )}
-      <div className="preview-live mb-4 py-3 px-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-gradient-to-br from-white/80 to-white/40 dark:from-white/10 dark:to-white/5">
+      <div className="preview-live mb-4 py-3 px-3 rounded-lg border border-liquid-highlight/20 bg-liquid-bg/20">
         {children}
       </div>
       <div className="preview-code relative group">
@@ -43,7 +43,7 @@ export const Preview: React.FC<PreviewProps> = ({
             <pre
               className={
                 className +
-                " text-[12.5px] leading-relaxed overflow-auto rounded-lg p-4 bg-[#0d1117] text-gray-100 border border-gray-700"
+                " text-[12.5px] leading-relaxed overflow-auto rounded-lg p-4 bg-liquid-bg/30 text-liquid-text border border-liquid-highlight/20"
               }
               style={style}
             >
@@ -92,7 +92,7 @@ const CopyButton: React.FC<{ code: string }> = ({ code }) => {
         };
         void doCopy();
       }}
-      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md bg-gray-800/90 text-gray-200 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-[#0d1117] text-[10px] px-2 py-1 font-medium"
+      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md bg-liquid-bg/30 text-liquid-text hover:bg-liquid-bg/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-liquid-accent text-[10px] px-2 py-1 font-medium"
     >
       {copied ? "Copied" : "Copy"}
     </button>
