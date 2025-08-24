@@ -4,6 +4,7 @@ import { GlassTreeView } from "./";
 const meta: Meta<typeof GlassTreeView> = {
   title: "Components/GlassTreeView",
   component: GlassTreeView,
+  tags: ["autodocs"],
 };
 export default meta;
 

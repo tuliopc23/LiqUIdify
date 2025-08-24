@@ -1,0 +1,118 @@
+{
+  "name": "LiqUIdify",
+  "description": "Production-ready React component library with liquid glass design and physics-based interactions",
+  "theme": "mint",
+  "logo": {
+    "light": "/Logo.svg",
+    "dark": "/Logo.svg"
+  },
+  "favicon": "/Favicon.svg",
+  "colors": {
+    "primary": "#0071e3",
+    "light": "#2997ff",
+    "dark": "#0a84ff"
+  },
+  "navigation": [
+    "index",
+    {
+      "group": "Getting Started",
+      "pages": [
+        "getting-started/installation",
+        "getting-started/quickstart",
+        "getting-started/project-setup"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "core-concepts/liquid-glass-system",
+        "core-concepts/theme-system",
+        "core-concepts/performance"
+      ]
+    },
+    {
+      "group": "Components",
+      "pages": [
+        "components/glass-button",
+        "components/responsive-button",
+        "components/avatar",
+        "components/badge",
+        "components/banner",
+        "components/form-field",
+        "components/glass-textarea",
+        "components/glass-number-input",
+        "components/glass-checkbox-group",
+        "components/glass-combobox",
+        "components/glass-date-picker",
+        "components/glass-file-upload",
+        "components/radio-group",
+        "components/breadcrumbs",
+        "components/navbar",
+        "components/sidebar",
+        "components/glass-mobile-nav",
+        "components/mobile-nav",
+        "components/tabs",
+        "components/toast",
+        "components/notification",
+        "components/modal",
+        "components/drawer",
+        "components/popover",
+        "components/progress",
+        "components/loading",
+        "components/spinner",
+        "components/portal",
+        "components/theme-provider",
+        "components/theme-toggle",
+        "components/focus-trap",
+        "components/error-boundary",
+        "components/liquid-glass",
+        "components/liquid-glass-reference",
+        "components/glass-chart",
+        "components/chart",
+        "components/search",
+        "components/table",
+        "components/tree-view",
+        "components/timeline",
+        "components/slider",
+        "components/showcase",
+        "components/command",
+        "components/date-picker",
+        "components/dropdown",
+        "components/file-upload",
+        "components/tooltip"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/theming",
+        "guides/accessibility",
+        "guides/recipes",
+        "guides/live-previews"
+      ]
+    },
+    {
+      "group": "Development",
+      "pages": [
+        "development/architecture",
+        "development/build-system",
+        "development/testing-strategy",
+        "development/onboarding"
+      ]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        "advanced/framework-integration",
+        "api/index",
+        "integrations/storybook",
+        "examples/dashboard-example",
+        "migrate/from-previous",
+        "faq",
+        "contributing",
+        "changelog",
+        "licenses"
+      ]
+    }
+  ]
+}

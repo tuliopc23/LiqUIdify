@@ -64,6 +64,7 @@ const config = {
   },
   staticDirs: ["../public"],
   docs: {
+    autodocs: "tag",
     defaultName: "Documentation",
   },
   viteFinal: async (config, { configType }) => {
@@ -185,6 +186,32 @@ const config = {
 
       .sb-show-main.sb-main-padded {
         padding: 1rem;
+      }
+
+      /* Typography consistency improvements */
+      .theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6 {
+        color: rgba(255, 255, 255, 0.95) !important;
+      }
+      
+      .theme-light h1, .theme-light h2, .theme-light h3, .theme-light h4, .theme-light h5, .theme-light h6 {
+        color: rgba(17, 24, 39, 0.95) !important;
+      }
+      
+      .theme-dark p, .theme-dark span, .theme-dark div:not(.sb-main-padded) {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .theme-light p, .theme-light span, .theme-light div:not(.sb-main-padded) {
+        color: rgba(17, 24, 39, 0.8);
+      }
+      
+      /* Blue accent for primary text elements */
+      .theme-dark .text-primary, .theme-dark [class*="text-blue"] {
+        color: rgba(96, 165, 250, 0.9) !important;
+      }
+      
+      .theme-light .text-primary, .theme-light [class*="text-blue"] {
+        color: rgba(59, 130, 246, 0.9) !important;
       }
 
       /* Performance optimization for animations */

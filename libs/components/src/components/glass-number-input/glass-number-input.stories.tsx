@@ -6,6 +6,7 @@ import { GlassNumberInput } from "./glass-number-input";
 const meta: Meta<typeof GlassNumberInput> = {
   title: "Components/Forms/GlassNumberInput",
   component: GlassNumberInput,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     docs: {

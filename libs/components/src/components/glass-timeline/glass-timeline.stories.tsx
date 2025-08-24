@@ -4,6 +4,7 @@ import { GlassTimeline } from "./";
 const meta: Meta<typeof GlassTimeline> = {
   title: "Components/GlassTimeline",
   component: GlassTimeline,
+  tags: ["autodocs"],
 };
 export default meta;
 

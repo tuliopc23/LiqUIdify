@@ -4,6 +4,7 @@ import { GlassFocusTrap } from "./";
 const meta: Meta<typeof GlassFocusTrap> = {
   title: "Components/GlassFocusTrap",
   component: GlassFocusTrap,
+  tags: ["autodocs"],
 };
 export default meta;
 

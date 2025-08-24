@@ -4,6 +4,7 @@ import { GlassBanner } from "./";
 const meta: Meta<typeof GlassBanner> = {
   title: "Components/GlassBanner",
   component: GlassBanner,
+  tags: ["autodocs"],
 };
 export default meta;
 

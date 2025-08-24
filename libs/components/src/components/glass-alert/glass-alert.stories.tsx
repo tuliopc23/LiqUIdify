@@ -4,6 +4,7 @@ import { GlassAlert } from "./glass-alert";
 const meta: Meta<typeof GlassAlert> = {
   title: "Components/GlassAlert",
   component: GlassAlert,
+  tags: ["autodocs"],
 };
 export default meta;
 

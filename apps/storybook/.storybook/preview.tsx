@@ -7,34 +7,26 @@ import type { Preview } from "@storybook/react";
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: "Glass Gradient",
+      default: "Glass Dark",
       values: [
         {
-          name: "Dark Theme",
-          value: "#1a1a1a",
-          class: "theme-dark",
-        },
-        {
-          name: "Light Theme",
-          value: "#f8fafc",
-          class: "theme-light",
-        },
-        {
-          name: "Glass Gradient",
-          value: `
-            radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
-            radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), 
-            linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
-          `,
+          name: "Glass Dark",
+          value: `radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)`,
           class: "theme-dark",
         },
         {
           name: "Glass Light",
-          value: `
-            radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.15), transparent 60%),
-            radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.12), transparent 60%),
-            linear-gradient(135deg, #f0f9ff 0%, #f8fafc 45%, #fdf2f8 100%)
-          `,
+          value: `radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.15), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.12), transparent 60%), linear-gradient(135deg, #f0f9ff 0%, #f8fafc 45%, #fdf2f8 100%)`,
+          class: "theme-light",
+        },
+        {
+          name: "Dark Solid",
+          value: "#1a1a1a",
+          class: "theme-dark",
+        },
+        {
+          name: "Light Solid",
+          value: "#f8fafc",
           class: "theme-light",
         },
       ],
@@ -85,11 +77,13 @@ const preview: Preview = {
 
       return (
         <div
-          className={isDark ? "theme-dark" : "theme-light"}
+          className={`${isDark ? "theme-dark" : "theme-light"} ${isDark ? "text-white" : "text-gray-900"}`}
           style={{
             minHeight: "100vh",
             padding: "1rem",
-            color: isDark ? "#ffffff" : "#000000",
+            color: isDark
+              ? "rgba(255, 255, 255, 0.9)"
+              : "rgba(17, 24, 39, 0.9)",
           }}
         >
           <Story />

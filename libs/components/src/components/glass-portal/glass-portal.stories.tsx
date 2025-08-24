@@ -4,6 +4,7 @@ import { GlassPortal } from "./";
 const meta: Meta<typeof GlassPortal> = {
   title: "Components/GlassPortal",
   component: GlassPortal,
+  tags: ["autodocs"],
 };
 export default meta;
 

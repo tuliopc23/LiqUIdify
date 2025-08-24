@@ -5,6 +5,7 @@ import { GlassTextarea } from "./glass-textarea";
 const meta: Meta<typeof GlassTextarea> = {
   title: "Components/Forms/GlassTextarea",
   component: GlassTextarea,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     docs: {

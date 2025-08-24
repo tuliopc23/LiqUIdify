@@ -19,6 +19,7 @@ import { GlassMobileNav, type NavItem } from "./glass-mobile-nav";
 const meta: Meta<typeof GlassMobileNav> = {
   title: "Components/Navigation/GlassMobileNav",
   component: GlassMobileNav,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     docs: {

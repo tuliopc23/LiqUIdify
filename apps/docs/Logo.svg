@@ -1,0 +1,39 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.2);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dropletGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(100,150,255,0.3);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(150,100,255,0.2);stop-opacity:1" />
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer glow -->
+  <circle cx="60" cy="60" r="50" fill="url(#glassGradient)" filter="url(#blur)" opacity="0.3"/>
+  
+  <!-- Main droplet shape -->
+  <path d="M60 20 C40 40, 40 60, 60 80 C80 60, 80 40, 60 20 Z" 
+        fill="url(#dropletGradient)" 
+        stroke="rgba(255,255,255,0.3)" 
+        stroke-width="1" 
+        filter="url(#glow)"/>
+  
+  <!-- Inner highlight -->
+  <ellipse cx="52" cy="35" rx="8" ry="12" fill="rgba(255,255,255,0.4)" opacity="0.6"/>
+  
+  <!-- Reflection line -->
+  <path d="M50 25 Q55 45, 50 65" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" opacity="0.7"/>
+</svg>
