@@ -32,9 +32,9 @@ export const GlassResponsiveButton = ({
 
   const variantClasses = {
     primary: 'font-semibold text-white bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 border border-blue-400/30 shadow-lg shadow-blue-500/25',
-    secondary: 'border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-900 hover:bg-white/90 hover:border-blue-300 dark:border-gray-600 dark:bg-gray-800/80 dark:text-gray-100 dark:hover:bg-gray-800/90',
-    tertiary: 'border border-transparent bg-transparent text-gray-900 hover:bg-gray-100/80 backdrop-blur-sm dark:text-gray-100 dark:hover:bg-gray-800/80',
-    ghost: 'border border-transparent bg-transparent text-gray-600 hover:bg-gray-100/80 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800/80 dark:hover:text-gray-100',
+    secondary: 'border border-[#007AFF]/40 bg-white/80 backdrop-blur-sm text-[#007AFF] hover:bg-white/90 hover:border-[#007AFF] dark:border-[#007AFF]/50 dark:bg-black/60 dark:text-[#007AFF] dark:hover:bg-black/70',
+    tertiary: 'border border-transparent bg-transparent text-[#007AFF] hover:bg-[#007AFF]/10 backdrop-blur-sm dark:text-[#007AFF] dark:hover:bg-white/5',
+    ghost: 'border border-transparent bg-transparent text-[#007AFF] hover:bg-[#007AFF]/10 hover:text-[#007AFF] dark:text-[#66A8FF] dark:hover:bg-white/5 dark:hover:text-[#66A8FF]',
     destructive: 'font-semibold text-white bg-gradient-to-b from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 border border-red-400/30 shadow-lg shadow-red-500/25'
   }
 

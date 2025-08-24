@@ -2,7 +2,7 @@
 
 export const GlassCard = ({ title, subtitle, variant, children }) => {
   const base = 'rounded-xl border border-black/10 dark:border-white/10 p-4 backdrop-blur bg-white/60 dark:bg-white/5 shadow-sm'
-  const solid = 'bg-gray-900 text-white border-transparent shadow-md'
+  const solid = 'bg-[#0A84FF] text-white border-transparent shadow-md'
   return (
     <div className={`${base} ${variant === 'solid' ? solid : ''}`}>
       {(title || subtitle) && (

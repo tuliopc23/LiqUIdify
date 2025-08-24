@@ -221,7 +221,7 @@ function ProductCard({ product }) {
         {product.isNew && <GlassBadge variant="success">New</GlassBadge>}
       </div>
 
-      <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+      <p className="text-sm text-[#007AFF] mb-3">{product.description}</p>
 
       <div className="flex gap-2 flex-wrap">
         {product.features.map((feature) => (
@@ -274,7 +274,7 @@ function UserList({ users }) {
             />
             <div>
               <h4 className="font-medium">{user.name}</h4>
-              <p className="text-sm text-gray-600">{user.email}</p>
+              <p className="text-sm text-[#007AFF]">{user.email}</p>
             </div>
           </div>
           <GlassBadge variant={getRoleVariant(user.role)}>
@@ -417,7 +417,7 @@ function TaskItem({ task }) {
     <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
       <div className="flex-1">
         <h4 className="font-medium mb-1">{task.title}</h4>
-        <p className="text-sm text-gray-600">{task.description}</p>
+        <p className="text-sm text-[#007AFF]">{task.description}</p>
       </div>
       <div className="flex gap-2">
         <GlassBadge variant={getPriorityVariant(task.priority)}>
@@ -451,13 +451,13 @@ function MetricCard({ metric }) {
   return (
     <div className="p-4 bg-white/10 rounded-lg">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-medium text-gray-600">{metric.label}</h3>
+        <h3 className="text-sm font-medium text-[#007AFF]">{metric.label}</h3>
         <GlassBadge variant={getTrendVariant(metric.trend)}>
           {getTrendText(metric.trend)}
         </GlassBadge>
       </div>
       <p className="text-2xl font-bold">{metric.value}</p>
-      <p className="text-xs text-gray-500 mt-1">vs last period</p>
+      <p className="text-xs text-[#007AFF] mt-1">vs last period</p>
     </div>
   );
 }
