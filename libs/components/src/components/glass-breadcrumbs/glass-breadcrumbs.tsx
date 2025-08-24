@@ -9,7 +9,7 @@ import {
 } from "../../lib/variant-system";
 
 const breadcrumbsVariants = cva({
-  base: "flex items-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 text-sm backdrop-blur-md",
+  base: "flex items-center space-x-1 rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 p-2 text-sm backdrop-blur-liquid-main",
   variants: {
     size: {
       sm: "p-1.5 text-xs",
@@ -17,8 +17,8 @@ const breadcrumbsVariants = cva({
       lg: "p-3 text-base",
     },
     variant: {
-      default: "bg-white/5",
-      solid: "bg-white/10",
+      default: "bg-liquid-bg/10",
+      solid: "bg-liquid-bg/20",
       ghost: "border-transparent bg-transparent",
     },
   },
@@ -29,14 +29,14 @@ const breadcrumbsVariants = cva({
 });
 
 const breadcrumbItemVariants = cva({
-  base: "flex items-center rounded px-2 py-1 transition-all duration-200 hover:text-blue-400 focus:text-blue-400 focus:outline-none",
+  base: "flex items-center rounded px-2 py-1 transition-all duration-200 hover:text-liquid-accent focus:text-liquid-accent focus:outline-none",
   variants: {
     isActive: {
-      true: "font-medium text-white",
-      false: "text-white/70 hover:text-white",
+      true: "font-medium text-liquid-accent",
+      false: "text-liquid-text hover:text-liquid-accent",
     },
     isClickable: {
-      true: "cursor-pointer hover:bg-white/5",
+      true: "cursor-pointer hover:bg-liquid-bg/20",
       false: "cursor-default",
     },
   },
@@ -71,7 +71,7 @@ const GlassBreadcrumbs = React.memo(
       {
         className,
         items,
-        separator = <ChevronRight className="h-4 w-4 text-white/40" />,
+        separator = <ChevronRight className="h-4 w-4 text-liquid-text/40" />,
         showHome = true,
         onHomeClick,
         maxItems,

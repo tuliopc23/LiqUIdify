@@ -211,7 +211,7 @@ const GlassDrawerOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
+      "fixed inset-0 z-50 bg-liquid-bg/30 backdrop-blur-liquid-main",
       "data-[state=closed]:animate-out data-[state=open]:animate-in",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className,
@@ -257,7 +257,7 @@ const GlassDrawerContent = React.forwardRef<
         >
           {children}
           {showCloseButton && closeButtonPosition === "overlay" && (
-            <GlassDrawerClose className="absolute top-4 right-4 rounded-md opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-text-liquid-accent/40">
+            <GlassDrawerClose className="absolute top-4 right-4 rounded-md opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-liquid-accent/40">
               <X className="h-4 w-4" />
 
               <span className="sr-only">Close</span>
@@ -284,7 +284,7 @@ const GlassDrawerTitle = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("font-semibold text-lg text-white", className)}
+    className={cn("font-semibold text-lg text-liquid-text", className)}
     {...props}
   >
     {children}
@@ -297,7 +297,7 @@ const GlassDrawerDescription = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-white/70", className)}
+    className={cn("text-sm text-liquid-text/70", className)}
     {...props}
   >
     {children}

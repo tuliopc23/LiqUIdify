@@ -1,21 +1,200 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "name": "LiqUIdify",
+  "description": "Liquidify UI Component Library Documentation - React components with Apple's Liquid Glass design system",
+  "theme": "mint",
   "colors": {
-    "dark": "#0055b3",
+    "primary": "#0066cc",
     "light": "#0a84ff",
-    "primary": "#0066cc"
+    "dark": "#0055b3"
   },
-  "description": "LiqUIdify UI Component Library Documentation - React components with Apple's Liquid Glass design system",
+  "logo": {
+    "light": "logo-light.svg",
+    "dark": "logo-dark.svg"
+  },
   "favicon": "favicon.svg",
-  "metadata": {
-    "og:title": "LiqUIdify - Liquid Glass UI Components",
-    "og:description": "Production-ready React components implementing Apple's Liquid Glass design language",
-    "og:url": "https://docs.useliquidify.dev",
-    "og:image": "https://docs.useliquidify.dev/og-image.png",
-    "twitter:card": "summary_large_image",
-    "twitter:title": "LiqUIdify - Liquid Glass UI Components",
-    "twitter:description": "Production-ready React components implementing Apple's Liquid Glass design language",
-    "twitter:site": "@useliquidify"
+  "navigation": [
+    {
+      "group": "Overview",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "group": "Getting Started",
+      "pages": [
+        "getting-started/installation",
+        "getting-started/project-setup",
+        "getting-started/quickstart"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/theming",
+        "guides/accessibility",
+        "guides/live-previews",
+        "guides/recipes"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "core-concepts/liquid-glass-system",
+        "core-concepts/theme-system",
+        "core-concepts/performance"
+      ]
+    },
+    {
+      "group": "Components Overview",
+      "pages": [
+        "components/showcase"
+      ]
+    },
+    {
+      "group": "Layout & Navigation",
+      "pages": [
+        "components/navbar",
+        "components/sidebar",
+        "components/mobile-nav",
+        "components/breadcrumbs",
+        "components/tabs"
+      ]
+    },
+    {
+      "group": "Form Components",
+      "pages": [
+        "components/form-field",
+        "components/file-upload",
+        "components/date-picker",
+        "components/radio-group",
+        "components/slider",
+        "components/search"
+      ]
+    },
+    {
+      "group": "Display Components",
+      "pages": [
+        "components/avatar",
+        "components/badge",
+        "components/banner",
+        "components/chart",
+        "components/table",
+        "components/timeline",
+        "components/tree-view",
+        "components/progress",
+        "components/loading",
+        "components/spinner"
+      ]
+    },
+    {
+      "group": "Interactive Components",
+      "pages": [
+        "components/responsive-button",
+        "components/modal",
+        "components/drawer",
+        "components/dropdown",
+        "components/popover",
+        "components/tooltip",
+        "components/command",
+        "components/notification",
+        "components/toast"
+      ]
+    },
+    {
+      "group": "Utility Components",
+      "pages": [
+        "components/theme-provider",
+        "components/theme-toggle",
+        "components/portal",
+        "components/focus-trap",
+        "components/error-boundary"
+      ]
+    },
+    {
+      "group": "Liquid Glass System",
+      "pages": [
+        "components/liquid-glass",
+        "components/liquid-glass-reference"
+      ]
+    },
+    {
+      "group": "Glass Components",
+      "pages": [
+        "components/glass-button",
+        "components/glass-chart",
+        "components/glass-checkbox-group",
+        "components/glass-combobox",
+        "components/glass-date-picker",
+        "components/glass-file-upload",
+        "components/glass-mobile-nav",
+        "components/glass-number-input",
+        "components/glass-textarea"
+      ]
+    },
+    {
+      "group": "Examples",
+      "pages": [
+        "examples/dashboard-example"
+      ]
+    },
+    {
+      "group": "Advanced",
+      "pages": [
+        "advanced/framework-integration"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api/index"
+      ]
+    },
+    {
+      "group": "Development",
+      "pages": [
+        "development/onboarding",
+        "development/architecture",
+        "development/build-system",
+        "development/testing-strategy"
+      ]
+    },
+    {
+      "group": "Migration",
+      "pages": [
+        "migrate/from-previous"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/storybook"
+      ]
+    },
+    {
+      "group": "Resources",
+      "pages": [
+        "contributing",
+        "styleguides",
+        "changelog",
+        "faq",
+        "licenses"
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Storybook",
+      "icon": "book-open",
+      "url": "https://storybook.useliquidify.dev"
+    }
+  ],
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": "dark"
+  },
+  "search": {
+    "prompt": "Search components, guides, and examples..."
   },
   "footer": {
     "socials": {
@@ -27,7 +206,7 @@
         "items": [
           {
             "label": "Components",
-            "href": "/components/showcase"
+            "href": "https://docs.useliquidify.dev/components/showcase"
           },
           {
             "label": "Storybook",
@@ -40,7 +219,7 @@
         "items": [
           {
             "label": "Installation",
-            "href": "/getting-started/installation"
+            "href": "https://docs.useliquidify.dev/getting-started/installation"
           },
           {
             "label": "GitHub",
@@ -49,87 +228,5 @@
         ]
       }
     ]
-  },
-  "logo": {
-    "dark": "logo-dark.svg",
-    "light": "logo-light.svg"
-  },
-  "name": "LiqUIdify",
-  "navigation": {
-    "anchors": [
-      {
-        "anchor": "Storybook",
-        "icon": "book-open",
-        "href": "https://storybook.useliquidify.dev"
-      }
-    ],
-    "groups": [
-      {
-        "group": "Getting Started",
-        "icon": "rocket",
-        "pages": [
-          "index",
-          "getting-started/installation",
-          "getting-started/quickstart"
-        ]
-      },
-      {
-        "group": "Core Concepts",
-        "icon": "lightbulb",
-        "pages": [
-          "core-concepts/liquid-glass-system",
-          "core-concepts/theme-system",
-          "core-concepts/performance",
-          "guides/accessibility"
-        ]
-      },
-      {
-        "group": "Components",
-        "icon": "puzzle-piece",
-        "pages": [
-          "components/showcase",
-          "components/liquid-glass-reference",
-          "components/glass-button",
-          "components/breadcrumbs",
-          "components/modal",
-          "components/responsive-button",
-          "components/tabs",
-          "components/toast",
-          "components/tooltip",
-          "components/form-field",
-          "components/navbar",
-          "components/notification",
-          "components/progress",
-          "components/loading",
-          "components/theme-toggle"
-        ]
-      }
-    ]
-  },
-  "navigationStyle": "section",
-  "styling": {
-    "eyebrows": "breadcrumbs",
-    "codeblocks": "dark"
-  },
-  "search": {
-    "prompt": "Search components, guides, and examples..."
-  },
-  "styles": ["styles/bundle.css", "liquid-glass-components.css"],
-  "theme": "mint",
-  "head": [
-    {
-      "tag": "script",
-      "attrs": {
-        "src": "scripts/enhancements.js",
-        "defer": true
-      }
-    },
-    {
-      "tag": "script",
-      "attrs": {
-        "src": "component-preview.js",
-        "defer": true
-      }
-    }
-  ]
+  }
 }

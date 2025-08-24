@@ -108,11 +108,11 @@ export const GlassSlider = React.memo(
         >
           {showValue && (
             <div className="mb-3 flex items-center justify-between">
-              <span className="text-gray-600 text-sm dark:text-gray-400">
+              <span className="text-liquid-text/70 text-sm">
                 Value
               </span>
 
-              <span className="font-medium text-gray-900 text-sm dark:text-white">
+              <span className="font-medium text-liquid-primary text-sm">
                 {currentValue}
               </span>
             </div>
@@ -123,7 +123,7 @@ export const GlassSlider = React.memo(
             className={cn(
               "relative h-2 cursor-pointer rounded-full",
               variant === "default" && getGlassClass("default"),
-              variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
+              variant === "minimal" && "bg-liquid-bg/20",
               disabled && "cursor-not-allowed opacity-50",
             )}
             onMouseDown={handleMouseDown}
@@ -131,7 +131,7 @@ export const GlassSlider = React.memo(
             {/* Track fill */}
 
             <div
-              className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-200"
+              className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-apple-blue-500 to-apple-blue-400 transition-all duration-200"
               style={{ width: `${percentage}%` }}
             />
 
@@ -143,16 +143,16 @@ export const GlassSlider = React.memo(
                 "-translate-y-1/2 -translate-x-1/2 absolute top-1/2 transform",
                 "h-5 w-5 rounded-full transition-all duration-200",
                 getGlassClass("elevated"),
-                "border-2 border-white/30 dark:border-white/20",
+                "border-2 border-liquid-highlight/30",
                 "hover:scale-110 active:scale-95",
-                isDragging && "scale-110 ring-4 ring-blue-500/30",
+                isDragging && "scale-110 ring-4 ring-liquid-accent/30",
                 disabled && "cursor-not-allowed",
               )}
               style={{ left: `${percentage}%` }}
             />
           </div>
 
-          <div className="mt-2 flex items-center justify-between text-gray-500 text-xs dark:text-gray-400">
+          <div className="mt-2 flex items-center justify-between text-liquid-text/70 text-xs">
             <span>{min}</span>
 
             <span>{max}</span>

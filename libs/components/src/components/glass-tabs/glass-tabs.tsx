@@ -28,8 +28,8 @@ export function GlassTabs({
   className,
   tabListClassName,
   tabButtonClassName,
-  activeTabButtonClassName = "bg-primary text-white", // Default active class
-  inactiveTabButtonClassName = "text-secondary hover:text-primary", // Default inactive class
+  activeTabButtonClassName = "text-liquid-accent ring-1 ring-liquid-accent/30 bg-liquid-bg/20", // Default active class aligned with Apple blue
+  inactiveTabButtonClassName = "text-liquid-primary hover:text-liquid-accent", // Default inactive class aligned with tokens
   tabPanelClassName,
   // orientation = 'horizontal', // For future enhancement
 }: GlassTabsProps) {
@@ -60,7 +60,7 @@ export function GlassTabs({
             onClick={() => !tab.disabled && setActiveTab(tab.id)}
             disabled={tab.disabled}
             className={cn(
-              "btn-scale flex-1 rounded-md px-4 py-2 font-medium text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500",
+              "btn-scale flex-1 rounded-md px-4 py-2 font-medium text-sm transition-all focus:outline-none focus:ring-2 focus:ring-liquid-accent",
               tabButtonClassName,
               activeTab === tab.id
                 ? activeTabButtonClassName

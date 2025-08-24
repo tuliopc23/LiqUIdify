@@ -316,14 +316,14 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           className={cn(
             "liquid-glass-skip-link",
             "inline-flex items-center gap-2 px-4 py-2",
-            "bg-white/90 backdrop-blur-xl dark:bg-gray-900/90",
-            "rounded-lg border border-white/20",
-            "font-medium text-gray-900 text-sm dark:text-white",
-            "hover:bg-white/95 dark:hover:bg-gray-800/95",
-            "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+            "bg-liquid-bg-readable backdrop-blur-liquid-main",
+            "rounded-lg border border-liquid-highlight/20",
+            "font-medium text-liquid-text text-sm",
+            "hover:bg-liquid-bg/20",
+            "focus:outline-none focus:ring-2 focus:ring-liquid-accent focus:ring-offset-2",
             "transition-all duration-200",
             "shadow-lg",
-            focusedIndex === index && "ring-2 ring-blue-500",
+            focusedIndex === index && "ring-2 ring-liquid-accent",
           )}
           onClick={(e) => handleSkipTo(link, e)}
           onKeyDown={(e) => handleKeyDown(e, index)}
@@ -334,7 +334,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
         >
           {link.label}
           {link.shortcut && (
-            <kbd className="rounded bg-black/10 px-1 py-0.5 text-xs dark:bg-white/10">
+            <kbd className="rounded bg-liquid-bg/20 px-1 py-0.5 text-xs">
               {link.shortcut}
             </kbd>
           )}

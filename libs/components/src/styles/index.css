@@ -19,8 +19,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--lg-bg-readable);
+  color: var(--lg-text);
   line-height: 1.5;
   transition:
     background-color 0.3s ease,
@@ -29,8 +29,8 @@ body {
 
 /* Dark theme with subtle dark grey background */
 .dark body {
-  background: #1a1a1a;
-  color: #ffffff;
+  background: var(--lg-bg-readable);
+  color: var(--lg-text);
 }
 
 /* Focus Management */

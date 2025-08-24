@@ -45,7 +45,8 @@
 
 /* ===== Theme Variants ===== */
 .theme-dark,
-.liquid-theme-dark {
+.liquid-theme-dark,
+.dark {
   --lg-bg-color: rgba(20, 20, 25, 0.35);
   --lg-bg-readable: rgba(20, 20, 25, 0.75);
   --lg-text: #ffffff;
@@ -464,7 +465,7 @@
 .liquid-glass-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--lg-bg-color);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
@@ -526,7 +527,7 @@
 }
 
 /* ===== High Contrast Support ===== */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .liquid-glass {
     border-width: 2px;
     border-color: rgba(255, 255, 255, 0.8);

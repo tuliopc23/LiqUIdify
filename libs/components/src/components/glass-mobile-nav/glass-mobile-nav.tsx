@@ -61,7 +61,7 @@ const hamburgerVariants = cva({
 });
 
 const overlayVariants = cva({
-  base: "fixed inset-0 z-50 bg-black/20 backdrop-blur-sm",
+  base: "fixed inset-0 z-50 bg-liquid-bg/20 backdrop-blur-liquid-main",
   variants: {},
 });
 
@@ -98,7 +98,7 @@ const navItemVariants = cva({
       lg: "px-5 py-4 text-lg",
     },
     isActive: {
-      true: "bg-blue-500/20 text-blue-400 border-l-2 border-blue-400",
+      true: "bg-liquid-accent/20 text-liquid-accent border-l-2 border-liquid-accent",
       false: "",
     },
   },

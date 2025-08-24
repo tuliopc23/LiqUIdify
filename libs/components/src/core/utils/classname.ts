@@ -99,10 +99,10 @@ export function focusRing(visible = true): string {
   return cn(
     "focus:outline-none",
     "focus:ring-2",
-    "focus:ring-blue-500",
+    "focus:ring-liquid-accent",
     "focus:ring-opacity-50",
     "focus:ring-offset-2",
-    "focus:ring-offset-white",
+    "focus:ring-offset-transparent",
   );
 }
 

@@ -167,10 +167,10 @@ export const NavbarItem = React.forwardRef<
       disabled={disabled}
       className={cn(
         "px-3 py-2 rounded-lg text-sm font-medium transition-all",
-        "hover:bg-white/10 active:bg-white/20",
-        active && "bg-white/15 text-primary",
+        "hover:bg-liquid-bg/20 active:bg-liquid-bg/30",
+        active && "ring-1 ring-liquid-accent/30 text-liquid-accent",
         disabled && "opacity-50 cursor-not-allowed",
-        !active && !disabled && "text-gray-700 dark:text-gray-300",
+        !active && !disabled && "text-liquid-primary",
         className,
       )}
     >
@@ -185,5 +185,5 @@ NavbarItem.displayName = "NavbarItem";
 export const NavbarDivider: React.FC<{ className?: string }> = ({
   className,
 }) => (
-  <div className={cn("h-6 w-px bg-gray-300 dark:bg-gray-700", className)} />
+  <div className={cn("h-6 w-px bg-liquid-highlight/30", className)} />
 );

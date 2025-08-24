@@ -191,7 +191,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         {/* Overlay backdrop */}
         {overlay && open && (
           <div
-            className="fixed inset-0 bg-black/50 transition-opacity md:hidden"
+            className="fixed inset-0 bg-liquid-bg/30 backdrop-blur-liquid-main transition-opacity md:hidden"
             style={{ zIndex: zIndex - 1 }}
             onClick={
               closeOnOverlayClick ? () => handleOpenChange(false) : undefined
@@ -273,10 +273,10 @@ export const SidebarItem = React.forwardRef<
           disabled={disabled}
           className={cn(
             "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all",
-            "hover:bg-white/10 active:bg-white/20",
-            active && "bg-white/15 text-primary font-medium",
+            "hover:bg-liquid-bg/20 active:bg-liquid-bg/30",
+            active && "ring-1 ring-liquid-accent/30 text-liquid-accent font-medium",
             disabled && "opacity-50 cursor-not-allowed",
-            !active && !disabled && "text-gray-700 dark:text-gray-300",
+            !active && !disabled && "text-liquid-primary",
             className,
           )}
         >
@@ -329,7 +329,7 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 }) => (
   <div className={cn("mb-6", className)}>
     {title && (
-      <h3 className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+      <h3 className="px-3 mb-2 text-xs font-semibold text-liquid-text/70 uppercase tracking-wider">
         {title}
       </h3>
     )}
@@ -340,4 +340,4 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 // SidebarDivider for visual separation
 export const SidebarDivider: React.FC<{ className?: string }> = ({
   className,
-}) => <hr className={cn("my-4 border-white/10", className)} />;
+}) => <hr className={cn("my-4 border-liquid-highlight/20", className)} />;

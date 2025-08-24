@@ -5,7 +5,7 @@ import { cn } from "../../core/utils/classname";
 import { createVariants as cva } from "../../lib/variant-system";
 
 const paginationVariants = cva({
-  base: "flex items-center justify-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md",
+  base: "flex items-center justify-center space-x-1 rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 p-2 backdrop-blur-liquid-main",
   variants: {
     size: {
       sm: "p-1 text-xs",
@@ -13,8 +13,8 @@ const paginationVariants = cva({
       lg: "p-3 text-base",
     },
     variant: {
-      default: "bg-white/5",
-      solid: "bg-white/10",
+      default: "bg-liquid-bg/10",
+      solid: "bg-liquid-bg/20",
       ghost: "border-transparent bg-transparent",
     },
   },
@@ -25,11 +25,11 @@ const paginationVariants = cva({
 });
 
 const pageButtonVariants = cva({
-  base: "flex h-8 min-w-[32px] items-center justify-center rounded-md px-2 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  base: "flex h-8 min-w-[32px] items-center justify-center rounded-md px-2 text-liquid-text/70 transition-all duration-200 hover:bg-liquid-bg/20 hover:text-liquid-accent focus:bg-liquid-bg/20 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   variants: {
     isActive: {
-      true: "border border-blue-400/30 bg-blue-500/20 text-blue-400",
-      false: "hover:bg-white/5",
+      true: "ring-1 ring-liquid-accent/30 bg-liquid-bg/20 text-liquid-accent",
+      false: "hover:bg-liquid-bg/20",
     },
     size: {
       sm: "h-6 min-w-[24px] text-xs",

@@ -251,7 +251,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
       <button
         type="button"
-        className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+        className="absolute inset-0 bg-liquid-bg/20 backdrop-blur-liquid-main"
         onClick={handleClose}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {

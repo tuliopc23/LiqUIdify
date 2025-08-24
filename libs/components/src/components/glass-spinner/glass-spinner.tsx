@@ -4,14 +4,14 @@ import { cn } from "../../core/utils/classname";
 
 // Variant mappings using Tailwind classes
 const VARIANT_CLASSES = {
-  default: "border-liquid-glass-hl/20 border-t-blue-400",
-  primary: "border-liquid-glass-hl/20 border-t-blue-500",
-  secondary: "border-liquid-glass-hl/20 border-t-purple-400",
-  success: "border-liquid-glass-hl/20 border-t-green-400",
-  warning: "border-liquid-glass-hl/20 border-t-yellow-400",
-  error: "border-liquid-glass-hl/20 border-t-red-400",
+  default: "border-liquid-highlight/20 border-t-liquid-accent",
+  primary: "border-liquid-highlight/20 border-t-liquid-accent",
+  secondary: "border-liquid-highlight/20 border-t-liquid-accent",
+  success: "border-liquid-highlight/20 border-t-liquid-accent",
+  warning: "border-liquid-highlight/20 border-t-liquid-accent",
+  error: "border-liquid-highlight/20 border-t-liquid-accent",
   "liquid-glass":
-    "border-liquid-glass-hl/10 border-t-liquid-glass-hl/50 backdrop-blur-liquid-glass",
+    "border-liquid-highlight/10 border-t-liquid-accent backdrop-blur-liquid-main",
 };
 
 const SIZE_CLASSES = {
@@ -85,7 +85,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
           orientation === "horizontal"
             ? "flex-row space-x-2"
             : "flex-col space-y-2",
-          centered && "fixed inset-0 z-50 bg-black/20 backdrop-blur-sm",
+          centered && "fixed inset-0 z-50 bg-liquid-bg/20 backdrop-blur-liquid-main",
           className,
         )}
         {...props}

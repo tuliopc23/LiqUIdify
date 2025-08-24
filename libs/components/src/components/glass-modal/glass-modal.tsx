@@ -95,7 +95,7 @@ export function GlassModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-liquid-bg/30 backdrop-blur-liquid-main"
       onClick={handleBackdropClick}
       aria-label="Modal backdrop"
     >
