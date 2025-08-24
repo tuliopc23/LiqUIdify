@@ -34,4 +34,3 @@ This ensures both `import { GlassThing } from 'liquidify'` and `import GlassThin
 ## Verification
 
 - Run: `bun run exports:verify` to check story named imports resolve to component exports.
-
