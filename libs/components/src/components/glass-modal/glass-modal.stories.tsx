@@ -19,10 +19,10 @@ import {
   Shield,
 } from "lucide-react";
 import React from "react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
-import { GlassCard } from "../glass-card-refactored/glass-card";
-import { GlassCheckbox } from "../glass-checkbox/glass-checkbox";
-import { GlassInput } from "../glass-input/glass-input";
+import { GlassButton } from "../glass-button-refactored";
+import { Card } from "../glass-card-refactored";
+import { GlassCheckbox } from "../glass-checkbox";
+import { GlassInput } from "../glass-input";
 import { GlassModal } from "./glass-modal";
 
 const meta: Meta<typeof GlassModal> = {

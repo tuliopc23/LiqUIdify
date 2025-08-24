@@ -147,7 +147,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Small</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+          Small
+        </h3>
         <GlassAccordion type="single" size="sm" collapsible>
           <GlassAccordionItem value="item-1" size="sm">
             <GlassAccordionTrigger size="sm">
@@ -178,7 +180,9 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Large</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+          Large
+        </h3>
         <GlassAccordion type="single" size="lg" collapsible>
           <GlassAccordionItem value="item-1" size="lg">
             <GlassAccordionTrigger size="lg">
@@ -204,7 +208,9 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Default</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+          Default
+        </h3>
         <GlassAccordion type="single" variant="default" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Default Style</GlassAccordionTrigger>
@@ -216,7 +222,9 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Enhanced</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+          Enhanced
+        </h3>
         <GlassAccordion type="single" variant="enhanced" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Enhanced Style</GlassAccordionTrigger>
@@ -228,7 +236,9 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">Ghost</h3>
+        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+          Ghost
+        </h3>
         <GlassAccordion type="single" variant="ghost" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Ghost Style</GlassAccordionTrigger>
@@ -352,15 +362,21 @@ export const ComplexContent: Story = {
           <GlassAccordionContent>
             <div className="space-y-4">
               <div>
-                <h4 className="mb-2 font-semibold text-liquid-primary">Props</h4>
+                <h4 className="mb-2 font-semibold text-liquid-primary">
+                  Props
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-1">
                     <code className="text-liquid-accent">type</code>
-                    <span className="text-liquid-text opacity-70">"single" | "multiple"</span>
+                    <span className="text-liquid-text opacity-70">
+                      "single" | "multiple"
+                    </span>
                   </div>
                   <div className="flex justify-between py-1">
                     <code className="text-liquid-accent">size</code>
-                    <span className="text-liquid-text opacity-70">"sm" | "md" | "lg"</span>
+                    <span className="text-liquid-text opacity-70">
+                      "sm" | "md" | "lg"
+                    </span>
                   </div>
                   <div className="flex justify-between py-1">
                     <code className="text-liquid-accent">variant</code>

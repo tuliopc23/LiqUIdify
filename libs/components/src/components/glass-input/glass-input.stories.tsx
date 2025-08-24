@@ -19,8 +19,8 @@ import {
   User,
 } from "lucide-react";
 import React from "react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
-import { GlassCard } from "../glass-card-refactored/glass-card";
+import { GlassButton } from "../glass-button-refactored";
+import { Card } from "../glass-card-refactored";
 import { GlassInput } from "./glass-input";
 
 const meta = {

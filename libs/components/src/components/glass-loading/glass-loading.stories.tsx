@@ -8,8 +8,8 @@ import {
   Upload,
 } from "lucide-react";
 import { useState } from "react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
-import { GlassCard } from "../glass-card-refactored/glass-card";
+import { GlassButton } from "../glass-button-refactored";
+import { Card } from "../glass-card-refactored";
 import { GlassLoading } from "./glass-loading";
 
 const meta = {

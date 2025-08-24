@@ -10,10 +10,10 @@ import {
   Phone,
   User,
 } from "lucide-react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
-import { GlassInput } from "../glass-input/glass-input";
-import { GlassSelect } from "../glass-select/glass-select";
-import { GlassTextarea } from "../glass-textarea/glass-textarea";
+import { GlassButton } from "../glass-button-refactored";
+import { GlassInput } from "../glass-input";
+import { GlassSelect } from "../glass-select";
+import { GlassTextarea } from "../glass-textarea";
 import { GlassFormField } from "./glass-form-field";
 
 const meta: Meta<typeof GlassFormField> = {

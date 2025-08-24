@@ -214,11 +214,18 @@
         "icon": "puzzle-piece",
         "pages": ["integrations/storybook"]
       },
-        {
-          "group": "Resources",
-          "icon": "link",
-          "pages": ["contributing", "styleguides", "changelog", "faq", "licenses", "snippets/component-template"]
-        }
+      {
+        "group": "Resources",
+        "icon": "link",
+        "pages": [
+          "contributing",
+          "styleguides",
+          "changelog",
+          "faq",
+          "licenses",
+          "snippets/component-template"
+        ]
+      }
     ]
   },
   "footer": {

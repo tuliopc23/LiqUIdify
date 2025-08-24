@@ -701,3 +701,33 @@ body {
   color: var(--lg-text) !important;
   opacity: 0.8 !important;
 }
+
+/* ---- Theme-aware text utilities ---- */
+.text-liquid-primary {
+  color: var(--liquid-primary) !important;
+}
+.text-liquid-text {
+  color: var(--liquid-text) !important;
+}
+.text-liquid-accent {
+  color: var(--liquid-accent) !important;
+}
+.text-liquid-tertiary {
+  color: var(--liquid-tertiary) !important;
+}
+.text-liquid-grey {
+  color: var(--liquid-grey) !important;
+}
+
+/* ---- Background utilities ---- */
+.bg-liquid-bg {
+  background: var(--liquid-bg) !important;
+}
+.bg-liquid-accent {
+  background: var(--liquid-accent) !important;
+}
+
+/* ---- Border utilities ---- */
+.border-liquid-accent {
+  border-color: var(--liquid-accent) !important;
+}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Bell, Menu, Search, Settings, User, X } from "lucide-react";
 import React from "react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
+import { GlassButton } from "../glass-button-refactored";
 import { Drawer } from "./glass-drawer";
 
 const meta = {

@@ -9,8 +9,8 @@ import {
   Shield,
 } from "lucide-react";
 import React from "react";
-import { GlassButton } from "../glass-button-refactored/glass-button";
-import { GlassCard } from "../glass-card-refactored/glass-card";
+import { GlassButton } from "../glass-button-refactored";
+import { GlassCard } from "../glass-card-refactored";
 import { GlassCheckbox } from "./glass-checkbox";
 
 const meta = {
