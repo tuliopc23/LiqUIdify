@@ -5,7 +5,7 @@ export const GlassButton = ({ variant = 'primary', iconOnly, loading, loadingTex
   const variants = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
     ghost: 'bg-transparent text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
-    solid: 'bg-[#007AFF] text-white hover:bg-[#0370FF] focus:ring-[#007AFF]',
+    solid: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
     destructive: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
   }
   const size = iconOnly ? 'p-2' : ''

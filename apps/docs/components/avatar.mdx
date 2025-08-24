@@ -74,7 +74,7 @@ export default function Demo() {
           alt="Circular"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Circular</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Circular</p>
       </div>
       <div className="text-center space-y-2">
         <GlassAvatar
@@ -83,7 +83,7 @@ export default function Demo() {
           alt="Rounded"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Rounded</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Rounded</p>
       </div>
       <div className="text-center space-y-2">
         <GlassAvatar
@@ -92,7 +92,7 @@ export default function Demo() {
           alt="Square"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Square</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Square</p>
       </div>
     </div>
   );
@@ -112,7 +112,7 @@ export default function Demo() {
           status="online"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Online</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Online</p>
       </div>
       <div className="text-center space-y-2">
         <GlassAvatar
@@ -121,7 +121,7 @@ export default function Demo() {
           status="away"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Away</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Away</p>
       </div>
       <div className="text-center space-y-2">
         <GlassAvatar
@@ -130,7 +130,7 @@ export default function Demo() {
           status="busy"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Busy</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Busy</p>
       </div>
       <div className="text-center space-y-2">
         <GlassAvatar
@@ -139,7 +139,7 @@ export default function Demo() {
           status="offline"
           size="lg"
         />
-        <p className="text-xs text-[#007AFF]">Offline</p>
+        <p className="text-xs text-[var(--apple-text-secondary)]">Offline</p>
       </div>
     </div>
   );
@@ -201,7 +201,7 @@ function UserProfile({ user }) {
       />
       <div>
         <h3 className="font-semibold">{user.name}</h3>
-        <p className="text-sm text-[#007AFF]">{user.role}</p>
+        <p className="text-sm text-[var(--apple-text-secondary)]">{user.role}</p>
       </div>
     </div>
   );
@@ -228,10 +228,10 @@ function TeamMembersList({ members }) {
             />
             <div>
               <h4 className="font-medium">{member.name}</h4>
-              <p className="text-sm text-[#007AFF]">{member.email}</p>
+              <p className="text-sm text-[var(--apple-text-secondary)]">{member.email}</p>
             </div>
           </div>
-          <span className="text-sm text-[#007AFF]">{member.role}</span>
+          <span className="text-sm text-[var(--apple-text-secondary)]">{member.role}</span>
         </div>
       ))}
     </div>
@@ -286,7 +286,7 @@ function Comment({ comment }) {
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-1">
           <span className="font-medium text-sm">{comment.author.name}</span>
-          <span className="text-xs text-[#007AFF]">{comment.timestamp}</span>
+          <span className="text-xs text-[var(--apple-text-secondary)]">{comment.timestamp}</span>
         </div>
         <p className="text-sm">{comment.content}</p>
       </div>
@@ -409,7 +409,7 @@ function MessageThread({ messages }) {
                 <span className="font-medium text-sm">
                   {message.sender.name}
                 </span>
-                <span className="text-xs text-[#007AFF]">{message.time}</span>
+                <span className="text-xs text-[var(--apple-text-secondary)]">{message.time}</span>
               </div>
               <p className="text-sm">{message.content}</p>
             </div>
@@ -437,8 +437,8 @@ function ProfileCard({ user }) {
         className="mx-auto mb-4"
       />
       <h3 className="font-semibold text-lg mb-1">{user.name}</h3>
-      <p className="text-[#007AFF] text-sm mb-2">{user.role}</p>
-      <p className="text-[#007AFF] text-xs">{user.department}</p>
+      <p className="text-[var(--apple-text-secondary)] text-sm mb-2">{user.role}</p>
+      <p className="text-[var(--apple-text-secondary)] text-xs">{user.department}</p>
     </div>
   );
 }
