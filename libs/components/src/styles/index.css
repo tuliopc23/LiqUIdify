@@ -665,3 +665,40 @@ body {
     box-shadow: none;
   }
 }
+
+
+/* ---- Storybook preview overrides: remove solid greys/whites and enforce liquid tokens ---- */
+/* These overrides exist to neutralize legacy Tailwind gray/white utilities used inside story files
+   so previews match the Liquid Glass design without editing every story.
+   They do NOT affect published CSS bundles when consumers don't include these classes. */
+:where(.bg-white) {
+  background: transparent !important;
+}
+:where(.dark .bg-gray-900) {
+  background: var(--lg-bg-color) !important;
+}
+:where(.text-gray-900) {
+  color: var(--lg-primary) !important;
+}
+:where(.text-gray-700) {
+  color: var(--lg-text) !important;
+}
+:where(.text-gray-600) {
+  color: var(--lg-text) !important;
+}
+:where(.text-gray-500) {
+  color: var(--lg-text) !important;
+  opacity: 0.7 !important;
+}
+:where(.text-gray-400) {
+  color: var(--lg-text) !important;
+  opacity: 0.6 !important;
+}
+:where(.dark .text-gray-400) {
+  color: var(--lg-text) !important;
+  opacity: 0.7 !important;
+}
+:where(.dark .text-gray-300) {
+  color: var(--lg-text) !important;
+  opacity: 0.8 !important;
+}
