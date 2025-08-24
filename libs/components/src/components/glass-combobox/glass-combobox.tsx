@@ -49,7 +49,7 @@ const listboxVariants = cva({
     "liquid-glass-container liquid-glass-md",
     "max-h-60 overflow-auto",
     // Transparent, subtle outline
-    "border border-liquid-glass-hl/30",
+    "border border-liquid-highlight/30",
   ),
   variants: {
     size: {
@@ -66,17 +66,17 @@ const listboxVariants = cva({
 const optionVariants = cva({
   base: cn(
     "flex items-center gap-3 px-4 py-3 cursor-pointer relative z-10",
-    "text-liquid-primary hover:bg-liquid-glass-bg/20 transition-colors duration-200",
+    "text-liquid-primary hover:bg-liquid-bg/20 transition-colors duration-200",
     // Transparent separators
-    "border-b border-liquid-glass-hl/20 last:border-b-0",
+    "border-b border-liquid-highlight/20 last:border-b-0",
   ),
   variants: {
     isSelected: {
-      true: "ring-2 ring-text-liquid-accent/30 text-text-liquid-accent font-medium",
+      true: "ring-2 ring-liquid-accent/30 text-liquid-accent font-medium",
       false: "",
     },
     isHighlighted: {
-      true: "bg-liquid-glass-bg/20",
+      true: "bg-liquid-bg/20",
       false: "",
     },
   },
@@ -299,7 +299,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                   disabled={disabled}
                   className={cn(
                     "flex-1 bg-transparent border-none outline-none",
-                    "text-liquid-primary placeholder:text-liquid-tertiary",
+                    "text-liquid-primary placeholder:text-liquid-text/60",
                     disabled && "cursor-not-allowed",
                   )}
                   aria-autocomplete="list"
@@ -328,22 +328,22 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                     e.stopPropagation();
                     handleClear();
                   }}
-                  className="p-1 hover:bg-liquid rounded-lg transition-colors"
+                  className="p-1 hover:bg-liquid-bg/20 rounded-lg transition-colors"
                   aria-label="Clear selection"
                 >
-                  <X className="h-4 w-4 text-liquid-secondary" />
+                  <X className="h-4 w-4 text-liquid-text" />
                 </button>
               )}
 
               {loading ? (
                 <div className="animate-spin">
-                  <Search className="h-4 w-4 text-liquid-secondary" />
+                  <Search className="h-4 w-4 text-liquid-text/70" />
                 </div>
               ) : (
                 <ChevronDown
                   className={cn(
-                    "h-4 w-4 text-liquid-secondary transition-transform duration-200",
-                    isOpen && "rotate-180",
+                    "h-4 w-4 text-liquid-text transition-transform duration-200",
+                    isOpen && "rotate-180 text-liquid-accent",
                   )}
                 />
               )}
@@ -371,7 +371,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                 <div className="liquid-glass-content p-0">
                   {displayOptions.length === 0 ? (
                     <div className="px-4 py-8 text-center">
-                      <p className="text-liquid-secondary">{emptyMessage}</p>
+                      <p className="text-liquid-text/70">{emptyMessage}</p>
                     </div>
                   ) : (
                     displayOptions.map((option, index) => (
@@ -406,7 +406,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                         <div className="flex-1 min-w-0">
                           <div className="font-medium">{option.label}</div>
                           {option.description && (
-                            <div className="text-sm text-liquid-secondary">
+                            <div className="text-sm text-liquid-text/70">
                               {option.description}
                             </div>
                           )}

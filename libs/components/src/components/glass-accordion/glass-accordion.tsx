@@ -9,7 +9,7 @@ import {
 } from "../../lib/variant-system";
 
 const accordionVariants = cva({
-  base: "w-full space-y-2",
+  base: "w-full space-y-2 group/acc",
   variants: {
     size: {
       sm: "text-sm",
@@ -17,9 +17,9 @@ const accordionVariants = cva({
       lg: "text-lg",
     },
     variant: {
-      default: "",
-      enhanced: "",
-      ghost: "",
+      default: "variant-default",
+      enhanced: "variant-enhanced",
+      ghost: "variant-ghost",
     },
   },
   defaultVariants: {
@@ -29,35 +29,47 @@ const accordionVariants = cva({
 });
 
 const accordionItemVariants = cva({
-  base: "overflow-hidden liquid-glass-container liquid-glass-md liquid-glass-interactive transition-all duration-200 mb-2 rounded-xl",
+  base: "overflow-hidden liquid-glass-container liquid-glass-md liquid-glass-interactive transition-all duration-200 mb-2 rounded-xl group-[.variant-enhanced]/acc:liquid-glass-core-enhanced",
   variants: {
     size: {
       sm: "liquid-glass-sm",
       md: "liquid-glass-md",
       lg: "liquid-glass-lg",
     },
+    variant: {
+      default: "",
+      enhanced: "liquid-glass-core-enhanced",
+      ghost: "",
+    },
   },
   defaultVariants: {
     size: "md",
+    variant: "default",
   },
 });
 
 const accordionTriggerVariants = cva({
-  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10 rounded-xl",
+  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-liquid-accent/40 data-[state=open]:text-liquid-accent relative z-10 rounded-xl group-[.variant-ghost]/acc:text-liquid-accent",
   variants: {
     size: {
       sm: "p-3 text-sm",
       md: "p-4 text-base",
       lg: "p-6 text-lg",
     },
+    variant: {
+      default: "",
+      enhanced: "",
+      ghost: "text-liquid-accent",
+    },
   },
   defaultVariants: {
     size: "md",
+    variant: "default",
   },
 });
 
 const accordionContentVariants = cva({
-  base: "overflow-hidden text-liquid-secondary relative z-10 rounded-b-xl",
+  base: "overflow-hidden text-liquid-text relative z-10 rounded-b-xl",
   variants: {
     size: {
       sm: "text-xs px-3 pb-3",
@@ -183,7 +195,7 @@ const GlassAccordionTrigger = React.forwardRef<
       <span className="flex-1 text-left">{children}</span>
       {showIcon && (
         <motion.div
-          className="text-liquid-secondary transition-colors group-hover:text-liquid-accent"
+          className="text-liquid-text transition-colors group-hover:text-liquid-accent group-data-[state=open]:text-liquid-accent"
           transition={{ duration: 0.2 }}
         >
           <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
@@ -211,7 +223,7 @@ const GlassAccordionContent = React.forwardRef<
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="border-t border-liquid/20"
+      className="border-t border-liquid-highlight/20"
     >
       {children}
     </motion.div>

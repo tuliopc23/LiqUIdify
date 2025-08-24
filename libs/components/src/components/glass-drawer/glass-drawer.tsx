@@ -10,7 +10,7 @@ const drawerVariants = cva({
     "fixed z-50 gap-4",
     // liquid-glass styling for the content surface
     "liquid-glass-container",
-    "border border-liquid-glass-hl/40 shadow-liquid backdrop-blur-md",
+    "border border-liquid-highlight/40 shadow-liquid-main backdrop-blur-liquid-main",
     "data-[state=closed]:animate-out data-[state=open]:animate-in",
     "data-[state=closed]:duration-300 data-[state=open]:duration-500",
   ].join(" "),
@@ -140,7 +140,7 @@ const drawerVariants = cva({
 });
 
 const drawerHeaderVariants = cva({
-  base: "flex items-center justify-between border-b border-liquid-glass-hl/30 bg-transparent p-4",
+  base: "flex items-center justify-between border-b border-liquid-highlight/30 bg-transparent p-4",
   variants: {},
 });
 
