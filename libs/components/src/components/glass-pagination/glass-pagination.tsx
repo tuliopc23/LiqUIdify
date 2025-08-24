@@ -268,3 +268,4 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 GlassPagination.displayName = "GlassPagination";
 
 export { GlassPagination };
+export default GlassPagination;

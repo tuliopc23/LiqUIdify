@@ -445,3 +445,4 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
 GlassMobileNav.displayName = "GlassMobileNav";
 
 export { GlassMobileNav };
+export default GlassMobileNav;

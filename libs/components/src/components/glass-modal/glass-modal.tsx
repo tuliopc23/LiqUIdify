@@ -167,3 +167,5 @@ export function GlassModal({
 
   return null;
 }
+
+export default GlassModal;

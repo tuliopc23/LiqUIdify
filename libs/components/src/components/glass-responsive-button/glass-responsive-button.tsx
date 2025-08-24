@@ -187,3 +187,4 @@ const GlassResponsiveButton = forwardRef<
 GlassResponsiveButton.displayName = "GlassResponsiveButton";
 
 export { GlassResponsiveButton };
+export default GlassResponsiveButton;

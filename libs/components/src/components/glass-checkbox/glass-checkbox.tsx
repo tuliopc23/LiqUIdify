@@ -65,3 +65,4 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
 GlassCheckbox.displayName = "GlassCheckbox";
 
 export { GlassCheckbox };
+export default GlassCheckbox;

@@ -223,3 +223,4 @@ export const SkeletonTable: React.FC<{
 );
 
 export { GlassSkeleton };
+export default GlassSkeleton;

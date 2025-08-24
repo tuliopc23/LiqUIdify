@@ -205,3 +205,4 @@ const GlassBreadcrumbs = React.memo(
 GlassBreadcrumbs.displayName = "GlassBreadcrumbs";
 
 export { GlassBreadcrumbs };
+export default GlassBreadcrumbs;

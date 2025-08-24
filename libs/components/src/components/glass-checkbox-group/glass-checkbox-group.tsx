@@ -306,3 +306,4 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
 GlassCheckboxGroup.displayName = "GlassCheckboxGroup";
 
 export { GlassCheckboxGroup };
+export default GlassCheckboxGroup;

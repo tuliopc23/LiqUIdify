@@ -349,3 +349,4 @@ const Drawer = Object.assign(GlassDrawer, {
 });
 
 export { Drawer };
+export default Drawer;

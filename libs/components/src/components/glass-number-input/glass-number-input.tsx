@@ -435,3 +435,4 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 GlassNumberInput.displayName = "GlassNumberInput";
 
 export { GlassNumberInput };
+export default GlassNumberInput;

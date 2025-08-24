@@ -60,3 +60,4 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
 GlassSwitch.displayName = "GlassSwitch";
 
 export { GlassSwitch };
+export default GlassSwitch;

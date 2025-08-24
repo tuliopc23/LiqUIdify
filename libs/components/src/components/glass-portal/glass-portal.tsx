@@ -59,3 +59,4 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 GlassPortal.displayName = "GlassPortal";
 
 export { GlassPortal };
+export default GlassPortal;

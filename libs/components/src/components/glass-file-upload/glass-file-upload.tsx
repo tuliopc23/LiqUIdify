@@ -487,3 +487,4 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 GlassFileUpload.displayName = "GlassFileUpload";
 
 export { GlassFileUpload };
+export default GlassFileUpload;

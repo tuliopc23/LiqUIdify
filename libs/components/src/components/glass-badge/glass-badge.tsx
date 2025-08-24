@@ -52,3 +52,4 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
 GlassBadge.displayName = "GlassBadge";
 
 export { GlassBadge };
+export default GlassBadge;

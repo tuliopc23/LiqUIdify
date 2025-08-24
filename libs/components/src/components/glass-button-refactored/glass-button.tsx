@@ -260,3 +260,4 @@ GlassButton.displayName = "GlassButton";
 
 // Export types for external use
 export type { GlassButtonProps, Size as ButtonSize, Variant as ButtonVariant };
+export default GlassButton;

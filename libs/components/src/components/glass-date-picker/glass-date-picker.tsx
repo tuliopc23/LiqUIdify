@@ -434,3 +434,4 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 GlassDatePicker.displayName = "GlassDatePicker";
 
 export { GlassDatePicker };
+export default GlassDatePicker;

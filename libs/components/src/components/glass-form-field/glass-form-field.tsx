@@ -411,3 +411,4 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 GlassFormField.displayName = "GlassFormField";
 
 export { GlassFormField };
+export default GlassFormField;
