@@ -93,3 +93,4 @@ const GlassResponsiveCard = forwardRef<
 GlassResponsiveCard.displayName = "GlassResponsiveCard";
 
 export { GlassResponsiveCard };
+export default GlassResponsiveCard;

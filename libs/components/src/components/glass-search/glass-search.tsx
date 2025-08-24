@@ -317,3 +317,5 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
     </div>
   );
 };
+
+export default GlassSearch;

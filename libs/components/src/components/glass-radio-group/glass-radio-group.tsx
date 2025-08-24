@@ -134,3 +134,4 @@ const RadioGroup = Object.assign(GlassRadioGroup, {
 });
 
 export { RadioGroup, GlassRadioGroup };
+export default GlassRadioGroup;

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Book, Clock, Search, TrendingUp, User } from "lucide-react";
 import { useState } from "react";
 import { GlassSearch, type SearchSuggestion } from "./glass-search";

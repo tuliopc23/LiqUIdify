@@ -342,3 +342,5 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 export const SidebarDivider: React.FC<{ className?: string }> = ({
   className,
 }) => <hr className={cn("my-4 border-liquid-highlight/20", className)} />;
+
+export default Sidebar;

@@ -161,4 +161,6 @@ export const GlassSlider = React.memo(
   ),
 );
 
+export default GlassSlider;
+
 GlassSlider.displayName = "GlassSlider";

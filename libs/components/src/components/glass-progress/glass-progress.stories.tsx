@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { useEffect, useState } from "react";
 import { GlassProgress } from "./glass-progress";
 

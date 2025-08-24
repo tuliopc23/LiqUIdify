@@ -104,6 +104,10 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
   },
 );
 
+GlassSpinner.displayName = "GlassSpinner";
+
+export default GlassSpinner;
+
 // Pulse spinner variant with Tailwind classes
 export const PulseSpinner: React.FC<{
   className?: string;

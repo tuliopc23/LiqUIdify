@@ -90,3 +90,5 @@ export function GlassTabs({
     </div>
   );
 }
+
+export default GlassTabs;

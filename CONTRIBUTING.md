@@ -561,6 +561,15 @@ Contributors are recognized in:
 
 - [React DevTools](https://react.dev/learn/react-developer-tools)
 - [Storybook](https://storybook.js.org/)
+
+### Export Conventions
+
+To keep imports consistent and avoid preview/build issues, follow the export conventions in `docs/EXPORTS.md`. A verification script is provided:
+
+```
+bun run exports:verify
+```
+
 - [Jest](https://jestjs.io/)
 - [Testing Library](https://testing-library.com/)
 

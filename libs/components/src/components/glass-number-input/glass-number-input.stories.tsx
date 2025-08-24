@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Calculator, DollarSign, Percent } from "lucide-react";
 import { GlassNumberInput } from "./glass-number-input";

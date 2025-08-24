@@ -173,3 +173,5 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
     </div>
   );
 };
+
+export default GlassTreeView;

@@ -347,4 +347,6 @@ export const GlassSelect = React.memo(
   ),
 );
 
+export default GlassSelect;
+
 GlassSelect.displayName = "GlassSelect";

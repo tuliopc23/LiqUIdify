@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { GlassButton } from "@/components/glass-button-refactored/glass-button";
 import { GlassCard } from "@/components/glass-card-refactored/glass-card";

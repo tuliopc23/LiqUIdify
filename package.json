@@ -191,6 +191,7 @@
     "validate:config": "test -f libs/components/rolldown.config.ts || (echo 'rolldown.config.ts not found' && exit 1)",
     "workspace:verify": "node scripts/verify-workspaces.mjs",
     "workspace:info": "node scripts/workspace-info.mjs",
+    "exports:verify": "bun run scripts/check-exports.mjs",
     "setup:dev": "node scripts/setup-dev.mjs",
     "prepublishOnly": "bun run type-check && bun run build:lib",
     "stories:coverage": "node scripts/story-coverage.js",

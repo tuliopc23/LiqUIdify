@@ -51,3 +51,4 @@ const GlassTable = <T,>({ data, columns, className }: GlassTableProps<T>) => {
 };
 
 export { GlassTable };
+export default GlassTable;

@@ -107,4 +107,6 @@ export const GlassProgress = React.memo(
   ),
 );
 
+export default GlassProgress;
+
 GlassProgress.displayName = "GlassProgress";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, RefreshCw, Sparkles, Zap } from "lucide-react";

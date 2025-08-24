@@ -319,3 +319,4 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
 GlassTextarea.displayName = "GlassTextarea";
 
 export { GlassTextarea };
+export default GlassTextarea;

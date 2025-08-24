@@ -140,6 +140,8 @@ export function ThemeProvider({
   );
 }
 
+export default ThemeProvider;
+
 const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

@@ -36,4 +36,6 @@ const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
 
 GlassAlert.displayName = "GlassAlert";
 
+// Provide both named and default exports to match story imports
+export { GlassAlert };
 export default GlassAlert;

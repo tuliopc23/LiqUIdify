@@ -168,3 +168,5 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 };
 
 GlassTooltip.displayName = "GlassTooltip";
+
+export default GlassTooltip;
