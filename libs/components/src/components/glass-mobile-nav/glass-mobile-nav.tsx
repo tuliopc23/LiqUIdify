@@ -276,7 +276,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
             <span className="flex-1 text-left">{item.label}</span>
 
             {item.badge && (
-              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-blue-500 px-1.5 text-xs font-medium text-white">
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-blue-500 px-1.5 text-xs font-medium text-liquid-text-inverse">
                 {item.badge}
               </span>
             )}

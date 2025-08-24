@@ -224,7 +224,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
             key={page === "ellipsis" ? `ellipsis-${index}` : `page-${page}`}
           >
             {page === "ellipsis" ? (
-              <span className="flex h-8 min-w-[32px] items-center justify-center text-white/40">
+              <span className="flex h-8 min-w-[32px] items-center justify-center text-liquid-tertiary">
                 <MoreHorizontal className="h-4 w-4" />
               </span>
             ) : (

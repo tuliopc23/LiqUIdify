@@ -44,7 +44,7 @@ const formFieldVariants = cva({
   variants: {
     variant: {
       default: "",
-      card: "rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm",
+      card: "rounded-xl border border-liquid-highlight/20 bg-liquid-bg/10 p-4 backdrop-blur-sm",
       inline: "flex items-center space-x-4 space-y-0",
     },
     size: {
@@ -60,7 +60,7 @@ const formFieldVariants = cva({
 });
 
 const labelVariants = cva({
-  base: "block font-medium text-white/90 transition-colors duration-200",
+  base: "block font-medium text-liquid-primary transition-colors duration-200",
   variants: {
     required: {
       true: "after:ml-1 after:text-red-400 after:content-['*']",
@@ -82,7 +82,7 @@ const helperTextVariants = cva({
   base: "flex items-center gap-1.5 text-xs transition-colors duration-200",
   variants: {
     state: {
-      default: "text-white/60",
+      default: "text-liquid-tertiary",
       error: "text-red-400",
       success: "text-green-400",
       warning: "text-yellow-400",

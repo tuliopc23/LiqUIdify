@@ -296,7 +296,7 @@ export const WithInstructions: Story = {
 // Real-world example
 export const RealWorldExample: Story = {
   render: () => (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen">
       <GlassSkipNavigation
         links={[
           { href: "#main-navigation", label: "Skip to navigation" },

@@ -60,11 +60,11 @@ const inputVariants = cva({
 const buttonVariants = cva({
   base: cn(
     "absolute top-1/2 -translate-y-1/2 flex items-center justify-center",
-    "rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm",
-    "transition-all duration-200 hover:bg-white/10 focus:bg-white/10",
+    "rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 backdrop-blur-sm",
+    "transition-all duration-200 hover:bg-liquid-bg/20 focus:bg-liquid-bg/20",
     "focus:outline-none focus:ring-2 focus:ring-blue-400/50",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    "text-white/70 hover:text-white",
+    "text-liquid-text hover:text-liquid-primary",
     microInteraction.gentle,
   ),
   variants: {
@@ -320,7 +320,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             id={labelId}
             htmlFor={props.id}
             className={cn(
-              "mb-2 block font-medium text-white",
+              "mb-2 block font-medium text-liquid-primary",
               size === "sm" && "text-sm",
               size === "lg" && "text-lg",
             )}
@@ -335,7 +335,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
           <p
             id={descriptionId}
             className={cn(
-              "mb-2 text-white/70",
+              "mb-2 text-liquid-text",
               size === "sm" && "text-xs",
               size === "md" && "text-sm",
               size === "lg" && "text-base",
@@ -421,7 +421,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-400" : "text-white/60",
+              error ? "text-red-400" : "text-liquid-tertiary",
             )}
           >
             {helperText}

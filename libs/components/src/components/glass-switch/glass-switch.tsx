@@ -45,7 +45,7 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
 
           <div
             className={cn(
-              "absolute inset-y-0 h-5 w-5 translate-y-0.5 transform rounded-full bg-white shadow transition-transform duration-200",
+              "absolute inset-y-0 h-5 w-5 translate-y-0.5 transform rounded-full bg-liquid-text-inverse shadow transition-transform duration-200",
               isChecked ? "translate-x-6" : "translate-x-0.5",
             )}
           />

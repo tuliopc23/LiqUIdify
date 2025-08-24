@@ -120,7 +120,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         getGlassClass("elevated"),
         "rounded-full px-3 py-2 text-sm",
         "border border-white/20 dark:border-white/10",
-        "text-gray-900 dark:text-white",
+        "text-liquid-primary",
         "max-w-xs break-words",
         "fade-in-0 zoom-in-95 animate-in duration-200",
         "shadow-black/10 shadow-lg dark:shadow-black/30",

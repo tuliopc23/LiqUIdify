@@ -107,7 +107,7 @@ export const Default: Story = {
     items: navigationItems,
   },
   render: (args) => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen p-4">
       <div className="flex justify-end">
         <GlassMobileNav {...args} />
       </div>
@@ -214,7 +214,7 @@ export const InteractiveDemo: Story = {
     }));
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-screen p-4">
         <div className="mb-8 flex items-center justify-between">
           <h2 className="font-semibold text-[var(--text-primary)] text-xl">
             Interactive Demo

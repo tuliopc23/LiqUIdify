@@ -56,11 +56,11 @@ export const GlassProgress = React.memo(
           <div className="liquid-glass-content">
             {showValue && (
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-gray-600 text-sm dark:text-gray-400">
+                <span className="text-liquid-text text-sm">
                   Progress
                 </span>
 
-                <span className="font-medium text-gray-900 text-sm dark:text-white">
+                <span className="font-medium text-liquid-primary text-sm">
                   {Math.round(percentage)}%
                 </span>
               </div>
@@ -71,9 +71,9 @@ export const GlassProgress = React.memo(
                 "relative w-full overflow-hidden rounded-full",
                 sizeClasses[size],
                 variant === "default" && getGlassClass("default"),
-                variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
+                variant === "minimal" && "bg-liquid-bg/20",
                 variant === "gradient" &&
-                  "bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600",
+                  "bg-gradient-to-r from-liquid-bg/20 to-liquid-bg/30",
               )}
             >
               <div

@@ -47,7 +47,7 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
       case "active":
         return "bg-blue-500/20 border-blue-500/50 text-blue-400";
       default:
-        return "bg-gray-500/20 border-gray-500/50 text-gray-400";
+        return "bg-liquid-bg/20 border-liquid-highlight/50 text-liquid-tertiary";
     }
   };
 

@@ -49,26 +49,12 @@ export const CompleteShowcase: Story = {
     const [progress, _setProgress] = React.useState(65);
     const [slider, setSlider] = React.useState(50);
 
-    React.useEffect(() => {
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(theme);
-      document.documentElement.dataset.theme = theme;
-    }, [theme]);
+    // Note: Do not mutate documentElement here.
+    // Storybook's preview decorator manages theme classes and backgrounds.
 
     return (
-      <div className={`min-h-screen transition-all duration-500 ${theme}`}>
-        {/* Dynamic Background */}
-        <div
-          className="fixed inset-0 transition-all duration-700"
-          style={{
-            background:
-              theme === "dark"
-                ? "radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.9) 35%, rgba(30, 41, 59, 0.95) 100%)"
-                : "radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(248, 250, 252, 0.95) 35%, rgba(226, 232, 240, 0.98) 100%)",
-          }}
-        />
-
-        {/* Content */}
+      <div className={`min-h-screen transition-all duration-500`}>
+        {/* Content (backgrounds managed by Storybook preview) */}
         <div className="relative z-10">
           {/* Header */}
           <header className="border-white/10 border-b backdrop-blur-xl">
@@ -363,7 +349,7 @@ export const CompleteShowcase: Story = {
 // Light Theme Only
 export const LightTheme: Story = {
   render: () => (
-    <div className="light min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
+    <div className="min-h-screen p-8">
       <div className="mx-auto max-w-4xl space-y-8">
         <h2 className="mb-8 font-bold text-3xl">Light Theme Components</h2>
         <ComponentGrid />
@@ -371,16 +357,16 @@ export const LightTheme: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: "light" },
+    backgrounds: { default: "Light Theme" },
   },
 };
 
 // Dark Theme Only
 export const DarkTheme: Story = {
   render: () => (
-    <div className="dark min-h-screen bg-gradient-to-br from-gray-900 to-black p-8">
+    <div className="min-h-screen p-8">
       <div className="mx-auto max-w-4xl space-y-8">
-        <h2 className="mb-8 font-bold text-3xl text-white">
+        <h2 className="mb-8 font-bold text-3xl">
           Dark Theme Components
         </h2>
         <ComponentGrid />
@@ -388,7 +374,7 @@ export const DarkTheme: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: "dark" },
+    backgrounds: { default: "Dark Theme" },
   },
 };
 

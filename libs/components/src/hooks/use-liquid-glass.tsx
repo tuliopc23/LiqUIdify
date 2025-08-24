@@ -12,9 +12,9 @@ import {
 const liquidGlassTokens = {
   colors: {
     primary: "59, 130, 246", // blue-500
-    secondary: "107, 114, 128", // gray-500
+    secondary: "var(--liquid-text, 107, 114, 128)", // liquid-text fallback to gray-500
     accent: "168, 85, 247", // purple-500
-    muted: "156, 163, 175", // gray-400
+    muted: "var(--liquid-tertiary, 156, 163, 175)", // liquid-tertiary fallback to gray-400
   },
   blur: {
     sm: 4,

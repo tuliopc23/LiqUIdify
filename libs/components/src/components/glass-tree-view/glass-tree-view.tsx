@@ -107,7 +107,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
         <div
           className={cn(
             "flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1",
-            "hover:bg-white/5",
+            "hover:bg-liquid-bg/5",
             microInteraction.interactive,
             isSelected &&
               cn(

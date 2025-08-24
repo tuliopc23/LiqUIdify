@@ -31,15 +31,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Introduction: Story = {
   render: () => (
-    <div
-      className="min-h-screen"
-      style={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      }}
-    >
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+        {/* Background is controlled by Storybook preview backgrounds */}
         <div className="relative z-10 px-8 py-20 text-center text-white">
           <div className="flex justify-center mb-8">
             <div className="relative">
