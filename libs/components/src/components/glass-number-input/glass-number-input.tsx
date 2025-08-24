@@ -59,12 +59,12 @@ const inputVariants = cva({
 
 const buttonVariants = cva({
   base: cn(
-    "absolute top-1/2 -translate-y-1/2 flex items-center justify-center",
-    "rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 backdrop-blur-sm",
-    "transition-all duration-200 hover:bg-liquid-bg/20 focus:bg-liquid-bg/20",
-    "focus:outline-none focus:ring-2 focus:ring-blue-400/50",
+    "absolute top-1/2 -translate-y-1/2 flex items-center justify-center liquid-glass liquid-glass-interactive",
+    "rounded-lg border-[#007AFF]/30",
+    "transition-all duration-200 hover:border-[#007AFF]/50 focus:border-[#007AFF]/60",
+    "focus:outline-none focus:ring-2 focus:ring-[#007AFF]/50",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    "text-liquid-text hover:text-liquid-primary",
+    "text-liquid-text hover:text-[#007AFF]",
     microInteraction.gentle,
   ),
   variants: {

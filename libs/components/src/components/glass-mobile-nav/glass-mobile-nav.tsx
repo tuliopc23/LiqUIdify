@@ -61,7 +61,7 @@ const hamburgerVariants = cva({
 });
 
 const overlayVariants = cva({
-  base: "fixed inset-0 z-50 bg-liquid-bg/20 backdrop-blur-liquid-main",
+  base: "fixed inset-0 z-50 liquid-glass backdrop-blur-liquid-main border-0",
   variants: {},
 });
 

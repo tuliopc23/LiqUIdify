@@ -13,180 +13,24 @@
     "dark": "logo-dark.svg"
   },
   "favicon": "favicon.svg",
-  "navigation": [
-    {
-      "group": "Overview",
-      "pages": [
-        "index"
-      ]
-    },
-    {
-      "group": "Getting Started",
-      "pages": [
-        "getting-started/installation",
-        "getting-started/project-setup",
-        "getting-started/quickstart"
-      ]
-    },
-    {
-      "group": "Guides",
-      "pages": [
-        "guides/theming",
-        "guides/accessibility",
-        "guides/live-previews",
-        "guides/recipes"
-      ]
-    },
-    {
-      "group": "Core Concepts",
-      "pages": [
-        "core-concepts/liquid-glass-system",
-        "core-concepts/theme-system",
-        "core-concepts/performance"
-      ]
-    },
-    {
-      "group": "Components Overview",
-      "pages": [
-        "components/showcase"
-      ]
-    },
-    {
-      "group": "Layout & Navigation",
-      "pages": [
-        "components/navbar",
-        "components/sidebar",
-        "components/mobile-nav",
-        "components/breadcrumbs",
-        "components/tabs"
-      ]
-    },
-    {
-      "group": "Form Components",
-      "pages": [
-        "components/form-field",
-        "components/file-upload",
-        "components/date-picker",
-        "components/radio-group",
-        "components/slider",
-        "components/search"
-      ]
-    },
-    {
-      "group": "Display Components",
-      "pages": [
-        "components/avatar",
-        "components/badge",
-        "components/banner",
-        "components/chart",
-        "components/table",
-        "components/timeline",
-        "components/tree-view",
-        "components/progress",
-        "components/loading",
-        "components/spinner"
-      ]
-    },
-    {
-      "group": "Interactive Components",
-      "pages": [
-        "components/responsive-button",
-        "components/modal",
-        "components/drawer",
-        "components/dropdown",
-        "components/popover",
-        "components/tooltip",
-        "components/command",
-        "components/notification",
-        "components/toast"
-      ]
-    },
-    {
-      "group": "Utility Components",
-      "pages": [
-        "components/theme-provider",
-        "components/theme-toggle",
-        "components/portal",
-        "components/focus-trap",
-        "components/error-boundary"
-      ]
-    },
-    {
-      "group": "Liquid Glass System",
-      "pages": [
-        "components/liquid-glass",
-        "components/liquid-glass-reference"
-      ]
-    },
-    {
-      "group": "Glass Components",
-      "pages": [
-        "components/glass-button",
-        "components/glass-chart",
-        "components/glass-checkbox-group",
-        "components/glass-combobox",
-        "components/glass-date-picker",
-        "components/glass-file-upload",
-        "components/glass-mobile-nav",
-        "components/glass-number-input",
-        "components/glass-textarea"
-      ]
-    },
-    {
-      "group": "Examples",
-      "pages": [
-        "examples/dashboard-example"
-      ]
-    },
-    {
-      "group": "Advanced",
-      "pages": [
-        "advanced/framework-integration"
-      ]
-    },
-    {
-      "group": "API Reference",
-      "pages": [
-        "api/index"
-      ]
-    },
-    {
-      "group": "Development",
-      "pages": [
-        "development/onboarding",
-        "development/architecture",
-        "development/build-system",
-        "development/testing-strategy"
-      ]
-    },
-    {
-      "group": "Migration",
-      "pages": [
-        "migrate/from-previous"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "integrations/storybook"
-      ]
-    },
-    {
-      "group": "Resources",
-      "pages": [
-        "contributing",
-        "styleguides",
-        "changelog",
-        "faq",
-        "licenses"
-      ]
-    }
+  "navigationStyle": "section",
+  "styles": [
+    "styles/bundle.css"
   ],
-  "anchors": [
+  "head": [
     {
-      "name": "Storybook",
-      "icon": "book-open",
-      "url": "https://storybook.useliquidify.dev"
+      "tag": "script",
+      "attrs": {
+        "src": "component-preview.js",
+        "defer": true
+      }
+    },
+    {
+      "tag": "script",
+      "attrs": {
+        "src": "scripts/enhancements.js",
+        "defer": true
+      }
     }
   ],
   "styling": {
@@ -195,6 +39,212 @@
   },
   "search": {
     "prompt": "Search components, guides, and examples..."
+  },
+  "navigation": {
+    "anchors": [
+      {
+        "anchor": "Storybook",
+        "icon": "book-open",
+        "href": "https://storybook.useliquidify.dev"
+      },
+      {
+        "anchor": "GitHub",
+        "icon": "github",
+        "href": "https://github.com/tuliopc23/LiqUIdify"
+      }
+    ],
+    "groups": [
+      {
+        "group": "Overview",
+        "icon": "home",
+        "pages": [
+          "index"
+        ]
+      },
+      {
+        "group": "Getting Started",
+        "icon": "rocket",
+        "pages": [
+          "getting-started/installation",
+          "getting-started/project-setup",
+          "getting-started/quickstart"
+        ]
+      },
+      {
+        "group": "Guides",
+        "icon": "book-open",
+        "pages": [
+          "guides/theming",
+          "guides/accessibility",
+          "guides/live-previews",
+          "guides/recipes"
+        ]
+      },
+      {
+        "group": "Core Concepts",
+        "icon": "lightbulb",
+        "pages": [
+          "core-concepts/liquid-glass-system",
+          "core-concepts/theme-system",
+          "core-concepts/performance"
+        ]
+      },
+      {
+        "group": "Components Overview",
+        "icon": "puzzle-piece",
+        "pages": [
+          "components/showcase"
+        ]
+      },
+      {
+        "group": "Layout & Navigation",
+        "icon": "compass",
+        "pages": [
+          "components/navbar",
+          "components/sidebar",
+          "components/mobile-nav",
+          "components/breadcrumbs",
+          "components/tabs"
+        ]
+      },
+      {
+        "group": "Form Components",
+        "icon": "pencil",
+        "pages": [
+          "components/form-field",
+          "components/file-upload",
+          "components/date-picker",
+          "components/radio-group",
+          "components/slider",
+          "components/search",
+          "components/glass-number-input",
+          "components/glass-textarea",
+          "components/glass-checkbox-group",
+          "components/glass-combobox"
+        ]
+      },
+      {
+        "group": "Data Display",
+        "icon": "table",
+        "pages": [
+          "components/avatar",
+          "components/badge",
+          "components/banner",
+          "components/chart",
+          "components/table",
+          "components/timeline",
+          "components/tree-view",
+          "components/progress",
+          "components/loading",
+          "components/spinner"
+        ]
+      },
+      {
+        "group": "Overlays & Feedback",
+        "icon": "layers",
+        "pages": [
+          "components/modal",
+          "components/drawer",
+          "components/dropdown",
+          "components/popover",
+          "components/tooltip",
+          "components/notification",
+          "components/toast"
+        ]
+      },
+      {
+        "group": "Interactions",
+        "icon": "cursor-arrow-rays",
+        "pages": [
+          "components/responsive-button",
+          "components/command"
+        ]
+      },
+      {
+        "group": "Utilities",
+        "icon": "wrench",
+        "pages": [
+          "components/theme-provider",
+          "components/theme-toggle",
+          "components/portal",
+          "components/focus-trap",
+          "components/error-boundary"
+        ]
+      },
+      {
+        "group": "Liquid Glass System",
+        "icon": "beaker",
+        "pages": [
+          "components/liquid-glass",
+          "components/liquid-glass-reference",
+          "components/glass-button",
+          "components/glass-chart",
+          "components/glass-checkbox-group",
+          "components/glass-combobox",
+          "components/glass-date-picker",
+          "components/glass-file-upload",
+          "components/glass-mobile-nav",
+          "components/glass-number-input",
+          "components/glass-textarea"
+        ]
+      },
+      {
+        "group": "Examples",
+        "icon": "sparkles",
+        "pages": [
+          "examples/dashboard-example"
+        ]
+      },
+      {
+        "group": "API Reference",
+        "icon": "code-bracket",
+        "pages": [
+          "api/index"
+        ]
+      },
+      {
+        "group": "Advanced",
+        "icon": "cog-6-tooth",
+        "pages": [
+          "advanced/framework-integration"
+        ]
+      },
+      {
+        "group": "Development",
+        "icon": "cpu-chip",
+        "pages": [
+          "development/onboarding",
+          "development/architecture",
+          "development/build-system",
+          "development/testing-strategy"
+        ]
+      },
+      {
+        "group": "Migration",
+        "icon": "arrow-path",
+        "pages": [
+          "migrate/from-previous"
+        ]
+      },
+      {
+        "group": "Integrations",
+        "icon": "puzzle-piece",
+        "pages": [
+          "integrations/storybook"
+        ]
+      },
+      {
+        "group": "Resources",
+        "icon": "link",
+        "pages": [
+          "contributing",
+          "styleguides",
+          "changelog",
+          "faq",
+          "licenses"
+        ]
+      }
+    ]
   },
   "footer": {
     "socials": {
@@ -206,7 +256,7 @@
         "items": [
           {
             "label": "Components",
-            "href": "https://docs.useliquidify.dev/components/showcase"
+            "href": "/components/showcase"
           },
           {
             "label": "Storybook",
@@ -219,7 +269,7 @@
         "items": [
           {
             "label": "Installation",
-            "href": "https://docs.useliquidify.dev/getting-started/installation"
+            "href": "/getting-started/installation"
           },
           {
             "label": "GitHub",

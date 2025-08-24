@@ -29,7 +29,7 @@ const radioGroupVariants = cva({
 });
 
 const radioItemVariants = cva({
-  base: "group flex cursor-pointer items-center gap-2 rounded-full p-2 transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg border border-white/10 backdrop-blur-md",
+  base: "group flex cursor-pointer items-center gap-2 rounded-xl p-2 transition-all duration-200 hover:bg-[rgba(0,122,255,0.05)] focus:bg-[rgba(0,122,255,0.1)] focus:outline-none data-[state=checked]:bg-[rgba(0,122,255,0.1)] data-[state=checked]:shadow-lg border border-[#007AFF]/20 backdrop-blur-md liquid-glass",
   variants: {
     size: {
       sm: "gap-1.5 p-1.5 text-sm",
@@ -37,9 +37,9 @@ const radioItemVariants = cva({
       lg: "gap-3 p-3 text-lg",
     },
     variant: {
-      default: "bg-white/5 hover:bg-white/10",
-      solid: "bg-white/10 hover:bg-white/15",
-      ghost: "bg-transparent hover:bg-white/5",
+      default: "bg-[rgba(0,122,255,0.05)] hover:bg-[rgba(0,122,255,0.1)]",
+      solid: "bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.15)]",
+      ghost: "bg-transparent hover:bg-[rgba(0,122,255,0.05)]",
     },
   },
   defaultVariants: {

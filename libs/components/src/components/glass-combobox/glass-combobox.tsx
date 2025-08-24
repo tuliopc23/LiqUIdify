@@ -66,17 +66,17 @@ const listboxVariants = cva({
 const optionVariants = cva({
   base: cn(
     "flex items-center gap-3 px-4 py-3 cursor-pointer relative z-10",
-    "text-liquid-primary hover:bg-liquid-bg/20 transition-colors duration-200",
+    "text-liquid-primary hover:border-[#007AFF]/30 transition-all duration-200",
     // Transparent separators
     "border-b border-liquid-highlight/20 last:border-b-0",
   ),
   variants: {
     isSelected: {
-      true: "ring-2 ring-liquid-accent/30 text-liquid-accent font-medium",
+      true: "ring-2 ring-[#007AFF]/30 text-[#007AFF] font-medium bg-[rgba(0,122,255,0.1)]",
       false: "",
     },
     isHighlighted: {
-      true: "bg-liquid-bg/20",
+      true: "bg-[rgba(0,122,255,0.05)] border-[#007AFF]/20",
       false: "",
     },
   },
@@ -328,7 +328,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                     e.stopPropagation();
                     handleClear();
                   }}
-                  className="p-1 hover:bg-liquid-bg/20 rounded-lg transition-colors"
+                  className="p-1 hover:bg-[rgba(0,122,255,0.1)] rounded-lg transition-colors"
                   aria-label="Clear selection"
                 >
                   <X className="h-4 w-4 text-liquid-text" />

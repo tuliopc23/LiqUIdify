@@ -287,21 +287,24 @@ export const Controlled: Story = {
           <button
             type="button"
             onClick={() => setValue("item-1")}
-            className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
+            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
           >
             Open First
           </button>
           <button
             type="button"
             onClick={() => setValue("item-2")}
-            className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
+            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
           >
             Open Second
           </button>
           <button
             type="button"
             onClick={() => setValue("item-3")}
-            className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-white border-[#007AFF]/30 hover:border-[#007AFF]/50"
+            style={{ background: 'rgba(0, 122, 255, 0.15)' }}
           >
             Open Third
           </button>
@@ -376,7 +379,7 @@ export const ComplexContent: Story = {
         <GlassAccordionItem value="item-2">
           <GlassAccordionTrigger>Code Example</GlassAccordionTrigger>
           <GlassAccordionContent>
-            <pre className="overflow-x-auto rounded-lg bg-black/20 p-3 text-sm">
+            <pre className="overflow-x-auto rounded-lg liquid-glass p-3 text-sm">
               <code className="text-green-400">{`<GlassAccordion type="single" collapsible>
   <GlassAccordionItem value="item-1">
     <GlassAccordionTrigger>

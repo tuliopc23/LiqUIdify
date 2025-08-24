@@ -195,7 +195,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
 
     // Base classes using Tailwind + liquid-glass utilities
     const textareaClasses = cn(
-      "liquid-glass-input w-full liquid-glass-sm resize-none",
+      "liquid-glass-input w-full liquid-glass-md resize-none rounded-xl",
       "text-liquid-primary placeholder:text-liquid-grey/70",
       "transition-all duration-200 will-change-transform",
       "liquid-glass-interactive:focus-visible",

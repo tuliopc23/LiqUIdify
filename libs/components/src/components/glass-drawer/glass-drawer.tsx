@@ -140,7 +140,7 @@ const drawerVariants = cva({
 });
 
 const drawerHeaderVariants = cva({
-  base: "flex items-center justify-between border-b border-liquid-highlight/30 bg-transparent p-4",
+  base: "flex items-center justify-between border-b border-liquid-highlight/30 bg-transparent p-4 text-liquid-primary",
   variants: {},
 });
 
@@ -150,7 +150,7 @@ const drawerContentVariants = cva({
 });
 
 const drawerFooterVariants = cva({
-  base: "flex items-center justify-end gap-2 border-t border-liquid-glass-hl/30 bg-transparent p-4",
+  base: "flex items-center justify-end gap-2 border-t border-liquid-glass-hl/30 bg-transparent p-4 text-liquid-primary",
   variants: {},
 });
 
@@ -211,7 +211,7 @@ const GlassDrawerOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-liquid-bg/30 backdrop-blur-liquid-main",
+      "fixed inset-0 z-50 liquid-glass backdrop-blur-liquid-main border-0",
       "data-[state=closed]:animate-out data-[state=open]:animate-in",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className,

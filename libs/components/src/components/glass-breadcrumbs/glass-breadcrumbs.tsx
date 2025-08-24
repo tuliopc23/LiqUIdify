@@ -9,7 +9,7 @@ import {
 } from "../../lib/variant-system";
 
 const breadcrumbsVariants = cva({
-  base: "flex items-center space-x-1 rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 p-2 text-sm backdrop-blur-liquid-main",
+  base: "flex items-center space-x-1 rounded-lg border border-liquid-highlight/20 liquid-glass p-2 text-sm backdrop-blur-liquid-main",
   variants: {
     size: {
       sm: "p-1.5 text-xs",
@@ -17,8 +17,8 @@ const breadcrumbsVariants = cva({
       lg: "p-3 text-base",
     },
     variant: {
-      default: "bg-liquid-bg/10",
-      solid: "bg-liquid-bg/20",
+      default: "bg-[rgba(0,122,255,0.05)]",
+      solid: "bg-[rgba(0,122,255,0.1)]",
       ghost: "border-transparent bg-transparent",
     },
   },
@@ -36,7 +36,7 @@ const breadcrumbItemVariants = cva({
       false: "text-liquid-text hover:text-liquid-accent",
     },
     isClickable: {
-      true: "cursor-pointer hover:bg-liquid-bg/20",
+      true: "cursor-pointer hover:bg-[rgba(0,122,255,0.1)] hover:border-[#007AFF]/30",
       false: "cursor-default",
     },
   },
