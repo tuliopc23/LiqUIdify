@@ -132,6 +132,26 @@
       sans-serif;
   }
 
+  /* Enforce readable default typography based on theme */
+  html.theme-dark,
+  html[data-theme="dark"] {
+    color: #ffffff;
+  }
+  html.theme-light,
+  html[data-theme="light"] {
+    color: #000000;
+  }
+
+  /* Storybook Docs base typography color (kept minimal to avoid overriding story previews) */
+  html.theme-dark .sbdocs,
+  html[data-theme="dark"] .sbdocs {
+    color: #ffffff;
+  }
+  html.theme-light .sbdocs,
+  html[data-theme="light"] .sbdocs {
+    color: #000000;
+  }
+
   /* Reduce motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
     * {

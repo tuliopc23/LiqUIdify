@@ -66,13 +66,24 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.liquidTheme || "dark";
-      const themeClass = theme === "light" ? "theme-light" : "theme-dark";
+      const sel = context.globals.liquidTheme || "dark";
+      const prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const resolved = sel === "auto" ? (prefersDark ? "dark" : "light") : sel;
+      const isDark = resolved === "dark";
+
+      // Sync theme to the preview iframe root so Tailwind, CSS variables and preview-head rules all respond consistently.
+      if (typeof document !== "undefined") {
+        const html = document.documentElement;
+        html.setAttribute("data-theme", isDark ? "dark" : "light");
+        html.classList.toggle("dark", isDark); // Tailwind dark mode
+        html.classList.remove(isDark ? "theme-light" : "theme-dark");
+        html.classList.add(isDark ? "theme-dark" : "theme-light"); // CSS variable themes
+      }
 
       return (
         <div
-          className={themeClass}
-          style={{ minHeight: "100vh", padding: "1rem" }}
+          className={isDark ? "theme-dark" : "theme-light"}
+          style={{ minHeight: "100vh", padding: "1rem", color: isDark ? "#ffffff" : "#000000" }}
         >
           <Story />
         </div>
