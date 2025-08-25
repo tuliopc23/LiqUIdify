@@ -11,9 +11,6 @@ export * from "../components/glass-focus-trap";
 export * from "../components/glass-input";
 
 // Provider imports
-
-export * from "../providers/config-provider";
-
-export * from "../providers/glass-ui-provider";
+// NOTE: config-provider and glass-ui-provider were removed during cleanup
 
 // Type exports;
