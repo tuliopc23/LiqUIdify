@@ -121,10 +121,10 @@ Apple's 8pt grid system ensures consistent spacing throughout your interface:
 </Frame>
 
 <div className="grid grid-cols-4 gap-4 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg">
-  <div className="bg-blue-500 h-1" style={{width: '4px'}}></div>
-  <div className="bg-blue-500 h-2" style={{width: '8px'}}></div>
-  <div className="bg-blue-500 h-3" style={{width: '12px'}}></div>
-  <div className="bg-blue-500 h-4" style={{width: '16px'}}></div>
+  <div className="bg-liquid-accent h-1" style={{width: '4px'}}></div>
+  <div className="bg-liquid-accent h-2" style={{width: '8px'}}></div>
+  <div className="bg-liquid-accent h-3" style={{width: '12px'}}></div>
+  <div className="bg-liquid-accent h-4" style={{width: '16px'}}></div>
   <div className="text-caption">4px</div>
   <div className="text-caption">8px</div>
   <div className="text-caption">12px</div>
@@ -184,11 +184,11 @@ Liquidify includes a comprehensive SF Symbols-style icon system:
     <div className="text-caption mt-2">sf-bell</div>
   </div>
   <div className="text-center">
-    <span className="sf-icon sf-icon-xl sf-checkmark" style={{color: '#34C759'}}></span>
+    <span className="sf-icon sf-icon-xl sf-checkmark" style={{ color: 'var(--lg-success)' }}></span>
     <div className="text-caption mt-2">sf-checkmark</div>
   </div>
   <div className="text-center">
-    <span className="sf-icon sf-icon-xl sf-xmark" style={{color: '#FF3B30'}}></span>
+    <span className="sf-icon sf-icon-xl sf-xmark" style={{ color: 'var(--lg-error)' }}></span>
     <div className="text-caption mt-2">sf-xmark</div>
   </div>
 </div>
@@ -214,7 +214,7 @@ Liquidify includes a comprehensive SF Symbols-style icon system:
 
 <div className="glass-card p-6 my-4">
   <div className="mintlify-card-title">
-    <span className="sf-icon sf-star" style={{color: '#0071e3'}}></span>
+    <span className="sf-icon sf-star" style={{ color: 'var(--liquid-primary)' }}></span>
     Glass Card Example
   </div>
   <div className="mintlify-card-description mt-2">

@@ -125,7 +125,7 @@ export default function Demo() {
   return (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="text-white mb-4">File System Explorer</h3>
+        <h3 className="text-liquid-text-inverse mb-4">File System Explorer</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <GlassTreeView
             nodes={fileSystemNodes}
@@ -134,10 +134,10 @@ export default function Demo() {
             selectedNodeId={selectedNode?.id}
             showIcons={true}
           />
-          <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-            <h4 className="text-white font-medium mb-2">Selected Node</h4>
+          <div className="bg-liquid-bg/5 rounded-lg p-4 border border-liquid-highlight/10">
+            <h4 className="text-liquid-text-inverse font-medium mb-2">Selected Node</h4>
             {selectedNode ? (
-              <div className="text-white/70 text-sm space-y-1">
+              <div className="text-liquid-text-inverse/70 text-sm space-y-1">
                 <p>
                   <strong>ID:</strong> {selectedNode.id}
                 </p>
@@ -155,7 +155,7 @@ export default function Demo() {
                 )}
               </div>
             ) : (
-              <p className="text-white/50 text-sm">
+              <p className="text-liquid-text-inverse/50 text-sm">
                 Click a node to see details
               </p>
             )}
@@ -164,7 +164,7 @@ export default function Demo() {
       </div>
 
       <div>
-        <h3 className="text-white mb-4">Database Schema</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Database Schema</h3>
         <GlassTreeView
           nodes={databaseNodes}
           onNodeSelect={handleNodeSelect}
@@ -174,7 +174,7 @@ export default function Demo() {
       </div>
 
       <div>
-        <h3 className="text-white mb-4">Without Icons</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Without Icons</h3>
         <GlassTreeView
           nodes={fileSystemNodes}
           onNodeSelect={handleNodeSelect}

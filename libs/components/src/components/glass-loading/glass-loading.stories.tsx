@@ -134,22 +134,22 @@ export const Variants: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-white/90">Spinner</h3>
+        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Spinner</h3>
         <GlassLoading variant="spinner" size="lg" />
       </div>
 
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-white/90">Dots</h3>
+        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Dots</h3>
         <GlassLoading variant="dots" size="lg" />
       </div>
 
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-white/90">Pulse</h3>
+        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Pulse</h3>
         <GlassLoading variant="pulse" size="lg" />
       </div>
 
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-white/90">Bars</h3>
+        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Bars</h3>
         <GlassLoading variant="bars" size="lg" />
       </div>
     </div>
@@ -162,7 +162,7 @@ export const Sizes: Story = {
     <div className="space-y-8">
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="text-center">
-          <h3 className="mb-4 font-medium text-white/90">Size: {size}</h3>
+          <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Size: {size}</h3>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <GlassLoading variant="spinner" size={size} />
             <GlassLoading variant="dots" size={size} />
@@ -218,7 +218,7 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Button Loading States
           </h3>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -317,7 +317,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Card Loading States
           </h3>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -344,10 +344,10 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Full Page Loading
           </h3>
-          <div className="relative h-64 overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="relative h-64 overflow-hidden rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 backdrop-blur-sm">
             <div className="absolute inset-0 flex items-center justify-center">
               <GlassLoading
                 variant="pulse"
@@ -376,14 +376,14 @@ export const InteractiveDemo: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Interactive Controls
           </h3>
-          <div className="grid grid-cols-1 gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-4 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-4">
             <div>
               <label
                 htmlFor="variant-select"
-                className="mb-2 block font-medium text-sm text-white/90"
+                className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
               >
                 Variant
               </label>
@@ -395,7 +395,7 @@ export const InteractiveDemo: Story = {
                     e.target.value as "spinner" | "dots" | "pulse" | "bars",
                   )
                 }
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
+                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm"
               >
                 <option value="spinner">Spinner</option>
                 <option value="dots">Dots</option>
@@ -407,7 +407,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="size-select"
-                className="mb-2 block font-medium text-sm text-white/90"
+                className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
               >
                 Size
               </label>
@@ -417,7 +417,7 @@ export const InteractiveDemo: Story = {
                 onChange={(e) =>
                   setSize(e.target.value as "sm" | "md" | "lg" | "xl")
                 }
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
+                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm"
               >
                 <option value="sm">Small</option>
                 <option value="md">Medium</option>
@@ -429,7 +429,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="text-input"
-                className="mb-2 block font-medium text-sm text-white/90"
+                className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
               >
                 Loading Text
               </label>
@@ -438,7 +438,7 @@ export const InteractiveDemo: Story = {
                 type="text"
                 value={customText}
                 onChange={(e) => setCustomText(e.target.value)}
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm placeholder:text-white/50"
+                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm placeholder:text-liquid-text-inverse/50"
                 placeholder="Enter loading text..."
               />
             </div>
@@ -454,7 +454,7 @@ export const InteractiveDemo: Story = {
                   checked={showText}
                   onChange={(e) => setShowText(e.target.checked)}
                 />
-                <span className="text-sm text-white/90">Show Text</span>
+                <span className="text-sm text-liquid-text-inverse/90">Show Text</span>
               </label>
 
               <label
@@ -467,14 +467,14 @@ export const InteractiveDemo: Story = {
                   checked={isLoading}
                   onChange={(e) => setIsLoading(e.target.checked)}
                 />
-                <span className="text-sm text-white/90">Is Loading</span>
+                <span className="text-sm text-liquid-text-inverse/90">Is Loading</span>
               </label>
             </div>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Live Preview
           </h3>
           <div className="text-center">
@@ -485,7 +485,7 @@ export const InteractiveDemo: Story = {
                 text={showText ? customText : undefined}
               />
             ) : (
-              <div className="flex items-center justify-center gap-2 text-green-400">
+              <div className="flex items-center justify-center gap-2 text-liquid-accent">
                 <CheckCircle className="h-6 w-6" />
                 <span>Loading Complete!</span>
               </div>
@@ -505,7 +505,7 @@ export const PerformanceShowcase: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Performance Test
           </h3>
           <div className="mb-4">
@@ -526,7 +526,7 @@ export const PerformanceShowcase: Story = {
           </div>
 
           {showMany && (
-            <div className="grid grid-cols-4 gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:grid-cols-8">
+            <div className="grid grid-cols-4 gap-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-4 backdrop-blur-sm md:grid-cols-8">
               {Array.from({ length: 16 }, (_, i) => (
                 <GlassLoading
                   key={`loader-${i}`}
@@ -545,29 +545,29 @@ export const PerformanceShowcase: Story = {
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             CPU-Friendly Animations
           </h3>
-          <div className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <ul className="space-y-2 text-sm text-white/80">
+          <div className="space-y-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+            <ul className="space-y-2 text-sm text-liquid-text-inverse/80">
               <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-liquid-accent" />
                 CSS-only animations for better performance
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-liquid-accent" />
                 GPU-accelerated transforms and opacity changes
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-liquid-accent" />
                 Minimal JavaScript overhead
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-liquid-accent" />
                 Optimized for mobile devices
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-liquid-accent" />
                 Respects user's reduced motion preferences
               </li>
             </ul>
@@ -583,7 +583,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Light Theme Simulation
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
@@ -605,7 +605,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Dark Theme (Current)
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-8">
@@ -627,7 +627,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Colorful Background
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 p-8">
@@ -656,33 +656,33 @@ export const AccessibilityShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Accessibility Features
         </h3>
-        <div className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-          <ul className="space-y-2 text-sm text-white/80">
+        <div className="space-y-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <ul className="space-y-2 text-sm text-liquid-text-inverse/80">
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               Proper ARIA role and labels for screen readers
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               Loading state announcements
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               Respects reduced motion preferences
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               Semantic HTML structure
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               High contrast support
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <CheckCircle className="h-4 w-4 text-liquid-accent" />
               Focus management in loading states
             </li>
           </ul>
@@ -690,7 +690,7 @@ export const AccessibilityShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Screen Reader Test
         </h3>
         <div className="text-center">
@@ -699,7 +699,7 @@ export const AccessibilityShowcase: Story = {
             size="lg"
             text="Loading content for screen readers..."
           />
-          <p className="mt-4 text-sm text-white/60">
+          <p className="mt-4 text-sm text-liquid-text-inverse/60">
             This loading indicator includes proper ARIA attributes for assistive
             technologies
           </p>
@@ -707,11 +707,11 @@ export const AccessibilityShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Reduced Motion Support
         </h3>
-        <div className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-          <p className="text-sm text-white/80">
+        <div className="space-y-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <p className="text-sm text-liquid-text-inverse/80">
             When users have "prefers-reduced-motion" enabled, animations are
             automatically reduced or replaced with subtle alternatives to
             accommodate motion sensitivity.

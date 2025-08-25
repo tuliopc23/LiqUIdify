@@ -77,13 +77,10 @@ const preview: Preview = {
 
       return (
         <div
-          className={`${isDark ? "theme-dark" : "theme-light"} ${isDark ? "text-white" : "text-gray-900"}`}
+          className={`${isDark ? "theme-dark" : "theme-light"} text-liquid-text`}
           style={{
             minHeight: "100vh",
             padding: "1rem",
-            color: isDark
-              ? "rgba(255, 255, 255, 0.9)"
-              : "rgba(17, 24, 39, 0.9)",
           }}
         >
           <Story />

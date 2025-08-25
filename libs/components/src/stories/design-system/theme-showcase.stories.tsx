@@ -57,7 +57,7 @@ export const CompleteShowcase: Story = {
         {/* Content (backgrounds managed by Storybook preview) */}
         <div className="relative z-10">
           {/* Header */}
-          <header className="border-white/10 border-b backdrop-blur-xl">
+          <header className="border-liquid-highlight/10 border-b backdrop-blur-xl">
             <div className="container mx-auto px-6 py-4">
               <div className="flex items-center justify-between">
                 <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-2xl text-transparent">
@@ -77,7 +77,7 @@ export const CompleteShowcase: Story = {
                   Beautiful Glass Design
                 </span>
               </h2>
-              <p className="mx-auto max-w-2xl text-gray-600 text-xl dark:text-gray-300">
+              <p className="mx-auto max-w-2xl text-liquid-secondary text-xl dark:text-liquid-grey">
                 Experience the elegance of glassmorphism with smooth transitions
                 between light and dark themes.
               </p>
@@ -89,7 +89,7 @@ export const CompleteShowcase: Story = {
               <GlassCard className="p-8">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
+                    <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
                       Default Variants
                     </h4>
                     <GlassButton type="button">Default</GlassButton>
@@ -104,7 +104,7 @@ export const CompleteShowcase: Story = {
                     </GlassButton>
                   </div>
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
+                    <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
                       With Icons
                     </h4>
                     <GlassButton type="button">
@@ -121,7 +121,7 @@ export const CompleteShowcase: Story = {
                     </GlassButton>
                   </div>
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
+                    <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
                       States
                     </h4>
                     <GlassButton type="button" disabled>
@@ -135,7 +135,7 @@ export const CompleteShowcase: Story = {
                     </GlassButton>
                   </div>
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
+                    <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
                       Sizes
                     </h4>
                     <GlassButton type="button" size="sm">
@@ -280,7 +280,7 @@ export const CompleteShowcase: Story = {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 <GlassCard hoverable className="space-y-4 p-6">
                   <h4 className="font-semibold text-lg">Hoverable Card</h4>
-                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                  <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                     This card has a subtle hover effect with enhanced glass
                     morphism on interaction.
                   </p>
@@ -291,7 +291,7 @@ export const CompleteShowcase: Story = {
 
                 <GlassCard variant="secondary" className="space-y-4 p-6">
                   <h4 className="font-semibold text-lg">Secondary Variant</h4>
-                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                  <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                     Different glass opacity and blur for visual hierarchy.
                   </p>
                   <GlassButton
@@ -308,7 +308,7 @@ export const CompleteShowcase: Story = {
                   <div className="h-32 bg-gradient-to-br from-blue-500 to-purple-500" />
                   <div className="space-y-4 p-6">
                     <h4 className="font-semibold text-lg">Media Card</h4>
-                    <p className="text-gray-600 text-sm dark:text-gray-400">
+                    <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                       Card with media content and no default padding.
                     </p>
                   </div>
@@ -320,7 +320,7 @@ export const CompleteShowcase: Story = {
             <section className="space-y-6">
               <h3 className="mb-6 font-semibold text-2xl">Microinteractions</h3>
               <GlassCard className="p-8">
-                <p className="mb-6 text-gray-600 text-sm dark:text-gray-400">
+                <p className="mb-6 text-liquid-secondary text-sm dark:text-liquid-grey">
                   All components feature smooth animations and
                   microinteractions. Try hovering, clicking, and focusing on
                   different elements.

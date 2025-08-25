@@ -26,7 +26,8 @@ const meta = {
       values: [
         {
           name: "gradient",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          value:
+            "linear-gradient(135deg, var(--liquid-primary) 0%, var(--lg-primary-light) 100%)",
         },
       ],
     },
@@ -56,16 +57,16 @@ const CodeBlock = ({
       {title && (
         <div className="text-sm font-semibold mb-2 opacity-75">{title}</div>
       )}
-      <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 font-mono text-sm relative">
-        <pre className="text-white/90 overflow-x-auto">{children}</pre>
+      <div className="bg-liquid-bg/20 backdrop-blur-sm rounded-lg p-4 font-mono text-sm relative">
+        <pre className="text-liquid-text-inverse/90 overflow-x-auto">{children}</pre>
         <button
           onClick={handleCopy}
-          className="absolute top-2 right-2 p-2 rounded hover:bg-white/10 transition-colors"
+          className="absolute top-2 right-2 p-2 rounded hover:bg-liquid-bg/10 transition-colors"
         >
           {copied ? (
-            <CheckCircle className="w-4 h-4 text-green-400" />
+            <CheckCircle className="w-4 h-4 text-liquid-accent" />
           ) : (
-            <Copy className="w-4 h-4 text-white/60" />
+            <Copy className="w-4 h-4 text-liquid-text-inverse/60" />
           )}
         </button>
       </div>
@@ -196,7 +197,7 @@ import { GlassCard } from '@liquidify/components/card';`}
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <h3 className="font-semibold flex items-center gap-2 text-green-400">
+            <h3 className="font-semibold flex items-center gap-2 text-liquid-accent">
               <CheckCircle className="w-5 h-5" />
               Do's
             </h3>
@@ -225,7 +226,7 @@ import { GlassCard } from '@liquidify/components/card';`}
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-semibold flex items-center gap-2 text-red-400">
+            <h3 className="font-semibold flex items-center gap-2 text-liquid-accent">
               <XCircle className="w-5 h-5" />
               Don'ts
             </h3>
@@ -294,7 +295,7 @@ import { GlassCard } from '@liquidify/components/card';`}
             <CodeBlock>
               {`{isLoading ? (
   <GlassCard className="animate-pulse">
-    <div className="h-32 bg-white/10 rounded" />
+    <div className="h-32 bg-liquid-bg/10 rounded" />
   </GlassCard>
 ) : (
   <GlassCard>
@@ -333,8 +334,8 @@ import { GlassCard } from '@liquidify/components/card';`}
 
         <div className="space-y-4">
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-blue-500/20">
-              <Lightbulb className="w-5 h-5 text-blue-300" />
+            <div className="p-2 rounded-lg bg-liquid-accent/20">
+              <Lightbulb className="w-5 h-5 text-liquid-accent" />
             </div>
             <div>
               <h3 className="font-semibold mb-1">Lazy Load Heavy Components</h3>
@@ -345,8 +346,8 @@ import { GlassCard } from '@liquidify/components/card';`}
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-green-500/20">
-              <Lightbulb className="w-5 h-5 text-green-300" />
+            <div className="p-2 rounded-lg bg-liquid-accent/20">
+              <Lightbulb className="w-5 h-5 text-liquid-accent" />
             </div>
             <div>
               <h3 className="font-semibold mb-1">
@@ -360,8 +361,8 @@ import { GlassCard } from '@liquidify/components/card';`}
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-purple-500/20">
-              <Lightbulb className="w-5 h-5 text-purple-300" />
+            <div className="p-2 rounded-lg bg-liquid-accent/20">
+              <Lightbulb className="w-5 h-5 text-liquid-accent" />
             </div>
             <div>
               <h3 className="font-semibold mb-1">Optimize Glass Effects</h3>
@@ -372,8 +373,8 @@ import { GlassCard } from '@liquidify/components/card';`}
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-yellow-500/20">
-              <Lightbulb className="w-5 h-5 text-yellow-300" />
+            <div className="p-2 rounded-lg bg-liquid-accent/20">
+              <Lightbulb className="w-5 h-5 text-liquid-accent" />
             </div>
             <div>
               <h3 className="font-semibold mb-1">Use Virtual Scrolling</h3>

@@ -27,19 +27,19 @@ export default function Demo() {
 
 return (
 
-<div className="flex h-96 bg-black/20 rounded-xl overflow-hidden">
+<div className="flex h-96 bg-liquid-bg/20 rounded-xl overflow-hidden">
 <Sidebar
 open={isOpen}
 onOpenChange={setIsOpen}
 header={
 <div className="flex items-center gap-3">
-<div className="h-8 w-8 rounded-lg bg-blue-500 flex items-center justify-center">
-<span className="text-white font-bold text-sm">A</span>
+<div className="h-8 w-8 rounded-lg bg-liquid-accent flex items-center justify-center">
+<span className="text-liquid-text-inverse font-bold text-sm">A</span>
 </div>
-<span className="font-semibold text-white">Admin Panel</span>
+<span className="font-semibold text-liquid-text-inverse">Admin Panel</span>
 </div>
 }
-footer={<div className="text-xs text-white/60">Version 2.1.0</div>} >
+footer={<div className="text-xs text-liquid-text-inverse/60">Version 2.1.0</div>} >
 <SidebarSection title="Main">
 <SidebarItem
 icon={<Home className="h-5 w-5" />}
@@ -53,7 +53,7 @@ label="Analytics"
 active={activeItem === "analytics"}
 onClick={() => setActiveItem("analytics")}
 badge={
-<span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+<span className="bg-liquid-accent text-liquid-text-inverse text-xs px-1.5 py-0.5 rounded-full">
 New
 </span>
 }
@@ -94,13 +94,13 @@ onClick={() => setActiveItem("clothing")}
 
       <div className="flex-1 p-6 flex items-center justify-center">
         <div className="text-center">
-          <h3 className="text-white text-lg font-semibold mb-2">
+          <h3 className="text-liquid-text-inverse text-lg font-semibold mb-2">
             Content Area
           </h3>
-          <p className="text-white/60">Active: {activeItem}</p>
+          <p className="text-liquid-text-inverse/60">Active: {activeItem}</p>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="mt-4 px-4 py-2 bg-liquid-accent text-liquid-text-inverse rounded-lg hover:bg-liquid-accent transition-colors"
           >
             Toggle Sidebar
           </button>

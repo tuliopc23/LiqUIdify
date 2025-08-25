@@ -24,7 +24,7 @@ export default function Demo() {
       status: "completed",
       icon: <Code className="h-4 w-4" />,
       content: (
-        <div className="text-sm text-white/70">
+        <div className="text-sm text-liquid-text-inverse/70">
           <p>Key milestones:</p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>API integration complete</li>
@@ -82,17 +82,17 @@ export default function Demo() {
   return (
     <div className="space-y-12 p-6">
       <div>
-        <h3 className="text-white mb-6">Vertical Timeline</h3>
+        <h3 className="text-liquid-text-inverse mb-6">Vertical Timeline</h3>
         <GlassTimeline items={projectTimeline} />
       </div>
 
       <div>
-        <h3 className="text-white mb-6">Horizontal Timeline</h3>
+        <h3 className="text-liquid-text-inverse mb-6">Horizontal Timeline</h3>
         <GlassTimeline items={horizontalTimeline} orientation="horizontal" />
       </div>
 
       <div>
-        <h3 className="text-white mb-6">Alternating Layout</h3>
+        <h3 className="text-liquid-text-inverse mb-6">Alternating Layout</h3>
         <GlassTimeline items={projectTimeline} alternating={true} />
       </div>
     </div>

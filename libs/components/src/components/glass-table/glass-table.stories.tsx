@@ -147,8 +147,8 @@ export const WithCustomRendering: Story = {
           <span
             className={`rounded-full px-2 py-1 font-medium text-xs ${
               value === "active"
-                ? "bg-green-500/20 text-green-400"
-                : "bg-red-500/20 text-red-400"
+                ? "bg-liquid-accent/20 text-liquid-accent"
+                : "bg-liquid-accent/20 text-liquid-accent"
             }`}
           >
             {value}
@@ -186,7 +186,7 @@ export const ProductTable: Story = {
         render: (value) => (
           <span
             className={`font-medium ${
-              value < 10 ? "text-red-400" : "text-green-400"
+              value < 10 ? "text-liquid-accent" : "text-liquid-accent"
             }`}
           >
             {value} units
@@ -269,7 +269,7 @@ export const StyledTable: Story = {
           <div className="flex items-center gap-2">
             <div
               className={`h-2 w-2 rounded-full ${
-                value === "active" ? "bg-green-400" : "bg-red-400"
+                value === "active" ? "bg-liquid-accent" : "bg-liquid-accent"
               }`}
             />
             <span className="capitalize">{value}</span>

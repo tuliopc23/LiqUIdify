@@ -56,20 +56,15 @@ type Story = StoryObj<typeof meta>;
 export const Overview: Story = {
   render: () => (
     <div
-      className="min-h-screen p-8"
+      className="min-h-screen p-8 bg-background-gradient-light"
       style={{
         fontFamily:
           "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-        background: `
-          radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
-          radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), 
-          linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
-        `,
       }}
     >
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Hero Section */}
-        <div className="text-center text-white mb-12">
+        <div className="text-center text-liquid-text-inverse mb-12">
           <h1 className="text-5xl font-bold mb-4">
             High-Fidelity Liquid Glass System
           </h1>
@@ -80,14 +75,7 @@ export const Overview: Story = {
 
         {/* High-Fidelity Glass Showcase */}
         <section className="theme-dark">
-          <div
-            style={{
-              color: "#d7dbffcc",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <div className="text-liquid-text-inverse/80 font-semibold tracking-wide mb-6">
             Dark Mode - High-Fidelity Implementation
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -134,14 +122,7 @@ export const Overview: Story = {
 
         {/* Light Theme Showcase */}
         <section className="theme-light">
-          <div
-            style={{
-              color: "#64748b",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <div className="text-liquid-tertiary font-semibold tracking-wide mb-6">
             Light Mode - Adaptive Transparency
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -179,63 +160,36 @@ export const Overview: Story = {
 
         {/* Apple Color System */}
         <section className="theme-dark">
-          <div
-            style={{
-              color: "#d7dbffcc",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <div className="text-liquid-text-inverse/80 font-semibold tracking-wide mb-6">
             Apple Color System
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
-                <div
-                  className="h-24 rounded-lg mb-3"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #007aff 0%, #5ac8fa 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                  }}
-                />
+                <div className="h-24 rounded-lg mb-3 bg-gradient-to-tr from-liquid-primary to-liquid-primary-light border border-liquid-highlight/10" />
                 <h4 className="font-medium mb-1">Primary System</h4>
                 <code className="text-xs opacity-75">#007aff → #5ac8fa</code>
               </div>
               <div>
                 <div
-                  className="h-24 rounded-lg mb-3"
+                  className="h-24 rounded-lg mb-3 border border-liquid-highlight/20"
                   style={{
                     background: "var(--lg-bg-color)",
                     backdropFilter: "blur(12px) saturate(180%)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
                   }}
                 />
                 <h4 className="font-medium mb-1">Glass Background</h4>
                 <code className="text-xs opacity-75">--lg-bg-color</code>
               </div>
               <div>
-                <div
-                  className="h-24 rounded-lg mb-3"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.1)",
-                    boxShadow:
-                      "inset -10px -8px 0 -11px rgba(255,255,255,1), inset 0 -9px 0 -8px rgba(255,255,255,1)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                  }}
-                />
+                <div className="h-24 rounded-lg mb-3 bg-liquid-bg/10 shadow-liquid-shine border border-liquid-highlight/20" />
                 <h4 className="font-medium mb-1">Shine Effect</h4>
                 <code className="text-xs opacity-75">--lg-shine-shadow</code>
               </div>
               <div>
                 <div
-                  className="h-24 rounded-lg mb-3"
-                  style={{
-                    background: "transparent",
-                    backdropFilter: "blur(12px) saturate(180%)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                  }}
+                  className="h-24 rounded-lg mb-3 bg-transparent border border-liquid-highlight/10"
+                  style={{ backdropFilter: "blur(12px) saturate(180%)" }}
                 />
                 <h4 className="font-medium mb-1">Pure Glass</h4>
                 <code className="text-xs opacity-75">transparent</code>
@@ -246,14 +200,7 @@ export const Overview: Story = {
 
         {/* Size Variants */}
         <section className="theme-dark">
-          <div
-            style={{
-              color: "#d7dbffcc",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <div className="text-liquid-text-inverse/80 font-semibold tracking-wide mb-6">
             Size Variants - Consistent Scaling
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
@@ -299,14 +246,7 @@ export const Overview: Story = {
 
         {/* Border Radius System */}
         <section className="theme-dark">
-          <div
-            style={{
-              color: "#d7dbffcc",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <div className="text-liquid-text-inverse/80 font-semibold tracking-wide mb-6">
             Border Radius System
           </div>
           <div className="liquid-glass liquid-glass-card liquid-glass-lg">
@@ -376,14 +316,9 @@ export const Overview: Story = {
 
 export const ComponentShowcase: Story = {
   render: () => (
-    <div
-      className="min-h-screen p-8"
-      style={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      }}
-    >
+      <div className="min-h-screen p-8 bg-gradient-to-tr from-liquid-primary to-liquid-primary-light">
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-white mb-8">
+        <h1 className="text-4xl font-bold text-liquid-text-inverse mb-8">
           Component Showcase
         </h1>
 
@@ -398,7 +333,7 @@ export const ComponentShowcase: Story = {
             <GlassButton disabled>Disabled Button</GlassButton>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-white/10">
+          <div className="mt-6 pt-6 border-t border-liquid-highlight/10">
             <h3 className="text-lg font-medium mb-4">Button Sizes</h3>
             <div className="flex flex-wrap items-center gap-4">
               <GlassButton size="sm">Small</GlassButton>
@@ -427,19 +362,19 @@ export const ComponentShowcase: Story = {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <h3 className="font-medium mb-3">Default State</h3>
-              <div className="p-4 rounded-lg bg-white/10 border border-white/20">
+              <div className="p-4 rounded-lg bg-liquid-bg/10 border border-liquid-highlight/20">
                 Resting state with base glass effect
               </div>
             </div>
             <div>
               <h3 className="font-medium mb-3">Hover State</h3>
-              <div className="p-4 rounded-lg bg-white/15 border border-white/30 transition-all hover:bg-white/20">
+              <div className="p-4 rounded-lg bg-liquid-bg/15 border border-liquid-highlight/30 transition-all hover:bg-liquid-bg/20">
                 Enhanced glass effect on hover
               </div>
             </div>
             <div>
               <h3 className="font-medium mb-3">Active State</h3>
-              <div className="p-4 rounded-lg bg-white/20 border border-white/40">
+              <div className="p-4 rounded-lg bg-liquid-bg/20 border border-liquid-highlight/40">
                 Pressed state with stronger effect
               </div>
             </div>
@@ -452,26 +387,21 @@ export const ComponentShowcase: Story = {
 
 export const DesignGuidelines: Story = {
   render: () => (
-    <div
-      className="min-h-screen p-8"
-      style={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      }}
-    >
+      <div className="min-h-screen p-8 bg-gradient-to-tr from-liquid-primary to-liquid-primary-light">
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-white mb-8">
+        <h1 className="text-4xl font-bold text-liquid-text-inverse mb-8">
           Design Guidelines
         </h1>
 
         {/* Do's and Don'ts */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <GlassCard className="p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-green-400">
+            <h2 className="text-2xl font-semibold mb-6 text-liquid-accent">
               ✓ Do's
             </h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="text-green-400 mt-1">✓</span>
+                <span className="text-liquid-accent mt-1">✓</span>
                 <div>
                   <strong>Use consistent blur values</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -480,7 +410,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-400 mt-1">✓</span>
+                <span className="text-liquid-accent mt-1">✓</span>
                 <div>
                   <strong>Layer glass effects thoughtfully</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -490,7 +420,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-400 mt-1">✓</span>
+                <span className="text-liquid-accent mt-1">✓</span>
                 <div>
                   <strong>Ensure sufficient contrast</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -499,7 +429,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-400 mt-1">✓</span>
+                <span className="text-liquid-accent mt-1">✓</span>
                 <div>
                   <strong>Use subtle animations</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -511,12 +441,12 @@ export const DesignGuidelines: Story = {
           </GlassCard>
 
           <GlassCard className="p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-red-400">
+            <h2 className="text-2xl font-semibold mb-6 text-liquid-accent">
               ✗ Don'ts
             </h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="text-red-400 mt-1">✗</span>
+                <span className="text-liquid-accent mt-1">✗</span>
                 <div>
                   <strong>Overuse glass effects</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -525,7 +455,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-red-400 mt-1">✗</span>
+                <span className="text-liquid-accent mt-1">✗</span>
                 <div>
                   <strong>Use on busy backgrounds</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -534,7 +464,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-red-400 mt-1">✗</span>
+                <span className="text-liquid-accent mt-1">✗</span>
                 <div>
                   <strong>Ignore accessibility</strong>
                   <p className="text-sm opacity-75 mt-1">
@@ -543,7 +473,7 @@ export const DesignGuidelines: Story = {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-red-400 mt-1">✗</span>
+                <span className="text-liquid-accent mt-1">✗</span>
                 <div>
                   <strong>Mix different design languages</strong>
                   <p className="text-sm opacity-75 mt-1">

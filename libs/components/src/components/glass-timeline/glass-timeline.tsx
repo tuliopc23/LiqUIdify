@@ -43,9 +43,9 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
   const getStatusClass = (status?: TimelineItem["status"]) => {
     switch (status) {
       case "completed":
-        return "bg-green-500/20 border-green-500/50 text-green-400";
+        return "bg-liquid-accent/20 border-liquid-accent/50 text-liquid-accent";
       case "active":
-        return "bg-blue-500/20 border-blue-500/50 text-blue-400";
+        return "bg-liquid-accent/20 border-liquid-accent/50 text-liquid-accent";
       default:
         return "bg-liquid-bg/20 border-liquid-highlight/50 text-liquid-tertiary";
     }
@@ -160,7 +160,7 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
                   className={cn(
                     "rounded-lg p-4",
                     getGlassClass("default"),
-                    "border border-white/10",
+                    "border border-liquid-highlight/10",
                   )}
                 >
                   {item.content}

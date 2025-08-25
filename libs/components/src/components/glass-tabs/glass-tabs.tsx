@@ -28,7 +28,7 @@ export function GlassTabs({
   className,
   tabListClassName,
   tabButtonClassName,
-  activeTabButtonClassName = "text-[#007AFF] ring-1 ring-[#007AFF]/30 bg-[rgba(0,122,255,0.1)]", // Default active class aligned with Apple blue
+  activeTabButtonClassName = "text-liquid-accent ring-1 ring-liquid-accent/30 bg-liquid-accent/10", // Default active class aligned with Apple blue
   inactiveTabButtonClassName = "text-liquid-primary hover:text-liquid-accent", // Default inactive class aligned with tokens
   tabPanelClassName,
   // orientation = 'horizontal', // For future enhancement

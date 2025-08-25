@@ -34,8 +34,8 @@ const triggerVariants = cva({
   ),
   variants: {
     isOpen: {
-      true: "border-blue-400/50 bg-white/10",
-      false: "border-white/10",
+      true: "border-liquid-accent/50 bg-liquid-bg/10",
+      false: "border-liquid-highlight/10",
     },
     size: {
       sm: "px-3 py-2 text-sm",
@@ -312,12 +312,12 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                   <button
                     type="button"
                     onClick={() => navigateMonth("prev")}
-                    className="rounded-lg p-2 transition-colors hover:bg-white/10"
+                    className="rounded-lg p-2 transition-colors hover:bg-liquid-bg/10"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
 
-                  <h2 className="font-semibold text-lg text-white">
+                  <h2 className="font-semibold text-lg text-liquid-text-inverse">
                     {viewDate.toLocaleDateString(locale, {
                       month: "long",
                       year: "numeric",
@@ -327,7 +327,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                   <button
                     type="button"
                     onClick={() => navigateMonth("next")}
-                    className="rounded-lg p-2 transition-colors hover:bg-white/10"
+                    className="rounded-lg p-2 transition-colors hover:bg-liquid-bg/10"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>
@@ -340,7 +340,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                   {reorderedWeekDays.map((day) => (
                     <div
                       key={day}
-                      className="p-2 text-center font-medium text-white/60 text-xs"
+                      className="p-2 text-center font-medium text-liquid-text-inverse/60 text-xs"
                     >
                       {day}
                     </div>
@@ -384,9 +384,9 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
                 {/* Time picker */}
                 {showTime && (
-                  <div className="border-white/10 border-t pt-4">
+                  <div className="border-liquid-highlight/10 border-t pt-4">
                     <div className="flex items-center justify-center gap-4">
-                      <Clock className="h-4 w-4 text-white/60" />
+                      <Clock className="h-4 w-4 text-liquid-text-inverse/60" />
 
                       <div className="flex items-center gap-2">
                         <input
@@ -400,10 +400,10 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                               Number.parseInt(e.target.value),
                             )
                           }
-                          className="w-16 rounded border border-white/10 bg-white/5 px-2 py-1 text-center text-white"
+                          className="w-16 rounded border border-liquid-highlight/10 bg-liquid-bg/5 px-2 py-1 text-center text-liquid-text-inverse"
                         />
 
-                        <span className="text-white/60">:</span>
+                        <span className="text-liquid-text-inverse/60">:</span>
 
                         <input
                           type="number"
@@ -416,7 +416,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                               Number.parseInt(e.target.value),
                             )
                           }
-                          className="w-16 rounded border border-white/10 bg-white/5 px-2 py-1 text-center text-white"
+                          className="w-16 rounded border border-liquid-highlight/10 bg-liquid-bg/5 px-2 py-1 text-center text-liquid-text-inverse"
                         />
                       </div>
                     </div>

@@ -475,10 +475,10 @@ export const RealWorldExamples: Story = {
                 ].map((file) => (
                   <div
                     key={file}
-                    className="cursor-pointer rounded-lg border border-gray-200 p-4 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+                    className="cursor-pointer rounded-lg border border-liquid-grey p-4 hover:bg-liquid-bg dark:border-liquid-grey dark:hover:bg-liquid-bg"
                   >
                     <div className="mb-2 flex items-center justify-between">
-                      <FileText className="h-8 w-8 text-gray-400" />
+                      <FileText className="h-8 w-8 text-liquid-secondary" />
                       <GlassDropdown
                         trigger={
                           <button
@@ -526,7 +526,7 @@ export const RealWorldExamples: Story = {
                       />
                     </div>
                     <p className="truncate font-medium text-sm">{file}</p>
-                    <p className="text-gray-500 text-xs">2.4 MB</p>
+                    <p className="text-liquid-secondary text-xs">2.4 MB</p>
                   </div>
                 ))}
               </div>
@@ -596,7 +596,7 @@ export const RealWorldExamples: Story = {
             <Card.Content>
               <table className="w-full">
                 <thead>
-                  <tr className="border-gray-200 border-b dark:border-gray-700">
+                  <tr className="border-liquid-grey border-b dark:border-liquid-grey">
                     <th className="py-2 text-left">Name</th>
                     <th className="py-2 text-left">Status</th>
                     <th className="py-2 text-left">Date</th>
@@ -623,7 +623,7 @@ export const RealWorldExamples: Story = {
                   ].map((project) => (
                     <tr
                       key={project.name}
-                      className="border-gray-100 border-b dark:border-gray-800"
+                      className="border-liquid-grey border-b dark:border-liquid-grey"
                     >
                       <td className="py-3">{project.name}</td>
                       <td className="py-3">
@@ -631,17 +631,17 @@ export const RealWorldExamples: Story = {
                           className={cn(
                             "rounded-full px-2 py-1 text-xs",
                             project.status === "Active" &&
-                              "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
+                              "bg-liquid-accent text-liquid-accent dark:bg-liquid-accent/20 dark:text-liquid-accent",
                             project.status === "Pending" &&
-                              "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
+                              "bg-liquid-accent text-liquid-accent dark:bg-liquid-accent/20 dark:text-liquid-accent",
                             project.status === "Completed" &&
-                              "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
+                              "bg-liquid-accent text-liquid-accent dark:bg-liquid-accent/20 dark:text-liquid-accent",
                           )}
                         >
                           {project.status}
                         </span>
                       </td>
-                      <td className="py-3 text-gray-600 dark:text-gray-400">
+                      <td className="py-3 text-liquid-secondary dark:text-liquid-grey">
                         {project.date}
                       </td>
                       <td className="py-3 text-right">
@@ -786,7 +786,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="space-y-4 rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
+        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
           <h3 className="font-semibold text-lg">Light Theme</h3>
           <GlassDropdown
             trigger={<GlassButton type="button">Light Theme Menu</GlassButton>}
@@ -812,8 +812,8 @@ export const ThemeShowcase: Story = {
           />
         </div>
 
-        <div className="space-y-4 rounded-xl bg-gray-900/80 p-6 dark:bg-white/80">
-          <h3 className="font-semibold text-lg text-white dark:text-gray-900">
+        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
+          <h3 className="font-semibold text-lg text-liquid-text-inverse dark:text-liquid-grey">
             Dark Theme
           </h3>
           <GlassDropdown
@@ -855,7 +855,7 @@ export const AccessibilityShowcase: Story = {
     <div className="max-w-2xl space-y-8">
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Keyboard Navigation</h3>
-        <p className="text-gray-600 text-sm dark:text-gray-400">
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
           Use Space or Enter to open the dropdown, Escape to close it.
         </p>
         <GlassDropdown
@@ -893,7 +893,7 @@ export const AccessibilityShowcase: Story = {
 
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Screen Reader Support</h3>
-        <p className="text-gray-600 text-sm dark:text-gray-400">
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
           The trigger button has proper ARIA attributes for screen readers.
         </p>
         <GlassDropdown
@@ -939,7 +939,7 @@ export const CustomStyling: Story = {
           { label: "Option 2", value: "opt2" },
           { label: "Option 3", value: "opt3" },
         ]}
-        contentClassName="bg-purple-900/90 border-purple-500/30"
+        contentClassName="bg-liquid-accent/90 border-liquid-accent/30"
       />
 
       <GlassDropdown

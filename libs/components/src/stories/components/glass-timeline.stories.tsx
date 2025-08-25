@@ -173,19 +173,19 @@ export const WithRichContent: Story = {
               <span className="text-[var(--text-secondary)] text-sm">
                 Revenue
               </span>
-              <span className="font-bold text-green-400">+25%</span>
+              <span className="font-bold text-liquid-accent">+25%</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-secondary)] text-sm">
                 Users
               </span>
-              <span className="font-bold text-blue-400">10.5K</span>
+              <span className="font-bold text-liquid-accent">10.5K</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[var(--text-secondary)] text-sm">
                 Engagement
               </span>
-              <span className="font-bold text-purple-400">87%</span>
+              <span className="font-bold text-liquid-accent">87%</span>
             </div>
           </div>
         ),
@@ -312,7 +312,7 @@ export const InteractiveTimeline: Story = {
       ...item,
       content: (
         <div
-          className="cursor-pointer rounded-lg p-3 transition-colors hover:bg-white/5"
+          className="cursor-pointer rounded-lg p-3 transition-colors hover:bg-liquid-bg/5"
           onClick={() => setSelectedItem(item.id)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -397,8 +397,8 @@ export const DarkModeTimeline: Story = {
     alternating: true,
   },
   render: (args) => (
-    <div className="dark min-h-[400px] rounded-lg bg-gray-900 p-8">
-      <h2 className="mb-6 text-center font-bold text-2xl text-white">
+    <div className="dark min-h-[400px] rounded-lg bg-liquid-bg p-8">
+      <h2 className="mb-6 text-center font-bold text-2xl text-liquid-text-inverse">
         Dark Mode Timeline
       </h2>
       <GlassTimeline {...args} />

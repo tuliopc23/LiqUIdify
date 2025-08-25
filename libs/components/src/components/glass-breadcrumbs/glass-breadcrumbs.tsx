@@ -17,8 +17,8 @@ const breadcrumbsVariants = cva({
       lg: "p-3 text-base",
     },
     variant: {
-      default: "bg-[rgba(0,122,255,0.05)]",
-      solid: "bg-[rgba(0,122,255,0.1)]",
+      default: "bg-liquid-accent/5",
+      solid: "bg-liquid-accent/10",
       ghost: "border-transparent bg-transparent",
     },
   },
@@ -36,7 +36,7 @@ const breadcrumbItemVariants = cva({
       false: "text-liquid-text hover:text-liquid-accent",
     },
     isClickable: {
-      true: "cursor-pointer hover:bg-[rgba(0,122,255,0.1)] hover:border-[#007AFF]/30",
+      true: "cursor-pointer hover:bg-liquid-accent/10 hover:border-liquid-accent/30",
       false: "cursor-default",
     },
   },

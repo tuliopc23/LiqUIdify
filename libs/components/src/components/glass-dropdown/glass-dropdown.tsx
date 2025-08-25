@@ -170,7 +170,7 @@ export const GlassDropdown = React.memo(
               style={dropdownStyle}
               className={cn(
                 getGlassClass("elevated"),
-                "rounded-full border border-white/20 py-1 dark:border-white/10",
+                "rounded-full border border-liquid-highlight/20 py-1 dark:border-liquid-highlight/10",
                 "min-w-[160px] max-w-[300px]",
                 "fade-in-0 zoom-in-95 animate-in duration-200",
                 contentClassName,
@@ -181,7 +181,7 @@ export const GlassDropdown = React.memo(
                   return (
                     <div
                       key={`separator-${index}`}
-                      className="my-1 border-white/10 border-t dark:border-white/5"
+                      className="my-1 border-liquid-highlight/10 border-t dark:border-liquid-highlight/5"
                     />
                   );
                 }
@@ -205,7 +205,7 @@ export const GlassDropdown = React.memo(
                       className={cn(
                         "liquid-glass-content w-full px-3 py-2 text-left",
                         "flex items-center gap-2 rounded-full bg-transparent",
-                        "text-gray-900 text-sm dark:text-white",
+                        "text-liquid-secondary text-sm dark:text-liquid-text-inverse",
                         "hover:scale-[1.02] active:scale-[0.98] outline-none",
                         item.disabled && "cursor-not-allowed",
                       )}

@@ -33,14 +33,14 @@ or accepts custom links.
           <header>
             <nav
               id="navigation"
-              className="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800"
+              className="mb-8 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
             >
               <h2 className="mb-2 font-semibold text-lg">Navigation</h2>
               <ul className="flex gap-4">
                 <li>
                   <a
                     href="#placeholder"
-                    className="text-blue-500 hover:underline"
+                    className="text-liquid-accent hover:underline"
                   >
                     Home
                   </a>
@@ -48,7 +48,7 @@ or accepts custom links.
                 <li>
                   <a
                     href="#placeholder"
-                    className="text-blue-500 hover:underline"
+                    className="text-liquid-accent hover:underline"
                   >
                     About
                   </a>
@@ -56,7 +56,7 @@ or accepts custom links.
                 <li>
                   <a
                     href="#placeholder"
-                    className="text-blue-500 hover:underline"
+                    className="text-liquid-accent hover:underline"
                   >
                     Services
                   </a>
@@ -64,7 +64,7 @@ or accepts custom links.
                 <li>
                   <a
                     href="#placeholder"
-                    className="text-blue-500 hover:underline"
+                    className="text-liquid-accent hover:underline"
                   >
                     Contact
                   </a>
@@ -91,7 +91,7 @@ or accepts custom links.
 
           <aside
             id="sidebar"
-            className="mb-8 rounded-lg bg-gray-50 p-4 dark:bg-gray-900"
+            className="mb-8 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
           >
             <h2 className="mb-2 font-semibold text-lg">Sidebar</h2>
             <p>Additional content and links.</p>
@@ -99,7 +99,7 @@ or accepts custom links.
 
           <footer
             id="footer"
-            className="rounded-lg bg-gray-200 p-4 dark:bg-gray-800"
+            className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
           >
             <h2 className="mb-2 font-semibold text-lg">Footer</h2>
             <p>© 2024 Your Company. All rights reserved.</p>
@@ -177,8 +177,8 @@ export const AlwaysVisible: Story = {
 export const Positions: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg border-2 border-gray-300 border-dashed p-4 dark:border-gray-700">
-        <p className="mb-4 text-gray-600 text-sm dark:text-gray-400">
+      <div className="rounded-lg border-2 border-liquid-grey border-dashed p-4 dark:border-liquid-grey">
+        <p className="mb-4 text-liquid-secondary text-sm dark:text-liquid-grey">
           Top Position (Default)
         </p>
         <div className="relative h-32">
@@ -193,8 +193,8 @@ export const Positions: Story = {
         </div>
       </div>
 
-      <div className="rounded-lg border-2 border-gray-300 border-dashed p-4 dark:border-gray-700">
-        <p className="mb-4 text-gray-600 text-sm dark:text-gray-400">
+      <div className="rounded-lg border-2 border-liquid-grey border-dashed p-4 dark:border-liquid-grey">
+        <p className="mb-4 text-liquid-secondary text-sm dark:text-liquid-grey">
           Left Position
         </p>
         <div className="relative h-32">
@@ -209,8 +209,8 @@ export const Positions: Story = {
         </div>
       </div>
 
-      <div className="rounded-lg border-2 border-gray-300 border-dashed p-4 dark:border-gray-700">
-        <p className="mb-4 text-gray-600 text-sm dark:text-gray-400">
+      <div className="rounded-lg border-2 border-liquid-grey border-dashed p-4 dark:border-liquid-grey">
+        <p className="mb-4 text-liquid-secondary text-sm dark:text-liquid-grey">
           Right Position
         </p>
         <div className="relative h-32">
@@ -232,33 +232,33 @@ export const Positions: Story = {
 export const WithInstructions: Story = {
   render: () => (
     <div>
-      <div className="mb-8 rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
+      <div className="mb-8 rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent">
         <h3 className="mb-2 font-semibold">Keyboard Navigation Instructions</h3>
         <ol className="list-inside list-decimal space-y-1 text-sm">
           <li>
             Press{" "}
-            <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
+            <kbd className="rounded bg-liquid-bg px-2 py-1 text-xs dark:bg-liquid-bg">
               Tab
             </kbd>{" "}
             to focus the skip links
           </li>
           <li>
             Use{" "}
-            <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
+            <kbd className="rounded bg-liquid-bg px-2 py-1 text-xs dark:bg-liquid-bg">
               Arrow Keys
             </kbd>{" "}
             to navigate between links
           </li>
           <li>
             Press{" "}
-            <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
+            <kbd className="rounded bg-liquid-bg px-2 py-1 text-xs dark:bg-liquid-bg">
               Enter
             </kbd>{" "}
             to jump to the section
           </li>
           <li>
             Press{" "}
-            <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
+            <kbd className="rounded bg-liquid-bg px-2 py-1 text-xs dark:bg-liquid-bg">
               Escape
             </kbd>{" "}
             to hide the menu
@@ -276,7 +276,7 @@ export const WithInstructions: Story = {
 
       <div
         id="demo-content"
-        className="mt-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800"
+        className="mt-8 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
       >
         <h2 className="mb-2 font-semibold text-lg">Demo Content</h2>
         <p>This is the main content area that can be skipped to.</p>
@@ -284,7 +284,7 @@ export const WithInstructions: Story = {
 
       <div
         id="demo-footer"
-        className="mt-4 rounded-lg bg-gray-200 p-4 dark:bg-gray-700"
+        className="mt-4 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
       >
         <h2 className="mb-2 font-semibold text-lg">Demo Footer</h2>
         <p>This is the footer area.</p>
@@ -306,7 +306,7 @@ export const RealWorldExample: Story = {
         ]}
       />
 
-      <header className="bg-white shadow dark:bg-gray-800">
+      <header className="bg-liquid-bg shadow dark:bg-liquid-bg">
         <nav
           id="main-navigation"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
@@ -319,25 +319,25 @@ export const RealWorldExample: Story = {
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <a
                   href="#placeholder"
-                  className="inline-flex items-center border-blue-500 border-b-2 px-1 pt-1 font-medium text-gray-900 text-sm dark:text-white"
+                  className="inline-flex items-center border-liquid-accent border-b-2 px-1 pt-1 font-medium text-liquid-secondary text-sm dark:text-liquid-text-inverse"
                 >
                   Home
                 </a>
                 <a
                   href="#placeholder"
-                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
+                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-liquid-secondary text-sm hover:text-liquid-secondary dark:hover:text-liquid-secondary"
                 >
                   About
                 </a>
                 <a
                   href="#placeholder"
-                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
+                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-liquid-secondary text-sm hover:text-liquid-secondary dark:hover:text-liquid-secondary"
                 >
                   Services
                 </a>
                 <a
                   href="#placeholder"
-                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
+                  className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-liquid-secondary text-sm hover:text-liquid-secondary dark:hover:text-liquid-secondary"
                 >
                   Contact
                 </a>
@@ -347,7 +347,7 @@ export const RealWorldExample: Story = {
               <input
                 type="search"
                 placeholder="Search..."
-                className="rounded-md border border-gray-300 px-3 py-1 text-sm dark:border-gray-600"
+                className="rounded-md border border-liquid-grey px-3 py-1 text-sm dark:border-liquid-grey"
               />
             </div>
           </div>
@@ -359,7 +359,7 @@ export const RealWorldExample: Story = {
         className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"
       >
         <div className="px-4 py-6 sm:px-0">
-          <h1 className="mb-4 font-bold text-3xl text-gray-900 dark:text-white">
+          <h1 className="mb-4 font-bold text-3xl text-liquid-secondary dark:text-liquid-text-inverse">
             Welcome to Our Website
           </h1>
           <div className="prose dark:prose-invert max-w-none">
@@ -381,21 +381,21 @@ export const RealWorldExample: Story = {
 
       <footer
         id="footer-nav"
-        className="bg-gray-800 text-white dark:bg-gray-900"
+        className="bg-liquid-bg text-liquid-text-inverse dark:bg-liquid-bg"
       >
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <nav className="flex space-x-4">
-            <a href="#placeholder" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
               Privacy Policy
             </a>
-            <a href="#placeholder" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
               Terms of Service
             </a>
-            <a href="#placeholder" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
               Contact Us
             </a>
           </nav>
-          <p className="mt-8 text-center text-gray-400">
+          <p className="mt-8 text-center text-liquid-secondary">
             © 2024 Your Company. All rights reserved.
           </p>
         </div>
@@ -453,7 +453,7 @@ export const StylingVariations: Story = {
 export const AccessibilityTesting: Story = {
   render: () => (
     <div>
-      <div className="mb-8 rounded-lg bg-yellow-50 p-4 dark:bg-yellow-950">
+      <div className="mb-8 rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent">
         <h3 className="mb-2 font-semibold">Screen Reader Testing</h3>
         <p className="mb-2 text-sm">
           Enable your screen reader and navigate through the skip links to test
@@ -477,7 +477,7 @@ export const AccessibilityTesting: Story = {
       <div className="mt-8 space-y-4">
         <section
           id="test-1"
-          className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800"
+          className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
         >
           <h2 className="font-semibold text-lg">First Test Section</h2>
           <p>Content of the first section.</p>
@@ -485,7 +485,7 @@ export const AccessibilityTesting: Story = {
 
         <section
           id="test-2"
-          className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800"
+          className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
         >
           <h2 className="font-semibold text-lg">Second Test Section</h2>
           <p>Content of the second section.</p>
@@ -493,7 +493,7 @@ export const AccessibilityTesting: Story = {
 
         <section
           id="test-3"
-          className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800"
+          className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg"
         >
           <h2 className="font-semibold text-lg">Third Test Section</h2>
           <p>Content of the third section.</p>

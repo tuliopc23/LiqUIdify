@@ -51,7 +51,7 @@ export default function Demo() {
   return (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="text-white mb-4">Basic Search</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Basic Search</h3>
         <GlassSearch
           placeholder="Search documentation..."
           suggestions={suggestions}
@@ -62,7 +62,7 @@ export default function Demo() {
       </div>
 
       <div>
-        <h3 className="text-white mb-4">E-commerce Search</h3>
+        <h3 className="text-liquid-text-inverse mb-4">E-commerce Search</h3>
         <GlassSearch
           placeholder="Search products..."
           suggestions={[
@@ -87,7 +87,7 @@ export default function Demo() {
       </div>
 
       {query && (
-        <div className="text-white/70 text-sm">Current query: "{query}"</div>
+        <div className="text-liquid-text-inverse/70 text-sm">Current query: "{query}"</div>
       )}
     </div>
   );
@@ -123,7 +123,7 @@ export default function SearchTypesDemo() {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-white mb-4">Documentation Search</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Documentation Search</h3>
         <GlassSearch
           placeholder="Search docs, guides, and API..."
           suggestions={documentationSuggestions}
@@ -133,7 +133,7 @@ export default function SearchTypesDemo() {
       </div>
 
       <div>
-        <h3 className="text-white mb-4">User Search</h3>
+        <h3 className="text-liquid-text-inverse mb-4">User Search</h3>
         <GlassSearch
           placeholder="Search users and teams..."
           suggestions={userSuggestions}
@@ -143,7 +143,7 @@ export default function SearchTypesDemo() {
       </div>
 
       <div>
-        <h3 className="text-white mb-4">Minimal Search</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Minimal Search</h3>
         <GlassSearch
           placeholder="Quick search..."
           suggestions={[]}

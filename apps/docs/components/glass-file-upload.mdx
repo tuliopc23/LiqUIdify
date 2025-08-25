@@ -45,7 +45,7 @@ return (
 
 <div className="space-y-6 max-w-lg mx-auto">
 <div>
-<h3 className="text-lg font-medium text-white mb-4">
+<h3 className="text-lg font-medium text-liquid-text-inverse mb-4">
 Basic File Upload
 </h3>
 <GlassFileUpload
@@ -60,7 +60,7 @@ browseText="Choose Files"
 </div>
 
       <div>
-        <h3 className="text-lg font-medium text-white mb-4">Compact Upload</h3>
+        <h3 className="text-lg font-medium text-liquid-text-inverse mb-4">Compact Upload</h3>
         <GlassFileUpload
           size="sm"
           multiple={false}
@@ -72,7 +72,7 @@ browseText="Choose Files"
       </div>
 
       <div>
-        <h3 className="text-lg font-medium text-white mb-4">
+        <h3 className="text-lg font-medium text-liquid-text-inverse mb-4">
           Large Upload Area
         </h3>
         <GlassFileUpload
@@ -86,13 +86,13 @@ browseText="Choose Files"
       </div>
 
       {files.length > 0 && (
-        <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-          <h4 className="font-medium text-white mb-2">Uploaded Files:</h4>
-          <ul className="text-white/70 text-sm space-y-1">
+        <div className="p-4 rounded-lg bg-liquid-bg/5 border border-liquid-highlight/10">
+          <h4 className="font-medium text-liquid-text-inverse mb-2">Uploaded Files:</h4>
+          <ul className="text-liquid-text-inverse/70 text-sm space-y-1">
             {files.map((file) => (
               <li key={file.id} className="flex justify-between">
                 <span>{file.file.name}</span>
-                <span className="text-white/50">
+                <span className="text-liquid-text-inverse/50">
                   {(file.file.size / 1024).toFixed(1)} KB
                 </span>
               </li>
@@ -299,7 +299,7 @@ const handleSubmit = async (e) => {
     onChange={(e) =>
       setFormData((prev) => ({ ...prev, title: e.target.value }))
     }
-    className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
+    className="w-full px-4 py-2 rounded-lg bg-liquid-bg/10 text-liquid-text-inverse"
   />
 
   <textarea
@@ -308,11 +308,11 @@ const handleSubmit = async (e) => {
     onChange={(e) =>
       setFormData((prev) => ({ ...prev, description: e.target.value }))
     }
-    className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
+    className="w-full px-4 py-2 rounded-lg bg-liquid-bg/10 text-liquid-text-inverse"
   />
 
   <div>
-    <label className="block text-sm font-medium text-white mb-2">
+    <label className="block text-sm font-medium text-liquid-text-inverse mb-2">
       Attachments
     </label>
     <GlassFileUpload
@@ -325,13 +325,13 @@ const handleSubmit = async (e) => {
       maxFiles={5}
     />
     {errors.attachments && (
-      <p className="text-red-400 text-sm mt-1">{errors.attachments}</p>
+      <p className="text-liquid-accent text-sm mt-1">{errors.attachments}</p>
     )}
   </div>
 
   <button
     type="submit"
-    className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+    className="px-6 py-2 bg-liquid-accent text-liquid-text-inverse rounded-lg hover:bg-liquid-accent"
   >
     Submit
   </button>

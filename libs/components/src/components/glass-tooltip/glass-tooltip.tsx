@@ -119,7 +119,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         "liquid-glass",
         getGlassClass("elevated"),
         "rounded-full px-3 py-2 text-sm",
-        "border border-white/20 dark:border-white/10",
+        "border border-liquid-highlight/20 dark:border-liquid-highlight/10",
         "text-liquid-primary",
         "max-w-xs break-words",
         "fade-in-0 zoom-in-95 animate-in duration-200",
@@ -135,7 +135,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         className={cn(
           "absolute h-2 w-2 rotate-45",
           getGlassClass("elevated"),
-          "border border-white/20 dark:border-white/10",
+          "border border-liquid-highlight/20 dark:border-liquid-highlight/10",
           position === "top" &&
             "-translate-x-1/2 bottom-[-5px] left-1/2 transform border-t-0 border-l-0",
           position === "bottom" &&

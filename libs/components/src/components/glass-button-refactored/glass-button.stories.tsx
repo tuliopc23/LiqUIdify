@@ -276,7 +276,7 @@ export const Playground: Story = {
 // Dark Mode
 export const DarkMode: Story = {
   render: () => (
-    <div className="dark p-8 bg-gray-900 rounded-lg">
+    <div className="dark p-8 bg-liquid-bg rounded-lg">
       <div className="flex flex-wrap gap-4 items-center">
         <GlassButton variant="primary">Primary Dark</GlassButton>
         <GlassButton variant="secondary">Secondary Dark</GlassButton>
@@ -303,8 +303,8 @@ export const ComplexExample: Story = {
   render: () => (
     <div className="space-y-6 p-6 max-w-md">
       <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold text-white">Liquid Glass Demo</h2>
-        <p className="text-white/80">
+        <h2 className="text-2xl font-bold text-liquid-text-inverse">Liquid Glass Demo</h2>
+        <p className="text-liquid-text-inverse/80">
           Experience the signature liquid glass effect with realistic depth and
           shine.
         </p>

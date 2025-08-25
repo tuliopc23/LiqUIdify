@@ -15,7 +15,7 @@ export const GlassToastProvider = ({ children }) => {
       {children}
       <div className="fixed bottom-4 right-4 z-50 space-y-2">
         {toasts.map((t) => (
-          <div key={t.id} className="min-w-[220px] rounded-md bg-black/80 px-3 py-2 text-white shadow-lg backdrop-blur">
+          <div key={t.id} className="min-w-[220px] rounded-md bg-liquid-bg/80 px-3 py-2 text-liquid-text-inverse shadow-lg backdrop-blur">
             <div className="font-medium">{t.title}</div>
             {t.description && <div className="text-xs opacity-80">{t.description}</div>}
           </div>

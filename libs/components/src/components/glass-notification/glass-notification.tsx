@@ -51,19 +51,19 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const iconClasses = "w-4 h-4 flex-shrink-0";
     switch (type) {
       case "success": {
-        return <CheckCircle className={cn(iconClasses, "text-green-500")} />;
+        return <CheckCircle className={cn(iconClasses, "text-liquid-accent")} />;
       }
       case "error": {
-        return <AlertCircle className={cn(iconClasses, "text-red-500")} />;
+        return <AlertCircle className={cn(iconClasses, "text-liquid-accent")} />;
       }
       case "warning": {
-        return <AlertTriangle className={cn(iconClasses, "text-yellow-500")} />;
+        return <AlertTriangle className={cn(iconClasses, "text-liquid-accent")} />;
       }
       case "info": {
-        return <Info className={cn(iconClasses, "text-blue-500")} />;
+        return <Info className={cn(iconClasses, "text-liquid-accent")} />;
       }
       default: {
-        return <Bell className={cn(iconClasses, "text-gray-500")} />;
+        return <Bell className={cn(iconClasses, "text-liquid-secondary")} />;
       }
     }
   };
@@ -103,7 +103,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       >
         <Bell className="h-5 w-5 text-[var(--text-secondary)]" />
         {unreadCount > 0 && (
-          <span className="-top-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-red-500 font-medium text-white text-xs">
+          <span className="-top-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-liquid-accent font-medium text-liquid-text-inverse text-xs">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -131,7 +131,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   <button
                     type="button"
                     onClick={onMarkAllAsRead}
-                    className="font-medium text-blue-500 text-xs hover:text-blue-600"
+                    className="font-medium text-liquid-accent text-xs hover:text-liquid-accent"
                   >
                     Mark all read
                   </button>
@@ -168,7 +168,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     "border-[var(--liquid-glass-border)] border-b p-4 last:border-b-0",
                     "w-full cursor-pointer text-left hover:bg-[var(--liquid-glass-bg)]",
                     microInteraction.gentle,
-                    !notification.read && "bg-blue-50/50 dark:bg-blue-950/20",
+                    !notification.read && "bg-liquid-accent/50 dark:bg-liquid-accent/20",
                   )}
                   onClick={() => onMarkAsRead?.(notification.id)}
                   onKeyDown={(e) => {
@@ -196,7 +196,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                           {notification.title}
                         </h4>
                         {!notification.read && (
-                          <div className="h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />
+                          <div className="h-2 w-2 flex-shrink-0 rounded-full bg-liquid-accent" />
                         )}
                       </div>
 
@@ -220,7 +220,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                               e.stopPropagation();
                               notification.action?.onClick();
                             }}
-                            className="font-medium text-blue-500 text-xs hover:text-blue-600"
+                            className="font-medium text-liquid-accent text-xs hover:text-liquid-accent"
                           >
                             {notification.action.label}
                           </button>

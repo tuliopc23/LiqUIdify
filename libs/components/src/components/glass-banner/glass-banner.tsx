@@ -17,19 +17,19 @@ interface GlassBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 const variantConfig = {
   info: {
     icon: Info,
-    className: "border-blue-500/20 bg-blue-500/10 text-blue-400",
+    className: "border-liquid-accent/20 bg-liquid-accent/10 text-liquid-accent",
   },
   success: {
     icon: CheckCircle,
-    className: "border-green-500/20 bg-green-500/10 text-green-400",
+    className: "border-liquid-accent/20 bg-liquid-accent/10 text-liquid-accent",
   },
   warning: {
     icon: AlertTriangle,
-    className: "border-yellow-500/20 bg-yellow-500/10 text-yellow-400",
+    className: "border-liquid-accent/20 bg-liquid-accent/10 text-liquid-accent",
   },
   error: {
     icon: AlertCircle,
-    className: "border-red-500/20 bg-red-500/10 text-red-400",
+    className: "border-liquid-accent/20 bg-liquid-accent/10 text-liquid-accent",
   },
 };
 
@@ -82,7 +82,7 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
               type="button"
               onClick={handleDismiss}
               className={cn(
-                "rounded-lg p-1 hover:bg-white/10",
+                "rounded-lg p-1 hover:bg-liquid-bg/10",
                 microInteraction.interactive,
                 "focus:outline-none focus:ring-2 focus:ring-white/20",
               )}

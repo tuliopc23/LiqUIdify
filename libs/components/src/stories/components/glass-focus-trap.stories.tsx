@@ -112,7 +112,7 @@ export const ModalExample: Story = {
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
-              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              className="absolute inset-0 bg-liquid-bg/20 backdrop-blur-sm"
               onClick={() => setShowModal(false)}
             />
             <GlassFocusTrap
@@ -234,7 +234,7 @@ export const NestedTraps: Story = {
                   escapeDeactivates
                   onDeactivate={() => setInnerActive(false)}
                 >
-                  <div className="rounded-lg border-2 border-blue-500/30 bg-blue-500/10 p-4">
+                  <div className="rounded-lg border-2 border-liquid-accent/30 bg-liquid-accent/10 p-4">
                     <h4 className="mb-2 font-bold">Inner Focus Trap</h4>
                     <p className="mb-3 text-[var(--text-secondary)] text-sm">
                       Focus is now trapped in this inner area.

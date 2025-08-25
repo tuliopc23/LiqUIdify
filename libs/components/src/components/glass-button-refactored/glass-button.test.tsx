@@ -74,7 +74,7 @@ describe("GlassButton", () => {
         "from-red-500",
         "to-red-600",
       );
-      expect(button).toHaveClass("text-white", "font-semibold");
+      expect(button).toHaveClass("text-liquid-text-inverse", "font-semibold");
     });
   });
 

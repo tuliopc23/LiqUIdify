@@ -101,7 +101,7 @@ const glassVariants = createVariants({
     default: "bg-liquid-bg/10 border-liquid-highlight/20",
     primary: "bg-apple-blue-500/10 border-apple-blue-500/20",
     secondary: "bg-liquid-bg/15 border-liquid-highlight/25",
-    destructive: "bg-red-500/10 border-red-500/20",
+    destructive: "bg-liquid-accent/10 border-liquid-accent/20",
     outline: "border-2 bg-transparent",
     ghost: "bg-transparent border-transparent hover:bg-liquid-bg/10",
     link: "bg-transparent border-transparent underline-offset-4 hover:underline",

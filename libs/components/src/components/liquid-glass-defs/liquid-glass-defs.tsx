@@ -40,7 +40,7 @@ export function LiquidGlassDefs() {
           <feBlend in="orig" in2="blur" mode="screen"/>
         </filter>
         <filter id="liquid-glass-edge">
-          <feSpecularLighting result="spec" specularExponent="20" lighting-color="#ffffff">
+          <feSpecularLighting result="spec" specularExponent="20" lighting-color="var(--liquid-highlight, #ffffff)">
             <fePointLight x="-5000" y="-10000" z="20000" />
           </feSpecularLighting>
           <feComposite in2="SourceAlpha" operator="in" />
@@ -67,7 +67,7 @@ export function LiquidGlassDefs() {
           </feComponentTransfer>
         </filter>
         <filter id="liquid-glass-specular">
-          <feSpecularLighting surfaceScale="1" specularConstant="0.75" specularExponent="16" lighting-color="#ffffff">
+          <feSpecularLighting surfaceScale="1" specularConstant="0.75" specularExponent="16" lighting-color="var(--liquid-highlight, #ffffff)">
             <fePointLight x="-200" y="-100" z="200" />
           </feSpecularLighting>
         </filter>

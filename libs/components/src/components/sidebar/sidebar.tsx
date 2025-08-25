@@ -129,7 +129,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       >
         {/* Header */}
         {header && (
-          <div className="flex items-center justify-between p-4 border-b border-white/10">
+          <div className="flex items-center justify-between p-4 border-b border-liquid-highlight/10">
             {header}
             {overlay && (
               <GlassButton
@@ -161,7 +161,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         <div className="flex-1 overflow-y-auto p-4">{children}</div>
 
         {/* Footer */}
-        {footer && <div className="p-4 border-t border-white/10">{footer}</div>}
+        {footer && <div className="p-4 border-t border-liquid-highlight/10">{footer}</div>}
       </div>
     );
 

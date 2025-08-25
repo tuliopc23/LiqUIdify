@@ -245,7 +245,7 @@ export const CustomStyling: Story = {
   args: {
     items: navigationItems,
     className:
-      "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30",
+      "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-liquid-accent/30",
   },
   parameters: {
     docs: {

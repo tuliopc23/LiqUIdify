@@ -120,10 +120,10 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
   };
 
   const iconColors = {
-    success: "text-green-400",
-    error: "text-red-400",
-    warning: "text-yellow-400",
-    info: "text-blue-400",
+    success: "text-liquid-accent",
+    error: "text-liquid-accent",
+    warning: "text-liquid-accent",
+    info: "text-liquid-accent",
   };
 
   const Icon = icons[toast.type || "info"];
@@ -217,10 +217,10 @@ const _GlassToast: React.FC<GlassToastProps> = ({
   };
 
   const iconColors = {
-    success: "text-green-400",
-    error: "text-red-400",
-    warning: "text-yellow-400",
-    info: "text-blue-400",
+    success: "text-liquid-accent",
+    error: "text-liquid-accent",
+    warning: "text-liquid-accent",
+    info: "text-liquid-accent",
   };
 
   const Icon = icons[type];

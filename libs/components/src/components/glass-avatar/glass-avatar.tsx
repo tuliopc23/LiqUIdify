@@ -46,10 +46,10 @@ export const GlassAvatar = React.memo(
       };
 
       const statusColors = {
-        online: "bg-green-500",
+        online: "bg-liquid-accent",
         offline: "bg-liquid-highlight/40",
-        away: "bg-yellow-500",
-        busy: "bg-red-500",
+        away: "bg-liquid-accent",
+        busy: "bg-liquid-accent",
       };
 
       const statusSizes = {

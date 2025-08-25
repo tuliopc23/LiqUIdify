@@ -46,7 +46,7 @@ export const Playground = () => (
 export const EdgeCases = () => (
   <div className="apple-glass mx-auto max-w-md space-y-6 p-8">
     <div>
-      <h3 className="mb-2 text-white">Disabled Options</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">Disabled Options</h3>
       <GlassCombobox
         options={disabledOptions}
         placeholder="Some options are disabled..."
@@ -54,7 +54,7 @@ export const EdgeCases = () => (
       />
     </div>
     <div>
-      <h3 className="mb-2 text-white">Loading State</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">Loading State</h3>
       <GlassCombobox
         options={sampleOptions}
         placeholder="Loading..."
@@ -63,7 +63,7 @@ export const EdgeCases = () => (
       />
     </div>
     <div>
-      <h3 className="mb-2 text-white">Empty State</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">Empty State</h3>
       <GlassCombobox
         options={[]}
         placeholder="No options available"

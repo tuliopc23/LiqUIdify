@@ -17,7 +17,7 @@ export const GlassTooltip = ({ content, children }) => {
     <span className="relative inline-block" onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>
       {children}
       {open && (
-        <span role="tooltip" className="absolute left-1/2 z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-xs text-white shadow-lg backdrop-blur">
+        <span role="tooltip" className="absolute left-1/2 z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-liquid-bg/80 px-2 py-1 text-xs text-liquid-text-inverse shadow-lg backdrop-blur">
           {content}
         </span>
       )}

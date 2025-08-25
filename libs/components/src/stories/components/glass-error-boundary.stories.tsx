@@ -117,7 +117,7 @@ export const CustomFallback: Story = {
             fallback={(error, _errorInfo) => (
               <div className="glass-effect rounded-lg p-8 text-center">
                 <div className="mb-4 text-6xl">🚨</div>
-                <h3 className="mb-2 font-bold text-red-600 text-xl">
+                <h3 className="mb-2 font-bold text-liquid-accent text-xl">
                   Oops! Something went wrong
                 </h3>
                 <p className="mb-4 text-[var(--text-secondary)]">
