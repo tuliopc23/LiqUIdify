@@ -199,7 +199,7 @@ export const Templates: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Button Template
         </h3>
         <GlassPlayground
@@ -211,7 +211,7 @@ export const Templates: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Card Template
         </h3>
         <GlassPlayground
@@ -223,7 +223,7 @@ export const Templates: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Form Template
         </h3>
         <GlassPlayground
@@ -243,7 +243,7 @@ export const LayoutVariations: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Editor Only
         </h3>
         <GlassPlayground
@@ -256,7 +256,7 @@ export const LayoutVariations: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Preview Only
         </h3>
         <GlassPlayground
@@ -269,7 +269,7 @@ export const LayoutVariations: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">Read-only</h3>
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">Read-only</h3>
         <GlassPlayground
           code={PlaygroundTemplates.button}
           title="Read-only Example"
@@ -317,7 +317,7 @@ export const InteractiveDemo: Story = {
     return (
       <div className="space-y-6 p-6">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Playground Controls
           </h3>
           <GlassCard className="p-6">
@@ -325,7 +325,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="template-select"
-                  className="mb-2 block font-medium text-sm text-white/90"
+                  className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
                 >
                   Template
                 </label>
@@ -344,7 +344,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="height-input"
-                  className="mb-2 block font-medium text-sm text-white/90"
+                  className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
                 >
                   Height
                 </label>
@@ -361,7 +361,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="theme-select"
-                  className="mb-2 block font-medium text-sm text-white/90"
+                  className="mb-2 block font-medium text-sm text-liquid-text-inverse/90"
                 >
                   Theme
                 </label>
@@ -382,7 +382,7 @@ export const InteractiveDemo: Story = {
                   onChange={setShowEditor}
                   id="show-editor"
                 />
-                <label htmlFor="show-editor" className="text-sm text-white/90">
+                <label htmlFor="show-editor" className="text-sm text-liquid-text-inverse/90">
                   Show Editor
                 </label>
               </div>
@@ -393,7 +393,7 @@ export const InteractiveDemo: Story = {
                   onChange={setShowPreview}
                   id="show-preview"
                 />
-                <label htmlFor="show-preview" className="text-sm text-white/90">
+                <label htmlFor="show-preview" className="text-sm text-liquid-text-inverse/90">
                   Show Preview
                 </label>
               </div>
@@ -404,7 +404,7 @@ export const InteractiveDemo: Story = {
                   onChange={setIsEditable}
                   id="is-editable"
                 />
-                <label htmlFor="is-editable" className="text-sm text-white/90">
+                <label htmlFor="is-editable" className="text-sm text-liquid-text-inverse/90">
                   Editable
                 </label>
               </div>
@@ -413,7 +413,7 @@ export const InteractiveDemo: Story = {
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-white/90">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
             Live Playground
           </h3>
           <GlassPlayground
@@ -438,7 +438,7 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Component Documentation
         </h3>
         <GlassPlayground
@@ -449,13 +449,13 @@ function DocumentationExample() {
 
   return (
     <GlassCard className="max-w-md p-6">
-      <h3 className="mb-4 text-lg font-semibold text-white/90">
+      <h3 className="mb-4 text-lg font-semibold text-liquid-text-inverse/90">
         Interactive Counter
       </h3>
 
       <div className="space-y-4">
         <div className="text-center">
-          <span className="text-2xl font-bold text-blue-400">{count}</span>
+          <span className="text-2xl font-bold text-liquid-accent">{count}</span>
         </div>
 
         <div className="flex gap-2">
@@ -494,7 +494,7 @@ render(<DocumentationExample />);
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Design System Showcase
         </h3>
         <GlassPlayground
@@ -502,34 +502,34 @@ render(<DocumentationExample />);
 // Design System Color Palette
 function ColorPalette() {
   const colors = [
-    { name: 'Primary', class: 'bg-blue-500' },
-    { name: 'Secondary', class: 'bg-gray-500' },
-    { name: 'Success', class: 'bg-green-500' },
-    { name: 'Warning', class: 'bg-yellow-500' },
-    { name: 'Error', class: 'bg-red-500' },
+    { name: 'Primary', class: 'bg-liquid-accent' },
+    { name: 'Secondary', class: 'bg-liquid-bg' },
+    { name: 'Success', class: 'bg-liquid-accent' },
+    { name: 'Warning', class: 'bg-liquid-accent' },
+    { name: 'Error', class: 'bg-liquid-accent' },
   ];
 
   return (
     <div className="space-y-6">
-      <h3 className="text-xl font-bold text-white/90">Color System</h3>
+      <h3 className="text-xl font-bold text-liquid-text-inverse/90">Color System</h3>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
         {colors.map((color) => (
           <div key={color.name} className="text-center">
             <div className={\`\${color.class} mx-auto mb-2 h-16 w-16 rounded-lg\`} />
-            <span className="text-sm text-white/70">{color.name}</span>
+            <span className="text-sm text-liquid-text-inverse/70">{color.name}</span>
           </div>
         ))}
       </div>
 
       <div className="space-y-4">
-        <h4 className="font-semibold text-white/90">Typography Scale</h4>
+        <h4 className="font-semibold text-liquid-text-inverse/90">Typography Scale</h4>
         <div className="space-y-2">
-          <div className="text-3xl font-bold text-white/90">Heading 1</div>
-          <div className="text-2xl font-semibold text-white/80">Heading 2</div>
-          <div className="text-xl font-medium text-white/70">Heading 3</div>
-          <div className="text-base text-white/60">Body Text</div>
-          <div className="text-sm text-white/50">Small Text</div>
+          <div className="text-3xl font-bold text-liquid-text-inverse/90">Heading 1</div>
+          <div className="text-2xl font-semibold text-liquid-text-inverse/80">Heading 2</div>
+          <div className="text-xl font-medium text-liquid-text-inverse/70">Heading 3</div>
+          <div className="text-base text-liquid-text-inverse/60">Body Text</div>
+          <div className="text-sm text-liquid-text-inverse/50">Small Text</div>
         </div>
       </div>
     </div>
@@ -546,7 +546,7 @@ render(<ColorPalette />);
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Interactive Tutorial
         </h3>
         <GlassPlayground
@@ -591,14 +591,14 @@ function TutorialStep() {
   return (
     <GlassCard className="max-w-lg p-6">
       <div className="mb-4 text-center">
-        <span className="text-sm text-white/60">Step {step} of {totalSteps}</span>
+        <span className="text-sm text-liquid-text-inverse/60">Step {step} of {totalSteps}</span>
       </div>
 
-      <h3 className="mb-2 text-lg font-semibold text-white/90">
+      <h3 className="mb-2 text-lg font-semibold text-liquid-text-inverse/90">
         {currentStep.title}
       </h3>
 
-      <p className="mb-6 text-white/70">
+      <p className="mb-6 text-liquid-text-inverse/70">
         {currentStep.content}
       </p>
 
@@ -642,7 +642,7 @@ export const AdvancedFeatures: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Tabbed Interface
         </h3>
         <GlassTabs
@@ -699,14 +699,14 @@ function CustomGlassComponent() {
   return (
     <div className={\`
       relative p-6 rounded-xl transition-all duration-300
-      \${isActive ? 'bg-blue-500/20 border-blue-400/30' : 'bg-white/10 border-white/20'}
+      \${isActive ? 'bg-liquid-accent/20 border-liquid-accent/30' : 'bg-liquid-bg/10 border-liquid-highlight/20'}
       border backdrop-blur-md
     \`}>
-      <h3 className="mb-4 text-lg font-semibold text-white/90">
+      <h3 className="mb-4 text-lg font-semibold text-liquid-text-inverse/90">
         Custom Glass Component
       </h3>
 
-      <p className="mb-4 text-white/70">
+      <p className="mb-4 text-liquid-text-inverse/70">
         This is a custom component built with glassmorphism effects.
       </p>
 
@@ -733,7 +733,7 @@ render(<CustomGlassComponent />);
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Fullscreen Mode
         </h3>
         <GlassPlayground
@@ -766,7 +766,7 @@ function FullscreenDemo() {
 
   return (
     <div className="max-w-md space-y-6">
-      <h3 className="text-xl font-bold text-white/90">Todo List</h3>
+      <h3 className="text-xl font-bold text-liquid-text-inverse/90">Todo List</h3>
 
       <div className="flex gap-2">
         <GlassInput
@@ -786,7 +786,7 @@ function FullscreenDemo() {
             key={item.id}
             className={\`
               flex items-center gap-3 p-3 rounded-lg transition-all
-              \${item.completed ? 'bg-green-500/20 border-green-400/30' : 'bg-white/10 border-white/20'}
+              \${item.completed ? 'bg-liquid-accent/20 border-liquid-accent/30' : 'bg-liquid-bg/10 border-liquid-highlight/20'}
               border backdrop-blur-sm
             \`}
           >
@@ -796,7 +796,7 @@ function FullscreenDemo() {
               onChange={() => toggleItem(item.id)}
               className="h-4 w-4" />
             <span className={\`
-              flex-1 \${item.completed ? 'line-through text-white/50' : 'text-white/90'}
+              flex-1 \${item.completed ? 'line-through text-liquid-text-inverse/50' : 'text-liquid-text-inverse/90'}
             \`}>
               {item.name}
             </span>
@@ -824,7 +824,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Light Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -839,7 +839,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">Dark Theme</h3>
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">Dark Theme</h3>
         <div className="rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-6">
           <GlassPlayground
             code={PlaygroundTemplates.card}
@@ -860,29 +860,29 @@ export const AccessibilityShowcase: Story = {
   render: () => (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Accessibility Features
         </h3>
         <GlassCard className="p-6">
-          <ul className="space-y-2 text-sm text-white/80">
+          <ul className="space-y-2 text-sm text-liquid-text-inverse/80">
             <li className="flex items-center gap-2">
-              <Eye className="h-4 w-4 text-green-400" />
+              <Eye className="h-4 w-4 text-liquid-accent" />
               Keyboard navigation between editor and preview
             </li>
             <li className="flex items-center gap-2">
-              <Code className="h-4 w-4 text-green-400" />
+              <Code className="h-4 w-4 text-liquid-accent" />
               Screen reader announcements for code changes
             </li>
             <li className="flex items-center gap-2">
-              <Settings className="h-4 w-4 text-green-400" />
+              <Settings className="h-4 w-4 text-liquid-accent" />
               Focus management and ARIA attributes
             </li>
             <li className="flex items-center gap-2">
-              <Palette className="h-4 w-4 text-green-400" />
+              <Palette className="h-4 w-4 text-liquid-accent" />
               High contrast mode support
             </li>
             <li className="flex items-center gap-2">
-              <FileCode className="h-4 w-4 text-green-400" />
+              <FileCode className="h-4 w-4 text-liquid-accent" />
               Semantic HTML structure
             </li>
           </ul>
@@ -890,7 +890,7 @@ export const AccessibilityShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-white/90">
+        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
           Keyboard Navigation Test
         </h3>
         <GlassPlayground
@@ -912,10 +912,10 @@ function AccessibleDemo() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-white/90">
+      <h3 className="text-lg font-semibold text-liquid-text-inverse/90">
         Keyboard Navigation Demo
       </h3>
-      <p className="text-sm text-white/70">
+      <p className="text-sm text-liquid-text-inverse/70">
         Use arrow keys to navigate, Enter to select
       </p>
 
@@ -932,8 +932,8 @@ function AccessibleDemo() {
             className={\`
               p-3 rounded-lg transition-all cursor-pointer
               \${index === focusedIndex
-                ? 'bg-blue-500/30 border-blue-400/50 ring-2 ring-blue-400/50'
-                : 'bg-white/10 border-white/20 hover:bg-white/20'
+                ? 'bg-liquid-accent/30 border-liquid-accent/50 ring-2 ring-blue-400/50'
+                : 'bg-liquid-bg/10 border-liquid-highlight/20 hover:bg-liquid-bg/20'
               }
               border backdrop-blur-sm
             \`}

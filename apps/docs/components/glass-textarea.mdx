@@ -56,9 +56,9 @@ export default function Demo() {
         />
       </div>
 
-      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-        <h3 className="font-medium text-white mb-2">Character Counts:</h3>
-        <div className="text-white/70 text-sm space-y-1">
+      <div className="p-4 rounded-lg bg-liquid-bg/5 border border-liquid-highlight/10">
+        <h3 className="font-medium text-liquid-text-inverse mb-2">Character Counts:</h3>
+        <div className="text-liquid-text-inverse/70 text-sm space-y-1">
           <p>Message: {message.length}/500</p>
           <p>Feedback: {feedback.length}</p>
           <p>Notes: {notes.length}</p>
@@ -173,7 +173,7 @@ const handleDescriptionChange = (value) => {
     onChange={(e) =>
       setFormData((prev) => ({ ...prev, title: e.target.value }))
     }
-    className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
+    className="w-full px-4 py-2 rounded-lg bg-liquid-bg/10 text-liquid-text-inverse"
   />
 
   <GlassTextarea
@@ -229,7 +229,7 @@ const handleContentChange = (value) => {
     characterCountPosition="bottom-left"
   />
 
-  <div className="mt-2 text-sm text-white/60">
+  <div className="mt-2 text-sm text-liquid-text-inverse/60">
     Words: {wordCount} | Estimated reading time: {Math.ceil(wordCount / 200)}{" "}
     min
   </div>
@@ -273,7 +273,7 @@ const handleChange = (value) => {
     minRows={10}
   />
 
-  <div className="mt-2 text-xs text-white/50">
+  <div className="mt-2 text-xs text-liquid-text-inverse/50">
     {saving
       ? "Saving..."
       : lastSaved

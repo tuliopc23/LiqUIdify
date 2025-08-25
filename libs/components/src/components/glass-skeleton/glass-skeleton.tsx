@@ -8,8 +8,8 @@ const skeletonVariants = cva({
   variants: {
     variant: {
       default: "bg-gradient-to-r from-white/10 via-white/20 to-white/10",
-      shimmer: "bg-white/10",
-      pulse: "bg-white/15",
+      shimmer: "bg-liquid-bg/10",
+      pulse: "bg-liquid-bg/15",
     },
     size: {
       sm: "h-4",

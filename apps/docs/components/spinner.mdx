@@ -17,7 +17,7 @@ export default function Demo() {
   return (
     <div className="space-y-8 p-6">
       <div>
-        <h3 className="text-white mb-4">Default Spinner Variants</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Default Spinner Variants</h3>
         <div className="flex gap-6 items-center flex-wrap">
           <GlassSpinner variant="default" size="md" />
           <GlassSpinner variant="primary" size="md" />
@@ -27,7 +27,7 @@ export default function Demo() {
         </div>
       </div>
       <div>
-        <h3 className="text-white mb-4">Sizes</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Sizes</h3>
         <div className="flex gap-6 items-center">
           <GlassSpinner size="xs" />
           <GlassSpinner size="sm" />
@@ -38,7 +38,7 @@ export default function Demo() {
         </div>
       </div>
       <div>
-        <h3 className="text-white mb-4">Alternative Spinners</h3>
+        <h3 className="text-liquid-text-inverse mb-4">Alternative Spinners</h3>
         <div className="flex gap-8 items-center flex-wrap">
           <PulseSpinner size="md" />
           <DotsSpinner size="md" count={4} />
@@ -47,7 +47,7 @@ export default function Demo() {
         </div>
       </div>
       <div>
-        <h3 className="text-white mb-4">With Labels</h3>
+        <h3 className="text-liquid-text-inverse mb-4">With Labels</h3>
         <div className="space-y-4">
           <GlassSpinner
             showLabel
@@ -63,9 +63,9 @@ export default function Demo() {
         </div>
       </div>
       <div>
-        <h3 className="text-white mb-4">Centered Overlay</h3>
-        <div className="relative h-32 bg-white/5 rounded-lg border border-white/10">
-          <div className="p-4 text-white/70">Content behind spinner</div>
+        <h3 className="text-liquid-text-inverse mb-4">Centered Overlay</h3>
+        <div className="relative h-32 bg-liquid-bg/5 rounded-lg border border-liquid-highlight/10">
+          <div className="p-4 text-liquid-text-inverse/70">Content behind spinner</div>
           {loading && <GlassSpinner centered showLabel label="Loading..." />}
         </div>
         <GlassButton onClick={simulateLoading} className="mt-4">

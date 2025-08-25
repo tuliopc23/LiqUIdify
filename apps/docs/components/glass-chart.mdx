@@ -291,7 +291,7 @@ const ChartWithErrorBoundary = ({ data }) => {
   if (!data || data.length === 0) {
     return (
       <div className="flex items-center justify-center h-48">
-        <p className="text-white/60">No data available</p>
+        <p className="text-liquid-text-inverse/60">No data available</p>
       </div>
     );
   }
@@ -314,7 +314,7 @@ const ChartWithLoading = ({ data, loading }) => {
   if (loading) {
     return (
       <div className="animate-pulse">
-        <div className="h-48 bg-white/10 rounded-xl"></div>
+        <div className="h-48 bg-liquid-bg/10 rounded-xl"></div>
       </div>
     );
   }

@@ -63,7 +63,7 @@ const labelVariants = cva({
   base: "block font-medium text-liquid-primary transition-colors duration-200 leading-tight",
   variants: {
     required: {
-      true: "after:ml-1 after:text-red-400 after:content-['*']",
+      true: "after:ml-1 after:text-liquid-accent after:content-['*']",
       false: "",
     },
     size: {
@@ -83,9 +83,9 @@ const helperTextVariants = cva({
   variants: {
     state: {
       default: "text-liquid-tertiary",
-      error: "text-red-400",
-      success: "text-green-400",
-      warning: "text-yellow-400",
+      error: "text-liquid-accent",
+      success: "text-liquid-accent",
+      warning: "text-liquid-accent",
     },
   },
   defaultVariants: {

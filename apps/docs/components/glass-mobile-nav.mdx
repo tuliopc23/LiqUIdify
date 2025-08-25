@@ -71,11 +71,11 @@ export default function Demo() {
         activeItemId={activeItem}
         onItemClick={(item) => setActiveItem(item.id)}
         header={
-          <h2 className="text-lg font-semibold text-white">Navigation</h2>
+          <h2 className="text-lg font-semibold text-liquid-text-inverse">Navigation</h2>
         }
-        footer={<p className="text-sm text-white/60">v1.0.0</p>}
+        footer={<p className="text-sm text-liquid-text-inverse/60">v1.0.0</p>}
       />
-      <span className="text-white/80">Active: {activeItem}</span>
+      <span className="text-liquid-text-inverse/80">Active: {activeItem}</span>
     </div>
   );
 }

@@ -202,7 +202,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
       "disabled:cursor-not-allowed disabled:opacity-50",
       SIZE_CLASSES[size],
       error
-        ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
+        ? "border-liquid-accent/50 focus:border-liquid-accent focus:ring-red-500/20"
         : "border-liquid-glass-hl/30 focus:border-text-liquid-accent focus:ring-text-liquid-accent/20",
     );
 
@@ -227,7 +227,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             )}
           >
             {label}
-            {props.required && <span className="ml-1 text-red-400">*</span>}
+            {props.required && <span className="ml-1 text-liquid-accent">*</span>}
           </label>
         )}
 
@@ -281,7 +281,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
                 characterCountPosition === "bottom-right"
                   ? "right-3"
                   : "left-3",
-                isOverLimit ? "text-red-400" : "text-liquid-grey/70",
+                isOverLimit ? "text-liquid-accent" : "text-liquid-grey/70",
               )}
             >
               {maxLength ? `${characterCount}/${maxLength}` : characterCount}
@@ -295,7 +295,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-400" : "text-liquid-grey/80",
+              error ? "text-liquid-accent" : "text-liquid-grey/80",
             )}
           >
             {helperText}

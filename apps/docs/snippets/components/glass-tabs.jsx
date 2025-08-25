@@ -7,12 +7,12 @@ export const GlassTabs = ({ tabs, defaultTabId }) => {
     <div>
       <div className="mb-2 flex gap-2">
         {tabs.map(t => (
-          <button key={t.id} onClick={() => setActive(t.id)} className={`rounded-md px-3 py-1.5 text-sm ${t.id === active ? 'bg-blue-600 text-white' : 'bg-black/5 dark:bg-white/10'}`}>
+          <button key={t.id} onClick={() => setActive(t.id)} className={`rounded-md px-3 py-1.5 text-sm ${t.id === active ? 'bg-liquid-accent text-liquid-text-inverse' : 'bg-liquid-bg/5 dark:bg-liquid-bg/10'}`}>
             {t.label}
           </button>
         ))}
       </div>
-      <div className="rounded-lg border border-black/10 p-3 dark:border-white/10">
+      <div className="rounded-lg border border-liquid-highlight/10 p-3 dark:border-liquid-highlight/10">
         {current?.content}
       </div>
     </div>

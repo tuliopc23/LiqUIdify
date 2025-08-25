@@ -29,7 +29,7 @@ const radioGroupVariants = cva({
 });
 
 const radioItemVariants = cva({
-  base: "group flex cursor-pointer items-center gap-2 rounded-xl p-2 transition-all duration-200 hover:bg-[rgba(0,122,255,0.05)] focus:bg-[rgba(0,122,255,0.1)] focus:outline-none data-[state=checked]:bg-[rgba(0,122,255,0.1)] data-[state=checked]:shadow-lg border border-[#007AFF]/20 backdrop-blur-md liquid-glass",
+  base: "group flex cursor-pointer items-center gap-2 rounded-xl p-2 transition-all duration-200 hover:bg-liquid-accent/5 focus:bg-liquid-accent/10 focus:outline-none data-[state=checked]:bg-liquid-accent/10 data-[state=checked]:shadow-lg border border-liquid-accent/20 backdrop-blur-md liquid-glass",
   variants: {
     size: {
       sm: "gap-1.5 p-1.5 text-sm",
@@ -37,9 +37,9 @@ const radioItemVariants = cva({
       lg: "gap-3 p-3 text-lg",
     },
     variant: {
-      default: "bg-[rgba(0,122,255,0.05)] hover:bg-[rgba(0,122,255,0.1)]",
-      solid: "bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.15)]",
-      ghost: "bg-transparent hover:bg-[rgba(0,122,255,0.05)]",
+      default: "bg-liquid-accent/5 hover:bg-liquid-accent/10",
+      solid: "bg-liquid-accent/10 hover:bg-liquid-accent/15",
+      ghost: "bg-transparent hover:bg-liquid-accent/5",
     },
   },
   defaultVariants: {
@@ -49,7 +49,7 @@ const radioItemVariants = cva({
 });
 
 const radioIndicatorVariants = cva({
-  base: "relative h-5 w-5 rounded-full border-2 border-white/20 group-data-[state=checked]:border-blue-400 group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-blue-400/20 group-data-[state=checked]:to-purple-400/20 backdrop-blur-sm transition-all duration-200 group-hover:border-white/40 group-focus:border-blue-400",
+  base: "relative h-5 w-5 rounded-full border-2 border-liquid-highlight/20 group-data-[state=checked]:border-liquid-accent group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-liquid-primary/20 group-data-[state=checked]:to-liquid-primary-light/20 backdrop-blur-sm transition-all duration-200 group-hover:border-liquid-highlight/40 group-focus:border-liquid-accent",
   variants: {},
 });
 

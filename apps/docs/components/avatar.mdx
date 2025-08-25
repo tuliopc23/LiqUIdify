@@ -219,7 +219,7 @@ function TeamMembersList({ members }) {
       {members.map((member) => (
         <div
           key={member.id}
-          className="flex items-center justify-between p-4 rounded-lg bg-white/5"
+          className="flex items-center justify-between p-4 rounded-lg bg-liquid-bg/5"
         >
           <div className="flex items-center gap-3">
             <GlassAvatar
@@ -381,7 +381,7 @@ Following Apple's Human Interface Guidelines for user representation:
 function UserDropdown({ user }) {
   return (
     <div className="relative">
-      <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-white/10">
+      <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-liquid-bg/10">
         <GlassAvatar
           src={user.avatar}
           alt={user.name}
@@ -412,7 +412,7 @@ function MessageThread({ messages }) {
             size="sm"
           />
           <div className="flex-1">
-            <div className="bg-white/10 rounded-lg p-3">
+            <div className="bg-liquid-bg/10 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-medium text-sm">
                   {message.sender.name}
@@ -436,7 +436,7 @@ function MessageThread({ messages }) {
 ```tsx
 function ProfileCard({ user }) {
   return (
-    <div className="text-center p-6 bg-white/10 rounded-xl">
+    <div className="text-center p-6 bg-liquid-bg/10 rounded-xl">
       <GlassAvatar
         src={user.avatar}
         alt={user.name}

@@ -16,7 +16,7 @@ import { cn } from "../../core/utils/classname";
 import { createVariants as cva } from "../../lib/variant-system";
 
 const fileUploadVariants = cva({
-  base: "relative w-full rounded-xl border-2 border-dashed bg-white/5 backdrop-blur-sm transition-all duration-200",
+  base: "relative w-full rounded-xl border-2 border-dashed bg-liquid-bg/5 backdrop-blur-sm transition-all duration-200",
   variants: {
     size: {
       sm: "min-h-[120px] p-4",
@@ -24,10 +24,10 @@ const fileUploadVariants = cva({
       lg: "min-h-[200px] p-8",
     },
     state: {
-      idle: "border-white/20 hover:border-white/40 hover:bg-white/10",
-      dragover: "border-blue-400 bg-blue-500/10",
-      uploading: "border-green-400 bg-green-500/10",
-      error: "border-red-400 bg-red-500/10",
+      idle: "border-liquid-highlight/20 hover:border-liquid-highlight/40 hover:bg-liquid-bg/10",
+      dragover: "border-liquid-accent bg-liquid-accent/10",
+      uploading: "border-liquid-accent bg-liquid-accent/10",
+      error: "border-liquid-accent bg-liquid-accent/10",
     },
   },
   defaultVariants: {
@@ -37,13 +37,13 @@ const fileUploadVariants = cva({
 });
 
 const fileItemVariants = cva({
-  base: "flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3 backdrop-blur-sm transition-all duration-200",
+  base: "flex items-center gap-3 rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-3 backdrop-blur-sm transition-all duration-200",
   variants: {
     status: {
-      pending: "border-white/10 bg-white/5",
-      uploading: "border-blue-400/50 bg-blue-500/10",
-      success: "border-green-400/50 bg-green-500/10",
-      error: "border-red-400/50 bg-red-500/10",
+      pending: "border-liquid-highlight/10 bg-liquid-bg/5",
+      uploading: "border-liquid-accent/50 bg-liquid-accent/10",
+      success: "border-liquid-accent/50 bg-liquid-accent/10",
+      error: "border-liquid-accent/50 bg-liquid-accent/10",
     },
   },
   defaultVariants: {
@@ -372,12 +372,12 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
             <Upload
               className={cn(
                 "h-12 w-12 transition-colors duration-200",
-                isDragOver ? "text-blue-400" : "text-white/60",
+                isDragOver ? "text-liquid-accent" : "text-liquid-text-inverse/60",
               )}
             />
           </div>
 
-          <p className="mb-2 text-white/80">{dropzoneText}</p>
+          <p className="mb-2 text-liquid-text-inverse/80">{dropzoneText}</p>
 
           <button
             type="button"
@@ -385,8 +385,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
             disabled={disabled}
             className={cn(
               "rounded-lg px-4 py-2 transition-all duration-200",
-              "bg-blue-500/20 text-blue-400 hover:bg-blue-500/30",
-              "border border-blue-400/30 hover:border-blue-400/50",
+              "bg-liquid-accent/20 text-liquid-accent hover:bg-liquid-accent/30",
+              "border border-liquid-accent/30 hover:border-liquid-accent/50",
               "disabled:cursor-not-allowed disabled:opacity-50",
               "focus:outline-none focus:ring-2 focus:ring-blue-400/50",
             )}
@@ -425,30 +425,30 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                         <img
                           src={fileItem.preview}
                           alt={fileItem.file.name}
-                          className="h-10 w-10 rounded object-cover border border-white/10"
+                          className="h-10 w-10 rounded object-cover border border-liquid-highlight/10"
                         />
                       ) : (
-                        <div className="flex h-10 w-10 items-center justify-center rounded bg-white/10 border border-white/10">
-                          <Icon className="h-6 w-6 text-white/60" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded bg-liquid-bg/10 border border-liquid-highlight/10">
+                          <Icon className="h-6 w-6 text-liquid-text-inverse/60" />
                         </div>
                       )}
                     </div>
 
                     {/* File Info */}
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-medium text-white/90">
+                      <p className="truncate font-medium text-liquid-text-inverse/90">
                         {fileItem.file.name}
                       </p>
 
-                      <p className="text-sm text-white/60">
+                      <p className="text-sm text-liquid-text-inverse/60">
                         {formatFileSize(fileItem.file.size)}
                       </p>
 
                       {/* Progress Bar */}
                       {showProgress && fileItem.status === "uploading" && (
-                        <div className="mt-1 h-1.5 w-full rounded-full bg-white/10">
+                        <div className="mt-1 h-1.5 w-full rounded-full bg-liquid-bg/10">
                           <div
-                            className="h-1.5 rounded-full bg-blue-400 transition-all duration-300"
+                            className="h-1.5 rounded-full bg-liquid-accent transition-all duration-300"
                             style={{
                               width: `${fileItem.progress || 0}%`,
                             }}
@@ -458,7 +458,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
                       {/* Error Message */}
                       {fileItem.error && (
-                        <p className="mt-1 text-red-400 text-xs">
+                        <p className="mt-1 text-liquid-accent text-xs">
                           {fileItem.error}
                         </p>
                       )}
@@ -468,10 +468,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                     <button
                       type="button"
                       onClick={() => removeFile(fileItem.id)}
-                      className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
+                      className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-liquid-bg/10 focus:outline-none focus:ring-2 focus:ring-white/20"
                       aria-label="Remove file"
                     >
-                      <X className="h-4 w-4 text-white/60 hover:text-white/90" />
+                      <X className="h-4 w-4 text-liquid-text-inverse/60 hover:text-liquid-text-inverse/90" />
                     </button>
                   </motion.div>
                 );

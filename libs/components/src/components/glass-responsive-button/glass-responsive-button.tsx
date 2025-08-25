@@ -74,11 +74,11 @@ const GlassResponsiveButton = forwardRef<
 
     const variantClasses = {
       primary: cn(
-        "font-semibold text-white",
+        "font-semibold text-liquid-text-inverse",
         "bg-gradient-to-b from-[var(--liquid-glass-primary)] to-[var(--liquid-glass-primary-active)]",
         "hover:from-[var(--liquid-glass-primary-hover)] hover:to-[var(--liquid-glass-primary)]",
         "active:from-[var(--liquid-glass-primary-active)] active:to-[var(--liquid-glass-primary-active)]",
-        "border border-blue-400/30 shadow-blue-500/25 shadow-lg",
+        "border border-liquid-accent/30 shadow-blue-500/25 shadow-lg",
         isMobile && "active:shadow-md",
       ),
       secondary: cn(
@@ -98,11 +98,11 @@ const GlassResponsiveButton = forwardRef<
         "active:bg-[var(--liquid-glass-bg-pressed)]",
       ),
       destructive: cn(
-        "font-semibold text-white",
+        "font-semibold text-liquid-text-inverse",
         "bg-gradient-to-b from-red-500 to-red-600",
         "hover:from-red-400 hover:to-red-500",
         "active:from-red-600 active:to-red-600",
-        "border border-red-400/30 shadow-lg shadow-red-500/25",
+        "border border-liquid-accent/30 shadow-lg shadow-red-500/25",
       ),
     };
 

@@ -14,10 +14,10 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
     const variantClasses = {
       default: "liquid-glass text-liquid-primary",
       success:
-        "liquid-glass bg-green-500/20 text-green-300 border-green-400/30",
+        "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
       warning:
-        "liquid-glass bg-yellow-500/20 text-yellow-300 border-yellow-400/30",
-      error: "liquid-glass bg-red-500/20 text-red-300 border-red-400/30",
+        "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
+      error: "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
     };
 
     return (

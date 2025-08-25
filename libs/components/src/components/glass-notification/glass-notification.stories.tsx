@@ -189,35 +189,35 @@ export const Interactive: Story = {
           <button
             type="button"
             onClick={() => addNotification("success")}
-            className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+            className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
           >
             Add Success
           </button>
           <button
             type="button"
             onClick={() => addNotification("error")}
-            className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
           >
             Add Error
           </button>
           <button
             type="button"
             onClick={() => addNotification("warning")}
-            className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
+            className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
           >
             Add Warning
           </button>
           <button
             type="button"
             onClick={() => addNotification("info")}
-            className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
           >
             Add Info
           </button>
           <button
             type="button"
             onClick={() => addNotification("system")}
-            className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+            className="rounded-lg bg-liquid-bg px-4 py-2 text-liquid-text-inverse hover:bg-liquid-bg"
           >
             Add System
           </button>
@@ -371,7 +371,7 @@ export const RealTimeUpdates: Story = {
 
     return (
       <div className="space-y-4 text-center">
-        <p className="text-gray-600 text-sm dark:text-gray-400">
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
           New notifications will appear every 5 seconds
         </p>
         <div className="flex justify-end">
@@ -404,7 +404,7 @@ export const DarkTheme: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="dark flex min-h-[500px] justify-end bg-gray-900 p-8">
+      <div className="dark flex min-h-[500px] justify-end bg-liquid-bg p-8">
         <Story />
       </div>
     ),

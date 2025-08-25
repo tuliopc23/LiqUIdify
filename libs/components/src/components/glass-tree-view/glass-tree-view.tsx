@@ -112,7 +112,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
             isSelected &&
               cn(
                 getGlassClass("default"),
-                "border border-blue-500/30 bg-blue-500/10",
+                "border border-liquid-accent/30 bg-liquid-accent/10",
               ),
           )}
           style={{ paddingLeft: `${level * indentSize + 8}px` }}

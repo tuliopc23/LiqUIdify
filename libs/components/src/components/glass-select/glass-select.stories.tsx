@@ -125,7 +125,7 @@ export const Controlled: Story = {
     return (
       <div className="space-y-4">
         <GlassSelect {...args} value={value} onChange={setValue} />
-        <p className="text-gray-600 text-sm dark:text-gray-400">
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
           Selected: <span className="font-semibold">{value || "None"}</span>
         </p>
       </div>
@@ -206,7 +206,7 @@ export const InteractiveDemo: Story = {
     return (
       <div className="w-96 space-y-6">
         <div>
-          <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
+          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
             Interactive Select Demo
           </h3>
 
@@ -214,7 +214,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="country-xyr8s3"
-                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+                className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
               >
                 Country
               </label>
@@ -229,7 +229,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="preferred-framework-6ztlaa"
-                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+                className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
               >
                 Preferred Framework
               </label>
@@ -244,7 +244,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="priority-level-75ifsj"
-                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+                className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
               >
                 Priority Level
               </label>
@@ -257,11 +257,11 @@ export const InteractiveDemo: Story = {
             </div>
           </div>
 
-          <div className="mt-6 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-            <h4 className="mb-2 font-semibold text-gray-900 text-sm dark:text-white">
+          <div className="mt-6 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+            <h4 className="mb-2 font-semibold text-liquid-secondary text-sm dark:text-liquid-text-inverse">
               Current Selections:
             </h4>
-            <div className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
+            <div className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
               <p>
                 Country:{" "}
                 <span className="font-medium">{country || "None"}</span>
@@ -320,7 +320,7 @@ export const FormIntegration: Story = {
 
     return (
       <form onSubmit={handleSubmit} className="w-96 space-y-6">
-        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
           Employee Registration
         </h3>
 
@@ -328,7 +328,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="role-oone7x"
-              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
             >
               Role
             </label>
@@ -343,7 +343,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="department-gl6udk"
-              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
             >
               Department
             </label>
@@ -360,7 +360,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="experience-ko9vu7"
-              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
             >
               Experience
             </label>
@@ -377,7 +377,7 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+          className="w-full rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse transition-colors hover:bg-liquid-accent"
           disabled={
             !formData.role || !formData.department || !formData.experience
           }
@@ -404,7 +404,7 @@ export const AccessibilityDemo: Story = {
     return (
       <div className="w-96 space-y-6">
         <div>
-          <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
+          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
             Accessibility Features
           </h3>
 
@@ -417,15 +417,15 @@ export const AccessibilityDemo: Story = {
             />
 
             {selectedValue && (
-              <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
-                <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-100">
+              <div className="rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent/20">
+                <h4 className="mb-2 font-semibold text-liquid-accent dark:text-liquid-accent">
                   {
                     accessibilityOptions.find(
                       (opt) => opt.value === selectedValue,
                     )?.label
                   }
                 </h4>
-                <p className="text-blue-800 text-sm dark:text-blue-200">
+                <p className="text-liquid-accent text-sm dark:text-liquid-accent">
                   {selectedValue === "screen-reader" &&
                     "The select component announces changes and states to screen readers using proper ARIA attributes."}
                   {selectedValue === "keyboard-nav" &&
@@ -439,11 +439,11 @@ export const AccessibilityDemo: Story = {
             )}
           </div>
 
-          <div className="mt-6 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-            <h4 className="mb-2 font-semibold text-gray-900 text-sm dark:text-white">
+          <div className="mt-6 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+            <h4 className="mb-2 font-semibold text-liquid-secondary text-sm dark:text-liquid-text-inverse">
               Keyboard Shortcuts:
             </h4>
-            <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
+            <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
               <li>
                 • <kbd>Tab</kbd> - Focus the select
               </li>
@@ -482,8 +482,8 @@ export const ThemeShowcase: Story = {
 
     return (
       <div className="space-y-8">
-        <div className="rounded-lg bg-white p-6">
-          <h3 className="mb-4 font-semibold text-gray-900 text-lg">
+        <div className="rounded-lg bg-liquid-bg p-6">
+          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg">
             Light Theme
           </h3>
           <GlassSelect
@@ -494,8 +494,8 @@ export const ThemeShowcase: Story = {
           />
         </div>
 
-        <div className="rounded-lg bg-gray-900 p-6">
-          <h3 className="mb-4 font-semibold text-lg text-white">Dark Theme</h3>
+        <div className="rounded-lg bg-liquid-bg p-6">
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">Dark Theme</h3>
           <GlassSelect
             options={themeOptions}
             value={darkValue}

@@ -349,7 +349,7 @@ export const InteractiveExample: Story = {
           </div>
 
           {selectedNodeId && (
-            <div className="mb-4 rounded-lg bg-blue-500/10 p-3">
+            <div className="mb-4 rounded-lg bg-liquid-accent/10 p-3">
               <p className="text-sm">
                 <strong>Selected:</strong> {selectedNodeId}
               </p>

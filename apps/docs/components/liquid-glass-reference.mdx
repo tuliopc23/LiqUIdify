@@ -5,23 +5,21 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
 ## High-Fidelity Reference Implementation
 
 <div className="liquid-component-preview">
-  <div style={{
-    fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
-    background: `
-      radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
-      radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%),
-      linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
-    `,
-    padding: '2rem',
-    borderRadius: '1.5rem',
-    minHeight: '200px',
-    display: 'grid',
-    placeItems: 'center'
-  }}>
+  <div
+    className="bg-background-gradient-light"
+    style={{
+      fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+      padding: '2rem',
+      borderRadius: '1.5rem',
+      minHeight: '200px',
+      display: 'grid',
+      placeItems: 'center'
+    }}
+  >
     <div style={{ width: '100%', maxWidth: '600px', display: 'grid', gap: '24px' }}>
       
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em' }}>
+        <span className="text-liquid-highlight/80 font-semibold tracking-wide">
           Dark Mode
         </span>
       </div>
@@ -39,7 +37,7 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
       </div>
 
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ color: '#d7dbffcc', fontWeight: 600, letterSpacing: '0.02em' }}>
+        <span className="text-liquid-highlight/80 font-semibold tracking-wide">
           Light Mode
         </span>
       </div>

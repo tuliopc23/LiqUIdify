@@ -232,7 +232,7 @@ export const InteractiveExample: Story = {
         />
 
         {clickedItem && (
-          <div className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg text-sm">
+          <div className="px-4 py-2 bg-liquid-accent/20 text-liquid-accent rounded-lg text-sm">
             Clicked:{" "}
             {basicNavItems.find((item) => item.id === clickedItem)?.label}
           </div>
@@ -325,19 +325,19 @@ export const ECommerceExample: Story = {
           onItemClick={(item) => setActiveItem(item.id)}
           header={
             <div className="flex items-center space-x-2">
-              <ShoppingCart className="h-6 w-6 text-blue-400" />
-              <h2 className="text-lg font-semibold text-white">ShopApp</h2>
+              <ShoppingCart className="h-6 w-6 text-liquid-accent" />
+              <h2 className="text-lg font-semibold text-liquid-text-inverse">ShopApp</h2>
             </div>
           }
           footer={
-            <div className="text-center text-sm text-white/60">
+            <div className="text-center text-sm text-liquid-text-inverse/60">
               <p>© 2024 ShopApp</p>
               <p>Version 1.0.0</p>
             </div>
           }
         />
 
-        <div className="text-center text-white/80">
+        <div className="text-center text-liquid-text-inverse/80">
           <p>
             Active:{" "}
             {ecommerceItems.find((item) => item.id === activeItem)?.label}

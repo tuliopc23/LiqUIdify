@@ -280,7 +280,7 @@ const MenuPopover = () => {
             <button
               key={item.label}
               onClick={item.action}
-              className="block w-full px-4 py-2 text-left hover:bg-white/10"
+              className="block w-full px-4 py-2 text-left hover:bg-liquid-bg/10"
             >
               {item.label}
             </button>
@@ -375,7 +375,7 @@ const SearchPopover = () => {
           />
           <div className="max-h-60 overflow-y-auto">
             {results.map((result) => (
-              <div key={result.id} className="p-2 hover:bg-white/10">
+              <div key={result.id} className="p-2 hover:bg-liquid-bg/10">
                 {result.name}
               </div>
             ))}

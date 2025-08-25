@@ -132,7 +132,7 @@ export const Default: Story = {
     children: (
       <div className="p-8">
         <h3 className="text-xl font-semibold mb-2">Liquid Glass Container</h3>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-liquid-secondary dark:text-liquid-grey">
           Adaptive glass effect with automatic device optimization
         </p>
       </div>
@@ -303,13 +303,13 @@ export const ComponentVariants: Story = {
 
       <LiquidGlassNav>
         <div className="flex gap-4 p-4">
-          <button className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded">
+          <button className="flex items-center gap-2 px-3 py-2 hover:bg-liquid-bg/10 rounded">
             <Home size={16} /> Home
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded">
+          <button className="flex items-center gap-2 px-3 py-2 hover:bg-liquid-bg/10 rounded">
             <User size={16} /> Profile
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded">
+          <button className="flex items-center gap-2 px-3 py-2 hover:bg-liquid-bg/10 rounded">
             <Settings size={16} /> Settings
           </button>
         </div>
@@ -398,7 +398,7 @@ export const ComplexComposition: Story = {
               <div className="p-4">
                 <p className="text-sm opacity-75">{stat.label}</p>
                 <p className="text-xl font-bold">{stat.value}</p>
-                <p className="text-sm text-green-500">{stat.change}</p>
+                <p className="text-sm text-liquid-accent">{stat.change}</p>
               </div>
             </LiquidGlass>
           ))}

@@ -9,10 +9,10 @@ interface MintlifyCalloutProps {
 }
 
 const calloutConfig = {
-  info: { icon: 'info', iconColor: '#0071e3' },
-  warning: { icon: 'exclamation', iconColor: '#FF9500' },
-  error: { icon: 'xmark', iconColor: '#FF3B30' },
-  success: { icon: 'checkmark', iconColor: '#34C759' }
+  info: { icon: 'info', iconColor: 'var(--liquid-primary)' },
+  warning: { icon: 'exclamation', iconColor: 'var(--lg-warning)' },
+  error: { icon: 'xmark', iconColor: 'var(--lg-error)' },
+  success: { icon: 'checkmark', iconColor: 'var(--lg-success)' }
 };
 
 export default function MintlifyCallout({ 

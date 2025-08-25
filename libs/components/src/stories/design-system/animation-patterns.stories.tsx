@@ -93,10 +93,10 @@ const AnimationCard: React.FC<{
           onClick={handleClick}
         />
       </div>
-      <p className="mb-2 text-center text-sm text-gray-600 dark:text-gray-400">
+      <p className="mb-2 text-center text-sm text-liquid-secondary dark:text-liquid-grey">
         {description}
       </p>
-      <div className="text-center text-xs text-gray-500">
+      <div className="text-center text-xs text-liquid-secondary">
         <div>Stiffness: {spring.stiffness}</div>
         <div>Damping: {spring.damping}</div>
       </div>
@@ -125,7 +125,7 @@ export const SpringAnimations: Story = {
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Spring Physics</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-liquid-secondary dark:text-liquid-grey">
           Natural, fluid animations using spring physics
         </p>
       </div>
@@ -155,7 +155,7 @@ export const HoverEffects: Story = {
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Hover Interactions</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-liquid-secondary dark:text-liquid-grey">
           Consistent hover states across components
         </p>
       </div>
@@ -183,17 +183,17 @@ export const LoadingStates: Story = {
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Loading Patterns</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-liquid-secondary dark:text-liquid-grey">
           Consistent loading states and spinners
         </p>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <GlassCard className="space-y-4 p-6">
           <h3 className="font-semibold">Pulse</h3>
-          <div className="h-20 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+          <div className="h-20 animate-pulse rounded-lg bg-liquid-bg dark:bg-liquid-bg" />
           <div className="space-y-2">
-            <div className="h-3 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
-            <div className="h-3 w-3/4 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+            <div className="h-3 animate-pulse rounded bg-liquid-bg dark:bg-liquid-bg" />
+            <div className="h-3 w-3/4 animate-pulse rounded bg-liquid-bg dark:bg-liquid-bg" />
           </div>
         </GlassCard>
         <GlassCard className="space-y-4 p-6">
@@ -203,13 +203,13 @@ export const LoadingStates: Story = {
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
             >
-              <RefreshCw className="h-8 w-8 text-blue-500" />
+              <RefreshCw className="h-8 w-8 text-liquid-accent" />
             </motion.div>
           </div>
         </GlassCard>
         <GlassCard className="space-y-4 p-6">
           <h3 className="font-semibold">Progress</h3>
-          <div className="relative h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+          <div className="relative h-2 overflow-hidden rounded-full bg-liquid-bg dark:bg-liquid-bg">
             <motion.div
               className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-purple-500"
               initial={{ width: "0%" }}
@@ -217,7 +217,7 @@ export const LoadingStates: Story = {
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             />
           </div>
-          <p className="text-gray-600 text-sm dark:text-gray-400">
+          <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
             Indeterminate progress
           </p>
         </GlassCard>
@@ -238,7 +238,7 @@ export const MicroInteractions: Story = {
       <div className="w-full max-w-4xl space-y-8">
         <div className="space-y-2 text-center">
           <h2 className="font-bold text-2xl">Micro-interactions</h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-liquid-secondary dark:text-liquid-grey">
             Small, delightful animations that enhance user experience
           </p>
         </div>
@@ -258,7 +258,7 @@ export const MicroInteractions: Story = {
                   fill={liked ? "currentColor" : "none"}
                   stroke="currentColor"
                   strokeWidth="2"
-                  className={liked ? "text-red-500" : "text-gray-400"}
+                  className={liked ? "text-liquid-accent" : "text-liquid-secondary"}
                   animate={
                     liked ? { scale: [1, 1.2, 1], rotate: [0, -10, 10, 0] } : {}
                   }
@@ -268,7 +268,7 @@ export const MicroInteractions: Story = {
                 </motion.svg>
               </motion.button>
             </div>
-            <p className="text-center text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-center text-liquid-secondary text-sm dark:text-liquid-grey">
               Click to like
             </p>
           </GlassCard>
@@ -293,7 +293,7 @@ export const MicroInteractions: Story = {
                 </motion.span>
               </GlassButton>
             </div>
-            <p className="text-center text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-center text-liquid-secondary text-sm dark:text-liquid-grey">
               Button with success animation
             </p>
           </GlassCard>
@@ -310,7 +310,7 @@ export const StaggerAnimations: Story = {
       <div className="w-full max-w-4xl space-y-8">
         <div className="space-y-2 text-center">
           <h2 className="font-bold text-2xl">Stagger Effects</h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-liquid-secondary dark:text-liquid-grey">
             Sequential animations for lists and groups
           </p>
         </div>
@@ -353,7 +353,7 @@ export const PageTransitions: Story = {
       <div className="w-full max-w-4xl space-y-8">
         <div className="space-y-2 text-center">
           <h2 className="font-bold text-2xl">Page Transitions</h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-liquid-secondary dark:text-liquid-grey">
             Smooth transitions between different views
           </p>
         </div>
@@ -382,7 +382,7 @@ export const PageTransitions: Story = {
             <GlassCard className="flex h-full items-center justify-center">
               <div className="text-center">
                 <h3 className="mb-4 font-bold text-3xl">{pages[page]}</h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-liquid-secondary dark:text-liquid-grey">
                   This is the {pages[page].toLowerCase()} page content
                 </p>
               </div>

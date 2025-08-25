@@ -156,7 +156,7 @@ export const Playground: Story = {
         >
           <div className="space-y-4">
             <p>This is the modal content. You can put any content here.</p>
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Try clicking outside or pressing Escape to close.
             </p>
           </div>
@@ -197,9 +197,9 @@ export const BasicExamples: Story = {
 
         <GlassModal isOpen={noTitleOpen} onClose={() => setNoTitleOpen(false)}>
           <div className="space-y-4 text-center">
-            <CheckCircle className="mx-auto h-12 w-12 text-green-500" />
+            <CheckCircle className="mx-auto h-12 w-12 text-liquid-accent" />
             <p className="font-semibold text-lg">Success!</p>
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Your action was completed successfully.
             </p>
             <GlassButton
@@ -277,12 +277,12 @@ export const DialogTypes: Story = {
         >
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-500" />
+              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-liquid-accent" />
               <div>
                 <p className="font-medium">
                   Are you sure you want to delete this item?
                 </p>
-                <p className="mt-1 text-gray-600 text-sm dark:text-gray-400">
+                <p className="mt-1 text-liquid-secondary text-sm dark:text-liquid-grey">
                   This action cannot be undone.
                 </p>
               </div>
@@ -312,10 +312,10 @@ export const DialogTypes: Story = {
         >
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
+              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-liquid-accent" />
               <div>
                 <p className="font-medium">Connection Error</p>
-                <p className="mt-1 text-gray-600 text-sm dark:text-gray-400">
+                <p className="mt-1 text-liquid-secondary text-sm dark:text-liquid-grey">
                   Unable to connect to the server. Please check your internet
                   connection and try again.
                 </p>
@@ -342,7 +342,7 @@ export const DialogTypes: Story = {
           title="Enter Name"
         >
           <div className="space-y-4">
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Please enter a name for your new project:
             </p>
             <GlassInput
@@ -379,12 +379,12 @@ export const DialogTypes: Story = {
         {/* Custom Dialog */}
         <GlassModal isOpen={customOpen} onClose={() => setCustomOpen(false)}>
           <div className="space-y-6 text-center">
-            <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
-              <Gift className="h-8 w-8 text-green-600 dark:text-green-400" />
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-liquid-accent dark:bg-liquid-accent/20">
+              <Gift className="h-8 w-8 text-liquid-accent dark:text-liquid-accent" />
             </div>
             <div className="space-y-2">
               <h3 className="font-semibold text-xl">Welcome Gift!</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-liquid-secondary dark:text-liquid-grey">
                 You've earned 50 bonus points for joining us.
               </p>
             </div>
@@ -565,7 +565,7 @@ export const RealWorldExamples: Story = {
               <GlassCheckbox label="Remember me" />
               <button
                 type="button"
-                className="text-blue-500 text-sm hover:underline"
+                className="text-liquid-accent text-sm hover:underline"
               >
                 Forgot password?
               </button>
@@ -577,10 +577,10 @@ export const RealWorldExamples: Story = {
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-gray-300 border-t dark:border-gray-700" />
+                <div className="w-full border-liquid-grey border-t dark:border-liquid-grey" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500 dark:bg-gray-900">
+                <span className="bg-liquid-bg px-2 text-liquid-secondary dark:bg-liquid-bg">
                   Or continue with
                 </span>
               </div>
@@ -607,11 +607,11 @@ export const RealWorldExamples: Story = {
           title="Share"
         >
           <div className="space-y-4">
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Share this content with your network
             </p>
 
-            <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700">
+            <div className="flex items-center gap-2 rounded-lg border border-liquid-grey p-3 dark:border-liquid-grey">
               <input
                 type="text"
                 value="https://example.com/shared-content"
@@ -632,7 +632,7 @@ export const RealWorldExamples: Story = {
               ].map(({ icon: Icon, label }) => (
                 <button
                   key={label}
-                  className="flex flex-col items-center gap-2 rounded-lg p-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="flex flex-col items-center gap-2 rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg"
                 >
                   <Icon className="h-6 w-6" />
                   <span className="text-xs">{label}</span>
@@ -655,10 +655,10 @@ export const RealWorldExamples: Story = {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Mail className="h-4 w-4 text-gray-500" />
+                    <Mail className="h-4 w-4 text-liquid-secondary" />
                     <div>
                       <p className="font-medium">Email Notifications</p>
-                      <p className="text-gray-600 text-sm dark:text-gray-400">
+                      <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                         Receive updates via email
                       </p>
                     </div>
@@ -668,10 +668,10 @@ export const RealWorldExamples: Story = {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Bell className="h-4 w-4 text-gray-500" />
+                    <Bell className="h-4 w-4 text-liquid-secondary" />
                     <div>
                       <p className="font-medium">Push Notifications</p>
-                      <p className="text-gray-600 text-sm dark:text-gray-400">
+                      <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                         Get instant updates
                       </p>
                     </div>
@@ -686,10 +686,10 @@ export const RealWorldExamples: Story = {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Eye className="h-4 w-4 text-gray-500" />
+                    <Eye className="h-4 w-4 text-liquid-secondary" />
                     <div>
                       <p className="font-medium">Profile Visibility</p>
-                      <p className="text-gray-600 text-sm dark:text-gray-400">
+                      <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                         Make your profile public
                       </p>
                     </div>
@@ -699,10 +699,10 @@ export const RealWorldExamples: Story = {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Shield className="h-4 w-4 text-gray-500" />
+                    <Shield className="h-4 w-4 text-liquid-secondary" />
                     <div>
                       <p className="font-medium">Two-Factor Auth</p>
-                      <p className="text-gray-600 text-sm dark:text-gray-400">
+                      <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                         Extra security for your account
                       </p>
                     </div>
@@ -712,7 +712,7 @@ export const RealWorldExamples: Story = {
               </div>
             </div>
 
-            <div className="flex gap-2 border-gray-200 border-t pt-4 dark:border-gray-700">
+            <div className="flex gap-2 border-liquid-grey border-t pt-4 dark:border-liquid-grey">
               <GlassButton
                 variant="ghost"
                 onClick={() => setSettingsOpen(false)}
@@ -732,12 +732,12 @@ export const RealWorldExamples: Story = {
         >
           <div className="space-y-4">
             <div className="flex aspect-video items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
-              <Image className="h-24 w-24 text-white/50" />
+              <Image className="h-24 w-24 text-liquid-text-inverse/50" />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-semibold">Beautiful Sunset</h3>
-                <p className="text-gray-600 text-sm dark:text-gray-400">
+                <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
                   Captured on January 15, 2024
                 </p>
               </div>
@@ -804,7 +804,7 @@ export const AccessibilityShowcase: Story = {
           initialFocus={firstInputRef}
         >
           <div className="space-y-4">
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Focus is trapped within the modal. Try tabbing through elements.
             </p>
             <GlassInput
@@ -816,7 +816,7 @@ export const AccessibilityShowcase: Story = {
               <GlassButton variant="ghost">Cancel</GlassButton>
               <GlassButton variant="primary">Submit</GlassButton>
             </div>
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
               Press Escape to close the modal.
             </p>
           </div>
@@ -828,11 +828,11 @@ export const AccessibilityShowcase: Story = {
           title="Accessible Modal"
         >
           <div className="space-y-4">
-            <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-900/20">
-              <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
+            <div className="rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent/20">
+              <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
                 ARIA Attributes
               </h4>
-              <ul className="space-y-1 text-blue-800 text-sm dark:text-blue-200">
+              <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
                 <li>• role="dialog"</li>
                 <li>• aria-modal="true"</li>
                 <li>• aria-labelledby points to title</li>

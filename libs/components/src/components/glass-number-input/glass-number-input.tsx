@@ -46,7 +46,7 @@ const inputVariants = cva({
       lg: "px-5 py-4 text-lg",
     },
     error: {
-      true: "border-red-400/50 focus:border-red-500",
+      true: "border-liquid-accent/50 focus:border-liquid-accent",
       false:
         "border-[var(--liquid-glass-border)] focus:border-[var(--liquid-glass-border-focus)]",
     },
@@ -60,11 +60,11 @@ const inputVariants = cva({
 const buttonVariants = cva({
   base: cn(
     "absolute top-1/2 -translate-y-1/2 flex items-center justify-center liquid-glass liquid-glass-interactive",
-    "rounded-lg border-[#007AFF]/30",
-    "transition-all duration-200 hover:border-[#007AFF]/50 focus:border-[#007AFF]/60",
-    "focus:outline-none focus:ring-2 focus:ring-[#007AFF]/50",
+    "rounded-lg border-liquid-accent/30",
+    "transition-all duration-200 hover:border-liquid-accent/50 focus:border-liquid-accent/60",
+    "focus:outline-none focus:ring-2 focus:ring-liquid-accent/50",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    "text-liquid-text hover:text-[#007AFF]",
+    "text-liquid-text hover:text-liquid-accent",
     microInteraction.gentle,
   ),
   variants: {
@@ -326,7 +326,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             )}
           >
             {label}
-            {props.required && <span className="ml-1 text-red-400">*</span>}
+            {props.required && <span className="ml-1 text-liquid-accent">*</span>}
           </label>
         )}
 
@@ -421,7 +421,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-400" : "text-liquid-tertiary",
+              error ? "text-liquid-accent" : "text-liquid-tertiary",
             )}
           >
             {helperText}

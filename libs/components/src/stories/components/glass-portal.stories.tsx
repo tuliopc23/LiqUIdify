@@ -47,7 +47,7 @@ export const Default: Story = {
             <GlassPortal>
               <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <div
-                  className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+                  className="absolute inset-0 bg-liquid-bg/20 backdrop-blur-sm"
                   onClick={() => setShowPortal(false)}
                 />
                 <GlassCard className="zoom-in-95 relative z-10 w-full max-w-md animate-in p-6">
@@ -56,7 +56,7 @@ export const Default: Story = {
                     <button
                       type="button"
                       onClick={() => setShowPortal(false)}
-                      className="rounded-lg p-1 transition-colors hover:bg-white/10"
+                      className="rounded-lg p-1 transition-colors hover:bg-liquid-bg/10"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -97,7 +97,7 @@ export const ModalExample: Story = {
           <GlassPortal>
             <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
               <div
-                className="fade-in absolute inset-0 animate-in bg-black/40 backdrop-blur-md"
+                className="fade-in absolute inset-0 animate-in bg-liquid-bg/40 backdrop-blur-md"
                 onClick={() => setShowModal(false)}
               />
               <div className="slide-in-from-bottom-4 relative z-10 w-full max-w-lg animate-in">
@@ -184,7 +184,7 @@ export const TooltipExample: Story = {
                 transform: "translate(-50%, -100%)",
               }}
             >
-              <div className="fade-in animate-in rounded-lg bg-black/80 px-3 py-2 text-white text-sm backdrop-blur-sm">
+              <div className="fade-in animate-in rounded-lg bg-liquid-bg/80 px-3 py-2 text-liquid-text-inverse text-sm backdrop-blur-sm">
                 This tooltip is rendered in a portal
                 <div className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black/80" />
               </div>
@@ -219,7 +219,7 @@ export const NestedPortals: Story = {
           <GlassPortal>
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
               <div
-                className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+                className="absolute inset-0 bg-liquid-bg/20 backdrop-blur-sm"
                 onClick={() => setShowFirstModal(false)}
               />
               <GlassCard className="relative z-10 w-full max-w-md p-6">
@@ -253,7 +253,7 @@ export const NestedPortals: Story = {
           <GlassPortal>
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
               <div
-                className="absolute inset-0 bg-black/40 backdrop-blur-md"
+                className="absolute inset-0 bg-liquid-bg/40 backdrop-blur-md"
                 onClick={() => setShowSecondModal(false)}
               />
               <GlassCard className="relative z-10 w-full max-w-sm p-6">
@@ -315,7 +315,7 @@ export const CustomContainer: Story = {
 
           {showPortal && customContainer && (
             <GlassPortal container={customContainer}>
-              <div className="absolute inset-0 flex items-center justify-center bg-blue-500/10 backdrop-blur-sm">
+              <div className="absolute inset-0 flex items-center justify-center bg-liquid-accent/10 backdrop-blur-sm">
                 <GlassCard className="w-full max-w-xs p-4">
                   <h3 className="mb-2 font-bold">Portal Content</h3>
                   <p className="mb-4 text-[var(--text-secondary)] text-sm">
@@ -336,7 +336,7 @@ export const CustomContainer: Story = {
 
         <div
           ref={containerRef}
-          className="relative h-64 rounded-lg border-2 border-dashed border-white/20 bg-white/5 p-4"
+          className="relative h-64 rounded-lg border-2 border-dashed border-liquid-highlight/20 bg-liquid-bg/5 p-4"
         >
           <h3 className="mb-2 font-bold">Custom Portal Container</h3>
           <p className="text-[var(--text-secondary)] text-sm">

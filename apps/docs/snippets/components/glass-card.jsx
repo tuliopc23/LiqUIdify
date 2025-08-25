@@ -1,8 +1,8 @@
 // docs-only: minimal GlassCard for Mintlify snippets
 
 export const GlassCard = ({ title, subtitle, variant, children }) => {
-  const base = 'rounded-xl border border-black/10 dark:border-white/10 p-4 backdrop-blur bg-white/60 dark:bg-white/5 shadow-sm'
-  const solid = 'bg-[#0A84FF] text-white border-transparent shadow-md'
+  const base = 'rounded-xl border border-liquid-highlight/10 dark:border-liquid-highlight/10 p-4 backdrop-blur bg-liquid-bg/60 dark:bg-liquid-bg/5 shadow-sm'
+  const solid = 'bg-[#0A84FF] text-liquid-text-inverse border-transparent shadow-md'
   return (
     <div className={`${base} ${variant === 'solid' ? solid : ''}`}>
       {(title || subtitle) && (

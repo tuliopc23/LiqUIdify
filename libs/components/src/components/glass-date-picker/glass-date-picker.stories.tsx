@@ -25,15 +25,15 @@ export const Playground = () => (
 export const EdgeCases = () => (
   <div className="apple-glass mx-auto max-w-md space-y-6 p-8">
     <div>
-      <h3 className="mb-2 text-white">With Time Selection</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">With Time Selection</h3>
       <GlassDatePicker placeholder="Select date and time..." showTime />
     </div>
     <div>
-      <h3 className="mb-2 text-white">Disabled State</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">Disabled State</h3>
       <GlassDatePicker placeholder="Disabled date picker" disabled />
     </div>
     <div>
-      <h3 className="mb-2 text-white">Date Range (Min/Max)</h3>
+      <h3 className="mb-2 text-liquid-text-inverse">Date Range (Min/Max)</h3>
       <GlassDatePicker
         placeholder="Select date within range..."
         minDate={new Date("2024-01-01")}

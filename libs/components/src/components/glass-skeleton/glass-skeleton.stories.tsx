@@ -189,7 +189,7 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Default Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Default Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="default" />
           <GlassSkeleton width={150} height={20} variant="default" />
@@ -198,7 +198,7 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Shimmer Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Shimmer Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="shimmer" />
           <GlassSkeleton width={150} height={20} variant="shimmer" />
@@ -207,7 +207,7 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Pulse Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Pulse Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="pulse" />
           <GlassSkeleton width={150} height={20} variant="pulse" />
@@ -234,7 +234,7 @@ export const Shapes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Rectangle Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Rectangle Shapes</h3>
         <div className="flex items-center gap-4">
           <GlassSkeleton
             shape="rectangle"
@@ -258,7 +258,7 @@ export const Shapes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Circle Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Circle Shapes</h3>
         <div className="flex items-center gap-4">
           <GlassSkeleton shape="circle" width={40} variant="shimmer" />
           <GlassSkeleton shape="circle" width={60} variant="shimmer" />
@@ -268,7 +268,7 @@ export const Shapes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Line Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Line Shapes</h3>
         <div className="space-y-3">
           <GlassSkeleton shape="line" width="100%" variant="shimmer" />
           <GlassSkeleton shape="line" width="80%" variant="shimmer" />
@@ -295,14 +295,14 @@ export const PreBuiltPatterns: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Text Skeleton</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Text Skeleton</h3>
         <div className="max-w-md">
           <SkeletonText lines={4} lastLineWidth="70%" />
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Card Skeleton with Avatar
         </h3>
         <div className="max-w-md">
@@ -311,7 +311,7 @@ export const PreBuiltPatterns: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Card Skeleton without Avatar
         </h3>
         <div className="max-w-md">
@@ -320,7 +320,7 @@ export const PreBuiltPatterns: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Table Skeleton</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Table Skeleton</h3>
         <div className="max-w-2xl">
           <SkeletonTable rows={5} columns={4} />
         </div>
@@ -345,10 +345,10 @@ export const ContentTypeExamples: Story = {
   render: () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Profile Card Loading
         </h3>
-        <div className="max-w-sm rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+        <div className="max-w-sm rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-4">
             <GlassSkeleton
               shape="circle"
@@ -372,10 +372,10 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Article Card Loading
         </h3>
-        <div className="max-w-md rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+        <div className="max-w-md rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           <GlassSkeleton
             width="100%"
             height={160}
@@ -402,7 +402,7 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Gallery Grid Loading
         </h3>
         <div className="grid max-w-md grid-cols-3 gap-4">
@@ -419,7 +419,7 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Chat Message Loading
         </h3>
         <div className="max-w-md space-y-4">
@@ -471,12 +471,12 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Social Media Feed</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Social Media Feed</h3>
         <div className="max-w-lg space-y-6">
           {Array.from({ length: 3 }, (_, postIndex) => (
             <div
               key={postIndex}
-              className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+              className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm"
             >
               {/* Post header */}
               <div className="mb-4 flex items-center gap-3">
@@ -540,14 +540,14 @@ export const RealWorldExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           E-commerce Product Grid
         </h3>
         <div className="grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
           {Array.from({ length: 8 }, (_, productIndex) => (
             <div
               key={productIndex}
-              className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm"
+              className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-4 backdrop-blur-sm"
             >
               <GlassSkeleton
                 width="100%"
@@ -569,10 +569,10 @@ export const RealWorldExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
           Dashboard Analytics
         </h3>
-        <div className="max-w-4xl rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+        <div className="max-w-4xl rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           {/* Header */}
           <div className="mb-6 flex items-center justify-between">
             <GlassSkeleton width={200} height={24} variant="shimmer" />
@@ -584,7 +584,7 @@ export const RealWorldExamples: Story = {
             {Array.from({ length: 4 }, (_, statIndex) => (
               <div
                 key={statIndex}
-                className="rounded-lg border border-white/10 bg-white/5 p-4"
+                className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4"
               >
                 <GlassSkeleton
                   width="60%"
@@ -604,7 +604,7 @@ export const RealWorldExamples: Story = {
           </div>
 
           {/* Chart */}
-          <div className="rounded-lg border border-white/10 bg-white/5 p-6">
+          <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-6">
             <GlassSkeleton
               width={150}
               height={20}
@@ -634,42 +634,42 @@ export const RealWorldExamples: Story = {
 export const LoadingStatesComparison: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
-        <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
+      <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
+        <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
           Skeleton vs Loading States
         </h4>
-        <p className="text-blue-800 text-sm dark:text-blue-200">
+        <p className="text-liquid-accent text-sm dark:text-liquid-accent">
           Compare different loading state approaches for the same content
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
             Skeleton Loading
           </h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
             <SkeletonCard showAvatar />
           </div>
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Actual Content</h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Actual Content</h3>
+          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
             <div className="mb-3 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
-                <User className="h-5 w-5 text-blue-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-liquid-accent/20">
+                <User className="h-5 w-5 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-white/90">John Smith</div>
-                <div className="text-sm text-white/60">2 hours ago</div>
+                <div className="font-medium text-liquid-text-inverse/90">John Smith</div>
+                <div className="text-sm text-liquid-text-inverse/60">2 hours ago</div>
               </div>
             </div>
             <div className="mb-4 space-y-2">
-              <h3 className="font-medium text-white/90">
+              <h3 className="font-medium text-liquid-text-inverse/90">
                 Building Better Loading States
               </h3>
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-liquid-text-inverse/70">
                 Skeleton screens provide a better user experience by showing the
                 structure of content before it loads, reducing perceived loading
                 time.
@@ -678,21 +678,21 @@ export const LoadingStatesComparison: Story = {
             <div className="flex items-center gap-4">
               <button
                 type="button"
-                className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80"
+                className="flex items-center gap-2 text-sm text-liquid-text-inverse/60 hover:text-liquid-text-inverse/80"
               >
                 <Heart className="h-4 w-4" />
                 <span>24</span>
               </button>
               <button
                 type="button"
-                className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80"
+                className="flex items-center gap-2 text-sm text-liquid-text-inverse/60 hover:text-liquid-text-inverse/80"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span>8</span>
               </button>
               <button
                 type="button"
-                className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80"
+                className="flex items-center gap-2 text-sm text-liquid-text-inverse/60 hover:text-liquid-text-inverse/80"
               >
                 <Share2 className="h-4 w-4" />
                 <span>Share</span>
@@ -721,7 +721,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ocean Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <div className="max-w-md">
             <SkeletonCard showAvatar />
@@ -730,7 +730,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Sunset Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <div className="grid max-w-md grid-cols-3 gap-4">
             {Array.from({ length: 6 }, (_, i) => (
@@ -746,7 +746,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Forest Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <div className="max-w-2xl">
             <SkeletonTable rows={4} columns={3} />

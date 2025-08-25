@@ -78,15 +78,15 @@ const LiveProvider = ({ children }: { children: React.ReactNode }) => (
   <div data-playground="fallback">{children}</div>
 );
 const LiveEditor = (props: any) => (
-  <div className={cn("rounded bg-gray-100 p-4", props.className)}>
-    <p className="text-gray-600 text-sm">
+  <div className={cn("rounded bg-liquid-bg p-4", props.className)}>
+    <p className="text-liquid-secondary text-sm">
       Live editor disabled in production build
     </p>
   </div>
 );
 const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
-  <div className="rounded border bg-white p-4" {...props}>
-    <p className="text-gray-600 text-sm">
+  <div className="rounded border bg-liquid-bg p-4" {...props}>
+    <p className="text-liquid-secondary text-sm">
       Live preview disabled in production build
     </p>
   </div>
@@ -200,7 +200,7 @@ export function GlassPlayground({
       )}
     >
       {/* Header  */}
-      <div className="liquid-glass border-white/10 border-b px-4 py-3">
+      <div className="liquid-glass border-liquid-highlight/10 border-b px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
             {title && (
@@ -220,7 +220,7 @@ export function GlassPlayground({
               aria-label="Copy code"
             >
               {copied ? (
-                <Check className="h-4 w-4 text-green-500" />
+                <Check className="h-4 w-4 text-liquid-accent" />
               ) : (
                 <Copy className="h-4 w-4" />
               )}
@@ -304,7 +304,7 @@ export function GlassPlayground({
                 <div
                   className={cn(
                     "flex-1",
-                    showPreview && "border-white/10 border-r",
+                    showPreview && "border-liquid-highlight/10 border-r",
                   )}
                 >
                   <PlaygroundEditor
@@ -394,7 +394,7 @@ function PlaygroundPreview() {
 // Playground Error Component
 function PlaygroundError() {
   return (
-    <LiveError className="absolute right-0 bottom-0 left-0 border-red-500/20 border-t bg-red-500/10 p-4 font-mono text-red-600 text-sm backdrop-blur-md" />
+    <LiveError className="absolute right-0 bottom-0 left-0 border-liquid-accent/20 border-t bg-liquid-accent/10 p-4 font-mono text-liquid-accent text-sm backdrop-blur-md" />
   );
 }
 

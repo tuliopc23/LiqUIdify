@@ -27,7 +27,7 @@ const checkboxGroupVariants = cva({
 });
 
 const checkboxItemVariants = cva({
-  base: "flex cursor-pointer items-center space-x-3 rounded-lg p-2 transition-all duration-200 hover:bg-white/5",
+  base: "flex cursor-pointer items-center space-x-3 rounded-lg p-2 transition-all duration-200 hover:bg-liquid-bg/5",
   variants: {
     itemSize: {
       sm: "p-1.5 space-x-2",
@@ -46,7 +46,7 @@ const checkboxItemVariants = cva({
 });
 
 const checkboxInputVariants = cva({
-  base: "rounded border-2 border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-0 checked:border-blue-400 checked:bg-blue-500/20",
+  base: "rounded border-2 border-liquid-highlight/20 bg-liquid-bg/5 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-0 checked:border-liquid-accent checked:bg-liquid-accent/20",
   variants: {
     inputSize: {
       sm: "h-4 w-4",
@@ -177,13 +177,13 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
           <label
             id={groupId}
             className={cn(
-              "block font-medium text-white",
+              "block font-medium text-liquid-text-inverse",
               size === "sm" && "text-sm",
               size === "lg" && "text-lg",
             )}
           >
             {label}
-            {required && <span className="ml-1 text-red-400">*</span>}
+            {required && <span className="ml-1 text-liquid-accent">*</span>}
           </label>
         )}
 
@@ -192,7 +192,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
           <p
             id={descriptionId}
             className={cn(
-              "text-white/70",
+              "text-liquid-text-inverse/70",
               size === "sm" && "text-xs",
               size === "md" && "text-sm",
               size === "lg" && "text-base",
@@ -255,10 +255,10 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                 <div className="flex-1 min-w-0">
                   <span
                     className={cn(
-                      "text-white",
+                      "text-liquid-text-inverse",
                       size === "sm" && "text-sm",
                       size === "lg" && "text-lg",
-                      isDisabled && "text-white/50",
+                      isDisabled && "text-liquid-text-inverse/50",
                     )}
                   >
                     {option.label}
@@ -267,11 +267,11 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                     <p
                       id={`${checkboxId}-desc`}
                       className={cn(
-                        "text-white/60",
+                        "text-liquid-text-inverse/60",
                         size === "sm" && "text-xs",
                         size === "md" && "text-sm",
                         size === "lg" && "text-base",
-                        isDisabled && "text-white/30",
+                        isDisabled && "text-liquid-text-inverse/30",
                       )}
                     >
                       {option.description}
@@ -289,7 +289,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
             id={errorId}
             role="alert"
             className={cn(
-              "text-red-400",
+              "text-liquid-accent",
               size === "sm" && "text-xs",
               size === "md" && "text-sm",
               size === "lg" && "text-base",

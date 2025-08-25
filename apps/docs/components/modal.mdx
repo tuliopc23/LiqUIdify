@@ -84,8 +84,8 @@ export default function Demo() {
       >
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-100 rounded-full">
-              <AlertTriangle className="w-5 h-5 text-red-600" />
+            <div className="p-2 bg-liquid-accent rounded-full">
+              <AlertTriangle className="w-5 h-5 text-liquid-accent" />
             </div>
             <div>
               <h4 className="font-medium">Are you sure?</h4>
@@ -246,7 +246,7 @@ function AlertDialog({ isOpen, onClose, title, message, onConfirm }) {
     >
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-500" />
+          <AlertCircle className="w-5 h-5 text-liquid-accent" />
           <p>{message}</p>
         </div>
 
@@ -284,7 +284,7 @@ function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
       onClose={onClose}
       size="full"
       showCloseButton={false}
-      className="bg-black/90"
+      className="bg-liquid-bg/90"
     >
       <div className="relative h-full flex items-center justify-center">
         <img
@@ -321,7 +321,7 @@ function ImageGalleryModal({ images, isOpen, onClose, initialIndex = 0 }) {
         </GlassButton>
 
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-          <span className="text-white text-sm">
+          <span className="text-liquid-text-inverse text-sm">
             {currentIndex + 1} of {images.length}
           </span>
         </div>
@@ -524,8 +524,8 @@ function WizardModal({ isOpen, onClose }) {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
                   index <= currentStep
-                    ? "bg-blue-500 text-white"
-                    : "bg-blue-500/20"
+                    ? "bg-liquid-accent text-liquid-text-inverse"
+                    : "bg-liquid-accent/20"
                 }`}
               >
                 {index + 1}
@@ -533,7 +533,7 @@ function WizardModal({ isOpen, onClose }) {
               {index < steps.length - 1 && (
                 <div
                   className={`w-12 h-0.5 ${
-                    index < currentStep ? "bg-blue-500" : "bg-blue-500/20"
+                    index < currentStep ? "bg-liquid-accent" : "bg-liquid-accent/20"
                   }`}
                 />
               )}

@@ -177,7 +177,7 @@ function StatusDashboard({ services }) {
       {services.map((service) => (
         <div
           key={service.id}
-          className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
+          className="flex items-center justify-between p-3 bg-liquid-bg/5 rounded-lg"
         >
           <span className="font-medium">{service.name}</span>
           <GlassBadge variant={getStatusVariant(service.status)}>
@@ -195,7 +195,7 @@ function StatusDashboard({ services }) {
 ```tsx
 function NotificationButton({ count }) {
   return (
-    <button className="relative p-2 rounded-lg hover:bg-white/10">
+    <button className="relative p-2 rounded-lg hover:bg-liquid-bg/10">
       <Bell className="w-5 h-5" />
       {count > 0 && (
         <GlassBadge
@@ -215,7 +215,7 @@ function NotificationButton({ count }) {
 ```tsx
 function ProductCard({ product }) {
   return (
-    <div className="p-4 bg-white/10 rounded-lg">
+    <div className="p-4 bg-liquid-bg/10 rounded-lg">
       <div className="flex items-start justify-between mb-2">
         <h3 className="font-semibold">{product.name}</h3>
         {product.isNew && <GlassBadge variant="success">New</GlassBadge>}
@@ -266,7 +266,7 @@ function UserList({ users }) {
       {users.map((user) => (
         <div
           key={user.id}
-          className="flex items-center justify-between p-3 bg-white/5 rounded-lg"
+          className="flex items-center justify-between p-3 bg-liquid-bg/5 rounded-lg"
         >
           <div className="flex items-center gap-3">
             <GlassAvatar
@@ -418,7 +418,7 @@ function TaskItem({ task }) {
   };
 
   return (
-    <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+    <div className="flex items-center justify-between p-3 bg-liquid-bg/5 rounded-lg">
       <div className="flex-1">
         <h4 className="font-medium mb-1">{task.title}</h4>
         <p className="text-sm text-[var(--apple-text-secondary)]">
@@ -455,7 +455,7 @@ function MetricCard({ metric }) {
   };
 
   return (
-    <div className="p-4 bg-white/10 rounded-lg">
+    <div className="p-4 bg-liquid-bg/10 rounded-lg">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-sm font-medium text-[var(--apple-text-primary)]">
           {metric.label}
