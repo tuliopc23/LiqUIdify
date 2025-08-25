@@ -1,6 +1,6 @@
 ---
-title: Framework Integration
-description: Step-by-step integration guides for Next.js, Remix, Vite, and other React frameworks.
+title: "Framework Integration"
+description: "Step-by-step integration guides for Next.js, Remix, Vite, and other React frameworks."
 ---
 
 # Framework Integration
@@ -18,13 +18,12 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
    # or
    bun add liquidify
    ```
-
 2. **Configure Next.js app (App Router)**:
 
    ```tsx
    // app/layout.tsx
    import "liquidify/styles";
-
+   
    export default function RootLayout({
      children,
    }: {
@@ -39,14 +38,13 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
      );
    }
    ```
-
 3. **Pages Router setup**:
 
    ```tsx
    // pages/_app.tsx
    import type { AppProps } from "next/app";
    import "liquidify/styles";
-
+   
    export default function App({ Component, pageProps }: AppProps) {
      return (
        <UnifiedGlassProvider theme="light">
@@ -64,7 +62,7 @@ LiqUIdify handles SSR automatically, but for optimal performance:
 
    ```tsx
    import dynamic from "next/dynamic";
-
+   
    const GlassChart = dynamic(
      () => import("liquidify").then((mod) => mod.GlassChart),
      {
@@ -73,20 +71,19 @@ LiqUIdify handles SSR automatically, but for optimal performance:
      },
    );
    ```
-
 2. **Handle theme hydration**:
 
    ```tsx
    // app/providers.tsx
    "use client";
-
+   
    export function Providers({ children }: { children: React.ReactNode }) {
      const [mounted, setMounted] = useState(false);
-
+   
      useEffect(() => {
        setMounted(true);
      }, []);
-
+   
      return (
        <UnifiedGlassProvider
          theme={mounted ? "light" : undefined}
@@ -114,7 +111,6 @@ LiqUIdify handles SSR automatically, but for optimal performance:
      },
    };
    ```
-
 2. **Use Next.js Image with Glass components**:
 
    ```tsx
@@ -177,7 +173,6 @@ export default function RootLayout({
    cd my-app
    npm install liquidify
    ```
-
 2. **Configure main entry**:
 
    ```tsx
@@ -186,7 +181,7 @@ export default function RootLayout({
    import App from "./App";
    import "liquidify/styles";
    import "./index.css";
-
+   
    ReactDOM.createRoot(document.getElementById("root")!).render(
      <React.StrictMode>
        <UnifiedGlassProvider theme="light">
@@ -195,7 +190,6 @@ export default function RootLayout({
      </React.StrictMode>,
    );
    ```
-
 3. **Optimize Vite config**:
 
    ```ts
@@ -233,8 +227,8 @@ export default function RootLayout({
      ],
    });
    ```
-
 2. **CSS optimization with PostCSS**:
+
    ```js
    // postcss.config.js
    export default {
@@ -255,7 +249,6 @@ export default function RootLayout({
    ```bash
    npm install liquidify
    ```
-
 2. **Configure root route**:
 
    ```tsx
@@ -269,11 +262,11 @@ export default function RootLayout({
      ScrollRestoration,
    } from "@remix-run/react";
    import liquidifyStyles from "liquidify/styles";
-
+   
    export const links: LinksFunction = () => [
      { rel: "stylesheet", href: liquidifyStyles },
    ];
-
+   
    export default function App() {
      return (
        <html lang="en">
@@ -301,7 +294,7 @@ export default function RootLayout({
    ```tsx
    // app/components/ClientOnly.tsx
    import { useHydrated } from "~/hooks/use-hydrated";
-
+   
    export function ClientOnly({
      children,
      fallback = null,
@@ -312,7 +305,7 @@ export default function RootLayout({
      const hydrated = useHydrated();
      return hydrated ? <>{children}</> : <>{fallback}</>;
    }
-
+   
    // Usage
    export default function Dashboard() {
      return (
@@ -322,7 +315,6 @@ export default function RootLayout({
      );
    }
    ```
-
 2. **Streaming SSR support**:
 
    ```tsx
@@ -342,14 +334,14 @@ export default function RootLayout({
            onShellReady() {
              const body = new PassThrough();
              responseHeaders.set("Content-Type", "text/html");
-
+   
              resolve(
                new Response(body, {
                  headers: responseHeaders,
                  status: responseStatusCode,
                }),
              );
-
+   
              pipe(body);
            },
            onShellError(error) {
@@ -357,7 +349,7 @@ export default function RootLayout({
            },
          },
        );
-
+   
        setTimeout(abort, 5000);
      });
    }
@@ -372,14 +364,13 @@ export default function RootLayout({
    ```bash
    npm install liquidify
    ```
-
 2. **Configure App component**:
 
    ```tsx
    // src/App.tsx
    import "liquidify/styles";
    import "./App.css";
-
+   
    function App() {
      return (
        <UnifiedGlassProvider theme="light">
@@ -387,10 +378,9 @@ export default function RootLayout({
        </UnifiedGlassProvider>
      );
    }
-
+   
    export default App;
    ```
-
 3. **Handle CSS imports**:
 
    ```tsx
@@ -399,7 +389,7 @@ export default function RootLayout({
    import "liquidify/styles"; // Import before your styles
    import "./index.css";
    import App from "./App";
-
+   
    const root = ReactDOM.createRoot(
      document.getElementById("root") as HTMLElement,
    );
@@ -419,19 +409,18 @@ export default function RootLayout({
    ```bash
    npm install liquidify
    ```
-
 2. **Configure gatsby-browser.js**:
 
    ```js
    // gatsby-browser.js
    import "liquidify/styles";
-
+   
    export const wrapRootElement = ({ element }) => (
      <UnifiedGlassProvider theme="light">{element}</UnifiedGlassProvider>
    );
    ```
-
 3. **Configure gatsby-ssr.js** (same as browser):
+
    ```js
    // gatsby-ssr.js
    export { wrapRootElement } from "./gatsby-browser";
