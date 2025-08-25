@@ -25,22 +25,22 @@ export {
   fireEvent,
   waitFor,
   within,
-  getByRole,
-  getByText,
-  getByTestId,
-  queryByRole,
-  queryByText,
-  queryByTestId,
-  getAllByRole,
-  getAllByText,
-  getAllByTestId,
-  cleanup,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 } from "@testing-library/react";
 export { customRender as render };
-export { default as userEvent } from "@testing-library/user-event";
+;
 
 // Test utilities for creating mock data
-export const createMockComponent = (name: string) => {
+const createMockComponent = (name: string) => {
   const MockComponent = React.forwardRef<
     HTMLDivElement,
     React.ComponentProps<"div">
@@ -54,7 +54,7 @@ export const createMockComponent = (name: string) => {
 };
 
 // Mock props factories for common component patterns
-export const mockButtonProps = {
+const mockButtonProps = {
   basic: {
     children: "Test Button",
     "data-testid": "test-button",
@@ -76,7 +76,7 @@ export const mockButtonProps = {
   },
 };
 
-export const mockCardProps = {
+const mockCardProps = {
   basic: {
     children: "Test Card Content",
     "data-testid": "test-card",
@@ -93,7 +93,7 @@ export const mockCardProps = {
   },
 };
 
-export const mockInputProps = {
+const mockInputProps = {
   basic: {
     placeholder: "Enter text",
     "data-testid": "test-input",
@@ -115,7 +115,7 @@ export const mockInputProps = {
   },
 };
 
-export const mockModalProps = {
+const mockModalProps = {
   basic: {
     isOpen: true,
     onClose: () => {},
@@ -132,7 +132,7 @@ export const mockModalProps = {
 };
 
 // Utility functions for testing glassmorphism effects
-export const hasGlassEffect = (element: HTMLElement): boolean => {
+const hasGlassEffect = (element: HTMLElement): boolean => {
   const style = window.getComputedStyle(element);
   return (
     (style.backdropFilter !== "none" && style.backdropFilter !== "") ||
@@ -142,7 +142,7 @@ export const hasGlassEffect = (element: HTMLElement): boolean => {
 };
 
 // Utility for testing keyboard navigation
-export const testKeyboardNavigation = async (
+const testKeyboardNavigation = async (
   element: HTMLElement,
   keys: string[],
 ) => {
@@ -157,7 +157,7 @@ export const testKeyboardNavigation = async (
 };
 
 // Utility for testing responsive behavior
-export const mockViewport = (width: number, height: number) => {
+const mockViewport = (width: number, height: number) => {
   Object.defineProperty(window, "innerWidth", {
     writable: true,
     configurable: true,
@@ -174,7 +174,7 @@ export const mockViewport = (width: number, height: number) => {
 };
 
 // Utility for testing animations
-export const waitForAnimationFrame = (): Promise<void> => {
+const waitForAnimationFrame = (): Promise<void> => {
   return new Promise((resolve) => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => resolve());
@@ -183,7 +183,7 @@ export const waitForAnimationFrame = (): Promise<void> => {
 };
 
 // Utility for testing focus trap behavior
-export const testFocusTrap = async (
+const testFocusTrap = async (
   container: HTMLElement,
 ): Promise<boolean> => {
   const userEvent = (await import("@testing-library/user-event")).default;
@@ -216,7 +216,7 @@ export const testFocusTrap = async (
 };
 
 // Utility for creating accessible test scenarios
-export const createAccessibilityTestSuite = (
+const createAccessibilityTestSuite = (
   _componentName: string,
   renderComponent: (props?: any) => RenderResult,
 ) => {
@@ -254,16 +254,3 @@ export const createAccessibilityTestSuite = (
   };
 };
 
-export default {
-  render: customRender,
-  mockButtonProps,
-  mockCardProps,
-  mockInputProps,
-  mockModalProps,
-  hasGlassEffect,
-  testKeyboardNavigation,
-  mockViewport,
-  waitForAnimationFrame,
-  testFocusTrap,
-  createAccessibilityTestSuite,
-};

@@ -255,7 +255,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 /**
  * Get CSS classes based on device capabilities
  */
-export function getLiquidGlassClasses(
+function getLiquidGlassClasses(
   capabilities: DeviceCapabilities,
   variant?: "default" | "premium" | "minimal",
   additionalClasses?: string,

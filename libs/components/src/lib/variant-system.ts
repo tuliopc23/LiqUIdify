@@ -7,11 +7,11 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
+function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export type VariantProps<T> = {
+type VariantProps<T> = {
   [K in keyof T]?: T[K] extends Record<string, any>
     ? keyof T[K]
     : T[K] extends readonly (infer U)[]
@@ -22,7 +22,7 @@ export type VariantProps<T> = {
 // Alias for backward compatibility
 export type InferVariantProps<T> = VariantProps<T>;
 
-export interface ComponentVariants {
+interface ComponentVariants {
   variant?:
     | "default"
     | "primary"
@@ -35,7 +35,7 @@ export interface ComponentVariants {
   intent?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
 }
 
-export interface GlassVariants extends ComponentVariants {
+interface GlassVariants extends ComponentVariants {
   intensity?: "subtle" | "medium" | "strong" | "extreme";
   blur?: "none" | "sm" | "md" | "lg" | "xl";
   opacity?: number;
@@ -96,7 +96,7 @@ export const createVariants = <T extends VariantConfig>(
   };
 };
 
-export const glassVariants = createVariants({
+const glassVariants = createVariants({
   variant: {
     default: "bg-liquid-bg/10 border-liquid-highlight/20",
     primary: "bg-apple-blue-500/10 border-apple-blue-500/20",
@@ -127,4 +127,4 @@ export const glassVariants = createVariants({
   },
 });
 
-export type GlassVariantProps = VariantProps<typeof glassVariants>;
+type GlassVariantProps = VariantProps<typeof glassVariants>;

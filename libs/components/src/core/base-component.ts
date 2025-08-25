@@ -16,7 +16,7 @@ import type {
 type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Core component variants
-export type ComponentVariant =
+type ComponentVariant =
   | "primary"
   | "secondary"
   | "tertiary"
@@ -93,7 +93,7 @@ interface CompoundComponentProps {
 }
 
 // Layout component props
-export interface LayoutGlassProps extends BaseGlassProps {
+interface LayoutGlassProps extends BaseGlassProps {
   /** Padding size */
   padding?: ComponentSize | "none";
   /** Margin size */
@@ -139,8 +139,8 @@ type TextareaProps = ComponentPropsWithoutRef<"textarea">;
 type SelectProps = ComponentPropsWithoutRef<"select">;
 type LabelProps = ComponentPropsWithoutRef<"label">;
 type SpanProps = ComponentPropsWithoutRef<"span">;
-export type HeadingProps = ComponentPropsWithoutRef<"h1">;
-export type ParagraphProps = ComponentPropsWithoutRef<"p">;
+type HeadingProps = ComponentPropsWithoutRef<"h1">;
+type ParagraphProps = ComponentPropsWithoutRef<"p">;
 
 // Polymorphic component props
 type PolymorphicProps<T extends React.ElementType> = {

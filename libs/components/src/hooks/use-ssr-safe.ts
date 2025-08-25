@@ -21,7 +21,7 @@ export function useIsClient(): boolean {
 /**
  * Hook to safely access window object in SSR environments
  */
-export function useSSRSafeWindow<T = Window>(
+function useSSRSafeWindow<T = Window>(
   selector: (window: Window) => T,
   fallback: T,
 ): T {
