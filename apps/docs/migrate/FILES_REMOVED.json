@@ -1,0 +1,5 @@
+[
+  "apps/docs/components/Playground.tsx",
+  "apps/docs/components/PlaygroundPreview.tsx",
+  "apps/docs/components/PreviewWithToolbar.tsx"
+]

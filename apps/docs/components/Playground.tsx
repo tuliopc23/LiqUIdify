@@ -1,5 +1,2 @@
-// filepath: apps/docs/components/Playground.tsx
-// Removed Sandpack-based playground component.
-export default function Playground() {
-  return null;
-}
+// Legacy Playground removed. Intentionally empty to avoid import errors.
+export default function Playground() { return null }

@@ -1,5 +1,5 @@
-import React from "react";
 import { Highlight } from "prism-react-renderer";
+import React from "react";
 
 export type PreviewProps = {
   title?: string;
@@ -16,37 +16,18 @@ export const Preview: React.FC<PreviewProps> = ({
   children,
 }) => {
   return (
-    <div className="preview-block not-prose my-6 rounded-xl border border-liquid-highlight/20 bg-liquid-bg-readable backdrop-blur-md p-4 shadow-sm">
-      {title && (
-        <div className="preview-title mb-3 flex items-center justify-between">
-          <div className="font-medium text-liquid-primary text-sm tracking-wide">
-            {title}
-          </div>
-        </div>
-      )}
-      <div className="preview-live mb-4 py-3 px-3 rounded-lg border border-liquid-highlight/20 bg-liquid-bg/20">
-        {children}
-      </div>
+    <div className="preview-block not-prose my-6">
+      {title && <div className="preview-title text-sm">{title}</div>}
+      <div className="preview-live">{children}</div>
       <div className="preview-code relative group">
         <CopyButton code={code} />
         <Highlight
           code={code.trim()}
           language={language as any}
-          theme={
-            {
-              plain: { color: "#e6edf3", backgroundColor: "#0d1117" },
-              styles: [],
-            } as any
-          }
+          theme={{ plain: {}, styles: [] } as any}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <pre
-              className={
-                className +
-                " text-[12.5px] leading-relaxed overflow-auto rounded-lg p-4 bg-liquid-bg/30 text-liquid-text border border-liquid-highlight/20"
-              }
-              style={style}
-            >
+            <pre className={className} style={style}>
               {tokens.map((line, i) => (
                 <div key={i} {...getLineProps({ line, key: i })}>
                   {line.map((token, key) => (
@@ -92,7 +73,12 @@ const CopyButton: React.FC<{ code: string }> = ({ code }) => {
         };
         void doCopy();
       }}
-      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md bg-liquid-bg/30 text-liquid-text hover:bg-liquid-bg/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-liquid-accent text-[10px] px-2 py-1 font-medium"
+      className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md text-[10px] px-2 py-1 font-medium"
+      style={{
+        background: "color-mix(in oklab, var(--liquid-bg) 85%, white 15%)",
+        color: "var(--liquid-text)",
+        border: "1px solid var(--liquid-highlight)",
+      }}
     >
       {copied ? "Copied" : "Copy"}
     </button>

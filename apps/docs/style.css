@@ -1,0 +1,74 @@
+:root {
+  --liquid-bg: #0b0f1a;
+  --liquid-bg-readable: #0f1422;
+  --liquid-text: #e6edf3;
+  --liquid-accent: #0a84ff;
+  --liquid-highlight: rgba(255, 255, 255, 0.18);
+}
+
+/* Liquid glass utility (scoped class, safe to use inline) */
+.liquid-glass {
+  backdrop-filter: blur(14px) saturate(1.25);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  background: color-mix(in oklab, var(--liquid-bg) 80%, white 20%);
+  border: 1px solid var(--liquid-highlight);
+  border-radius: 12px;
+}
+
+/* Minimal chrome tweaks (shallow selectors only) */
+.navbar,
+.footer {
+  background: color-mix(in oklab, var(--liquid-bg) 70%, white 30%);
+  border-color: var(--liquid-highlight);
+}
+
+/* Preview shell styling */
+.preview-block {
+  border: 1px solid var(--liquid-highlight);
+  background: color-mix(in oklab, var(--liquid-bg) 90%, white 10%);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.preview-title {
+  color: var(--liquid-accent);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.preview-live {
+  border: 1px solid var(--liquid-highlight);
+  border-radius: 10px;
+  padding: 12px;
+  background: color-mix(in oklab, var(--liquid-bg) 85%, white 15%);
+  margin-bottom: 0.75rem;
+}
+.preview-code pre {
+  border: 1px solid var(--liquid-highlight);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+/* Tabs styling for PreviewCodeTabs */
+.preview-code-tabs .pct-tablist {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.preview-code-tabs .pct-tab {
+  border: 1px solid var(--liquid-highlight);
+  border-radius: 10px;
+  padding: 0.35rem 0.6rem;
+  background: color-mix(in oklab, var(--liquid-bg) 85%, white 15%);
+  font-weight: 500;
+}
+.preview-code-tabs .pct-tab[aria-selected="true"] {
+  outline: 2px solid var(--liquid-accent);
+}
+.preview-code-tabs .pct-panel {
+  border-radius: 10px;
+}
+.preview-code-tabs .pct-code pre {
+  border: 1px solid var(--liquid-highlight);
+  border-radius: 10px;
+}
