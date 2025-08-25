@@ -100,7 +100,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
       placeholder = "Select date...",
       disabled = false,
       showTime = false,
-      format,
+      format: _format,
       locale = "en-US",
       minDate,
       maxDate,

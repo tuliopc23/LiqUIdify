@@ -7,34 +7,38 @@ This implementation addresses the critical API case mapping inconsistencies outl
 ## Fixed Issues
 
 ### ✅ 1. `/api/projects` Mixed Case Response
+
 **Problem**: Server was spreading camelCase database fields (`githubUrl`, `createdAt`) instead of transforming to expected snake_case (`github_url`, `created_at`).
 
 **Solution**: Implemented explicit field mapping in `/server/routes/api.ts`:
+
 ```typescript
 // BEFORE (problematic)
-const transformedProjects = validatedProjects.map(project => ({
+const transformedProjects = validatedProjects.map((project) => ({
   ...project, // Spreads camelCase fields
   tech_stack: project.techStack ? JSON.parse(project.techStack) : [],
-}))
+}));
 
 // AFTER (fixed)
 const transformedProjects = validatedProjects.map((project) => ({
   id: project.id,
   name: project.name,
-  description: project.description ?? '',
+  description: project.description ?? "",
   tech_stack: project.techStack ? JSON.parse(project.techStack) : [],
   github_url: project.githubUrl ?? undefined,
   live_url: project.liveUrl ?? undefined,
   status: project.status ?? undefined,
   created_at: project.createdAt?.toISOString() ?? undefined,
   updated_at: project.updatedAt?.toISOString() ?? undefined,
-}))
+}));
 ```
 
 ### ✅ 2. GitHub Commits String(limit) Typo
+
 **Problem**: Malformed `String(limit)` call in GitHub API endpoint causing runtime errors.
 
 **Solution**: Properly formatted the URL construction:
+
 ```typescript
 // BEFORE (broken)
 const res = await fetch(
@@ -48,58 +52,67 @@ const res = await fetch(url, { headers });
 ```
 
 ### ✅ 3. Security Middleware Wrong Hook
+
 **Problem**: Using `.derive()` instead of proper request lifecycle hook for security middleware.
 
 **Solution**: Changed to `.onRequest()` with corrected signature:
+
 ```typescript
 // BEFORE (wrong API)
 const securityMiddleware = (context: Context, next: () => void) => {
   // ... security logic
-  return next()
-}
-app.derive(securityMiddleware)
+  return next();
+};
+app.derive(securityMiddleware);
 
 // AFTER (correct API)
 const securityMiddleware = (context: Context) => {
   // ... security logic
   // No next() call needed
-}
-app.onRequest(securityMiddleware)
+};
+app.onRequest(securityMiddleware);
 ```
 
 ### ✅ 4. SSR Headers Scope Issue
+
 **Problem**: Referencing out-of-scope `context` variable in SSR route.
 
 **Solution**: Use only available `set` parameter:
+
 ```typescript
 // BEFORE (out of scope)
 set.headers = {
-  'Content-Type': 'text/html; charset=utf-8',
-  ...context.set.headers // context not in scope
-}
+  "Content-Type": "text/html; charset=utf-8",
+  ...context.set.headers, // context not in scope
+};
 
 // AFTER (fixed scope)
 set.headers = {
   ...set.headers,
-  'Content-Type': 'text/html; charset=utf-8'
-}
+  "Content-Type": "text/html; charset=utf-8",
+};
 ```
 
 ## Architecture Implementation
 
 ### Data Transformation Service
+
 Created `ProjectTransformService` class with:
+
 - `transformToAPIFormat()`: Converts camelCase DB fields to snake_case API fields
 - `transformToDatabaseFormat()`: Reverse transformation for write operations
 - `parseTechStack()`: Safe JSON parsing with error handling
 
 ### Validation Layer
+
 Implemented Zod schemas for:
+
 - Database format validation (`ProjectDatabaseSchema`)
 - API format validation (`ProjectAPISchema`)
 - Type-safe transformations
 
 ### Client Integration
+
 - `useProjects` hook expecting snake_case format
 - `ProjectCard` component using proper field names
 - Proper error handling and loading states
@@ -107,6 +120,7 @@ Implemented Zod schemas for:
 ## Testing Coverage
 
 ### Unit Tests (`server/tests/projectTransform.test.ts`)
+
 - ✅ camelCase to snake_case transformation
 - ✅ Missing optional fields handling
 - ✅ Malformed JSON graceful degradation
@@ -114,6 +128,7 @@ Implemented Zod schemas for:
 - ✅ Empty arrays and edge cases
 
 ### Integration Tests (`server/tests/api.integration.test.ts`)
+
 - ✅ API response format validation
 - ✅ Security headers verification
 - ✅ Error handling scenarios
@@ -122,11 +137,13 @@ Implemented Zod schemas for:
 ## Build Configuration
 
 ### Server Setup
+
 - Bun runtime with Elysia framework
 - TypeScript with strict type checking
 - Vitest for testing infrastructure
 
 ### Client Setup
+
 - React 18 with TypeScript
 - Vite build system with SSR support
 - Tailwind CSS v4 for styling

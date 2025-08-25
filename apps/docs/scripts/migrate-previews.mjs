@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 // Codemod: wrap runnable snippet examples with PreviewCodeTabs and ensure absolute imports.
 // Scans apps/docs/components/**/*.mdx and wraps usages like <SomethingExample />.
-import { glob } from 'glob';
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { glob } from "glob";
+import fs from "node:fs/promises";
+import path from "node:path";
 
 const root = process.cwd();
-const docsDir = path.join(root, 'apps/docs/components');
 
 const ensureImport = (src, importLine) => {
   if (src.includes(importLine)) return src;
   // insert after frontmatter or at top
-  const fmEnd = src.indexOf('---', 3);
-  if (src.startsWith('---') && fmEnd !== -1) {
+  const fmEnd = src.indexOf("---", 3);
+  if (src.startsWith("---") && fmEnd !== -1) {
     const before = src.slice(0, fmEnd + 3);
     const after = src.slice(fmEnd + 3);
     return `${before}\n\n${importLine}\n${after}`;
@@ -21,7 +20,10 @@ const ensureImport = (src, importLine) => {
 };
 
 const wrapUsage = (src, name) => {
-  const pattern = new RegExp(`(^|\n)\s*<${name}(\s[^>]*)?>\\s*</${name}>|(^|\n)\s*<${name}(\s*[^>]*)?/?>`, 'g');
+  const pattern = new RegExp(
+    `(^|\n)\\s*<${name}(\\s[^>]*)?>\\s*</${name}>|(^|\n)\\s*<${name}(\\s*[^>]*)?/?>`,
+    "g",
+  );
   let changed = false;
   src = src.replace(pattern, (m) => {
     changed = true;
@@ -32,18 +34,22 @@ const wrapUsage = (src, name) => {
 };
 
 const run = async () => {
-  const files = await glob('apps/docs/components/**/*.mdx');
+  const files = await glob("apps/docs/components/**/*.mdx");
   let updated = [];
 
   for (const file of files) {
-    let src = await fs.readFile(file, 'utf8');
+    let src = await fs.readFile(file, "utf8");
     let fileChanged = false;
 
     // Ensure PreviewCodeTabs import absolute
-    src = ensureImport(src, "import PreviewCodeTabs from '/snippets/components/PreviewCodeTabs'");
+    src = ensureImport(
+      src,
+      "import PreviewCodeTabs from '/snippets/components/PreviewCodeTabs'",
+    );
 
     // Detect any JSX tag ending with Example and wrap it
-    const exampleTagRegex = /<([A-Z][A-Za-z0-9]+Example)(\s[^>]*)?(\/)?>(?:\s*<\/\1>)?/g;
+    const exampleTagRegex =
+      /<([A-Z][A-Za-z0-9]+Example)(\s[^>]*)?(\/)?>(?:\s*<\/\1>)?/g;
     let match;
     const seen = new Set();
     while ((match = exampleTagRegex.exec(src))) {
@@ -61,16 +67,16 @@ const run = async () => {
     }
 
     if (fileChanged) {
-      await fs.writeFile(file, src, 'utf8');
+      await fs.writeFile(file, src, "utf8");
       updated.push(path.relative(root, file));
     }
   }
 
   if (updated.length) {
-    console.log('Updated MDX files with live previews:');
-    for (const f of updated) console.log(' -', f);
+    console.log("Updated MDX files with live previews:");
+    for (const f of updated) console.log(" -", f);
   } else {
-    console.log('No changes needed.');
+    console.log("No changes needed.");
   }
 };
 

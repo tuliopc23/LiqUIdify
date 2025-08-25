@@ -5,6 +5,7 @@ This is a production-ready Mintlify documentation site for LiqUIdify with an App
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Mintlify CLI installed globally: `npm install -g mintlify`
 - Node.js (for development)
 
@@ -64,9 +65,9 @@ The Apple-inspired theme is configured in `docs.json`:
 {
   "theme": "mint",
   "colors": {
-    "primary": "#0071e3",    // Apple Blue
-    "light": "#2997ff",      // Hover state
-    "dark": "#0a84ff"        // Active state
+    "primary": "#0071e3", // Apple Blue
+    "light": "#2997ff", // Hover state
+    "dark": "#0a84ff" // Active state
   },
   "font": {
     "family": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif"
@@ -86,20 +87,22 @@ Custom Apple HIG-inspired styles are in `styles.css` and include:
 To customize colors or typography:
 
 1. **Colors**: Update CSS variables in `styles.css`:
+
    ```css
    :root {
      --apple-blue: #0071e3;
-     --ios-system-blue: #007AFF;
+     --ios-system-blue: #007aff;
      /* Add your custom colors */
    }
    ```
 
 2. **Typography**: Modify the font scale variables:
+
    ```css
    :root {
-     --text-display: 34px;    /* Large Title */
-     --text-title1: 28px;     /* Title 1 */
-     --text-title2: 22px;     /* Title 2 */
+     --text-display: 34px; /* Large Title */
+     --text-title1: 28px; /* Title 1 */
+     --text-title2: 22px; /* Title 2 */
      /* Adjust as needed */
    }
    ```
@@ -107,9 +110,9 @@ To customize colors or typography:
 3. **Spacing**: Update the 8pt grid system:
    ```css
    :root {
-     --space-1: 0.25rem;  /* 4px */
-     --space-2: 0.5rem;   /* 8px */
-     --space-4: 1rem;     /* 16px */
+     --space-1: 0.25rem; /* 4px */
+     --space-2: 0.5rem; /* 8px */
+     --space-4: 1rem; /* 16px */
      /* Customize spacing */
    }
    ```
@@ -129,14 +132,17 @@ The documentation covers 52+ components organized by category:
 
 ### Common Issues
 
-1. **Missing Files Warning**: 
+1. **Missing Files Warning**:
+
    ```
    Could not find file /snippets/components/...
    ```
+
    - These are import path warnings that don't break functionality
    - The site works correctly despite these warnings
 
 2. **Port Already in Use**:
+
    ```bash
    mintlify dev --port 3001
    ```
@@ -175,10 +181,7 @@ Edit the `navigation` object in `docs.json`:
     "groups": [
       {
         "group": "New Section",
-        "pages": [
-          "path/to/new-page",
-          "path/to/another-page"
-        ]
+        "pages": ["path/to/new-page", "path/to/another-page"]
       }
     ]
   }
@@ -194,6 +197,7 @@ The site is ready for deployment to any static hosting platform:
 3. **Configure domain** and SSL as needed
 
 Popular deployment options:
+
 - Vercel
 - Netlify
 - GitHub Pages
@@ -204,7 +208,7 @@ Popular deployment options:
 This implementation meets all specified requirements:
 
 - ✅ **Apple Developer-inspired style** with colors, spacing, and typography
-- ✅ **Complete sidebar navigation** with all 60+ MDX files organized logically  
+- ✅ **Complete sidebar navigation** with all 60+ MDX files organized logically
 - ✅ **Typography system** using Apple HIG scale with system font stack
 - ✅ **Logo + favicon** integrated and properly sized
 - ✅ **Light/dark mode** support with semantic colors

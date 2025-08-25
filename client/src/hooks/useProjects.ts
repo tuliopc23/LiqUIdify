@@ -1,5 +1,5 @@
 // client/src/hooks/useProjects.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Project {
   id: number;
@@ -21,28 +21,28 @@ export const useProjects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects');
-        
+        const response = await fetch("/api/projects");
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data: Project[] = await response.json();
-        
+
         // Data is now in expected snake_case format
         // Validate that we have the expected fields
-        const validatedData = data.map(project => {
+        const validatedData = data.map((project) => {
           if (!project.tech_stack || !Array.isArray(project.tech_stack)) {
-            console.warn('Project missing or invalid tech_stack:', project);
+            console.warn("Project missing or invalid tech_stack:", project);
           }
           return project;
         });
-        
+
         setProjects(validatedData);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching projects:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        console.error("Error fetching projects:", err);
+        setError(err instanceof Error ? err.message : "Unknown error");
         setLoading(false);
       }
     };

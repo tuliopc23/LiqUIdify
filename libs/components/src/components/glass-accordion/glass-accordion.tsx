@@ -150,7 +150,7 @@ const GlassAccordion = React.forwardRef<
   <AccordionPrimitive.Root
     ref={ref}
     className={cn(
-      accordionVariants({ ...{ variant, size } } as any),
+      accordionVariants({ variant, size } as any),
       className,
     )}
     {...props}
@@ -187,7 +187,7 @@ const GlassAccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        accordionTriggerVariants({ ...{ size } } as any),
+        accordionTriggerVariants({ size } as any),
         className,
       )}
       {...props}
