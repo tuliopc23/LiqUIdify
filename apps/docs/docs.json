@@ -17,8 +17,7 @@
     "default": "system"
   },
   "font": {
-    "family": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif"
-  },
+    "family":'SF Pro Text', 'SF Pro Display', 'Apple Color Emoji',
   "navigation": {
     "groups": [
       {
