@@ -10,14 +10,15 @@
   "favicon": "/Favicon.svg",
   "colors": {
     "primary": "#0071e3",
-    "light": "#2997ff",
-    "dark": "#0a84ff"
+    "light": "#aeaeb2",
+    "dark": "#1c1c1e"
   },
   "appearance": {
     "default": "system"
   },
   "font": {
-    "family":'SF Pro Text', 'SF Pro Display', 'Apple Color Emoji',
+    "family": "-apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+  },
   "navigation": {
     "groups": [
       {
@@ -50,132 +51,136 @@
       {
         "group": "Form Components",
         "pages": [
-          "components/form-field",
           "components/glass-textarea",
           "components/glass-number-input",
-          "components/glass-checkbox-group",
-          "components/glass-combobox",
-          "components/glass-date-picker",
-          "components/glass-file-upload",
-          "components/radio-group"
+          "components/glass-input",
+          "components/glass-select",
+          "components/glass-checkbox",
+          "components/glass-radio",
+          "components/glass-switch",
+          "components/glass-slider"
         ]
       },
       {
         "group": "Navigation Components",
         "pages": [
-          "components/breadcrumbs",
-          "components/navbar",
-          "components/sidebar",
-          "components/glass-mobile-nav",
-          "components/mobile-nav",
-          "components/tabs"
-        ]
-      },
-      {
-        "group": "Feedback Components",
-        "pages": [
-          "components/toast",
-          "components/notification",
-          "components/modal",
-          "components/drawer",
-          "components/popover",
-          "components/progress",
-          "components/loading",
-          "components/spinner"
+          "components/glass-navigation",
+          "components/glass-breadcrumbs",
+          "components/glass-tabs",
+          "components/glass-pagination"
         ]
       },
       {
         "group": "Layout Components",
         "pages": [
-          "components/portal",
-          "components/theme-provider",
-          "components/theme-toggle",
-          "components/focus-trap",
-          "components/error-boundary"
+          "components/glass-grid",
+          "components/glass-flex",
+          "components/glass-container",
+          "components/glass-card",
+          "components/glass-panel"
         ]
       },
       {
-        "group": "Specialized Components",
+        "group": "Feedback Components",
         "pages": [
-          "components/liquid-glass",
-          "components/liquid-glass-reference",
+          "components/glass-modal",
+          "components/glass-tooltip",
+          "components/glass-popover",
+          "components/glass-notification",
+          "components/glass-alert",
+          "components/glass-toast",
+          "components/glass-loading"
+        ]
+      },
+      {
+        "group": "Advanced Components",
+        "pages": [
           "components/glass-chart",
-          "components/chart",
-          "components/search",
-          "components/table",
-          "components/tree-view",
-          "components/timeline",
-          "components/slider",
-          "components/showcase",
-          "components/command",
-          "components/date-picker",
-          "components/dropdown",
-          "components/file-upload",
-          "components/tooltip"
-        ]
-      },
-      {
-        "group": "Guides",
-        "pages": [
-          "guides/theming",
-          "guides/apple-hig-integration",
-          "guides/accessibility",
-          "guides/recipes",
-          "guides/live-previews"
-        ]
-      },
-      {
-        "group": "Development",
-        "pages": [
-          "development/architecture",
-          "development/build-system",
-          "development/testing-strategy",
-          "development/onboarding"
-        ]
-      },
-      {
-        "group": "Advanced",
-        "pages": [
-          "advanced/framework-integration"
-        ]
-      },
-      {
-        "group": "API Reference",
-        "pages": [
-          "api/index"
-        ]
-      },
-      {
-        "group": "Integrations",
-        "pages": [
-          "integrations/storybook"
+          "components/glass-data-table",
+          "components/glass-calendar",
+          "components/glass-file-upload",
+          "components/glass-color-picker"
         ]
       },
       {
         "group": "Examples",
         "pages": [
-          "examples/dashboard-example"
+          "examples/dashboard",
+          "examples/forms",
+          "examples/pricing",
+          "examples/landing-page"
+        ]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "guides/styling",
+          "guides/theming",
+          "guides/animations",
+          "guides/accessibility",
+          "guides/performance"
+        ]
+      },
+      {
+        "group": "Integrations",
+        "pages": [
+          "integrations/nextjs",
+          "integrations/react",
+          "integrations/vite",
+          "integrations/webpack",
+          "integrations/typescript"
+        ]
+      },
+      {
+        "group": "Development",
+        "pages": [
+          "development/setup",
+          "development/building",
+          "development/testing",
+          "development/deployment"
+        ]
+      },
+      {
+        "group": "Advanced",
+        "pages": [
+          "advanced/custom-components",
+          "advanced/plugins",
+          "advanced/server-side-rendering",
+          "advanced/optimization"
         ]
       },
       {
         "group": "Migration",
         "pages": [
-          "migrate/from-previous"
+          "migrate/from-v1",
+          "migrate/from-other-libraries"
         ]
       },
       {
-        "group": "Reference",
+        "group": "API Reference",
+        "pages": [
+          "api/components",
+          "api/hooks",
+          "api/utilities",
+          "api/types"
+        ]
+      },
+      {
+        "group": "Resources",
         "pages": [
           "faq",
-          "contributing",
           "changelog",
+          "contributing",
           "licenses"
         ]
       }
     ]
   },
   "footerSocials": {
-    "github": "https://github.com/yourusername/liquidify",
+    "github": "https://github.com/liquidify/liquidify",
     "discord": "https://discord.gg/liquidify"
+  },
+  "analytics": {
+    "gtag": "G-XXXXXXXXXX"
   }
 }
