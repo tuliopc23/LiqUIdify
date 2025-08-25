@@ -40,7 +40,7 @@ export function LiquidGlassDefs() {
           <feBlend in="orig" in2="blur" mode="screen"/>
         </filter>
         <filter id="liquid-glass-edge">
-          <feSpecularLighting result="spec" specularExponent="20" lighting-color="var(--liquid-highlight, #ffffff)">
+          <feSpecularLighting result="spec" specularExponent="20" lighting-color="var(--liquid-highlight)">
             <fePointLight x="-5000" y="-10000" z="20000" />
           </feSpecularLighting>
           <feComposite in2="SourceAlpha" operator="in" />
@@ -57,7 +57,7 @@ export function LiquidGlassDefs() {
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
         </filter>
         <filter id="liquid-glass-depth">
-          <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="rgba(0,0,0,0.2)"/>
+          <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="rgb(var(--lg-text-rgb) / 0.2)"/>
         </filter>
         <filter id="liquid-glass-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/>
@@ -67,7 +67,7 @@ export function LiquidGlassDefs() {
           </feComponentTransfer>
         </filter>
         <filter id="liquid-glass-specular">
-          <feSpecularLighting surfaceScale="1" specularConstant="0.75" specularExponent="16" lighting-color="var(--liquid-highlight, #ffffff)">
+          <feSpecularLighting surfaceScale="1" specularConstant="0.75" specularExponent="16" lighting-color="var(--liquid-highlight)">
             <fePointLight x="-200" y="-100" z="200" />
           </feSpecularLighting>
         </filter>

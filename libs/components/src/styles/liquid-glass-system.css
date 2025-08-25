@@ -34,7 +34,7 @@
   --lg-shine-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
-  --lg-shine-filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+  --lg-shine-filter: blur(1px) drop-shadow(10px 4px 6px color-mix(in oklab, var(--lg-text) 60%, transparent)) brightness(115%);
 
   /* ===== Animation & Transitions ===== */
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);

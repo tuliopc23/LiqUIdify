@@ -660,8 +660,8 @@ body {
   .liquid-glass,
   .liquid-glass-container {
     backdrop-filter: none;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: var(--liquid-bg);
+    border: 1px solid color-mix(in oklab, var(--lg-text) 20%, transparent);
     box-shadow: none;
   }
 }

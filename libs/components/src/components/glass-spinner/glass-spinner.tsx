@@ -200,7 +200,7 @@ export const RingSpinner: React.FC<{
       )}
       style={{
         borderWidth: thickness,
-        borderTopColor: "rgba(59, 130, 246, 0.8)",
+        borderTopColor: "rgb(var(--lg-accent-rgb) / 0.8)",
       }}
       animate={{ rotate: 360 }}
       transition={{
@@ -222,7 +222,7 @@ export const WaveSpinner: React.FC<{
       {Array.from({ length: bars }).map((_, index) => (
         <motion.div
           key={`wave-bar-${index}`}
-          className="w-1 liquid-glass-sm bg-gradient-to-t from-blue-400 to-purple-400"
+          className="w-1 liquid-glass-sm bg-gradient-to-t from-liquid-primary/60 to-liquid-highlight/60"
           animate={{
             height: [8, 24, 8],
           }}
