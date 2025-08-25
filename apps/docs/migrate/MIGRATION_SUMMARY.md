@@ -15,7 +15,7 @@ Removed/cleaned:
 CSS changes:
 
 - Added apps/docs/style.css with namespaced tokens and preview/tabs styles
-- Kept selectors shallow; no resets of html/body/*/pre/code
+- Kept selectors shallow; no resets of html/body/\*/pre/code
 
 Notes:
 

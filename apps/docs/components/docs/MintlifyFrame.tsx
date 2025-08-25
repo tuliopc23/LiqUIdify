@@ -1,5 +1,5 @@
-import React from 'react';
-import SFIcon from './SFIcon';
+import React from "react";
+import SFIcon from "./SFIcon";
 
 interface MintlifyFrameProps {
   title?: string;
@@ -9,12 +9,12 @@ interface MintlifyFrameProps {
   headerClassName?: string;
 }
 
-export default function MintlifyFrame({ 
-  title, 
-  icon, 
-  children, 
-  className = '',
-  headerClassName = ''
+export default function MintlifyFrame({
+  title,
+  icon,
+  children,
+  className = "",
+  headerClassName = "",
 }: MintlifyFrameProps) {
   return (
     <div className={`mintlify-frame ${className}`}>
@@ -24,9 +24,7 @@ export default function MintlifyFrame({
           {title}
         </div>
       )}
-      <div className="mintlify-frame-content">
-        {children}
-      </div>
+      <div className="mintlify-frame-content">{children}</div>
     </div>
   );
 }

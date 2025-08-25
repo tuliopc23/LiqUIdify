@@ -13,6 +13,7 @@
     ".nx/**",
     "**/*.d.ts",
     "vite.config.ts",
+    "vitest.config.mts",
     "tailwind.config.ts",
     "**/*.config.{ts,js,mjs}"
   ],

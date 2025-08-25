@@ -177,10 +177,6 @@
     ]
   },
   "footerSocials": {
-    "github": "https://github.com/liquidify/liquidify",
-    "discord": "https://discord.gg/liquidify"
-  },
-  "analytics": {
-    "gtag": "G-XXXXXXXXXX"
+    "github": "https://github.com/tuliopc23/LiqUIdify"
   }
 }

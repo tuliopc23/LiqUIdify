@@ -14,6 +14,6 @@ export * from "../components/glass-focus-trap";
 export * from "../components/glass-skip-navigation";
 
 // Accessibility Utilities
-export * from "../utils/contrast-checker";
+// NOTE: contrast-checker utility was removed during cleanup
 
 // Type exports

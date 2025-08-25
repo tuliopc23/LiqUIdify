@@ -15,7 +15,7 @@ import {
 // Mock AccessibilityManager since it was removed
 const AccessibilityManager = {
   getInstance: () => ({
-    validateComponent: async (element: any, config: any) => ({
+    validateComponent: async (_element: any, _config: any) => ({
       violations: [],
       passes: [],
       score: 100,
@@ -26,10 +26,10 @@ const AccessibilityManager = {
 };
 
 // Mock functions since unified-liquid-glass-system was removed
-const generateGlassClasses = (options: any) => "liquid-glass";
-const generateGlassVariables = (options: any) => ({});
-const useGlassStateTransitions = (animation: any) => ({
-  transitionToState: (state: string) => {},
+const generateGlassClasses = (_options: any) => "liquid-glass";
+const generateGlassVariables = (_options: any) => ({});
+const useGlassStateTransitions = (_animation: any) => ({
+  transitionToState: (_state: string) => {},
   currentState: "idle",
   isTransitioning: false,
 });

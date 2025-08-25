@@ -13,11 +13,11 @@ graph TD
     A[Database Layer] -->|camelCase fields| B[Server API Route]
     B -->|Mixed Case Response| C[Client Validation Layer]
     C -->|Schema Mismatch| D[UI Component Failure]
-    
+
     A1[githubUrl, createdAt, updatedAt] --> B1[...project spread]
     B1 --> C1[Expects github_url, created_at, updated_at]
     C1 -->|Validation Error| D1[Broken UI State]
-    
+
     style C fill:#ffcccc
     style D fill:#ffcccc
     style C1 fill:#ffcccc
@@ -25,6 +25,7 @@ graph TD
 ```
 
 **Problem Flow:**
+
 1. Database ORM returns camelCase fields (`githubUrl`, `createdAt`, `updatedAt`)
 2. Server API spreads database rows without field transformation
 3. Client validation schemas expect snake_case format
@@ -39,12 +40,12 @@ graph TD
     B -->|snake_case| C[API Response]
     C -->|Consistent Format| D[Client Validation]
     D -->|Success| E[UI Rendering]
-    
+
     A1[githubUrl, createdAt] --> B1[Field Mapping Logic]
     B1 --> C1[github_url, created_at]
     C1 --> D1[Schema Validation Pass]
     D1 --> E1[Component Render Success]
-    
+
     style B fill:#ccffcc
     style D fill:#ccffcc
     style E fill:#ccffcc
@@ -56,17 +57,20 @@ graph TD
 ## Technology Stack & Dependencies
 
 ### Server Stack
+
 - **Runtime**: Bun with Elysia framework
 - **Database**: SQLite/PostgreSQL with ORM (camelCase conventions)
 - **API Layer**: RESTful endpoints with JSON responses
 
 ### Client Stack
+
 - **Framework**: React with TypeScript
 - **Build Tool**: Vite with SSR support
 - **Validation**: Zod schemas expecting snake_case
 - **Styling**: Tailwind CSS v4
 
 ### Build Configuration
+
 - **Root Directory**: `client/` for Vite configuration
 - **Output**: `dist/public/` for client builds, `dist/server/` for SSR
 - **Proxy**: `/api` routes proxy to `http://localhost:3001`
@@ -74,6 +78,7 @@ graph TD
 ## Data Models & ORM Mapping
 
 ### Database Schema (camelCase Convention)
+
 ```typescript
 interface ProjectDatabaseRow {
   id: number;
@@ -89,6 +94,7 @@ interface ProjectDatabaseRow {
 ```
 
 ### Client Schema Expectations (snake_case Convention)
+
 ```typescript
 interface ProjectAPIResponse {
   id: number;
@@ -105,48 +111,51 @@ interface ProjectAPIResponse {
 
 ### Field Mapping Strategy
 
-| Database Field | API Field | Transformation |
-|---------------|-----------|----------------|
-| `id` | `id` | Direct mapping |
-| `name` | `name` | Direct mapping |
-| `description` | `description` | Default to empty string |
-| `techStack` | `tech_stack` | JSON.parse() + array validation |
-| `githubUrl` | `github_url` | Optional field mapping |
-| `liveUrl` | `live_url` | Optional field mapping |
-| `status` | `status` | Optional field mapping |
-| `createdAt` | `created_at` | Date → ISO string |
-| `updatedAt` | `updated_at` | Date → ISO string |
+| Database Field | API Field     | Transformation                  |
+| -------------- | ------------- | ------------------------------- |
+| `id`           | `id`          | Direct mapping                  |
+| `name`         | `name`        | Direct mapping                  |
+| `description`  | `description` | Default to empty string         |
+| `techStack`    | `tech_stack`  | JSON.parse() + array validation |
+| `githubUrl`    | `github_url`  | Optional field mapping          |
+| `liveUrl`      | `live_url`    | Optional field mapping          |
+| `status`       | `status`      | Optional field mapping          |
+| `createdAt`    | `created_at`  | Date → ISO string               |
+| `updatedAt`    | `updated_at`  | Date → ISO string               |
 
 ## API Endpoints Reference
 
 ### GET /api/projects
 
 **Current Implementation (Problematic)**
+
 ```typescript
 // server/routes/api.ts - BEFORE
-const transformedProjects = validatedProjects.map(project => ({
+const transformedProjects = validatedProjects.map((project) => ({
   ...project, // Spreads camelCase fields from database
   tech_stack: project.techStack ? JSON.parse(project.techStack) : [],
-}))
+}));
 ```
 
 **Fixed Implementation**
+
 ```typescript
 // server/routes/api.ts - AFTER
 const transformedProjects = validatedProjects.map((project) => ({
   id: project.id,
   name: project.name,
-  description: project.description ?? '',
+  description: project.description ?? "",
   tech_stack: project.techStack ? JSON.parse(project.techStack) : [],
   github_url: project.githubUrl ?? undefined,
   live_url: project.liveUrl ?? undefined,
   status: project.status ?? undefined,
   created_at: project.createdAt ?? undefined,
   updated_at: project.updatedAt ?? undefined,
-}))
+}));
 ```
 
 **Request/Response Schema**
+
 ```yaml
 GET /api/projects:
   responses:
@@ -162,7 +171,7 @@ GET /api/projects:
                 id: { type: number }
                 name: { type: string }
                 description: { type: string }
-                tech_stack: 
+                tech_stack:
                   type: array
                   items: { type: string }
                 github_url: { type: string, format: uri }
@@ -173,6 +182,7 @@ GET /api/projects:
 ```
 
 **Authentication Requirements**
+
 - No authentication required for public project listing
 - Rate limiting applied via security middleware
 - CORS headers configured for client domain
@@ -192,7 +202,7 @@ export class ProjectTransformService {
     return {
       id: project.id,
       name: project.name,
-      description: project.description ?? '',
+      description: project.description ?? "",
       tech_stack: this.parseTechStack(project.techStack),
       github_url: project.githubUrl ?? undefined,
       live_url: project.liveUrl ?? undefined,
@@ -208,12 +218,14 @@ export class ProjectTransformService {
    */
   private static parseTechStack(techStack?: string): string[] {
     if (!techStack) return [];
-    
+
     try {
       const parsed = JSON.parse(techStack);
-      return Array.isArray(parsed) ? parsed.filter(item => typeof item === 'string') : [];
+      return Array.isArray(parsed)
+        ? parsed.filter((item) => typeof item === "string")
+        : [];
     } catch (error) {
-      console.warn('Failed to parse tech stack:', error);
+      console.warn("Failed to parse tech stack:", error);
       return [];
     }
   }
@@ -222,17 +234,25 @@ export class ProjectTransformService {
    * Transform API format back to database format
    * For POST/PUT operations
    */
-  static transformToDatabaseFormat(apiProject: Partial<ProjectAPIResponse>): Partial<ProjectDatabaseRow> {
+  static transformToDatabaseFormat(
+    apiProject: Partial<ProjectAPIResponse>,
+  ): Partial<ProjectDatabaseRow> {
     return {
       id: apiProject.id,
       name: apiProject.name,
       description: apiProject.description,
-      techStack: apiProject.tech_stack ? JSON.stringify(apiProject.tech_stack) : undefined,
+      techStack: apiProject.tech_stack
+        ? JSON.stringify(apiProject.tech_stack)
+        : undefined,
       githubUrl: apiProject.github_url,
       liveUrl: apiProject.live_url,
       status: apiProject.status,
-      createdAt: apiProject.created_at ? new Date(apiProject.created_at) : undefined,
-      updatedAt: apiProject.updated_at ? new Date(apiProject.updated_at) : undefined,
+      createdAt: apiProject.created_at
+        ? new Date(apiProject.created_at)
+        : undefined,
+      updatedAt: apiProject.updated_at
+        ? new Date(apiProject.updated_at)
+        : undefined,
     };
   }
 }
@@ -242,7 +262,7 @@ export class ProjectTransformService {
 
 ```typescript
 // server/validators/projectValidator.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 const ProjectDatabaseSchema = z.object({
   id: z.number(),
@@ -268,10 +288,10 @@ const ProjectAPISchema = z.object({
   updated_at: z.string().datetime().optional(),
 });
 
-export const validateDatabaseProject = (project: unknown) => 
+export const validateDatabaseProject = (project: unknown) =>
   ProjectDatabaseSchema.parse(project);
 
-export const validateAPIProject = (project: unknown) => 
+export const validateAPIProject = (project: unknown) =>
   ProjectAPISchema.parse(project);
 ```
 
@@ -280,47 +300,52 @@ export const validateAPIProject = (project: unknown) =>
 ### Security Middleware Fix
 
 **Current Implementation (Incorrect)**
+
 ```typescript
 // server/app.ts - BEFORE (Wrong Hook)
 const securityMiddleware = (context: Context, next: () => void) => {
-  applySecurityHeaders(context)
-  const ok = rateLimit(defaultRateLimitOptions)(context)
+  applySecurityHeaders(context);
+  const ok = rateLimit(defaultRateLimitOptions)(context);
   if (!ok) {
     return new Response(
-      JSON.stringify({ success: false, error: { code: 'RATE_LIMIT_EXCEEDED', message: 'Too many requests' } }),
-      { status: 429, headers: { 'Content-Type': 'application/json' } }
-    )
+      JSON.stringify({
+        success: false,
+        error: { code: "RATE_LIMIT_EXCEEDED", message: "Too many requests" },
+      }),
+      { status: 429, headers: { "Content-Type": "application/json" } },
+    );
   }
-  return next()
-}
+  return next();
+};
 
-app.derive(securityMiddleware) // Wrong API usage
+app.derive(securityMiddleware); // Wrong API usage
 ```
 
 **Fixed Implementation**
+
 ```typescript
 // server/app.ts - AFTER (Correct Hook)
 const securityMiddleware = (context: Context) => {
-  applySecurityHeaders(context)
-  const ok = rateLimit(defaultRateLimitOptions)(context)
+  applySecurityHeaders(context);
+  const ok = rateLimit(defaultRateLimitOptions)(context);
   if (!ok) {
     return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: { 
-          code: 'RATE_LIMIT_EXCEEDED', 
-          message: 'Too many requests' 
-        } 
+      JSON.stringify({
+        success: false,
+        error: {
+          code: "RATE_LIMIT_EXCEEDED",
+          message: "Too many requests",
+        },
       }),
-      { 
-        status: 429, 
-        headers: { 'Content-Type': 'application/json' } 
-      }
-    )
+      {
+        status: 429,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
-}
+};
 
-app.onRequest(securityMiddleware) // Correct API usage
+app.onRequest(securityMiddleware); // Correct API usage
 ```
 
 ### Response Transformation Middleware
@@ -329,13 +354,13 @@ app.onRequest(securityMiddleware) // Correct API usage
 // server/middleware/responseTransform.ts
 export const responseTransformMiddleware = (context: Context) => {
   const originalJson = context.set.headers;
-  
+
   // Add consistent response headers
   context.set.headers = {
     ...context.set.headers,
-    'Content-Type': 'application/json',
-    'X-API-Version': '1.0',
-    'Cache-Control': 'no-cache'
+    "Content-Type": "application/json",
+    "X-API-Version": "1.0",
+    "Cache-Control": "no-cache",
   };
 };
 ```
@@ -364,14 +389,14 @@ export const useProjects = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
+    fetch("/api/projects")
+      .then((res) => res.json())
       .then((data: Project[]) => {
         // Data already in expected snake_case format
         setProjects(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
@@ -390,7 +415,7 @@ graph TD
     C --> D[ProjectDetails]
     C --> E[TechStack]
     C --> F[ProjectLinks]
-    
+
     A1[useProjects Hook] --> B1[Project[] State]
     B1 --> C1[Individual Project Props]
     C1 --> D1[name, description]
@@ -449,50 +474,51 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
 ```typescript
 // server/tests/projectTransform.test.ts
-import { describe, it, expect } from 'vitest';
-import { ProjectTransformService } from '../services/projectTransformService';
+import { describe, it, expect } from "vitest";
+import { ProjectTransformService } from "../services/projectTransformService";
 
-describe('ProjectTransformService', () => {
-  it('should transform camelCase database fields to snake_case API fields', () => {
+describe("ProjectTransformService", () => {
+  it("should transform camelCase database fields to snake_case API fields", () => {
     const databaseProject = {
       id: 1,
-      name: 'Test Project',
-      description: 'A test project',
+      name: "Test Project",
+      description: "A test project",
       techStack: '["React", "TypeScript"]',
-      githubUrl: 'https://github.com/user/repo',
-      liveUrl: 'https://example.com',
-      status: 'active',
-      createdAt: new Date('2024-01-01'),
-      updatedAt: new Date('2024-01-02'),
+      githubUrl: "https://github.com/user/repo",
+      liveUrl: "https://example.com",
+      status: "active",
+      createdAt: new Date("2024-01-01"),
+      updatedAt: new Date("2024-01-02"),
     };
 
-    const result = ProjectTransformService.transformToAPIFormat(databaseProject);
+    const result =
+      ProjectTransformService.transformToAPIFormat(databaseProject);
 
     expect(result).toEqual({
       id: 1,
-      name: 'Test Project',
-      description: 'A test project',
-      tech_stack: ['React', 'TypeScript'],
-      github_url: 'https://github.com/user/repo',
-      live_url: 'https://example.com',
-      status: 'active',
-      created_at: '2024-01-01T00:00:00.000Z',
-      updated_at: '2024-01-02T00:00:00.000Z',
+      name: "Test Project",
+      description: "A test project",
+      tech_stack: ["React", "TypeScript"],
+      github_url: "https://github.com/user/repo",
+      live_url: "https://example.com",
+      status: "active",
+      created_at: "2024-01-01T00:00:00.000Z",
+      updated_at: "2024-01-02T00:00:00.000Z",
     });
   });
 
-  it('should handle missing optional fields gracefully', () => {
+  it("should handle missing optional fields gracefully", () => {
     const minimalProject = {
       id: 1,
-      name: 'Minimal Project',
+      name: "Minimal Project",
     };
 
     const result = ProjectTransformService.transformToAPIFormat(minimalProject);
 
     expect(result).toEqual({
       id: 1,
-      name: 'Minimal Project',
-      description: '',
+      name: "Minimal Project",
+      description: "",
       tech_stack: [],
       github_url: undefined,
       live_url: undefined,
@@ -502,14 +528,15 @@ describe('ProjectTransformService', () => {
     });
   });
 
-  it('should handle malformed JSON in techStack gracefully', () => {
+  it("should handle malformed JSON in techStack gracefully", () => {
     const projectWithBadJson = {
       id: 1,
-      name: 'Bad JSON Project',
-      techStack: 'invalid json',
+      name: "Bad JSON Project",
+      techStack: "invalid json",
     };
 
-    const result = ProjectTransformService.transformToAPIFormat(projectWithBadJson);
+    const result =
+      ProjectTransformService.transformToAPIFormat(projectWithBadJson);
 
     expect(result.tech_stack).toEqual([]);
   });
@@ -520,43 +547,43 @@ describe('ProjectTransformService', () => {
 
 ```typescript
 // server/tests/api.integration.test.ts
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { app } from '../app';
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { app } from "../app";
 
-describe('GET /api/projects', () => {
-  it('should return projects in snake_case format', async () => {
+describe("GET /api/projects", () => {
+  it("should return projects in snake_case format", async () => {
     const response = await app.handle(
-      new Request('http://localhost/api/projects')
+      new Request("http://localhost/api/projects"),
     );
-    
+
     expect(response.status).toBe(200);
-    
+
     const projects = await response.json();
     expect(Array.isArray(projects)).toBe(true);
-    
+
     if (projects.length > 0) {
       const project = projects[0];
-      expect(project).toHaveProperty('tech_stack');
-      expect(project).toHaveProperty('github_url');
-      expect(project).toHaveProperty('live_url');
-      expect(project).toHaveProperty('created_at');
-      expect(project).toHaveProperty('updated_at');
-      
+      expect(project).toHaveProperty("tech_stack");
+      expect(project).toHaveProperty("github_url");
+      expect(project).toHaveProperty("live_url");
+      expect(project).toHaveProperty("created_at");
+      expect(project).toHaveProperty("updated_at");
+
       // Should not have camelCase fields
-      expect(project).not.toHaveProperty('techStack');
-      expect(project).not.toHaveProperty('githubUrl');
-      expect(project).not.toHaveProperty('liveUrl');
-      expect(project).not.toHaveProperty('createdAt');
-      expect(project).not.toHaveProperty('updatedAt');
+      expect(project).not.toHaveProperty("techStack");
+      expect(project).not.toHaveProperty("githubUrl");
+      expect(project).not.toHaveProperty("liveUrl");
+      expect(project).not.toHaveProperty("createdAt");
+      expect(project).not.toHaveProperty("updatedAt");
     }
   });
 
-  it('should handle empty project list', async () => {
+  it("should handle empty project list", async () => {
     // Test with empty database
     const response = await app.handle(
-      new Request('http://localhost/api/projects')
+      new Request("http://localhost/api/projects"),
     );
-    
+
     expect(response.status).toBe(200);
     const projects = await response.json();
     expect(Array.isArray(projects)).toBe(true);

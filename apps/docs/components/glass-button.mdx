@@ -3,28 +3,27 @@ title: "Glass Button"
 description: "Beautiful glass morphism button component with physics-based interactions and Apple HIG styling"
 ---
 
-import {GlassButton} from '/snippets/components/glass-button.jsx'
+import { GlassButton } from "/snippets/components/glass-button.jsx";
 
 # <span className="sf-icon-text"><span className="sf-icon sf-star"></span>Glass Button</span>
 
 <div className="text-title2 mb-6">
-  A beautiful button component with glass morphism effects, backdrop blur, and physics-based hover interactions.
+  A beautiful button component with glass morphism effects, backdrop blur, and
+  physics-based hover interactions.
 </div>
 
 <Frame>
-<div className="flex flex-wrap gap-3 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg">
-  <GlassButton variant="primary">Primary</GlassButton>
-  <GlassButton variant="ghost">Ghost</GlassButton>
-  <GlassButton variant="solid">Solid</GlassButton>
-  <GlassButton variant="destructive">Destructive</GlassButton>
-</div>
+  <div className="flex flex-wrap gap-3 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg">
+    <GlassButton variant="primary">Primary</GlassButton>
+    <GlassButton variant="ghost">Ghost</GlassButton>
+    <GlassButton variant="solid">Solid</GlassButton>
+    <GlassButton variant="destructive">Destructive</GlassButton>
+  </div>
 </Frame>
 
 ## <span className="sf-icon-text"><span className="sf-icon sf-gear"></span>Installation</span>
 
-<Tip>
-Install the Liquidify package to get access to all glass components.
-</Tip>
+<Tip>Install the Liquidify package to get access to all glass components.</Tip>
 
 ```bash
 npm install @liquidify/react
@@ -33,14 +32,14 @@ npm install @liquidify/react
 ## <span className="sf-icon-text"><span className="sf-icon sf-chevron-right"></span>Basic Usage</span>
 
 ```tsx
-import { GlassButton } from '@liquidify/react'
+import { GlassButton } from "@liquidify/react";
 
 function MyComponent() {
   return (
-    <GlassButton variant="primary" onClick={() => console.log('Clicked!')}>
+    <GlassButton variant="primary" onClick={() => console.log("Clicked!")}>
       Click me
     </GlassButton>
-  )
+  );
 }
 ```
 
@@ -53,21 +52,21 @@ function MyComponent() {
       <GlassButton variant="primary">Primary Button</GlassButton>
     </div>
   </Card>
-  
-  <Card title="Ghost" icon="circle">
-    Transparent button with subtle hover effects, perfect for secondary actions.
-    <div className="mt-3">
-      <GlassButton variant="ghost">Ghost Button</GlassButton>
-    </div>
-  </Card>
-  
-  <Card title="Solid" icon="check">
-    Solid background variant for high-contrast environments.
-    <div className="mt-3">
-      <GlassButton variant="solid">Solid Button</GlassButton>
-    </div>
-  </Card>
-  
+
+<Card title="Ghost" icon="circle">
+  Transparent button with subtle hover effects, perfect for secondary actions.
+  <div className="mt-3">
+    <GlassButton variant="ghost">Ghost Button</GlassButton>
+  </div>
+</Card>
+
+<Card title="Solid" icon="check">
+  Solid background variant for high-contrast environments.
+  <div className="mt-3">
+    <GlassButton variant="solid">Solid Button</GlassButton>
+  </div>
+</Card>
+
   <Card title="Destructive" icon="x">
     Red variant for dangerous or destructive actions.
     <div className="mt-3">
@@ -79,7 +78,7 @@ function MyComponent() {
 ## <span className="sf-icon-text"><span className="sf-icon sf-heart"></span>With Icons</span>
 
 ```tsx
-import { GlassButton } from '@liquidify/react'
+import { GlassButton } from "@liquidify/react";
 
 function IconButtons() {
   return (
@@ -88,39 +87,39 @@ function IconButtons() {
         <PlusIcon className="w-4 h-4 mr-2" />
         Add Item
       </GlassButton>
-      
+
       <GlassButton variant="ghost">
         <SearchIcon className="w-4 h-4 mr-2" />
         Search
       </GlassButton>
-      
+
       <GlassButton variant="destructive">
         <XIcon className="w-4 h-4 mr-2" />
         Delete
       </GlassButton>
     </div>
-  )
+  );
 }
 ```
 
 <Frame>
-<div className="flex flex-wrap gap-3 p-4 bg-glass rounded-lg">
-  <GlassButton variant="primary">
-    <span className="sf-icon sf-plus mr-2"></span>Add Item
-  </GlassButton>
-  <GlassButton variant="ghost">
-    <span className="sf-icon sf-magnifyingglass mr-2"></span>Search
-  </GlassButton>
-  <GlassButton variant="destructive">
-    <span className="sf-icon sf-xmark mr-2"></span>Delete
-  </GlassButton>
-</div>
+  <div className="flex flex-wrap gap-3 p-4 bg-glass rounded-lg">
+    <GlassButton variant="primary">
+      <span className="sf-icon sf-plus mr-2"></span>Add Item
+    </GlassButton>
+    <GlassButton variant="ghost">
+      <span className="sf-icon sf-magnifyingglass mr-2"></span>Search
+    </GlassButton>
+    <GlassButton variant="destructive">
+      <span className="sf-icon sf-xmark mr-2"></span>Delete
+    </GlassButton>
+  </div>
 </Frame>
 
 ## <span className="sf-icon-text"><span className="sf-icon sf-gear"></span>Loading States</span>
 
 <Info>
-Glass buttons include built-in loading states with smooth spinner animations.
+  Glass buttons include built-in loading states with smooth spinner animations.
 </Info>
 
 ```tsx
@@ -134,19 +133,23 @@ Glass buttons include built-in loading states with smooth spinner animations.
 ```
 
 <Frame>
-<div className="flex gap-3 p-4 bg-glass rounded-lg">
-  <GlassButton variant="primary" loading loadingText="Saving...">
-    Save Changes
-  </GlassButton>
-  <GlassButton variant="ghost" loading>
-    Loading
-  </GlassButton>
-</div>
+  <div className="flex gap-3 p-4 bg-glass rounded-lg">
+    <GlassButton variant="primary" loading loadingText="Saving...">
+      Save Changes
+    </GlassButton>
+    <GlassButton variant="ghost" loading>
+      Loading
+    </GlassButton>
+  </div>
 </Frame>
 
 ## <span className="sf-icon-text"><span className="sf-icon sf-bookmark"></span>API Reference</span>
 
-<ResponseField name="variant" type="'primary' | 'ghost' | 'solid' | 'destructive'" default="'primary'">
+<ResponseField
+  name="variant"
+  type="'primary' | 'ghost' | 'solid' | 'destructive'"
+  default="'primary'"
+>
   Button style variant
 </ResponseField>
 
@@ -167,20 +170,25 @@ Glass buttons include built-in loading states with smooth spinner animations.
 </ResponseField>
 
 <Check>
-**Accessibility:** Glass buttons include proper focus indicators, keyboard navigation, and ARIA attributes for screen readers.
+  **Accessibility:** Glass buttons include proper focus indicators, keyboard
+  navigation, and ARIA attributes for screen readers.
 </Check>
 
 ## <span className="sf-icon-text"><span className="sf-icon sf-house"></span>Related Components</span>
 
 <CardGroup cols={3}>
-  <Card title="Responsive Button" icon="star" href="/components/responsive-button">
+  <Card
+    title="Responsive Button"
+    icon="star"
+    href="/components/responsive-button"
+  >
     Adaptive button that changes based on screen size
   </Card>
-  
-  <Card title="Form Field" icon="check" href="/components/form-field">
-    Complete form controls with validation
-  </Card>
-  
+
+<Card title="Form Field" icon="check" href="/components/form-field">
+  Complete form controls with validation
+</Card>
+
   <Card title="Loading" icon="gear" href="/components/loading">
     Loading states and spinner components
   </Card>

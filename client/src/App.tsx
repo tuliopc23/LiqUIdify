@@ -1,7 +1,7 @@
 // client/src/App.tsx
-import React from 'react';
-import { useProjects } from './hooks/useProjects';
-import ProjectCard from './components/ProjectCard';
+import React from "react";
+import { useProjects } from "./hooks/useProjects";
+import ProjectCard from "./components/ProjectCard";
 
 function App() {
   const { projects, loading, error } = useProjects();
@@ -42,7 +42,6 @@ function App() {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <h2 className="text-2xl font-semibold text-liquid-secondary mb-6">Projects</h2>
-          
           {projects.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-liquid-secondary">No projects found.</p>

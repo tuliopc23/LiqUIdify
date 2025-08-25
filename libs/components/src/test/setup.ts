@@ -20,6 +20,47 @@ afterEach(() => {
 beforeAll(() => {
   // Set up DOM API mocks that need to be available globally
   if (typeof global !== "undefined") {
+    // Mock Canvas API for device capability tests
+    const mockCanvas = {
+      getContext: vi.fn(() => ({
+        fillRect: vi.fn(),
+        clearRect: vi.fn(),
+        getImageData: vi.fn(() => ({ data: new Array(4) })),
+        putImageData: vi.fn(),
+        createImageData: vi.fn(() => ({ data: new Array(4) })),
+        setTransform: vi.fn(),
+        drawImage: vi.fn(),
+        save: vi.fn(),
+        fillText: vi.fn(),
+        restore: vi.fn(),
+        beginPath: vi.fn(),
+        moveTo: vi.fn(),
+        lineTo: vi.fn(),
+        closePath: vi.fn(),
+        stroke: vi.fn(),
+        translate: vi.fn(),
+        scale: vi.fn(),
+        rotate: vi.fn(),
+        arc: vi.fn(),
+        fill: vi.fn(),
+        measureText: vi.fn(() => ({ width: 0 })),
+        transform: vi.fn(),
+        rect: vi.fn(),
+        clip: vi.fn(),
+      })),
+      toDataURL: vi.fn(() => "data:image/png;base64,"),
+      toBlob: vi.fn(),
+    };
+
+    // Mock HTMLCanvasElement
+    Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+      value: mockCanvas.getContext,
+    });
+
+    Object.defineProperty(HTMLCanvasElement.prototype, "toDataURL", {
+      value: mockCanvas.toDataURL,
+    });
+
     // Mock ResizeObserver for tests
     global.ResizeObserver = class ResizeObserver {
       constructor() {}
@@ -139,12 +180,40 @@ beforeAll(() => {
         matches: false,
         media: query,
         onchange: null,
-        addListener: () => {},
-        removeListener: () => {},
-        addEventListener: () => {},
-        removeEventListener: () => {},
-        dispatchEvent: () => {},
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       }),
+    });
+
+    // Mock navigator.connection for device capability tests
+    Object.defineProperty(navigator, "connection", {
+      writable: true,
+      value: {
+        effectiveType: "4g",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      },
+    });
+
+    // Mock navigator.hardwareConcurrency
+    Object.defineProperty(navigator, "hardwareConcurrency", {
+      writable: true,
+      value: 4,
+    });
+
+    // Mock navigator.deviceMemory
+    Object.defineProperty(navigator, "deviceMemory", {
+      writable: true,
+      value: 8,
+    });
+
+    // Mock devicePixelRatio
+    Object.defineProperty(window, "devicePixelRatio", {
+      writable: true,
+      value: 1,
     });
   }
 });

@@ -6,12 +6,12 @@ import { cn } from "../../core/utils/classname";
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
 // Mock accessibilityManager since it was removed
-const accessibilityManager = {
+const _accessibilityManager = {
   announce: (message: string, priority?: string) => {
     // Placeholder implementation for screen reader announcements
     console.debug("Announce:", message, priority);
   },
-  trapFocus: (container: HTMLElement) => () => {},
+  trapFocus: (_container: HTMLElement) => () => {},
 };
 
 interface GlassFocusTrapProps {
