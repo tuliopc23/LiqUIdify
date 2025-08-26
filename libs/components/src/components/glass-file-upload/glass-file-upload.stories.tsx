@@ -290,7 +290,8 @@ export const BasicUsage: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -302,7 +303,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Small Size</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Small Size
+        </h3>
         <GlassFileUpload
           size="sm"
           dropzoneText="Drop files here"
@@ -312,7 +315,9 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Medium Size</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Medium Size
+        </h3>
         <GlassFileUpload
           size="md"
           onFilesChange={(files) => console.log("Medium upload:", files)}
@@ -320,7 +325,9 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Large Size</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Large Size
+        </h3>
         <GlassFileUpload
           size="lg"
           onFilesChange={(files) => console.log("Large upload:", files)}
@@ -334,7 +341,8 @@ export const Sizes: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -346,12 +354,16 @@ export const FileTypeExamples: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Image Upload</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Image Upload
+        </h3>
         <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Image className="h-5 w-5 text-liquid-accent" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">Image Gallery</div>
+              <div className="font-medium text-liquid-text-inverse/90">
+                Image Gallery
+              </div>
               <div className="text-sm text-liquid-text-inverse/60">
                 Upload photos and images
               </div>
@@ -374,12 +386,16 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Document Upload</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Document Upload
+        </h3>
         <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <FileText className="h-5 w-5 text-liquid-accent" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">Document Manager</div>
+              <div className="font-medium text-liquid-text-inverse/90">
+                Document Manager
+              </div>
               <div className="text-sm text-liquid-text-inverse/60">
                 Upload PDFs and documents
               </div>
@@ -401,12 +417,16 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Media Upload</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Media Upload
+        </h3>
         <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Video className="h-5 w-5 text-liquid-accent" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">Media Library</div>
+              <div className="font-medium text-liquid-text-inverse/90">
+                Media Library
+              </div>
               <div className="text-sm text-liquid-text-inverse/60">
                 Upload videos and audio files
               </div>
@@ -430,7 +450,8 @@ export const FileTypeExamples: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -484,7 +505,9 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Disabled State</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Disabled State
+          </h3>
           <GlassFileUpload disabled dropzoneText="Upload is disabled" />
         </div>
       </div>
@@ -496,7 +519,8 @@ export const UploadStates: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -526,7 +550,9 @@ export const RealWorldExamples: Story = {
                 <Image className="h-6 w-6 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">Profile Picture</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  Profile Picture
+                </div>
                 <div className="text-sm text-liquid-text-inverse/60">
                   Upload a profile photo (max 2MB)
                 </div>
@@ -608,7 +634,9 @@ export const RealWorldExamples: Story = {
                 <FileText className="h-6 w-6 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">Legal Documents</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  Legal Documents
+                </div>
                 <div className="text-sm text-liquid-text-inverse/60">
                   Submit required documentation (PDF only)
                 </div>
@@ -649,7 +677,8 @@ export const RealWorldExamples: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -733,7 +762,8 @@ export const AccessibilityShowcase: Story = {
       values: [
         {
           name: "glass-light",
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -745,7 +775,9 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Ocean Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <GlassFileUpload
             dropzoneText="Drop files into the ocean..."
@@ -756,7 +788,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Sunset Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <GlassFileUpload
             dropzoneText="Upload files to the sunset..."
@@ -767,7 +801,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Forest Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <GlassFileUpload
             dropzoneText="Plant files in the forest..."

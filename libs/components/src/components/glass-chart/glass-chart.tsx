@@ -316,7 +316,8 @@ export const BarChart: React.FC<BarChartProps> = ({
                     animationDelay: animated ? `${index * 100}ms` : "0ms",
                     transform: mounted ? "scaleY(1)" : "scaleY(0)",
                     transformOrigin: "bottom",
-                    filter: "drop-shadow(0 2px 8px rgb(var(--lg-text-rgb) / 0.1))",
+                    filter:
+                      "drop-shadow(0 2px 8px rgb(var(--lg-text-rgb) / 0.1))",
                   }}
                 />
                 {showValues && (

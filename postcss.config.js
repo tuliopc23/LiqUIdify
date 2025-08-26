@@ -5,8 +5,7 @@
  * - Storybook (apps/storybook) via Vite
  * - Library builds (libs/components) via Vite
  *
- * Tailwind v4 and v3-style configs are both supported. This file is ESM because
- * the repo sets `"type": "module"` in package.json.
+ * Using Tailwind CSS v4 syntax.
  */
 
 import tailwind from "@tailwindcss/postcss";

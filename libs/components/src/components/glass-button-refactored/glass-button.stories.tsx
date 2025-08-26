@@ -39,20 +39,21 @@ The Liquid Glass Button implements the signature liquid glass effect with:
       default: "glass-light",
       values: [
         {
-          name: "glass-light", 
-          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)"
+          name: "glass-light",
+          value:
+            "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
         {
           name: "glass-dark",
-          value: "#0b1220"
+          value: "#0b1220",
         },
         {
-          name: "neutral-light", 
-          value: "#fafafa"
+          name: "neutral-light",
+          value: "#fafafa",
         },
         {
           name: "neutral-dark",
-          value: "#0a0a0a"
+          value: "#0a0a0a",
         },
         {
           name: "light",
