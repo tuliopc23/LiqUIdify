@@ -309,7 +309,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
       <div
         className={cn(
           numberInputVariants({
-            ...{ size: size as "sm" | "md" | "lg" },
+            size: size as "sm" | "md" | "lg",
           } as any),
           className,
         )}

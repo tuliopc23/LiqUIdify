@@ -79,7 +79,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
         <motion.div
           ref={itemRef}
           className={cn(
-            skeletonVariants({ ...{ variant, size, shape } } as any),
+            skeletonVariants({ variant, size, shape } as any),
             className,
           )}
           style={skeletonStyle as any}

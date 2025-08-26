@@ -98,7 +98,7 @@ const config = {
       // Resolve & alias settings
       config.logLevel = "error";
       config.resolve = {
-        ...(config.resolve ?? {}),
+        ...config.resolve,
         alias: aliasMap,
         dedupe: ["react", "react-dom"],
       };
@@ -108,9 +108,9 @@ const config = {
 
       // Build options
       config.build = {
-        ...(config.build ?? {}),
+        ...config.build,
         rollupOptions: {
-          ...(config.build?.rollupOptions ?? {}),
+          ...config.build?.rollupOptions,
           onwarn(warning, warn) {
             // Suppress "use client" directive warnings
             if (
@@ -122,7 +122,7 @@ const config = {
               return;
             }
             // Suppress "use client" warnings
-            if (warning.message && warning.message.includes('\"use client\"')) {
+            if (warning.message && warning.message.includes('"use client"')) {
               return;
             }
             warn(warning);
@@ -155,7 +155,7 @@ const config = {
 
       // Global defines
       config.define = {
-        ...(config.define ?? {}),
+        ...config.define,
         "process.env.NODE_ENV": JSON.stringify(
           configType === "PRODUCTION" ? "production" : "development",
         ),

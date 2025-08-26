@@ -346,7 +346,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         ref={ref}
         className={cn(
           "liquid-glass",
-          fileUploadVariants({ ...{ size, state: currentState } } as any),
+          fileUploadVariants({ size, state: currentState } as any),
           className,
         )}
         onDragEnter={handleDragEnter}
@@ -417,7 +417,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                     exit={{ opacity: 0, x: 20 }}
                     className={cn(
                       fileItemVariants({
-                        ...{ status: fileItem.status },
+                        status: fileItem.status,
                       } as any),
                     )}
                   >

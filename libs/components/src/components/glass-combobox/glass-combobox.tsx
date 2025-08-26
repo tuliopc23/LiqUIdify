@@ -260,7 +260,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
       <div className={cn("w-full", className)}>
         <div
           ref={comboboxRef}
-          className={cn(comboboxVariants({ ...{ size } } as any))}
+          className={cn(comboboxVariants({ size } as any))}
         >
           {/* Apple-style liquid glass layers */}
           <div className="liquid-glass-filter" />
@@ -269,7 +269,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
 
           <button
             type="button"
-            className={cn(triggerVariants({ ...{ isOpen, size } } as any))}
+            className={cn(triggerVariants({ isOpen, size } as any))}
             onClick={() => !disabled && setIsOpen(!isOpen)}
             onKeyDown={handleKeyDown}
             disabled={disabled}
@@ -358,7 +358,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className={cn(listboxVariants({ ...{ size } } as any))}
+                className={cn(listboxVariants({ size } as any))}
                 role="listbox"
                 id={`${id}-listbox`}
                 ref={listboxRef}

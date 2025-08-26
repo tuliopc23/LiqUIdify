@@ -318,7 +318,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       if (React.isValidElement(child)) {
         const childElement = child as React.ReactElement<any>;
         return React.cloneElement(childElement, {
-          ...(childElement.props || {}),
+          ...childElement.props,
           id: finalId,
           "aria-describedby": message ? `${finalId}-message` : undefined,
           "aria-invalid": error ? true : undefined,
@@ -395,7 +395,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         {message && (
           <div
             id={`${finalId}-message`}
-            className={cn(helperTextVariants({ ...{ state } } as any))}
+            className={cn(helperTextVariants({ state } as any))}
             role={error ? "alert" : undefined}
             aria-live={error ? "polite" : undefined}
           >

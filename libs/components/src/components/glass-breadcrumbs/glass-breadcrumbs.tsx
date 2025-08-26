@@ -110,7 +110,7 @@ const GlassBreadcrumbs = React.memo(
           ref={ref}
           className={cn(
             "liquid-glass",
-            breadcrumbsVariants({ ...{ size, variant } } as any),
+            breadcrumbsVariants({ size, variant } as any),
             className,
           )}
           aria-label="Breadcrumb"
