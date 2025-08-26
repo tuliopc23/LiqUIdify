@@ -1,6 +1,6 @@
 {
   "name": "@liquidify/components",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "private": false,
   "type": "module",
   "description": "LiqUIdify component library - glassmorphism React components",
