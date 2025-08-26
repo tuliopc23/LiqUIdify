@@ -7,16 +7,22 @@ import "@/styles/tailwind.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LiquidGlassDefs } from "liquidify";
 
-// Standard backgrounds matching HTML preview design
-const glassLightBg = `
-  radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
-  radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%),
-  linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
+// Modern gradient backgrounds with flowing colorful shapes
+const lightGradientBg = `
+  radial-gradient(ellipse 800px 600px at 10% 20%, rgba(255, 154, 88, 0.8) 0%, rgba(255, 88, 195, 0.8) 25%, rgba(139, 69, 255, 0.8) 50%, rgba(44, 158, 255, 0.8) 75%, transparent 100%),
+  radial-gradient(ellipse 600px 800px at 90% 80%, rgba(154, 255, 88, 0.6) 0%, rgba(88, 255, 195, 0.6) 25%, rgba(88, 154, 255, 0.6) 50%, rgba(195, 88, 255, 0.6) 75%, transparent 100%),
+  linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)
 `;
 
-// Solid canvas colors that enhance glass effects (high contrast, low noise)
-const glassCanvasLight = "#e9eef6"; // soft cool light for subtle shadows  
-const glassCanvasDark = "#0b1220"; // deep midnight blue to make glass pop
+const darkGradientBg = `
+  radial-gradient(ellipse 800px 600px at 10% 20%, rgba(255, 88, 88, 0.4) 0%, rgba(255, 88, 195, 0.4) 25%, rgba(139, 69, 255, 0.6) 50%, transparent 100%),
+  radial-gradient(ellipse 600px 800px at 90% 80%, rgba(255, 154, 88, 0.3) 0%, rgba(88, 195, 255, 0.4) 25%, rgba(195, 88, 255, 0.5) 50%, transparent 100%),
+  linear-gradient(135deg, #0c0c0c 0%, #1a0a1a 50%, #0a0a1a 100%)
+`;
+
+// Image backgrounds (served from apps/storybook/public/backgrounds)
+const greyImageBg = `url('/backgrounds/3cbf0e6a-09c8-4b47-9560-c3ff84130086.webp') center / cover no-repeat`;
+const tahoeImageBg = `url('/backgrounds/Tahoe1x1.webp') center / cover no-repeat`;
 
 // noinspection JSUnusedGlobalSymbols
 export const parameters = {
@@ -48,12 +54,13 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: "glass-light",
+    // Default canvas background
+    default: "grey",
     values: [
-      { name: "glass-light", value: glassLightBg },
-      { name: "glass-dark", value: glassCanvasDark },
-      { name: "glass-canvas-light", value: glassCanvasLight },
-      { name: "transparent", value: "transparent" },
+      { name: "light", value: lightGradientBg },
+      { name: "dark", value: darkGradientBg },
+      { name: "grey", value: greyImageBg },
+      { name: "tahoe", value: tahoeImageBg },
     ],
   },
   viewport: {
@@ -116,16 +123,15 @@ export const globalTypes = {
   },
   canvasBg: {
     description: "Canvas background for the preview (gradients supported)",
-    defaultValue: "glass-dark",
+    defaultValue: "grey",
     toolbar: {
       title: "Canvas BG",
       icon: "photo",
       items: [
-        { value: "glass-dark", title: "Glass Dark (solid)" },
-        { value: "glass-light", title: "Glass Light (solid)" },
         { value: "light", title: "Light Gradient" },
         { value: "dark", title: "Dark Gradient" },
-        { value: "transparent", title: "Transparent" },
+        { value: "grey", title: "Grey Image" },
+        { value: "tahoe", title: "Tahoe Image" },
       ],
       dynamicTitle: true,
     },
@@ -136,7 +142,7 @@ export const globalTypes = {
 export const decorators = [
   // 1) Canvas background controller: set a data attribute on the preview document
   (Story, context) => {
-    const canvasBg = context.globals.canvasBg || "glass-dark";
+    const canvasBg = context.globals.canvasBg || "light";
     if (typeof document !== "undefined") {
       document.documentElement.setAttribute("data-canvas-bg", canvasBg);
     }

@@ -1,6 +1,5 @@
 import { GlassCheckbox } from "../glass-checkbox";
 import { GlassCheckboxGroup } from "./glass-checkbox-group";
-import "@/styles/index.css";
 
 export default {
   title: "Components/GlassCheckboxGroup",

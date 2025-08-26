@@ -1,5 +1,4 @@
 import { GlassCombobox } from "./glass-combobox";
-import "@/styles/index.css";
 
 const sampleOptions = [
   { value: "apple", label: "Apple", icon: "🍎" },

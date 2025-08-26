@@ -1,6 +1,5 @@
 import { ArrowRight, Heart, Star, Zap } from "lucide-react";
 import { GlassResponsiveButton } from "./glass-responsive-button";
-import "@/styles/index.css";
 
 export default {
   title: "Components/GlassResponsiveButton",

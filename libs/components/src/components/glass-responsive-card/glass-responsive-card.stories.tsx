@@ -1,6 +1,5 @@
 import { Heart, MessageCircle, Star } from "lucide-react";
 import { GlassResponsiveCard } from "./glass-responsive-card";
-import "@/styles/index.css";
 
 export default {
   title: "Components/GlassResponsiveCard",

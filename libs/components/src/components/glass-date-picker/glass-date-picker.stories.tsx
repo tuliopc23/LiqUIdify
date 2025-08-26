@@ -1,5 +1,4 @@
 import { GlassDatePicker } from "./glass-date-picker";
-import "@/styles/index.css";
 
 export default {
   title: "Components/GlassDatePicker",
