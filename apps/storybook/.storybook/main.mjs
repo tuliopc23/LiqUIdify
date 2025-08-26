@@ -42,6 +42,8 @@ const config = {
     "@storybook/addon-links",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
+    // Themes addon provides native toolbar theme switching and CSS variables
+    "@storybook/addon-themes",
   ],
   framework: {
     name: "@storybook/react-vite",

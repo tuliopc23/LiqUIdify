@@ -4,7 +4,7 @@ import "liquidify/css";
 // Load Tailwind utilities from the library's entry to enable utility classes
 import "@/styles/tailwind.css";
 // Wrap stories with the library's ThemeProvider so global theme toggle works
-import { ThemeProvider } from "@/hooks/use-theme";
+import { ThemeProvider, useTheme } from "@/hooks/use-theme";
 import { LiquidGlassDefs } from "liquidify";
 
 // Modern gradient backgrounds with flowing colorful shapes
@@ -41,17 +41,13 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs: {
-    theme: {
-      base: "dark",
-      colorPrimary: "var(--lg-primary, #007AFF)",
-      colorSecondary: "var(--lg-primary-light, #5AC8FA)",
-      appBg: "var(--glass-bg-canvas, #0d1117)",
-      appContentBg: "var(--lg-bg-color, #0f1524)",
-      textColor: "var(--lg-text, #ffffff)",
-      brandTitle: "LiqUIdify",
-      brandUrl: "https://liquidify.dev",
-    },
+  // Native theme toolbar via @storybook/addon-themes
+  themes: {
+    default: "Light",
+    list: [
+      { name: "Light", class: "light", color: "#ffffff" },
+      { name: "Dark", class: "dark", color: "#0d1117" },
+    ],
   },
   backgrounds: {
     // Default canvas background
@@ -108,19 +104,6 @@ export const parameters = {
 
 // noinspection JSUnusedGlobalSymbols
 export const globalTypes = {
-  theme: {
-    description: "Global theme for components",
-    defaultValue: "light",
-    toolbar: {
-      title: "Theme",
-      icon: "paintbrush",
-      items: [
-        { value: "light", title: "Light Mode" },
-        { value: "dark", title: "Dark Mode" },
-      ],
-      dynamicTitle: true,
-    },
-  },
   canvasBg: {
     description: "Canvas background for the preview (gradients supported)",
     defaultValue: "grey",
@@ -150,18 +133,30 @@ export const decorators = [
   },
   // 2) UI wrapper: theme provider and typography only (transparent wrapper)
   (Story, context) => {
-    const theme = context.globals.theme || "light";
+    const selectedTheme = context.globals.theme || "light";
+
+    const ThemeSync = ({ selected }) => {
+      const { theme, setTheme } = useTheme();
+      React.useEffect(() => {
+        if (selected && theme !== selected) {
+          setTheme(selected);
+        }
+      }, [selected, theme, setTheme]);
+      return null;
+    };
+
     return (
       <ThemeProvider defaultTheme="light">
         <LiquidGlassDefs />
+        <ThemeSync selected={selectedTheme} />
         <div
-          className={`${theme} min-h-screen p-4`}
+          className={`${selectedTheme} min-h-screen p-4`}
           style={{
             fontFamily:
               "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontSize: "16px",
             lineHeight: "1.5",
-            color: theme === "dark" ? "#ffffff" : "#000000",
+            color: selectedTheme === "dark" ? "#ffffff" : "#000000",
           }}
         >
           <React.StrictMode>
