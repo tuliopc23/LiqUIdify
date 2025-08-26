@@ -43,10 +43,10 @@ export const parameters = {
   },
   // Native theme toolbar via @storybook/addon-themes
   themes: {
-    default: "Light",
+    default: "light",
     list: [
-      { name: "Light", class: "light", color: "#ffffff" },
-      { name: "Dark", class: "dark", color: "#0d1117" },
+      { name: "light", class: "light", color: "#ffffff" },
+      { name: "dark", class: "dark", color: "#0d1117" },
     ],
   },
   backgrounds: {
