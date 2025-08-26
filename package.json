@@ -136,8 +136,7 @@
     "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "scripts": {
     "dev:all": "node scripts/dev.mjs",
