@@ -51,13 +51,19 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const iconClasses = "w-4 h-4 flex-shrink-0";
     switch (type) {
       case "success": {
-        return <CheckCircle className={cn(iconClasses, "text-liquid-accent")} />;
+        return (
+          <CheckCircle className={cn(iconClasses, "text-liquid-accent")} />
+        );
       }
       case "error": {
-        return <AlertCircle className={cn(iconClasses, "text-liquid-accent")} />;
+        return (
+          <AlertCircle className={cn(iconClasses, "text-liquid-accent")} />
+        );
       }
       case "warning": {
-        return <AlertTriangle className={cn(iconClasses, "text-liquid-accent")} />;
+        return (
+          <AlertTriangle className={cn(iconClasses, "text-liquid-accent")} />
+        );
       }
       case "info": {
         return <Info className={cn(iconClasses, "text-liquid-accent")} />;
@@ -168,7 +174,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     "border-[var(--liquid-glass-border)] border-b p-4 last:border-b-0",
                     "w-full cursor-pointer text-left hover:bg-[var(--liquid-glass-bg)]",
                     microInteraction.gentle,
-                    !notification.read && "bg-liquid-accent/50 dark:bg-liquid-accent/20",
+                    !notification.read &&
+                      "bg-liquid-accent/50 dark:bg-liquid-accent/20",
                   )}
                   onClick={() => onMarkAsRead?.(notification.id)}
                   onKeyDown={(e) => {

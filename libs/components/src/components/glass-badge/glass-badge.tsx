@@ -17,7 +17,8 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
         "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
       warning:
         "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
-      error: "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
+      error:
+        "liquid-glass bg-liquid-accent/20 text-liquid-accent border-liquid-accent/30",
     };
 
     return (

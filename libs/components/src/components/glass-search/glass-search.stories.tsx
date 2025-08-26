@@ -251,7 +251,9 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Simple Search</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Simple Search
+        </h3>
         <GlassSearch
           placeholder="Type to search..."
           onSearch={(query) => console.log("Search:", query)}
@@ -270,7 +272,9 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">With Suggestions</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          With Suggestions
+        </h3>
         <GlassSearch
           placeholder="Search documentation..."
           suggestions={sampleSuggestions.slice(0, 5)}
@@ -281,11 +285,11 @@ export const BasicUsage: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -388,11 +392,11 @@ export const SuggestionTypes: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -448,7 +452,9 @@ export const LoadingAndEmptyStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Empty State</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Empty State
+          </h3>
           <GlassSearch
             placeholder="Search for something that doesn't exist..."
             suggestions={[]}
@@ -460,11 +466,11 @@ export const LoadingAndEmptyStates: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -588,7 +594,9 @@ export const RealWorldExamples: Story = {
                 <Search className="h-4 w-4 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">Product Search</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  Product Search
+                </div>
                 <div className="text-sm text-liquid-text-inverse/60">
                   Search millions of products
                 </div>
@@ -613,7 +621,9 @@ export const RealWorldExamples: Story = {
                 <Book className="h-4 w-4 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">Documentation</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  Documentation
+                </div>
                 <div className="text-sm text-liquid-text-inverse/60">
                   Find guides, APIs, and examples
                 </div>
@@ -638,7 +648,9 @@ export const RealWorldExamples: Story = {
                 <User className="h-4 w-4 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">Social Search</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  Social Search
+                </div>
                 <div className="text-sm text-liquid-text-inverse/60">
                   Find people, posts, and hashtags
                 </div>
@@ -657,11 +669,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -731,11 +743,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -747,7 +759,9 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Ocean Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <GlassSearch
             placeholder="Search the depths..."
@@ -758,7 +772,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Sunset Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <GlassSearch
             placeholder="Discover something new..."
@@ -769,7 +785,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Forest Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <GlassSearch
             placeholder="Explore nature..."

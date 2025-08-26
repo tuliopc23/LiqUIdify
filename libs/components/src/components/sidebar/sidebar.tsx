@@ -161,7 +161,11 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         <div className="flex-1 overflow-y-auto p-4">{children}</div>
 
         {/* Footer */}
-        {footer && <div className="p-4 border-t border-liquid-highlight/10">{footer}</div>}
+        {footer && (
+          <div className="p-4 border-t border-liquid-highlight/10">
+            {footer}
+          </div>
+        )}
       </div>
     );
 

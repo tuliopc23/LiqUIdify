@@ -134,7 +134,9 @@ export const Variants: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Spinner</h3>
+        <h3 className="mb-4 font-medium text-liquid-text-inverse/90">
+          Spinner
+        </h3>
         <GlassLoading variant="spinner" size="lg" />
       </div>
 
@@ -162,7 +164,9 @@ export const Sizes: Story = {
     <div className="space-y-8">
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="text-center">
-          <h3 className="mb-4 font-medium text-liquid-text-inverse/90">Size: {size}</h3>
+          <h3 className="mb-4 font-medium text-liquid-text-inverse/90">
+            Size: {size}
+          </h3>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <GlassLoading variant="spinner" size={size} />
             <GlassLoading variant="dots" size={size} />
@@ -454,7 +458,9 @@ export const InteractiveDemo: Story = {
                   checked={showText}
                   onChange={(e) => setShowText(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">Show Text</span>
+                <span className="text-sm text-liquid-text-inverse/90">
+                  Show Text
+                </span>
               </label>
 
               <label
@@ -467,7 +473,9 @@ export const InteractiveDemo: Story = {
                   checked={isLoading}
                   onChange={(e) => setIsLoading(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">Is Loading</span>
+                <span className="text-sm text-liquid-text-inverse/90">
+                  Is Loading
+                </span>
               </label>
             </div>
           </div>

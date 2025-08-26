@@ -400,7 +400,9 @@ export const DocumentationExample: Story = {
             <div className="rounded-lg bg-liquid-bg p-4 font-mono text-liquid-secondary text-sm">
               npm install glass-ui-components
             </div>
-            <p className="text-liquid-secondary dark:text-liquid-grey">Or using yarn:</p>
+            <p className="text-liquid-secondary dark:text-liquid-grey">
+              Or using yarn:
+            </p>
             <div className="rounded-lg bg-liquid-bg p-4 font-mono text-liquid-secondary text-sm">
               yarn add glass-ui-components
             </div>
@@ -489,7 +491,8 @@ export const CustomStyling: Story = {
     tabListClassName: "bg-gradient-to-r from-purple-500/20 to-blue-500/20",
     activeTabButtonClassName:
       "bg-gradient-to-r from-purple-500 to-blue-500 text-liquid-text-inverse",
-    inactiveTabButtonClassName: "text-liquid-secondary hover:text-liquid-accent",
+    inactiveTabButtonClassName:
+      "text-liquid-secondary hover:text-liquid-accent",
   },
 };
 

@@ -168,7 +168,9 @@ export const RichContent: Story = {
           <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500" />
           <div>
             <p className="font-semibold">John Doe</p>
-            <p className="text-liquid-secondary text-sm">john.doe@example.com</p>
+            <p className="text-liquid-secondary text-sm">
+              john.doe@example.com
+            </p>
           </div>
         </div>
         <div className="p-2">

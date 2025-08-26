@@ -87,15 +87,21 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">Small</p>
+        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          Small
+        </p>
         <GlassProgress value={40} size="sm" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">Medium</p>
+        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          Medium
+        </p>
         <GlassProgress value={60} size="md" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">Large</p>
+        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          Large
+        </p>
         <GlassProgress value={80} size="lg" />
       </div>
     </div>
@@ -132,7 +138,9 @@ export const Variants: Story = {
         <GlassProgress value={70} variant="gradient" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">Minimal</p>
+        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          Minimal
+        </p>
         <GlassProgress value={70} variant="minimal" />
       </div>
     </div>
@@ -338,7 +346,9 @@ export const RealWorldExamples: Story = {
               <div key={item.skill}>
                 <div className="mb-1 flex justify-between">
                   <span className="font-medium text-sm">{item.skill}</span>
-                  <span className="text-liquid-secondary text-sm">{item.level}%</span>
+                  <span className="text-liquid-secondary text-sm">
+                    {item.level}%
+                  </span>
                 </div>
                 <GlassProgress
                   value={item.level}
@@ -473,7 +483,9 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">Dark Theme</h3>
+        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+          Dark Theme
+        </h3>
         <div className="space-y-3">
           <GlassProgress value={60} showValue />
           <GlassProgress value={60} variant="gradient" color="purple" />

@@ -151,28 +151,15 @@
       },
       {
         "group": "Migration",
-        "pages": [
-          "migrate/from-v1",
-          "migrate/from-other-libraries"
-        ]
+        "pages": ["migrate/from-v1", "migrate/from-other-libraries"]
       },
       {
         "group": "API Reference",
-        "pages": [
-          "api/components",
-          "api/hooks",
-          "api/utilities",
-          "api/types"
-        ]
+        "pages": ["api/components", "api/hooks", "api/utilities", "api/types"]
       },
       {
         "group": "Resources",
-        "pages": [
-          "faq",
-          "changelog",
-          "contributing",
-          "licenses"
-        ]
+        "pages": ["faq", "changelog", "contributing", "licenses"]
       }
     ]
   },

@@ -224,7 +224,9 @@ export const Variants: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Default Variant</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Default Variant
+          </h3>
           <GlassPagination
             currentPage={page1}
             totalPages={10}
@@ -234,7 +236,9 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Solid Variant</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Solid Variant
+          </h3>
           <GlassPagination
             currentPage={page2}
             totalPages={10}
@@ -244,7 +248,9 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ghost Variant</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Ghost Variant
+          </h3>
           <GlassPagination
             currentPage={page3}
             totalPages={10}
@@ -257,11 +263,11 @@ export const Variants: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -278,7 +284,9 @@ export const Sizes: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Small Size</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Small Size
+          </h3>
           <GlassPagination
             currentPage={page1}
             totalPages={8}
@@ -288,7 +296,9 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Medium Size</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Medium Size
+          </h3>
           <GlassPagination
             currentPage={page2}
             totalPages={8}
@@ -298,7 +308,9 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Large Size</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Large Size
+          </h3>
           <GlassPagination
             currentPage={page3}
             totalPages={8}
@@ -311,11 +323,11 @@ export const Sizes: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -333,7 +345,9 @@ export const States: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">First Page</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            First Page
+          </h3>
           <GlassPagination
             currentPage={page1}
             totalPages={10}
@@ -342,7 +356,9 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Middle Page</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Middle Page
+          </h3>
           <GlassPagination
             currentPage={page2}
             totalPages={10}
@@ -351,7 +367,9 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Last Page</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Last Page
+          </h3>
           <GlassPagination
             currentPage={page3}
             totalPages={10}
@@ -360,7 +378,9 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Disabled State</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Disabled State
+          </h3>
           <GlassPagination
             currentPage={page4}
             totalPages={10}
@@ -373,11 +393,11 @@ export const States: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -436,11 +456,11 @@ export const ConfigurationExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -575,11 +595,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -634,11 +654,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -655,7 +675,9 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ocean Theme</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Ocean Theme
+          </h3>
           <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
             <GlassPagination
               currentPage={page1}
@@ -667,7 +689,9 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Sunset Theme</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Sunset Theme
+          </h3>
           <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
             <GlassPagination
               currentPage={page2}
@@ -679,7 +703,9 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Forest Theme</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Forest Theme
+          </h3>
           <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
             <GlassPagination
               currentPage={page3}

@@ -98,27 +98,39 @@ export const Variants: Story = {
     <div className="grid grid-cols-3 gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner variant="default" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Default</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Default
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="primary" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Primary</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Primary
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="secondary" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Secondary</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Secondary
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="success" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Success</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Success
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="warning" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Warning</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Warning
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="error" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Error</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Error
+        </p>
       </div>
       <div className="space-y-2 rounded-lg bg-liquid-bg p-4 text-center">
         <GlassSpinner variant="glass" />
@@ -134,27 +146,39 @@ export const Sizes: Story = {
     <div className="flex items-center gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner size="xs" />
-        <p className="text-liquid-secondary text-xs dark:text-liquid-grey">XS</p>
+        <p className="text-liquid-secondary text-xs dark:text-liquid-grey">
+          XS
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="sm" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Small</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Small
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="md" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Medium</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Medium
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Large</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Large
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="xl" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">XL</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          XL
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="2xl" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">2XL</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          2XL
+        </p>
       </div>
     </div>
   ),
@@ -166,15 +190,21 @@ export const Speeds: Story = {
     <div className="flex gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner speed="slow" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Slow</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Slow
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="normal" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Normal</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Normal
+        </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="fast" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">Fast</p>
+        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          Fast
+        </p>
       </div>
     </div>
   ),
@@ -462,7 +492,9 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">Dark Theme</h3>
+        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+          Dark Theme
+        </h3>
         <div className="flex gap-4">
           <GlassSpinner variant="primary" />
           <GlassSpinner variant="secondary" />

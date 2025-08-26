@@ -592,7 +592,9 @@ export const RealWorldExamples: Story = {
           <GlassInput
             leftIcon={<Globe className="h-4 w-4" />}
             placeholder="Search globally"
-            rightIcon={<span className="text-liquid-secondary text-xs">⌘K</span>}
+            rightIcon={
+              <span className="text-liquid-secondary text-xs">⌘K</span>
+            }
           />
         </div>
       </div>

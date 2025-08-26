@@ -326,7 +326,9 @@ export const ECommerceExample: Story = {
           header={
             <div className="flex items-center space-x-2">
               <ShoppingCart className="h-6 w-6 text-liquid-accent" />
-              <h2 className="text-lg font-semibold text-liquid-text-inverse">ShopApp</h2>
+              <h2 className="text-lg font-semibold text-liquid-text-inverse">
+                ShopApp
+              </h2>
             </div>
           }
           footer={

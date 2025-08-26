@@ -98,7 +98,9 @@ export default function Demo() {
       </div>
 
       <div className="p-4 rounded-lg bg-liquid-bg/5 border border-liquid-highlight/10">
-        <h3 className="font-medium text-liquid-text-inverse mb-2">Selected Values:</h3>
+        <h3 className="font-medium text-liquid-text-inverse mb-2">
+          Selected Values:
+        </h3>
         <p className="text-liquid-text-inverse/70 text-sm">
           User: {selectedUser || "None"}
           <br />
@@ -347,7 +349,9 @@ const ComboboxOption = React.memo(({ option, isSelected, isHighlighted }) => {
       <div>
         <div className="font-medium">{option.label}</div>
         {option.description && (
-          <div className="text-sm text-liquid-text-inverse/60">{option.description}</div>
+          <div className="text-sm text-liquid-text-inverse/60">
+            {option.description}
+          </div>
         )}
       </div>
     </div>

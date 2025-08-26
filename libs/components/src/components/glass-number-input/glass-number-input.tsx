@@ -326,7 +326,9 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             )}
           >
             {label}
-            {props.required && <span className="ml-1 text-liquid-accent">*</span>}
+            {props.required && (
+              <span className="ml-1 text-liquid-accent">*</span>
+            )}
           </label>
         )}
 

@@ -17,85 +17,37 @@
 <style>
   /* Canvas background controller (driven by globalTypes.canvasBg in preview.jsx) */
   :root[data-canvas-bg="glass-dark"] .sb-show-main {
-    background: #0b1220 !important;
+    background: var(--glass-bg-canvas, #0b1220) !important;
   }
   :root[data-canvas-bg="glass-light"] .sb-show-main {
-    background: #e9eef6 !important;
+    background: 
+      radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
+      radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%),
+      linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%) !important;
+  }
+  :root[data-canvas-bg="glass-canvas-light"] .sb-show-main {
+    background: var(--glass-bg-canvas, #e9eef6) !important;
   }
   :root[data-canvas-bg="transparent"] .sb-show-main {
     background: transparent !important;
   }
-  :root[data-canvas-bg="light"] .sb-show-main {
-    background:
-      radial-gradient(
-        1200px 800px at 10% 10%,
-        rgba(255, 255, 255, 0.9),
-        rgba(247, 249, 252, 0.85) 30%,
-        rgba(235, 240, 247, 0.75) 60%,
-        rgba(229, 233, 241, 0.7) 100%
-      ),
-      radial-gradient(
-        1000px 600px at 80% 20%,
-        rgba(102, 126, 234, 0.25),
-        transparent 60%
-      ),
-      radial-gradient(
-        900px 700px at 20% 80%,
-        rgba(90, 200, 250, 0.18),
-        transparent 60%
-      ),
-      linear-gradient(180deg, #eef2f7 0%, #e6ebf3 100%) !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
-  }
-  :root[data-canvas-bg="dark"] .sb-show-main {
-    background:
-      radial-gradient(
-        1200px 800px at 10% 10%,
-        rgba(14, 18, 28, 0.98),
-        rgba(14, 18, 28, 0.92) 30%,
-        rgba(18, 22, 34, 0.9) 60%,
-        rgba(20, 24, 33, 0.9) 100%
-      ),
-      radial-gradient(
-        1000px 600px at 80% 20%,
-        rgba(102, 126, 234, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        900px 700px at 20% 80%,
-        rgba(90, 200, 250, 0.14),
-        transparent 60%
-      ),
-      linear-gradient(180deg, #0d111a 0%, #121725 100%) !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
-  }
+  /* Remove old hardcoded dark background - now handled in CSS */
 
   /* Performance optimizations */
   * {
     will-change: auto;
   }
 
-  /* Glass UI Theme Variables */
+  /* Glass UI Theme Variables - References liquid-glass-system.css */
   :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-text: rgba(0, 0, 0, 0.8);
-    --glass-blur: 10px;
+    /* Legacy compatibility for old CSS variables */
+    --glass-bg: var(--lg-bg-color);
+    --glass-border: rgb(var(--lg-text-rgb) / 0.1);
+    --glass-text: var(--lg-text);
+    --glass-blur: 12px;
     --glass-saturation: 180%;
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --glass-highlight: rgba(255, 255, 255, 0.3);
-  }
-
-  [data-theme="dark"] {
-    --glass-bg: rgba(0, 0, 0, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-text: rgba(255, 255, 255, 0.9);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --glass-highlight: rgba(255, 255, 255, 0.1);
+    --glass-shadow: var(--lg-shadow-main);
+    --glass-highlight: var(--lg-highlight);
   }
 
   /* Glass effect base styles */
@@ -149,7 +101,11 @@
   }
   html.theme-light .sbdocs,
   html[data-theme="light"] .sbdocs {
-    color: #000000;
+    color: var(--lg-text, #1a1d21);
+  }
+  html.theme-dark .sbdocs,
+  html[data-theme="dark"] .sbdocs {
+    color: var(--lg-text, #ffffff);
   }
 
   /* Reduce motion for accessibility */
@@ -177,10 +133,10 @@
 
   /* Error display styles */
   .sb-errordisplay {
-    background: var(--glass-bg) !important;
-    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    background: var(--lg-bg-color) !important;
+    border: 1px solid rgb(var(--lg-error-rgb) / 0.3) !important;
     backdrop-filter: blur(10px) !important;
-    border-radius: 12px !important;
+    border-radius: var(--lg-radius-sm) !important;
     padding: 1rem !important;
   }
 
@@ -192,7 +148,7 @@
 
     .glass-effect,
     .glass-ui {
-      border-radius: 8px;
+      border-radius: var(--lg-radius-xs);
     }
   }
   /* Storybook Docs: align typography and rounding with library */

@@ -104,7 +104,9 @@ export const Sizes: Story = {
     <div className="space-y-6">
       {(["sm", "md", "lg"] as const).map((size) => (
         <div key={size} className="w-80">
-          <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Size: {size}</h3>
+          <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+            Size: {size}
+          </h3>
           <GlassFormField
             size={size}
             label={`${size.toUpperCase()} Field`}
@@ -123,13 +125,17 @@ export const ValidationStates: Story = {
   render: () => (
     <div className="space-y-6">
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Default State</h3>
+        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          Default State
+        </h3>
         <GlassFormField label="Username" helperText="Choose a unique username">
           <GlassInput placeholder="username" />
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Error State</h3>
+        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          Error State
+        </h3>
         <GlassFormField
           label="Password"
           error="Password must be at least 8 characters long"
@@ -139,7 +145,9 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Success State</h3>
+        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          Success State
+        </h3>
         <GlassFormField
           label="Email"
           success="Email is available and valid"
@@ -149,7 +157,9 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Warning State</h3>
+        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          Warning State
+        </h3>
         <GlassFormField
           label="Phone Number"
           warning="International format recommended"
@@ -158,7 +168,9 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">Disabled State</h3>
+        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          Disabled State
+        </h3>
         <GlassFormField
           label="Account Type"
           helperText="Contact admin to change"
@@ -253,7 +265,9 @@ export const RealWorldExamples: Story = {
     };
     return (
       <div className="w-full max-w-md">
-        <h3 className="mb-6 font-bold text-liquid-text-inverse/90 text-xl">Create Account</h3>
+        <h3 className="mb-6 font-bold text-liquid-text-inverse/90 text-xl">
+          Create Account
+        </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <GlassFormField
@@ -447,7 +461,9 @@ export const InteractiveDemo: Story = {
                   checked={isRequired}
                   onChange={(e) => setIsRequired(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">Required</span>
+                <span className="text-sm text-liquid-text-inverse/90">
+                  Required
+                </span>
               </label>
               <label className="flex items-center gap-2">
                 <input
@@ -455,7 +471,9 @@ export const InteractiveDemo: Story = {
                   checked={isDisabled}
                   onChange={(e) => setIsDisabled(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">Disabled</span>
+                <span className="text-sm text-liquid-text-inverse/90">
+                  Disabled
+                </span>
               </label>
             </div>
           </div>

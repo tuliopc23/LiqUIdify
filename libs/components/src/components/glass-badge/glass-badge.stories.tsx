@@ -112,11 +112,15 @@ export const StatusIndicators: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-liquid-text-inverse/80">User Status:</span>
+        <span className="text-sm text-liquid-text-inverse/80">
+          User Status:
+        </span>
         <GlassBadge variant="success">Active</GlassBadge>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm text-liquid-text-inverse/80">Subscription:</span>
+        <span className="text-sm text-liquid-text-inverse/80">
+          Subscription:
+        </span>
         <GlassBadge variant="warning">Expiring Soon</GlassBadge>
       </div>
       <div className="flex items-center gap-2">
@@ -177,7 +181,9 @@ export const TagsAndLabels: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Categories</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Categories
+        </h4>
         <div className="flex flex-wrap gap-2">
           <GlassBadge>Technology</GlassBadge>
           <GlassBadge>Design</GlassBadge>
@@ -187,7 +193,9 @@ export const TagsAndLabels: Story = {
         </div>
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Skills</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Skills
+        </h4>
         <div className="flex flex-wrap gap-2">
           <GlassBadge variant="success">React</GlassBadge>
           <GlassBadge variant="success">TypeScript</GlassBadge>
@@ -261,7 +269,9 @@ export const RealWorldExamples: Story = {
             <GlassBadge>Admin</GlassBadge>
           </div>
         </div>
-        <p className="mb-3 text-sm text-liquid-text-inverse/60">Senior Software Engineer</p>
+        <p className="mb-3 text-sm text-liquid-text-inverse/60">
+          Senior Software Engineer
+        </p>
         <div className="flex flex-wrap gap-2">
           <GlassBadge className="text-xs">React</GlassBadge>
           <GlassBadge className="text-xs">TypeScript</GlassBadge>
@@ -273,8 +283,12 @@ export const RealWorldExamples: Story = {
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
         <div className="mb-2 flex items-start justify-between">
           <div>
-            <h3 className="font-semibold text-liquid-text-inverse">Premium Package</h3>
-            <p className="mt-1 font-bold text-2xl text-liquid-text-inverse">$99/mo</p>
+            <h3 className="font-semibold text-liquid-text-inverse">
+              Premium Package
+            </h3>
+            <p className="mt-1 font-bold text-2xl text-liquid-text-inverse">
+              $99/mo
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <GlassBadge variant="warning">Limited Time</GlassBadge>
@@ -292,15 +306,21 @@ export const RealWorldExamples: Story = {
         <h3 className="mb-3 font-semibold text-liquid-text-inverse">Tasks</h3>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-liquid-text-inverse/80">Fix navigation bug</span>
+            <span className="text-sm text-liquid-text-inverse/80">
+              Fix navigation bug
+            </span>
             <GlassBadge variant="error">Critical</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-liquid-text-inverse/80">Update documentation</span>
+            <span className="text-sm text-liquid-text-inverse/80">
+              Update documentation
+            </span>
             <GlassBadge variant="warning">High</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-liquid-text-inverse/80">Refactor auth module</span>
+            <span className="text-sm text-liquid-text-inverse/80">
+              Refactor auth module
+            </span>
             <GlassBadge>Medium</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
@@ -369,7 +389,9 @@ export const AccessibilityDemo: Story = {
         <div className="flex items-center gap-2">
           <span className="text-liquid-text-inverse">Payment Status:</span>
           <GlassBadge variant="warning">Processing</GlassBadge>
-          <span className="text-sm text-liquid-text-inverse/60">(Expected: 2-3 days)</span>
+          <span className="text-sm text-liquid-text-inverse/60">
+            (Expected: 2-3 days)
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-liquid-text-inverse">Account Type:</span>
@@ -377,7 +399,10 @@ export const AccessibilityDemo: Story = {
             Premium
           </GlassBadge>
         </div>
-        <p id="premium-description" className="ml-4 text-liquid-text-inverse/60 text-xs">
+        <p
+          id="premium-description"
+          className="ml-4 text-liquid-text-inverse/60 text-xs"
+        >
           Premium accounts have access to all features and priority support.
         </p>
       </div>

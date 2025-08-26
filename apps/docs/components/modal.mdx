@@ -533,7 +533,9 @@ function WizardModal({ isOpen, onClose }) {
               {index < steps.length - 1 && (
                 <div
                   className={`w-12 h-0.5 ${
-                    index < currentStep ? "bg-liquid-accent" : "bg-liquid-accent/20"
+                    index < currentStep
+                      ? "bg-liquid-accent"
+                      : "bg-liquid-accent/20"
                   }`}
                 />
               )}

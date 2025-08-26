@@ -36,15 +36,23 @@ The Liquid Glass Button implements the signature liquid glass effect with:
       },
     },
     backgrounds: {
-      default: "liquid-glass",
+      default: "glass-light",
       values: [
         {
-          name: "liquid-glass",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light", 
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)"
         },
         {
-          name: "dark",
-          value: "#1a1a1a",
+          name: "glass-dark",
+          value: "#0b1220"
+        },
+        {
+          name: "neutral-light", 
+          value: "#fafafa"
+        },
+        {
+          name: "neutral-dark",
+          value: "#0a0a0a"
         },
         {
           name: "light",
@@ -303,7 +311,9 @@ export const ComplexExample: Story = {
   render: () => (
     <div className="space-y-6 p-6 max-w-md">
       <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold text-liquid-text-inverse">Liquid Glass Demo</h2>
+        <h2 className="text-2xl font-bold text-liquid-text-inverse">
+          Liquid Glass Demo
+        </h2>
         <p className="text-liquid-text-inverse/80">
           Experience the signature liquid glass effect with realistic depth and
           shine.

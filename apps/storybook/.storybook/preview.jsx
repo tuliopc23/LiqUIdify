@@ -7,21 +7,15 @@ import "@/styles/tailwind.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LiquidGlassDefs } from "liquidify";
 
-const lightBg = `
-  radial-gradient(1200px 800px at 10% 10%, rgba(255,255,255,0.9), rgba(247,249,252,0.85) 30%, rgba(235,240,247,0.75) 60%, rgba(229,233,241,0.7) 100%),
-  radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.25), transparent 60%),
-  radial-gradient(900px 700px at 20% 80%, rgba(90,200,250,0.18), transparent 60%),
-  linear-gradient(180deg, #eef2f7 0%, #e6ebf3 100%)
-`;
-const darkBg = `
-  radial-gradient(1200px 800px at 10% 10%, rgba(14,18,28,0.98), rgba(14,18,28,0.92) 30%, rgba(18,22,34,0.9) 60%, rgba(20,24,33,0.9) 100%),
-  radial-gradient(1000px 600px at 80% 20%, rgba(102,126,234,0.18), transparent 60%),
-  radial-gradient(900px 700px at 20% 80%, rgba(90,200,250,0.14), transparent 60%),
-  linear-gradient(180deg, #0d111a 0%, #121725 100%)
+// Standard backgrounds matching HTML preview design
+const glassLightBg = `
+  radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%),
+  radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%),
+  linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)
 `;
 
 // Solid canvas colors that enhance glass effects (high contrast, low noise)
-const glassCanvasLight = "#e9eef6"; // soft cool light for subtle shadows
+const glassCanvasLight = "#e9eef6"; // soft cool light for subtle shadows  
 const glassCanvasDark = "#0b1220"; // deep midnight blue to make glass pop
 
 // noinspection JSUnusedGlobalSymbols
@@ -44,22 +38,21 @@ export const parameters = {
   docs: {
     theme: {
       base: "dark",
-      colorPrimary: "#007AFF",
-      colorSecondary: "#5AC8FA",
-      appBg: "#0d1117",
-      appContentBg: "#0f1524",
-      textColor: "#ffffff",
+      colorPrimary: "var(--lg-primary, #007AFF)",
+      colorSecondary: "var(--lg-primary-light, #5AC8FA)",
+      appBg: "var(--glass-bg-canvas, #0d1117)",
+      appContentBg: "var(--lg-bg-color, #0f1524)",
+      textColor: "var(--lg-text, #ffffff)",
       brandTitle: "LiqUIdify",
       brandUrl: "https://liquidify.dev",
     },
   },
   backgrounds: {
-    default: "glass-dark",
+    default: "glass-light",
     values: [
+      { name: "glass-light", value: glassLightBg },
       { name: "glass-dark", value: glassCanvasDark },
-      { name: "glass-light", value: glassCanvasLight },
-      { name: "light", value: lightBg },
-      { name: "dark", value: darkBg },
+      { name: "glass-canvas-light", value: glassCanvasLight },
       { name: "transparent", value: "transparent" },
     ],
   },

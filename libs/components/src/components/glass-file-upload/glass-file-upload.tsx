@@ -372,7 +372,9 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
             <Upload
               className={cn(
                 "h-12 w-12 transition-colors duration-200",
-                isDragOver ? "text-liquid-accent" : "text-liquid-text-inverse/60",
+                isDragOver
+                  ? "text-liquid-accent"
+                  : "text-liquid-text-inverse/60",
               )}
             />
           </div>

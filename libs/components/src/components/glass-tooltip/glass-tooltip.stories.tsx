@@ -167,7 +167,9 @@ export const RichContent: Story = {
         content={
           <div>
             <p className="font-semibold">John Doe</p>
-            <p className="text-liquid-secondary text-xs">john.doe@example.com</p>
+            <p className="text-liquid-secondary text-xs">
+              john.doe@example.com
+            </p>
             <p className="mt-1 text-liquid-secondary text-xs">
               Last active: 2 hours ago
             </p>
@@ -403,7 +405,9 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">Dark Theme</h3>
+        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+          Dark Theme
+        </h3>
         <div className="flex gap-4">
           <GlassTooltip content="Tooltip in dark theme">
             <button

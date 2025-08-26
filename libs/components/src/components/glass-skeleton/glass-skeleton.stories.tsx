@@ -189,7 +189,9 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Default Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Default Variant
+        </h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="default" />
           <GlassSkeleton width={150} height={20} variant="default" />
@@ -198,7 +200,9 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Shimmer Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Shimmer Variant
+        </h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="shimmer" />
           <GlassSkeleton width={150} height={20} variant="shimmer" />
@@ -207,7 +211,9 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Pulse Variant</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Pulse Variant
+        </h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="pulse" />
           <GlassSkeleton width={150} height={20} variant="pulse" />
@@ -218,11 +224,11 @@ export const Variants: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -234,7 +240,9 @@ export const Shapes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Rectangle Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Rectangle Shapes
+        </h3>
         <div className="flex items-center gap-4">
           <GlassSkeleton
             shape="rectangle"
@@ -258,7 +266,9 @@ export const Shapes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Circle Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Circle Shapes
+        </h3>
         <div className="flex items-center gap-4">
           <GlassSkeleton shape="circle" width={40} variant="shimmer" />
           <GlassSkeleton shape="circle" width={60} variant="shimmer" />
@@ -268,7 +278,9 @@ export const Shapes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Line Shapes</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Line Shapes
+        </h3>
         <div className="space-y-3">
           <GlassSkeleton shape="line" width="100%" variant="shimmer" />
           <GlassSkeleton shape="line" width="80%" variant="shimmer" />
@@ -279,11 +291,11 @@ export const Shapes: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -295,7 +307,9 @@ export const PreBuiltPatterns: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Text Skeleton</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Text Skeleton
+        </h3>
         <div className="max-w-md">
           <SkeletonText lines={4} lastLineWidth="70%" />
         </div>
@@ -320,7 +334,9 @@ export const PreBuiltPatterns: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Table Skeleton</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Table Skeleton
+        </h3>
         <div className="max-w-2xl">
           <SkeletonTable rows={5} columns={4} />
         </div>
@@ -329,11 +345,11 @@ export const PreBuiltPatterns: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -455,11 +471,11 @@ export const ContentTypeExamples: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -471,7 +487,9 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Social Media Feed</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Social Media Feed
+        </h3>
         <div className="max-w-lg space-y-6">
           {Array.from({ length: 3 }, (_, postIndex) => (
             <div
@@ -619,11 +637,11 @@ export const RealWorldExamples: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -654,15 +672,21 @@ export const LoadingStatesComparison: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">Actual Content</h3>
+          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+            Actual Content
+          </h3>
           <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-liquid-accent/20">
                 <User className="h-5 w-5 text-liquid-accent" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">John Smith</div>
-                <div className="text-sm text-liquid-text-inverse/60">2 hours ago</div>
+                <div className="font-medium text-liquid-text-inverse/90">
+                  John Smith
+                </div>
+                <div className="text-sm text-liquid-text-inverse/60">
+                  2 hours ago
+                </div>
               </div>
             </div>
             <div className="mb-4 space-y-2">
@@ -705,11 +729,11 @@ export const LoadingStatesComparison: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "glass-light",
       values: [
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: "glass-light",
+          value: "radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%)",
         },
       ],
     },
@@ -721,7 +745,9 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Ocean Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <div className="max-w-md">
             <SkeletonCard showAvatar />
@@ -730,7 +756,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Sunset Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <div className="grid max-w-md grid-cols-3 gap-4">
             {Array.from({ length: 6 }, (_, i) => (
@@ -746,7 +774,9 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          Forest Theme
+        </h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <div className="max-w-2xl">
             <SkeletonTable rows={4} columns={3} />

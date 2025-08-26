@@ -205,7 +205,9 @@ export const FormExample: Story = {
 
     return (
       <div className="w-96 space-y-4">
-        <h3 className="text-lg font-semibold text-liquid-text-inverse">Contact Form</h3>
+        <h3 className="text-lg font-semibold text-liquid-text-inverse">
+          Contact Form
+        </h3>
 
         <div>
           <input

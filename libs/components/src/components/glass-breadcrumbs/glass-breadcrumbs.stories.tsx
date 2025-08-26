@@ -131,7 +131,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Small</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Small
+        </h4>
         <GlassBreadcrumbs
           size="sm"
           items={[
@@ -155,7 +157,9 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Large</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Large
+        </h4>
         <GlassBreadcrumbs
           size="lg"
           items={[
@@ -181,7 +185,9 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Default</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Default
+        </h4>
         <GlassBreadcrumbs
           variant="default"
           items={[
@@ -192,7 +198,9 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Solid</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Solid
+        </h4>
         <GlassBreadcrumbs
           variant="solid"
           items={[
@@ -203,7 +211,9 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">Ghost</h4>
+        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          Ghost
+        </h4>
         <GlassBreadcrumbs
           variant="ghost"
           items={[
@@ -330,7 +340,9 @@ export const RealWorldExamples: Story = {
     <div className="w-[700px] space-y-6">
       {/* E-commerce */}
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">E-commerce Navigation</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          E-commerce Navigation
+        </h4>
         <GlassBreadcrumbs
           items={[
             {
@@ -347,7 +359,9 @@ export const RealWorldExamples: Story = {
 
       {/* File system */}
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">File System</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          File System
+        </h4>
         <GlassBreadcrumbs
           items={[
             { label: "Root", icon: <Folder className="h-4 w-4" />, href: "/" },
@@ -369,7 +383,9 @@ export const RealWorldExamples: Story = {
 
       {/* Multi-step form */}
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">Checkout Process</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          Checkout Process
+        </h4>
         <GlassBreadcrumbs
           variant="ghost"
           items={[
@@ -385,14 +401,18 @@ export const RealWorldExamples: Story = {
             },
             { label: "Payment", icon: <CreditCard className="h-4 w-4" /> },
           ]}
-          separator={<span className="mx-3 text-liquid-text-inverse/40">→</span>}
+          separator={
+            <span className="mx-3 text-liquid-text-inverse/40">→</span>
+          }
           showHome={false}
         />
       </div>
 
       {/* Admin panel */}
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">Admin Dashboard</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          Admin Dashboard
+        </h4>
         <GlassBreadcrumbs
           size="sm"
           items={[

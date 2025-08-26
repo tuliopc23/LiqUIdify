@@ -385,13 +385,22 @@ export const RealWorldExample: Story = {
       >
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <nav className="flex space-x-4">
-            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
+            <a
+              href="#placeholder"
+              className="text-liquid-secondary hover:text-liquid-text-inverse"
+            >
               Privacy Policy
             </a>
-            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
+            <a
+              href="#placeholder"
+              className="text-liquid-secondary hover:text-liquid-text-inverse"
+            >
               Terms of Service
             </a>
-            <a href="#placeholder" className="text-liquid-secondary hover:text-liquid-text-inverse">
+            <a
+              href="#placeholder"
+              className="text-liquid-secondary hover:text-liquid-text-inverse"
+            >
               Contact Us
             </a>
           </nav>
@@ -426,7 +435,7 @@ export const StylingVariations: Story = {
         <div className="relative h-20 rounded-lg border">
           <style>{`
             .custom-skip-nav a {
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              background: radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
               color: white !important;
               border-radius: 9999px;
               padding: 0.5rem 1.5rem;

@@ -97,7 +97,9 @@ export default function Demo() {
           <Drawer.Body>
             <div className="space-y-3">
               <div className="p-3 rounded-lg bg-liquid-accent/10 border border-liquid-accent/20">
-                <p className="text-liquid-accent text-sm">New message received</p>
+                <p className="text-liquid-accent text-sm">
+                  New message received
+                </p>
               </div>
               <div className="p-3 rounded-lg bg-liquid-accent/10 border border-liquid-accent/20">
                 <p className="text-liquid-accent text-sm">
@@ -187,9 +189,15 @@ export default function SizesDemo() {
               This is a medium drawer with more space for content.
             </p>
             <div className="space-y-3">
-              <div className="p-3 rounded-lg bg-liquid-bg/5">Content item 1</div>
-              <div className="p-3 rounded-lg bg-liquid-bg/5">Content item 2</div>
-              <div className="p-3 rounded-lg bg-liquid-bg/5">Content item 3</div>
+              <div className="p-3 rounded-lg bg-liquid-bg/5">
+                Content item 1
+              </div>
+              <div className="p-3 rounded-lg bg-liquid-bg/5">
+                Content item 2
+              </div>
+              <div className="p-3 rounded-lg bg-liquid-bg/5">
+                Content item 3
+              </div>
             </div>
           </Drawer.Body>
         </Drawer.Content>
@@ -208,14 +216,18 @@ export default function SizesDemo() {
           <Drawer.Body>
             <div className="space-y-6">
               <div>
-                <h4 className="text-liquid-text-inverse font-medium mb-3">Section 1</h4>
+                <h4 className="text-liquid-text-inverse font-medium mb-3">
+                  Section 1
+                </h4>
                 <div className="space-y-2">
                   <div className="p-3 rounded-lg bg-liquid-bg/5">Item A</div>
                   <div className="p-3 rounded-lg bg-liquid-bg/5">Item B</div>
                 </div>
               </div>
               <div>
-                <h4 className="text-liquid-text-inverse font-medium mb-3">Section 2</h4>
+                <h4 className="text-liquid-text-inverse font-medium mb-3">
+                  Section 2
+                </h4>
                 <div className="space-y-2">
                   <div className="p-3 rounded-lg bg-liquid-bg/5">Item C</div>
                   <div className="p-3 rounded-lg bg-liquid-bg/5">Item D</div>
@@ -239,7 +251,9 @@ export default function SizesDemo() {
           <Drawer.Body>
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <h4 className="text-liquid-text-inverse font-medium mb-3">Left Column</h4>
+                <h4 className="text-liquid-text-inverse font-medium mb-3">
+                  Left Column
+                </h4>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
                     <div key={i} className="p-4 rounded-lg bg-liquid-bg/5">
@@ -249,7 +263,9 @@ export default function SizesDemo() {
                 </div>
               </div>
               <div>
-                <h4 className="text-liquid-text-inverse font-medium mb-3">Right Column</h4>
+                <h4 className="text-liquid-text-inverse font-medium mb-3">
+                  Right Column
+                </h4>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
                     <div key={i} className="p-4 rounded-lg bg-liquid-bg/5">
@@ -471,7 +487,9 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
                 </GlassBadge>
               </div>
 
-              <p className="text-liquid-text-inverse/70 mb-6">{product?.description}</p>
+              <p className="text-liquid-text-inverse/70 mb-6">
+                {product?.description}
+              </p>
 
               <div className="space-y-4">
                 <div>
@@ -484,8 +502,12 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
                         key={index}
                         className="flex justify-between py-2 border-b border-liquid-highlight/10"
                       >
-                        <span className="text-liquid-text-inverse/70">{spec.name}</span>
-                        <span className="text-liquid-text-inverse">{spec.value}</span>
+                        <span className="text-liquid-text-inverse/70">
+                          {spec.name}
+                        </span>
+                        <span className="text-liquid-text-inverse">
+                          {spec.value}
+                        </span>
                       </div>
                     ))}
                   </div>

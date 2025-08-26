@@ -72,7 +72,9 @@ export default function Demo() {
       </div>
 
       <div className="p-4 rounded-lg bg-liquid-bg/5 border border-liquid-highlight/10">
-        <h3 className="font-medium text-liquid-text-inverse mb-2">Selected Values:</h3>
+        <h3 className="font-medium text-liquid-text-inverse mb-2">
+          Selected Values:
+        </h3>
         <div className="text-liquid-text-inverse/70 text-sm space-y-1">
           <p>Features: {selectedFeatures.join(", ") || "None"}</p>
           <p>Categories: {selectedCategories.join(", ") || "None"}</p>
@@ -320,7 +322,9 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
       <div
         className={cn(
           "w-5 h-5 rounded border-2 transition-all",
-          checked ? "bg-liquid-accent border-liquid-accent" : "border-liquid-highlight/20",
+          checked
+            ? "bg-liquid-accent border-liquid-accent"
+            : "border-liquid-highlight/20",
         )}
       >
         {checked && <CheckIcon />}
@@ -328,7 +332,9 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
       <div>
         <div className="font-medium">{option.label}</div>
         {option.description && (
-          <div className="text-sm text-liquid-text-inverse/60">{option.description}</div>
+          <div className="text-sm text-liquid-text-inverse/60">
+            {option.description}
+          </div>
         )}
       </div>
     </label>

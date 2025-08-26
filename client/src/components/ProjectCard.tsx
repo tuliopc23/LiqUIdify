@@ -34,8 +34,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </h4>
           <div className="flex flex-wrap gap-2">
             {project.tech_stack.map((tech, index) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="inline-block bg-liquid-accent text-liquid-accent text-xs px-2 py-1 rounded-full font-medium"
               >
                 {tech}
@@ -95,11 +95,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       {project.status && (
         <div className="mt-3 pt-3 border-t border-liquid-grey">
-          <span className={`inline-block text-xs px-2 py-1 rounded-full font-medium ${
-            project.status === 'active' 
-              ? 'bg-liquid-accent text-liquid-accent' 
-              : 'bg-liquid-bg text-liquid-secondary'
-          }`}>
+          <span
+            className={`inline-block text-xs px-2 py-1 rounded-full font-medium ${
+              project.status === "active"
+                ? "bg-liquid-accent text-liquid-accent"
+                : "bg-liquid-bg text-liquid-secondary"
+            }`}
+          >
             {project.status}
           </span>
         </div>

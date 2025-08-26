@@ -317,8 +317,12 @@ export const RealWorldExamples: Story = {
           showBorder
         />
         <div className="flex-1">
-          <h3 className="font-semibold text-liquid-text-inverse">Sarah Johnson</h3>
-          <p className="text-sm text-liquid-text-inverse/60">Product Designer</p>
+          <h3 className="font-semibold text-liquid-text-inverse">
+            Sarah Johnson
+          </h3>
+          <p className="text-sm text-liquid-text-inverse/60">
+            Product Designer
+          </p>
           <div className="mt-2 flex gap-2">
             <span className="text-liquid-text-inverse/40 text-xs">
               sarah.johnson@company.com
@@ -329,7 +333,9 @@ export const RealWorldExamples: Story = {
 
       {/* Message list */}
       <div className="space-y-3 rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">Recent Messages</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          Recent Messages
+        </h4>
         <div className="flex items-start gap-3">
           <GlassAvatar
             src="https://i.pravatar.cc/150?img=25"
@@ -338,8 +344,12 @@ export const RealWorldExamples: Story = {
           />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-liquid-text-inverse">Mike Chen</span>
-              <span className="text-liquid-text-inverse/40 text-xs">2 min ago</span>
+              <span className="font-medium text-sm text-liquid-text-inverse">
+                Mike Chen
+              </span>
+              <span className="text-liquid-text-inverse/40 text-xs">
+                2 min ago
+              </span>
             </div>
             <p className="text-sm text-liquid-text-inverse/60">
               Hey, are you available for a quick call?
@@ -350,8 +360,12 @@ export const RealWorldExamples: Story = {
           <GlassAvatar fallback="Emma Davis" size="sm" status="away" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-liquid-text-inverse">Emma Davis</span>
-              <span className="text-liquid-text-inverse/40 text-xs">15 min ago</span>
+              <span className="font-medium text-sm text-liquid-text-inverse">
+                Emma Davis
+              </span>
+              <span className="text-liquid-text-inverse/40 text-xs">
+                15 min ago
+              </span>
             </div>
             <p className="text-sm text-liquid-text-inverse/60">
               I've updated the design files.
@@ -362,7 +376,9 @@ export const RealWorldExamples: Story = {
 
       {/* Comment section */}
       <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">Comments</h4>
+        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+          Comments
+        </h4>
         <div className="space-y-4">
           <div className="flex gap-3">
             <GlassAvatar
@@ -376,7 +392,9 @@ export const RealWorldExamples: Story = {
                   <span className="font-medium text-sm text-liquid-text-inverse">
                     Alex Turner
                   </span>
-                  <span className="text-liquid-text-inverse/40 text-xs">1 hour ago</span>
+                  <span className="text-liquid-text-inverse/40 text-xs">
+                    1 hour ago
+                  </span>
                 </div>
                 <p className="text-sm text-liquid-text-inverse/80">
                   Great work on this component! The glass effect looks amazing.
@@ -496,7 +514,9 @@ export const AccessibilityDemo: Story = {
             alt="Profile picture of Sarah Williams"
             size="md"
           />
-          <span className="text-liquid-text-inverse">Sarah Williams (with alt text)</span>
+          <span className="text-liquid-text-inverse">
+            Sarah Williams (with alt text)
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <button

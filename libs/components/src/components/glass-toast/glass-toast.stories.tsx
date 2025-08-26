@@ -550,7 +550,9 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">Dark Theme</h3>
+        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+          Dark Theme
+        </h3>
         <div className="space-y-2">
           <GlassToast type="success" message="Success toast in dark theme" />
           <GlassToast type="error" message="Error toast in dark theme" />

@@ -169,7 +169,7 @@ const config = {
   },
   managerHead: (head) => `
     ${head}
-    <meta name="theme-color" content="#3b82f6" />
+    <meta name="theme-color" content="var(--lg-primary, #007aff)" />
     <meta name="description" content="LiqUIdify Component Library - Interactive component documentation and examples" />
     <meta property="og:title" content="LiqUIdify Storybook" />
     <meta property="og:description" content="Interactive documentation for LiqUIdify React component library" />
@@ -190,28 +190,28 @@ const config = {
 
       /* Typography consistency improvements */
       .theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6 {
-        color: rgba(255, 255, 255, 0.95) !important;
+        color: var(--lg-text, #ffffff) !important;
       }
       
       .theme-light h1, .theme-light h2, .theme-light h3, .theme-light h4, .theme-light h5, .theme-light h6 {
-        color: rgba(17, 24, 39, 0.95) !important;
+        color: var(--lg-text, #1a1d21) !important;
       }
       
       .theme-dark p, .theme-dark span, .theme-dark div:not(.sb-main-padded) {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--lg-text, #ffffff);
       }
       
       .theme-light p, .theme-light span, .theme-light div:not(.sb-main-padded) {
-        color: rgba(17, 24, 39, 0.8);
+        color: var(--lg-text, #1a1d21);
       }
       
       /* Blue accent for primary text elements */
       .theme-dark .text-primary, .theme-dark [class*="text-blue"] {
-        color: rgba(96, 165, 250, 0.9) !important;
+        color: var(--lg-accent, #5ac8fa) !important;
       }
       
       .theme-light .text-primary, .theme-light [class*="text-blue"] {
-        color: rgba(59, 130, 246, 0.9) !important;
+        color: var(--lg-accent, #007aff) !important;
       }
 
       /* Performance optimization for animations */

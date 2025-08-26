@@ -20,26 +20,36 @@ export default {
 export const Playground = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
     <GlassResponsiveCard variant="default">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">Default Card</h3>
+      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+        Default Card
+      </h3>
       <p className="text-liquid-text-inverse/80">
         This is a default card with Liquid Glass styling.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="elevated">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">Elevated Card</h3>
+      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+        Elevated Card
+      </h3>
       <p className="text-liquid-text-inverse/80">
         This card has elevated styling for more prominence.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="outlined">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">Outlined Card</h3>
+      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+        Outlined Card
+      </h3>
       <p className="text-liquid-text-inverse/80">
         This card has a subtle outline for definition.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="pressed">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">Pressed Card</h3>
-      <p className="text-liquid-text-inverse/80">This card has a pressed appearance.</p>
+      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+        Pressed Card
+      </h3>
+      <p className="text-liquid-text-inverse/80">
+        This card has a pressed appearance.
+      </p>
     </GlassResponsiveCard>
   </div>
 );
@@ -49,7 +59,9 @@ export const EdgeCases = () => (
     <div>
       <h3 className="mb-2 text-liquid-text-inverse">No Hover Effect</h3>
       <GlassResponsiveCard hover={false}>
-        <p className="text-liquid-text-inverse/80">This card has no hover effect.</p>
+        <p className="text-liquid-text-inverse/80">
+          This card has no hover effect.
+        </p>
       </GlassResponsiveCard>
     </div>
     <div>
@@ -70,7 +82,9 @@ export const EdgeCases = () => (
         <div className="flex items-center space-x-4">
           <Star className="h-5 w-5 text-liquid-accent" />
           <div>
-            <h4 className="font-medium text-liquid-text-inverse">Star Rating</h4>
+            <h4 className="font-medium text-liquid-text-inverse">
+              Star Rating
+            </h4>
             <p className="text-sm text-liquid-text-inverse/60">4.5 out of 5</p>
           </div>
         </div>
@@ -105,7 +119,9 @@ export const ResponsiveBehavior = () => (
       <div className="flex items-center space-x-4">
         <Heart className="h-6 w-6 text-liquid-accent" />
         <div>
-          <h4 className="font-medium text-liquid-text-inverse">Responsive Card</h4>
+          <h4 className="font-medium text-liquid-text-inverse">
+            Responsive Card
+          </h4>
           <p className="text-sm text-liquid-text-inverse/60">
             This card adapts to different screen sizes.
           </p>
@@ -116,7 +132,9 @@ export const ResponsiveBehavior = () => (
       <div className="flex items-center space-x-4">
         <MessageCircle className="h-6 w-6 text-liquid-accent" />
         <div>
-          <h4 className="font-medium text-liquid-text-inverse">Non-Responsive Card</h4>
+          <h4 className="font-medium text-liquid-text-inverse">
+            Non-Responsive Card
+          </h4>
           <p className="text-sm text-liquid-text-inverse/60">
             This card maintains fixed sizing.
           </p>

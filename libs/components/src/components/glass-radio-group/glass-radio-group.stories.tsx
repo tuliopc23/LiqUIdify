@@ -307,7 +307,9 @@ export const PaymentMethod: Story = {
                 <Shield className="h-5 w-5" />
                 <div>
                   <p className="font-medium">PayPal</p>
-                  <p className="text-liquid-secondary text-sm">Fast and secure</p>
+                  <p className="text-liquid-secondary text-sm">
+                    Fast and secure
+                  </p>
                 </div>
               </div>
             </div>
@@ -318,7 +320,9 @@ export const PaymentMethod: Story = {
                 <Zap className="h-5 w-5" />
                 <div>
                   <p className="font-medium">Cryptocurrency</p>
-                  <p className="text-liquid-secondary text-sm">Bitcoin, Ethereum</p>
+                  <p className="text-liquid-secondary text-sm">
+                    Bitcoin, Ethereum
+                  </p>
                 </div>
               </div>
             </div>
@@ -395,7 +399,9 @@ export const ThemeSelection: Story = {
               <Monitor className="h-4 w-4" />
               <div className="flex-1">
                 <p className="font-medium">System</p>
-                <p className="text-liquid-secondary text-sm">Match system preference</p>
+                <p className="text-liquid-secondary text-sm">
+                  Match system preference
+                </p>
               </div>
             </div>
           </RadioGroup.Item>
@@ -479,7 +485,7 @@ export const CustomStyling: Story = {
     <div className="space-y-6">
       <style>{`
         .custom-radio-group .group[data-state="checked"] {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
           color: white;
         }
         .custom-radio-group .group[data-state="checked"] .text-liquid-secondary {

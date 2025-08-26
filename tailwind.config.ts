@@ -12,7 +12,7 @@ const config: Config = {
     "./public/**/*.html",
   ],
 
-  darkMode: ["class"],
+  darkMode: "class",
 
   safelist: [
     // Core liquid glass system

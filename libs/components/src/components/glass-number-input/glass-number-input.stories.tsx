@@ -252,7 +252,9 @@ export const MultipleInputs: Story = {
 
     return (
       <div className="space-y-4 w-80">
-        <h3 className="text-lg font-semibold text-liquid-text-inverse">Box Dimensions</h3>
+        <h3 className="text-lg font-semibold text-liquid-text-inverse">
+          Box Dimensions
+        </h3>
 
         <GlassNumberInput
           label="Width (cm)"

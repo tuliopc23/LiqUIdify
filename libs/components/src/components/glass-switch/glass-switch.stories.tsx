@@ -203,7 +203,9 @@ export const InteractiveDemo: Story = {
     return (
       <div
         className={`w-96 rounded-lg p-6 transition-colors ${
-          isDarkMode ? "bg-liquid-bg text-liquid-text-inverse" : "bg-liquid-bg text-liquid-secondary"
+          isDarkMode
+            ? "bg-liquid-bg text-liquid-text-inverse"
+            : "bg-liquid-bg text-liquid-secondary"
         }`}
       >
         <h3 className="mb-6 font-semibold text-lg">System Settings</h3>
@@ -541,7 +543,9 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="rounded-lg bg-liquid-bg p-6">
-          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">Dark Theme</h3>
+          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+            Dark Theme
+          </h3>
           <div className="space-y-3">
             <GlassSwitch
               checked={darkChecked}
