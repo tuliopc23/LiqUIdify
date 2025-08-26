@@ -409,6 +409,8 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 ![GitHub issues](https://img.shields.io/github/issues/tuliopc23/LiqUIdify)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/tuliopc23/LiqUIdify)
 
+<!-- Auto-deployment test -->
+
 ---
 
 ## 🔗 Links
