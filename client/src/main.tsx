@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "liquidify/css";
+import "@liquidify/components/css";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import { initThemeFromStorage } from "./lib/theme";

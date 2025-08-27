@@ -1,11 +1,11 @@
 {
-  "name": "hackerfolio-client",
+  "name": "@liquidify/landing-page",
   "version": "1.0.0",
-  "description": "HackerFolio client with proper API case mapping",
+  "description": "LiqUIdify landing page showcasing the component library",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir ../dist/server",
     "preview": "vite preview",
     "test": "vitest",
@@ -14,24 +14,25 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@liquidify/components": "workspace:*",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.8",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.0",
-    "typescript": "^5.0.2",
+    "typescript": "^5.9.2",
     "vite": "^5.0.0",
-    "vitest": "^1.0.0",
-    "tailwindcss": "^4.0.0",
-    "@tailwindcss/postcss": "^4.0.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0"
+    "vitest": "^3.2.4",
+    "tailwindcss": "^4.1.12",
+    "@tailwindcss/postcss": "^4.1.12",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6"
   }
 }

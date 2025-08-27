@@ -4,17 +4,17 @@
   "private": false,
   "type": "module",
   "description": "LiqUIdify component library - glassmorphism React components",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "../../dist/libs/components/index.cjs",
+  "module": "../../dist/libs/components/index.mjs",
+  "types": "../../dist/libs/components/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "types": "../../dist/libs/components/index.d.ts",
+      "import": "../../dist/libs/components/index.mjs",
+      "require": "../../dist/libs/components/index.cjs"
     },
-    "./css": "./dist/liquidify.css",
-    "./styles": "./dist/liquidify.css"
+    "./css": "../../dist/libs/components/liquidify.css",
+    "./styles": "../../dist/libs/components/liquidify.css"
   },
   "files": [
     "dist/**/*.{js,mjs,cjs,d.ts,css}",

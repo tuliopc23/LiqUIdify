@@ -1,8 +1,4 @@
-import React from "react";
-import { ThemeToggle } from "./ThemeToggle";
-import { ContrastToggle } from "./ContrastToggle";
-
-export const Footer: React.FC = () => {
+export const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <footer className="footer" role="contentinfo">
@@ -11,7 +7,7 @@ export const Footer: React.FC = () => {
           <nav aria-label="Product">
             <h3>Product</h3>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              <li><a href="#showcase">Components</a></li>
+              <li><a href="#features">Components</a></li>
               <li><a href="#install">Install</a></li>
               <li><a href="https://docs.useliquidify.dev" rel="noopener">Docs</a></li>
             </ul>
@@ -31,11 +27,10 @@ export const Footer: React.FC = () => {
             </ul>
           </nav>
           <div>
-            <h3>Preferences</h3>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <ThemeToggle />
-              <ContrastToggle />
-            </div>
+            <h3>About</h3>
+            <p style={{ fontSize: "var(--font-size-sm)", lineHeight: 1.4 }}>
+              A refined React component library inspired by Apple's latest design language.
+            </p>
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "var(--space-8)" }}>

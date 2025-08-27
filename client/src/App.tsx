@@ -1,14 +1,11 @@
-// client/src/App.tsx
-import React from "react";
 import LandingPage from "./pages/index";
-import { UnifiedGlassProvider, LiquidGlassDefs } from "liquidify";
+import { LiquidGlassDefs } from "@liquidify/components";
 
 export default function App() {
   return (
-    <UnifiedGlassProvider>
-      {/* Injects SVG filter defs once so CSS filter:url(#...) works */}
+    <div className="liquidify-app">
       <LiquidGlassDefs />
       <LandingPage />
-    </UnifiedGlassProvider>
+    </div>
   );
 }

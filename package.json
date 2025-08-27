@@ -141,11 +141,13 @@
   "scripts": {
     "dev:all": "node scripts/dev.mjs",
     "dev:quick": "concurrently \"bun run --filter @liquidify/components build:watch\" \"bun run --filter @liquidify/storybook-app dev\"",
-    "build": "bun run build:lib && bun run build:storybook",
+    "dev:landing": "bun run --filter @liquidify/landing-page dev",
+    "build": "bun run build:lib && bun run build:storybook && bun run build:landing",
     "build:lib": "bun run --filter @liquidify/components build",
     "build:storybook": "bun run --filter @liquidify/storybook-app build",
+    "build:landing": "bun run --filter @liquidify/landing-page build",
     "build:docs": "echo 'Docs are built and deployed via Mintlify platform'",
-    "build:all": "bun run build:lib && bun run build:storybook && bun run build:docs",
+    "build:all": "bun run build:lib && bun run build:storybook && bun run build:landing && bun run build:docs",
     "build:types": "bun run --filter @liquidify/components build:types",
     "build:watch": "bun run --filter @liquidify/components build:watch",
     "check:tsconfig": "tsc --noEmit --project tsconfig.json",
@@ -165,9 +167,9 @@
     "health-check": "bun run type-check && bun run build:lib",
     "lint": "qlty check -a",
     "preview": "bun run build && bun run docs:preview",
-    "site:dev": "bunx vite",
-    "site:build": "bunx vite build",
-    "site:preview": "bunx vite preview",
+    "landing:dev": "bun run --filter @liquidify/landing-page dev",
+    "landing:build": "bun run --filter @liquidify/landing-page build",
+    "landing:preview": "bun run --filter @liquidify/landing-page preview",
     "storybook": "bun run --filter @liquidify/storybook-app dev",
     "storybook:typecheck": "bun run --filter @liquidify/storybook-app typecheck",
     "storybook:build": "bun run --cwd apps/storybook build",
@@ -205,6 +207,7 @@
   "version": "1.3.7",
   "workspaces": [
     "apps/*",
+    "client",
     "examples/*",
     "libs/*"
   ]
