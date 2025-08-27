@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "framework": null,
-  "installCommand": "bun install",
+  "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run --cwd apps/storybook build",
   "outputDirectory": "apps/storybook/storybook-static"
 }
