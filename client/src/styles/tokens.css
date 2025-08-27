@@ -1,0 +1,79 @@
+:root {
+  /* Typography */
+  --font-family: var(--font-system, -apple-system, BlinkMacSystemFont, 'SF Pro', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, system-ui, sans-serif);
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-body: 1rem;   /* 16px */
+  --font-size-h3: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --font-size-h2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --font-size-h1: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Hit areas */
+  --hit-area: 44px;
+
+  /* Glass & elevation */
+  --glass-blur: 24px;
+  --glass-saturate: 1.2;
+  --glass-radius: 16px;
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+
+  /* Light theme (default) */
+  --color-bg: hsl(210 20% 98%);
+  --color-surface: color-mix(in oklab, white 70%, transparent);
+  --color-text: hsl(222 14% 12%);
+  --color-muted: hsl(222 10% 42%);
+  --color-accent: #0a84ff;
+  --glass-outline: 1px solid color-mix(in oklab, #0a84ff 15%, transparent);
+}
+
+/* Theme modes via attributes on <html> */
+html[data-theme="dark"] {
+  --color-bg: hsl(220 18% 10%);
+  --color-surface: color-mix(in oklab, #0b0b0c 60%, transparent);
+  --color-text: hsl(210 14% 96%);
+  --color-muted: hsl(214 12% 70%);
+  --color-accent: #0a84ff; /* keep accent consistent */
+  --glass-outline: 1px solid color-mix(in oklab, #0a84ff 35%, transparent);
+}
+
+/* Auto respects prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  html[data-theme="auto"] {
+    --color-bg: hsl(220 18% 10%);
+    --color-surface: color-mix(in oklab, #0b0b0c 60%, transparent);
+    --color-text: hsl(210 14% 96%);
+    --color-muted: hsl(214 12% 70%);
+    --glass-outline: 1px solid color-mix(in oklab, #0a84ff 35%, transparent);
+  }
+}
+
+/* Increased contrast mode */
+html[data-contrast="increased"] {
+  --color-surface: color-mix(in oklab, white 85%, transparent); /* reduce translucency */
+  --glass-outline: 1px solid color-mix(in oklab, black 18%, transparent);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.14);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.18);
+}
+
+/* Increased contrast + dark */
+html[data-theme="dark"][data-contrast="increased"] {
+  --color-surface: color-mix(in oklab, #0b0b0c 85%, transparent);
+  --glass-outline: 1px solid color-mix(in oklab, white 22%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="auto"][data-contrast="increased"] {
+    --color-surface: color-mix(in oklab, #0b0b0c 85%, transparent);
+    --glass-outline: 1px solid color-mix(in oklab, white 22%, transparent);
+  }
+}
