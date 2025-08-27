@@ -1,11 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "storybook build -c .storybook -o storybook-static",
+  "buildCommand": "echo 'Using pre-built storybook from storybook-static'",
   "outputDirectory": "storybook-static",
-  "installCommand": "bun install",
-  "devCommand": "bun run dev",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
+  "installCommand": "echo 'No install needed - using pre-built assets'",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- apps/storybook/storybook-static/",
   "headers": [
     {
       "source": "/(.*)",
