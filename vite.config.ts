@@ -7,11 +7,14 @@ export default defineConfig({
   root: "client",
   plugins: [react()],
   resolve: {
-    alias: {
-      "@": resolve(__dirname, "./client/src"),
-      "@shared": resolve(__dirname, "./shared"),
-      "@server": resolve(__dirname, "./server"),
-    },
+    alias: [
+      // Ensure the more specific alias resolves first
+      { find: "liquidify/css", replacement: resolve(__dirname, "./libs/components/src/styles/index.css") },
+      { find: "liquidify", replacement: resolve(__dirname, "./libs/components/src/index.ts") },
+      { find: "@", replacement: resolve(__dirname, "./client/src") },
+      { find: "@shared", replacement: resolve(__dirname, "./shared") },
+      { find: "@server", replacement: resolve(__dirname, "./server") },
+    ],
   },
   build: {
     outDir: "../dist/public",
