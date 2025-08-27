@@ -55,9 +55,9 @@ docs
 # Scripts and configs not needed for deployment
 scripts
 *.config.js
-*.config.ts
 !postcss.config.js
 !tailwind.config.ts
+!apps/storybook/.storybook/*.config.js
 
 # Package files
 *.tgz
