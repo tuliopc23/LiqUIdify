@@ -107,8 +107,7 @@
         "pages": [
           "examples/dashboard",
           "examples/forms",
-          "examples/pricing",
-          "examples/landing-page"
+          "examples/pricing"
         ]
       },
       {

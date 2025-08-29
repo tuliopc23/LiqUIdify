@@ -10,7 +10,9 @@ beforeAll(() => {
 
 describe("GlassInput", () => {
   it("renders input element with placeholder", () => {
-    const { container } = render(<GlassInput placeholder="Enter text" data-testid="test-input" />);
+    const { container } = render(
+      <GlassInput placeholder="Enter text" data-testid="test-input" />,
+    );
 
     const input = container.querySelector('[data-testid="test-input"]');
     expect(input).toBeTruthy();
@@ -20,13 +22,12 @@ describe("GlassInput", () => {
   it("handles value changes", () => {
     const handleChange = vi.fn();
     const { container } = render(
-      <GlassInput
-        data-testid="test-input"
-        onChange={handleChange}
-      />
+      <GlassInput data-testid="test-input" onChange={handleChange} />,
     );
 
-    const input = container.querySelector('[data-testid="test-input"]') as HTMLInputElement;
+    const input = container.querySelector(
+      '[data-testid="test-input"]',
+    ) as HTMLInputElement;
     expect(input).toBeTruthy();
   });
 });

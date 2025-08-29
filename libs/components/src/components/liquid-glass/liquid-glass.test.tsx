@@ -29,7 +29,9 @@ describe("LiquidGlass", () => {
       </LiquidGlass>,
     );
 
-    const liquidGlassElement = container.querySelector('[data-testid="liquid-glass"]');
+    const liquidGlassElement = container.querySelector(
+      '[data-testid="liquid-glass"]',
+    );
     expect(liquidGlassElement).toHaveClass("custom-class");
   });
 });

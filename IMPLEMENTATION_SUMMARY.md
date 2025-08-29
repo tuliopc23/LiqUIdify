@@ -164,18 +164,6 @@ Implemented Zod schemas for:
 │   │   └── api.integration.test.ts       # Integration tests
 │   ├── app.ts                            # Main server with fixed middleware
 │   └── package.json                      # Server dependencies
-├── client/
-│   ├── src/
-│   │   ├── hooks/
-│   │   │   └── useProjects.ts            # Snake_case expecting hook
-│   │   ├── components/
-│   │   │   └── ProjectCard.tsx           # Component using proper fields
-│   │   ├── App.tsx                       # Main application
-│   │   ├── main.tsx                      # Client entry point
-│   │   ├── entry-server.tsx              # SSR entry point
-│   │   └── index.css                     # Tailwind styles
-│   ├── index.html                        # HTML template
-│   └── package.json                      # Client dependencies
 └── vite.config.ts                        # Build configuration
 ```
 

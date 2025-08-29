@@ -22,10 +22,13 @@ describe("GlassButton", () => {
     });
 
     it("accepts standard button props", () => {
-      const element = <GlassButton type="submit" disabled>Test</GlassButton>;
+      const element = (
+        <GlassButton type="submit" disabled>
+          Test
+        </GlassButton>
+      );
       expect(element.props.type).toBe("submit");
       expect(element.props.disabled).toBe(true);
     });
   });
-
 });

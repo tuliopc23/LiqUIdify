@@ -442,19 +442,4 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
   </p>
 </div>
 
-## 🖥️ Landing Page (Dev Preview)
 
-A Vite-powered marketing/landing experience showcasing Liquidify components is included under `client/`.
-
-- Run locally (Bun):
-  - Install deps once at repo root: `bun install`
-  - Dev server: `bun run site:dev` (served from `client/`, hot reload)
-- Build static site:
-  - `bun run site:build` → outputs to `dist/public`
-  - Preview the built site: `bun run site:preview`
-
-Notes
-
-- The landing uses the library directly via Vite aliases for local development (`vite.config.ts` maps `liquidify` and `liquidify/css` to `libs/components/src`). When publishing/consuming, the package resolves to built artifacts as per `package.json` export map.
-- Theming: HTML attributes `data-theme` (auto|light|dark) and `data-contrast` (normal|increased) are persisted via `client/src/lib/theme.ts`. UI toggles live in `client/src/components/ui`.
-- Styles: tokens are defined in `client/src/styles/tokens.css`; globals in `client/src/styles/global.css`. Lighthouse/a11y-friendly defaults (focus-visible, reduced motion) are included.
