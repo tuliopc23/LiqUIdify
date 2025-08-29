@@ -1,22 +1,24 @@
-import { LiquidGlassDefs, Button, Card } from "@liquidify/components";
-
 export default function App() {
   return (
-    <div
-      className="liquidify-app"
-      style={{ padding: "2rem", minHeight: "100vh" }}
-    >
-      <LiquidGlassDefs />
-      <Card
-        variant="elevated"
-        style={{ padding: "2rem", maxWidth: "600px", margin: "0 auto" }}
-      >
-        <h1>LiqUIdify Landing Page</h1>
-        <p>Testing basic component rendering...</p>
-        <Button variant="primary" size="large">
-          Get Started
-        </Button>
-      </Card>
+    <div style={{ 
+      padding: "2rem", 
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      color: "white",
+      fontFamily: "system-ui"
+    }}>
+      <h1>LiqUIdify Landing Page</h1>
+      <p>If you can see this, React is working!</p>
+      <button style={{
+        padding: "12px 24px",
+        background: "rgba(255,255,255,0.2)",
+        border: "1px solid rgba(255,255,255,0.3)",
+        borderRadius: "8px",
+        color: "white",
+        cursor: "pointer"
+      }}>
+        Test Button
+      </button>
     </div>
   );
 }
