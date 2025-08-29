@@ -14,7 +14,11 @@ interface TabsProps {
 export const Tabs: React.FC<TabsProps> = ({ items, value, onChange }) => {
   return (
     <div>
-      <div role="tablist" aria-label="Showcase categories" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      <div
+        role="tablist"
+        aria-label="Showcase categories"
+        style={{ display: "flex", gap: 8, flexWrap: "wrap" }}
+      >
         {items.map((item) => {
           const selected = value === item.id;
           return (

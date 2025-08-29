@@ -6,7 +6,10 @@ export const Install = () => {
         <div className="grid grid-2" style={{ marginTop: "var(--space-4)" }}>
           <div className="glass-surface" style={{ padding: "var(--space-6)" }}>
             <h3>Install</h3>
-            <pre style={{ marginBottom: "var(--space-4)" }} aria-label="Install with bun">
+            <pre
+              style={{ marginBottom: "var(--space-4)" }}
+              aria-label="Install with bun"
+            >
               <code>bun add liquidify</code>
             </pre>
             <pre aria-label="Install with npm">
@@ -15,7 +18,9 @@ export const Install = () => {
           </div>
           <div className="glass-surface" style={{ padding: "var(--space-6)" }}>
             <h3>Usage</h3>
-            <pre style={{ fontSize: "0.85rem", lineHeight: 1.4, overflow: "auto" }}>
+            <pre
+              style={{ fontSize: "0.85rem", lineHeight: 1.4, overflow: "auto" }}
+            >
               <code>{`import { GlassButton, ThemeProvider, LiquidGlassDefs } from 'liquidify';
 import 'liquidify/css';
 

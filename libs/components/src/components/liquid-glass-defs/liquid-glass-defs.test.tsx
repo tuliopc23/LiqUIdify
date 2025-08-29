@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { render } from "../../test/test-utils";
+import { vi, beforeAll } from "vitest";
+import { setupDOM } from "../../test/test-setup";
 import { LiquidGlassDefs } from "./liquid-glass-defs";
+
+// Set up DOM environment
+beforeAll(() => {
+  setupDOM();
+});
 
 describe("LiquidGlassDefs", () => {
   describe("Rendering", () => {

@@ -34,8 +34,14 @@ export function applyContrast(contrast: ContrastMode) {
 
 export function initThemeFromStorage() {
   if (!isBrowser()) return;
-  const theme = getStoredTheme() ?? (document.documentElement.getAttribute("data-theme") as ThemeMode) ?? "auto";
-  const contrast = getStoredContrast() ?? (document.documentElement.getAttribute("data-contrast") as ContrastMode) ?? "normal";
+  const theme =
+    getStoredTheme() ??
+    (document.documentElement.getAttribute("data-theme") as ThemeMode) ??
+    "auto";
+  const contrast =
+    getStoredContrast() ??
+    (document.documentElement.getAttribute("data-contrast") as ContrastMode) ??
+    "normal";
   applyTheme(theme);
   applyContrast(contrast);
 }

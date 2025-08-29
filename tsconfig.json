@@ -12,6 +12,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,

@@ -9,8 +9,18 @@ export const CTA = () => {
           <p style={{ margin: 0, opacity: 0.95 }}>
             Production-ready components with Apple-inspired glass aesthetics.
           </p>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: "var(--space-6)" }}>
-            <a href="#install" className="glass-button glass-button--primary glass-button--lg">
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              justifyContent: "center",
+              marginTop: "var(--space-6)",
+            }}
+          >
+            <a
+              href="#install"
+              className="glass-button glass-button--primary glass-button--lg"
+            >
               Install Now
             </a>
           </div>

@@ -1,5 +1,6 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
+import { setupDOM } from "./test-setup";
 
 // Basic test utilities to replace removed test infrastructure
 // This is a minimal implementation to get tests working again
@@ -12,6 +13,8 @@ interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
  * Custom render function that wraps components with necessary providers
  */
 const customRender = (ui: ReactElement, options: CustomRenderOptions = {}) => {
+  // Ensure DOM is set up before rendering
+  setupDOM();
   return render(ui, options);
 };
 

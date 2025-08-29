@@ -27,12 +27,14 @@ This document captures project-specific knowledge useful for advanced contributo
   - CSS entry for consumers is exported as `liquidify/css` or `liquidify/styles`.
 
 Notes
+
 - The npm package export map lives in `package.json` under `exports`. Multiple entry points (`core`, `forms`, `navigation`, etc.) all resolve to the same built bundle with different `.d.ts` surfaces.
 - Build artifacts are emitted under `dist/libs/components`.
 
 ## Testing
 
 Configuration
+
 - Primary config: `vitest.config.mts` (jsdom environment, global setup and test setup, path aliases matching tsconfig, HTML/JUnit/JSON reporters writing to `test-results/*`).
   - environment: `jsdom`
   - globalSetup: `./libs/components/src/test/global-setup.ts`
@@ -44,6 +46,7 @@ Configuration
 - There is also a minimalist `vitest.config.ts` with `happy-dom`; it is not used by default (scripts point to the `.mts` config). Prefer `vitest.config.mts` unless you have a strong reason.
 
 Running tests
+
 - All tests via the root script (uses the `.mts` config):
   - With Bun: `bun run test`
   - With npx (Node): `npx vitest -c vitest.config.mts run`
@@ -62,6 +65,7 @@ Running tests
   - Generated automatically; preview with `npx vite preview --outDir test-results/html`.
 
 Adding tests
+
 - Place component/unit tests alongside source or under `libs/components/src/test/`.
 - Prefer React Testing Library APIs re-exported by our light wrapper (`libs/components/src/test/test-utils.tsx`). Import as:
   - `import { render, screen } from "@/test/test-utils"` or direct `@testing-library/react` if you don't need wrappers.
@@ -69,14 +73,15 @@ Adding tests
 - Use path aliases from `vitest.config.mts` and `tsconfig.base.json` (`@`, `@/components`, `@/hooks`, etc.).
 
 Minimal example (verified)
+
 - We validated the test runner with a simple spec and executed it via `npx vitest -c vitest.config.mts run` on a temporary file. The command completed successfully and produced the default HTML report.
 - To reproduce locally, create a file like `libs/components/src/test/sanity.test.ts`:
 
   ```ts
-  import { describe, it, expect } from 'vitest';
+  import { describe, it, expect } from "vitest";
 
-  describe('sanity', () => {
-    it('adds numbers correctly', () => {
+  describe("sanity", () => {
+    it("adds numbers correctly", () => {
       expect(1 + 2).toBe(3);
     });
   });
@@ -91,6 +96,7 @@ Minimal example (verified)
   Then remove the file when done to keep the repo clean.
 
 Troubleshooting
+
 - If tests are slow or flaky locally, ensure you are using the `.mts` config (it tunes pool/threading and deps optimization) and that Bun/Node versions meet the engines required by dependencies.
 - Some tests rely on Storybook story imports or Tailwind styles. For pure unit tests these are mocked; for integration-like tests, prefer the scripts under `test:*` in `package.json`.
 - The repository also includes `fix-tests.sh` with targeted runs for high-signal suites using `bunx vitest`.
@@ -111,6 +117,7 @@ Troubleshooting
   - When changing Tailwind configuration or CSS pipeline, verify storybook builds and run `stories:coverage` script if relevant.
 
 ## Quick Commands Reference
+
 - Build lib: `bun run build:lib`
 - Dev (components): `bun run dev`
 - Storybook dev: `bun run storybook`
