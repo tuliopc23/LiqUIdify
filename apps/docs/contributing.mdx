@@ -1,23 +1,187 @@
 ---
-title: Contributing
-description: Dev scripts, PR checklist, and conventions.
+title: Contributing to Liquidify
+description: Comprehensive guide for contributing to the Liquidify component library - development workflow, design principles, and quality standards
 ---
 
-See the repository guide:
+# Contributing to Liquidify
 
-- [CONTRIBUTING.md](https://github.com/tuliopc23/LiqUIdify/blob/main/CONTRIBUTING.md)
+We welcome contributions to Liquidify! This guide will help you understand our development workflow, design principles, and quality standards to ensure your contributions align with our Apple HIG-inspired liquid glass design language.
 
-Quick start:
+## 🚀 Quick Start for Contributors
+
+### Development Environment Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/tuliopc23/LiqUIdify.git
+cd LiqUIdify
+
+# Install dependencies
 bun install
-bun run dev
-bun run storybook
+
+# Start development servers
+bun run dev:all          # All development servers
+bun run storybook        # Component playground
+bun run docs:dev         # Documentation site
 ```
 
-Checklist:
+### Essential Development Commands
 
-- TypeScript passes: `bun run type-check`
-- Lint/format: `bun run lint`
-- Tests: `bun run test:all`
-- Update docs when adding components.
+```bash
+# Type checking
+bun run type-check       # Verify TypeScript compliance
+
+# Code quality
+bun run lint            # ESLint and Prettier
+bun run format:fix      # Auto-format code
+
+# Testing
+bun run test           # Run test suite
+bun run test:coverage  # Coverage reports
+
+# Building
+bun run build:lib      # Build component library
+bun run build:all      # Build all packages
+```
+
+## 🎨 Design Principles
+
+### Liquid Glass Design Language
+
+Our components follow a sophisticated **liquid glass design language** inspired by Apple's Human Interface Guidelines:
+
+- **Layered Transparency**: Multiple glass layers with varying opacity levels
+- **Content-Aware Adaptation**: Glass effects that respond to underlying content
+- **Specular Highlights**: Subtle light reflections that enhance depth perception
+- **Physics-Based Motion**: Spring animations and momentum-based interactions
+
+### Apple HIG Integration
+
+All components must adhere to these Apple design principles:
+
+- **Clarity**: Clear visual hierarchy and purposeful design
+- **Deference**: Interface doesn't compete with content
+- **Depth**: Realistic layering and dimensional effects
+- **Accessibility**: WCAG 2.1 AA compliance minimum
+
+## 📋 Contribution Checklist
+
+### Before Submitting a PR
+
+- [ ] **TypeScript Compliance**: `bun run type-check` passes
+- [ ] **Code Quality**: `bun run lint` and `bun run format:fix` applied
+- [ ] **Test Coverage**: All tests pass with `bun run test`
+- [ ] **Storybook Stories**: Component examples in Storybook
+- [ ] **Documentation**: MDX documentation in `apps/docs/components/`
+- [ ] **Accessibility**: Keyboard navigation and screen reader support
+- [ ] **Design Review**: Follows liquid glass design principles
+
+### Component Development Standards
+
+#### Required Implementation
+
+1. **TypeScript**: Comprehensive type definitions
+2. **Accessibility**: ARIA attributes, keyboard navigation
+3. **Glass Effects**: Appropriate backdrop blur and transparency
+4. **Theme Support**: Light/dark mode compatibility
+5. **Responsive Design**: Mobile-first approach
+6. **Performance**: Optimized rendering and animations
+
+#### Code Quality Standards
+
+```tsx
+// Example component structure
+interface GlassComponentProps {
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+  className?: string
+  // ... other props
+}
+
+export const GlassComponent = forwardRef<HTMLElement, GlassComponentProps>(
+  ({ variant = 'primary', size = 'md', children, className, ...props }, ref) => {
+    // Implementation with glass effects
+    return (
+      <div
+        ref={ref}
+        className={clsx(
+          'glass-base-styles',
+          `glass-variant-${variant}`,
+          `glass-size-${size}`,
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    )
+  }
+)
+```
+
+## 🏗️ Project Architecture
+
+### Monorepo Structure
+
+```
+LiqUIdify/
+├── libs/components/          # Core component library
+├── apps/storybook/          # Component playground
+├── apps/docs/               # Documentation site
+├── tests/                   # Cross-package tests
+└── scripts/                 # Build and utility scripts
+```
+
+### Development Workflow
+
+1. **Feature Branches**: Create from `main` with descriptive names
+2. **Atomic Commits**: Small, focused commits with clear messages
+3. **PR Reviews**: All changes require review and approval
+4. **CI/CD**: Automated testing and deployment pipeline
+
+## 📚 Documentation Standards
+
+### Component Documentation
+
+Each component requires:
+
+- **MDX file** in `apps/docs/components/[component-name].mdx`
+- **Live examples** with TypeScript code blocks
+- **Props documentation** with types and descriptions
+- **Accessibility notes** and keyboard shortcuts
+- **Usage patterns** and best practices
+
+### Design Documentation
+
+- **Storybook stories** showcasing all variants
+- **Interactive examples** demonstrating functionality
+- **Design tokens** and customization options
+- **Integration guides** for common use cases
+
+## 🤝 Community Guidelines
+
+### Code of Conduct
+
+We are committed to providing a welcoming and inclusive environment. Please:
+
+- Be respectful and constructive in discussions
+- Help others learn and contribute effectively
+- Report any inappropriate behavior to maintainers
+- Follow our community guidelines in all interactions
+
+### Getting Help
+
+- **GitHub Discussions**: General questions and ideas
+- **GitHub Issues**: Bug reports and feature requests
+- **Discord**: Real-time community chat
+- **Documentation**: Comprehensive guides and examples
+
+---
+
+## 📖 Additional Resources
+
+- [Full Contributing Guide](https://github.com/tuliopc23/LiqUIdify/blob/main/CONTRIBUTING.md)
+- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
+- [Component API Reference](/api)
+- [Design System Documentation](/core-concepts/liquid-glass-system)

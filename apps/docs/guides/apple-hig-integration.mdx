@@ -1,109 +1,283 @@
 ---
 title: "Apple HIG Integration Guide"
-description: "Complete guide to Apple Human Interface Guidelines integration with glass components and SF Symbols"
+description: "Comprehensive guide to implementing Apple's Human Interface Guidelines with Liquidify's liquid glass components and design system"
 ---
 
 # Apple HIG Integration Guide
 
 <div className="text-title2 mb-6">
-  Learn how to leverage Apple's Human Interface Guidelines with Liquidify's
-  glass components and SF Symbols-style icons.
+  Master the art of Apple-quality interface design using Liquidify's sophisticated 
+  implementation of Human Interface Guidelines with liquid glass aesthetics.
 </div>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-star"></span>Design Principles</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-star"></span>Core Design Principles</span>
+
+Liquidify embodies Apple's fundamental design principles through its liquid glass design language:
 
 <CardGroup cols={2}>
   <Card title="Clarity" icon="eye">
-    Text is legible at every size, icons are precise and lucid, adornments are
-    subtle and appropriate.
+    **Visual Hierarchy**: Clear typography scales, purposeful contrast, and strategic 
+    use of transparency ensure content remains the primary focus while glass effects 
+    enhance rather than distract.
   </Card>
 
-<Card title="Deference" icon="layers">
-  Fluid motion and a crisp, beautiful interface help people understand and
-  interact with content.
-</Card>
+  <Card title="Deference" icon="layers">
+    **Content First**: Liquid glass materials create sophisticated backgrounds that 
+    defer to content, using subtle blur and transparency to establish context without 
+    competing for attention.
+  </Card>
 
-<Card title="Depth" icon="cube">
-  Distinct visual layers and realistic motion convey hierarchy and vitality.
-</Card>
+  <Card title="Depth" icon="cube">
+    **Spatial Relationships**: Multi-layered glass effects create realistic depth 
+    perception, establishing clear information hierarchy through z-axis positioning 
+    and shadow systems.
+  </Card>
 
   <Card title="Consistency" icon="grid">
-    Familiar standards and paradigms help people feel confident using your app.
+    **Predictable Interactions**: Familiar Apple interaction patterns combined with 
+    physics-based animations create intuitive user experiences across all platforms.
   </Card>
 </CardGroup>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-gear"></span>Typography System</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-textformat"></span>Typography Excellence</span>
 
-Liquidify implements Apple's complete typography scale with SF Pro fonts:
+### Apple's Complete Type Scale
+
+Liquidify implements Apple's comprehensive typography system with pixel-perfect precision:
 
 <Frame>
-  ```css Typography Scale /* Apple HIG Type Sizes */ --text-display: 34px; /*
-  Large Title */ --text-title1: 28px; /* Title 1 */ --text-title2: 22px; /*
-  Title 2 */ --text-title3: 20px; /* Title 3 */ --text-headline: 17px; /*
-  Headline */ --text-body: 17px; /* Body */ --text-callout: 16px; /* Callout */
-  --text-subhead: 15px; /* Subheadline */ --text-footnote: 13px; /* Footnote */
-  --text-caption1: 12px; /* Caption 1 */ --text-caption2: 11px; /* Caption 2 */
-  ```
+```css
+/* Apple HIG Typography Scale */
+.apple-typography {
+  --text-largeTitle: clamp(2.125rem, 4vw, 2.125rem);    /* 34px - Large Title */
+  --text-title1: clamp(1.75rem, 3.5vw, 1.75rem);       /* 28px - Title 1 */
+  --text-title2: clamp(1.375rem, 2.75vw, 1.375rem);    /* 22px - Title 2 */
+  --text-title3: clamp(1.25rem, 2.5vw, 1.25rem);       /* 20px - Title 3 */
+  --text-headline: clamp(1.0625rem, 2.1vw, 1.0625rem); /* 17px - Headline */
+  --text-body: clamp(1.0625rem, 2.1vw, 1.0625rem);     /* 17px - Body */
+  --text-callout: clamp(1rem, 2vw, 1rem);              /* 16px - Callout */
+  --text-subheadline: clamp(0.9375rem, 1.9vw, 0.9375rem); /* 15px - Subheadline */
+  --text-footnote: clamp(0.8125rem, 1.6vw, 0.8125rem); /* 13px - Footnote */
+  --text-caption1: clamp(0.75rem, 1.5vw, 0.75rem);     /* 12px - Caption 1 */
+  --text-caption2: clamp(0.6875rem, 1.4vw, 0.6875rem); /* 11px - Caption 2 */
+}
+```
 </Frame>
 
-### Typography Examples
+### SF Pro Font Integration
 
-<div className="space-y-4 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg">
-  <div className="text-display">Large Title (Display)</div>
-  <div className="text-title1">Title 1</div>
-  <div className="text-title2">Title 2</div>
-  <div className="text-title3">Title 3</div>
-  <div className="text-headline">Headline</div>
-  <div className="text-body">Body text for readable content</div>
-  <div className="text-callout">Callout text</div>
-  <div className="text-subhead">SUBHEADLINE</div>
-  <div className="text-footnote">Footnote text</div>
-  <div className="text-caption">Caption text</div>
+```css
+/* San Francisco Pro Display & Text Integration */
+.sf-font-system {
+  font-family: 
+    'SF Pro Display',
+    'SF Pro Text', 
+    -apple-system, 
+    BlinkMacSystemFont, 
+    'Segoe UI', 
+    Roboto, 
+    sans-serif;
+    
+  /* Optimized for Apple platforms */
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+
+### Typography in Practice
+
+<div className="space-y-6 p-8 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-2xl backdrop-blur-sm">
+  <div className="text-largeTitle font-bold">Large Title - Interface Headers</div>
+  <div className="text-title1 font-semibold">Title 1 - Page Headlines</div>
+  <div className="text-title2 font-medium">Title 2 - Section Headers</div>
+  <div className="text-title3">Title 3 - Subsection Headers</div>
+  <div className="text-headline font-medium">Headline - Emphasized Content</div>
+  <div className="text-body">Body - Primary reading text with optimal line height and spacing for extended reading sessions</div>
+  <div className="text-callout">Callout - Important secondary information</div>
+  <div className="text-subheadline font-medium text-secondary">SUBHEADLINE - SECTION LABELS</div>
+  <div className="text-footnote text-tertiary">Footnote - Additional context and references</div>
+  <div className="text-caption1 text-quaternary">Caption - Image descriptions and metadata</div>
 </div>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-paintbrush"></span>Color System</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-paintbrush"></span>Sophisticated Color System</span>
+
+### Apple Brand Integration
 
 <AccordionGroup>
-  <Accordion title="Apple Brand Colors" icon="palette">
-    ```css --apple-blue: #0071e3; --ios-system-blue: #007AFF;
-    --apple-blue-hover: #0077ED; --apple-blue-active: #006AD6; ```
+  <Accordion title="Apple Signature Colors" icon="palette">
+    ```css
+    /* Official Apple Brand Colors */
+    :root {
+      --apple-blue: #007AFF;           /* iOS System Blue */
+      --apple-blue-hover: #0056D6;    /* Interaction State */
+      --apple-blue-pressed: #004BB5;   /* Active State */
+      
+      --apple-green: #30D158;          /* System Green */
+      --apple-orange: #FF9500;         /* System Orange */
+      --apple-red: #FF3B30;            /* System Red */
+      --apple-yellow: #FFCC00;         /* System Yellow */
+      --apple-purple: #AF52DE;         /* System Purple */
+      --apple-pink: #FF2D92;           /* System Pink */
+    }
+    ```
   </Accordion>
 
-<Accordion title="Semantic Colors" icon="color-swatch">
-  ```css /* Light Mode */ --text-primary: #111; --text-secondary: #6b7280;
-  --background-primary: #ffffff; --background-secondary: #f9fafb; /* Dark Mode
-  */ --text-primary: #f5f5f7; --text-secondary: #a1a1aa; --background-primary:
-  #000000; --background-secondary: #111111; ```
-</Accordion>
+  <Accordion title="Semantic Color Tokens" icon="color-swatch">
+    ```css
+    /* Light Mode Semantics */
+    .theme-light {
+      --color-text-primary: rgba(0, 0, 0, 0.9);
+      --color-text-secondary: rgba(0, 0, 0, 0.6);
+      --color-text-tertiary: rgba(0, 0, 0, 0.3);
+      
+      --color-background-primary: #FFFFFF;
+      --color-background-secondary: #F5F5F7;
+      --color-background-tertiary: #EFEFF4;
+      
+      --color-glass-material: rgba(255, 255, 255, 0.25);
+      --color-glass-border: rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Dark Mode Semantics */
+    .theme-dark {
+      --color-text-primary: rgba(255, 255, 255, 0.95);
+      --color-text-secondary: rgba(255, 255, 255, 0.7);
+      --color-text-tertiary: rgba(255, 255, 255, 0.4);
+      
+      --color-background-primary: #000000;
+      --color-background-secondary: #1C1C1E;
+      --color-background-tertiary: #2C2C2E;
+      
+      --color-glass-material: rgba(0, 0, 0, 0.15);
+      --color-glass-border: rgba(255, 255, 255, 0.1);
+    }
+    ```
+  </Accordion>
 
-  <Accordion title="Glass Effects" icon="circle">
-    ```css --glass-background: rgba(255, 255, 255, 0.8); --glass-border:
-    rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px); ```
+  <Accordion title="Advanced Glass Materials" icon="circle">
+    ```css
+    /* Premium Glass Effect System */
+    .liquid-glass-premium {
+      /* Multi-layer backdrop filtering */
+      background: var(--color-glass-material);
+      backdrop-filter: 
+        blur(var(--glass-blur, 20px))
+        saturate(var(--glass-saturation, 1.2))
+        brightness(var(--glass-brightness, 1.1));
+        
+      /* Specular highlight border */
+      border: 1px solid var(--color-glass-border);
+      
+      /* Shadow system */
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        
+      /* Performance optimization */
+      transform: translateZ(0);
+      will-change: backdrop-filter, transform;
+    }
+    ```
   </Accordion>
 </AccordionGroup>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-grid"></span>Spacing System</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-grid"></span>Precision Spacing System</span>
 
-Apple's 8pt grid system ensures consistent spacing throughout your interface:
+### Apple's 8-Point Grid Mastery
+
+Apple's spatial system ensures mathematical harmony and visual consistency:
 
 <Frame>
-  ```css 8pt Grid System --space-1: 0.25rem; /* 4px */ --space-2: 0.5rem; /* 8px
-  */ --space-3: 0.75rem; /* 12px */ --space-4: 1rem; /* 16px */ --space-6:
-  1.5rem; /* 24px */ --space-8: 2rem; /* 32px */ --space-12: 3rem; /* 48px */
-  --space-16: 4rem; /* 64px */ ```
+```css
+/* Apple HIG 8-Point Grid System */
+:root {
+  /* Base unit: 4px for fine control */
+  --space-0: 0;                    /* 0px */
+  --space-1: 0.25rem;              /* 4px */
+  --space-2: 0.5rem;               /* 8px - Base unit */
+  --space-3: 0.75rem;              /* 12px */
+  --space-4: 1rem;                 /* 16px */
+  --space-5: 1.25rem;              /* 20px */
+  --space-6: 1.5rem;               /* 24px */
+  --space-8: 2rem;                 /* 32px */
+  --space-10: 2.5rem;              /* 40px */
+  --space-12: 3rem;                /* 48px */
+  --space-16: 4rem;                /* 64px */
+  --space-20: 5rem;                /* 80px */
+  --space-24: 6rem;                /* 96px */
+  
+  /* Component-specific spacing */
+  --space-button-padding-x: var(--space-6);
+  --space-button-padding-y: var(--space-3);
+  --space-card-padding: var(--space-6);
+  --space-section-gap: var(--space-16);
+}
+```
 </Frame>
 
-<div className="grid grid-cols-4 gap-4 p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg">
-  <div className="bg-liquid-accent h-1" style={{ width: "4px" }}></div>
-  <div className="bg-liquid-accent h-2" style={{ width: "8px" }}></div>
-  <div className="bg-liquid-accent h-3" style={{ width: "12px" }}></div>
-  <div className="bg-liquid-accent h-4" style={{ width: "16px" }}></div>
-  <div className="text-caption">4px</div>
-  <div className="text-caption">8px</div>
-  <div className="text-caption">12px</div>
-  <div className="text-caption">16px</div>
+### Spatial Hierarchy Visualization
+
+<div className="grid grid-cols-8 gap-2 p-8 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-2xl backdrop-blur-sm">
+  <div className="bg-apple-blue h-2 rounded" style={{ width: "4px" }} title="4px"></div>
+  <div className="bg-apple-blue h-3 rounded" style={{ width: "8px" }} title="8px"></div>
+  <div className="bg-apple-blue h-4 rounded" style={{ width: "12px" }} title="12px"></div>
+  <div className="bg-apple-blue h-5 rounded" style={{ width: "16px" }} title="16px"></div>
+  <div className="bg-apple-blue h-6 rounded" style={{ width: "20px" }} title="20px"></div>
+  <div className="bg-apple-blue h-8 rounded" style={{ width: "24px" }} title="24px"></div>
+  <div className="bg-apple-blue h-10 rounded" style={{ width: "32px" }} title="32px"></div>
+  <div className="bg-apple-blue h-12 rounded" style={{ width: "40px" }} title="40px"></div>
 </div>
+
+## <span className="sf-icon-text"><span className="sf-icon sf-star-fill"></span>Platform-Specific Patterns</span>
+
+### iOS Design Patterns
+
+Liquidify components seamlessly integrate with iOS design conventions:
+
+<AccordionGroup>
+  <Accordion title="Navigation Controllers" icon="list">
+    **Hierarchical Navigation**: Glass-enhanced navigation bars with backdrop blur effects 
+    that maintain context while providing clear wayfinding. Supports large titles, 
+    inline search, and contextual actions.
+  </Accordion>
+
+  <Accordion title="Modal Presentations" icon="square-stack">
+    **Contextual Overlays**: Sheet-style modals with realistic glass materials that 
+    create depth without losing connection to the underlying interface. Includes 
+    detent support for partial presentations.
+  </Accordion>
+
+  <Accordion title="List Interfaces" icon="list-bullet">
+    **Content Organization**: Grouped lists with subtle glass backgrounds that 
+    enhance readability while maintaining visual hierarchy. Supports swipe actions, 
+    disclosure indicators, and accessory views.
+  </Accordion>
+</AccordionGroup>
+
+### macOS Integration Patterns
+
+<AccordionGroup>
+  <Accordion title="Window Management" icon="macwindow">
+    **Translucent Windows**: Full-window glass effects with intelligent backdrop 
+    filtering that adapts to desktop wallpapers and underlying content. Maintains 
+    legibility across all background conditions.
+  </Accordion>
+
+  <Accordion title="Sidebar Navigation" icon="sidebar-left">
+    **Persistent Navigation**: Glass-enhanced sidebars with smooth collapse animations 
+    and contextual highlighting. Supports hierarchical content organization and 
+    drag-and-drop interactions.
+  </Accordion>
+
+  <Accordion title="Toolbar Integration" icon="hammer">
+    **Unified Toolbars**: Seamless integration with macOS toolbar conventions, 
+    featuring glass materials that unify with window chrome while maintaining 
+    distinct interactive areas.
+  </Accordion>
+</AccordionGroup>
 
 ## <span className="sf-icon-text"><span className="sf-icon sf-star-fill"></span>SF Symbols Integration</span>
 

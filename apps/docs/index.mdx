@@ -1,29 +1,29 @@
 ---
 title: "Liquidify"
-description: "Production-ready React component library with liquid glass design and physics-based interactions"
+description: "Production-ready React component library with liquid glass design and physics-based interactions inspired by Apple's Human Interface Guidelines"
 ---
 
 # Welcome to Liquidify
 
 <div className="text-display font-display mb-8">
-  Build beautiful, accessible React applications with liquid glass design and
-  physics-based interactions.
+  Build beautiful, accessible React applications with **liquid glass design** and
+  **physics-based interactions** inspired by Apple's Human Interface Guidelines.
 </div>
 
 <CardGroup cols={3}>
-  <Card title="Glass Components" icon="star">
-    Beautiful glass morphism effects with backdrop blur and subtle animations
-    that follow Apple's design principles.
+  <Card title="Liquid Glass Design" icon="star">
+    Sophisticated glassmorphism effects with layered transparency, backdrop blur, 
+    and subtle specular highlights that create depth and visual hierarchy.
   </Card>
 
-<Card title="Physics-Based" icon="gear">
-  Smooth, natural interactions powered by physics simulations that feel
-  responsive and delightful.
-</Card>
+  <Card title="Apple HIG Inspired" icon="gear">
+    Design patterns and interaction principles directly inspired by Apple's Human 
+    Interface Guidelines for iOS, macOS, and visionOS platforms.
+  </Card>
 
   <Card title="Accessibility First" icon="heart">
-    Built with WCAG 2.1 AA compliance, keyboard navigation, and screen reader
-    support out of the box.
+    Built with WCAG 2.1 AA compliance, comprehensive keyboard navigation, 
+    screen reader support, and focus management out of the box.
   </Card>
 </CardGroup>
 
@@ -46,57 +46,70 @@ pnpm add @liquidify/react
 import { GlassButton, ThemeProvider } from '@liquidify/react'
 
 function App() {
-return (
-
-<ThemeProvider>
-  <GlassButton variant="primary">Get Started</GlassButton>
-</ThemeProvider>
-) }
-
+  return (
+    <ThemeProvider>
+      <GlassButton variant="primary">Get Started</GlassButton>
+    </ThemeProvider>
+  )
+}
 ```
 </Frame>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-star-fill"></span>Features</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-star-fill"></span>Core Features</span>
 
 <AccordionGroup>
-  <Accordion title="🌊 Liquid Glass Design System" icon="star">
-    A comprehensive design system inspired by Apple's Human Interface Guidelines with glass morphism effects, subtle animations, and perfect typography.
+  <Accordion title="🌊 Liquid Glass Design Language" icon="star">
+    A comprehensive design system featuring layered transparency effects, content-aware adaptation, 
+    specular highlights, and dynamic backdrop filtering that creates the signature liquid glass aesthetic.
   </Accordion>
 
-  <Accordion title="⚡ 50+ Production-Ready Components" icon="gear">
-    From basic buttons to complex data tables, all components are built with accessibility, performance, and developer experience in mind.
+  <Accordion title="🍎 Apple HIG Integration" icon="gear">
+    Design patterns, spacing systems, typography scales, and interaction principles directly 
+    inspired by Apple's Human Interface Guidelines across iOS, macOS, and visionOS platforms.
   </Accordion>
 
-  <Accordion title="🎯 Physics-Based Interactions" icon="heart">
-    Natural feeling animations and interactions powered by physics simulations that respond to user input in delightful ways.
+  <Accordion title="⚡ 50+ Premium Components" icon="heart">
+    Production-ready components from basic UI elements to complex data visualization tools, 
+    all built with performance optimization and developer experience in mind.
   </Accordion>
 
-  <Accordion title="🌙 Dark Mode Support" icon="moon">
-    Seamless dark mode support with automatic theme detection and smooth transitions between light and dark themes.
+  <Accordion title="🎯 Physics-Based Interactions" icon="moon">
+    Natural feeling animations powered by spring physics, momentum scrolling, 
+    and realistic motion curves that respond intuitively to user input.
   </Accordion>
 
-  <Accordion title="📝 TypeScript First" icon="check">
-    Built with TypeScript from the ground up with comprehensive type definitions and excellent IntelliSense support.
+  <Accordion title="🌙 Adaptive Theming" icon="check">
+    Seamless light/dark mode support with automatic system detection, smooth transitions, 
+    and customizable color tokens that adapt to ambient lighting conditions.
+  </Accordion>
+
+  <Accordion title="📝 TypeScript Excellence" icon="code">
+    Built with TypeScript from the ground up featuring comprehensive type definitions, 
+    excellent IntelliSense support, and strict type safety for enterprise applications.
   </Accordion>
 </AccordionGroup>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-house"></span>Component Categories</span>
+## <span className="sf-icon-text"><span className="sf-icon sf-house"></span>Component Ecosystem</span>
 
 <CardGroup cols={2}>
-  <Card title="Base Components" icon="plus" href="/components/glass-button">
-    Essential building blocks including buttons, inputs, cards, and navigation elements with glass morphism effects.
+  <Card title="Foundation Components" icon="plus" href="/components/glass-button">
+    Essential building blocks including buttons, inputs, cards, and navigation elements 
+    with sophisticated liquid glass effects and Apple-inspired interactions.
   </Card>
 
-  <Card title="Form Components" icon="check" href="/components/form-field">
-    Complete form controls with validation, accessibility features, and beautiful glass styling.
+  <Card title="Form & Input Controls" icon="check" href="/components/form-field">
+    Complete form ecosystem with validation, accessibility features, error handling, 
+    and beautiful glass styling that maintains usability across all devices.
   </Card>
 
-  <Card title="Feedback Components" icon="bell" href="/components/toast">
-    Modals, toasts, notifications, and loading states that provide clear user feedback.
+  <Card title="Feedback & Communication" icon="bell" href="/components/toast">
+    Modals, toasts, notifications, alerts, and loading states that provide clear, 
+    contextual user feedback with appropriate urgency and visual hierarchy.
   </Card>
 
-  <Card title="Specialized Components" icon="star" href="/components/liquid-glass">
-    Advanced components like charts, tables, command palettes, and data visualization tools.
+  <Card title="Advanced Data Components" icon="star" href="/components/liquid-glass">
+    Sophisticated components including charts, tables, command palettes, tree views, 
+    and data visualization tools optimized for complex application interfaces.
   </Card>
 </CardGroup>
 
