@@ -98,7 +98,7 @@ const ToastProviderDemo = () => {
               description: "Your changes have been saved.",
             })
           }
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Show Success Toast
         </button>
@@ -111,7 +111,7 @@ const ToastProviderDemo = () => {
               description: "Failed to save changes. Please try again.",
             })
           }
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Show Error Toast
         </button>
@@ -124,7 +124,7 @@ const ToastProviderDemo = () => {
               description: "Your session will expire in 5 minutes.",
             })
           }
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Show Warning Toast
         </button>
@@ -137,7 +137,7 @@ const ToastProviderDemo = () => {
               description: "New features have been added to your dashboard.",
             })
           }
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Show Info Toast
         </button>
@@ -167,7 +167,7 @@ const PositionDemo = ({ position }: { position: string }) => {
           duration: 3000,
         })
       }
-      className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+      className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
     >
       Show Toast at {position}
     </button>
@@ -223,11 +223,11 @@ const ActionToastDemo = () => {
             },
           });
         }}
-        className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
       >
         Delete Item
       </button>
-      {undone && <p className="text-liquid-accent text-sm">Item restored!</p>}
+      {undone && <p className="text-blue-900 text-sm">Item restored!</p>}
     </div>
   );
 };
@@ -254,7 +254,7 @@ const DurationDemo = () => {
             duration: 2000,
           })
         }
-        className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
       >
         2 Second Toast
       </button>
@@ -266,7 +266,7 @@ const DurationDemo = () => {
             duration: 10000,
           })
         }
-        className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
       >
         10 Second Toast
       </button>
@@ -278,7 +278,7 @@ const DurationDemo = () => {
             description: "This toast uses the default 5 second duration",
           })
         }
-        className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
       >
         Default Duration
       </button>
@@ -324,7 +324,7 @@ const MultipleToastsDemo = () => {
     <button
       type="button"
       onClick={showMultipleToasts}
-      className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-liquid-text-inverse hover:from-blue-600 hover:to-purple-600"
+      className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-blue-900 hover:from-blue-600 hover:to-purple-600"
     >
       Show Multiple Toasts
     </button>
@@ -414,7 +414,7 @@ const RealWorldDemo = () => {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save Document"}
         </button>
@@ -422,14 +422,14 @@ const RealWorldDemo = () => {
           type="button"
           onClick={handleUpload}
           disabled={uploading}
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {uploading ? "Uploading..." : "Upload File"}
         </button>
         <button
           type="button"
           onClick={handleNetworkError}
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Simulate Network Error
         </button>
@@ -498,7 +498,7 @@ const FormValidationDemo = () => {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-lg border border-liquid-grey px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-lg border border-blue-200 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
           placeholder="your@email.com"
         />
       </div>
@@ -514,13 +514,13 @@ const FormValidationDemo = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-lg border border-liquid-grey px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-lg border border-blue-200 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
           placeholder="Enter password"
         />
       </div>
       <button
         type="submit"
-        className="w-full rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+        className="w-full rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
       >
         Submit
       </button>
@@ -540,7 +540,7 @@ export const FormValidation: Story = {
 export const ThemeVariations: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg bg-liquid-bg p-6">
+      <div className="rounded-lg bg-blue-100 p-6">
         <h3 className="mb-4 font-semibold">Light Theme</h3>
         <div className="space-y-2">
           <GlassToast type="success" message="Success toast in light theme" />
@@ -549,8 +549,8 @@ export const ThemeVariations: Story = {
           <GlassToast type="info" message="Info toast in light theme" />
         </div>
       </div>
-      <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100 p-6">
+        <h3 className="mb-4 font-semibold text-blue-900">
           Dark Theme
         </h3>
         <div className="space-y-2">

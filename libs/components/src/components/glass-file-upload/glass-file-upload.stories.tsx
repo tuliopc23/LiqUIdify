@@ -249,7 +249,7 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Simple File Upload
         </h3>
         <GlassFileUpload
@@ -258,7 +258,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Single File Upload
         </h3>
         <GlassFileUpload
@@ -271,7 +271,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           With File Restrictions
         </h3>
         <GlassFileUpload
@@ -303,7 +303,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Small Size
         </h3>
         <GlassFileUpload
@@ -315,7 +315,7 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Medium Size
         </h3>
         <GlassFileUpload
@@ -325,7 +325,7 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Large Size
         </h3>
         <GlassFileUpload
@@ -354,17 +354,17 @@ export const FileTypeExamples: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Image Upload
         </h3>
-        <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
-            <Image className="h-5 w-5 text-liquid-accent" />
+            <Image className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">
+              <div className="font-medium text-blue-900/90">
                 Image Gallery
               </div>
-              <div className="text-sm text-liquid-text-inverse/60">
+              <div className="text-sm text-blue-900/60">
                 Upload photos and images
               </div>
             </div>
@@ -386,17 +386,17 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Document Upload
         </h3>
-        <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
-            <FileText className="h-5 w-5 text-liquid-accent" />
+            <FileText className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">
+              <div className="font-medium text-blue-900/90">
                 Document Manager
               </div>
-              <div className="text-sm text-liquid-text-inverse/60">
+              <div className="text-sm text-blue-900/60">
                 Upload PDFs and documents
               </div>
             </div>
@@ -417,17 +417,17 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Media Upload
         </h3>
-        <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
-            <Video className="h-5 w-5 text-liquid-accent" />
+            <Video className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-liquid-text-inverse/90">
+              <div className="font-medium text-blue-900/90">
                 Media Library
               </div>
-              <div className="text-sm text-liquid-text-inverse/60">
+              <div className="text-sm text-blue-900/60">
                 Upload videos and audio files
               </div>
             </div>
@@ -482,7 +482,7 @@ export const UploadStates: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Upload with Progress
           </h3>
           <GlassFileUpload
@@ -494,7 +494,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Error State Example
           </h3>
           <GlassFileUpload
@@ -505,7 +505,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Disabled State
           </h3>
           <GlassFileUpload disabled dropzoneText="Upload is disabled" />
@@ -541,19 +541,19 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Profile Picture Upload
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-liquid-accent/20">
-                <Image className="h-6 w-6 text-liquid-accent" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+                <Image className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Profile Picture
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Upload a profile photo (max 2MB)
                 </div>
               </div>
@@ -570,7 +570,7 @@ export const RealWorldExamples: Story = {
               showPreview
             />
             {profileFiles.length > 0 && (
-              <div className="mt-4 text-sm text-liquid-text-inverse/60">
+              <div className="mt-4 text-sm text-blue-900/60">
                 Selected: {profileFiles[0].file.name}
               </div>
             )}
@@ -578,19 +578,19 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Portfolio Upload
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-liquid-accent/20">
-                <Archive className="h-6 w-6 text-liquid-accent" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+                <Archive className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Portfolio Gallery
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Upload your work samples and portfolio items
                 </div>
               </div>
@@ -605,16 +605,16 @@ export const RealWorldExamples: Story = {
             />
             {portfolioFiles.length > 0 && (
               <div className="mt-4">
-                <div className="font-medium text-sm text-liquid-text-inverse/80">
+                <div className="font-medium text-sm text-blue-900/80">
                   {portfolioFiles.length} file(s) selected
                 </div>
                 <div className="mt-2 space-y-1">
                   {portfolioFiles.map((file, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2 text-liquid-text-inverse/60 text-xs"
+                      className="flex items-center gap-2 text-blue-900/60 text-xs"
                     >
-                      <CheckCircle className="h-3 w-3 text-liquid-accent" />
+                      <CheckCircle className="h-3 w-3 text-blue-900" />
                       {file.file.name}
                     </div>
                   ))}
@@ -625,19 +625,19 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Document Submission
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-liquid-accent/20">
-                <FileText className="h-6 w-6 text-liquid-accent" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+                <FileText className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Legal Documents
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Submit required documentation (PDF only)
                 </div>
               </div>
@@ -652,10 +652,10 @@ export const RealWorldExamples: Story = {
               onFilesChange={setDocumentFiles}
               showPreview={false}
             />
-            <div className="mt-4 rounded-lg border border-liquid-accent/20 bg-liquid-accent/10 p-3">
+            <div className="mt-4 rounded-lg border border-blue-500/20 bg-blue-500/10 p-3">
               <div className="flex items-start gap-2">
-                <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-liquid-accent" />
-                <div className="text-sm text-liquid-accent">
+                <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-900" />
+                <div className="text-sm text-blue-900">
                   <div className="font-medium">Requirements:</div>
                   <ul className="mt-1 list-inside list-disc space-y-0.5 text-xs">
                     <li>PDF format only</li>
@@ -692,11 +692,11 @@ export const AccessibilityShowcase: Story = {
 
     return (
       <div className="space-y-6">
-        <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-          <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
+        <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Accessibility Features
           </h4>
-          <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
+          <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
             <li>• Full keyboard navigation support</li>
             <li>• ARIA labels and live regions for screen readers</li>
             <li>• Drag state announcements</li>
@@ -707,7 +707,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             Try using keyboard navigation: Tab to focus the upload area,
             Space/Enter to open file dialog
           </p>
@@ -720,15 +720,15 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         {files.length > 0 && (
-          <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-            <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
+          <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+            <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
               Upload Status
             </h4>
             <div className="space-y-2">
               {files.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 text-liquid-accent text-sm dark:text-liquid-accent"
+                  className="flex items-center gap-2 text-blue-900 text-sm dark:text-blue-900"
                 >
                   <CheckCircle className="h-4 w-4" />
                   <span>
@@ -741,11 +741,11 @@ export const AccessibilityShowcase: Story = {
           </div>
         )}
 
-        <div className="rounded-lg border border-liquid-grey bg-liquid-bg p-4 dark:border-liquid-grey dark:bg-liquid-bg">
-          <h4 className="mb-2 font-medium text-liquid-secondary dark:text-liquid-grey">
+        <div className="rounded-lg border border-blue-200 bg-blue-100 p-4 dark:border-blue-200 dark:bg-blue-100">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Screen Reader Announcements
           </h4>
-          <div className="space-y-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          <div className="space-y-2 text-blue-900 text-sm dark:text-blue-900">
             <p>Drag enter: "File drop zone activated"</p>
             <p>File added: "File [filename] added to upload queue"</p>
             <p>Upload start: "Uploading [filename]"</p>
@@ -775,7 +775,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Ocean Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
@@ -788,7 +788,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Sunset Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
@@ -801,7 +801,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Forest Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">

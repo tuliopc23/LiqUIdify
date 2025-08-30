@@ -3,8 +3,9 @@ title: Glass Combobox
 description: Searchable dropdown component with Apple-inspired liquid glass effects and advanced filtering capabilities.
 ---
 
-;
-;
+import { GlassCombobox } from "@liquidify/react";
+import { MapPin, User } from "lucide-react";
+import { useState } from "react";
 
 ### Example
 
@@ -342,7 +343,7 @@ const ComboboxOption = React.memo(({ option, isSelected, isHighlighted }) => {
       className={cn(
         "flex items-center gap-3 px-4 py-3",
         isSelected && "bg-liquid-accent/20",
-        isHighlighted && "bg-liquid-bg/10",
+        isHighlighted && "bg-liquid-bg/10"
       )}
     >
       {option.icon}

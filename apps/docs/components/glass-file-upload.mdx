@@ -3,17 +3,12 @@ title: Glass File Upload
 description: Elegant drag-and-drop file upload component with Apple-inspired liquid glass effects and comprehensive file handling.
 ---
 
-;
-;
+import { GlassFileUpload } from "@liquidify/react";
+import { useState } from "react";
 
 ### Example
 
 ```tsx
-;
-;
-;
-
-
 export default function Demo() {
   const [files, setFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState({});
@@ -224,7 +219,7 @@ const handleUploadWithProgress = async (files) => {
         body: formData,
         onUploadProgress: (progressEvent) => {
           const progress = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
+            (progressEvent.loaded * 100) / progressEvent.total
           );
           setUploadProgress((prev) => ({
             ...prev,
@@ -478,8 +473,8 @@ const handleUploadError = (error, file) => {
 
   setFiles((prev) =>
     prev.map((f) =>
-      f.id === file.id ? { ...f, status: "error", error: errorMessage } : f,
-    ),
+      f.id === file.id ? { ...f, status: "error", error: errorMessage } : f
+    )
   );
 };
 ```
@@ -535,7 +530,7 @@ const useFileUpload = (options = {}) => {
 
       setFiles((prev) => [...prev, ...validatedFiles]);
     },
-    [options],
+    [options]
   );
 
   const removeFile = useCallback((fileId) => {
@@ -552,7 +547,7 @@ const useFileUpload = (options = {}) => {
 
     try {
       await Promise.all(
-        filesToUpload.map((file) => uploadSingleFile(file, setProgress)),
+        filesToUpload.map((file) => uploadSingleFile(file, setProgress))
       );
     } catch (error) {
       console.error("Upload failed:", error);

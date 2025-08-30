@@ -3,6 +3,9 @@ title: Portal
 description: Liquid Glass portal for rendering components outside the normal DOM hierarchy.
 ---
 
+import { GlassButton, GlassPortal } from "@liquidify/react";
+import { useState } from "react";
+
 # Portal
 
 The `GlassPortal` component provides a way to render children into a DOM node that exists outside the parent component's DOM hierarchy. This is essential for overlays, modals, tooltips, and other components that need to escape their container's styling constraints.

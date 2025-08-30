@@ -12,7 +12,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -43,7 +43,7 @@
     "node_modules",
     "tmp",
     "dist",
-
+    "Liquid-glass-imp/**/*",
     "server/**/*",
     "examples/**/*",
     "apps/docs/**/*",

@@ -28,10 +28,10 @@ const basicTabs: Array<GlassTabItem> = [
     label: "Overview",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Overview
         </h3>
-        <p className="text-liquid-secondary dark:text-liquid-grey">
+        <p className="text-blue-900 dark:text-blue-900">
           This is the overview tab content. It provides a general introduction
           to the topic at hand.
         </p>
@@ -43,10 +43,10 @@ const basicTabs: Array<GlassTabItem> = [
     label: "Details",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Details
         </h3>
-        <p className="text-liquid-secondary dark:text-liquid-grey">
+        <p className="text-blue-900 dark:text-blue-900">
           This tab contains more detailed information about the subject matter.
         </p>
       </div>
@@ -57,10 +57,10 @@ const basicTabs: Array<GlassTabItem> = [
     label: "Resources",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Resources
         </h3>
-        <p className="text-liquid-secondary dark:text-liquid-grey">
+        <p className="text-blue-900 dark:text-blue-900">
           Find additional resources and documentation here.
         </p>
       </div>
@@ -86,10 +86,10 @@ export const WithIcons: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Profile Settings
             </h3>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               Manage your personal information and profile settings.
             </p>
           </div>
@@ -105,10 +105,10 @@ export const WithIcons: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Notification Preferences
             </h3>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               Configure how and when you receive notifications.
             </p>
           </div>
@@ -124,10 +124,10 @@ export const WithIcons: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Security Settings
             </h3>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               Manage your account security and privacy settings.
             </p>
           </div>
@@ -179,21 +179,21 @@ export const InteractiveDemo: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Frontend Technologies
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">Frameworks</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• React</li>
                   <li>• Vue.js</li>
                   <li>• Angular</li>
                 </ul>
               </div>
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">Tools</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• Webpack</li>
                   <li>• Vite</li>
                   <li>• TypeScript</li>
@@ -213,21 +213,21 @@ export const InteractiveDemo: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Backend Technologies
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">Languages</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• Node.js</li>
                   <li>• Python</li>
                   <li>• Go</li>
                 </ul>
               </div>
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">Databases</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• PostgreSQL</li>
                   <li>• MongoDB</li>
                   <li>• Redis</li>
@@ -247,21 +247,21 @@ export const InteractiveDemo: Story = {
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               DevOps & Infrastructure
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">CI/CD</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• GitHub Actions</li>
                   <li>• Jenkins</li>
                   <li>• GitLab CI</li>
                 </ul>
               </div>
-              <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+              <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
                 <h4 className="mb-2 font-medium">Cloud</h4>
-                <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+                <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                   <li>• AWS</li>
                   <li>• Google Cloud</li>
                   <li>• Azure</li>
@@ -289,35 +289,35 @@ export const SettingsExample: Story = {
         content: (
           <div className="space-y-6">
             <div>
-              <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+              <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
                 Account Settings
               </h3>
               <div className="space-y-4">
                 <div>
                   <label
                     htmlFor="username-settings"
-                    className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+                    className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
                   >
                     Username
                   </label>
                   <input
                     id="username-settings"
                     type="text"
-                    className="w-full rounded-lg border border-liquid-grey px-4 py-2 dark:border-liquid-grey"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-2 dark:border-blue-200"
                     placeholder="john_doe"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="email-settings"
-                    className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+                    className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
                   >
                     Email
                   </label>
                   <input
                     id="email-settings"
                     type="email"
-                    className="w-full rounded-lg border border-liquid-grey px-4 py-2 dark:border-liquid-grey"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-2 dark:border-blue-200"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -331,7 +331,7 @@ export const SettingsExample: Story = {
         label: "Privacy",
         content: (
           <div className="space-y-6">
-            <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
               Privacy Settings
             </h3>
             <div className="space-y-4">
@@ -356,21 +356,21 @@ export const SettingsExample: Story = {
         label: "Billing",
         content: (
           <div className="space-y-6">
-            <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
               Billing Information
             </h3>
-            <div className="rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent/20">
+            <div className="rounded-lg bg-blue-500 p-4 dark:bg-blue-500/20">
               <div className="mb-2 flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-liquid-accent dark:text-liquid-accent" />
+                <CreditCard className="h-5 w-5 text-blue-900 dark:text-blue-900" />
                 <span className="font-medium">Current Plan: Pro</span>
               </div>
-              <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+              <p className="text-blue-900 text-sm dark:text-blue-900">
                 $19/month • Renews on Jan 15, 2025
               </p>
             </div>
             <button
               type="button"
-              className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
             >
               Manage Subscription
             </button>
@@ -394,16 +394,16 @@ export const DocumentationExample: Story = {
         label: "Installation",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Installation
             </h3>
-            <div className="rounded-lg bg-liquid-bg p-4 font-mono text-liquid-secondary text-sm">
+            <div className="rounded-lg bg-blue-100 p-4 font-mono text-blue-900 text-sm">
               npm install glass-ui-components
             </div>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               Or using yarn:
             </p>
-            <div className="rounded-lg bg-liquid-bg p-4 font-mono text-liquid-secondary text-sm">
+            <div className="rounded-lg bg-blue-100 p-4 font-mono text-blue-900 text-sm">
               yarn add glass-ui-components
             </div>
           </div>
@@ -414,10 +414,10 @@ export const DocumentationExample: Story = {
         label: "Usage",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Basic Usage
             </h3>
-            <pre className="overflow-x-auto rounded-lg bg-liquid-bg p-4 text-liquid-secondary">
+            <pre className="overflow-x-auto rounded-lg bg-blue-100 p-4 text-blue-900">
               <code>{`import { GlassTabs } from 'glass-ui-components';\n\nconst tabs = [\n  { id: 'tab1', label: 'Tab 1', content: <div>Content 1</div> },\n  { id: 'tab2', label: 'Tab 2', content: <div>Content 2</div> }\n];\n\n<GlassTabs tabs={tabs} />`}</code>
             </pre>
           </div>
@@ -428,7 +428,7 @@ export const DocumentationExample: Story = {
         label: "API",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               API Reference
             </h3>
             <table className="w-full text-sm">
@@ -439,7 +439,7 @@ export const DocumentationExample: Story = {
                   <th className="py-2 text-left">Default</th>
                 </tr>
               </thead>
-              <tbody className="text-liquid-secondary dark:text-liquid-grey">
+              <tbody className="text-blue-900 dark:text-blue-900">
                 <tr className="border-b">
                   <td className="py-2">tabs</td>
                   <td className="py-2">Array&lt;GlassTabItem&gt;</td>
@@ -490,9 +490,9 @@ export const CustomStyling: Story = {
     ],
     tabListClassName: "bg-gradient-to-r from-purple-500/20 to-blue-500/20",
     activeTabButtonClassName:
-      "bg-gradient-to-r from-purple-500 to-blue-500 text-liquid-text-inverse",
+      "bg-gradient-to-r from-purple-500 to-blue-500 text-blue-900",
     inactiveTabButtonClassName:
-      "text-liquid-secondary hover:text-liquid-accent",
+      "text-blue-900 hover:text-blue-900",
   },
 };
 
@@ -504,10 +504,10 @@ export const AccessibilityDemo: Story = {
         label: "Keyboard Nav",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Keyboard Navigation
             </h3>
-            <div className="rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent/20">
+            <div className="rounded-lg bg-blue-500 p-4 dark:bg-blue-500/20">
               <h4 className="mb-2 font-medium">Available Shortcuts:</h4>
               <ul className="space-y-2 text-sm">
                 <li>
@@ -535,13 +535,13 @@ export const AccessibilityDemo: Story = {
         label: "ARIA Support",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               ARIA Attributes
             </h3>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               This component includes comprehensive ARIA support:
             </p>
-            <ul className="space-y-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+            <ul className="space-y-2 text-blue-900 text-sm dark:text-blue-900">
               <li>
                 • <code>role="tablist"</code> on tab container
               </li>
@@ -569,13 +569,13 @@ export const AccessibilityDemo: Story = {
         label: "Screen Readers",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
               Screen Reader Support
             </h3>
-            <p className="text-liquid-secondary dark:text-liquid-grey">
+            <p className="text-blue-900 dark:text-blue-900">
               The component is fully compatible with screen readers:
             </p>
-            <ul className="space-y-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+            <ul className="space-y-2 text-blue-900 text-sm dark:text-blue-900">
               <li>• Tab count is announced</li>
               <li>• Active tab state is communicated</li>
               <li>• Tab panel changes are announced</li>

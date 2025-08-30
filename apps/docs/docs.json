@@ -33,7 +33,7 @@
       {
         "group": "Core Concepts",
         "pages": [
-          "core-concepts/liquid-glass-system",
+          "core-concepts/",
           "core-concepts/theme-system",
           "core-concepts/performance"
         ]
@@ -104,11 +104,7 @@
       },
       {
         "group": "Examples",
-        "pages": [
-          "examples/dashboard",
-          "examples/forms",
-          "examples/pricing"
-        ]
+        "pages": ["examples/dashboard", "examples/forms", "examples/pricing"]
       },
       {
         "group": "Guides",

@@ -113,7 +113,7 @@ export const Controlled: Story = {
       <div className="w-80 space-y-4">
         <GlassSlider {...args} value={value} onChange={setValue} />
         <div className="text-center">
-          <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          <p className="text-blue-900 text-sm dark:text-blue-900">
             Current Value: <span className="font-bold text-lg">{value}</span>
           </p>
         </div>
@@ -135,7 +135,7 @@ export const CustomRange: Story = {
 
     return (
       <div className="w-80 space-y-2">
-        <h3 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
           Temperature Control
         </h3>
         <GlassSlider
@@ -147,7 +147,7 @@ export const CustomRange: Story = {
           showValue={false}
         />
         <div className="text-center">
-          <span className="font-bold text-2xl text-liquid-secondary dark:text-liquid-text-inverse">
+          <span className="font-bold text-2xl text-blue-900 dark:text-blue-900">
             {temperature}°C
           </span>
         </div>
@@ -162,21 +162,21 @@ export const StepIntervals: Story = {
     return (
       <div className="w-80 space-y-8">
         <div>
-          <h3 className="mb-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             Step: 1
           </h3>
           <GlassSlider min={0} max={10} step={1} />
         </div>
 
         <div>
-          <h3 className="mb-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             Step: 0.1
           </h3>
           <GlassSlider min={0} max={1} step={0.1} />
         </div>
 
         <div>
-          <h3 className="mb-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             Step: 5
           </h3>
           <GlassSlider min={0} max={100} step={5} />
@@ -206,14 +206,14 @@ export const MinimalVariant: Story = {
     return (
       <div className="w-80 space-y-8">
         <div>
-          <h3 className="mb-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             Default Variant
           </h3>
           <GlassSlider value={value} onChange={setValue} variant="default" />
         </div>
 
         <div>
-          <h3 className="mb-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             Minimal Variant
           </h3>
           <GlassSlider value={value} onChange={setValue} variant="minimal" />
@@ -238,7 +238,7 @@ export const VolumeControl: Story = {
     return (
       <div className="w-80 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="flex items-center gap-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+          <h3 className="flex items-center gap-2 font-medium text-blue-900 text-sm dark:text-blue-900">
             <Volume2 className="h-4 w-4" />
             Volume Control
           </h3>
@@ -252,11 +252,11 @@ export const VolumeControl: Story = {
           onChange={setVolume}
           showValue={false}
         />
-        <div className="flex justify-between text-liquid-secondary text-xs">
+        <div className="flex justify-between text-blue-900 text-xs">
           <button
             type="button"
             onClick={() => setVolume(0)}
-            className="hover:text-liquid-secondary dark:hover:text-liquid-secondary"
+            className="hover:text-blue-900 dark:hover:text-blue-900"
           >
             Mute
           </button>
@@ -264,7 +264,7 @@ export const VolumeControl: Story = {
           <button
             type="button"
             onClick={() => setVolume(100)}
-            className="hover:text-liquid-secondary dark:hover:text-liquid-secondary"
+            className="hover:text-blue-900 dark:hover:text-blue-900"
           >
             Max
           </button>
@@ -283,7 +283,7 @@ export const InteractiveDemo: Story = {
 
     return (
       <div className="w-96 space-y-8">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Interactive Slider Controls
         </h3>
 
@@ -292,7 +292,7 @@ export const InteractiveDemo: Story = {
             <div className="mb-2 flex items-center justify-between">
               <label
                 htmlFor="brightness-jru606"
-                className="flex items-center gap-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+                className="flex items-center gap-2 font-medium text-blue-900 text-sm dark:text-blue-900"
               >
                 <Sun className="h-4 w-4" />
                 Brightness
@@ -312,7 +312,7 @@ export const InteractiveDemo: Story = {
             <div className="mb-2 flex items-center justify-between">
               <label
                 htmlFor="animation-speed-i9kuig"
-                className="flex items-center gap-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+                className="flex items-center gap-2 font-medium text-blue-900 text-sm dark:text-blue-900"
               >
                 <Gauge className="h-4 w-4" />
                 Animation Speed
@@ -333,7 +333,7 @@ export const InteractiveDemo: Story = {
             <div className="mb-2 flex items-center justify-between">
               <label
                 htmlFor="price-range-h0kix5"
-                className="flex items-center gap-2 font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+                className="flex items-center gap-2 font-medium text-blue-900 text-sm dark:text-blue-900"
               >
                 <DollarSign className="h-4 w-4" />
                 Price Range
@@ -351,12 +351,12 @@ export const InteractiveDemo: Story = {
           </div>
         </div>
 
-        <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
-          <h4 className="mb-2 font-semibold text-liquid-secondary text-sm dark:text-liquid-text-inverse">
+        <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
+          <h4 className="mb-2 font-semibold text-blue-900 text-sm dark:text-blue-900">
             Current Settings:
           </h4>
           <div
-            className="flex h-20 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 font-bold text-liquid-text-inverse transition-all"
+            className="flex h-20 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 font-bold text-blue-900 transition-all"
             style={{
               opacity: brightness / 100,
               animationDuration: `${speed}ms`,
@@ -386,7 +386,7 @@ export const FormIntegration: Story = {
 
     return (
       <form onSubmit={handleSubmit} className="w-96 space-y-6">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Candidate Assessment
         </h3>
 
@@ -394,7 +394,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="years-of-experience-eaichh"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Years of Experience
             </label>
@@ -412,7 +412,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="technical-skills-1-10-9e6sk2"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Technical Skills (1-10)
             </label>
@@ -428,7 +428,7 @@ export const FormIntegration: Story = {
           <div>
             <label
               htmlFor="weekly-availability-hours-ymuots"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Weekly Availability (hours)
             </label>
@@ -446,7 +446,7 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse transition-colors hover:bg-liquid-accent"
+          className="w-full rounded-lg bg-blue-500 px-4 py-2 text-blue-900 transition-colors hover:bg-blue-500"
         >
           Submit Assessment
         </button>
@@ -463,7 +463,7 @@ export const AccessibilityDemo: Story = {
     return (
       <div className="w-96 space-y-6">
         <div>
-          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+          <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
             Accessibility Features
           </h3>
 
@@ -474,11 +474,11 @@ export const AccessibilityDemo: Story = {
               aria-label="Demonstration slider"
             />
 
-            <div className="rounded-lg bg-liquid-accent p-4 dark:bg-liquid-accent/20">
-              <h4 className="mb-2 font-semibold text-liquid-accent dark:text-liquid-accent">
+            <div className="rounded-lg bg-blue-500 p-4 dark:bg-blue-500/20">
+              <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-900">
                 Keyboard Navigation
               </h4>
-              <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
+              <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
                 <li>
                   • Use <kbd>←</kbd> <kbd>→</kbd> to adjust by step
                 </li>
@@ -495,11 +495,11 @@ export const AccessibilityDemo: Story = {
             </div>
           </div>
 
-          <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
-            <h4 className="mb-2 font-semibold text-liquid-secondary text-sm dark:text-liquid-text-inverse">
+          <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
+            <h4 className="mb-2 font-semibold text-blue-900 text-sm dark:text-blue-900">
               Screen Reader Support:
             </h4>
-            <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+            <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
               <li>• Announces current value</li>
               <li>• Provides min/max context</li>
               <li>• Updates on value change</li>
@@ -521,7 +521,7 @@ export const RealTimePreview: Story = {
 
     return (
       <div className="w-96 space-y-6">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Real-time CSS Effects
         </h3>
 
@@ -529,7 +529,7 @@ export const RealTimePreview: Story = {
           <div>
             <label
               htmlFor="blur-effect-mfkx4e"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Blur Effect
             </label>
@@ -546,7 +546,7 @@ export const RealTimePreview: Story = {
           <div>
             <label
               htmlFor="opacity-94kdsl"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Opacity
             </label>
@@ -563,7 +563,7 @@ export const RealTimePreview: Story = {
           <div>
             <label
               htmlFor="scale-016424"
-              className="mb-2 block font-medium text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="mb-2 block font-medium text-blue-900 text-sm dark:text-blue-900"
             >
               Scale
             </label>
@@ -578,9 +578,9 @@ export const RealTimePreview: Story = {
           </div>
         </div>
 
-        <div className="flex items-center justify-center rounded-lg bg-liquid-bg p-8 dark:bg-liquid-bg">
+        <div className="flex items-center justify-center rounded-lg bg-blue-100 p-8 dark:bg-blue-100">
           <div
-            className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 p-6 font-bold text-liquid-text-inverse transition-all duration-300"
+            className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 p-6 font-bold text-blue-900 transition-all duration-300"
             style={{
               filter: `blur(${blur}px)`,
               opacity: opacity / 100,
@@ -591,7 +591,7 @@ export const RealTimePreview: Story = {
           </div>
         </div>
 
-        <div className="font-mono text-liquid-secondary text-xs dark:text-liquid-grey">
+        <div className="font-mono text-blue-900 text-xs dark:text-blue-900">
           filter: blur({blur}px);
           <br />
           opacity: {opacity / 100};<br />

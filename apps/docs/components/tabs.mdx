@@ -3,16 +3,35 @@ title: Tabs
 description: Switch content panels using accessible tablist.
 ---
 
-import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs";
-import TabsExample from "/snippets/components/TabsExample.jsx";
+import { GlassTabs } from "@liquidify/react";
 
 # Tabs
 
 Accessible tabbed interface for switching between content panels.
 
-<PreviewCodeTabs code={`<TabsExample />`}>
-  <TabsExample />
-</PreviewCodeTabs>
+```tsx
+export default function Demo() {
+  const tabs = [
+    {
+      id: "overview",
+      label: "Overview",
+      content: <div>Overview content here...</div>,
+    },
+    {
+      id: "details",
+      label: "Details",
+      content: <div>Detailed information...</div>,
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      content: <div>Settings panel...</div>,
+    },
+  ];
+
+  return <GlassTabs tabs={tabs} defaultTab="details" />;
+}
+```
 
 ## Installation
 
@@ -23,7 +42,7 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-import { Tabs } from "liquidify";
+import { GlassTabs } from "@liquidify/react";
 
 export default function Demo() {
   const tabs = [

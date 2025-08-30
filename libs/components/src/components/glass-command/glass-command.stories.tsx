@@ -88,11 +88,11 @@ export const Playground = () => (
 export const EdgeCases = () => (
   <div className="apple-glass mx-auto max-w-md space-y-6 p-8">
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Empty Commands</h3>
+      <h3 className="mb-2 text-blue-900">Empty Commands</h3>
       <CommandPalette items={[]} placeholder="No commands available..." />
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Custom Shortcut</h3>
+      <h3 className="mb-2 text-blue-900">Custom Shortcut</h3>
       <CommandPalette
         items={sampleCommands}
         shortcut={["ctrl", "shift", "p"]}

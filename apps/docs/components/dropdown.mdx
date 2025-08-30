@@ -3,6 +3,9 @@ title: Dropdown
 description: Menu-style selection anchored to a trigger.
 ---
 
+import { GlassButton, GlassDropdown } from "@liquidify/react";
+import { useState } from "react";
+
 # Dropdown
 
 Menu-style selection component anchored to a trigger element.
@@ -16,7 +19,7 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-import { GlassDropdown, Button } from "liquidify";
+import { GlassDropdown, GlassButton } from "@liquidify/react";
 import { useState } from "react";
 
 export default function Demo() {
@@ -31,7 +34,7 @@ export default function Demo() {
   return (
     <div className="space-y-2">
       <GlassDropdown
-        trigger={<Button variant="ghost">Open menu</Button>}
+        trigger={<GlassButton variant="ghost">Open menu</GlassButton>}
         items={items}
         onSelect={setValue}
       />

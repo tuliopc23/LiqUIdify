@@ -48,11 +48,11 @@ The Liquid Glass Button implements the signature liquid glass effect with:
           value: "#0b1220",
         },
         {
-          name: "neutral-light",
+          name: "blue-light",
           value: "#fafafa",
         },
         {
-          name: "neutral-dark",
+          name: "blue-dark",
           value: "#0a0a0a",
         },
         {
@@ -285,7 +285,7 @@ export const Playground: Story = {
 // Dark Mode
 export const DarkMode: Story = {
   render: () => (
-    <div className="dark p-8 bg-liquid-bg rounded-lg">
+    <div className="dark p-8 bg-blue-100 rounded-lg">
       <div className="flex flex-wrap gap-4 items-center">
         <GlassButton variant="primary">Primary Dark</GlassButton>
         <GlassButton variant="secondary">Secondary Dark</GlassButton>
@@ -312,10 +312,10 @@ export const ComplexExample: Story = {
   render: () => (
     <div className="space-y-6 p-6 max-w-md">
       <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold text-liquid-text-inverse">
+        <h2 className="text-2xl font-bold text-blue-900">
           Liquid Glass Demo
         </h2>
-        <p className="text-liquid-text-inverse/80">
+        <p className="text-blue-900/80">
           Experience the signature liquid glass effect with realistic depth and
           shine.
         </p>

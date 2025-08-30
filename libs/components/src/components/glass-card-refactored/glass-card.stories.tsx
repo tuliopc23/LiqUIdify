@@ -43,7 +43,7 @@ export const Default: Story = {
           <p>Use the controls to try different variants and sizes.</p>
         </Card.Content>
         <Card.Footer>
-          <p className="text-sm text-liquid-secondary">Footer content</p>
+          <p className="text-sm text-blue-900">Footer content</p>
         </Card.Footer>
       </>
     ),
@@ -164,7 +164,7 @@ export const Composition: Story = {
         <p className="text-sm">Compound components in action.</p>
       </Card.Content>
       <Card.Footer>
-        <p className="text-xs text-liquid-secondary">Footer content</p>
+        <p className="text-xs text-blue-900">Footer content</p>
       </Card.Footer>
     </Card>
   ),

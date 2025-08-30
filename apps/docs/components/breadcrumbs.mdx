@@ -3,14 +3,20 @@ title: Breadcrumbs
 description: Navigation breadcrumbs with liquid glass styling and customizable separators.
 ---
 
-import BreadcrumbsExample from "/snippets/components/BreadcrumbsExample.jsx";
-import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs";
+import { GlassBreadcrumbs } from "@liquidify/react";
+import { ChevronRight } from "lucide-react";
 
 ### Example
 
-<PreviewCodeTabs code={`<BreadcrumbsExample />`}>
-  <BreadcrumbsExample />
-</PreviewCodeTabs>
+```tsx
+<GlassBreadcrumbs
+  items={[
+    { label: "Home", onClick: () => navigate("/") },
+    { label: "Components", onClick: () => navigate("/components") },
+    { label: "Breadcrumbs" },
+  ]}
+/>
+```
 
 ## Props
 

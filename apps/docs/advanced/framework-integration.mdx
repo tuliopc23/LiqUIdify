@@ -33,7 +33,7 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
      return (
        <html lang="en">
          <body>
-           <UnifiedGlassProvider theme="light">{children}</UnifiedGlassProvider>
+           < theme="light">{children}</>
          </body>
        </html>
      );
@@ -49,9 +49,9 @@ LiqUIdify works seamlessly with all modern React frameworks. This guide provides
 
    export default function App({ Component, pageProps }: AppProps) {
      return (
-       <UnifiedGlassProvider theme="light">
+       < theme="light">
          <Component {...pageProps} />
-       </UnifiedGlassProvider>
+       </>
      );
    }
    ```
@@ -88,12 +88,12 @@ LiqUIdify handles SSR automatically, but for optimal performance:
      }, []);
 
      return (
-       <UnifiedGlassProvider
+       <
          theme={mounted ? "light" : undefined}
          suppressHydrationWarning
        >
          {children}
-       </UnifiedGlassProvider>
+       </>
      );
    }
    ```
@@ -189,9 +189,9 @@ export default function RootLayout({
 
    ReactDOM.createRoot(document.getElementById("root")!).render(
      <React.StrictMode>
-       <UnifiedGlassProvider theme="light">
+       < theme="light">
          <App />
-       </UnifiedGlassProvider>
+       </>
      </React.StrictMode>,
    );
    ```
@@ -283,9 +283,9 @@ export default function RootLayout({
            <Links />
          </head>
          <body>
-           <UnifiedGlassProvider theme="light">
+           < theme="light">
              <Outlet />
-           </UnifiedGlassProvider>
+           </>
            <ScrollRestoration />
            <Scripts />
            <LiveReload />
@@ -383,9 +383,9 @@ export default function RootLayout({
 
    function App() {
      return (
-       <UnifiedGlassProvider theme="light">
+       < theme="light">
          {/* Your app content */}
-       </UnifiedGlassProvider>
+       </>
      );
    }
 
@@ -428,7 +428,7 @@ export default function RootLayout({
    import "liquidify/styles";
 
    export const wrapRootElement = ({ element }) => (
-     <UnifiedGlassProvider theme="light">{element}</UnifiedGlassProvider>
+     < theme="light">{element}</>
    );
    ```
 

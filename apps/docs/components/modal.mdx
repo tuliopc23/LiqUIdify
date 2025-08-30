@@ -4,15 +4,31 @@ description: Overlay dialogs with liquid glass effects, focus management, and co
 icon: square-stack
 ---
 
-import ModalExample from "/snippets/components/ModalExample.jsx";
+import { GlassButton, GlassModal } from "@liquidify/react";
+import { useState } from "react";
 
 # Modal
 
 A glassmorphic modal component with liquid glass effects, robust focus management, and comprehensive accessibility support. Features Apple-inspired design with smooth animations and proper dialog semantics.
 
-{/_Live preview_/}
+```tsx
+function ModalExample() {
+  const [open, setOpen] = useState(false);
 
-<ModalExample />
+  return (
+    <>
+      <GlassButton onClick={() => setOpen(true)}>Open Modal</GlassButton>
+      <GlassModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Example Modal"
+      >
+        <p>This is a modal with liquid glass effects.</p>
+      </GlassModal>
+    </>
+  );
+}
+```
 
 ### Size Variants
 

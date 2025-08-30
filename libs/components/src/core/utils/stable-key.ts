@@ -13,21 +13,21 @@
  * @returns A stable string key
  */
 export function getItemKey<T extends Record<string, any>>(
-  item: T,
-  prefix: string = "item",
-  index = 0,
+ item: T,
+ prefix: string = "item",
+ index = 0,
 ): string {
-  // Try to find a stable identifier property
-  const stableProps = ["id", "key", "href", "label", "name", "value"];
+ // Try to find a stable identifier property
+ const stableProps = ["id", "key", "href", "label", "name", "value"];
 
-  for (const prop of stableProps) {
-    if (item[prop] && typeof item[prop] === "string") {
-      return `${prefix}-${item[prop]}`;
-    }
-  }
+ for (const prop of stableProps) {
+ if (item[prop] && typeof item[prop] === "string") {
+ return `${prefix}-${item[prop]}`;
+ }
+ }
 
-  // If no stable property found, use index as fallback
-  return `${prefix}-${index}`;
+ // If no stable property found, use index as fallback
+ return `${prefix}-${index}`;
 }
 
 /**
@@ -37,10 +37,10 @@ export function getItemKey<T extends Record<string, any>>(
  * @returns A stable string key
  */
 export function generateStaticKey(
-  prefix: string,
-  identifier: string | number,
+ prefix: string,
+ identifier: string | number,
 ): string {
-  return `${prefix}-${identifier}`;
+ return `${prefix}-${identifier}`;
 }
 
 /**
@@ -49,7 +49,7 @@ export function generateStaticKey(
  * @returns A stable string key
  */
 function _generateNestedKey(...parts: Array<string | number>): string {
-  return parts.join("-");
+ return parts.join("-");
 }
 
 /**
@@ -59,8 +59,8 @@ function _generateNestedKey(...parts: Array<string | number>): string {
  * @returns A stable or unique string key
  */
 function _generateTimestampKey(prefix: string, useTimestamp = false): string {
-  if (useTimestamp) {
-    return `${prefix}-${Date.now()}`;
-  }
-  return prefix;
+ if (useTimestamp) {
+ return `${prefix}-${Date.now()}`;
+ }
+ return prefix;
 }

@@ -86,27 +86,27 @@ export const Sizes: Story = {
     <div className="flex flex-wrap items-center gap-4">
       <div className="text-center">
         <GlassAvatar size="xs" src="https://i.pravatar.cc/150?img=2" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">xs</p>
+        <p className="mt-2 text-blue-900/60 text-xs">xs</p>
       </div>
       <div className="text-center">
         <GlassAvatar size="sm" src="https://i.pravatar.cc/150?img=3" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">sm</p>
+        <p className="mt-2 text-blue-900/60 text-xs">sm</p>
       </div>
       <div className="text-center">
         <GlassAvatar size="md" src="https://i.pravatar.cc/150?img=4" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">md</p>
+        <p className="mt-2 text-blue-900/60 text-xs">md</p>
       </div>
       <div className="text-center">
         <GlassAvatar size="lg" src="https://i.pravatar.cc/150?img=5" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">lg</p>
+        <p className="mt-2 text-blue-900/60 text-xs">lg</p>
       </div>
       <div className="text-center">
         <GlassAvatar size="xl" src="https://i.pravatar.cc/150?img=6" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">xl</p>
+        <p className="mt-2 text-blue-900/60 text-xs">xl</p>
       </div>
       <div className="text-center">
         <GlassAvatar size="2xl" src="https://i.pravatar.cc/150?img=7" />
-        <p className="mt-2 text-liquid-text-inverse/60 text-xs">2xl</p>
+        <p className="mt-2 text-blue-900/60 text-xs">2xl</p>
       </div>
     </div>
   ),
@@ -122,7 +122,7 @@ export const Variants: Story = {
           src="https://i.pravatar.cc/150?img=8"
           size="lg"
         />
-        <p className="mt-2 text-sm text-liquid-text-inverse/60">Circular</p>
+        <p className="mt-2 text-sm text-blue-900/60">Circular</p>
       </div>
       <div className="text-center">
         <GlassAvatar
@@ -130,7 +130,7 @@ export const Variants: Story = {
           src="https://i.pravatar.cc/150?img=9"
           size="lg"
         />
-        <p className="mt-2 text-sm text-liquid-text-inverse/60">Rounded</p>
+        <p className="mt-2 text-sm text-blue-900/60">Rounded</p>
       </div>
       <div className="text-center">
         <GlassAvatar
@@ -138,7 +138,7 @@ export const Variants: Story = {
           src="https://i.pravatar.cc/150?img=10"
           size="lg"
         />
-        <p className="mt-2 text-sm text-liquid-text-inverse/60">Square</p>
+        <p className="mt-2 text-sm text-blue-900/60">Square</p>
       </div>
     </div>
   ),
@@ -170,7 +170,7 @@ export const StatusIndicators: Story = {
             src="https://i.pravatar.cc/150?img=12"
             size="lg"
           />
-          <p className="mt-2 text-sm text-liquid-text-inverse/60">Online</p>
+          <p className="mt-2 text-sm text-blue-900/60">Online</p>
         </div>
         <div className="text-center">
           <GlassAvatar
@@ -178,7 +178,7 @@ export const StatusIndicators: Story = {
             src="https://i.pravatar.cc/150?img=13"
             size="lg"
           />
-          <p className="mt-2 text-sm text-liquid-text-inverse/60">Away</p>
+          <p className="mt-2 text-sm text-blue-900/60">Away</p>
         </div>
         <div className="text-center">
           <GlassAvatar
@@ -186,7 +186,7 @@ export const StatusIndicators: Story = {
             src="https://i.pravatar.cc/150?img=14"
             size="lg"
           />
-          <p className="mt-2 text-sm text-liquid-text-inverse/60">Busy</p>
+          <p className="mt-2 text-sm text-blue-900/60">Busy</p>
         </div>
         <div className="text-center">
           <GlassAvatar
@@ -194,7 +194,7 @@ export const StatusIndicators: Story = {
             src="https://i.pravatar.cc/150?img=15"
             size="lg"
           />
-          <p className="mt-2 text-sm text-liquid-text-inverse/60">Offline</p>
+          <p className="mt-2 text-sm text-blue-900/60">Offline</p>
         </div>
       </div>
 
@@ -236,7 +236,7 @@ export const AvatarGroups: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <h4 className="mb-3 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">
           Stacked avatars
         </h4>
         <div className="-space-x-3 flex">
@@ -268,13 +268,13 @@ export const AvatarGroups: Story = {
             fallback="+5"
             size="md"
             showBorder
-            className="z-0 bg-liquid-bg"
+            className="z-0 bg-blue-100"
           />
         </div>
       </div>
 
       <div>
-        <h4 className="mb-3 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">
           Team members
         </h4>
         <div className="flex gap-2">
@@ -309,7 +309,7 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="max-w-2xl space-y-6">
       {/* User profile card */}
-      <div className="flex items-center gap-4 rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
+      <div className="flex items-center gap-4 rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
         <GlassAvatar
           src="https://i.pravatar.cc/150?img=24"
           size="xl"
@@ -317,14 +317,14 @@ export const RealWorldExamples: Story = {
           showBorder
         />
         <div className="flex-1">
-          <h3 className="font-semibold text-liquid-text-inverse">
+          <h3 className="font-semibold text-blue-900">
             Sarah Johnson
           </h3>
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             Product Designer
           </p>
           <div className="mt-2 flex gap-2">
-            <span className="text-liquid-text-inverse/40 text-xs">
+            <span className="text-blue-900/40 text-xs">
               sarah.johnson@company.com
             </span>
           </div>
@@ -332,8 +332,8 @@ export const RealWorldExamples: Story = {
       </div>
 
       {/* Message list */}
-      <div className="space-y-3 rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="space-y-3 rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           Recent Messages
         </h4>
         <div className="flex items-start gap-3">
@@ -344,14 +344,14 @@ export const RealWorldExamples: Story = {
           />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-liquid-text-inverse">
+              <span className="font-medium text-sm text-blue-900">
                 Mike Chen
               </span>
-              <span className="text-liquid-text-inverse/40 text-xs">
+              <span className="text-blue-900/40 text-xs">
                 2 min ago
               </span>
             </div>
-            <p className="text-sm text-liquid-text-inverse/60">
+            <p className="text-sm text-blue-900/60">
               Hey, are you available for a quick call?
             </p>
           </div>
@@ -360,14 +360,14 @@ export const RealWorldExamples: Story = {
           <GlassAvatar fallback="Emma Davis" size="sm" status="away" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-liquid-text-inverse">
+              <span className="font-medium text-sm text-blue-900">
                 Emma Davis
               </span>
-              <span className="text-liquid-text-inverse/40 text-xs">
+              <span className="text-blue-900/40 text-xs">
                 15 min ago
               </span>
             </div>
-            <p className="text-sm text-liquid-text-inverse/60">
+            <p className="text-sm text-blue-900/60">
               I've updated the design files.
             </p>
           </div>
@@ -375,8 +375,8 @@ export const RealWorldExamples: Story = {
       </div>
 
       {/* Comment section */}
-      <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           Comments
         </h4>
         <div className="space-y-4">
@@ -387,16 +387,16 @@ export const RealWorldExamples: Story = {
               variant="rounded"
             />
             <div className="flex-1 space-y-1">
-              <div className="rounded-lg bg-liquid-bg/5 p-3">
+              <div className="rounded-lg bg-blue-100/5 p-3">
                 <div className="mb-1 flex items-center gap-2">
-                  <span className="font-medium text-sm text-liquid-text-inverse">
+                  <span className="font-medium text-sm text-blue-900">
                     Alex Turner
                   </span>
-                  <span className="text-liquid-text-inverse/40 text-xs">
+                  <span className="text-blue-900/40 text-xs">
                     1 hour ago
                   </span>
                 </div>
-                <p className="text-sm text-liquid-text-inverse/80">
+                <p className="text-sm text-blue-900/80">
                   Great work on this component! The glass effect looks amazing.
                 </p>
               </div>
@@ -413,7 +413,7 @@ export const ErrorHandling: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h4 className="mb-3 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">
           Image load errors fallback to initials or icon
         </h4>
         <div className="flex items-center gap-4">
@@ -461,8 +461,8 @@ export const CustomStyling: Story = {
 export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg bg-liquid-bg/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100/10 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Light Background
         </h3>
         <div className="flex items-center gap-4">
@@ -476,8 +476,8 @@ export const ThemeShowcase: Story = {
         </div>
       </div>
 
-      <div className="rounded-lg bg-liquid-bg/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100/30 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Dark Background
         </h3>
         <div className="flex items-center gap-4">
@@ -503,7 +503,7 @@ export const ThemeShowcase: Story = {
 export const AccessibilityDemo: Story = {
   render: () => (
     <div className="max-w-md space-y-4">
-      <p className="text-sm text-liquid-text-inverse/60">
+      <p className="text-sm text-blue-900/60">
         All avatars include proper alt text for screen readers. When used in
         interactive elements, ensure proper labeling.
       </p>
@@ -514,18 +514,18 @@ export const AccessibilityDemo: Story = {
             alt="Profile picture of Sarah Williams"
             size="md"
           />
-          <span className="text-liquid-text-inverse">
+          <span className="text-blue-900">
             Sarah Williams (with alt text)
           </span>
         </div>
         <div className="flex items-center gap-3">
           <button
             type="button"
-            className="flex items-center gap-3 rounded-lg p-2 hover:bg-liquid-bg/10"
+            className="flex items-center gap-3 rounded-lg p-2 hover:bg-blue-100/10"
             aria-label="Open John Doe's profile"
           >
             <GlassAvatar fallback="John Doe" size="md" />
-            <span className="text-liquid-text-inverse">
+            <span className="text-blue-900">
               John Doe (clickable with aria-label)
             </span>
           </button>

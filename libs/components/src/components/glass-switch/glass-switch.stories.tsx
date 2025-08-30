@@ -110,7 +110,7 @@ export const Controlled: Story = {
           onChange={setChecked}
           label="Toggle me"
         />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Switch is:{" "}
           <span className="font-semibold">{checked ? "ON" : "OFF"}</span>
         </p>
@@ -161,7 +161,7 @@ export const MultipleSwitches: Story = {
 
     return (
       <div className="space-y-4">
-        <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
           Application Settings
         </h3>
 
@@ -204,8 +204,8 @@ export const InteractiveDemo: Story = {
       <div
         className={`w-96 rounded-lg p-6 transition-colors ${
           isDarkMode
-            ? "bg-liquid-bg text-liquid-text-inverse"
-            : "bg-liquid-bg text-liquid-secondary"
+            ? "bg-blue-100 text-blue-900"
+            : "bg-blue-100 text-blue-900"
         }`}
       >
         <h3 className="mb-6 font-semibold text-lg">System Settings</h3>
@@ -253,7 +253,7 @@ export const InteractiveDemo: Story = {
 
         <div
           className={`mt-6 rounded-lg p-4 ${
-            isDarkMode ? "bg-liquid-bg" : "bg-liquid-bg"
+            isDarkMode ? "bg-blue-100" : "bg-blue-100"
           }`}
         >
           <p className="text-sm opacity-75">
@@ -289,13 +289,13 @@ export const FormIntegration: Story = {
 
     return (
       <form onSubmit={handleSubmit} className="w-96 space-y-6">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Privacy & Security Settings
         </h3>
 
         <div className="space-y-4">
           <div className="space-y-3">
-            <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
               Notifications
             </h4>
             <GlassSwitch
@@ -316,7 +316,7 @@ export const FormIntegration: Story = {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
               Privacy
             </h4>
             <GlassSwitch
@@ -327,7 +327,7 @@ export const FormIntegration: Story = {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
               Security
             </h4>
             <GlassSwitch
@@ -340,7 +340,7 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse transition-colors hover:bg-liquid-accent"
+          className="w-full rounded-lg bg-blue-500 px-4 py-2 text-blue-900 transition-colors hover:bg-blue-500"
         >
           Save Settings
         </button>
@@ -360,21 +360,21 @@ export const StatusIndicators: Story = {
 
     return (
       <div className="space-y-6">
-        <h3 className="font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
           Quick Settings
         </h3>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+          <div className="flex items-center justify-between rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
             <div className="flex items-center gap-3">
               {status.visibility ? (
-                <Eye className="h-5 w-5 text-liquid-accent" />
+                <Eye className="h-5 w-5 text-blue-900" />
               ) : (
-                <EyeOff className="h-5 w-5 text-liquid-secondary" />
+                <EyeOff className="h-5 w-5 text-blue-900" />
               )}
               <div>
                 <p className="font-medium">Profile Visibility</p>
-                <p className="text-liquid-secondary text-sm">
+                <p className="text-blue-900 text-sm">
                   {status.visibility
                     ? "Visible to everyone"
                     : "Hidden from search"}
@@ -389,16 +389,16 @@ export const StatusIndicators: Story = {
             />
           </div>
 
-          <div className="flex items-center justify-between rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+          <div className="flex items-center justify-between rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
             <div className="flex items-center gap-3">
               {status.sound ? (
-                <Volume2 className="h-5 w-5 text-liquid-accent" />
+                <Volume2 className="h-5 w-5 text-blue-900" />
               ) : (
-                <VolumeX className="h-5 w-5 text-liquid-secondary" />
+                <VolumeX className="h-5 w-5 text-blue-900" />
               )}
               <div>
                 <p className="font-medium">Sound Effects</p>
-                <p className="text-liquid-secondary text-sm">
+                <p className="text-blue-900 text-sm">
                   {status.sound ? "All sounds enabled" : "Muted"}
                 </p>
               </div>
@@ -409,16 +409,16 @@ export const StatusIndicators: Story = {
             />
           </div>
 
-          <div className="flex items-center justify-between rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+          <div className="flex items-center justify-between rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
             <div className="flex items-center gap-3">
               {status.security ? (
-                <Lock className="h-5 w-5 text-liquid-accent" />
+                <Lock className="h-5 w-5 text-blue-900" />
               ) : (
-                <Unlock className="h-5 w-5 text-liquid-accent" />
+                <Unlock className="h-5 w-5 text-blue-900" />
               )}
               <div>
                 <p className="font-medium">Security Mode</p>
-                <p className="text-liquid-secondary text-sm">
+                <p className="text-blue-900 text-sm">
                   {status.security
                     ? "Enhanced security active"
                     : "Standard security"}
@@ -448,7 +448,7 @@ export const AccessibilityDemo: Story = {
     return (
       <div className="w-96 space-y-6">
         <div>
-          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg dark:text-liquid-text-inverse">
+          <h3 className="mb-4 font-semibold text-blue-900 text-lg dark:text-blue-900">
             Accessibility Settings
           </h3>
 
@@ -461,7 +461,7 @@ export const AccessibilityDemo: Story = {
             />
             <p
               id="screen-reader-desc"
-              className="ml-9 text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
             >
               Optimize interface for screen reader users
             </p>
@@ -474,7 +474,7 @@ export const AccessibilityDemo: Story = {
             />
             <p
               id="high-contrast-desc"
-              className="ml-9 text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
             >
               Increase color contrast for better visibility
             </p>
@@ -487,17 +487,17 @@ export const AccessibilityDemo: Story = {
             />
             <p
               id="reduced-motion-desc"
-              className="ml-9 text-liquid-secondary text-sm dark:text-liquid-grey"
+              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
             >
               Minimize animations and transitions
             </p>
           </div>
 
-          <div className="mt-6 rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
-            <h4 className="mb-2 font-semibold text-liquid-secondary text-sm dark:text-liquid-text-inverse">
+          <div className="mt-6 rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
+            <h4 className="mb-2 font-semibold text-blue-900 text-sm dark:text-blue-900">
               Keyboard Navigation:
             </h4>
-            <ul className="space-y-1 text-liquid-secondary text-sm dark:text-liquid-grey">
+            <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
               <li>
                 • <kbd>Tab</kbd> - Focus switch
               </li>
@@ -524,8 +524,8 @@ export const ThemeShowcase: Story = {
 
     return (
       <div className="space-y-8">
-        <div className="rounded-lg bg-liquid-bg p-6">
-          <h3 className="mb-4 font-semibold text-liquid-secondary text-lg">
+        <div className="rounded-lg bg-blue-100 p-6">
+          <h3 className="mb-4 font-semibold text-blue-900 text-lg">
             Light Theme
           </h3>
           <div className="space-y-3">
@@ -542,8 +542,8 @@ export const ThemeShowcase: Story = {
           </div>
         </div>
 
-        <div className="rounded-lg bg-liquid-bg p-6">
-          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+        <div className="rounded-lg bg-blue-100 p-6">
+          <h3 className="mb-4 font-semibold text-lg text-blue-900">
             Dark Theme
           </h3>
           <div className="space-y-3">

@@ -3,6 +3,9 @@ title: "Radio Group"
 description: "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time."
 ---
 
+import { GlassRadioGroup } from "@liquidify/react";
+import { useState } from "react";
+
 # Radio Group
 
 A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
@@ -16,7 +19,7 @@ npm install liquidify
 ## Usage
 
 ```tsx
-import { GlassRadioGroup } from "liquidify";
+import { GlassRadioGroup } from "@liquidify/react";
 
 function Example() {
   const [value, setValue] = useState("option1");

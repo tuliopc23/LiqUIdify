@@ -53,7 +53,7 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Default Variant
         </h3>
         <div className="w-80">
@@ -67,7 +67,7 @@ export const Variants: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Card Variant
         </h3>
         <div className="w-80">
@@ -81,14 +81,14 @@ export const Variants: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Inline Variant
         </h3>
         <div className="w-80">
           <GlassFormField variant="inline" label="Newsletter">
             <div className="flex items-center">
               <input type="checkbox" className="mr-2" />
-              <span className="text-sm text-liquid-text-inverse/70">
+              <span className="text-sm text-blue-900/70">
                 Subscribe to updates
               </span>
             </div>
@@ -104,7 +104,7 @@ export const Sizes: Story = {
     <div className="space-y-6">
       {(["sm", "md", "lg"] as const).map((size) => (
         <div key={size} className="w-80">
-          <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+          <h3 className="mb-3 font-medium text-blue-900/90">
             Size: {size}
           </h3>
           <GlassFormField
@@ -125,7 +125,7 @@ export const ValidationStates: Story = {
   render: () => (
     <div className="space-y-6">
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+        <h3 className="mb-3 font-medium text-blue-900/90">
           Default State
         </h3>
         <GlassFormField label="Username" helperText="Choose a unique username">
@@ -133,7 +133,7 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+        <h3 className="mb-3 font-medium text-blue-900/90">
           Error State
         </h3>
         <GlassFormField
@@ -145,7 +145,7 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+        <h3 className="mb-3 font-medium text-blue-900/90">
           Success State
         </h3>
         <GlassFormField
@@ -157,7 +157,7 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+        <h3 className="mb-3 font-medium text-blue-900/90">
           Warning State
         </h3>
         <GlassFormField
@@ -168,7 +168,7 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
       <div className="w-80">
-        <h3 className="mb-3 font-medium text-liquid-text-inverse/90">
+        <h3 className="mb-3 font-medium text-blue-900/90">
           Disabled State
         </h3>
         <GlassFormField
@@ -265,7 +265,7 @@ export const RealWorldExamples: Story = {
     };
     return (
       <div className="w-full max-w-md">
-        <h3 className="mb-6 font-bold text-liquid-text-inverse/90 text-xl">
+        <h3 className="mb-6 font-bold text-blue-900/90 text-xl">
           Create Account
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -324,7 +324,7 @@ export const RealWorldExamples: Story = {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-liquid-text-inverse/60 hover:text-liquid-text-inverse/90"
+                  className="text-blue-900/60 hover:text-blue-900/90"
                 >
                   {showPassword ? (
                     <EyeOff className="h-4 w-4" />
@@ -407,18 +407,18 @@ export const InteractiveDemo: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
             Interactive Controls
           </h3>
-          <div className="grid grid-cols-2 gap-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-4 backdrop-blur-sm md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-4 backdrop-blur-sm md:grid-cols-4">
             <div>
-              <label className="mb-2 block font-medium text-sm text-liquid-text-inverse/90">
+              <label className="mb-2 block font-medium text-sm text-blue-900/90">
                 State
               </label>
               <select
                 value={fieldState}
                 onChange={(e) => setFieldState(e.target.value as any)}
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 text-sm text-blue-900 backdrop-blur-sm"
               >
                 <option value="default">Default</option>
                 <option value="error">Error</option>
@@ -427,13 +427,13 @@ export const InteractiveDemo: Story = {
               </select>
             </div>
             <div>
-              <label className="mb-2 block font-medium text-sm text-liquid-text-inverse/90">
+              <label className="mb-2 block font-medium text-sm text-blue-900/90">
                 Variant
               </label>
               <select
                 value={variant}
                 onChange={(e) => setVariant(e.target.value as any)}
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 text-sm text-blue-900 backdrop-blur-sm"
               >
                 <option value="default">Default</option>
                 <option value="card">Card</option>
@@ -441,13 +441,13 @@ export const InteractiveDemo: Story = {
               </select>
             </div>
             <div>
-              <label className="mb-2 block font-medium text-sm text-liquid-text-inverse/90">
+              <label className="mb-2 block font-medium text-sm text-blue-900/90">
                 Size
               </label>
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value as any)}
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 text-sm text-liquid-text-inverse backdrop-blur-sm"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 text-sm text-blue-900 backdrop-blur-sm"
               >
                 <option value="sm">Small</option>
                 <option value="md">Medium</option>
@@ -461,7 +461,7 @@ export const InteractiveDemo: Story = {
                   checked={isRequired}
                   onChange={(e) => setIsRequired(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">
+                <span className="text-sm text-blue-900/90">
                   Required
                 </span>
               </label>
@@ -471,7 +471,7 @@ export const InteractiveDemo: Story = {
                   checked={isDisabled}
                   onChange={(e) => setIsDisabled(e.target.checked)}
                 />
-                <span className="text-sm text-liquid-text-inverse/90">
+                <span className="text-sm text-blue-900/90">
                   Disabled
                 </span>
               </label>
@@ -479,7 +479,7 @@ export const InteractiveDemo: Story = {
           </div>
         </div>
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
             Live Preview
           </h3>
           <div className="w-80">
@@ -507,7 +507,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Light Theme Simulation
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -527,10 +527,10 @@ export const ThemeShowcase: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Dark Theme (Current)
         </h3>
-        <div className="rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-6">
+        <div className="rounded-xl bg-gradient-to-br from-blue-900 to-blue-800 p-6">
           <div className="w-80">
             <GlassFormField
               label="Email Address"
@@ -547,7 +547,7 @@ export const ThemeShowcase: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Gradient Background
         </h3>
         <div className="rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 p-6">
@@ -574,40 +574,40 @@ export const AccessibilityShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Accessibility Features
         </h3>
-        <div className="space-y-4 rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
-          <ul className="space-y-2 text-sm text-liquid-text-inverse/80">
+        <div className="space-y-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
+          <ul className="space-y-2 text-sm text-blue-900/80">
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               Proper label association with form controls
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               Descriptive helper text and error messages
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               Required field indication with asterisk
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               ARIA live regions for dynamic state changes
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               Keyboard navigation support
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-liquid-accent" />
+              <CheckCircle className="h-4 w-4 text-blue-900" />
               Screen reader announcements
             </li>
           </ul>
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Keyboard Navigation Test
         </h3>
         <div className="w-80 space-y-4">
@@ -640,7 +640,7 @@ export const AccessibilityShowcase: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse/90">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
           Screen Reader Test
         </h3>
         <div className="w-80">

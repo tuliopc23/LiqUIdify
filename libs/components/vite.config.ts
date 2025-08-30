@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
-import lightningcss from "vite-plugin-lightningcss";
+
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,15 +9,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   logLevel: "error",
-  plugins: [
-    react(),
-    tsconfigPaths(),
-    lightningcss({
-      browserslist: ">0.5%, last 2 versions, not dead, not IE 11",
-      cssModules: false,
-      // Additional options not present in current type defs
-    } as any),
-  ],
+  plugins: [react(), tsconfigPaths()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -26,8 +18,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
     },
     outDir: resolve(__dirname, "../../dist/libs/components"),
-    cssCodeSplit: false,
-    cssMinify: "lightningcss",
+
     rollupOptions: {
       external: [
         "react",
@@ -37,21 +28,16 @@ export default defineConfig({
         "clsx",
         "framer-motion",
         "lucide-react",
-        "tailwind-merge",
       ],
-      // Emit separate outputs for ESM and CommonJS consumers
       output: [
         {
           format: "es",
           exports: "named",
-          // Predictable flat chunk strategy for better DX + fewer artifacts
           entryFileNames: "index.mjs",
           chunkFileNames: "chunks/[name]-[hash].mjs",
-          assetFileNames: (assetInfo: { name?: string }) => {
-            // Always emit a single deterministic stylesheet so consumers
-            // can import "liquidify/css" and package.json `style` resolves.
-            if (assetInfo.name && assetInfo.name.endsWith(".css")) {
-              return "liquidify.css";
+          assetFileNames: (assetInfo) => {
+            if (assetInfo?.name?.endsWith(".css")) {
+              return "new-design-system.css";
             }
             return "assets/[name]-[hash][extname]";
           },
@@ -61,9 +47,9 @@ export default defineConfig({
           exports: "named",
           entryFileNames: "index.cjs",
           chunkFileNames: "chunks/[name]-[hash].cjs",
-          assetFileNames: (assetInfo: { name?: string }) => {
-            if (assetInfo.name && assetInfo.name.endsWith(".css")) {
-              return "liquidify.css";
+          assetFileNames: (assetInfo) => {
+            if (assetInfo?.name?.endsWith(".css")) {
+              return "new-design-system.css";
             }
             return "assets/[name]-[hash][extname]";
           },

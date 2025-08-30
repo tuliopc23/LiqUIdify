@@ -79,8 +79,8 @@ const config = {
       const aliasMap =
         configType === "PRODUCTION"
           ? {
-              "liquidify/css": path.resolve(distBase, "liquidify.css"),
-              "liquidify/styles": path.resolve(distBase, "liquidify.css"),
+              "liquidify/css": path.resolve(distBase, "new-design-system.css"),
+              "liquidify/styles": path.resolve(distBase, "new-design-system.css"),
               liquidify: path.resolve(distBase, "index.mjs"),
               "@": srcBase,
             }

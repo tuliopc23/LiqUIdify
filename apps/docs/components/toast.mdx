@@ -3,16 +3,54 @@ title: Toast
 description: Notifications via ToastProvider and useToast hook.
 ---
 
-import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs";
-import ToastExample from "/snippets/components/ToastExample.jsx";
+import { GlassButton, ToastProvider, useToast } from "@liquidify/react";
 
 # Toast
 
 Toast notification system with provider and hook for displaying temporary messages.
 
-<PreviewCodeTabs code={`<ToastExample />`}>
-  <ToastExample />
-</PreviewCodeTabs>
+```tsx
+function ToastDemo() {
+  const { addToast } = useToast();
+
+  return (
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+      <GlassButton
+        onClick={() =>
+          addToast({
+            title: "Saved",
+            description: "Changes persisted",
+            type: "success",
+          })
+        }
+      >
+        Success
+      </GlassButton>
+
+      <GlassButton
+        variant="ghost"
+        onClick={() =>
+          addToast({
+            title: "Heads up",
+            description: "Check your input",
+            type: "warning",
+          })
+        }
+      >
+        Warning
+      </GlassButton>
+    </div>
+  );
+}
+
+export default function Demo() {
+  return (
+    <ToastProvider>
+      <ToastDemo />
+    </ToastProvider>
+  );
+}
+```
 
 ## Installation
 
@@ -23,7 +61,7 @@ npm install liquidify
 ## Basic Usage
 
 ```tsx
-import { ToastProvider, useToast, Button } from "liquidify";
+import { ToastProvider, useToast, GlassButton } from "@liquidify/react";
 
 function ToastDemo() {
   const { addToast } = useToast();

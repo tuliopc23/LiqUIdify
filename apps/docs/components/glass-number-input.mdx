@@ -3,8 +3,8 @@ title: Glass Number Input
 description: Elegant numeric input component with Apple-inspired liquid glass effects and advanced number formatting.
 ---
 
-;
-;
+import { GlassNumberInput } from "@liquidify/react";
+import { useState } from "react";
 
 ```tsx
 // Interactive example - see Storybook for live preview
@@ -247,7 +247,7 @@ const debouncedValidation = useMemo(
       const error = validateValue(value);
       setError(error);
     }, 300),
-  [validateValue],
+  [validateValue]
 );
 ```
 
@@ -365,7 +365,7 @@ const useNumberInput = (initialValue, options = {}) => {
       setError(error);
       return !error;
     },
-    [min, max, options.required],
+    [min, max, options.required]
   );
 
   return {

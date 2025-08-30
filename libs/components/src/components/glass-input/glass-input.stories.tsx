@@ -350,7 +350,7 @@ export const WithIcons: Story = {
       <GlassInput
         leftIcon={<CreditCard className="h-4 w-4" />}
         placeholder="Card number"
-        rightIcon={<Shield className="h-4 w-4 text-liquid-accent" />}
+        rightIcon={<Shield className="h-4 w-4 text-blue-900" />}
       />
 
       <GlassInput
@@ -593,7 +593,7 @@ export const RealWorldExamples: Story = {
             leftIcon={<Globe className="h-4 w-4" />}
             placeholder="Search globally"
             rightIcon={
-              <span className="text-liquid-secondary text-xs">⌘K</span>
+              <span className="text-blue-900 text-xs">⌘K</span>
             }
           />
         </div>
@@ -755,7 +755,7 @@ export const InteractiveDemo: Story = {
             />
             {searchTerm && (
               <div className="space-y-2">
-                <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+                <p className="text-blue-900 text-sm dark:text-blue-900">
                   Searching for: "{searchTerm}"
                 </p>
                 <div className="space-y-1">
@@ -766,7 +766,7 @@ export const InteractiveDemo: Story = {
                     .map((item) => (
                       <div
                         key={item}
-                        className="rounded p-2 hover:bg-liquid-bg dark:hover:bg-liquid-bg"
+                        className="rounded p-2 hover:bg-blue-100 dark:hover:bg-blue-100"
                       >
                         {item}
                       </div>
@@ -799,11 +799,11 @@ export const InteractiveDemo: Story = {
                         "h-2 flex-1 rounded transition-colors",
                         level <= passwordStrength.strength
                           ? level === 1
-                            ? "bg-liquid-accent"
+                            ? "bg-blue-500"
                             : level === 2
-                              ? "bg-liquid-accent"
-                              : "bg-liquid-accent"
-                          : "bg-liquid-bg dark:bg-liquid-bg",
+                              ? "bg-blue-500"
+                              : "bg-blue-500"
+                          : "bg-blue-100 dark:bg-blue-100",
                       )}
                     />
                   ))}
@@ -822,7 +822,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
+        <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
           <h3 className="font-semibold text-lg">Light Theme</h3>
           <div className="space-y-4">
             <GlassInput placeholder="Default input" />
@@ -839,8 +839,8 @@ export const ThemeShowcase: Story = {
           </div>
         </div>
 
-        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
-          <h3 className="font-semibold text-lg text-liquid-text-inverse dark:text-liquid-grey">
+        <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
+          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">
             Dark Theme
           </h3>
           <div className="space-y-4">
@@ -931,7 +931,7 @@ export const AccessibilityShowcase: Story = {
         <h3 className="font-semibold text-lg">Focus Management</h3>
         <Card>
           <Card.Content className="space-y-4">
-            <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+            <p className="text-blue-900 text-sm dark:text-blue-900">
               Tab through these inputs to see focus indicators
             </p>
             <GlassInput placeholder="First input" />

@@ -147,7 +147,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Small
         </h3>
         <GlassAccordion type="single" size="sm" collapsible>
@@ -164,7 +164,7 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Medium (Default)
         </h3>
         <GlassAccordion type="single" size="md" collapsible>
@@ -180,7 +180,7 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Large
         </h3>
         <GlassAccordion type="single" size="lg" collapsible>
@@ -208,7 +208,7 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Default
         </h3>
         <GlassAccordion type="single" variant="default" collapsible>
@@ -222,7 +222,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Enhanced
         </h3>
         <GlassAccordion type="single" variant="enhanced" collapsible>
@@ -236,7 +236,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-liquid-primary">
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">
           Ghost
         </h3>
         <GlassAccordion type="single" variant="ghost" collapsible>
@@ -297,21 +297,21 @@ export const Controlled: Story = {
           <button
             type="button"
             onClick={() => setValue("item-1")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
+            className="rounded-lg px-3 py-1 text-sm text-blue-900 border-blue-500/30 hover:border-blue-500/50 bg-blue-500/15"
           >
             Open First
           </button>
           <button
             type="button"
             onClick={() => setValue("item-2")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
+            className="rounded-lg px-3 py-1 text-sm text-blue-900 border-blue-500/30 hover:border-blue-500/50 bg-blue-500/15"
           >
             Open Second
           </button>
           <button
             type="button"
             onClick={() => setValue("item-3")}
-            className="liquid-glass liquid-glass-interactive rounded-lg px-3 py-1 text-sm text-liquid-primary border-liquid-accent/30 hover:border-liquid-accent/50 bg-liquid-accent/15"
+            className="rounded-lg px-3 py-1 text-sm text-blue-900 border-blue-500/30 hover:border-blue-500/50 bg-blue-500/15"
           >
             Open Third
           </button>
@@ -362,25 +362,25 @@ export const ComplexContent: Story = {
           <GlassAccordionContent>
             <div className="space-y-4">
               <div>
-                <h4 className="mb-2 font-semibold text-liquid-primary">
+                <h4 className="mb-2 font-semibold text-blue-900">
                   Props
                 </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-1">
-                    <code className="text-liquid-accent">type</code>
-                    <span className="text-liquid-text opacity-70">
+                    <code className="text-blue-900">type</code>
+                    <span className="text-blue-900 opacity-70">
                       "single" | "multiple"
                     </span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <code className="text-liquid-accent">size</code>
-                    <span className="text-liquid-text opacity-70">
+                    <code className="text-blue-900">size</code>
+                    <span className="text-blue-900 opacity-70">
                       "sm" | "md" | "lg"
                     </span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <code className="text-liquid-accent">variant</code>
-                    <span className="text-liquid-text opacity-70">
+                    <code className="text-blue-900">variant</code>
+                    <span className="text-blue-900 opacity-70">
                       "default" | "solid" | "ghost"
                     </span>
                   </div>
@@ -392,8 +392,8 @@ export const ComplexContent: Story = {
         <GlassAccordionItem value="item-2">
           <GlassAccordionTrigger>Code Example</GlassAccordionTrigger>
           <GlassAccordionContent>
-            <pre className="overflow-x-auto rounded-lg liquid-glass p-3 text-sm">
-              <code className="text-liquid-accent">{`<GlassAccordion type="single" collapsible>
+            <pre className="overflow-x-auto rounded-lg p-3 text-sm">
+              <code className="text-blue-900">{`<GlassAccordion type="single" collapsible>
   <GlassAccordionItem value="item-1">
     <GlassAccordionTrigger>
       Click me
@@ -447,8 +447,8 @@ export const ThemeShowcase: Story = {
   },
   render: () => (
     <div className="w-[600px] space-y-8">
-      <div className="rounded-lg bg-liquid-bg/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-primary">
+      <div className="rounded-lg bg-blue-100/10 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Light Background
         </h3>
         <GlassAccordion type="single" collapsible>
@@ -463,8 +463,8 @@ export const ThemeShowcase: Story = {
         </GlassAccordion>
       </div>
 
-      <div className="rounded-lg bg-liquid-bg/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-primary">
+      <div className="rounded-lg bg-blue-100/30 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Dark Background
         </h3>
         <GlassAccordion type="single" collapsible>

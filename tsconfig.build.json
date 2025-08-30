@@ -18,8 +18,6 @@
     "**/examples/**",
     "**/demo/**",
     "**/playground/**",
-    "**/glass-playground/**",
-    "**/*liquid-glass-template*",
     "**/*.backup",
     "**/*.md",
     "**/*.mdx",

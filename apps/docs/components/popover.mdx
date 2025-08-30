@@ -3,6 +3,8 @@ title: Popover
 description: Liquid Glass popover with intelligent positioning and interactive content.
 ---
 
+import { GlassButton, GlassPopover } from "@liquidify/react";
+
 # Popover
 
 The `GlassPopover` component provides floating content containers with glassmorphism effects. It features intelligent positioning, viewport awareness, and comprehensive interaction handling.
@@ -353,8 +355,8 @@ const SearchPopover = () => {
       // Simulate search
       setResults(
         mockData.filter((item) =>
-          item.name.toLowerCase().includes(query.toLowerCase()),
-        ),
+          item.name.toLowerCase().includes(query.toLowerCase())
+        )
       );
     } else {
       setResults([]);

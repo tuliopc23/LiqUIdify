@@ -12,163 +12,50 @@ A glassmorphic avatar component for displaying user profile images with elegant 
 
 ### Basic Usage
 
-```tsx
-<div className="flex items-center gap-4">
-  <GlassAvatar
-    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-    alt="John Doe"
-    fallback="JD"
-  />
-  <GlassAvatar fallback="AB" alt="Alice Brown" />
-  <GlassAvatar />
-</div>
-```
+import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs";
+import GlassAvatarBasic from "/snippets/components/glass-avatar-basic.jsx";
+import GlassAvatarBorder from "/snippets/components/glass-avatar-border.jsx";
+import GlassAvatarShapes from "/snippets/components/glass-avatar-shapes.jsx";
+import GlassAvatarSizes from "/snippets/components/glass-avatar-sizes.jsx";
+import GlassAvatarStatus from "/snippets/components/glass-avatar-status.jsx";
+
+<PreviewCodeTabs
+  code={`<div className=\"flex items-center gap-4\">\n  <GlassAvatar src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face\" alt=\"John Doe\" fallback=\"JD\" />\n  <GlassAvatar fallback=\"AB\" alt=\"Alice Brown\" />\n  <GlassAvatar />\n</div>`}
+>
+  <GlassAvatarBasic />
+</PreviewCodeTabs>
 
 ### Size Variants
 
-```tsx
-<div className="flex items-center gap-4">
-  <GlassAvatar
-    size="xs"
-    src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-    alt="Extra Small"
-  />
-  <GlassAvatar
-    size="sm"
-    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-    alt="Small"
-  />
-  <GlassAvatar
-    size="md"
-    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-    alt="Medium"
-  />
-  <GlassAvatar
-    size="lg"
-    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
-    alt="Large"
-  />
-  <GlassAvatar
-    size="xl"
-    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
-    alt="Extra Large"
-  />
-  <GlassAvatar
-    size="2xl"
-    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face"
-    alt="2X Large"
-  />
-</div>
-```
+<PreviewCodeTabs
+  code={`<div className=\"flex items-center gap-4\">\n  <GlassAvatar size=\"xs\" alt=\"XS\" fallback=\"XS\" />\n  <GlassAvatar size=\"sm\" alt=\"SM\" fallback=\"SM\" />\n  <GlassAvatar size=\"md\" alt=\"MD\" fallback=\"MD\" />\n  <GlassAvatar size=\"lg\" alt=\"LG\" fallback=\"LG\" />\n  <GlassAvatar size=\"xl\" alt=\"XL\" fallback=\"XL\" />\n  <GlassAvatar size=\"2xl\" alt=\"2XL\" fallback=\"2X\" />\n</div>`}
+>
+  <GlassAvatarSizes />
+</PreviewCodeTabs>
 
 ### Shape Variants
 
-```tsx
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4">
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="circular"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-          alt="Circular"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Circular</p>
-      </div>
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="rounded"
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-          alt="Rounded"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Rounded</p>
-      </div>
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          variant="square"
-          src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-          alt="Square"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Square</p>
-      </div>
-    </div>
-  );
-}
-```
+<PreviewCodeTabs
+  code={`<div className=\"flex items-center gap-6\">\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar variant=\"circular\" size=\"lg\" alt=\"Circular\" fallback=\"CI\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Circular</p>\n  </div>\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar variant=\"rounded\" size=\"lg\" alt=\"Rounded\" fallback=\"RO\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Rounded</p>\n  </div>\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar variant=\"square\" size=\"lg\" alt=\"Square\" fallback=\"SQ\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Square</p>\n  </div>\n</div>`}
+>
+  <GlassAvatarShapes />
+</PreviewCodeTabs>
 
 ### Status Indicators
 
-```tsx
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-6">
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-          alt="Online User"
-          status="online"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Online</p>
-      </div>
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-          alt="Away User"
-          status="away"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Away</p>
-      </div>
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-          alt="Busy User"
-          status="busy"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Busy</p>
-      </div>
-      <div className="text-center space-y-2">
-        <GlassAvatar
-          fallback="OF"
-          alt="Offline User"
-          status="offline"
-          size="lg"
-        />
-        <p className="text-xs text-[var(--apple-text-secondary)]">Offline</p>
-      </div>
-    </div>
-  );
-}
-```
+<PreviewCodeTabs
+  code={`<div className=\"flex items-center gap-6\">\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar status=\"online\" size=\"lg\" alt=\"Online\" fallback=\"ON\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Online</p>\n  </div>\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar status=\"away\" size=\"lg\" alt=\"Away\" fallback=\"AW\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Away</p>\n  </div>\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar status=\"busy\" size=\"lg\" alt=\"Busy\" fallback=\"BU\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Busy</p>\n  </div>\n  <div className=\"text-center space-y-2\">\n    <GlassAvatar status=\"offline\" size=\"lg\" alt=\"Offline\" fallback=\"OF\" />\n    <p className=\"text-xs text-[var(--apple-text-secondary)]\">Offline</p>\n  </div>\n</div>`}
+>
+  <GlassAvatarStatus />
+</PreviewCodeTabs>
 
 ### With Border
 
-```tsx
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-4">
-      <GlassAvatar
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-        alt="With Border"
-        showBorder
-        size="lg"
-      />
-      <GlassAvatar
-        fallback="AB"
-        alt="Fallback with Border"
-        showBorder
-        size="lg"
-      />
-      <GlassAvatar showBorder size="lg" />
-    </div>
-  );
-}
-```
+<PreviewCodeTabs
+  code={`<div className=\"flex items-center gap-4\">\n  <GlassAvatar showBorder size=\"lg\" alt=\"Bordered\" fallback=\"BO\" />\n  <GlassAvatar showBorder size=\"lg\" alt=\"Fallback\" fallback=\"FB\" />\n  <GlassAvatar showBorder size=\"lg\" />\n</div>`}
+>
+  <GlassAvatarBorder />
+</PreviewCodeTabs>
 
 ## Props
 

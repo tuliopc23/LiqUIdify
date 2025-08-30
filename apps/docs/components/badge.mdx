@@ -12,136 +12,109 @@ A glassmorphic badge component for displaying status, counts, labels, and other 
 
 ### Basic Variants
 
+import { GlassBadge } from "@liquidify/react";
+import { AlertTriangle, Check, Info, X } from "lucide-react";
+
 ```tsx
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-3 flex-wrap">
-      <GlassBadge variant="default">Default</GlassBadge>
-      <GlassBadge variant="success">Success</GlassBadge>
-      <GlassBadge variant="warning">Warning</GlassBadge>
-      <GlassBadge variant="error">Error</GlassBadge>
-    </div>
-  );
-}
+<div className="flex items-center gap-3 flex-wrap">
+  <GlassBadge variant="default">Default</GlassBadge>
+  <GlassBadge variant="success">Success</GlassBadge>
+  <GlassBadge variant="warning">Warning</GlassBadge>
+  <GlassBadge variant="error">Error</GlassBadge>
+</div>
 ```
 
 ### Status Indicators
 
 ```tsx
-export default function Demo() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Server Status:</span>
-        <GlassBadge variant="success">Online</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Build Status:</span>
-        <GlassBadge variant="warning">Pending</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Connection:</span>
-        <GlassBadge variant="error">Failed</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Version:</span>
-        <GlassBadge variant="default">v2.1.0</GlassBadge>
-      </div>
-    </div>
-  );
-}
+<div className="space-y-4">
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Server Status:</span>
+    <GlassBadge variant="success">Online</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Build Status:</span>
+    <GlassBadge variant="warning">Pending</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Connection:</span>
+    <GlassBadge variant="error">Failed</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Version:</span>
+    <GlassBadge variant="default">v2.1.0</GlassBadge>
+  </div>
+</div>
 ```
 
 ### Count Badges
 
 ```tsx
-export default function Demo() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Notifications</span>
-        <GlassBadge variant="error">3</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Messages</span>
-        <GlassBadge variant="default">12</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Tasks</span>
-        <GlassBadge variant="warning">5</GlassBadge>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Completed</span>
-        <GlassBadge variant="success">24</GlassBadge>
-      </div>
-    </div>
-  );
-}
+<div className="space-y-4">
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Notifications</span>
+    <GlassBadge variant="error">3</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Messages</span>
+    <GlassBadge variant="default">12</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Tasks</span>
+    <GlassBadge variant="warning">5</GlassBadge>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">Completed</span>
+    <GlassBadge variant="success">24</GlassBadge>
+  </div>
+</div>
 ```
 
 ### Category Tags
 
 ```tsx
-export default function Demo() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-sm font-medium mb-2">Article Categories</h4>
-        <div className="flex gap-2 flex-wrap">
-          <GlassBadge variant="default">Technology</GlassBadge>
-          <GlassBadge variant="default">Design</GlassBadge>
-          <GlassBadge variant="default">Development</GlassBadge>
-          <GlassBadge variant="default">UI/UX</GlassBadge>
-        </div>
-      </div>
-
-      <div>
-        <h4 className="text-sm font-medium mb-2">Priority Levels</h4>
-        <div className="flex gap-2 flex-wrap">
-          <GlassBadge variant="error">High</GlassBadge>
-          <GlassBadge variant="warning">Medium</GlassBadge>
-          <GlassBadge variant="success">Low</GlassBadge>
-        </div>
-      </div>
+<div className="space-y-4">
+  <div>
+    <h4 className="text-sm font-medium mb-2">Article Categories</h4>
+    <div className="flex gap-2 flex-wrap">
+      <GlassBadge variant="default">Technology</GlassBadge>
+      <GlassBadge variant="default">Design</GlassBadge>
+      <GlassBadge variant="default">Development</GlassBadge>
+      <GlassBadge variant="default">UI/UX</GlassBadge>
     </div>
-  );
-}
+  </div>
+  <div>
+    <h4 className="text-sm font-medium mb-2">Priority Levels</h4>
+    <div className="flex gap-2 flex-wrap">
+      <GlassBadge variant="error">High</GlassBadge>
+      <GlassBadge variant="warning">Medium</GlassBadge>
+      <GlassBadge variant="success">Low</GlassBadge>
+    </div>
+  </div>
+</div>
 ```
 
 ### With Icons
 
 ```tsx
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-3 flex-wrap">
-      <GlassBadge variant="success">
-        <Check className="w-3 h-3 mr-1" />
-        Verified
-      </GlassBadge>
-
-      <GlassBadge variant="warning">
-        <AlertTriangle className="w-3 h-3 mr-1" />
-        Pending
-      </GlassBadge>
-
-      <GlassBadge variant="error">
-        <X className="w-3 h-3 mr-1" />
-        Failed
-      </GlassBadge>
-
-      <GlassBadge variant="default">
-        <Info className="w-3 h-3 mr-1" />
-        Info
-      </GlassBadge>
-    </div>
-  );
-}
+<div className="flex items-center gap-3 flex-wrap">
+  <GlassBadge variant="success">
+    <Check className="w-3 h-3 mr-1" />
+    Verified
+  </GlassBadge>
+  <GlassBadge variant="warning">
+    <AlertTriangle className="w-3 h-3 mr-1" />
+    Pending
+  </GlassBadge>
+  <GlassBadge variant="error">
+    <X className="w-3 h-3 mr-1" />
+    Failed
+  </GlassBadge>
+  <GlassBadge variant="default">
+    <Info className="w-3 h-3 mr-1" />
+    Info
+  </GlassBadge>
+</div>
 ```
 
 ## Props

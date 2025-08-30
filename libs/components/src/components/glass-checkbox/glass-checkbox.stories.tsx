@@ -214,7 +214,7 @@ export const BasicExamples: Story = {
   render: () => (
     <div className="space-y-6">
       <div className="space-y-4">
-        <h3 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
           States
         </h3>
         <div className="space-y-3">
@@ -226,7 +226,7 @@ export const BasicExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
           Without Labels
         </h3>
         <div className="flex items-center gap-4">
@@ -244,7 +244,7 @@ export const SizeVariants: Story = {
   render: () => (
     <div className="space-y-6">
       <div className="space-y-4">
-        <h3 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
           Custom Sizes with Tailwind
         </h3>
         <div className="space-y-3">
@@ -294,7 +294,7 @@ export const InteractiveDemo: Story = {
     return (
       <Card className="max-w-md p-6">
         <div className="space-y-4">
-          <div className="border-liquid-grey border-b pb-4 dark:border-liquid-grey">
+          <div className="border-blue-200 border-b pb-4 dark:border-blue-200">
             <GlassCheckbox
               label="Select All"
               checked={allChecked}
@@ -330,7 +330,7 @@ export const InteractiveDemo: Story = {
             />
           </div>
 
-          <div className="pt-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+          <div className="pt-4 text-blue-900 text-sm dark:text-blue-900">
             Selected: {Object.values(checkedItems).filter(Boolean).length} / 4
           </div>
         </div>
@@ -417,19 +417,19 @@ export const FormExamples: Story = {
             <div className="space-y-4">
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-5 w-5 text-liquid-secondary" />
+                  <Mail className="mt-0.5 h-5 w-5 text-blue-900" />
                   <GlassCheckbox label="Email notifications" defaultChecked />
                 </div>
                 <div className="flex items-start gap-3">
-                  <MessageCircle className="mt-0.5 h-5 w-5 text-liquid-secondary" />
+                  <MessageCircle className="mt-0.5 h-5 w-5 text-blue-900" />
                   <GlassCheckbox label="SMS notifications" />
                 </div>
                 <div className="flex items-start gap-3">
-                  <Bell className="mt-0.5 h-5 w-5 text-liquid-secondary" />
+                  <Bell className="mt-0.5 h-5 w-5 text-blue-900" />
                   <GlassCheckbox label="Push notifications" defaultChecked />
                 </div>
                 <div className="flex items-start gap-3">
-                  <Globe className="mt-0.5 h-5 w-5 text-liquid-secondary" />
+                  <Globe className="mt-0.5 h-5 w-5 text-blue-900" />
                   <GlassCheckbox label="Browser notifications" />
                 </div>
               </div>
@@ -461,24 +461,24 @@ export const RealWorldExamples: Story = {
             </GlassCard.Header>
             <GlassCard.Content>
               <div className="space-y-3">
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox
                     label="Complete project proposal"
                     defaultChecked
                   />
-                  <span className="text-liquid-secondary text-sm">High</span>
+                  <span className="text-blue-900 text-sm">High</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Review pull requests" defaultChecked />
-                  <span className="text-liquid-secondary text-sm">Medium</span>
+                  <span className="text-blue-900 text-sm">Medium</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Update documentation" />
-                  <span className="text-liquid-secondary text-sm">Low</span>
+                  <span className="text-blue-900 text-sm">Low</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Team standup meeting" />
-                  <span className="text-liquid-secondary text-sm">High</span>
+                  <span className="text-blue-900 text-sm">High</span>
                 </div>
               </div>
             </GlassCard.Content>
@@ -491,21 +491,21 @@ export const RealWorldExamples: Story = {
             </GlassCard.Header>
             <GlassCard.Content>
               <div className="space-y-3">
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Milk" defaultChecked />
-                  <span className="text-liquid-secondary text-sm">2 units</span>
+                  <span className="text-blue-900 text-sm">2 units</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Bread" />
-                  <span className="text-liquid-secondary text-sm">1 loaf</span>
+                  <span className="text-blue-900 text-sm">1 loaf</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Eggs" />
-                  <span className="text-liquid-secondary text-sm">1 dozen</span>
+                  <span className="text-blue-900 text-sm">1 dozen</span>
                 </div>
-                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-liquid-bg dark:hover:bg-liquid-bg">
+                <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
                   <GlassCheckbox label="Coffee" defaultChecked />
-                  <span className="text-liquid-secondary text-sm">1 bag</span>
+                  <span className="text-blue-900 text-sm">1 bag</span>
                 </div>
               </div>
             </GlassCard.Content>
@@ -526,7 +526,7 @@ export const RealWorldExamples: Story = {
           <GlassCard.Content>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="space-y-3">
-                <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
                   Storage
                 </h4>
                 <div className="space-y-2">
@@ -538,7 +538,7 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
                   Security
                 </h4>
                 <div className="space-y-2">
@@ -550,7 +550,7 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-medium text-liquid-secondary text-sm dark:text-liquid-grey">
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
                   Support
                 </h4>
                 <div className="space-y-2">
@@ -651,7 +651,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
+        <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
           <h3 className="font-semibold text-lg">Light Theme</h3>
           <div className="space-y-3">
             <GlassCheckbox label="Unchecked option" />
@@ -661,8 +661,8 @@ export const ThemeShowcase: Story = {
           </div>
         </div>
 
-        <div className="space-y-4 rounded-xl bg-liquid-bg/80 p-6 dark:bg-liquid-bg/80">
-          <h3 className="font-semibold text-lg text-liquid-text-inverse dark:text-liquid-grey">
+        <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
+          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">
             Dark Theme
           </h3>
           <div className="space-y-3">
@@ -688,7 +688,7 @@ export const AccessibilityShowcase: Story = {
     <div className="max-w-4xl space-y-8">
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Keyboard Navigation</h3>
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Use Tab to navigate between checkboxes and Space to toggle them.
         </p>
         <GlassCard>
@@ -717,7 +717,7 @@ export const AccessibilityShowcase: Story = {
               />
               <p
                 id="option1-desc"
-                className="pl-8 text-liquid-secondary text-sm dark:text-liquid-grey"
+                className="pl-8 text-blue-900 text-sm dark:text-blue-900"
               >
                 This checkbox has additional context for screen readers.
               </p>
@@ -729,7 +729,7 @@ export const AccessibilityShowcase: Story = {
               />
 
               <GlassCheckbox aria-label="Option without visible label" />
-              <p className="pl-8 text-liquid-secondary text-sm dark:text-liquid-grey">
+              <p className="pl-8 text-blue-900 text-sm dark:text-blue-900">
                 The checkbox above has an aria-label instead of visible text.
               </p>
             </div>
@@ -742,7 +742,7 @@ export const AccessibilityShowcase: Story = {
         <GlassCard>
           <GlassCard.Content>
             <div className="space-y-4">
-              <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+              <p className="text-blue-900 text-sm dark:text-blue-900">
                 Focus indicators are clearly visible for keyboard users.
               </p>
               <div className="space-y-3">
@@ -773,11 +773,11 @@ export const AccessibilityShowcase: Story = {
                   required
                   aria-invalid="true"
                   aria-describedby="terms-error"
-                  className="border-liquid-accent"
+                  className="border-blue-500"
                 />
                 <p
                   id="terms-error"
-                  className="pl-8 text-liquid-accent text-sm dark:text-liquid-accent"
+                  className="pl-8 text-blue-900 text-sm dark:text-blue-900"
                 >
                   You must accept the terms to continue.
                 </p>
@@ -790,7 +790,7 @@ export const AccessibilityShowcase: Story = {
                 />
                 <p
                   id="marketing-help"
-                  className="pl-8 text-liquid-secondary text-sm dark:text-liquid-grey"
+                  className="pl-8 text-blue-900 text-sm dark:text-blue-900"
                 >
                   You can unsubscribe at any time.
                 </p>

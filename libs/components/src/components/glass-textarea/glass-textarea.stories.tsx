@@ -205,7 +205,7 @@ export const FormExample: Story = {
 
     return (
       <div className="w-96 space-y-4">
-        <h3 className="text-lg font-semibold text-liquid-text-inverse">
+        <h3 className="text-lg font-semibold text-blue-900">
           Contact Form
         </h3>
 
@@ -215,7 +215,7 @@ export const FormExample: Story = {
             placeholder="Subject"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg bg-liquid-bg/10 border border-liquid-highlight/20 text-liquid-text-inverse placeholder-white/60"
+            className="w-full px-4 py-2 rounded-lg bg-blue-100/10 border border-blue-300/20 text-blue-900 placeholder-white/60"
           />
         </div>
 
@@ -239,7 +239,7 @@ export const FormExample: Story = {
           characterCountPosition="bottom-left"
         />
 
-        <button className="w-full px-4 py-2 bg-liquid-accent text-liquid-text-inverse rounded-lg hover:bg-liquid-accent transition-colors">
+        <button className="w-full px-4 py-2 bg-blue-500 text-blue-900 rounded-lg hover:bg-blue-500 transition-colors">
           Submit
         </button>
       </div>

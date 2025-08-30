@@ -220,19 +220,19 @@ export const ControlledExample: Story = {
         <div className="flex gap-2">
           <button
             onClick={() => setValue(0)}
-            className="px-3 py-1 bg-liquid-accent text-liquid-text-inverse rounded text-sm"
+            className="px-3 py-1 bg-blue-500 text-blue-900 rounded text-sm"
           >
             Reset to 0
           </button>
           <button
             onClick={() => setValue(50)}
-            className="px-3 py-1 bg-liquid-accent text-liquid-text-inverse rounded text-sm"
+            className="px-3 py-1 bg-blue-500 text-blue-900 rounded text-sm"
           >
             Set to 50
           </button>
           <button
             onClick={() => setValue(undefined)}
-            className="px-3 py-1 bg-liquid-bg text-liquid-text-inverse rounded text-sm"
+            className="px-3 py-1 bg-blue-100 text-blue-900 rounded text-sm"
           >
             Clear
           </button>
@@ -252,7 +252,7 @@ export const MultipleInputs: Story = {
 
     return (
       <div className="space-y-4 w-80">
-        <h3 className="text-lg font-semibold text-liquid-text-inverse">
+        <h3 className="text-lg font-semibold text-blue-900">
           Box Dimensions
         </h3>
 
@@ -283,8 +283,8 @@ export const MultipleInputs: Story = {
           step={1}
         />
 
-        <div className="p-4 bg-liquid-bg/10 rounded-lg backdrop-blur-sm">
-          <p className="text-liquid-text-inverse">
+        <div className="p-4 bg-blue-100/10 rounded-lg backdrop-blur-sm">
+          <p className="text-blue-900">
             <strong>Volume:</strong> {volume.toLocaleString()} cm³
           </p>
         </div>

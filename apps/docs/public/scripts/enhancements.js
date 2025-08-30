@@ -8,8 +8,8 @@
   const bound = new WeakSet();
   const once = (el) => el && !bound.has(el) && bound.add(el);
 
-  function ensureLiquidGlassDefs() {
-    const MARK = "data-liquid-glass-defs";
+  function ensure() {
+    const MARK = "data-";
     if (document.querySelector(`svg[${MARK}]`)) return;
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("aria-hidden", "true");
@@ -23,20 +23,20 @@
     svg.setAttribute(MARK, "");
     svg.innerHTML = `
       <defs>
-        <filter id="liquid-glass-distortion">
+        <filter id="">
           <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" seed="2" result="noise" />
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
         </filter>
-        <filter id="liquid-glass-refraction">
+        <filter id="">
           <feTurbulence type="fractalNoise" baseFrequency="0.002" numOctaves="3" seed="7" result="f" />
           <feDisplacementMap in="SourceGraphic" in2="f" scale="4" xChannelSelector="R" yChannelSelector="G" />
         </filter>
-        <filter id="liquid-glass-chromatic">
+        <filter id="">
           <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="orig"/>
           <feGaussianBlur stdDeviation="0.6" in="orig" result="blur"/>
           <feBlend in="orig" in2="blur" mode="screen"/>
         </filter>
-        <filter id="liquid-glass-edge">
+        <filter id="">
           <feSpecularLighting result="spec" specularExponent="20" lighting-color="#ffffff">
             <fePointLight x="-5000" y="-10000" z="20000" />
           </feSpecularLighting>
@@ -46,24 +46,24 @@
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        <filter id="liquid-glass-mobile">
+        <filter id="">
           <feGaussianBlur stdDeviation="0.8" />
         </filter>
-        <filter id="liquid-glass-ripple">
+        <filter id="">
           <feTurbulence type="fractalNoise" baseFrequency="0.01 0.03" numOctaves="1" seed="3" result="noise"/>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
         </filter>
-        <filter id="liquid-glass-depth">
+        <filter id="">
           <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="rgba(0,0,0,0.2)"/>
         </filter>
-        <filter id="liquid-glass-noise">
+        <filter id="">
           <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/>
           <feColorMatrix type="saturate" values="0"/>
           <feComponentTransfer>
             <feFuncA type="table" tableValues="0 0.04"/>
           </feComponentTransfer>
         </filter>
-        <filter id="liquid-glass-specular">
+        <filter id="">
           <feSpecularLighting surfaceScale="1" specularConstant="0.75" specularExponent="16" lighting-color="#ffffff">
             <fePointLight x="-200" y="-100" z="200" />
           </feSpecularLighting>
@@ -192,7 +192,7 @@
   }
 
   function runAll(root = document) {
-    ensureLiquidGlassDefs();
+    ensure();
     initHeroTilt(root);
     initReadingProgress();
     initBlurUp(root);

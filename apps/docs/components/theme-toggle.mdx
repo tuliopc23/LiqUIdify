@@ -3,6 +3,8 @@ title: ThemeToggle
 description: Apple-inspired theme toggle with smooth transitions and accessibility support.
 ---
 
+import { GlassButton, ThemeToggle, useTheme } from "@liquidify/react";
+
 # ThemeToggle
 
 A beautifully crafted theme toggle component that switches between light and dark modes with smooth animations and proper accessibility support. Follows Apple Human Interface Guidelines for intuitive user experience.
@@ -34,11 +36,11 @@ export default function Demo() {
 ```tsx
 export default function Demo() {
   return (
-    <nav className="liquid-glass-container p-4 rounded-2xl">
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content justify-between">
+    <nav className=" p-4 rounded-2xl">
+      <div className="" />
+      <div className="" />
+      <div className="" />
+      <div className=" justify-between">
         <div className="flex gap-4">
           <GlassButton variant="ghost">Home</GlassButton>
           <GlassButton variant="ghost">About</GlassButton>

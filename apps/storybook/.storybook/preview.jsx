@@ -1,11 +1,8 @@
 import React from "react";
 // Use package CSS export to mirror consumer usage
 import "liquidify/css";
-// Load Tailwind utilities from the library's entry to enable utility classes
-import "@/styles/tailwind.css";
 // Wrap stories with the library's ThemeProvider so global theme toggle works
 import { ThemeProvider, useTheme } from "@/hooks/use-theme";
-import { LiquidGlassDefs } from "liquidify";
 
 // Modern gradient backgrounds with flowing colorful shapes
 const lightGradientBg = `
@@ -147,7 +144,6 @@ export const decorators = [
 
     return (
       <ThemeProvider defaultTheme="light">
-        <LiquidGlassDefs />
         <ThemeSync selected={selectedTheme} />
         <div
           className={`${selectedTheme} min-h-screen p-4`}

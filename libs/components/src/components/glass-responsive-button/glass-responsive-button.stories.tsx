@@ -37,25 +37,25 @@ export const Playground = () => (
 export const EdgeCases = () => (
   <div className="apple-glass mx-auto max-w-md space-y-6 p-8">
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Loading State</h3>
+      <h3 className="mb-2 text-blue-900">Loading State</h3>
       <GlassResponsiveButton variant="primary" loading>
         Loading...
       </GlassResponsiveButton>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Disabled State</h3>
+      <h3 className="mb-2 text-blue-900">Disabled State</h3>
       <GlassResponsiveButton variant="primary" disabled>
         Disabled Button
       </GlassResponsiveButton>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Full Width</h3>
+      <h3 className="mb-2 text-blue-900">Full Width</h3>
       <GlassResponsiveButton variant="primary" fullWidth>
         Full Width Button
       </GlassResponsiveButton>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">With Icons</h3>
+      <h3 className="mb-2 text-blue-900">With Icons</h3>
       <GlassResponsiveButton
         variant="primary"
         leftIcon={<Heart className="h-4 w-4" />}

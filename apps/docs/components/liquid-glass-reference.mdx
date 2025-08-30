@@ -1,3 +1,8 @@
+---
+title: Liquid Glass Reference
+description: Reference implementation of the liquid glass effect
+---
+
 # Reference Implementation
 
 This page demonstrates the exact high-fidelity liquid glass implementation based on our Apple-quality reference.
@@ -25,13 +30,13 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
       </div>
       
       <div className="theme-dark" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+        <button className="liquid-glass     ">
           Secondary
         </button>
-        <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-primary">
+        <button className="liquid-glass     ">
           Primary
         </button>
-        <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-ghost">
+        <button className="liquid-glass     ">
           Ghost
         </button>
       </div>
@@ -43,13 +48,13 @@ This page demonstrates the exact high-fidelity liquid glass implementation based
       </div>
 
       <div className="theme-light" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-secondary">
+        <button className="liquid-glass     ">
           Secondary
         </button>
-        <button className="liquid-glass liquid-glass-elevated liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-primary">
+        <button className="liquid-glass     ">
           Primary
         </button>
-        <button className="liquid-glass liquid-glass-interactive liquid-glass-button liquid-glass-md liquid-glass-button-ghost">
+        <button className="liquid-glass    ">
           Ghost
         </button>
       </div>
@@ -98,9 +103,8 @@ The reference implementation uses:
 
 ```css
 --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
---lg-shine-shadow:
-  inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
-  inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+--lg-shine-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1), inset
+    0px -9px 0px -8px rgba(255, 255, 255, 1);
 ```
 
 ## CSS Classes Available
@@ -108,20 +112,20 @@ The reference implementation uses:
 ### Core Classes
 
 - `.liquid-glass` - Base glass container
-- `.liquid-glass-interactive` - Interactive behaviors
+- `.` - Interactive behaviors
 - `.liquid-theme-light` / `.liquid-theme-dark` - Theme contexts
 
 ### Button System
 
-- `.liquid-glass-button` - Button base
-- `.liquid-glass-button-primary` - Primary variant
-- `.liquid-glass-button-secondary` - Secondary variant
-- `.liquid-glass-button-ghost` - Ghost variant
+- `.` - Button base
+- `.` - Primary variant
+- `.` - Secondary variant
+- `.` - Ghost variant
 
 ### Size Variants
 
-- `.liquid-glass-xs` through `.liquid-glass-xl`
-- `.liquid-glass-button-xs` through `.liquid-glass-button-xl`
+- `.` through `.`
+- `.` through `.`
 
 ### Utility Classes
 

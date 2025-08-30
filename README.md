@@ -441,5 +441,3 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
     <strong>52 components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>
   </p>
 </div>
-
-

@@ -3,50 +3,45 @@ title: "Components Showcase"
 description: "Interactive examples of the most commonly used Liquidify components with live code previews"
 ---
 
+import {
+  GlassButton,
+  GlassCard,
+  GlassInput,
+  GlassModal,
+  GlassTabs,
+  GlassToast,
+  GlassTooltip,
+} from "@liquidify/react";
+
 # Components Showcase
 
 A curated collection of the most commonly used Liquidify components with live snippet previews (rendered) followed by their code blocks. For more examples, visit our [Storybook](https://liquidify-storybook.vercel.app).
-
-import ButtonExample from "/snippets/components/ButtonExample.jsx";
-import InputExample from "/snippets/components/InputExample.jsx";
-import CardExample from "/snippets/components/CardExample.jsx";
-import ModalExample from "/snippets/components/ModalExample.jsx";
-import TabsExample from "/snippets/components/TabsExample.jsx";
-import TooltipExample from "/snippets/components/TooltipExample.jsx";
-import ToastExample from "/snippets/components/ToastExample.jsx";
 
 ## Overview
 
 Explore a quick visual overview. Each component is presented with a short description, a live preview, and a usage code block.
 
-import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs.tsx";
-
 ### Button
 
 A primary action trigger with hover, focus, and active states.
 
-<PreviewCodeTabs
-  code={`import { Button } from "liquidify";
+```tsx
+import { GlassButton } from "@liquidify/react";
 
 export default function Example() {
-  return <Button variant="primary">Click me</Button>;
-}`}
-  language="tsx"
->
-  <ButtonExample />
-</PreviewCodeTabs>
+  return <GlassButton variant="primary">Click me</GlassButton>;
+}
+```
 
 ### Input
 
 Text input with clear focus and hover states.
 
-<InputExample />
-
-```tsx title="Usage"
-import { Input } from "liquidify";
+```tsx
+import { GlassInput } from "@liquidify/react";
 
 export default function Example() {
-  return <Input placeholder="Type here" />;
+  return <GlassInput placeholder="Type here" />;
 }
 ```
 

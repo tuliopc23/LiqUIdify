@@ -251,7 +251,7 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Simple Search
         </h3>
         <GlassSearch
@@ -261,7 +261,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           With Recent Searches
         </h3>
         <GlassSearch
@@ -272,7 +272,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           With Suggestions
         </h3>
         <GlassSearch
@@ -355,10 +355,10 @@ export const SuggestionTypes: Story = {
     return (
       <div className="space-y-6">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Mixed Suggestion Types
           </h3>
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             Shows recent searches, trending topics, and regular suggestions
           </p>
           <GlassSearch
@@ -369,11 +369,11 @@ export const SuggestionTypes: Story = {
           />
         </div>
 
-        <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-          <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
+        <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Suggestion Types
           </h4>
-          <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
+          <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
             <li>
               <Clock className="mr-2 inline h-3 w-3" />
               Recent: Previously searched items
@@ -433,10 +433,10 @@ export const LoadingAndEmptyStates: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Interactive Search
           </h3>
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             Try searching "React" or "no results" to see different states
           </p>
           <GlassSearch
@@ -446,15 +446,15 @@ export const LoadingAndEmptyStates: Story = {
             maxSuggestions={6}
           />
           {isLoading && (
-            <div className="flex items-center gap-2 text-sm text-liquid-text-inverse/60">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-liquid-highlight/20 border-t-white/60" />
+            <div className="flex items-center gap-2 text-sm text-blue-900/60">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-blue-300/20 border-t-white/60" />
               Searching...
             </div>
           )}
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Empty State
           </h3>
           <GlassSearch
@@ -588,19 +588,19 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             E-commerce Search
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-liquid-accent/20">
-                <Search className="h-4 w-4 text-liquid-accent" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
+                <Search className="h-4 w-4 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Product Search
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Search millions of products
                 </div>
               </div>
@@ -615,19 +615,19 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Documentation Search
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-liquid-accent/20">
-                <Book className="h-4 w-4 text-liquid-accent" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
+                <Book className="h-4 w-4 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Documentation
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Find guides, APIs, and examples
                 </div>
               </div>
@@ -642,19 +642,19 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Social Platform Search
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-liquid-accent/20">
-                <User className="h-4 w-4 text-liquid-accent" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
+                <User className="h-4 w-4 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-liquid-text-inverse/90">
+                <div className="font-medium text-blue-900/90">
                   Social Search
                 </div>
-                <div className="text-sm text-liquid-text-inverse/60">
+                <div className="text-sm text-blue-900/60">
                   Find people, posts, and hashtags
                 </div>
               </div>
@@ -691,11 +691,11 @@ export const AccessibilityShowcase: Story = {
 
     return (
       <div className="space-y-6">
-        <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-          <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
+        <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Accessibility Features
           </h4>
-          <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
+          <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
             <li>• Full keyboard navigation (Arrow keys, Enter, Escape)</li>
             <li>• ARIA labels and roles for screen readers</li>
             <li>• Focus management and visible focus indicators</li>
@@ -705,7 +705,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             Try navigating with keyboard: Tab to focus, Arrow keys to navigate
             suggestions, Enter to select
           </p>
@@ -721,21 +721,21 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         {selectedSuggestion && (
-          <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-            <h4 className="mb-1 font-medium text-liquid-accent dark:text-liquid-accent">
+          <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+            <h4 className="mb-1 font-medium text-blue-900 dark:text-blue-900">
               Selected Suggestion
             </h4>
-            <p className="text-liquid-accent text-sm dark:text-liquid-accent">
+            <p className="text-blue-900 text-sm dark:text-blue-900">
               You selected: "{selectedSuggestion}"
             </p>
           </div>
         )}
 
-        <div className="rounded-lg border border-liquid-grey bg-liquid-bg p-4 dark:border-liquid-grey dark:bg-liquid-bg">
-          <h4 className="mb-2 font-medium text-liquid-secondary dark:text-liquid-grey">
+        <div className="rounded-lg border border-blue-200 bg-blue-100 p-4 dark:border-blue-200 dark:bg-blue-100">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Screen Reader Support
           </h4>
-          <div className="space-y-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          <div className="space-y-2 text-blue-900 text-sm dark:text-blue-900">
             <p>Search input: "Search suggestions, edit text"</p>
             <p>Suggestions: "X suggestions available"</p>
             <p>Navigation: "Suggestion X of Y, [suggestion text]"</p>
@@ -764,7 +764,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Ocean Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
@@ -777,7 +777,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Sunset Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
@@ -790,7 +790,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+        <h3 className="font-medium text-sm text-blue-900/80">
           Forest Theme
         </h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">

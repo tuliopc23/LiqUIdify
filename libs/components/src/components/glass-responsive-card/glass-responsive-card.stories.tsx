@@ -19,34 +19,34 @@ export default {
 export const Playground = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
     <GlassResponsiveCard variant="default">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+      <h3 className="mb-2 font-semibold text-lg text-blue-900">
         Default Card
       </h3>
-      <p className="text-liquid-text-inverse/80">
+      <p className="text-blue-900/80">
         This is a default card with Liquid Glass styling.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="elevated">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+      <h3 className="mb-2 font-semibold text-lg text-blue-900">
         Elevated Card
       </h3>
-      <p className="text-liquid-text-inverse/80">
+      <p className="text-blue-900/80">
         This card has elevated styling for more prominence.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="outlined">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+      <h3 className="mb-2 font-semibold text-lg text-blue-900">
         Outlined Card
       </h3>
-      <p className="text-liquid-text-inverse/80">
+      <p className="text-blue-900/80">
         This card has a subtle outline for definition.
       </p>
     </GlassResponsiveCard>
     <GlassResponsiveCard variant="pressed">
-      <h3 className="mb-2 font-semibold text-lg text-liquid-text-inverse">
+      <h3 className="mb-2 font-semibold text-lg text-blue-900">
         Pressed Card
       </h3>
-      <p className="text-liquid-text-inverse/80">
+      <p className="text-blue-900/80">
         This card has a pressed appearance.
       </p>
     </GlassResponsiveCard>
@@ -56,35 +56,35 @@ export const Playground = () => (
 export const EdgeCases = () => (
   <div className="apple-glass mx-auto max-w-md space-y-6 p-8">
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">No Hover Effect</h3>
+      <h3 className="mb-2 text-blue-900">No Hover Effect</h3>
       <GlassResponsiveCard hover={false}>
-        <p className="text-liquid-text-inverse/80">
+        <p className="text-blue-900/80">
           This card has no hover effect.
         </p>
       </GlassResponsiveCard>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">No Border</h3>
+      <h3 className="mb-2 text-blue-900">No Border</h3>
       <GlassResponsiveCard bordered={false}>
-        <p className="text-liquid-text-inverse/80">This card has no border.</p>
+        <p className="text-blue-900/80">This card has no border.</p>
       </GlassResponsiveCard>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">No Padding</h3>
+      <h3 className="mb-2 text-blue-900">No Padding</h3>
       <GlassResponsiveCard padding="none">
-        <p className="text-liquid-text-inverse/80">This card has no padding.</p>
+        <p className="text-blue-900/80">This card has no padding.</p>
       </GlassResponsiveCard>
     </div>
     <div>
-      <h3 className="mb-2 text-liquid-text-inverse">Stack on Mobile</h3>
+      <h3 className="mb-2 text-blue-900">Stack on Mobile</h3>
       <GlassResponsiveCard stackOnMobile>
         <div className="flex items-center space-x-4">
-          <Star className="h-5 w-5 text-liquid-accent" />
+          <Star className="h-5 w-5 text-blue-900" />
           <div>
-            <h4 className="font-medium text-liquid-text-inverse">
+            <h4 className="font-medium text-blue-900">
               Star Rating
             </h4>
-            <p className="text-sm text-liquid-text-inverse/60">4.5 out of 5</p>
+            <p className="text-sm text-blue-900/60">4.5 out of 5</p>
           </div>
         </div>
       </GlassResponsiveCard>
@@ -95,19 +95,19 @@ export const EdgeCases = () => (
 export const PaddingSizes = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
     <GlassResponsiveCard padding="xs">
-      <p className="text-liquid-text-inverse/80">Extra Small Padding</p>
+      <p className="text-blue-900/80">Extra Small Padding</p>
     </GlassResponsiveCard>
     <GlassResponsiveCard padding="sm">
-      <p className="text-liquid-text-inverse/80">Small Padding</p>
+      <p className="text-blue-900/80">Small Padding</p>
     </GlassResponsiveCard>
     <GlassResponsiveCard padding="md">
-      <p className="text-liquid-text-inverse/80">Medium Padding (Default)</p>
+      <p className="text-blue-900/80">Medium Padding (Default)</p>
     </GlassResponsiveCard>
     <GlassResponsiveCard padding="lg">
-      <p className="text-liquid-text-inverse/80">Large Padding</p>
+      <p className="text-blue-900/80">Large Padding</p>
     </GlassResponsiveCard>
     <GlassResponsiveCard padding="xl">
-      <p className="text-liquid-text-inverse/80">Extra Large Padding</p>
+      <p className="text-blue-900/80">Extra Large Padding</p>
     </GlassResponsiveCard>
   </div>
 );
@@ -116,12 +116,12 @@ export const ResponsiveBehavior = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
     <GlassResponsiveCard responsive>
       <div className="flex items-center space-x-4">
-        <Heart className="h-6 w-6 text-liquid-accent" />
+        <Heart className="h-6 w-6 text-blue-900" />
         <div>
-          <h4 className="font-medium text-liquid-text-inverse">
+          <h4 className="font-medium text-blue-900">
             Responsive Card
           </h4>
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             This card adapts to different screen sizes.
           </p>
         </div>
@@ -129,12 +129,12 @@ export const ResponsiveBehavior = () => (
     </GlassResponsiveCard>
     <GlassResponsiveCard responsive={false}>
       <div className="flex items-center space-x-4">
-        <MessageCircle className="h-6 w-6 text-liquid-accent" />
+        <MessageCircle className="h-6 w-6 text-blue-900" />
         <div>
-          <h4 className="font-medium text-liquid-text-inverse">
+          <h4 className="font-medium text-blue-900">
             Non-Responsive Card
           </h4>
-          <p className="text-sm text-liquid-text-inverse/60">
+          <p className="text-sm text-blue-900/60">
             This card maintains fixed sizing.
           </p>
         </div>

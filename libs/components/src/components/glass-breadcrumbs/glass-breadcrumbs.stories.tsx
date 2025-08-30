@@ -131,7 +131,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Small
         </h4>
         <GlassBreadcrumbs
@@ -144,7 +144,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Medium (Default)
         </h4>
         <GlassBreadcrumbs
@@ -157,7 +157,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Large
         </h4>
         <GlassBreadcrumbs
@@ -185,7 +185,7 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Default
         </h4>
         <GlassBreadcrumbs
@@ -198,7 +198,7 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Solid
         </h4>
         <GlassBreadcrumbs
@@ -211,7 +211,7 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
           Ghost
         </h4>
         <GlassBreadcrumbs
@@ -256,7 +256,7 @@ export const CustomSeparator: Story = {
           { label: "Step 2", href: "#" },
           { label: "Step 3" },
         ]}
-        separator={<span className="mx-2 text-liquid-text-inverse/40">→</span>}
+        separator={<span className="mx-2 text-blue-900/40">→</span>}
       />
       <GlassBreadcrumbs
         items={[
@@ -264,7 +264,7 @@ export const CustomSeparator: Story = {
           { label: "Level 2", href: "#" },
           { label: "Level 3" },
         ]}
-        separator={<span className="mx-2 text-liquid-text-inverse/40">/</span>}
+        separator={<span className="mx-2 text-blue-900/40">/</span>}
       />
       <GlassBreadcrumbs
         items={[
@@ -272,7 +272,7 @@ export const CustomSeparator: Story = {
           { label: "Second", href: "#" },
           { label: "Third" },
         ]}
-        separator={<span className="mx-2 text-liquid-text-inverse/40">•</span>}
+        separator={<span className="mx-2 text-blue-900/40">•</span>}
       />
     </div>
   ),
@@ -305,19 +305,19 @@ export const WithTruncation: Story = {
     return (
       <div className="w-[600px] space-y-4">
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
             Full path
           </h4>
           <GlassBreadcrumbs items={longPath} />
         </div>
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
             Max 5 items
           </h4>
           <GlassBreadcrumbs items={longPath} maxItems={5} />
         </div>
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse/80">
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
             Max 3 items
           </h4>
           <GlassBreadcrumbs items={longPath} maxItems={3} />
@@ -339,8 +339,8 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="w-[700px] space-y-6">
       {/* E-commerce */}
-      <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           E-commerce Navigation
         </h4>
         <GlassBreadcrumbs
@@ -358,8 +358,8 @@ export const RealWorldExamples: Story = {
       </div>
 
       {/* File system */}
-      <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           File System
         </h4>
         <GlassBreadcrumbs
@@ -382,8 +382,8 @@ export const RealWorldExamples: Story = {
       </div>
 
       {/* Multi-step form */}
-      <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           Checkout Process
         </h4>
         <GlassBreadcrumbs
@@ -402,15 +402,15 @@ export const RealWorldExamples: Story = {
             { label: "Payment", icon: <CreditCard className="h-4 w-4" /> },
           ]}
           separator={
-            <span className="mx-3 text-liquid-text-inverse/40">→</span>
+            <span className="mx-3 text-blue-900/40">→</span>
           }
           showHome={false}
         />
       </div>
 
       {/* Admin panel */}
-      <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-        <h4 className="mb-3 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+        <h4 className="mb-3 font-semibold text-blue-900">
           Admin Dashboard
         </h4>
         <GlassBreadcrumbs
@@ -455,34 +455,34 @@ export const InteractiveDemo: Story = {
           <button
             type="button"
             onClick={() => addLevel("Products")}
-            className="rounded-lg bg-liquid-bg/10 px-3 py-1 text-sm text-liquid-text-inverse hover:bg-liquid-bg/20"
+            className="rounded-lg bg-blue-100/10 px-3 py-1 text-sm text-blue-900 hover:bg-blue-100/20"
           >
             Add "Products"
           </button>
           <button
             type="button"
             onClick={() => addLevel("Services")}
-            className="rounded-lg bg-liquid-bg/10 px-3 py-1 text-sm text-liquid-text-inverse hover:bg-liquid-bg/20"
+            className="rounded-lg bg-blue-100/10 px-3 py-1 text-sm text-blue-900 hover:bg-blue-100/20"
           >
             Add "Services"
           </button>
           <button
             type="button"
             onClick={() => addLevel("About")}
-            className="rounded-lg bg-liquid-bg/10 px-3 py-1 text-sm text-liquid-text-inverse hover:bg-liquid-bg/20"
+            className="rounded-lg bg-blue-100/10 px-3 py-1 text-sm text-blue-900 hover:bg-blue-100/20"
           >
             Add "About"
           </button>
           <button
             type="button"
             onClick={() => setPath(["Home"])}
-            className="rounded-lg bg-liquid-accent/20 px-3 py-1 text-sm text-liquid-text-inverse hover:bg-liquid-accent/30"
+            className="rounded-lg bg-blue-500/20 px-3 py-1 text-sm text-blue-900 hover:bg-blue-500/30"
           >
             Reset
           </button>
         </div>
 
-        <p className="text-sm text-liquid-text-inverse/60">
+        <p className="text-sm text-blue-900/60">
           Click breadcrumb items to navigate back, or use buttons to add new
           levels.
         </p>
@@ -502,8 +502,8 @@ export const ThemeShowcase: Story = {
   },
   render: () => (
     <div className="w-[600px] space-y-8">
-      <div className="rounded-lg bg-liquid-bg/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100/10 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Light Background
         </h3>
         <GlassBreadcrumbs
@@ -516,8 +516,8 @@ export const ThemeShowcase: Story = {
         />
       </div>
 
-      <div className="rounded-lg bg-liquid-bg/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100/30 p-6">
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">
           Dark Background
         </h3>
         <GlassBreadcrumbs
@@ -549,14 +549,14 @@ export const AccessibilityDemo: Story = {
   },
   render: () => (
     <div className="max-w-2xl space-y-4">
-      <p className="text-sm text-liquid-text-inverse/60">
+      <p className="text-sm text-blue-900/60">
         Breadcrumbs include proper ARIA labels and current page indication. The
         navigation is keyboard accessible with proper focus management.
       </p>
 
       <div className="space-y-4">
-        <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-          <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse">
+        <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+          <h4 className="mb-2 font-semibold text-sm text-blue-900">
             Standard navigation
           </h4>
           <GlassBreadcrumbs
@@ -567,14 +567,14 @@ export const AccessibilityDemo: Story = {
               { label: "Best Sellers" },
             ]}
           />
-          <p className="mt-2 text-liquid-text-inverse/60 text-xs">
+          <p className="mt-2 text-blue-900/60 text-xs">
             The last item is marked with aria-current="page" and is not
             clickable.
           </p>
         </div>
 
-        <div className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-4">
-          <h4 className="mb-2 font-semibold text-sm text-liquid-text-inverse">
+        <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
+          <h4 className="mb-2 font-semibold text-sm text-blue-900">
             With keyboard navigation
           </h4>
           <GlassBreadcrumbs
@@ -588,7 +588,7 @@ export const AccessibilityDemo: Story = {
             ]}
             onHomeClick={() => alert("Navigate to Home")}
           />
-          <p className="mt-2 text-liquid-text-inverse/60 text-xs">
+          <p className="mt-2 text-blue-900/60 text-xs">
             Try using Tab to navigate through items and Enter/Space to activate.
           </p>
         </div>

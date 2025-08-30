@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 // Custom render function for components
 const customRender = (ui: ReactElement, options: RenderOptions = {}) => {
-  return render(ui, options);
+ return render(ui, options);
 };
 
 // Re-export everything from testing-library

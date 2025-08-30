@@ -98,43 +98,43 @@ export const Variants: Story = {
     <div className="grid grid-cols-3 gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner variant="default" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Default
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="primary" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Primary
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="secondary" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Secondary
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="success" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Success
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="warning" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Warning
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="error" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Error
         </p>
       </div>
-      <div className="space-y-2 rounded-lg bg-liquid-bg p-4 text-center">
+      <div className="space-y-2 rounded-lg bg-blue-100 p-4 text-center">
         <GlassSpinner variant="glass" />
-        <p className="text-liquid-secondary text-sm">Glass</p>
+        <p className="text-blue-900 text-sm">Glass</p>
       </div>
     </div>
   ),
@@ -146,37 +146,37 @@ export const Sizes: Story = {
     <div className="flex items-center gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner size="xs" />
-        <p className="text-liquid-secondary text-xs dark:text-liquid-grey">
+        <p className="text-blue-900 text-xs dark:text-blue-900">
           XS
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="sm" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Small
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="md" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Medium
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Large
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="xl" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           XL
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="2xl" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           2XL
         </p>
       </div>
@@ -190,19 +190,19 @@ export const Speeds: Story = {
     <div className="flex gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner speed="slow" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Slow
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="normal" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Normal
         </p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="fast" size="lg" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Fast
         </p>
       </div>
@@ -220,13 +220,13 @@ export const WithLabels: Story = {
           label="Loading content..."
           orientation="horizontal"
         />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Horizontal orientation
         </p>
       </div>
       <div className="space-y-2">
         <GlassSpinner showLabel label="Please wait..." orientation="vertical" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Vertical orientation
         </p>
       </div>
@@ -247,7 +247,7 @@ export const CenteredOverlay: Story = {
             setLoading(true);
             setTimeout(() => setLoading(false), 3000);
           }}
-          className="rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Show Centered Loading (3s)
         </button>
@@ -260,7 +260,7 @@ export const CenteredOverlay: Story = {
             variant="glass"
           />
         )}
-        <div className="rounded-lg bg-liquid-bg p-8 dark:bg-liquid-bg">
+        <div className="rounded-lg bg-blue-100 p-8 dark:bg-blue-100">
           <p>This content is behind the loading overlay when active.</p>
         </div>
       </div>
@@ -330,7 +330,7 @@ export const ButtonLoading: Story = {
           type="button"
           onClick={() => handleClick("save")}
           disabled={loading.save}
-          className="flex items-center gap-2 rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.save && <GlassSpinner size="xs" />}
           {loading.save ? "Saving..." : "Save Changes"}
@@ -340,7 +340,7 @@ export const ButtonLoading: Story = {
           type="button"
           onClick={() => handleClick("submit")}
           disabled={loading.submit}
-          className="flex items-center gap-2 rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.submit && <GlassSpinner size="xs" />}
           {loading.submit ? "Submitting..." : "Submit Form"}
@@ -350,7 +350,7 @@ export const ButtonLoading: Story = {
           type="button"
           onClick={() => handleClick("delete")}
           disabled={loading.delete}
-          className="flex items-center gap-2 rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.delete && <GlassSpinner size="xs" />}
           {loading.delete ? "Deleting..." : "Delete Item"}
@@ -364,21 +364,21 @@ export const ButtonLoading: Story = {
 export const LoadingCards: Story = {
   render: () => (
     <div className="grid grid-cols-3 gap-4">
-      <div className="rounded-lg bg-liquid-bg p-6 text-center dark:bg-liquid-bg">
+      <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <GlassSpinner variant="primary" size="lg" />
-        <p className="mt-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
           Loading posts...
         </p>
       </div>
-      <div className="rounded-lg bg-liquid-bg p-6 text-center dark:bg-liquid-bg">
+      <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <PulseSpinner />
-        <p className="mt-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
           Fetching data...
         </p>
       </div>
-      <div className="rounded-lg bg-liquid-bg p-6 text-center dark:bg-liquid-bg">
+      <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <WaveSpinner />
-        <p className="mt-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
           Processing...
         </p>
       </div>
@@ -398,8 +398,8 @@ export const DataTableLoading: Story = {
 
     return (
       <div className="w-full max-w-2xl">
-        <div className="overflow-hidden rounded-lg border border-liquid-grey dark:border-liquid-grey">
-          <div className="border-liquid-grey border-b bg-liquid-bg p-4 dark:border-liquid-grey dark:bg-liquid-bg">
+        <div className="overflow-hidden rounded-lg border border-blue-200 dark:border-blue-200">
+          <div className="border-blue-200 border-b bg-blue-100 p-4 dark:border-blue-200 dark:bg-blue-100">
             <h3 className="font-semibold">User Data</h3>
           </div>
           {loading ? (
@@ -414,19 +414,19 @@ export const DataTableLoading: Story = {
           ) : (
             <table className="w-full">
               <thead>
-                <tr className="border-liquid-grey border-b dark:border-liquid-grey">
+                <tr className="border-blue-200 border-b dark:border-blue-200">
                   <th className="px-4 py-2 text-left">Name</th>
                   <th className="px-4 py-2 text-left">Email</th>
                   <th className="px-4 py-2 text-left">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-liquid-grey border-b dark:border-liquid-grey">
+                <tr className="border-blue-200 border-b dark:border-blue-200">
                   <td className="px-4 py-2">John Doe</td>
                   <td className="px-4 py-2">john@example.com</td>
                   <td className="px-4 py-2">Active</td>
                 </tr>
-                <tr className="border-liquid-grey border-b dark:border-liquid-grey">
+                <tr className="border-blue-200 border-b dark:border-blue-200">
                   <td className="px-4 py-2">Jane Smith</td>
                   <td className="px-4 py-2">jane@example.com</td>
                   <td className="px-4 py-2">Active</td>
@@ -441,7 +441,7 @@ export const DataTableLoading: Story = {
             setLoading(true);
             setTimeout(() => setLoading(false), 3000);
           }}
-          className="mt-4 rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent"
+          className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"
         >
           Refresh Data
         </button>
@@ -459,17 +459,17 @@ export const InlineLoading: Story = {
         <DotsSpinner size="sm" />
       </div>
 
-      <div className="flex items-center gap-2 text-liquid-accent">
+      <div className="flex items-center gap-2 text-blue-900">
         <span>Saving changes</span>
         <GlassSpinner size="xs" variant="success" />
       </div>
 
-      <div className="flex items-center gap-2 text-liquid-accent">
+      <div className="flex items-center gap-2 text-blue-900">
         <span>Syncing data</span>
         <PulseSpinner size="sm" />
       </div>
 
-      <div className="flex items-center gap-2 text-liquid-accent">
+      <div className="flex items-center gap-2 text-blue-900">
         <span>Processing request</span>
         <RingSpinner size="sm" />
       </div>
@@ -481,7 +481,7 @@ export const InlineLoading: Story = {
 export const ThemeVariations: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg bg-liquid-bg p-6">
+      <div className="rounded-lg bg-blue-100 p-6">
         <h3 className="mb-4 font-semibold">Light Theme</h3>
         <div className="flex gap-4">
           <GlassSpinner variant="primary" />
@@ -491,8 +491,8 @@ export const ThemeVariations: Story = {
           <GlassSpinner variant="error" />
         </div>
       </div>
-      <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100 p-6">
+        <h3 className="mb-4 font-semibold text-blue-900">
           Dark Theme
         </h3>
         <div className="flex gap-4">
@@ -532,7 +532,7 @@ export const CustomStyling: Story = {
 
       <div className="space-y-4 text-center">
         <div className="rainbow-spinner inline-block h-12 w-12 rounded-full border-4" />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Custom Rainbow Spinner
         </p>
       </div>
@@ -542,7 +542,7 @@ export const CustomStyling: Story = {
           size="xl"
           className="!border-4 !border-gradient-to-r !from-purple-500 !to-pink-500"
         />
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Gradient Border Spinner
         </p>
       </div>

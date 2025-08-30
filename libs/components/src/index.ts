@@ -1,7 +1,7 @@
 // Main entry point for the Liquidify component library
 
-// Import styles for CSS bundling
-import "./styles/index.css";
+// Import new CSS system
+import "./styles/new-design-system.css";
 
 // Core components
 export * from "./components/glass-accordion";
@@ -83,21 +83,14 @@ export { GlassSelect as Select } from "./components/glass-select";
 export { GlassTextarea as Textarea } from "./components/glass-textarea";
 export { GlassResponsiveButton as ResponsiveButton } from "./components/glass-responsive-button";
 
-// Liquid Glass System
-export * from "./components/liquid-glass/liquid-glass";
-export * from "./components/liquid-glass-defs/liquid-glass-defs";
-export * from "./types/liquid-glass";
-
-// Liquid Glass Utilities
-export {
-  withLiquidGlass,
-  useLiquidGlass,
-  liquidGlassPresets,
-  mergeLiquidGlassClasses,
-  createLiquidGlassComponent,
-} from "./utils/liquid-glass-utils";
-export { getLiquidGlassClasses } from "./utils/liquid-glass-classes";
-
 // Liquid Glass Hooks
 export { useDeviceCapabilities } from "./hooks/use-device-capabilities";
 export type { DeviceCapabilities } from "./hooks/use-device-capabilities";
+
+// DEPRECATED: Legacy glass system exports (will be removed in v2.0.0)
+export {
+  UnifiedGlassProvider,
+  LiquidGlassDefs,
+  type LiquidGlassProps,
+  type GlassVariant,
+} from "./legacy/legacy-glass-stubs";

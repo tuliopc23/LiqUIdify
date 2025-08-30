@@ -85,28 +85,28 @@ export const LeftSide: Story = {
           <nav className="space-y-2">
             <a
               href="#placeholder"
-              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-liquid-bg/10"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-blue-100/10"
             >
               <Menu className="h-5 w-5" />
               <span>Dashboard</span>
             </a>
             <a
               href="#placeholder"
-              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-liquid-bg/10"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-blue-100/10"
             >
               <User className="h-5 w-5" />
               <span>Profile</span>
             </a>
             <a
               href="#placeholder"
-              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-liquid-bg/10"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-blue-100/10"
             >
               <Settings className="h-5 w-5" />
               <span>Settings</span>
             </a>
             <a
               href="#placeholder"
-              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-liquid-bg/10"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-blue-100/10"
             >
               <Bell className="h-5 w-5" />
               <span>Notifications</span>
@@ -127,12 +127,12 @@ export const TopSide: Story = {
       <Drawer.Content side="top" size="sm">
         <Drawer.Body>
           <div className="flex items-center gap-4">
-            <Search className="h-5 w-5 text-liquid-text-inverse/60" />
+            <Search className="h-5 w-5 text-blue-900/60" />
             <input
               id="input-127"
               type="text"
               placeholder="Search..."
-              className="flex-1 border-liquid-highlight/20 border-b bg-transparent pb-2 outline-none placeholder:text-liquid-text-inverse/40"
+              className="flex-1 border-blue-300/20 border-b bg-transparent pb-2 outline-none placeholder:text-blue-900/40"
             />
           </div>
         </Drawer.Body>
@@ -237,9 +237,9 @@ export const LargeSize: Story = {
           <p>This is a large-sized drawer with more content space.</p>
           <div className="mt-6 space-y-4">
             {Array.from({ length: 5 }, (_, i) => (
-              <div key={i} className="rounded-lg bg-liquid-bg/5 p-4">
+              <div key={i} className="rounded-lg bg-blue-100/5 p-4">
                 <h4 className="mb-2 font-medium">Section {i + 1}</h4>
-                <p className="text-sm text-liquid-text-inverse/70">
+                <p className="text-sm text-blue-900/70">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
               </div>
@@ -310,7 +310,7 @@ export const WithForm: Story = {
               <input
                 id="input-290"
                 type="text"
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 outline-none focus:border-liquid-highlight/40"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 outline-none focus:border-blue-300/40"
                 placeholder="John Doe"
               />
             </div>
@@ -324,7 +324,7 @@ export const WithForm: Story = {
               <input
                 id="input-298"
                 type="email"
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 outline-none focus:border-liquid-highlight/40"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 outline-none focus:border-blue-300/40"
                 placeholder="john@example.com"
               />
             </div>
@@ -337,7 +337,7 @@ export const WithForm: Story = {
               </label>
               <textarea
                 id="textarea-1-tg7lb0"
-                className="w-full rounded-lg border border-liquid-highlight/20 bg-liquid-bg/10 px-3 py-2 outline-none focus:border-liquid-highlight/40"
+                className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 outline-none focus:border-blue-300/40"
                 rows={4}
                 placeholder="Tell us about yourself..."
               />
@@ -415,7 +415,7 @@ export const ScrollableContent: Story = {
           {Array.from({ length: 20 }, (_, i) => (
             <div key={i} className="mb-4">
               <h3 className="mb-2 font-medium">{i + 1}. Section Title</h3>
-              <p className="text-sm text-liquid-text-inverse/70">
+              <p className="text-sm text-blue-900/70">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris.

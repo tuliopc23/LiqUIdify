@@ -222,28 +222,28 @@ export const Controlled: Story = {
           <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
           <RadioGroup.Item value="option3">Option 3</RadioGroup.Item>
         </RadioGroup>
-        <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-blue-900 text-sm dark:text-blue-900">
           Selected value: <strong>{value}</strong>
         </p>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={() => setValue("option1")}
-            className="rounded bg-liquid-accent px-3 py-1 text-sm text-liquid-text-inverse"
+            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
           >
             Select Option 1
           </button>
           <button
             type="button"
             onClick={() => setValue("option2")}
-            className="rounded bg-liquid-accent px-3 py-1 text-sm text-liquid-text-inverse"
+            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
           >
             Select Option 2
           </button>
           <button
             type="button"
             onClick={() => setValue("option3")}
-            className="rounded bg-liquid-accent px-3 py-1 text-sm text-liquid-text-inverse"
+            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
           >
             Select Option 3
           </button>
@@ -294,7 +294,7 @@ export const PaymentMethod: Story = {
                 <CreditCard className="h-5 w-5" />
                 <div>
                   <p className="font-medium">Credit Card</p>
-                  <p className="text-liquid-secondary text-sm">
+                  <p className="text-blue-900 text-sm">
                     Visa, Mastercard, Amex
                   </p>
                 </div>
@@ -307,7 +307,7 @@ export const PaymentMethod: Story = {
                 <Shield className="h-5 w-5" />
                 <div>
                   <p className="font-medium">PayPal</p>
-                  <p className="text-liquid-secondary text-sm">
+                  <p className="text-blue-900 text-sm">
                     Fast and secure
                   </p>
                 </div>
@@ -320,7 +320,7 @@ export const PaymentMethod: Story = {
                 <Zap className="h-5 w-5" />
                 <div>
                   <p className="font-medium">Cryptocurrency</p>
-                  <p className="text-liquid-secondary text-sm">
+                  <p className="text-blue-900 text-sm">
                     Bitcoin, Ethereum
                   </p>
                 </div>
@@ -328,7 +328,7 @@ export const PaymentMethod: Story = {
             </div>
           </RadioGroup.Item>
         </RadioGroup>
-        <div className="mt-4 rounded-lg bg-liquid-bg p-3 dark:bg-liquid-bg">
+        <div className="mt-4 rounded-lg bg-blue-100 p-3 dark:bg-blue-100">
           <p className="text-sm">
             Selected: <strong>{paymentMethod}</strong>
           </p>
@@ -381,7 +381,7 @@ export const ThemeSelection: Story = {
               <Sun className="h-4 w-4" />
               <div className="flex-1">
                 <p className="font-medium">Light</p>
-                <p className="text-liquid-secondary text-sm">Light theme</p>
+                <p className="text-blue-900 text-sm">Light theme</p>
               </div>
             </div>
           </RadioGroup.Item>
@@ -390,7 +390,7 @@ export const ThemeSelection: Story = {
               <Moon className="h-4 w-4" />
               <div className="flex-1">
                 <p className="font-medium">Dark</p>
-                <p className="text-liquid-secondary text-sm">Dark theme</p>
+                <p className="text-blue-900 text-sm">Dark theme</p>
               </div>
             </div>
           </RadioGroup.Item>
@@ -399,7 +399,7 @@ export const ThemeSelection: Story = {
               <Monitor className="h-4 w-4" />
               <div className="flex-1">
                 <p className="font-medium">System</p>
-                <p className="text-liquid-secondary text-sm">
+                <p className="text-blue-900 text-sm">
                   Match system preference
                 </p>
               </div>
@@ -421,28 +421,28 @@ export const Survey: Story = {
         <h3 className="mb-2 font-semibold">
           How satisfied are you with our service?
         </h3>
-        <p className="mb-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
           Your feedback helps us improve
         </p>
         <RadioGroup value={satisfaction} onValueChange={setSatisfaction}>
           <RadioGroup.Item value="very-satisfied">
-            <span className="text-liquid-accent">Very Satisfied 😊</span>
+            <span className="text-blue-900">Very Satisfied 😊</span>
           </RadioGroup.Item>
           <RadioGroup.Item value="satisfied">
-            <span className="text-liquid-accent">Satisfied 🙂</span>
+            <span className="text-blue-900">Satisfied 🙂</span>
           </RadioGroup.Item>
           <RadioGroup.Item value="neutral">
-            <span className="text-liquid-secondary">Neutral 😐</span>
+            <span className="text-blue-900">Neutral 😐</span>
           </RadioGroup.Item>
           <RadioGroup.Item value="dissatisfied">
-            <span className="text-liquid-accent">Dissatisfied 😕</span>
+            <span className="text-blue-900">Dissatisfied 😕</span>
           </RadioGroup.Item>
           <RadioGroup.Item value="very-dissatisfied">
-            <span className="text-liquid-accent">Very Dissatisfied 😞</span>
+            <span className="text-blue-900">Very Dissatisfied 😞</span>
           </RadioGroup.Item>
         </RadioGroup>
         {satisfaction && (
-          <div className="mt-4 rounded-lg bg-liquid-accent p-3 dark:bg-liquid-accent">
+          <div className="mt-4 rounded-lg bg-blue-500 p-3 dark:bg-blue-500">
             <p className="text-sm">Thank you for your feedback!</p>
           </div>
         )}
@@ -488,7 +488,7 @@ export const CustomStyling: Story = {
           background: radial-gradient(80rem 60rem at 20% 20%, rgba(162, 210, 255, 0.3), transparent 60%), radial-gradient(80rem 60rem at 80% 30%, rgba(255, 183, 248, 0.28), transparent 60%), linear-gradient(135deg, #c9e7ff 0%, #d9d0ff 45%, #ffc9dc 100%);
           color: white;
         }
-        .custom-radio-group .group[data-state="checked"] .text-liquid-secondary {
+        .custom-radio-group .group[data-state="checked"] .text-blue-900 {
           color: rgba(255, 255, 255, 0.8);
         }
       `}</style>
@@ -498,19 +498,19 @@ export const CustomStyling: Story = {
           <RadioGroup.Item value="custom1" size="lg">
             <div className="w-full">
               <p className="font-medium">Premium Plan</p>
-              <p className="text-liquid-secondary text-sm">$29/month</p>
+              <p className="text-blue-900 text-sm">$29/month</p>
             </div>
           </RadioGroup.Item>
           <RadioGroup.Item value="custom2" size="lg">
             <div className="w-full">
               <p className="font-medium">Pro Plan</p>
-              <p className="text-liquid-secondary text-sm">$49/month</p>
+              <p className="text-blue-900 text-sm">$49/month</p>
             </div>
           </RadioGroup.Item>
           <RadioGroup.Item value="custom3" size="lg">
             <div className="w-full">
               <p className="font-medium">Enterprise Plan</p>
-              <p className="text-liquid-secondary text-sm">Custom pricing</p>
+              <p className="text-blue-900 text-sm">Custom pricing</p>
             </div>
           </RadioGroup.Item>
         </RadioGroup>
@@ -524,7 +524,7 @@ export const AccessibilityDemo: Story = {
   render: () => (
     <div className="w-full max-w-md">
       <h3 className="mb-2 font-semibold">Accessible Radio Group</h3>
-      <p className="mb-4 text-liquid-secondary text-sm dark:text-liquid-grey">
+      <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
         Use arrow keys to navigate, Space to select
       </p>
       <RadioGroup defaultValue="a11y1" aria-label="Accessibility options">
@@ -538,7 +538,7 @@ export const AccessibilityDemo: Story = {
           <label htmlFor="a11y3">Reduce motion</label>
         </RadioGroup.Item>
       </RadioGroup>
-      <div className="mt-4 rounded-lg bg-liquid-accent p-3 dark:bg-liquid-accent">
+      <div className="mt-4 rounded-lg bg-blue-500 p-3 dark:bg-blue-500">
         <p className="text-sm">
           <strong>Keyboard shortcuts:</strong>
           <br />• Tab: Focus radio group

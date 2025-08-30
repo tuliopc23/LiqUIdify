@@ -3,6 +3,8 @@ title: LiquidGlass
 description: Core liquid glass effect system with layered transparency and content-aware adaptation.
 ---
 
+import { GlassUIProvider } from "@liquidify/react";
+
 # LiquidGlass System
 
 The LiquidGlass system is the foundation of Liquidify's design language, providing Apple-inspired glassmorphism effects with layered transparency, specular highlights, and content-aware adaptation.
@@ -14,11 +16,11 @@ The LiquidGlass system is the foundation of Liquidify's design language, providi
 ```tsx
 function BasicGlassContainer({ children }) {
   return (
-    <div className="liquid-glass-container liquid-glass-md">
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">{children}</div>
+    <div className=" ">
+      <div className="" />
+      <div className="" />
+      <div className="" />
+      <div className="">{children}</div>
     </div>
   );
 }
@@ -56,14 +58,11 @@ export default function Demo() {
 ```tsx
 function AdaptiveGlass({ bgColor, children }) {
   return (
-    <div
-      className="liquid-glass-container liquid-glass-md"
-      style={{ backgroundColor: bgColor }}
-    >
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">{children}</div>
+    <div className=" " style={{ backgroundColor: bgColor }}>
+      <div className="" />
+      <div className="" />
+      <div className="" />
+      <div className="">{children}</div>
     </div>
   );
 }
@@ -143,44 +142,44 @@ const defaultConfig: Required<LiquidGlassConfig> = {
 
 ### Core Classes
 
-| Class                    | Description              |
-| ------------------------ | ------------------------ |
-| `liquid-glass`           | Basic glass effect       |
-| `liquid-glass-container` | Layered glass container  |
-| `liquid-glass-filter`    | Backdrop filter layer    |
-| `liquid-glass-overlay`   | Color overlay layer      |
-| `liquid-glass-specular`  | Specular highlight layer |
-| `liquid-glass-content`   | Content wrapper          |
+| Class          | Description              |
+| -------------- | ------------------------ |
+| `liquid-glass` | Basic glass effect       |
+| ``             | Layered glass container  |
+| ``             | Backdrop filter layer    |
+| ``             | Color overlay layer      |
+| ``             | Specular highlight layer |
+| ``             | Content wrapper          |
 
-| Class              | Padding | Min Height | Border Radius |
-| ------------------ | ------- | ---------- | ------------- |
-| `liquid-glass-xs`  | 0.75rem | 2.5rem     | 0.75rem       |
-| `liquid-glass-sm`  | 1rem    | 3rem       | 1rem          |
-| `liquid-glass-md`  | 1.5rem  | 3.5rem     | 1.25rem       |
-| `liquid-glass-lg`  | 2rem    | 4rem       | 1.5rem        |
-| `liquid-glass-xl`  | 2.5rem  | 5rem       | 2rem          |
-| `liquid-glass-2xl` | 3rem    | 6rem       | 2.5rem        |
-| `liquid-glass-3xl` | 3.5rem  | 7rem       | 3rem          |
+| Class | Padding | Min Height | Border Radius |
+| ----- | ------- | ---------- | ------------- |
+| ``    | 0.75rem | 2.5rem     | 0.75rem       |
+| ``    | 1rem    | 3rem       | 1rem          |
+| ``    | 1.5rem  | 3.5rem     | 1.25rem       |
+| ``    | 2rem    | 4rem       | 1.5rem        |
+| ``    | 2.5rem  | 5rem       | 2rem          |
+| ``    | 3rem    | 6rem       | 2.5rem        |
+| ``    | 3.5rem  | 7rem       | 3rem          |
 
 ### Interactive States
 
-| Class                      | Description              |
-| -------------------------- | ------------------------ |
-| `liquid-glass-interactive` | Adds hover/active states |
-| `liquid-glass-enhanced`    | Enhanced shadow effects  |
-| `liquid-glass-float`       | Floating animation       |
-| `liquid-glass-shimmer`     | Shimmer animation        |
+| Class | Description              |
+| ----- | ------------------------ |
+| ``    | Adds hover/active states |
+| ``    | Enhanced shadow effects  |
+| ``    | Floating animation       |
+| ``    | Shimmer animation        |
 
 ### Shape Variants
 
-| Class                  | Description                |
-| ---------------------- | -------------------------- |
-| `liquid-glass-rounded` | Extra rounded corners      |
-| `liquid-glass-pill`    | Pill shape (fully rounded) |
-| `liquid-glass-circle`  | Perfect circle             |
-| `liquid-glass-square`  | Square aspect ratio        |
-| `liquid-glass-wide`    | 16:9 aspect ratio          |
-| `liquid-glass-card`    | 4:3 aspect ratio           |
+| Class | Description                |
+| ----- | -------------------------- |
+| ``    | Extra rounded corners      |
+| ``    | Pill shape (fully rounded) |
+| ``    | Perfect circle             |
+| ``    | Square aspect ratio        |
+| ``    | 16:9 aspect ratio          |
+| ``    | 4:3 aspect ratio           |
 
 ## Usage Patterns
 
@@ -219,26 +218,21 @@ interface CustomGlassProps {
 const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
   (
     { children, size = "md", interactive = false, className, ...props },
-    ref,
+    ref
   ) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          "liquid-glass-container",
-          `liquid-glass-${size}`,
-          { "liquid-glass-interactive": interactive },
-          className,
-        )}
+        className={cn("", `${size}`, { "": interactive }, className)}
         {...props}
       >
-        <div className="liquid-glass-filter" />
-        <div className="liquid-glass-overlay" />
-        <div className="liquid-glass-specular" />
-        <div className="liquid-glass-content">{children}</div>
+        <div className="" />
+        <div className="" />
+        <div className="" />
+        <div className="">{children}</div>
       </div>
     );
-  },
+  }
 );
 ```
 
@@ -258,7 +252,7 @@ function ContentAwareComponent() {
   }, []);
 
   return (
-    <div ref={contentRef} className="liquid-glass-container">
+    <div ref={contentRef} className="">
       {/* Content that affects glass appearance */}
     </div>
   );
@@ -280,8 +274,8 @@ The LiquidGlass system follows WCAG 2.1 AA guidelines:
 ```css
 /* Respects reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .liquid-glass-container,
-  .liquid-glass-interactive {
+  .,
+  . {
     transition: none !important;
     animation: none !important;
   }
@@ -293,7 +287,7 @@ The LiquidGlass system follows WCAG 2.1 AA guidelines:
 ```css
 /* Adapts to high contrast preferences */
 @media (prefers-contrast: more) {
-  .liquid-glass-container {
+  . {
     backdrop-filter: none;
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(0, 0, 0, 0.8);
@@ -341,10 +335,10 @@ The LiquidGlass system embodies Apple's design principles:
 
 ```css
 /* Optimized for performance */
-.liquid-glass-container,
-.liquid-glass-filter,
-.liquid-glass-overlay,
-.liquid-glass-specular {
+.,
+.,
+.,
+. {
   will-change: transform, opacity;
   transform: translateZ(0); /* Force GPU layer */
 }

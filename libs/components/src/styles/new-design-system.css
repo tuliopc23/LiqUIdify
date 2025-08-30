@@ -1,0 +1,685 @@
+/* ========================================
+   NEW DESIGN SYSTEM - Ready for Implementation
+   ======================================== */
+
+/* Base Variables - iOS Blur Color Palette */
+:root {
+  /* Primary Colors - iOS Blue */
+  --color-primary: #007aff;
+  --color-primary-hover: #0056cc;
+  --color-primary-light: #e5f1ff;
+
+  /* iOS Material Colors - Light Mode (Blue Tinted) */
+  --color-material-regular: rgba(229, 241, 255, 0.8);
+  --color-material-thick: rgba(229, 241, 255, 0.9);
+  --color-material-thin: rgba(229, 241, 255, 0.6);
+  --color-material-ultra-thin: rgba(229, 241, 255, 0.4);
+
+  /* iOS Label Colors - Light Mode (Blue Tinted) */
+  --color-label-primary: rgba(37, 99, 235, 0.9);
+  --color-label-secondary: rgba(37, 99, 235, 0.7);
+  --color-label-tertiary: rgba(37, 99, 235, 0.5);
+  --color-label-quaternary: rgba(37, 99, 235, 0.3);
+
+  /* iOS Fill Colors - Light Mode (Blue Tinted) */
+  --color-fill-primary: rgba(59, 130, 246, 0.2);
+  --color-fill-secondary: rgba(59, 130, 246, 0.16);
+  --color-fill-tertiary: rgba(59, 130, 246, 0.12);
+  --color-fill-quaternary: rgba(59, 130, 246, 0.08);
+
+  /* iOS Background Colors - Light Mode */
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f2f2f7;
+  --color-background-tertiary: #ffffff;
+  --color-background-grouped-primary: #f2f2f7;
+  --color-background-grouped-secondary: #ffffff;
+  --color-background-grouped-tertiary: #f2f2f7;
+
+  /* iOS Separator Colors (Blue Tinted) */
+  --color-separator-opaque: rgba(59, 130, 246, 0.3);
+  --color-separator-non-opaque: rgba(37, 99, 235, 0.2);
+
+  /* Semantic Colors - iOS Style */
+  --color-success: #34c759;
+  --color-warning: #ff9500;
+  --color-error: #ff3b30;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* ===== COMPONENT CLASSES ===== */
+
+/* Button System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-fill-secondary);
+  color: var(--color-label-primary);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-label-primary);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-fill-quaternary);
+}
+
+/* iOS Blue Component Overrides */
+.ios-blue-bg {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.ios-blue-border {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.ios-blue-text {
+  color: rgb(37, 99, 235) !important;
+}
+
+.ios-blue-hover:hover {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+/* ===== RADIX UI COMPONENT OVERRIDES - FORCE BLUE COLORS ===== */
+
+/* Radix Accordion Overrides */
+[data-radix-accordion-item],
+.accordion-item {
+  background-color: var(--color-material-regular) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+  color: var(--color-label-primary) !important;
+}
+
+[data-radix-accordion-trigger],
+.accordion-trigger {
+  background-color: transparent !important;
+  color: var(--color-label-primary) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+[data-radix-accordion-trigger]:hover,
+.accordion-trigger:hover {
+  background-color: var(--color-fill-quaternary) !important;
+  color: var(--color-primary) !important;
+}
+
+[data-radix-accordion-content],
+.accordion-content {
+  background-color: var(--color-material-thin) !important;
+  color: var(--color-label-primary) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+/* Radix Dialog Overrides */
+[data-radix-dialog-overlay],
+.dialog-overlay {
+  background-color: rgba(37, 99, 235, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+[data-radix-dialog-content],
+.dialog-content {
+  background-color: var(--color-material-regular) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+  color: var(--color-label-primary) !important;
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25) !important;
+}
+
+[data-radix-dialog-title],
+.dialog-title {
+  color: var(--color-label-primary) !important;
+}
+
+[data-radix-dialog-description],
+.dialog-description {
+  color: var(--color-label-secondary) !important;
+}
+
+/* Radix Radio Group Overrides */
+[data-radix-radio-group-item],
+.radio-item {
+  background-color: var(--color-material-thin) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+  color: var(--color-label-primary) !important;
+}
+
+[data-radix-radio-group-item]:hover,
+.radio-item:hover {
+  background-color: var(--color-fill-quaternary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-radix-radio-group-item][data-state="checked"],
+.radio-item[data-state="checked"] {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: white !important;
+}
+
+[data-radix-radio-group-indicator],
+.radio-indicator {
+  background-color: currentColor !important;
+}
+
+/* Generic Radix Component Overrides */
+[data-radix-collection-item],
+[data-state],
+[data-highlighted],
+[data-selected] {
+  background-color: var(--color-material-thin) !important;
+  color: var(--color-label-primary) !important;
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+[data-state="open"],
+[data-highlighted="true"],
+[data-selected="true"] {
+  background-color: var(--color-fill-secondary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* Force override any remaining gray colors in third-party components */
+* {
+  /* Override common gray background patterns */
+}
+
+*[style*="background-color: rgb(243, 244, 246)"],
+*[style*="background-color: rgb(249, 250, 251)"],
+*[style*="background-color: rgb(229, 231, 235)"],
+*[style*="background-color: rgb(156, 163, 175)"],
+*[style*="background-color: rgb(107, 114, 128)"],
+*[style*="background-color: rgb(75, 85, 99)"],
+*[style*="background-color: rgb(55, 65, 81)"],
+*[style*="background-color: rgb(31, 41, 55)"] {
+  background-color: var(--color-material-regular) !important;
+}
+
+*[style*="color: rgb(156, 163, 175)"],
+*[style*="color: rgb(107, 114, 128)"],
+*[style*="color: rgb(75, 85, 99)"],
+*[style*="color: rgb(55, 65, 81)"],
+*[style*="color: rgb(31, 41, 55)"] {
+  color: var(--color-label-primary) !important;
+}
+
+*[style*="border-color: rgb(229, 231, 235)"],
+*[style*="border-color: rgb(209, 213, 219)"],
+*[style*="border-color: rgb(156, 163, 175)"] {
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+/* ===== COMPREHENSIVE TAILWIND GRAY CLASS OVERRIDES ===== */
+/* Force override ALL Tailwind gray utility classes with blue equivalents */
+
+/* Text Colors - Gray to Blue */
+.text-gray-50,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900,
+.text-gray-950 {
+  color: var(--color-label-primary) !important;
+}
+
+.text-slate-50,
+.text-slate-100,
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-slate-600,
+.text-slate-700,
+.text-slate-800,
+.text-slate-900,
+.text-slate-950 {
+  color: var(--color-label-primary) !important;
+}
+
+.text-neutral-50,
+.text-neutral-100,
+.text-neutral-200,
+.text-neutral-300,
+.text-neutral-400,
+.text-neutral-500,
+.text-neutral-600,
+.text-neutral-700,
+.text-neutral-800,
+.text-neutral-900,
+.text-neutral-950 {
+  color: var(--color-label-primary) !important;
+}
+
+.text-stone-50,
+.text-stone-100,
+.text-stone-200,
+.text-stone-300,
+.text-stone-400,
+.text-stone-500,
+.text-stone-600,
+.text-stone-700,
+.text-stone-800,
+.text-stone-900,
+.text-stone-950 {
+  color: var(--color-label-primary) !important;
+}
+
+/* Background Colors - Gray to Blue */
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-gray-300,
+.bg-gray-400,
+.bg-gray-500,
+.bg-gray-600,
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900,
+.bg-gray-950 {
+  background-color: var(--color-material-regular) !important;
+}
+
+.bg-slate-50,
+.bg-slate-100,
+.bg-slate-200,
+.bg-slate-300,
+.bg-slate-400,
+.bg-slate-500,
+.bg-slate-600,
+.bg-slate-700,
+.bg-slate-800,
+.bg-slate-900,
+.bg-slate-950 {
+  background-color: var(--color-material-regular) !important;
+}
+
+.bg-neutral-50,
+.bg-neutral-100,
+.bg-neutral-200,
+.bg-neutral-300,
+.bg-neutral-400,
+.bg-neutral-500,
+.bg-neutral-600,
+.bg-neutral-700,
+.bg-neutral-800,
+.bg-neutral-900,
+.bg-neutral-950 {
+  background-color: var(--color-material-regular) !important;
+}
+
+.bg-stone-50,
+.bg-stone-100,
+.bg-stone-200,
+.bg-stone-300,
+.bg-stone-400,
+.bg-stone-500,
+.bg-stone-600,
+.bg-stone-700,
+.bg-stone-800,
+.bg-stone-900,
+.bg-stone-950 {
+  background-color: var(--color-material-regular) !important;
+}
+
+/* Border Colors - Gray to Blue */
+.border-gray-50,
+.border-gray-100,
+.border-gray-200,
+.border-gray-300,
+.border-gray-400,
+.border-gray-500,
+.border-gray-600,
+.border-gray-700,
+.border-gray-800,
+.border-gray-900,
+.border-gray-950 {
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+.border-slate-50,
+.border-slate-100,
+.border-slate-200,
+.border-slate-300,
+.border-slate-400,
+.border-slate-500,
+.border-slate-600,
+.border-slate-700,
+.border-slate-800,
+.border-slate-900,
+.border-slate-950 {
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+.border-neutral-50,
+.border-neutral-100,
+.border-neutral-200,
+.border-neutral-300,
+.border-neutral-400,
+.border-neutral-500,
+.border-neutral-600,
+.border-neutral-700,
+.border-neutral-800,
+.border-neutral-900,
+.border-neutral-950 {
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+.border-stone-50,
+.border-stone-100,
+.border-stone-200,
+.border-stone-300,
+.border-stone-400,
+.border-stone-500,
+.border-stone-600,
+.border-stone-700,
+.border-stone-800,
+.border-stone-900,
+.border-stone-950 {
+  border-color: var(--color-separator-non-opaque) !important;
+}
+
+/* Ring Colors - Gray to Blue */
+.ring-gray-50,
+.ring-gray-100,
+.ring-gray-200,
+.ring-gray-300,
+.ring-gray-400,
+.ring-gray-500,
+.ring-gray-600,
+.ring-gray-700,
+.ring-gray-800,
+.ring-gray-900,
+.ring-gray-950 {
+  --tw-ring-color: var(--color-primary) !important;
+}
+
+.ring-slate-50,
+.ring-slate-100,
+.ring-slate-200,
+.ring-slate-300,
+.ring-slate-400,
+.ring-slate-500,
+.ring-slate-600,
+.ring-slate-700,
+.ring-slate-800,
+.ring-slate-900,
+.ring-slate-950 {
+  --tw-ring-color: var(--color-primary) !important;
+}
+
+/* Placeholder Colors - Gray to Blue */
+.placeholder-gray-50::placeholder,
+.placeholder-gray-100::placeholder,
+.placeholder-gray-200::placeholder,
+.placeholder-gray-300::placeholder,
+.placeholder-gray-400::placeholder,
+.placeholder-gray-500::placeholder,
+.placeholder-gray-600::placeholder,
+.placeholder-gray-700::placeholder,
+.placeholder-gray-800::placeholder,
+.placeholder-gray-900::placeholder,
+.placeholder-gray-950::placeholder {
+  color: var(--color-label-tertiary) !important;
+}
+
+/* Hover and Focus States */
+.hover\:bg-gray-50:hover,
+.hover\:bg-gray-100:hover,
+.hover\:bg-gray-200:hover,
+.hover\:bg-gray-300:hover,
+.hover\:bg-gray-400:hover,
+.hover\:bg-gray-500:hover,
+.hover\:bg-gray-600:hover,
+.hover\:bg-gray-700:hover,
+.hover\:bg-gray-800:hover,
+.hover\:bg-gray-900:hover,
+.hover\:bg-gray-950:hover {
+  background-color: var(--color-fill-quaternary) !important;
+}
+
+.hover\:text-gray-50:hover,
+.hover\:text-gray-100:hover,
+.hover\:text-gray-200:hover,
+.hover\:text-gray-300:hover,
+.hover\:text-gray-400:hover,
+.hover\:text-gray-500:hover,
+.hover\:text-gray-600:hover,
+.hover\:text-gray-700:hover,
+.hover\:text-gray-800:hover,
+.hover\:text-gray-900:hover,
+.hover\:text-gray-950:hover {
+  color: var(--color-primary) !important;
+}
+
+.focus\:ring-gray-500:focus {
+  --tw-ring-color: var(--color-primary) !important;
+}
+
+/* Input System */
+.input {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-material-thin);
+  border: 1px solid var(--color-separator-non-opaque);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  color: var(--color-label-primary);
+  transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-error {
+  border-color: var(--color-error);
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+.input-error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Card System */
+.card {
+  background-color: var(--color-material-regular);
+  border: 1px solid var(--color-separator-non-opaque);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-interactive {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-interactive:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  color: var(--color-label-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-error {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+/* ===== COMPONENT READY FOR NEW IMPLEMENTATION ===== */
+
+/* All legacy glass classes have been removed.
+   This CSS system is now ready for your fresh implementation. */
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .input {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* iOS Material Colors - Dark Mode (Blue Tinted) */
+    --color-material-regular: rgba(0, 30, 60, 0.8);
+    --color-material-thick: rgba(0, 30, 60, 0.9);
+    --color-material-thin: rgba(0, 30, 60, 0.6);
+    --color-material-ultra-thin: rgba(0, 30, 60, 0.4);
+
+    /* iOS Label Colors - Dark Mode (Blue Tinted) */
+    --color-label-primary: rgba(147, 197, 253, 0.95);
+    --color-label-secondary: rgba(147, 197, 253, 0.7);
+    --color-label-tertiary: rgba(147, 197, 253, 0.5);
+    --color-label-quaternary: rgba(147, 197, 253, 0.3);
+
+    /* iOS Fill Colors - Dark Mode (Blue Tinted) */
+    --color-fill-primary: rgba(59, 130, 246, 0.3);
+    --color-fill-secondary: rgba(59, 130, 246, 0.25);
+    --color-fill-tertiary: rgba(59, 130, 246, 0.2);
+    --color-fill-quaternary: rgba(59, 130, 246, 0.15);
+
+    /* iOS Background Colors - Dark Mode */
+    --color-background-primary: #000000;
+    --color-background-secondary: #1c1c1e;
+    --color-background-tertiary: #2c2c2e;
+    --color-background-grouped-primary: #000000;
+    --color-background-grouped-secondary: #1c1c1e;
+    --color-background-grouped-tertiary: #2c2c2e;
+
+    /* iOS Separator Colors - Dark Mode (Blue Tinted) */
+    --color-separator-opaque: rgba(59, 130, 246, 0.4);
+    --color-separator-non-opaque: rgba(59, 130, 246, 0.25);
+  }
+
+  .card {
+    background-color: var(--color-material-regular);
+    border-color: var(--color-separator-non-opaque);
+    color: var(--color-label-primary);
+  }
+
+  .input {
+    background-color: var(--color-material-thin);
+    border-color: var(--color-separator-non-opaque);
+    color: var(--color-label-primary);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-fill-secondary);
+    color: var(--color-label-primary);
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-fill-quaternary);
+  }
+
+  .form-label {
+    color: var(--color-label-primary);
+  }
+}

@@ -3,8 +3,7 @@ title: Responsive Button
 description: Liquid Glass responsive button with adaptive sizing and enhanced touch interactions.
 ---
 
-import ResponsiveButtonExample from "/snippets/components/ResponsiveButtonExample.jsx";
-import PreviewCodeTabs from "/snippets/components/PreviewCodeTabs.tsx";
+import { GlassResponsiveButton, GlassUIProvider } from "@liquidify/react";
 
 # Responsive Button
 
@@ -12,8 +11,8 @@ The `GlassResponsiveButton` component provides an enhanced button experience wit
 
 ## Basic Usage
 
-<PreviewCodeTabs
-  code={`import { GlassResponsiveButton, GlassUIProvider } from "liquidify";
+```tsx
+import { GlassResponsiveButton, GlassUIProvider } from "@liquidify/react";
 
 export default function Example() {
   return (
@@ -23,11 +22,8 @@ export default function Example() {
       </GlassResponsiveButton>
     </GlassUIProvider>
   );
-}`}
-  language="tsx"
->
-  <ResponsiveButtonExample />
-</PreviewCodeTabs>
+}
+```
 
 ### Size Variants
 

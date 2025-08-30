@@ -87,19 +87,19 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Small
         </p>
         <GlassProgress value={40} size="sm" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Medium
         </p>
         <GlassProgress value={60} size="md" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Large
         </p>
         <GlassProgress value={80} size="lg" />
@@ -126,19 +126,19 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Default Glass
         </p>
         <GlassProgress value={70} variant="default" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Gradient
         </p>
         <GlassProgress value={70} variant="gradient" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Minimal
         </p>
         <GlassProgress value={70} variant="minimal" />
@@ -179,7 +179,7 @@ export const Animated: Story = {
     return (
       <div className="space-y-4">
         <GlassProgress value={progress} showValue color="blue" />
-        <p className="text-center text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="text-center text-blue-900 text-sm dark:text-blue-900">
           Continuously animating progress
         </p>
       </div>
@@ -219,7 +219,7 @@ export const LoadingSimulation: Story = {
           type="button"
           onClick={startLoading}
           disabled={loading}
-          className="w-full rounded-lg bg-liquid-accent px-4 py-2 text-liquid-text-inverse hover:bg-liquid-accent disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Loading..." : "Start Loading"}
         </button>
@@ -244,7 +244,7 @@ export const MultipleProgress: Story = {
           <div key={index}>
             <div className="mb-2 flex items-center justify-between">
               <span className="font-medium text-sm">{task.name}</span>
-              <span className="text-liquid-secondary text-sm dark:text-liquid-grey">
+              <span className="text-blue-900 text-sm dark:text-blue-900">
                 {task.progress}%
               </span>
             </div>
@@ -261,19 +261,19 @@ export const CustomMaxValue: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Steps: 7 out of 10
         </p>
         <GlassProgress value={7} max={10} showValue />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Experience: 1,250 / 2,000 XP
         </p>
         <GlassProgress value={1250} max={2000} color="purple" />
       </div>
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Storage: 4.5GB / 10GB
         </p>
         <GlassProgress value={4.5} max={10} color="red" />
@@ -312,12 +312,12 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-8">
         {/* File Upload */}
-        <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+        <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h3 className="mb-4 font-semibold">File Upload</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-sm">document.pdf</span>
-              <span className="text-liquid-secondary text-sm">
+              <span className="text-blue-900 text-sm">
                 {Math.round(uploadProgress)}%
               </span>
             </div>
@@ -326,7 +326,7 @@ export const RealWorldExamples: Story = {
               type="button"
               onClick={simulateUpload}
               disabled={isUploading}
-              className="text-liquid-accent text-sm hover:text-liquid-accent disabled:text-liquid-secondary"
+              className="text-blue-900 text-sm hover:text-blue-900 disabled:text-blue-900"
             >
               {isUploading ? "Uploading..." : "Start Upload"}
             </button>
@@ -334,7 +334,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         {/* Skill Progress */}
-        <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+        <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h3 className="mb-4 font-semibold">Skills</h3>
           <div className="space-y-4">
             {[
@@ -346,7 +346,7 @@ export const RealWorldExamples: Story = {
               <div key={item.skill}>
                 <div className="mb-1 flex justify-between">
                   <span className="font-medium text-sm">{item.skill}</span>
-                  <span className="text-liquid-secondary text-sm">
+                  <span className="text-blue-900 text-sm">
                     {item.level}%
                   </span>
                 </div>
@@ -361,13 +361,13 @@ export const RealWorldExamples: Story = {
         </div>
 
         {/* System Resources */}
-        <div className="rounded-lg bg-liquid-bg p-4 dark:bg-liquid-bg">
+        <div className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h3 className="mb-4 font-semibold">System Resources</h3>
           <div className="space-y-4">
             <div>
               <div className="mb-1 flex justify-between">
                 <span className="text-sm">CPU Usage</span>
-                <span className="text-liquid-secondary text-sm">45%</span>
+                <span className="text-blue-900 text-sm">45%</span>
               </div>
               <GlassProgress
                 value={45}
@@ -379,7 +379,7 @@ export const RealWorldExamples: Story = {
             <div>
               <div className="mb-1 flex justify-between">
                 <span className="text-sm">Memory</span>
-                <span className="text-liquid-secondary text-sm">72%</span>
+                <span className="text-blue-900 text-sm">72%</span>
               </div>
               <GlassProgress
                 value={72}
@@ -391,7 +391,7 @@ export const RealWorldExamples: Story = {
             <div>
               <div className="mb-1 flex justify-between">
                 <span className="text-sm">Disk Space</span>
-                <span className="text-liquid-secondary text-sm">89%</span>
+                <span className="text-blue-900 text-sm">89%</span>
               </div>
               <GlassProgress
                 value={89}
@@ -412,7 +412,7 @@ export const IndeterminateLoading: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
           Processing... (Simulated with cycling progress)
         </p>
         <div className="relative">
@@ -439,14 +439,14 @@ export const IndeterminateLoading: Story = {
 export const StackedProgress: Story = {
   render: () => {
     const segments = [
-      { label: "Completed", value: 40, color: "bg-liquid-accent" },
-      { label: "In Progress", value: 30, color: "bg-liquid-accent" },
-      { label: "Pending", value: 30, color: "bg-liquid-bg" },
+      { label: "Completed", value: 40, color: "bg-blue-500" },
+      { label: "In Progress", value: 30, color: "bg-blue-500" },
+      { label: "Pending", value: 30, color: "bg-blue-100" },
     ];
 
     return (
       <div className="space-y-4">
-        <div className="flex h-2 overflow-hidden rounded-full bg-liquid-bg dark:bg-liquid-bg">
+        <div className="flex h-2 overflow-hidden rounded-full bg-blue-100 dark:bg-blue-100">
           {segments.map((segment, index) => (
             <div
               key={index}
@@ -474,7 +474,7 @@ export const StackedProgress: Story = {
 export const ThemeVariations: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="rounded-lg bg-liquid-bg p-6">
+      <div className="rounded-lg bg-blue-100 p-6">
         <h3 className="mb-4 font-semibold">Light Theme</h3>
         <div className="space-y-3">
           <GlassProgress value={60} showValue />
@@ -482,8 +482,8 @@ export const ThemeVariations: Story = {
           <GlassProgress value={60} variant="minimal" color="green" />
         </div>
       </div>
-      <div className="rounded-lg bg-liquid-bg p-6">
-        <h3 className="mb-4 font-semibold text-liquid-text-inverse">
+      <div className="rounded-lg bg-blue-100 p-6">
+        <h3 className="mb-4 font-semibold text-blue-900">
           Dark Theme
         </h3>
         <div className="space-y-3">

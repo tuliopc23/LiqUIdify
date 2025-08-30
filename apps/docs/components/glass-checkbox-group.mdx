@@ -3,8 +3,8 @@ title: Glass Checkbox Group
 description: Elegant checkbox group component with Apple-inspired liquid glass effects and flexible layout options.
 ---
 
-;
-;
+import { GlassCheckboxGroup } from "@liquidify/react";
+import { useState } from "react";
 
 ### Example
 
@@ -324,7 +324,7 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
           "w-5 h-5 rounded border-2 transition-all",
           checked
             ? "bg-liquid-accent border-liquid-accent"
-            : "border-liquid-highlight/20",
+            : "border-liquid-highlight/20"
         )}
       >
         {checked && <CheckIcon />}
@@ -412,7 +412,7 @@ const useCheckboxGroup = (initialValues = [], options = {}) => {
         return newValues;
       });
     },
-    [options],
+    [options]
   );
 
   const selectAll = useCallback(() => {

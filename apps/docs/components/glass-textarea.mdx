@@ -3,8 +3,8 @@ title: Glass Textarea
 description: Elegant multi-line text input component with Apple-inspired liquid glass effects and auto-resize functionality.
 ---
 
-;
-;
+import { GlassTextarea } from "@liquidify/react";
+import { useState } from "react";
 
 ### Example
 
@@ -12,7 +12,7 @@ description: Elegant multi-line text input component with Apple-inspired liquid 
 export default function Demo() {
   const [message, setMessage] = useState("");
   const [feedback, setFeedback] = useState(
-    "This component looks amazing! The liquid glass effects really make it stand out.",
+    "This component looks amazing! The liquid glass effects really make it stand out."
   );
   const [notes, setNotes] = useState("");
 
@@ -258,7 +258,7 @@ const debouncedSave = useMemo(
         setSaving(false);
       }
     }, 1000),
-  [],
+  []
 );
 
 const handleChange = (value) => {
@@ -279,8 +279,8 @@ const handleChange = (value) => {
     {saving
       ? "Saving..."
       : lastSaved
-        ? `Last saved: ${lastSaved.toLocaleTimeString()}`
-        : "Not saved"}
+      ? `Last saved: ${lastSaved.toLocaleTimeString()}`
+      : "Not saved"}
   </div>
 </div>;
 ```
@@ -368,7 +368,7 @@ const useCharacterCount = (text, maxLength) => {
 const useDebouncedResize = (callback, delay) => {
   const debouncedCallback = useMemo(
     () => debounce(callback, delay),
-    [callback, delay],
+    [callback, delay]
   );
 
   return debouncedCallback;
@@ -508,7 +508,7 @@ const useTextarea = (initialValue = "", options = {}) => {
       setError(error);
       return !error;
     },
-    [value, required, minLength, maxLength],
+    [value, required, minLength, maxLength]
   );
 
   const handleChange = useCallback(
@@ -516,7 +516,7 @@ const useTextarea = (initialValue = "", options = {}) => {
       setValue(newValue);
       validate(newValue);
     },
-    [validate],
+    [validate]
   );
 
   return {

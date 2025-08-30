@@ -1,21 +1,21 @@
 /**
  * Lightning CSS Configuration
- * Optimizes CSS for the Liquidify glassmorphism component library
+ * Optimizes CSS for the LiqUIdify component library
  */
 
 export default {
-  // Modern browser targets for optimal glassmorphism support
+  // Modern browser targets for optimal component library support
   targets: {
-    chrome: 95, // Supports backdrop-filter
-    firefox: 91, // Supports backdrop-filter
-    safari: 15, // Native backdrop-filter support
-    edge: 95, // Chromium-based with full support
-    ios_saf: 15, // iOS Safari backdrop-filter
+    chrome: 95,
+    firefox: 91,
+    safari: 15,
+    edge: 95,
+    ios_saf: 15,
   },
 
   // CSS Features configuration
   include: {
-    // Modern CSS features used in glassmorphism
+    // Modern CSS features for component styling
     nesting: true, // CSS nesting for cleaner code
     customMedia: true, // @custom-media queries
     logicalProperties: true, // Logical properties for RTL support
@@ -29,7 +29,7 @@ export default {
   sourceMap: true, // Generate source maps
   analyzeDependencies: true, // Analyze @import dependencies
 
-  // Preserve important patterns for glassmorphism
+  // Preserve important patterns for component styling
   preserve: {
     customProperties: true, // Keep CSS variables
     importantComments: true, // Keep license comments

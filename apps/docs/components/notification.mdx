@@ -3,6 +3,9 @@ title: Notification
 description: Liquid Glass notification center with real-time updates and interactive management.
 ---
 
+import { NotificationCenter } from "@liquidify/react";
+import { useState } from "react";
+
 # Notification
 
 The `NotificationCenter` component provides a comprehensive notification system with glassmorphism effects. It supports different notification types, real-time updates, and interactive management features.
@@ -105,7 +108,7 @@ export default function Demo() {
 
   const handleMarkAsRead = (id) => {
     setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
   };
 

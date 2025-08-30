@@ -224,7 +224,7 @@ export const Variants: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Default Variant
           </h3>
           <GlassPagination
@@ -236,7 +236,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Solid Variant
           </h3>
           <GlassPagination
@@ -248,7 +248,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Ghost Variant
           </h3>
           <GlassPagination
@@ -285,7 +285,7 @@ export const Sizes: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Small Size
           </h3>
           <GlassPagination
@@ -297,7 +297,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Medium Size
           </h3>
           <GlassPagination
@@ -309,7 +309,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Large Size
           </h3>
           <GlassPagination
@@ -347,7 +347,7 @@ export const States: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             First Page
           </h3>
           <GlassPagination
@@ -358,7 +358,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Middle Page
           </h3>
           <GlassPagination
@@ -369,7 +369,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Last Page
           </h3>
           <GlassPagination
@@ -380,7 +380,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Disabled State
           </h3>
           <GlassPagination
@@ -417,7 +417,7 @@ export const ConfigurationExamples: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Compact Mode (No First/Last)
           </h3>
           <GlassPagination
@@ -430,7 +430,7 @@ export const ConfigurationExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Extended Siblings (siblingCount: 2)
           </h3>
           <GlassPagination
@@ -443,7 +443,7 @@ export const ConfigurationExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             No Ellipsis Mode
           </h3>
           <GlassPagination
@@ -481,23 +481,23 @@ export const RealWorldExamples: Story = {
     return (
       <div className="flex flex-col gap-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Search Results Pagination
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 text-sm text-liquid-text-inverse/60">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
+            <div className="mb-4 text-sm text-blue-900/60">
               Showing results 21-30 of 100 total results
             </div>
             <div className="space-y-2">
               {Array.from({ length: 5 }, (_, i) => (
                 <div
                   key={i}
-                  className="rounded-lg border border-liquid-highlight/10 bg-liquid-bg/5 p-3"
+                  className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-3"
                 >
-                  <div className="font-medium text-liquid-text-inverse/90">
+                  <div className="font-medium text-blue-900/90">
                     Result {21 + i}
                   </div>
-                  <div className="text-sm text-liquid-text-inverse/60">
+                  <div className="text-sm text-blue-900/60">
                     Search result description...
                   </div>
                 </div>
@@ -515,43 +515,43 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Data Table Pagination
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center justify-between">
-              <div className="text-sm text-liquid-text-inverse/60">
+              <div className="text-sm text-blue-900/60">
                 Showing 111-120 of 500 items
               </div>
-              <div className="text-sm text-liquid-text-inverse/60">
+              <div className="text-sm text-blue-900/60">
                 Page {tablePage} of 50
               </div>
             </div>
-            <div className="overflow-hidden rounded-lg border border-liquid-highlight/10">
+            <div className="overflow-hidden rounded-lg border border-blue-300/10">
               <table className="w-full">
-                <thead className="bg-liquid-bg/5">
+                <thead className="bg-blue-100/5">
                   <tr>
-                    <th className="px-4 py-3 text-left font-medium text-sm text-liquid-text-inverse/80">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-blue-900/80">
                       Name
                     </th>
-                    <th className="px-4 py-3 text-left font-medium text-sm text-liquid-text-inverse/80">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-blue-900/80">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left font-medium text-sm text-liquid-text-inverse/80">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-blue-900/80">
                       Date
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {Array.from({ length: 10 }, (_, i) => (
-                    <tr key={i} className="border-liquid-highlight/5 border-t">
-                      <td className="px-4 py-3 text-sm text-liquid-text-inverse/90">
+                    <tr key={i} className="border-blue-300/5 border-t">
+                      <td className="px-4 py-3 text-sm text-blue-900/90">
                         Item {111 + i}
                       </td>
-                      <td className="px-4 py-3 text-liquid-accent text-sm">
+                      <td className="px-4 py-3 text-blue-900 text-sm">
                         Active
                       </td>
-                      <td className="px-4 py-3 text-sm text-liquid-text-inverse/60">
+                      <td className="px-4 py-3 text-sm text-blue-900/60">
                         2024-01-15
                       </td>
                     </tr>
@@ -571,15 +571,15 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Image Gallery Pagination
           </h3>
-          <div className="rounded-xl border border-liquid-highlight/10 bg-liquid-bg/5 p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 grid grid-cols-4 gap-4">
               {Array.from({ length: 12 }, (_, i) => (
                 <div
                   key={i}
-                  className="aspect-square rounded-lg border border-liquid-highlight/10 bg-gradient-to-br from-blue-400/20 to-purple-400/20"
+                  className="aspect-square rounded-lg border border-blue-300/10 bg-gradient-to-br from-blue-400/20 to-purple-400/20"
                 />
               ))}
             </div>
@@ -618,11 +618,11 @@ export const AccessibilityShowcase: Story = {
 
     return (
       <div className="space-y-6">
-        <div className="rounded-lg border border-liquid-accent bg-liquid-accent p-4 dark:border-liquid-accent dark:bg-liquid-accent/20">
-          <h4 className="mb-2 font-medium text-liquid-accent dark:text-liquid-accent">
+        <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Accessibility Features
           </h4>
-          <ul className="space-y-1 text-liquid-accent text-sm dark:text-liquid-accent">
+          <ul className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
             <li>• Full keyboard navigation support</li>
             <li>• ARIA labels for screen readers</li>
             <li>• Current page indication</li>
@@ -632,7 +632,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-liquid-secondary text-sm dark:text-liquid-grey">
+          <p className="text-blue-900 text-sm dark:text-blue-900">
             Try navigating with Tab, Space, and Enter keys:
           </p>
           <GlassPagination
@@ -644,11 +644,11 @@ export const AccessibilityShowcase: Story = {
           />
         </div>
 
-        <div className="rounded-lg border border-liquid-grey bg-liquid-bg p-4 dark:border-liquid-grey dark:bg-liquid-bg">
-          <h4 className="mb-2 font-medium text-liquid-secondary dark:text-liquid-grey">
+        <div className="rounded-lg border border-blue-200 bg-blue-100 p-4 dark:border-blue-200 dark:bg-blue-100">
+          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
             Screen Reader Announcements
           </h4>
-          <div className="space-y-2 text-liquid-secondary text-sm dark:text-liquid-grey">
+          <div className="space-y-2 text-blue-900 text-sm dark:text-blue-900">
             <p>Current page: "Page {currentPage}, current page"</p>
             <p>Navigation: "Go to page X" or "Go to previous/next page"</p>
             <p>Disabled states: Properly excluded from tab order</p>
@@ -681,7 +681,7 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Ocean Theme
           </h3>
           <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
@@ -695,7 +695,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Sunset Theme
           </h3>
           <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
@@ -709,7 +709,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-liquid-text-inverse/80">
+          <h3 className="font-medium text-sm text-blue-900/80">
             Forest Theme
           </h3>
           <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">

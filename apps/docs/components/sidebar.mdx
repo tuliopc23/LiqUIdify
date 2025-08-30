@@ -3,78 +3,87 @@ title: Sidebar
 description: Flexible sidebar navigation with collapsible sections and Apple-inspired glass effects.
 ---
 
-;
-;
+import { Sidebar, SidebarItem, SidebarSection } from "@liquidify/react";
+import {
+  BarChart,
+  Bell,
+  FileText,
+  Heart,
+  Home,
+  Package,
+  Search,
+  Settings,
+  Shield,
+  User,
+} from "lucide-react";
+import { useState } from "react";
 
 ### Example
 
 ```tsx
-;
-  Settings,
-  User,
-  Bell,
-  Search,
-  Heart,
-  Package,
-  BarChart,
-  FileText,
-  Shield,
-} from "lucide-react";
-
 export default function Demo() {
   const [isOpen, setIsOpen] = useState(true);
   const [activeItem, setActiveItem] = useState("dashboard");
 
-return (
-
-<div className="flex h-96 bg-liquid-bg/20 rounded-xl overflow-hidden">
-<Sidebar
-open={isOpen}
-onOpenChange={setIsOpen}
-header={
-<div className="flex items-center gap-3">
-<div className="h-8 w-8 rounded-lg bg-liquid-accent flex items-center justify-center">
-<span className="text-liquid-text-inverse font-bold text-sm">A</span>
-</div>
-<span className="font-semibold text-liquid-text-inverse">Admin Panel</span>
-</div>
-}
-footer={<div className="text-xs text-liquid-text-inverse/60">Version 2.1.0</div>} >
-<SidebarSection title="Main">
-<SidebarItem
-icon={<Home className="h-5 w-5" />}
-label="Dashboard"
-active={activeItem === "dashboard"}
-onClick={() => setActiveItem("dashboard")}
-/>
-<SidebarItem
-icon={<BarChart className="h-5 w-5" />}
-label="Analytics"
-active={activeItem === "analytics"}
-onClick={() => setActiveItem("analytics")}
-badge={
-<span className="bg-liquid-accent text-liquid-text-inverse text-xs px-1.5 py-0.5 rounded-full">
-New
-</span>
-}
-/>
-<SidebarItem
-icon={<Package className="h-5 w-5" />}
-label="Products"
-active={activeItem === "products"}
-onClick={() => setActiveItem("products")} >
-<SidebarItem
-label="Electronics"
-active={activeItem === "electronics"}
-onClick={() => setActiveItem("electronics")}
-/>
-<SidebarItem
-label="Clothing"
-active={activeItem === "clothing"}
-onClick={() => setActiveItem("clothing")}
-/>
-</SidebarItem>
-</SidebarSection>
+  return (
+    <div className="flex h-96 bg-liquid-bg/20 rounded-xl overflow-hidden">
+      <Sidebar
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        header={
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-lg bg-liquid-accent flex items-center justify-center">
+              <span className="text-liquid-text-inverse font-bold text-sm">
+                A
+              </span>
+            </div>
+            <span className="font-semibold text-liquid-text-inverse">
+              Admin Panel
+            </span>
+          </div>
+        }
+        footer={
+          <div className="text-xs text-liquid-text-inverse/60">
+            Version 2.1.0
+          </div>
+        }
+      >
+        <SidebarSection title="Main">
+          <SidebarItem
+            icon={<Home className="h-5 w-5" />}
+            label="Dashboard"
+            active={activeItem === "dashboard"}
+            onClick={() => setActiveItem("dashboard")}
+          />
+          <SidebarItem
+            icon={<BarChart className="h-5 w-5" />}
+            label="Analytics"
+            active={activeItem === "analytics"}
+            onClick={() => setActiveItem("analytics")}
+            badge={
+              <span className="bg-liquid-accent text-liquid-text-inverse text-xs px-1.5 py-0.5 rounded-full">
+                New
+              </span>
+            }
+          />
+          <SidebarItem
+            icon={<Package className="h-5 w-5" />}
+            label="Products"
+            active={activeItem === "products"}
+            onClick={() => setActiveItem("products")}
+          >
+            <SidebarItem
+              label="Electronics"
+              active={activeItem === "electronics"}
+              onClick={() => setActiveItem("electronics")}
+            />
+            <SidebarItem
+              label="Clothing"
+              active={activeItem === "clothing"}
+              onClick={() => setActiveItem("clothing")}
+            />
+          </SidebarItem>
+        </SidebarSection>
 
         <SidebarSection title="Account">
           <SidebarItem
@@ -107,8 +116,7 @@ onClick={() => setActiveItem("clothing")}
         </div>
       </div>
     </div>
-
-);
+  );
 }
 ```
 

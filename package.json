@@ -16,7 +16,7 @@
   "dependencies": {
     "knip": "^5.63.0"
   },
-  "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
+  "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.55.0",
@@ -26,6 +26,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/bun": "^1.2.21",
+    "@types/jscodeshift": "^17.3.0",
     "@types/jsdom": "~21.1.7",
     "@types/node": "^24.3.0",
     "@types/react": "~19.1.12",
@@ -35,6 +36,7 @@
     "canvas": "^3.2.0",
     "concurrently": "^9.2.1",
     "happy-dom": "^18.0.1",
+    "jscodeshift": "^17.3.0",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
@@ -110,12 +112,10 @@
     "react",
     "typescript",
     "components",
-    "glassmorphism",
     "ui-library",
     "design-system",
     "accessibility",
     "wcag",
-    "liquid-glass",
     "physics",
     "animations",
     "magnetic-hover",
@@ -143,11 +143,9 @@
   "scripts": {
     "dev:all": "node scripts/dev.mjs",
     "dev:quick": "concurrently \"bun run --filter @liquidify/components build:watch\" \"bun run --filter @liquidify/storybook-app dev\"",
-
     "build": "bun run build:lib && bun run build:storybook",
     "build:lib": "bun run --filter @liquidify/components build",
     "build:storybook": "bun run --filter @liquidify/storybook-app build",
-
     "build:docs": "echo 'Docs are built and deployed via Mintlify platform'",
     "build:all": "bun run build:lib && bun run build:storybook && bun run build:docs",
     "build:types": "bun run --filter @liquidify/components build:types",
@@ -169,7 +167,6 @@
     "health-check": "bun run type-check && bun run build:lib",
     "lint": "qlty check -a",
     "preview": "bun run build && bun run docs:preview",
-
     "storybook": "bun run --filter @liquidify/storybook-app dev",
     "storybook:typecheck": "bun run --filter @liquidify/storybook-app typecheck",
     "storybook:build": "bun run --cwd apps/storybook build",
@@ -195,7 +192,9 @@
     "stories:coverage": "node scripts/story-coverage.js",
     "build:analyze": "node scripts/build-analyze.cjs",
     "build:analyze:compressed": "node scripts/build-analyze.cjs --compressed",
-    "audit:contrast": "node scripts/contrast-audit.js"
+    "audit:contrast": "node scripts/contrast-audit.js",
+    "scan:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' || true",
+    "ci:guard:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' && echo 'ERROR: Legacy liquid-glass artifacts found' && exit 1 || echo 'OK: No legacy artifacts found'"
   },
   "sideEffects": [
     "*.css",
