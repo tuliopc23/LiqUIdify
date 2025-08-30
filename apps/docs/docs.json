@@ -1,8 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Liquidify",
-  "description": "Production-ready React component library with liquid glass design and physics-based interactions",
-  "theme": "mint",
   "logo": {
     "light": "/Logo.svg",
     "dark": "/Logo.svg"
@@ -13,41 +11,45 @@
     "light": "#aeaeb2",
     "dark": "#1c1c1e"
   },
-  "appearance": {
-    "default": "system"
-  },
-  "font": {
-    "family": "-apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
-  },
-  "navigation": {
-    "groups": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "getting-started/installation",
-          "getting-started/quickstart",
-          "getting-started/project-setup"
-        ]
-      },
-      {
-        "group": "Core Concepts",
-        "pages": [
-          "core-concepts/",
-          "core-concepts/theme-system",
-          "core-concepts/performance"
-        ]
-      },
-      {
-        "group": "Base Components",
-        "pages": [
-          "components/glass-button",
-          "components/responsive-button",
-          "components/avatar",
-          "components/badge",
-          "components/banner"
-        ]
-      },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "index",
+        "getting-started/installation",
+        "getting-started/quickstart",
+        "getting-started/project-setup",
+        "snippets"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "core-concepts/liquid-glass-system",
+        "core-concepts/theme-system",
+        "core-concepts/performance"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/apple-hig-integration",
+        "guides/theming",
+        "guides/accessibility",
+        "guides/recipes",
+        "guides/live-previews"
+      ]
+    },
+    {
+      "group": "Base Components",
+      "pages": [
+        "components/glass-button",
+        "components/responsive-button",
+        "components/avatar",
+        "components/badge",
+        "components/banner"
+      ]
+    },
       {
         "group": "Form Components",
         "pages": [
@@ -107,16 +109,6 @@
         "pages": ["examples/dashboard", "examples/forms", "examples/pricing"]
       },
       {
-        "group": "Guides",
-        "pages": [
-          "guides/styling",
-          "guides/theming",
-          "guides/animations",
-          "guides/accessibility",
-          "guides/performance"
-        ]
-      },
-      {
         "group": "Integrations",
         "pages": [
           "integrations/nextjs",
@@ -156,8 +148,7 @@
         "group": "Resources",
         "pages": ["faq", "changelog", "contributing", "licenses"]
       }
-    ]
-  },
+    ],
   "footerSocials": {
     "github": "https://github.com/tuliopc23/LiqUIdify"
   }
