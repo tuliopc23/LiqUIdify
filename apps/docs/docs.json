@@ -1,6 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Liquidify",
+  "theme": "mint",
   "logo": {
     "light": "/Logo.svg",
     "dark": "/Logo.svg"
@@ -11,144 +12,23 @@
     "light": "#aeaeb2",
     "dark": "#1c1c1e"
   },
+  "tabs": [
+    {
+      "name": "Documentation",
+      "url": "docs"
+    }
+  ],
   "navigation": [
     {
       "group": "Getting Started",
       "pages": [
         "index",
-        "getting-started/installation",
+        "getting-started/installation", 
         "getting-started/quickstart",
-        "getting-started/project-setup",
         "snippets"
       ]
-    },
-    {
-      "group": "Core Concepts",
-      "pages": [
-        "core-concepts/liquid-glass-system",
-        "core-concepts/theme-system",
-        "core-concepts/performance"
-      ]
-    },
-    {
-      "group": "Guides",
-      "pages": [
-        "guides/apple-hig-integration",
-        "guides/theming",
-        "guides/accessibility",
-        "guides/recipes",
-        "guides/live-previews"
-      ]
-    },
-    {
-      "group": "Base Components",
-      "pages": [
-        "components/glass-button",
-        "components/responsive-button",
-        "components/avatar",
-        "components/badge",
-        "components/banner"
-      ]
-    },
-      {
-        "group": "Form Components",
-        "pages": [
-          "components/glass-textarea",
-          "components/glass-number-input",
-          "components/glass-input",
-          "components/glass-select",
-          "components/glass-checkbox",
-          "components/glass-radio",
-          "components/glass-switch",
-          "components/glass-slider"
-        ]
-      },
-      {
-        "group": "Navigation Components",
-        "pages": [
-          "components/glass-navigation",
-          "components/glass-breadcrumbs",
-          "components/glass-tabs",
-          "components/glass-pagination"
-        ]
-      },
-      {
-        "group": "Layout Components",
-        "pages": [
-          "components/glass-grid",
-          "components/glass-flex",
-          "components/glass-container",
-          "components/glass-card",
-          "components/glass-panel"
-        ]
-      },
-      {
-        "group": "Feedback Components",
-        "pages": [
-          "components/glass-modal",
-          "components/glass-tooltip",
-          "components/glass-popover",
-          "components/glass-notification",
-          "components/glass-alert",
-          "components/glass-toast",
-          "components/glass-loading"
-        ]
-      },
-      {
-        "group": "Advanced Components",
-        "pages": [
-          "components/glass-chart",
-          "components/glass-data-table",
-          "components/glass-calendar",
-          "components/glass-file-upload",
-          "components/glass-color-picker"
-        ]
-      },
-      {
-        "group": "Examples",
-        "pages": ["examples/dashboard", "examples/forms", "examples/pricing"]
-      },
-      {
-        "group": "Integrations",
-        "pages": [
-          "integrations/nextjs",
-          "integrations/react",
-          "integrations/vite",
-          "integrations/webpack",
-          "integrations/typescript"
-        ]
-      },
-      {
-        "group": "Development",
-        "pages": [
-          "development/setup",
-          "development/building",
-          "development/testing",
-          "development/deployment"
-        ]
-      },
-      {
-        "group": "Advanced",
-        "pages": [
-          "advanced/custom-components",
-          "advanced/plugins",
-          "advanced/server-side-rendering",
-          "advanced/optimization"
-        ]
-      },
-      {
-        "group": "Migration",
-        "pages": ["migrate/from-v1", "migrate/from-other-libraries"]
-      },
-      {
-        "group": "API Reference",
-        "pages": ["api/components", "api/hooks", "api/utilities", "api/types"]
-      },
-      {
-        "group": "Resources",
-        "pages": ["faq", "changelog", "contributing", "licenses"]
-      }
-    ],
+    }
+  ],
   "footerSocials": {
     "github": "https://github.com/tuliopc23/LiqUIdify"
   }

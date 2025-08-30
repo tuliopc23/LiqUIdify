@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CodeBlockProps {
   children: string;
   language?: string;
@@ -11,13 +9,13 @@ interface CodeBlockProps {
 
 export function CodeBlock({
   children,
-  language = 'tsx',
+  language = "tsx",
   title,
   showLineNumbers = false,
   highlight = [],
-  fileName
+  fileName,
 }: CodeBlockProps) {
-  const lines = children.trim().split('\n');
+  const lines = children.trim().split("\n");
 
   return (
     <div className="relative rounded-xl overflow-hidden bg-gray-900 shadow-2xl">
@@ -35,7 +33,7 @@ export function CodeBlock({
             </span>
           )}
         </div>
-        
+
         <div className="flex items-center gap-2">
           <span className="text-xs text-gray-400 uppercase tracking-wider">
             {language}
@@ -52,9 +50,9 @@ export function CodeBlock({
                 key={index}
                 className={`${
                   highlight.includes(index + 1)
-                    ? 'bg-blue-500/10 border-l-2 border-blue-400'
-                    : ''
-                } ${showLineNumbers ? 'pl-12' : 'px-4'} py-0.5 relative`}
+                    ? "bg-blue-500/10 border-l-2 border-blue-400"
+                    : ""
+                } ${showLineNumbers ? "pl-12" : "px-4"} py-0.5 relative`}
               >
                 {showLineNumbers && (
                   <span className="absolute left-0 w-8 text-right text-gray-500 text-xs select-none">

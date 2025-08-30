@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface TabsProps {
   children: React.ReactNode;
@@ -24,18 +24,16 @@ const TabsContext = React.createContext<{
   activeTab: string;
   setActiveTab: (value: string) => void;
 }>({
-  activeTab: '',
-  setActiveTab: () => {}
+  activeTab: "",
+  setActiveTab: () => {},
 });
 
 export function Tabs({ children, defaultValue }: TabsProps) {
-  const [activeTab, setActiveTab] = useState(defaultValue || '');
+  const [activeTab, setActiveTab] = useState(defaultValue || "");
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div className="w-full">
-        {children}
-      </div>
+      <div className="w-full">{children}</div>
     </TabsContext.Provider>
   );
 }
@@ -57,9 +55,10 @@ export function TabsTrigger({ value, children, icon }: TabsTriggerProps) {
       onClick={() => setActiveTab(value)}
       className={`
         flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-all duration-200
-        ${isActive 
-          ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm border border-gray-200/50 dark:border-gray-600/50' 
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
+        ${
+          isActive
+            ? "bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm border border-gray-200/50 dark:border-gray-600/50"
+            : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/50 dark:hover:bg-gray-700/30"
         }
       `}
     >
@@ -71,14 +70,10 @@ export function TabsTrigger({ value, children, icon }: TabsTriggerProps) {
 
 export function TabsContent({ value, children }: TabsContentProps) {
   const { activeTab } = React.useContext(TabsContext);
-  
+
   if (activeTab !== value) return null;
 
-  return (
-    <div className="mt-4 rounded-lg">
-      {children}
-    </div>
-  );
+  return <div className="mt-4 rounded-lg">{children}</div>;
 }
 
 // Compound component pattern

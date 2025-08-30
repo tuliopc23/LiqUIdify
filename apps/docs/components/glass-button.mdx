@@ -4,29 +4,62 @@ description: "Glass morphism button with Liquid Glass variants, adaptive effects
 ---
 
 import { GlassButton } from "@liquidify/react";
+import { SFSymbol } from "../components/SFSymbol";
 
 # Glass Button
 
-High quality button primitive built on the Liquid Glass system with adaptive variant blending, accessible focus management, optional loading states, and icon composition.
-
-```tsx
-<div className="flex flex-wrap gap-3">
-  <GlassButton variant="primary">Primary</GlassButton>
-  <GlassButton variant="secondary">Secondary</GlassButton>
-  <GlassButton variant="ghost">Ghost</GlassButton>
-  <GlassButton variant="destructive">Destructive</GlassButton>
+<div className="text-title-1 mb-6" style={{ color: "var(--ios-blue)" }}>
+  High quality button primitive built on the Liquid Glass system with adaptive
+  variant blending, accessible focus management, optional loading states, and
+  icon composition.
 </div>
-```
 
-## Installation
+<div className="glass-surface p-6 rounded-xl mb-8">
+  <div className="flex flex-wrap gap-3">
+    <GlassButton variant="primary">
+      <div className="flex items-center gap-2">
+        <SFSymbol name="play-fill" size="sm" color="white" />
+        Primary
+      </div>
+    </GlassButton>
+    <GlassButton variant="secondary">
+      <div className="flex items-center gap-2">
+        <SFSymbol name="gear" size="sm" color="var(--ios-blue)" />
+        Secondary
+      </div>
+    </GlassButton>
+    <GlassButton variant="ghost">
+      <div className="flex items-center gap-2">
+        <SFSymbol
+          name="sparkles"
+          size="sm"
+          color="var(--apple-label-primary)"
+        />
+        Ghost
+      </div>
+    </GlassButton>
+    <GlassButton variant="destructive">
+      <div className="flex items-center gap-2">
+        <SFSymbol name="trash" size="sm" color="white" />
+        Destructive
+      </div>
+    </GlassButton>
+  </div>
+</div>
 
-<Tip>Install the Liquidify package to get access to all glass components.</Tip>
+## <div className="flex items-center gap-3 text-title-2 mb-4"><SFSymbol name="cube-box" size="xl" color="var(--ios-purple)" />Installation</div>
 
-```bash
-npm install @liquidify/react
-```
+<div className="glass-surface p-4 rounded-xl mb-6">
+  <div className="flex items-center gap-3 mb-3">
+    <SFSymbol name="lightbulb-fill" size="md" color="var(--ios-yellow)" />
+    <span className="text-subhead font-medium">
+      Install the Liquidify package to get access to all glass components.
+    </span>
+  </div>
+  ```bash npm install @liquidify/react ```
+</div>
 
-## Basic Usage
+## <div className="flex items-center gap-3 text-title-2 mb-4"><SFSymbol name="play-circle" size="xl" color="var(--ios-green)" />Basic Usage</div>
 
 ```tsx
 import { GlassButton } from "@liquidify/react";
@@ -34,20 +67,29 @@ import { GlassButton } from "@liquidify/react";
 export function MyComponent() {
   return (
     <GlassButton variant="primary" onClick={() => console.log("Clicked!")}>
-      Click me
+      <div className="flex items-center gap-2">
+        <SFSymbol name="hand-tap" size="sm" color="white" />
+        Click me
+      </div>
     </GlassButton>
   );
 }
 ```
 
-## Variants
+## <div className="flex items-center gap-3 text-title-2 mb-4"><SFSymbol name="paintpalette-fill" size="xl" color="var(--ios-teal)" />Variants</div>
 
-```tsx
-<div className="grid gap-4 sm:grid-cols-2">
-  {/* Primary */}
-  <div>
-    <p className="text-xs mb-2 font-medium">Primary</p>
-    <GlassButton variant="primary">Primary Button</GlassButton>
+<div className="grid gap-6 sm:grid-cols-2 mb-8">
+  <div className="glass-surface p-4 rounded-xl">
+    <div className="flex items-center gap-2 mb-3">
+      <SFSymbol name="star-fill" size="sm" color="var(--ios-blue)" />
+      <p className="text-headline font-semibold">Primary</p>
+    </div>
+    <GlassButton variant="primary">
+      <div className="flex items-center gap-2">
+        <SFSymbol name="checkmark" size="sm" color="white" />
+        Primary Button
+      </div>
+    </GlassButton>
   </div>
   {/* Secondary */}
   <div>

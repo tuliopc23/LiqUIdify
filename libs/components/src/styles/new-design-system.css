@@ -158,103 +158,52 @@
   background-color: rgba(59, 130, 246, 0.2) !important;
 }
 
-/* ===== RADIX UI COMPONENT OVERRIDES - FORCE BLUE COLORS ===== */
+/* ===== SHADCN/UI COMPONENT OVERRIDES ===== */
 
-/* Radix Accordion Overrides */
-[data-radix-accordion-item],
+/* Accordion Component */
 .accordion-item {
-  background-color: var(--color-material-regular) !important;
-  border-color: var(--color-separator-non-opaque) !important;
-  color: var(--color-label-primary) !important;
+  background-color: rgb(var(--card));
+  border-color: rgb(var(--border));
+  color: rgb(var(--foreground));
 }
 
-[data-radix-accordion-trigger],
 .accordion-trigger {
-  background-color: transparent !important;
-  color: var(--color-label-primary) !important;
-  border-color: var(--color-separator-non-opaque) !important;
+  background-color: transparent;
+  color: rgb(var(--foreground));
+  border-color: rgb(var(--border));
 }
 
-[data-radix-accordion-trigger]:hover,
 .accordion-trigger:hover {
-  background-color: var(--color-fill-quaternary) !important;
-  color: var(--color-primary) !important;
+  background-color: rgb(var(--accent));
+  color: rgb(var(--accent-foreground));
 }
 
-[data-radix-accordion-content],
 .accordion-content {
-  background-color: var(--color-material-thin) !important;
-  color: var(--color-label-primary) !important;
-  border-color: var(--color-separator-non-opaque) !important;
+  background-color: rgb(var(--card));
+  color: rgb(var(--foreground));
+  border-color: rgb(var(--border));
 }
 
-/* Radix Dialog Overrides */
-[data-radix-dialog-overlay],
+/* Dialog Component */
 .dialog-overlay {
-  background-color: rgba(37, 99, 235, 0.3) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background-color: rgb(var(--background) / 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-[data-radix-dialog-content],
 .dialog-content {
-  background-color: var(--color-material-regular) !important;
-  border-color: var(--color-separator-non-opaque) !important;
-  color: var(--color-label-primary) !important;
-  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25) !important;
+  background-color: rgb(var(--card));
+  border-color: rgb(var(--border));
+  color: rgb(var(--foreground));
+  box-shadow: 0 25px 50px -12px rgb(var(--primary) / 0.25);
 }
 
-[data-radix-dialog-title],
 .dialog-title {
-  color: var(--color-label-primary) !important;
+  color: rgb(var(--foreground));
 }
 
-[data-radix-dialog-description],
 .dialog-description {
-  color: var(--color-label-secondary) !important;
-}
-
-/* Radix Radio Group Overrides */
-[data-radix-radio-group-item],
-.radio-item {
-  background-color: var(--color-material-thin) !important;
-  border-color: var(--color-separator-non-opaque) !important;
-  color: var(--color-label-primary) !important;
-}
-
-[data-radix-radio-group-item]:hover,
-.radio-item:hover {
-  background-color: var(--color-fill-quaternary) !important;
-  border-color: var(--color-primary) !important;
-}
-
-[data-radix-radio-group-item][data-state="checked"],
-.radio-item[data-state="checked"] {
-  background-color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
-  color: white !important;
-}
-
-[data-radix-radio-group-indicator],
-.radio-indicator {
-  background-color: currentColor !important;
-}
-
-/* Generic Radix Component Overrides */
-[data-radix-collection-item],
-[data-state],
-[data-highlighted],
-[data-selected] {
-  background-color: var(--color-material-thin) !important;
-  color: var(--color-label-primary) !important;
-  border-color: var(--color-separator-non-opaque) !important;
-}
-
-[data-state="open"],
-[data-highlighted="true"],
-[data-selected="true"] {
-  background-color: var(--color-fill-secondary) !important;
-  color: var(--color-primary) !important;
+  color: rgb(var(--muted-foreground));
 }
 
 /* Force override any remaining gray colors in third-party components */
@@ -641,10 +590,122 @@
   gap: var(--spacing-md);
 }
 
-/* ===== COMPONENT READY FOR NEW IMPLEMENTATION ===== */
+/* ===== LIQUID GLASS TAILWIND UTILITIES ===== */
 
-/* All legacy glass classes have been removed.
-   This CSS system is now ready for your fresh implementation. */
+/* Core Liquid Glass Animation Keyframes */
+@keyframes liquidJiggle {
+  0%, 100% { 
+    transform: translate(0, 0) rotate(0deg); 
+  }
+  25% { 
+    transform: translate(-2px, -1px) rotate(-0.5deg); 
+  }
+  50% { 
+    transform: translate(2px, 1px) rotate(0.5deg); 
+  }
+  75% { 
+    transform: translate(-1px, 2px) rotate(-0.3deg); 
+  }
+}
+
+@keyframes liquidRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(20);
+    opacity: 0;
+  }
+}
+
+@keyframes liquidPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.05); 
+  }
+}
+
+@keyframes liquidFloat {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-6px); 
+  }
+}
+
+/* Liquid Glass Utility Classes */
+@layer utilities {
+  .liquid-glass-base {
+    @apply relative backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+  
+  .liquid-glass-subtle {
+    @apply backdrop-blur-sm bg-white/5 border-white/10;
+  }
+  
+  .liquid-glass-medium {
+    @apply backdrop-blur-xl bg-white/10 border-white/20;
+  }
+  
+  .liquid-glass-strong {
+    @apply backdrop-blur-3xl bg-white/20 border-white/30;
+  }
+  
+  .liquid-hover {
+    @apply hover:bg-white/15 hover:border-white/25 transition-all duration-300;
+  }
+  
+  .liquid-pressed {
+    @apply scale-95 bg-white/25 transition-transform duration-150;
+  }
+  
+  .liquid-jiggle {
+    animation: liquidJiggle 0.8s ease-out;
+  }
+  
+  .liquid-ripple {
+    animation: liquidRipple 0.6s ease-out forwards;
+  }
+  
+  .liquid-pulse {
+    animation: liquidPulse 2s ease-in-out infinite;
+  }
+  
+  .liquid-float {
+    animation: liquidFloat 3s ease-in-out infinite;
+  }
+  
+  /* Dark Mode Variants */
+  .dark .liquid-glass-base {
+    @apply bg-black/10 border-white/10;
+  }
+  
+  .dark .liquid-glass-subtle {
+    @apply bg-black/5 border-white/5;
+  }
+  
+  .dark .liquid-glass-medium {
+    @apply bg-black/10 border-white/10;
+  }
+  
+  .dark .liquid-glass-strong {
+    @apply bg-black/20 border-white/20;
+  }
+  
+  .dark .liquid-hover {
+    @apply hover:bg-black/15 hover:border-white/15;
+  }
+  
+  .dark .liquid-pressed {
+    @apply bg-black/25;
+  }
+}
 
 /* ===== RESPONSIVE DESIGN ===== */
 

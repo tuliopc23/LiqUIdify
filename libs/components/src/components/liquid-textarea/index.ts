@@ -1,0 +1,1 @@
+export { LiquidTextarea, liquidTextareaVariants, type LiquidTextareaProps } from "./liquid-textarea";

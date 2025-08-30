@@ -1,8 +1,10 @@
-import React from 'react';
-import SnippetPreview from './SnippetPreview';
-
 // Enhanced wrapper for existing snippet components with Apple design
-export function SnippetShowcase({ snippetComponent, title, description, category }) {
+export function SnippetShowcase({
+  snippetComponent,
+  title,
+  description,
+  category,
+}) {
   return (
     <div className="mb-8">
       {/* Category Header */}
@@ -14,12 +16,10 @@ export function SnippetShowcase({ snippetComponent, title, description, category
           </span>
         </div>
       )}
-      
+
       {/* Snippet Component */}
-      <div className="relative">
-        {snippetComponent}
-      </div>
-      
+      <div className="relative">{snippetComponent}</div>
+
       {/* Optional description */}
       {description && (
         <div className="mt-4 p-4 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg border border-blue-200/30 dark:border-blue-800/30">
@@ -60,7 +60,7 @@ export function QuickSnippets() {
       title: "Install Liquidify",
       description: "Get started with Liquidify in your project",
       code: "npm install @liquidify/react",
-      language: "bash"
+      language: "bash",
     },
     {
       title: "Basic Import",
@@ -74,7 +74,7 @@ function App() {
     </GlassButton>
   );
 }`,
-      language: "tsx"
+      language: "tsx",
     },
     {
       title: "Theme Setup",
@@ -88,8 +88,8 @@ function App() {
     </GlassUIProvider>
   );
 }`,
-      language: "tsx"
-    }
+      language: "tsx",
+    },
   ];
 
   return (

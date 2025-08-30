@@ -1,0 +1,539 @@
+---
+title: "Apple HIG Color System"
+description: "Complete implementation of Apple's Human Interface Guidelines color system with iOS system colors, semantic tokens, and liquid glass extensions"
+---
+
+import { SFSymbol } from "./components/SFSymbol";
+
+# Apple HIG Color System
+
+<div className="text-title-1 mb-6" style={{ color: "var(--ios-blue)" }}>
+  Authentic Apple design colors with comprehensive light/dark mode support and
+  liquid glass extensions.
+</div>
+
+## <div className="flex items-center gap-3 text-title-2 mb-6"><SFSymbol name="paintpalette-fill" size="xl" color="var(--ios-blue)" />iOS System Colors</div>
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <div className="glass-surface p-6 rounded-xl">
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-8 h-8 rounded-full" style={{backgroundColor: 'var(--ios-blue)'}}></div>
+      <div>
+        <h3 className="text-headline font-semibold" style={{color: 'var(--apple-label-primary)'}}>iOS Blue</h3>
+        <p className="text-footnote" style={{color: 'var(--apple-label-secondary)'}}>Primary brand color</p>
+      </div>
+    </div>
+    <div className="space-y-2 text-caption-1" style={{color: 'var(--apple-label-tertiary)'}}>
+      <div>Light: #007AFF</div>
+      <div>Dark: #0A84FF</div>
+      <div>CSS: var(--ios-blue)</div>
+    </div>
+  </div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-green)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Green
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Success states
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #34C759</div>
+    <div>Dark: #30D158</div>
+    <div>CSS: var(--ios-green)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-red)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Red
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Error states
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #FF3B30</div>
+    <div>Dark: #FF453A</div>
+    <div>CSS: var(--ios-red)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-orange)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Orange
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Warning states
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #FF9500</div>
+    <div>Dark: #FF9F0A</div>
+    <div>CSS: var(--ios-orange)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-yellow)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Yellow
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Attention
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #FFCC00</div>
+    <div>Dark: #FFD60A</div>
+    <div>CSS: var(--ios-yellow)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-purple)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Purple
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Creative tools
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #AF52DE</div>
+    <div>Dark: #BF5AF2</div>
+    <div>CSS: var(--ios-purple)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-pink)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Pink
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Accent color
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #FF2D92</div>
+    <div>Dark: #FF375F</div>
+    <div>CSS: var(--ios-pink)</div>
+  </div>
+</div>
+
+{" "}
+<div className="glass-surface p-6 rounded-xl">
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="w-8 h-8 rounded-full"
+      style={{ backgroundColor: "var(--ios-teal)" }}
+    ></div>
+    <div>
+      <h3
+        className="text-headline font-semibold"
+        style={{ color: "var(--apple-label-primary)" }}
+      >
+        iOS Teal
+      </h3>
+      <p
+        className="text-footnote"
+        style={{ color: "var(--apple-label-secondary)" }}
+      >
+        Cool accent
+      </p>
+    </div>
+  </div>
+  <div
+    className="space-y-2 text-caption-1"
+    style={{ color: "var(--apple-label-tertiary)" }}
+  >
+    <div>Light: #5AC8FA</div>
+    <div>Dark: #64D2FF</div>
+    <div>CSS: var(--ios-teal)</div>
+  </div>
+</div>
+
+  <div className="glass-surface p-6 rounded-xl">
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-8 h-8 rounded-full" style={{backgroundColor: 'var(--ios-indigo)'}}></div>
+      <div>
+        <h3 className="text-headline font-semibold" style={{color: 'var(--apple-label-primary)'}}>iOS Indigo</h3>
+        <p className="text-footnote" style={{color: 'var(--apple-label-secondary)'}}>Deep blue</p>
+      </div>
+    </div>
+    <div className="space-y-2 text-caption-1" style={{color: 'var(--apple-label-tertiary)'}}>
+      <div>Light: #5856D6</div>
+      <div>Dark: #5E5CE6</div>
+      <div>CSS: var(--ios-indigo)</div>
+    </div>
+  </div>
+</div>
+
+## <div className="flex items-center gap-3 text-title-2 mb-6"><SFSymbol name="textformat" size="xl" color="var(--ios-purple)" />Semantic Colors</div>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div className="glass-surface p-6 rounded-xl">
+    <h3 className="text-headline font-semibold mb-4" style={{color: 'var(--apple-label-primary)'}}>Label Colors</h3>
+    <div className="space-y-3">
+      <div className="flex justify-between items-center">
+        <span className="text-body" style={{color: 'var(--apple-label-primary)'}}>Primary Label</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-label-primary)</code>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-body" style={{color: 'var(--apple-label-secondary)'}}>Secondary Label</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-label-secondary)</code>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-body" style={{color: 'var(--apple-label-tertiary)'}}>Tertiary Label</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-label-tertiary)</code>
+      </div>
+    </div>
+  </div>
+
+  <div className="glass-surface p-6 rounded-xl">
+    <h3 className="text-headline font-semibold mb-4" style={{color: 'var(--apple-label-primary)'}}>Background Colors</h3>
+    <div className="space-y-3">
+      <div className="flex justify-between items-center">
+        <span className="text-body">Primary Background</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-background-primary)</code>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-body">Secondary Background</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-background-secondary)</code>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-body">Tertiary Background</span>
+        <code className="text-caption-1 px-2 py-1 rounded bg-gray-100">var(--apple-background-tertiary)</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+## <div className="flex items-center gap-3 text-title-2 mb-6"><SFSymbol name="drop-triangle-fill" size="xl" color="var(--ios-teal)" />Liquid Glass Colors</div>
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <div className="p-6 rounded-xl border" style={{background: 'var(--liquid-blue)', borderColor: 'var(--liquid-border-medium)'}}>
+    <div className="flex items-center gap-3 mb-4">
+      <SFSymbol name="drop-fill" size="lg" color="white" />
+      <div>
+        <h3 className="text-headline font-semibold text-white">Liquid Blue</h3>
+        <p className="text-footnote text-white opacity-80">Primary actions</p>
+      </div>
+    </div>
+    <code className="text-caption-1 text-white opacity-70">var(--liquid-blue)</code>
+  </div>
+
+{" "}
+<div
+  className="p-6 rounded-xl border"
+  style={{
+    background: "var(--liquid-green)",
+    borderColor: "var(--liquid-border-medium)",
+  }}
+>
+  <div className="flex items-center gap-3 mb-4">
+    <SFSymbol name="checkmark-circle-fill" size="lg" color="white" />
+    <div>
+      <h3 className="text-headline font-semibold text-white">Liquid Green</h3>
+      <p className="text-footnote text-white opacity-80">Success states</p>
+    </div>
+  </div>
+  <code className="text-caption-1 text-white opacity-70">
+    var(--liquid-green)
+  </code>
+</div>
+
+{" "}
+<div
+  className="p-6 rounded-xl border"
+  style={{
+    background: "var(--liquid-purple)",
+    borderColor: "var(--liquid-border-medium)",
+  }}
+>
+  <div className="flex items-center gap-3 mb-4">
+    <SFSymbol name="wand-and-rays" size="lg" color="white" />
+    <div>
+      <h3 className="text-headline font-semibold text-white">Liquid Purple</h3>
+      <p className="text-footnote text-white opacity-80">Creative tools</p>
+    </div>
+  </div>
+  <code className="text-caption-1 text-white opacity-70">
+    var(--liquid-purple)
+  </code>
+</div>
+
+{" "}
+<div
+  className="p-6 rounded-xl border"
+  style={{
+    background: "var(--liquid-orange)",
+    borderColor: "var(--liquid-border-medium)",
+  }}
+>
+  <div className="flex items-center gap-3 mb-4">
+    <SFSymbol name="exclamationmark-triangle-fill" size="lg" color="white" />
+    <div>
+      <h3 className="text-headline font-semibold text-white">Liquid Orange</h3>
+      <p className="text-footnote text-white opacity-80">Warning states</p>
+    </div>
+  </div>
+  <code className="text-caption-1 text-white opacity-70">
+    var(--liquid-orange)
+  </code>
+</div>
+
+{" "}
+<div
+  className="p-6 rounded-xl border"
+  style={{
+    background: "var(--liquid-red)",
+    borderColor: "var(--liquid-border-medium)",
+  }}
+>
+  <div className="flex items-center gap-3 mb-4">
+    <SFSymbol name="xmark-circle-fill" size="lg" color="white" />
+    <div>
+      <h3 className="text-headline font-semibold text-white">Liquid Red</h3>
+      <p className="text-footnote text-white opacity-80">Error states</p>
+    </div>
+  </div>
+  <code className="text-caption-1 text-white opacity-70">
+    var(--liquid-red)
+  </code>
+</div>
+
+  <div className="p-6 rounded-xl border" style={{background: 'var(--liquid-teal)', borderColor: 'var(--liquid-border-medium)'}}>
+    <div className="flex items-center gap-3 mb-4">
+      <SFSymbol name="sparkles" size="lg" color="white" />
+      <div>
+        <h3 className="text-headline font-semibold text-white">Liquid Teal</h3>
+        <p className="text-footnote text-white opacity-80">Cool accents</p>
+      </div>
+    </div>
+    <code className="text-caption-1 text-white opacity-70">var(--liquid-teal)</code>
+  </div>
+</div>
+
+## <div className="flex items-center gap-3 text-title-2 mb-6"><SFSymbol name="square-3-layers-3d" size="xl" color="var(--ios-indigo)" />Glass Surface Effects</div>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div className="space-y-4">
+    <h3 className="text-headline font-semibold" style={{color: 'var(--apple-label-primary)'}}>Surface Variations</h3>
+    
+    <div className="glass-ultra-thin p-4 rounded-xl">
+      <div className="flex items-center gap-3 mb-2">
+        <SFSymbol name="circle" size="md" color="var(--ios-blue)" />
+        <span className="text-subhead font-medium">Ultra Thin</span>
+      </div>
+      <p className="text-caption-1" style={{color: 'var(--apple-label-secondary)'}}>30% opacity, subtle blur</p>
+      <code className="text-caption-2">glass-ultra-thin</code>
+    </div>
+
+    <div className="glass-surface p-4 rounded-xl">
+      <div className="flex items-center gap-3 mb-2">
+        <SFSymbol name="circle-fill" size="md" color="var(--ios-blue)" />
+        <span className="text-subhead font-medium">Surface</span>
+      </div>
+      <p className="text-caption-1" style={{color: 'var(--apple-label-secondary)'}}>60% opacity, medium blur</p>
+      <code className="text-caption-2">glass-surface</code>
+    </div>
+
+    <div className="glass-elevated p-4 rounded-xl">
+      <div className="flex items-center gap-3 mb-2">
+        <SFSymbol name="circle-hexagongrid-fill" size="md" color="var(--ios-blue)" />
+        <span className="text-subhead font-medium">Elevated</span>
+      </div>
+      <p className="text-caption-1" style={{color: 'var(--apple-label-secondary)'}}>80% opacity, strong blur</p>
+      <code className="text-caption-2">glass-elevated</code>
+    </div>
+
+    <div className="glass-heavy p-4 rounded-xl">
+      <div className="flex items-center gap-3 mb-2">
+        <SFSymbol name="square-fill" size="md" color="var(--ios-blue)" />
+        <span className="text-subhead font-medium">Heavy</span>
+      </div>
+      <p className="text-caption-1" style={{color: 'var(--apple-label-secondary)'}}>90% opacity, maximum blur</p>
+      <code className="text-caption-2">glass-heavy</code>
+    </div>
+
+  </div>
+
+  <div className="glass-surface p-6 rounded-xl">
+    <h3 className="text-headline font-semibold mb-4" style={{color: 'var(--apple-label-primary)'}}>CSS Variables</h3>
+    <div className="space-y-2 text-caption-1 font-mono" style={{color: 'var(--apple-label-secondary)'}}>
+      <div>--glass-blur: 20px</div>
+      <div>--glass-opacity: 0.8</div>
+      <div>--glass-border-width: 1px</div>
+      <div>--glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1)</div>
+      <div>--glass-shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.15)</div>
+    </div>
+  </div>
+</div>
+
+## <div className="flex items-center gap-3 text-title-2 mb-6"><SFSymbol name="code" size="xl" color="var(--ios-green)" />Usage Examples</div>
+
+```css
+/* Using iOS system colors */
+.primary-button {
+  background-color: var(--ios-blue);
+  color: white;
+}
+
+/* Using semantic colors */
+.card-title {
+  color: var(--apple-label-primary);
+}
+
+.card-subtitle {
+  color: var(--apple-label-secondary);
+}
+
+/* Using liquid glass effects */
+.glass-card {
+  background: var(--liquid-surface-medium);
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--liquid-border-light);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Combining colors with glass effects */
+.success-notification {
+  background: var(--liquid-green);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(52, 199, 89, 0.3);
+}
+```
+
+<div className="glass-surface p-6 rounded-xl mt-8">
+  <div className="flex items-center gap-3 mb-4">
+    <SFSymbol name="lightbulb-fill" size="lg" color="var(--ios-yellow)" />
+    <h3
+      className="text-headline font-semibold"
+      style={{ color: "var(--apple-label-primary)" }}
+    >
+      Best Practices
+    </h3>
+  </div>
+  <ul
+    className="space-y-2 text-body"
+    style={{ color: "var(--apple-label-secondary)" }}
+  >
+    <li>
+      • Use semantic colors for text and backgrounds to ensure proper contrast
+      in both light and dark modes
+    </li>
+    <li>
+      • Apply liquid glass colors for interactive elements and brand highlights
+    </li>
+    <li>
+      • Combine glass surface classes with appropriate color variables for depth
+      and hierarchy
+    </li>
+    <li>
+      • Test color combinations with both light and dark appearance settings
+    </li>
+    <li>• Follow WCAG 2.1 AA guidelines for color contrast ratios</li>
+  </ul>
+</div>

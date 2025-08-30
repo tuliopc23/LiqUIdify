@@ -3,34 +3,55 @@ title: "Liquidify"
 description: "Production-ready React component library with liquid glass design and physics-based interactions inspired by Apple's Human Interface Guidelines"
 ---
 
+import { SFSymbol, SFSymbolGrid } from "./components/SFSymbol";
+
 # Welcome to Liquidify
 
-<div className="text-display font-display mb-8">
-  Build beautiful, accessible React applications with **liquid glass design** and
-  **physics-based interactions** inspired by Apple's Human Interface Guidelines.
+<div
+  className="text-large-title font-display mb-8"
+  style={{ color: "var(--ios-blue)" }}
+>
+  Build beautiful, accessible React applications with **liquid glass design**
+  and **physics-based interactions** inspired by Apple's Human Interface
+  Guidelines.
 </div>
 
 <CardGroup cols={3}>
-  <Card title="Liquid Glass Design" icon="star">
-    Sophisticated glassmorphism effects with layered transparency, backdrop blur, 
-    and subtle specular highlights that create depth and visual hierarchy.
+  <Card title="Liquid Glass Design" icon={<SFSymbol name="drop-fill" size="lg" color="var(--ios-blue)" />}>
+    <div className="glass-surface p-4 rounded-xl">
+      Sophisticated glassmorphism effects with layered transparency, backdrop blur, 
+      and subtle specular highlights that create depth and visual hierarchy.
+    </div>
   </Card>
 
-  <Card title="Apple HIG Inspired" icon="gear">
-    Design patterns and interaction principles directly inspired by Apple's Human 
-    Interface Guidelines for iOS, macOS, and visionOS platforms.
-  </Card>
+{" "}
+<Card
+  title="Apple HIG Inspired"
+  icon={
+    <SFSymbol name="apple-logo" size="lg" color="var(--apple-label-primary)" />
+  }
+>
+  <div className="glass-surface p-4 rounded-xl">
+    Design patterns and interaction principles directly inspired by Apple's
+    Human Interface Guidelines for iOS, macOS, and visionOS platforms.
+  </div>
+</Card>
 
-  <Card title="Accessibility First" icon="heart">
-    Built with WCAG 2.1 AA compliance, comprehensive keyboard navigation, 
-    screen reader support, and focus management out of the box.
+  <Card title="Accessibility First" icon={<SFSymbol name="heart-fill" size="lg" color="var(--ios-red)" />}>
+    <div className="glass-surface p-4 rounded-xl">
+      Built with WCAG 2.1 AA compliance, comprehensive keyboard navigation, 
+      screen reader support, and focus management out of the box.
+    </div>
   </Card>
 </CardGroup>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-magnifyingglass"></span>Quick Start</span>
+## <div className="flex items-center gap-3 text-title-2"><SFSymbol name="magnifyingglass" size="xl" color="var(--ios-blue)" />Quick Start</div>
 
 <Tip>
-  Get started with Liquidify in seconds using your favorite package manager.
+  <div className="flex items-center gap-2">
+    <SFSymbol name="lightbulb-fill" size="md" color="var(--ios-yellow)" />
+    Get started with Liquidify in seconds using your favorite package manager.
+  </div>
 </Tip>
 
 ```bash
@@ -46,96 +67,114 @@ pnpm add @liquidify/react
 import { GlassButton, ThemeProvider } from '@liquidify/react'
 
 function App() {
-  return (
-    <ThemeProvider>
-      <GlassButton variant="primary">Get Started</GlassButton>
-    </ThemeProvider>
-  )
+return (
+<ThemeProvider>
+<GlassButton variant="primary">Get Started</GlassButton>
+</ThemeProvider>
+)
 }
+
 ```
 </Frame>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-star-fill"></span>Core Features</span>
+## <div className="flex items-center gap-3 text-title-2"><SFSymbol name="star-fill" size="xl" color="var(--ios-yellow)" />Core Features</div>
 
 <AccordionGroup>
-  <Accordion title="🌊 Liquid Glass Design Language" icon="star">
-    A comprehensive design system featuring layered transparency effects, content-aware adaptation, 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="drop-triangle" size="md" color="var(--ios-blue)" />Liquid Glass Design Language</div>}>
+    A comprehensive design system featuring layered transparency effects, content-aware adaptation,
     specular highlights, and dynamic backdrop filtering that creates the signature liquid glass aesthetic.
   </Accordion>
 
-  <Accordion title="🍎 Apple HIG Integration" icon="gear">
-    Design patterns, spacing systems, typography scales, and interaction principles directly 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="apple-logo" size="md" color="var(--apple-label-primary)" />Apple HIG Integration</div>}>
+    Design patterns, spacing systems, typography scales, and interaction principles directly
     inspired by Apple's Human Interface Guidelines across iOS, macOS, and visionOS platforms.
   </Accordion>
 
-  <Accordion title="⚡ 50+ Premium Components" icon="heart">
-    Production-ready components from basic UI elements to complex data visualization tools, 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="cube-box-fill" size="md" color="var(--ios-purple)" />50+ Premium Components</div>}>
+    Production-ready components from basic UI elements to complex data visualization tools,
     all built with performance optimization and developer experience in mind.
   </Accordion>
 
-  <Accordion title="🎯 Physics-Based Interactions" icon="moon">
-    Natural feeling animations powered by spring physics, momentum scrolling, 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="wand-and-rays" size="md" color="var(--ios-pink)" />Physics-Based Interactions</div>}>
+    Natural feeling animations powered by spring physics, momentum scrolling,
     and realistic motion curves that respond intuitively to user input.
   </Accordion>
 
-  <Accordion title="🌙 Adaptive Theming" icon="check">
-    Seamless light/dark mode support with automatic system detection, smooth transitions, 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="moon-fill" size="md" color="var(--ios-indigo)" />Adaptive Theming</div>}>
+    Seamless light/dark mode support with automatic system detection, smooth transitions,
     and customizable color tokens that adapt to ambient lighting conditions.
   </Accordion>
 
-  <Accordion title="📝 TypeScript Excellence" icon="code">
-    Built with TypeScript from the ground up featuring comprehensive type definitions, 
+  <Accordion title={<div className="flex items-center gap-3"><SFSymbol name="swift" size="md" color="var(--ios-orange)" />TypeScript Excellence</div>}>
+    Built with TypeScript from the ground up featuring comprehensive type definitions,
     excellent IntelliSense support, and strict type safety for enterprise applications.
   </Accordion>
 </AccordionGroup>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-house"></span>Component Ecosystem</span>
+## <div className="flex items-center gap-3 text-title-2"><SFSymbol name="house-fill" size="xl" color="var(--ios-green)" />Component Ecosystem</div>
 
 <CardGroup cols={2}>
-  <Card title="Foundation Components" icon="plus" href="/components/glass-button">
-    Essential building blocks including buttons, inputs, cards, and navigation elements 
-    with sophisticated liquid glass effects and Apple-inspired interactions.
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="building-columns" size="md" color="var(--ios-blue)" />Foundation Components</div>} href="/components/glass-button">
+    <div className="glass-surface p-3 rounded-lg">
+      Essential building blocks including buttons, inputs, cards, and navigation elements
+      with sophisticated liquid glass effects and Apple-inspired interactions.
+    </div>
   </Card>
 
-  <Card title="Form & Input Controls" icon="check" href="/components/form-field">
-    Complete form ecosystem with validation, accessibility features, error handling, 
-    and beautiful glass styling that maintains usability across all devices.
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="doc-text" size="md" color="var(--ios-green)" />Form & Input Controls</div>} href="/components/form-field">
+    <div className="glass-surface p-3 rounded-lg">
+      Complete form ecosystem with validation, accessibility features, error handling,
+      and beautiful glass styling that maintains usability across all devices.
+    </div>
   </Card>
 
-  <Card title="Feedback & Communication" icon="bell" href="/components/toast">
-    Modals, toasts, notifications, alerts, and loading states that provide clear, 
-    contextual user feedback with appropriate urgency and visual hierarchy.
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="bell-fill" size="md" color="var(--ios-orange)" />Feedback & Communication</div>} href="/components/toast">
+    <div className="glass-surface p-3 rounded-lg">
+      Modals, toasts, notifications, alerts, and loading states that provide clear,
+      contextual user feedback with appropriate urgency and visual hierarchy.
+    </div>
   </Card>
 
-  <Card title="Advanced Data Components" icon="star" href="/components/liquid-glass">
-    Sophisticated components including charts, tables, command palettes, tree views, 
-    and data visualization tools optimized for complex application interfaces.
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="chart-bar-fill" size="md" color="var(--ios-purple)" />Advanced Data Components</div>} href="/components/liquid-glass">
+    <div className="glass-surface p-3 rounded-lg">
+      Sophisticated components including charts, tables, command palettes, tree views,
+      and data visualization tools optimized for complex application interfaces.
+    </div>
   </Card>
 </CardGroup>
 
 <Check>
-**Ready to Build?** Explore our comprehensive component library and start building beautiful applications today.
+  <div className="flex items-center gap-2">
+    <SFSymbol name="checkmark-circle-fill" size="md" color="var(--ios-green)" />
+    **Ready to Build?** Explore our comprehensive component library and start building beautiful applications today.
+  </div>
 </Check>
 
-## <span className="sf-icon-text"><span className="sf-icon sf-bookmark"></span>What's Next?</span>
+## <div className="flex items-center gap-3 text-title-2"><SFSymbol name="bookmark-fill" size="xl" color="var(--ios-teal)" />What's Next?</div>
 
 <CardGroup cols={3}>
-  <Card title="Installation Guide" icon="download" href="/getting-started/installation">
-    Get up and running with Liquidify in minutes
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="arrow-down-circle-fill" size="md" color="var(--ios-blue)" />Installation Guide</div>} href="/getting-started/installation">
+    <div className="glass-ultra-thin p-3 rounded-lg">
+      Get up and running with Liquidify in minutes
+    </div>
   </Card>
 
-  <Card title="Browse Components" icon="star" href="/components/glass-button">
-    Explore our comprehensive component library
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="square-grid-2x2-fill" size="md" color="var(--ios-purple)" />Browse Components</div>} href="/components/glass-button">
+    <div className="glass-ultra-thin p-3 rounded-lg">
+      Explore our comprehensive component library
+    </div>
   </Card>
 
-  <Card title="View Examples" icon="code" href="/examples/dashboard-example">
-    See Liquidify in action with real examples
+  <Card title={<div className="flex items-center gap-2"><SFSymbol name="doc-plaintext" size="md" color="var(--ios-green)" />View Examples</div>} href="/examples/dashboard-example">
+    <div className="glass-ultra-thin p-3 rounded-lg">
+      See Liquidify in action with real examples
+    </div>
   </Card>
 </CardGroup>
 
 ---
 
-<div className="text-center text-footnote text-muted mt-12">
-  Built with <span className="sf-icon sf-heart-fill text-liquid-accent"></span> by the Liquidify team
+<div className="text-center text-footnote mt-12" style={{color: 'var(--apple-label-secondary)'}}>
+  Built with <SFSymbol name="heart-fill" size="sm" color="var(--ios-red)" className="inline-block" /> by the Liquidify team
 </div>
 ```
