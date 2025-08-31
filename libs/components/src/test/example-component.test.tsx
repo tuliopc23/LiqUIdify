@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { vi, expect, test, beforeAll } from "vitest";
+import { beforeAll, expect, test, vi } from "vitest";
 import { setupDOM } from "./test-setup";
 
 // Set up DOM environment

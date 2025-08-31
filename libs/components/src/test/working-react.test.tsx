@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { vi, expect, test, beforeAll } from "vitest";
 import { JSDOM } from "jsdom";
+import { beforeAll, expect, test, vi } from "vitest";
 
 // Set up DOM environment manually
 beforeAll(() => {

@@ -1,51 +1,48 @@
 "use client";
 
-import * as React from "react";
-import { useState, useCallback, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 import { LiquidButton } from "../liquid-button";
+import { LiquidGlass } from "../liquid-glass";
 
-const liquidSidebarVariants = cva(
-  "fixed top-0 h-full transition-all duration-300 ease-out z-40",
-  {
-    variants: {
-      variant: {
-        default: "bg-white/10 border-r border-white/20 backdrop-blur-xl",
-        filled: "bg-white/15 border-r border-white/25 backdrop-blur-2xl",
-        transparent: "bg-white/5 border-r border-white/10 backdrop-blur-sm",
-        solid: "bg-white/95 border-r border-white/30 backdrop-blur-3xl"
-      },
-      side: {
-        left: "left-0",
-        right: "right-0"
-      },
-      size: {
-        sm: "w-64",
-        md: "w-80", 
-        lg: "w-96",
-        xl: "w-[28rem]"
-      },
-      collapsible: {
-        true: "",
-        false: ""
-      }
+const liquidSidebarVariants = cva("fixed top-0 h-full transition-all duration-300 ease-out z-40", {
+  variants: {
+    variant: {
+      default: "bg-white/10 border-r border-white/20 backdrop-blur-xl",
+      filled: "bg-white/15 border-r border-white/25 backdrop-blur-2xl",
+      transparent: "bg-white/5 border-r border-white/10 backdrop-blur-sm",
+      solid: "bg-white/95 border-r border-white/30 backdrop-blur-3xl",
     },
-    compoundVariants: [
-      {
-        collapsible: true,
-        class: "data-[collapsed=true]:w-16"
-      }
-    ],
-    defaultVariants: {
-      variant: "default",
-      side: "left",
-      size: "md",
-      collapsible: false
-    }
-  }
-);
+    side: {
+      left: "left-0",
+      right: "right-0",
+    },
+    size: {
+      sm: "w-64",
+      md: "w-80",
+      lg: "w-96",
+      xl: "w-[28rem]",
+    },
+    collapsible: {
+      true: "",
+      false: "",
+    },
+  },
+  compoundVariants: [
+    {
+      collapsible: true,
+      class: "data-[collapsed=true]:w-16",
+    },
+  ],
+  defaultVariants: {
+    variant: "default",
+    side: "left",
+    size: "md",
+    collapsible: false,
+  },
+});
 
 interface SidebarItem {
   label: string;
@@ -63,7 +60,9 @@ interface SidebarSection {
   items: SidebarItem[];
 }
 
-interface LiquidSidebarProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidSidebarVariants> {
+interface LiquidSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidSidebarVariants> {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   sections?: SidebarSection[];
@@ -76,28 +75,31 @@ interface LiquidSidebarProps extends React.HTMLAttributes<HTMLDivElement>, Varia
 }
 
 export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps>(
-  ({
-    className,
-    variant,
-    side,
-    size,
-    collapsible,
-    open = true,
-    onOpenChange,
-    sections = [],
-    header,
-    footer,
-    collapsed = false,
-    onCollapsedChange,
-    showOverlay = true,
-    closeOnClickOutside = true,
-    children,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      side,
+      size,
+      collapsible,
+      open = true,
+      onOpenChange,
+      sections = [],
+      header,
+      footer,
+      collapsed = false,
+      onCollapsedChange,
+      showOverlay = true,
+      closeOnClickOutside = true,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const [expandedSections, setExpandedSections] = useState<Set<number>>(new Set());
 
     const handleToggleSection = useCallback((sectionIndex: number) => {
-      setExpandedSections(prev => {
+      setExpandedSections((prev) => {
         const newSet = new Set(prev);
         if (newSet.has(sectionIndex)) {
           newSet.delete(sectionIndex);
@@ -123,40 +125,42 @@ export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps
     // Close sidebar on escape key
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape' && open) {
+        if (event.key === "Escape" && open) {
           onOpenChange?.(false);
         }
       };
 
-      document.addEventListener('keydown', handleKeyDown);
-      return () => document.removeEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
     }, [open, onOpenChange]);
 
     const ChevronIcon = ({ expanded }: { expanded: boolean }) => (
-      <svg 
-        width="16" 
-        height="16" 
-        viewBox="0 0 16 16" 
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
         fill="currentColor"
-        className={cn(
-          "transition-transform duration-200",
-          expanded && "transform rotate-90"
-        )}
+        className={cn("transition-transform duration-200", expanded && "transform rotate-90")}
       >
-        <path d="M6.22 4.22a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"/>
+        <path d="M6.22 4.22a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" />
       </svg>
     );
 
     const CollapseIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M9.78 4.22a.75.75 0 0 1 0 1.06L7.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06L5.47 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.75.75 0 0 1 1.06 0Z"/>
+        <path d="M9.78 4.22a.75.75 0 0 1 0 1.06L7.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06L5.47 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.75.75 0 0 1 1.06 0Z" />
       </svg>
     );
 
-    const renderSidebarItem = (item: SidebarItem, itemIndex: number, sectionIndex: number, depth = 0) => {
+    const renderSidebarItem = (
+      item: SidebarItem,
+      itemIndex: number,
+      sectionIndex: number,
+      depth = 0
+    ) => {
       const hasChildren = item.children && item.children.length > 0;
       const isExpanded = expandedSections.has(sectionIndex * 1000 + itemIndex);
-      const ItemComponent = item.href ? 'a' : 'button';
+      const ItemComponent = item.href ? "a" : "button";
 
       return (
         <div key={`${sectionIndex}-${itemIndex}-${depth}`}>
@@ -181,18 +185,18 @@ export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps
           >
             {/* Icon */}
             {item.icon && (
-              <span className={cn(
-                "flex-shrink-0 w-5 h-5 flex items-center justify-center",
-                !collapsed && "mr-3"
-              )}>
+              <span
+                className={cn(
+                  "flex-shrink-0 w-5 h-5 flex items-center justify-center",
+                  !collapsed && "mr-3"
+                )}
+              >
                 {item.icon}
               </span>
             )}
 
             {/* Label */}
-            {!collapsed && (
-              <span className="flex-1 truncate">{item.label}</span>
-            )}
+            {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
 
             {/* Badge */}
             {!collapsed && item.badge && (
@@ -247,7 +251,7 @@ export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps
       <>
         {/* Overlay */}
         {showOverlay && open && (
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
             onClick={handleOverlayClick}
           />
@@ -270,13 +274,12 @@ export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps
           <div className="flex flex-col h-full">
             {/* Header */}
             {header && (
-              <div className={cn(
-                "flex-shrink-0 p-4 border-b border-white/10",
-                collapsed && "px-2"
-              )}>
+              <div
+                className={cn("flex-shrink-0 p-4 border-b border-white/10", collapsed && "px-2")}
+              >
                 <div className="flex items-center justify-between">
                   {!collapsed && <div className="flex-1">{header}</div>}
-                  
+
                   {collapsible && (
                     <LiquidButton
                       variant="ghost"
@@ -300,10 +303,9 @@ export const LiquidSidebar = React.forwardRef<HTMLDivElement, LiquidSidebarProps
 
             {/* Footer */}
             {footer && (
-              <div className={cn(
-                "flex-shrink-0 p-4 border-t border-white/10",
-                collapsed && "px-2"
-              )}>
+              <div
+                className={cn("flex-shrink-0 p-4 border-t border-white/10", collapsed && "px-2")}
+              >
                 {footer}
               </div>
             )}

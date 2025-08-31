@@ -1,11 +1,11 @@
-export { 
+export {
   LiquidTabs,
-  LiquidTabsList,
-  LiquidTabsTrigger,
   LiquidTabsContent,
+  LiquidTabsList,
+  type LiquidTabsProps,
+  LiquidTabsTrigger,
   liquidTabsVariants,
+  type TabItem,
   tabListVariants,
   tabTriggerVariants,
-  type LiquidTabsProps,
-  type TabItem
 } from "./liquid-tabs";

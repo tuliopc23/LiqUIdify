@@ -28,16 +28,12 @@ export function CodeBlock({
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
           {(title || fileName) && (
-            <span className="ml-3 text-sm text-gray-300 font-medium">
-              {title || fileName}
-            </span>
+            <span className="ml-3 text-sm text-gray-300 font-medium">{title || fileName}</span>
           )}
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-400 uppercase tracking-wider">
-            {language}
-          </span>
+          <span className="text-xs text-gray-400 uppercase tracking-wider">{language}</span>
         </div>
       </div>
 
@@ -49,9 +45,7 @@ export function CodeBlock({
               <div
                 key={index}
                 className={`${
-                  highlight.includes(index + 1)
-                    ? "bg-blue-500/10 border-l-2 border-blue-400"
-                    : ""
+                  highlight.includes(index + 1) ? "bg-blue-500/10 border-l-2 border-blue-400" : ""
                 } ${showLineNumbers ? "pl-12" : "px-4"} py-0.5 relative`}
               >
                 {showLineNumbers && (

@@ -1,7 +1,7 @@
 // filepath: snippets/components/InputExample.jsx
-import React from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+
 import { Input } from "liquidify";
+import ComponentFrame from "../preview/ComponentFrame";
 
 const USAGE = `import { Input } from "liquidify";
 
@@ -13,11 +13,7 @@ export default function Example() {
 
 export default function InputExample() {
   return (
-    <ComponentFrame
-      title="Input"
-      intro="Text input with focus and hover states."
-      code={USAGE}
-    >
+    <ComponentFrame title="Input" intro="Text input with focus and hover states." code={USAGE}>
       <Input placeholder="Type here" />
     </ComponentFrame>
   );

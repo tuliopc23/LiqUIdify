@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  NotificationCenter,
-  type NotificationItem,
-} from "./glass-notification";
+import { NotificationCenter, type NotificationItem } from "./glass-notification";
 
 const meta = {
   title: "Components/GlassNotification",
@@ -63,12 +60,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample notifications data
-const sampleNotifications: Array<NotificationItem> = [
+const sampleNotifications: NotificationItem[] = [
   {
     id: "1",
     title: "Welcome to GlassUI",
-    message:
-      "Thanks for trying out our notification system. Click to mark as read.",
+    message: "Thanks for trying out our notification system. Click to mark as read.",
     type: "success",
     timestamp: new Date(Date.now() - 60000), // 1 minute ago
     read: false,
@@ -154,13 +150,10 @@ export const OnlyUnread: Story = {
 // Interactive example with state management
 export const Interactive: Story = {
   render: () => {
-    const [notifications, setNotifications] =
-      useState<Array<NotificationItem>>(sampleNotifications);
+    const [notifications, setNotifications] = useState<NotificationItem[]>(sampleNotifications);
 
     const handleMarkAsRead = (id: string) => {
-      setNotifications((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-      );
+      setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
     };
 
     const handleMarkAllAsRead = () => {
@@ -320,9 +313,7 @@ export const ManyNotifications: Story = {
       id: i.toString(),
       title: `Notification ${i + 1}`,
       message: `This is notification number ${i + 1} in a long list.`,
-      type: ["success", "error", "warning", "info", "system"][
-        i % 5
-      ] as NotificationItem["type"],
+      type: ["success", "error", "warning", "info", "system"][i % 5] as NotificationItem["type"],
       timestamp: new Date(Date.now() - i * 60000),
       read: i % 3 === 0,
     })),
@@ -332,20 +323,12 @@ export const ManyNotifications: Story = {
 // Real-time simulation
 export const RealTimeUpdates: Story = {
   render: () => {
-    const [notifications, setNotifications] = useState<Array<NotificationItem>>(
-      [],
-    );
+    const [notifications, setNotifications] = useState<NotificationItem[]>([]);
 
     // Simulate real-time notifications
     useState(() => {
       const interval = setInterval(() => {
-        const types: Array<NotificationItem["type"]> = [
-          "success",
-          "error",
-          "warning",
-          "info",
-          "system",
-        ];
+        const types: NotificationItem["type"][] = ["success", "error", "warning", "info", "system"];
         const messages = [
           "New user signed up",
           "Payment received",
@@ -378,14 +361,10 @@ export const RealTimeUpdates: Story = {
           <NotificationCenter
             notifications={notifications}
             onMarkAsRead={(id) => {
-              setNotifications((prev) =>
-                prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-              );
+              setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
             }}
             onMarkAllAsRead={() => {
-              setNotifications((prev) =>
-                prev.map((n) => ({ ...n, read: true })),
-              );
+              setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
             }}
             onDismiss={(id) => {
               setNotifications((prev) => prev.filter((n) => n.id !== id));

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   AlertCircle,
   Copy,
@@ -125,34 +124,22 @@ export const WithIcons: Story = {
   render: () => (
     <div className="flex gap-4">
       <GlassTooltip content="Get help">
-        <button
-          type="button"
-          className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100"
-        >
+        <button type="button" className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100">
           <HelpCircle className="h-5 w-5" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="More information">
-        <button
-          type="button"
-          className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100"
-        >
+        <button type="button" className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100">
           <Info className="h-5 w-5" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="Warning: This action cannot be undone">
-        <button
-          type="button"
-          className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100"
-        >
+        <button type="button" className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100">
           <AlertCircle className="h-5 w-5 text-blue-900" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="Settings">
-        <button
-          type="button"
-          className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100"
-        >
+        <button type="button" className="rounded-lg p-2 hover:bg-blue-100 dark:hover:bg-blue-100">
           <Settings className="h-5 w-5" />
         </button>
       </GlassTooltip>
@@ -167,12 +154,8 @@ export const RichContent: Story = {
         content={
           <div>
             <p className="font-semibold">John Doe</p>
-            <p className="text-blue-900 text-xs">
-              john.doe@example.com
-            </p>
-            <p className="mt-1 text-blue-900 text-xs">
-              Last active: 2 hours ago
-            </p>
+            <p className="text-blue-900 text-xs">john.doe@example.com</p>
+            <p className="mt-1 text-blue-900 text-xs">Last active: 2 hours ago</p>
           </div>
         }
       >
@@ -191,21 +174,15 @@ export const RichContent: Story = {
             <div className="space-y-1 text-xs">
               <div className="flex justify-between gap-4">
                 <span>Copy</span>
-                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">
-                  ⌘C
-                </kbd>
+                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">⌘C</kbd>
               </div>
               <div className="flex justify-between gap-4">
                 <span>Paste</span>
-                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">
-                  ⌘V
-                </kbd>
+                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">⌘V</kbd>
               </div>
               <div className="flex justify-between gap-4">
                 <span>Undo</span>
-                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">
-                  ⌘Z
-                </kbd>
+                <kbd className="rounded bg-blue-100 px-1 dark:bg-blue-100">⌘Z</kbd>
               </div>
             </div>
           </div>
@@ -249,45 +226,27 @@ export const ActionButtons: Story = {
   render: () => (
     <div className="flex gap-2">
       <GlassTooltip content="Download file" position="top">
-        <button
-          type="button"
-          className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500"
-        >
+        <button type="button" className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500">
           <Download className="h-4 w-4" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="Copy to clipboard" position="top">
-        <button
-          type="button"
-          className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500"
-        >
+        <button type="button" className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500">
           <Copy className="h-4 w-4" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="Share" position="top">
-        <button
-          type="button"
-          className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500"
-        >
+        <button type="button" className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500">
           <Share2 className="h-4 w-4" />
         </button>
       </GlassTooltip>
       <GlassTooltip content="Edit" position="top">
-        <button
-          type="button"
-          className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500"
-        >
+        <button type="button" className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500">
           <Edit className="h-4 w-4" />
         </button>
       </GlassTooltip>
-      <GlassTooltip
-        content="Delete (This action cannot be undone)"
-        position="top"
-      >
-        <button
-          type="button"
-          className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500"
-        >
+      <GlassTooltip content="Delete (This action cannot be undone)" position="top">
+        <button type="button" className="rounded bg-blue-500 p-2 text-blue-900 hover:bg-blue-500">
           <Trash2 className="h-4 w-4" />
         </button>
       </GlassTooltip>
@@ -303,10 +262,7 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="left"
         >
-          <button
-            type="button"
-            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
-          >
+          <button type="button" className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900">
             Top Left
           </button>
         </GlassTooltip>
@@ -316,10 +272,7 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="right"
         >
-          <button
-            type="button"
-            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
-          >
+          <button type="button" className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900">
             Top Right
           </button>
         </GlassTooltip>
@@ -329,10 +282,7 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="left"
         >
-          <button
-            type="button"
-            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
-          >
+          <button type="button" className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900">
             Bottom Left
           </button>
         </GlassTooltip>
@@ -342,10 +292,7 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="right"
         >
-          <button
-            type="button"
-            className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900"
-          >
+          <button type="button" className="rounded bg-blue-500 px-3 py-1 text-sm text-blue-900">
             Bottom Right
           </button>
         </GlassTooltip>
@@ -370,8 +317,7 @@ export const LongContent: Story = {
           <div>
             <h4 className="mb-2 font-semibold">API Documentation</h4>
             <p className="mb-2 text-xs">
-              The GlassTooltip component provides contextual information on
-              hover.
+              The GlassTooltip component provides contextual information on hover.
             </p>
             <code className="block rounded bg-blue-100 p-2 text-xs dark:bg-blue-100">{`<GlassTooltip content="..." position="top">`}</code>
           </div>
@@ -405,9 +351,7 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-blue-100 p-6">
-        <h3 className="mb-4 font-semibold text-blue-900">
-          Dark Theme
-        </h3>
+        <h3 className="mb-4 font-semibold text-blue-900">Dark Theme</h3>
         <div className="flex gap-4">
           <GlassTooltip content="Tooltip in dark theme">
             <button
@@ -437,10 +381,7 @@ export const CustomStyling: Story = {
           Gradient Tooltip
         </button>
       </GlassTooltip>
-      <GlassTooltip
-        content="Large tooltip with custom padding"
-        className="!px-6 !py-4 !text-lg"
-      >
+      <GlassTooltip content="Large tooltip with custom padding" className="!px-6 !py-4 !text-lg">
         <button
           type="button"
           className="rounded-lg bg-blue-500 px-4 py-2 text-blue-900 hover:bg-blue-500"

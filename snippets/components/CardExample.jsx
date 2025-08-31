@@ -1,7 +1,7 @@
 // filepath: snippets/components/CardExample.jsx
-import React from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+
 import { Card } from "liquidify";
+import ComponentFrame from "../preview/ComponentFrame";
 
 const USAGE = `import { Card } from "liquidify";
 
@@ -15,12 +15,10 @@ export default function Example() {
 
 export default function CardExample() {
   return (
-    <ComponentFrame
-      title="Card"
-      intro="Container for grouping related content."
-      code={USAGE}
-    >
-      <Card title="Card title" subtitle="Subtitle">Content</Card>
+    <ComponentFrame title="Card" intro="Container for grouping related content." code={USAGE}>
+      <Card title="Card title" subtitle="Subtitle">
+        Content
+      </Card>
     </ComponentFrame>
   );
 }

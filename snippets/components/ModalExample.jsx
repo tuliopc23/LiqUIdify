@@ -1,7 +1,8 @@
 // filepath: snippets/components/ModalExample.jsx
+
+import { Button, Modal } from "liquidify";
 import React from "react";
 import ComponentFrame from "../preview/ComponentFrame";
-import { Modal, Button } from "liquidify";
 
 const USAGE = `import { Modal, Button } from "liquidify";
 
@@ -26,7 +27,9 @@ export default function ModalExample() {
       code={USAGE}
     >
       <div className="flex items-center gap-3">
-        <Button variant="primary" onClick={() => setOpen(true)}>Open modal</Button>
+        <Button variant="primary" onClick={() => setOpen(true)}>
+          Open modal
+        </Button>
         <Modal open={open} onOpenChange={setOpen} title="Modal title">
           <p>Modal content</p>
         </Modal>

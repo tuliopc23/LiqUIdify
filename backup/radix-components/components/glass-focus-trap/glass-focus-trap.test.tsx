@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "../../test/test-utils";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
+import { render, screen } from "../../test/test-utils";
 import { GlassFocusTrap } from "./glass-focus-trap";
 
 function renderTrap() {
@@ -14,7 +14,7 @@ function renderTrap() {
         </div>
       </GlassFocusTrap>
       <button data-testid="after">After</button>
-    </div>,
+    </div>
   );
 }
 

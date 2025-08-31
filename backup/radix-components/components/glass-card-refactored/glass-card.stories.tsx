@@ -35,9 +35,7 @@ export const Default: Story = {
       <>
         <Card.Header>
           <Card.Title>Glass Card</Card.Title>
-          <Card.Description>
-            A simple card using the compound components API.
-          </Card.Description>
+          <Card.Description>A simple card using the compound components API.</Card.Description>
         </Card.Header>
         <Card.Content>
           <p>Use the controls to try different variants and sizes.</p>
@@ -136,11 +134,7 @@ export const Interactive: Story = {
   render: () => {
     const [clicked, setClicked] = React.useState(false);
     return (
-      <Card
-        variant="interactive"
-        interactive
-        onClick={() => setClicked(!clicked)}
-      >
+      <Card variant="interactive" interactive onClick={() => setClicked(!clicked)}>
         <Card.Header>
           <Card.Title>Interactive Card</Card.Title>
           <Card.Description>Click to toggle</Card.Description>

@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useState, useCallback, useRef, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { LiquidGlass } from "../liquid-glass";
 
@@ -14,18 +14,18 @@ const liquidSelectVariants = cva(
         default: "bg-white/10 border-white/20 hover:bg-white/15 hover:border-white/30",
         filled: "bg-white/15 border-white/25 hover:bg-white/20 hover:border-white/35",
         ghost: "bg-transparent border-white/10 hover:bg-white/5 hover:border-white/20",
-        error: "bg-red-500/10 border-red-400/30 hover:bg-red-500/15 hover:border-red-400/40"
+        error: "bg-red-500/10 border-red-400/30 hover:bg-red-500/15 hover:border-red-400/40",
       },
       size: {
         sm: "px-3 py-2 text-sm rounded-lg min-h-9",
         md: "px-4 py-3 text-base rounded-xl min-h-11",
-        lg: "px-5 py-4 text-lg rounded-2xl min-h-12"
-      }
+        lg: "px-5 py-4 text-lg rounded-2xl min-h-12",
+      },
     },
     defaultVariants: {
       variant: "default",
-      size: "md"
-    }
+      size: "md",
+    },
   }
 );
 
@@ -35,14 +35,14 @@ const dropdownVariants = cva(
     variants: {
       variant: {
         default: "bg-white/10",
-        filled: "bg-white/15", 
+        filled: "bg-white/15",
         ghost: "bg-white/5",
-        error: "bg-red-500/10 border-red-400/30"
-      }
+        error: "bg-red-500/10 border-red-400/30",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
+      variant: "default",
+    },
   }
 );
 
@@ -52,7 +52,9 @@ interface SelectOption {
   disabled?: boolean;
 }
 
-interface LiquidSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>, VariantProps<typeof liquidSelectVariants> {
+interface LiquidSelectProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
+    VariantProps<typeof liquidSelectVariants> {
   options: SelectOption[];
   value?: string;
   placeholder?: string;
@@ -68,28 +70,31 @@ interface LiquidSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
 }
 
 export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
-  ({
-    className,
-    variant,
-    size,
-    options,
-    value,
-    placeholder = "Select an option...",
-    label,
-    helperText,
-    errorMessage,
-    disabled = false,
-    searchable = false,
-    clearable = false,
-    leftIcon,
-    onChange,
-    onClear,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      options,
+      value,
+      placeholder = "Select an option...",
+      label,
+      helperText,
+      errorMessage,
+      disabled = false,
+      searchable = false,
+      clearable = false,
+      leftIcon,
+      onChange,
+      onClear,
+      ...props
+    },
+    ref
+  ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [focusedIndex, setFocusedIndex] = useState(-1);
-    
+
     const containerRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const optionsRef = useRef<HTMLDivElement[]>([]);
@@ -97,77 +102,86 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
     const isError = Boolean(errorMessage);
     const effectiveVariant = isError ? "error" : variant;
 
-    const selectedOption = options.find(option => option.value === value);
-    
+    const selectedOption = options.find((option) => option.value === value);
+
     const filteredOptions = React.useMemo(() => {
       if (!searchable || !searchTerm) return options;
-      return options.filter(option => 
+      return options.filter((option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }, [options, searchTerm, searchable]);
 
     const handleToggle = useCallback(() => {
       if (disabled) return;
-      setIsOpen(prev => !prev);
+      setIsOpen((prev) => !prev);
       setSearchTerm("");
       setFocusedIndex(-1);
     }, [disabled]);
 
-    const handleSelect = useCallback((optionValue: string) => {
-      onChange?.(optionValue);
-      setIsOpen(false);
-      setSearchTerm("");
-      setFocusedIndex(-1);
-    }, [onChange]);
+    const handleSelect = useCallback(
+      (optionValue: string) => {
+        onChange?.(optionValue);
+        setIsOpen(false);
+        setSearchTerm("");
+        setFocusedIndex(-1);
+      },
+      [onChange]
+    );
 
-    const handleClear = useCallback((e: React.MouseEvent) => {
-      e.stopPropagation();
-      onClear?.();
-      setIsOpen(false);
-    }, [onClear]);
+    const handleClear = useCallback(
+      (e: React.MouseEvent) => {
+        e.stopPropagation();
+        onClear?.();
+        setIsOpen(false);
+      },
+      [onClear]
+    );
 
-    const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-      if (disabled) return;
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent) => {
+        if (disabled) return;
 
-      switch (e.key) {
-        case 'Enter':
-        case ' ':
-          if (!isOpen) {
-            setIsOpen(true);
-          } else if (focusedIndex >= 0 && focusedIndex < filteredOptions.length) {
-            const option = filteredOptions[focusedIndex];
-            if (!option.disabled) {
-              handleSelect(option.value);
+        switch (e.key) {
+          case "Enter":
+          case " ":
+            if (!isOpen) {
+              setIsOpen(true);
+            } else if (focusedIndex >= 0 && focusedIndex < filteredOptions.length) {
+              const option = filteredOptions[focusedIndex];
+              if (!option.disabled) {
+                handleSelect(option.value);
+              }
             }
-          }
-          e.preventDefault();
-          break;
-        case 'Escape':
-          setIsOpen(false);
-          setFocusedIndex(-1);
-          break;
-        case 'ArrowDown':
-          if (!isOpen) {
-            setIsOpen(true);
-          } else {
-            setFocusedIndex(prev => {
-              const nextIndex = prev < filteredOptions.length - 1 ? prev + 1 : 0;
-              return nextIndex;
-            });
-          }
-          e.preventDefault();
-          break;
-        case 'ArrowUp':
-          if (isOpen) {
-            setFocusedIndex(prev => {
-              const nextIndex = prev > 0 ? prev - 1 : filteredOptions.length - 1;
-              return nextIndex;
-            });
             e.preventDefault();
-          }
-          break;
-      }
-    }, [disabled, isOpen, focusedIndex, filteredOptions, handleSelect]);
+            break;
+          case "Escape":
+            setIsOpen(false);
+            setFocusedIndex(-1);
+            break;
+          case "ArrowDown":
+            if (!isOpen) {
+              setIsOpen(true);
+            } else {
+              setFocusedIndex((prev) => {
+                const nextIndex = prev < filteredOptions.length - 1 ? prev + 1 : 0;
+                return nextIndex;
+              });
+            }
+            e.preventDefault();
+            break;
+          case "ArrowUp":
+            if (isOpen) {
+              setFocusedIndex((prev) => {
+                const nextIndex = prev > 0 ? prev - 1 : filteredOptions.length - 1;
+                return nextIndex;
+              });
+              e.preventDefault();
+            }
+            break;
+        }
+      },
+      [disabled, isOpen, focusedIndex, filteredOptions, handleSelect]
+    );
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -178,8 +192,8 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
         }
       };
 
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     // Focus search input when dropdown opens
@@ -193,41 +207,34 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
     useEffect(() => {
       if (focusedIndex >= 0 && optionsRef.current[focusedIndex]) {
         optionsRef.current[focusedIndex].scrollIntoView({
-          block: 'nearest',
-          behavior: 'smooth'
+          block: "nearest",
+          behavior: "smooth",
         });
       }
     }, [focusedIndex]);
 
     const ChevronIcon = () => (
-      <svg 
-        width="16" 
-        height="16" 
-        viewBox="0 0 16 16" 
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
         fill="currentColor"
-        className={cn(
-          "transition-transform duration-200", 
-          isOpen && "transform rotate-180"
-        )}
+        className={cn("transition-transform duration-200", isOpen && "transform rotate-180")}
       >
-        <path d="M4.427 6.573L8 10.146l3.573-3.573a.5.5 0 0 1 .708.708L8.354 11.208a.5.5 0 0 1-.708 0L3.719 7.281a.5.5 0 1 1 .708-.708Z"/>
+        <path d="M4.427 6.573L8 10.146l3.573-3.573a.5.5 0 0 1 .708.708L8.354 11.208a.5.5 0 0 1-.708 0L3.719 7.281a.5.5 0 1 1 .708-.708Z" />
       </svg>
     );
 
     const ClearIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16ZM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646Z"/>
+        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16ZM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646Z" />
       </svg>
     );
 
     return (
       <div className="w-full" ref={containerRef}>
-        {label && (
-          <label className="block text-sm font-medium text-white/90 mb-2">
-            {label}
-          </label>
-        )}
-        
+        {label && <label className="block text-sm font-medium text-white/90 mb-2">{label}</label>}
+
         <div className="relative">
           <LiquidGlass
             ref={ref}
@@ -254,13 +261,15 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
                 {leftIcon}
               </div>
             )}
-            
+
             <div className="flex-1 text-white">
-              {selectedOption ? selectedOption.label : (
+              {selectedOption ? (
+                selectedOption.label
+              ) : (
                 <span className="text-white/50">{placeholder}</span>
               )}
             </div>
-            
+
             <div className="flex items-center gap-2">
               {clearable && selectedOption && !disabled && (
                 <button
@@ -271,13 +280,13 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
                   <ClearIcon />
                 </button>
               )}
-              
+
               <div className="flex-shrink-0 w-5 h-5 text-white/60 flex items-center justify-center">
                 <ChevronIcon />
               </div>
             </div>
           </LiquidGlass>
-          
+
           {isOpen && (
             <LiquidGlass
               variant="card"
@@ -299,12 +308,10 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
                   />
                 </div>
               )}
-              
+
               <div role="listbox" className="py-2">
                 {filteredOptions.length === 0 ? (
-                  <div className="px-4 py-3 text-white/60 text-sm">
-                    No options found
-                  </div>
+                  <div className="px-4 py-3 text-white/60 text-sm">No options found</div>
                 ) : (
                   filteredOptions.map((option, index) => (
                     <div
@@ -335,12 +342,9 @@ export const LiquidSelect = React.forwardRef<HTMLDivElement, LiquidSelectProps>(
             </LiquidGlass>
           )}
         </div>
-        
+
         {(helperText || errorMessage) && (
-          <div className={cn(
-            "mt-2 text-xs",
-            isError ? "text-red-300" : "text-white/60"
-          )}>
+          <div className={cn("mt-2 text-xs", isError ? "text-red-300" : "text-white/60")}>
             {errorMessage || helperText}
           </div>
         )}

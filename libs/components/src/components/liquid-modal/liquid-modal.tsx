@@ -1,54 +1,48 @@
 "use client";
 
-import * as React from "react";
-import { useState, useEffect, useCallback, useRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 import { LiquidButton } from "../liquid-button";
+import { LiquidGlass } from "../liquid-glass";
 
-const liquidModalVariants = cva(
-  "fixed inset-0 z-50 flex items-center justify-center p-4",
-  {
-    variants: {
-      size: {
-        sm: "",
-        md: "",
-        lg: "",
-        xl: "",
-        full: "p-0"
-      }
+const liquidModalVariants = cva("fixed inset-0 z-50 flex items-center justify-center p-4", {
+  variants: {
+    size: {
+      sm: "",
+      md: "",
+      lg: "",
+      xl: "",
+      full: "p-0",
     },
-    defaultVariants: {
-      size: "md"
-    }
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
-const modalContentVariants = cva(
-  "relative w-full max-h-[90vh] overflow-hidden",
-  {
-    variants: {
-      size: {
-        sm: "max-w-sm",
-        md: "max-w-md",
-        lg: "max-w-lg", 
-        xl: "max-w-xl",
-        full: "max-w-none h-full max-h-none"
-      },
-      variant: {
-        default: "",
-        card: "rounded-2xl",
-        dialog: "rounded-xl",
-        sheet: "rounded-t-2xl"
-      }
+const modalContentVariants = cva("relative w-full max-h-[90vh] overflow-hidden", {
+  variants: {
+    size: {
+      sm: "max-w-sm",
+      md: "max-w-md",
+      lg: "max-w-lg",
+      xl: "max-w-xl",
+      full: "max-w-none h-full max-h-none",
     },
-    defaultVariants: {
-      size: "md",
-      variant: "default"
-    }
-  }
-);
+    variant: {
+      default: "",
+      card: "rounded-2xl",
+      dialog: "rounded-xl",
+      sheet: "rounded-t-2xl",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+    variant: "default",
+  },
+});
 
 const overlayVariants = cva(
   "fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300",
@@ -58,16 +52,18 @@ const overlayVariants = cva(
         default: "",
         dark: "bg-black/70",
         light: "bg-black/30",
-        blur: "backdrop-blur-md"
-      }
+        blur: "backdrop-blur-md",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
+      variant: "default",
+    },
   }
 );
 
-interface LiquidModalProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidModalVariants> {
+interface LiquidModalProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidModalVariants> {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   title?: React.ReactNode;
@@ -84,24 +80,27 @@ interface LiquidModalProps extends React.HTMLAttributes<HTMLDivElement>, Variant
 }
 
 export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
-  ({
-    className,
-    size,
-    variant = "default",
-    overlayVariant = "default",
-    open = false,
-    onOpenChange,
-    title,
-    description,
-    footer,
-    closeOnOverlayClick = true,
-    closeOnEscape = true,
-    showCloseButton = true,
-    preventScroll = true,
-    trapFocus = true,
-    children,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      size,
+      variant = "default",
+      overlayVariant = "default",
+      open = false,
+      onOpenChange,
+      title,
+      description,
+      footer,
+      closeOnOverlayClick = true,
+      closeOnEscape = true,
+      showCloseButton = true,
+      preventScroll = true,
+      trapFocus = true,
+      children,
+      ...props
+    },
+    _ref
+  ) => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [mounted, setMounted] = useState(false);
     const modalRef = useRef<HTMLDivElement>(null);
@@ -129,7 +128,7 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
 
       if (open) {
         const originalStyle = window.getComputedStyle(document.body).overflow;
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
         return () => {
           document.body.style.overflow = originalStyle;
         };
@@ -141,7 +140,7 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
       if (!trapFocus || !open || !mounted) return;
 
       previousActiveElement.current = document.activeElement as HTMLElement;
-      
+
       const modal = modalRef.current;
       if (!modal) return;
 
@@ -157,25 +156,23 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
       }
 
       const handleTabKey = (e: KeyboardEvent) => {
-        if (e.key !== 'Tab') return;
+        if (e.key !== "Tab") return;
 
         if (e.shiftKey) {
           if (document.activeElement === firstElement) {
             e.preventDefault();
             lastElement?.focus();
           }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement?.focus();
-          }
+        } else if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
         }
       };
 
-      document.addEventListener('keydown', handleTabKey);
+      document.addEventListener("keydown", handleTabKey);
 
       return () => {
-        document.removeEventListener('keydown', handleTabKey);
+        document.removeEventListener("keydown", handleTabKey);
         if (previousActiveElement.current) {
           previousActiveElement.current.focus();
         }
@@ -187,20 +184,23 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
       if (!closeOnEscape) return;
 
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === 'Escape' && open) {
+        if (e.key === "Escape" && open) {
           onOpenChange?.(false);
         }
       };
 
-      document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
     }, [open, closeOnEscape, onOpenChange]);
 
-    const handleOverlayClick = useCallback((e: React.MouseEvent) => {
-      if (closeOnOverlayClick && e.target === overlayRef.current) {
-        onOpenChange?.(false);
-      }
-    }, [closeOnOverlayClick, onOpenChange]);
+    const handleOverlayClick = useCallback(
+      (e: React.MouseEvent) => {
+        if (closeOnOverlayClick && e.target === overlayRef.current) {
+          onOpenChange?.(false);
+        }
+      },
+      [closeOnOverlayClick, onOpenChange]
+    );
 
     const handleClose = useCallback(() => {
       onOpenChange?.(false);
@@ -208,7 +208,7 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
 
     const CloseIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
       </svg>
     );
 
@@ -248,7 +248,7 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
               variant === "sheet" && [
                 "rounded-b-none",
                 isAnimating && !open && "animate-out slide-out-to-bottom duration-150",
-                isAnimating && open && "animate-in slide-in-from-bottom duration-150"
+                isAnimating && open && "animate-in slide-in-from-bottom duration-150",
               ]
             )}
             role="dialog"
@@ -272,7 +272,7 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
                       </p>
                     )}
                   </div>
-                  
+
                   {showCloseButton && (
                     <LiquidButton
                       variant="ghost"
@@ -288,16 +288,10 @@ export const LiquidModal = React.forwardRef<HTMLDivElement, LiquidModalProps>(
               )}
 
               {/* Content */}
-              <div className="flex-1 overflow-y-auto px-6 pb-6">
-                {children}
-              </div>
+              <div className="flex-1 overflow-y-auto px-6 pb-6">{children}</div>
 
               {/* Footer */}
-              {footer && (
-                <div className="border-t border-white/10 p-6 pt-4">
-                  {footer}
-                </div>
-              )}
+              {footer && <div className="border-t border-white/10 p-6 pt-4">{footer}</div>}
             </div>
           </LiquidGlass>
         </div>
@@ -338,11 +332,7 @@ interface LiquidModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const LiquidModalContent = React.forwardRef<HTMLDivElement, LiquidModalContentProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("flex flex-col space-y-4", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("flex flex-col space-y-4", className)} {...props}>
       {children}
     </div>
   )
@@ -356,11 +346,7 @@ interface LiquidModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const LiquidModalHeader = React.forwardRef<HTMLDivElement, LiquidModalHeaderProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("flex flex-col space-y-1.5", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("flex flex-col space-y-1.5", className)} {...props}>
       {children}
     </div>
   )
@@ -374,11 +360,7 @@ interface LiquidModalTitleProps extends React.HTMLAttributes<HTMLHeadingElement>
 
 export const LiquidModalTitle = React.forwardRef<HTMLHeadingElement, LiquidModalTitleProps>(
   ({ className, children, ...props }, ref) => (
-    <h2
-      ref={ref}
-      className={cn("text-lg font-semibold text-white", className)}
-      {...props}
-    >
+    <h2 ref={ref} className={cn("text-lg font-semibold text-white", className)} {...props}>
       {children}
     </h2>
   )
@@ -390,17 +372,14 @@ interface LiquidModalDescriptionProps extends React.HTMLAttributes<HTMLParagraph
   children: React.ReactNode;
 }
 
-export const LiquidModalDescription = React.forwardRef<HTMLParagraphElement, LiquidModalDescriptionProps>(
-  ({ className, children, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn("text-sm text-white/70", className)}
-      {...props}
-    >
-      {children}
-    </p>
-  )
-);
+export const LiquidModalDescription = React.forwardRef<
+  HTMLParagraphElement,
+  LiquidModalDescriptionProps
+>(({ className, children, ...props }, ref) => (
+  <p ref={ref} className={cn("text-sm text-white/70", className)} {...props}>
+    {children}
+  </p>
+));
 
 LiquidModalDescription.displayName = "LiquidModalDescription";
 
@@ -422,9 +401,4 @@ export const LiquidModalFooter = React.forwardRef<HTMLDivElement, LiquidModalFoo
 
 LiquidModalFooter.displayName = "LiquidModalFooter";
 
-export { 
-  liquidModalVariants, 
-  modalContentVariants,
-  overlayVariants,
-  type LiquidModalProps 
-};
+export { liquidModalVariants, modalContentVariants, overlayVariants, type LiquidModalProps };

@@ -1,1 +1,5 @@
-export { LiquidTextarea, liquidTextareaVariants, type LiquidTextareaProps } from "./liquid-textarea";
+export {
+  LiquidTextarea,
+  type LiquidTextareaProps,
+  liquidTextareaVariants,
+} from "./liquid-textarea";

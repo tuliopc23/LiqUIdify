@@ -9,12 +9,7 @@ export type PreviewProps = {
 };
 
 // Simple styling hooks via classNames to let Mintlify / site CSS theme it.
-export const Preview: React.FC<PreviewProps> = ({
-  title,
-  code,
-  language = "tsx",
-  children,
-}) => {
+export const Preview: React.FC<PreviewProps> = ({ title, code, language = "tsx", children }) => {
   return (
     <div className="preview-block not-prose my-6">
       {title && <div className="preview-title text-sm">{title}</div>}

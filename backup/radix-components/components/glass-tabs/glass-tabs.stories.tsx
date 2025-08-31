@@ -1,14 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import {
-  Bell,
-  Code,
-  CreditCard,
-  Database,
-  Shield,
-  Terminal,
-  User,
-} from "lucide-react";
+import { Bell, Code, CreditCard, Database, Shield, Terminal, User } from "lucide-react";
 import { type GlassTabItem, GlassTabs } from "./glass-tabs";
 
 const meta: Meta<typeof GlassTabs> = {
@@ -22,18 +13,15 @@ export default meta;
 
 type Story = StoryObj<typeof GlassTabs>;
 
-const basicTabs: Array<GlassTabItem> = [
+const basicTabs: GlassTabItem[] = [
   {
     id: "overview",
     label: "Overview",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-          Overview
-        </h3>
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Overview</h3>
         <p className="text-blue-900 dark:text-blue-900">
-          This is the overview tab content. It provides a general introduction
-          to the topic at hand.
+          This is the overview tab content. It provides a general introduction to the topic at hand.
         </p>
       </div>
     ),
@@ -43,9 +31,7 @@ const basicTabs: Array<GlassTabItem> = [
     label: "Details",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-          Details
-        </h3>
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Details</h3>
         <p className="text-blue-900 dark:text-blue-900">
           This tab contains more detailed information about the subject matter.
         </p>
@@ -57,9 +43,7 @@ const basicTabs: Array<GlassTabItem> = [
     label: "Resources",
     content: (
       <div className="space-y-4">
-        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-          Resources
-        </h3>
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Resources</h3>
         <p className="text-blue-900 dark:text-blue-900">
           Find additional resources and documentation here.
         </p>
@@ -168,7 +152,7 @@ export const WithDisabledTabs: Story = {
 
 export const InteractiveDemo: Story = {
   render: () => {
-    const demoTabs: Array<GlassTabItem> = [
+    const demoTabs: GlassTabItem[] = [
       {
         id: "frontend",
         label: (
@@ -282,7 +266,7 @@ export const InteractiveDemo: Story = {
 
 export const SettingsExample: Story = {
   render: () => {
-    const settingsTabs: Array<GlassTabItem> = [
+    const settingsTabs: GlassTabItem[] = [
       {
         id: "account",
         label: "Account",
@@ -388,21 +372,17 @@ export const SettingsExample: Story = {
 
 export const DocumentationExample: Story = {
   render: () => {
-    const docsTabs: Array<GlassTabItem> = [
+    const docsTabs: GlassTabItem[] = [
       {
         id: "installation",
         label: "Installation",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-              Installation
-            </h3>
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Installation</h3>
             <div className="rounded-lg bg-blue-100 p-4 font-mono text-blue-900 text-sm">
               npm install glass-ui-components
             </div>
-            <p className="text-blue-900 dark:text-blue-900">
-              Or using yarn:
-            </p>
+            <p className="text-blue-900 dark:text-blue-900">Or using yarn:</p>
             <div className="rounded-lg bg-blue-100 p-4 font-mono text-blue-900 text-sm">
               yarn add glass-ui-components
             </div>
@@ -414,9 +394,7 @@ export const DocumentationExample: Story = {
         label: "Usage",
         content: (
           <div className="space-y-4">
-            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-              Basic Usage
-            </h3>
+            <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Basic Usage</h3>
             <pre className="overflow-x-auto rounded-lg bg-blue-100 p-4 text-blue-900">
               <code>{`import { GlassTabs } from 'glass-ui-components';\n\nconst tabs = [\n  { id: 'tab1', label: 'Tab 1', content: <div>Content 1</div> },\n  { id: 'tab2', label: 'Tab 2', content: <div>Content 2</div> }\n];\n\n<GlassTabs tabs={tabs} />`}</code>
             </pre>
@@ -489,16 +467,14 @@ export const CustomStyling: Story = {
       },
     ],
     tabListClassName: "bg-gradient-to-r from-purple-500/20 to-blue-500/20",
-    activeTabButtonClassName:
-      "bg-gradient-to-r from-purple-500 to-blue-500 text-blue-900",
-    inactiveTabButtonClassName:
-      "text-blue-900 hover:text-blue-900",
+    activeTabButtonClassName: "bg-gradient-to-r from-purple-500 to-blue-500 text-blue-900",
+    inactiveTabButtonClassName: "text-blue-900 hover:text-blue-900",
   },
 };
 
 export const AccessibilityDemo: Story = {
   render: () => {
-    const accessibilityTabs: Array<GlassTabItem> = [
+    const accessibilityTabs: GlassTabItem[] = [
       {
         id: "keyboard",
         label: "Keyboard Nav",

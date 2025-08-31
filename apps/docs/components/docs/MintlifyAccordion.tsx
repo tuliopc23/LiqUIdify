@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import SFIcon from "./SFIcon";
 
 interface MintlifyAccordionProps {
@@ -11,16 +12,9 @@ interface MintlifyAccordionProps {
   className?: string;
 }
 
-export default function MintlifyAccordion({
-  items,
-  className = "",
-}: MintlifyAccordionProps) {
+export default function MintlifyAccordion({ items, className = "" }: MintlifyAccordionProps) {
   const [openItems, setOpenItems] = useState<Set<number>>(
-    new Set(
-      items
-        .map((item, index) => (item.defaultOpen ? index : -1))
-        .filter((i) => i >= 0),
-    ),
+    new Set(items.map((item, index) => (item.defaultOpen ? index : -1)).filter((i) => i >= 0))
   );
 
   const toggleItem = (index: number) => {
@@ -52,9 +46,7 @@ export default function MintlifyAccordion({
               weight="medium"
             />
           </button>
-          {openItems.has(index) && (
-            <div className="mintlify-accordion-content">{item.content}</div>
-          )}
+          {openItems.has(index) && <div className="mintlify-accordion-content">{item.content}</div>}
         </div>
       ))}
     </div>

@@ -1,9 +1,9 @@
-export { 
-  LiquidAlert,
-  LiquidAlertTitle,
-  LiquidAlertDescription,
-  LiquidAlertAction,
-  liquidAlertVariants,
+export {
   alertIconVariants,
-  type LiquidAlertProps 
+  LiquidAlert,
+  LiquidAlertAction,
+  LiquidAlertDescription,
+  type LiquidAlertProps,
+  LiquidAlertTitle,
+  liquidAlertVariants,
 } from "./liquid-alert";

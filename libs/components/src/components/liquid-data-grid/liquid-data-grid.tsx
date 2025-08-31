@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 import { LiquidButton } from "../liquid-button";
+import { LiquidGlass } from "../liquid-glass";
 import { LiquidInput } from "../liquid-input";
 import { LiquidPopover } from "../liquid-popover";
 
@@ -16,18 +16,18 @@ const liquidDataGridVariants = cva(
       variant: {
         default: "",
         card: "shadow-lg bg-white/10",
-        minimal: "border-0 bg-transparent"
+        minimal: "border-0 bg-transparent",
       },
       size: {
         sm: "text-sm",
         md: "",
-        lg: "text-lg"
-      }
+        lg: "text-lg",
+      },
     },
     defaultVariants: {
       variant: "default",
-      size: "md"
-    }
+      size: "md",
+    },
   }
 );
 
@@ -38,12 +38,12 @@ const gridHeaderVariants = cva(
       size: {
         sm: "h-8 text-xs",
         md: "h-10 text-sm",
-        lg: "h-12"
-      }
+        lg: "h-12",
+      },
     },
     defaultVariants: {
-      size: "md"
-    }
+      size: "md",
+    },
   }
 );
 
@@ -54,12 +54,12 @@ const gridCellVariants = cva(
       size: {
         sm: "h-8 px-2 text-xs",
         md: "h-10 px-3 text-sm",
-        lg: "h-12 px-4"
-      }
+        lg: "h-12 px-4",
+      },
     },
     defaultVariants: {
-      size: "md"
-    }
+      size: "md",
+    },
   }
 );
 
@@ -95,7 +95,9 @@ interface VirtualScrollProps {
   renderItem: (index: number, style: React.CSSProperties) => React.ReactNode;
 }
 
-interface LiquidDataGridProps<T = any> extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidDataGridVariants> {
+interface LiquidDataGridProps<T = any>
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidDataGridVariants> {
   columns: GridColumn<T>[];
   data: T[];
   loading?: boolean;
@@ -135,7 +137,7 @@ const useVirtualScroll = ({ height, itemHeight, itemCount, renderItem }: Virtual
     const startIndex = Math.floor(scrollTop / itemHeight);
     const visibleCount = Math.ceil(containerHeight / itemHeight);
     const endIndex = Math.min(startIndex + visibleCount + 1, itemCount - 1);
-    
+
     return { startIndex, endIndex, visibleCount };
   }, [scrollTop, height, itemHeight, itemCount]);
 
@@ -147,7 +149,7 @@ const useVirtualScroll = ({ height, itemHeight, itemCount, renderItem }: Virtual
     const items = [];
     for (let i = visibleRange.startIndex; i <= visibleRange.endIndex; i++) {
       const style: React.CSSProperties = {
-        position: 'absolute',
+        position: "absolute",
         top: i * itemHeight,
         left: 0,
         right: 0,
@@ -170,83 +172,103 @@ const useVirtualScroll = ({ height, itemHeight, itemCount, renderItem }: Virtual
 };
 
 export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridProps>(
-  ({
-    className,
-    variant,
-    size,
-    columns: initialColumns,
-    data,
-    loading = false,
-    height = 400,
-    rowHeight = 40,
-    headerHeight = 40,
-    emptyText = "No data available",
-    rowKey = "id",
-    virtualized = true,
-    rowSelection,
-    editable = false,
-    onCellEdit,
-    onRowDoubleClick,
-    sortable = true,
-    filterable = true,
-    resizable = true,
-    showHeader = true,
-    striped = false,
-    bordered = false,
-    onSort,
-    onFilter,
-    onColumnResize,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      columns: initialColumns,
+      data,
+      loading = false,
+      height = 400,
+      rowHeight = 40,
+      headerHeight = 40,
+      emptyText = "No data available",
+      rowKey = "id",
+      virtualized = true,
+      rowSelection,
+      editable = false,
+      onCellEdit,
+      onRowDoubleClick,
+      sortable = true,
+      filterable = true,
+      resizable = true,
+      showHeader = true,
+      striped = false,
+      bordered = false,
+      onSort,
+      onFilter,
+      onColumnResize,
+      ...props
+    },
+    ref
+  ) => {
     const [columns, setColumns] = useState(initialColumns);
     const [sortState, setSortState] = useState<{ key: string; direction: SortDirection }>({
       key: "",
       direction: null,
     });
     const [filters, setFilters] = useState<Record<string, any>>({});
-    const [editingCell, setEditingCell] = useState<{ rowIndex: number; columnKey: string } | null>(null);
-    const [selectedRows, setSelectedRows] = useState<(string | number)[]>(rowSelection?.selectedRowKeys || []);
+    const [editingCell, setEditingCell] = useState<{ rowIndex: number; columnKey: string } | null>(
+      null
+    );
+    const [selectedRows, setSelectedRows] = useState<(string | number)[]>(
+      rowSelection?.selectedRowKeys || []
+    );
 
     // Get row key
-    const getRowKey = useCallback((record: any, index: number): string | number => {
-      if (typeof rowKey === "function") {
-        return rowKey(record);
-      }
-      return record[rowKey] ?? index;
-    }, [rowKey]);
+    const getRowKey = useCallback(
+      (record: any, index: number): string | number => {
+        if (typeof rowKey === "function") {
+          return rowKey(record);
+        }
+        return record[rowKey] ?? index;
+      },
+      [rowKey]
+    );
 
     // Handle sorting
-    const handleSort = useCallback((column: GridColumn) => {
-      if (!column.sortable) return;
+    const handleSort = useCallback(
+      (column: GridColumn) => {
+        if (!column.sortable) return;
 
-      let newDirection: SortDirection = "asc";
-      if (sortState.key === column.key) {
-        newDirection = sortState.direction === "asc" ? "desc" : sortState.direction === "desc" ? null : "asc";
-      }
+        let newDirection: SortDirection = "asc";
+        if (sortState.key === column.key) {
+          newDirection =
+            sortState.direction === "asc" ? "desc" : sortState.direction === "desc" ? null : "asc";
+        }
 
-      const newSortState = { key: column.key, direction: newDirection };
-      setSortState(newSortState);
-      onSort?.(column, newDirection);
-    }, [sortState, onSort]);
+        const newSortState = { key: column.key, direction: newDirection };
+        setSortState(newSortState);
+        onSort?.(column, newDirection);
+      },
+      [sortState, onSort]
+    );
 
     // Handle filtering
-    const handleFilter = useCallback((columnKey: string, value: any) => {
-      const newFilters = { ...filters, [columnKey]: value };
-      if (value == null || value === "") {
-        delete newFilters[columnKey];
-      }
-      setFilters(newFilters);
-      onFilter?.(newFilters);
-    }, [filters, onFilter]);
+    const handleFilter = useCallback(
+      (columnKey: string, value: any) => {
+        const newFilters = { ...filters, [columnKey]: value };
+        if (value == null || value === "") {
+          delete newFilters[columnKey];
+        }
+        setFilters(newFilters);
+        onFilter?.(newFilters);
+      },
+      [filters, onFilter]
+    );
 
     // Handle column resize
-    const handleColumnResize = useCallback((column: GridColumn, newWidth: number) => {
-      const updatedColumns = columns.map(col => 
-        col.key === column.key ? { ...col, width: Math.max(newWidth, col.minWidth || 50) } : col
-      );
-      setColumns(updatedColumns);
-      onColumnResize?.(column, newWidth);
-    }, [columns, onColumnResize]);
+    const handleColumnResize = useCallback(
+      (column: GridColumn, newWidth: number) => {
+        const updatedColumns = columns.map((col) =>
+          col.key === column.key ? { ...col, width: Math.max(newWidth, col.minWidth || 50) } : col
+        );
+        setColumns(updatedColumns);
+        onColumnResize?.(column, newWidth);
+      },
+      [columns, onColumnResize]
+    );
 
     // Filter and sort data
     const processedData = useMemo(() => {
@@ -255,16 +277,18 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
       // Apply filters
       Object.entries(filters).forEach(([columnKey, filterValue]) => {
         if (filterValue != null && filterValue !== "") {
-          const column = columns.find(col => col.key === columnKey);
+          const column = columns.find((col) => col.key === columnKey);
           if (column) {
-            result = result.filter(record => {
+            result = result.filter((record) => {
               const cellValue = record[column.dataIndex || column.key];
               if (column.filterType === "text") {
                 return String(cellValue).toLowerCase().includes(String(filterValue).toLowerCase());
-              } else if (column.filterType === "number") {
+              }
+              if (column.filterType === "number") {
                 return Number(cellValue) === Number(filterValue);
-              } else if (column.filterType === "select" || column.filterType === "multiSelect") {
-                return Array.isArray(filterValue) 
+              }
+              if (column.filterType === "select" || column.filterType === "multiSelect") {
+                return Array.isArray(filterValue)
                   ? filterValue.includes(cellValue)
                   : cellValue === filterValue;
               }
@@ -276,12 +300,12 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
 
       // Apply sorting
       if (sortState.key && sortState.direction) {
-        const sortColumn = columns.find(col => col.key === sortState.key);
+        const sortColumn = columns.find((col) => col.key === sortState.key);
         if (sortColumn) {
           result.sort((a, b) => {
             const aVal = a[sortColumn.dataIndex || sortColumn.key];
             const bVal = b[sortColumn.dataIndex || sortColumn.key];
-            
+
             if (aVal == null && bVal == null) return 0;
             if (aVal == null) return 1;
             if (bVal == null) return -1;
@@ -302,62 +326,91 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
     }, [data, columns, filters, sortState]);
 
     // Handle row selection
-    const handleRowSelect = useCallback((record: any, selected: boolean) => {
-      const key = getRowKey(record, 0);
-      let newSelectedRows: (string | number)[];
+    const handleRowSelect = useCallback(
+      (record: any, selected: boolean) => {
+        const key = getRowKey(record, 0);
+        let newSelectedRows: (string | number)[];
 
-      if (rowSelection?.type === "radio") {
-        newSelectedRows = selected ? [key] : [];
-      } else {
-        if (selected) {
+        if (rowSelection?.type === "radio") {
+          newSelectedRows = selected ? [key] : [];
+        } else if (selected) {
           newSelectedRows = [...selectedRows, key];
         } else {
-          newSelectedRows = selectedRows.filter(k => k !== key);
+          newSelectedRows = selectedRows.filter((k) => k !== key);
         }
-      }
 
-      setSelectedRows(newSelectedRows);
-      
-      const selectedRecords = processedData.filter(item => 
-        newSelectedRows.includes(getRowKey(item, 0))
-      );
-      
-      rowSelection?.onChange?.(newSelectedRows, selectedRecords);
-    }, [selectedRows, processedData, getRowKey, rowSelection]);
+        setSelectedRows(newSelectedRows);
+
+        const selectedRecords = processedData.filter((item) =>
+          newSelectedRows.includes(getRowKey(item, 0))
+        );
+
+        rowSelection?.onChange?.(newSelectedRows, selectedRecords);
+      },
+      [selectedRows, processedData, getRowKey, rowSelection]
+    );
 
     // Handle cell editing
-    const handleCellDoubleClick = useCallback((rowIndex: number, column: GridColumn) => {
-      if (editable && column.editor) {
-        setEditingCell({ rowIndex, columnKey: column.key });
-      }
-    }, [editable]);
-
-    const handleCellEditComplete = useCallback((value: any) => {
-      if (editingCell) {
-        const record = processedData[editingCell.rowIndex];
-        const column = columns.find(col => col.key === editingCell.columnKey);
-        if (record && column) {
-          onCellEdit?.(record, column, value);
+    const handleCellDoubleClick = useCallback(
+      (rowIndex: number, column: GridColumn) => {
+        if (editable && column.editor) {
+          setEditingCell({ rowIndex, columnKey: column.key });
         }
-        setEditingCell(null);
-      }
-    }, [editingCell, processedData, columns, onCellEdit]);
+      },
+      [editable]
+    );
+
+    const handleCellEditComplete = useCallback(
+      (value: any) => {
+        if (editingCell) {
+          const record = processedData[editingCell.rowIndex];
+          const column = columns.find((col) => col.key === editingCell.columnKey);
+          if (record && column) {
+            onCellEdit?.(record, column, value);
+          }
+          setEditingCell(null);
+        }
+      },
+      [editingCell, processedData, columns, onCellEdit]
+    );
 
     // Icons
     const SortIcon = ({ direction }: { direction: SortDirection }) => (
       <div className="flex flex-col ml-1">
-        <svg width="8" height="4" viewBox="0 0 8 4" className={cn("transition-colors", direction === "asc" ? "text-blue-400" : "text-white/30")}>
+        <svg
+          width="8"
+          height="4"
+          viewBox="0 0 8 4"
+          className={cn(
+            "transition-colors",
+            direction === "asc" ? "text-blue-400" : "text-white/30"
+          )}
+        >
           <path d="M4 0L0 4h8L4 0z" fill="currentColor" />
         </svg>
-        <svg width="8" height="4" viewBox="0 0 8 4" className={cn("transition-colors", direction === "desc" ? "text-blue-400" : "text-white/30")}>
+        <svg
+          width="8"
+          height="4"
+          viewBox="0 0 8 4"
+          className={cn(
+            "transition-colors",
+            direction === "desc" ? "text-blue-400" : "text-white/30"
+          )}
+        >
           <path d="M4 4L8 0H0L4 4z" fill="currentColor" />
         </svg>
       </div>
     );
 
     const FilterIcon = () => (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" className="text-white/40 hover:text-white/80">
-        <path d="M0 0h14l-5.6 6.72v4.48l-2.8-1.4V6.72L0 0z"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        fill="currentColor"
+        className="text-white/40 hover:text-white/80"
+      >
+        <path d="M0 0h14l-5.6 6.72v4.48l-2.8-1.4V6.72L0 0z" />
       </svg>
     );
 
@@ -408,30 +461,39 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
     };
 
     // Render cell content
-    const renderCell = useCallback((column: GridColumn, record: any, rowIndex: number, columnIndex: number) => {
-      const isEditing = editingCell?.rowIndex === rowIndex && editingCell?.columnKey === column.key;
-      
-      if (isEditing && column.editor) {
-        return (
-          <CellEditor
-            column={column}
-            value={record[column.dataIndex || column.key]}
-            onComplete={handleCellEditComplete}
-            onCancel={() => setEditingCell(null)}
-          />
-        );
-      }
+    const renderCell = useCallback(
+      (column: GridColumn, record: any, rowIndex: number, columnIndex: number) => {
+        const isEditing =
+          editingCell?.rowIndex === rowIndex && editingCell?.columnKey === column.key;
 
-      if (column.render) {
-        return column.render(record[column.dataIndex || column.key], record, rowIndex);
-      }
+        if (isEditing && column.editor) {
+          return (
+            <CellEditor
+              column={column}
+              value={record[column.dataIndex || column.key]}
+              onComplete={handleCellEditComplete}
+              onCancel={() => setEditingCell(null)}
+            />
+          );
+        }
 
-      const value = record[column.dataIndex || column.key];
-      return value != null ? String(value) : "";
-    }, [editingCell, handleCellEditComplete]);
+        if (column.render) {
+          return column.render(record[column.dataIndex || column.key], record, rowIndex);
+        }
+
+        const value = record[column.dataIndex || column.key];
+        return value != null ? String(value) : "";
+      },
+      [editingCell, handleCellEditComplete]
+    );
 
     // Cell editor component
-    const CellEditor = ({ column, value, onComplete, onCancel }: {
+    const CellEditor = ({
+      column,
+      value,
+      onComplete,
+      onCancel,
+    }: {
       column: GridColumn;
       value: any;
       onComplete: (value: any) => void;
@@ -567,61 +629,78 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
     };
 
     // Render row
-    const renderRow = useCallback((index: number, style?: React.CSSProperties) => {
-      const record = processedData[index];
-      const key = getRowKey(record, index);
-      const isSelected = selectedRows.includes(key);
+    const renderRow = useCallback(
+      (index: number, style?: React.CSSProperties) => {
+        const record = processedData[index];
+        const key = getRowKey(record, index);
+        const isSelected = selectedRows.includes(key);
 
-      return (
-        <div
-          key={key}
-          style={style}
-          className={cn(
-            "flex border-b border-white/5 hover:bg-white/5 transition-colors",
-            striped && index % 2 === 1 && "bg-white/2",
-            isSelected && "bg-blue-500/10 border-blue-500/20"
-          )}
-          onDoubleClick={() => onRowDoubleClick?.(record, index)}
-        >
-          {/* Selection column */}
-          {rowSelection && (
-            <div className={cn(gridCellVariants({ size }), "w-12 flex items-center justify-center")}>
-              <input
-                type={rowSelection.type || "checkbox"}
-                name={rowSelection.type === "radio" ? "row-selection" : undefined}
-                checked={isSelected}
-                onChange={(e) => handleRowSelect(record, e.target.checked)}
-                className="rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-500/50"
-                {...rowSelection.getCheckboxProps?.(record)}
-              />
-            </div>
-          )}
+        return (
+          <div
+            key={key}
+            style={style}
+            className={cn(
+              "flex border-b border-white/5 hover:bg-white/5 transition-colors",
+              striped && index % 2 === 1 && "bg-white/2",
+              isSelected && "bg-blue-500/10 border-blue-500/20"
+            )}
+            onDoubleClick={() => onRowDoubleClick?.(record, index)}
+          >
+            {/* Selection column */}
+            {rowSelection && (
+              <div
+                className={cn(gridCellVariants({ size }), "w-12 flex items-center justify-center")}
+              >
+                <input
+                  type={rowSelection.type || "checkbox"}
+                  name={rowSelection.type === "radio" ? "row-selection" : undefined}
+                  checked={isSelected}
+                  onChange={(e) => handleRowSelect(record, e.target.checked)}
+                  className="rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-500/50"
+                  {...rowSelection.getCheckboxProps?.(record)}
+                />
+              </div>
+            )}
 
-          {/* Data columns */}
-          {columns.map((column, columnIndex) => (
-            <div
-              key={column.key}
-              className={cn(
-                gridCellVariants({ size }),
-                column.align === "center" && "text-center",
-                column.align === "right" && "text-right",
-                column.frozen === "left" && "sticky left-0 bg-white/10 z-10",
-                column.frozen === "right" && "sticky right-0 bg-white/10 z-10",
-                column.className
-              )}
-              style={{ 
-                width: column.width || 100,
-                minWidth: column.minWidth || 50,
-                maxWidth: column.maxWidth,
-              }}
-              onDoubleClick={() => handleCellDoubleClick(index, column)}
-            >
-              {renderCell(column, record, index, columnIndex)}
-            </div>
-          ))}
-        </div>
-      );
-    }, [processedData, columns, selectedRows, striped, rowSelection, size, getRowKey, handleRowSelect, onRowDoubleClick, handleCellDoubleClick, renderCell]);
+            {/* Data columns */}
+            {columns.map((column, columnIndex) => (
+              <div
+                key={column.key}
+                className={cn(
+                  gridCellVariants({ size }),
+                  column.align === "center" && "text-center",
+                  column.align === "right" && "text-right",
+                  column.frozen === "left" && "sticky left-0 bg-white/10 z-10",
+                  column.frozen === "right" && "sticky right-0 bg-white/10 z-10",
+                  column.className
+                )}
+                style={{
+                  width: column.width || 100,
+                  minWidth: column.minWidth || 50,
+                  maxWidth: column.maxWidth,
+                }}
+                onDoubleClick={() => handleCellDoubleClick(index, column)}
+              >
+                {renderCell(column, record, index, columnIndex)}
+              </div>
+            ))}
+          </div>
+        );
+      },
+      [
+        processedData,
+        columns,
+        selectedRows,
+        striped,
+        rowSelection,
+        size,
+        getRowKey,
+        handleRowSelect,
+        onRowDoubleClick,
+        handleCellDoubleClick,
+        renderCell,
+      ]
+    );
 
     // Virtual scroll setup
     const virtualScroll = useVirtualScroll({
@@ -649,16 +728,21 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
       >
         {/* Header */}
         {showHeader && (
-          <div className={cn(gridHeaderVariants({ size }), "flex")} style={{ height: headerHeight }}>
+          <div
+            className={cn(gridHeaderVariants({ size }), "flex")}
+            style={{ height: headerHeight }}
+          >
             {/* Selection header */}
             {rowSelection && (
               <div className="w-12 flex items-center justify-center border-r border-white/10">
                 {rowSelection.type !== "radio" && (
                   <input
                     type="checkbox"
-                    checked={selectedRows.length === processedData.length && processedData.length > 0}
+                    checked={
+                      selectedRows.length === processedData.length && processedData.length > 0
+                    }
                     onChange={(e) => {
-                      const newSelectedRows = e.target.checked 
+                      const newSelectedRows = e.target.checked
                         ? processedData.map((record, index) => getRowKey(record, index))
                         : [];
                       setSelectedRows(newSelectedRows);
@@ -692,7 +776,7 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
                 onClick={() => sortable && handleSort(column)}
               >
                 <span className="truncate">{column.title}</span>
-                
+
                 {/* Sort indicator */}
                 {sortable && column.sortable && (
                   <SortIcon direction={sortState.key === column.key ? sortState.direction : null} />
@@ -706,9 +790,7 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
                 )}
 
                 {/* Resize handle */}
-                {resizable && column.resizable !== false && (
-                  <ResizeHandle column={column} />
-                )}
+                {resizable && column.resizable !== false && <ResizeHandle column={column} />}
               </div>
             ))}
           </div>
@@ -719,9 +801,7 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
           {loading ? (
             <LoadingSpinner />
           ) : processedData.length === 0 ? (
-            <div className="flex items-center justify-center py-8 text-white/60">
-              {emptyText}
-            </div>
+            <div className="flex items-center justify-center py-8 text-white/60">{emptyText}</div>
           ) : virtualized ? (
             <div
               ref={virtualScroll.containerRef}
@@ -745,7 +825,7 @@ export const LiquidDataGrid = React.forwardRef<HTMLDivElement, LiquidDataGridPro
 
 LiquidDataGrid.displayName = "LiquidDataGrid";
 
-export { 
+export {
   liquidDataGridVariants,
   gridHeaderVariants,
   gridCellVariants,
@@ -753,5 +833,5 @@ export {
   type GridColumn,
   type SortDirection,
   type FilterType,
-  type CellEditor
+  type CellEditor,
 };

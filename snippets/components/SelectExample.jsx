@@ -1,7 +1,7 @@
 // filepath: snippets/components/SelectExample.jsx
-import React from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+
 import { Select } from "liquidify";
+import ComponentFrame from "../preview/ComponentFrame";
 
 const USAGE = `import { Select } from "liquidify";
 
@@ -29,7 +29,7 @@ export default function SelectExample() {
         options={[
           { label: "Option A", value: "a" },
           { label: "Option B", value: "b" },
-          { label: "Option C", value: "c" }
+          { label: "Option C", value: "c" },
         ]}
         placeholder="Choose an option"
       />

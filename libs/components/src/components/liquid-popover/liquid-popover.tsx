@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useState, useRef, useEffect, useCallback } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { LiquidGlass } from "../liquid-glass";
 
@@ -14,39 +14,36 @@ const liquidPopoverVariants = cva(
         default: "",
         card: "border-white/10",
         menu: "py-1",
-        dialog: "p-0"
+        dialog: "p-0",
       },
       size: {
         sm: "max-w-xs",
-        md: "max-w-sm", 
+        md: "max-w-sm",
         lg: "max-w-md",
         xl: "max-w-lg",
-        auto: "w-auto"
-      }
+        auto: "w-auto",
+      },
     },
     defaultVariants: {
       variant: "default",
-      size: "md"
-    }
+      size: "md",
+    },
   }
 );
 
-const arrowVariants = cva(
-  "absolute w-2 h-2 rotate-45 border border-white/20",
-  {
-    variants: {
-      variant: {
-        default: "bg-white/10",
-        card: "bg-white/10",
-        menu: "bg-white/10",
-        dialog: "bg-white/10"
-      }
+const arrowVariants = cva("absolute w-2 h-2 rotate-45 border border-white/20", {
+  variants: {
+    variant: {
+      default: "bg-white/10",
+      card: "bg-white/10",
+      menu: "bg-white/10",
+      dialog: "bg-white/10",
     },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 type PopoverSide = "top" | "right" | "bottom" | "left";
 type PopoverAlign = "start" | "center" | "end";
@@ -58,7 +55,9 @@ interface Position {
   align: PopoverAlign;
 }
 
-interface LiquidPopoverProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidPopoverVariants> {
+interface LiquidPopoverProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidPopoverVariants> {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   side?: PopoverSide;
@@ -74,27 +73,30 @@ interface LiquidPopoverProps extends React.HTMLAttributes<HTMLDivElement>, Varia
 }
 
 export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps>(
-  ({
-    className,
-    variant,
-    size,
-    open = false,
-    onOpenChange,
-    side = "bottom",
-    align = "center",
-    sideOffset = 4,
-    alignOffset = 0,
-    arrow = true,
-    modal = false,
-    closeOnClickOutside = true,
-    closeOnEscape = true,
-    trigger,
-    children,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      open = false,
+      onOpenChange,
+      side = "bottom",
+      align = "center",
+      sideOffset = 4,
+      alignOffset = 0,
+      arrow = true,
+      modal = false,
+      closeOnClickOutside = true,
+      closeOnEscape = true,
+      trigger,
+      children,
+      ...props
+    },
+    _ref
+  ) => {
     const [position, setPosition] = useState<Position>({ x: 0, y: 0, side, align });
     const [mounted, setMounted] = useState(false);
-    
+
     const triggerRef = useRef<HTMLElement>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
@@ -110,113 +112,122 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
     }, [open]);
 
     // Calculate popover position
-    const calculatePosition = useCallback((preferredSide: PopoverSide = side, preferredAlign: PopoverAlign = align): Position => {
-      const triggerElement = triggerRef.current;
-      const popoverElement = popoverRef.current;
-      
-      if (!triggerElement || !popoverElement) {
-        return { x: 0, y: 0, side: preferredSide, align: preferredAlign };
-      }
+    const calculatePosition = useCallback(
+      (preferredSide: PopoverSide = side, preferredAlign: PopoverAlign = align): Position => {
+        const triggerElement = triggerRef.current;
+        const popoverElement = popoverRef.current;
 
-      const triggerRect = triggerElement.getBoundingClientRect();
-      const popoverRect = popoverElement.getBoundingClientRect();
-      const viewport = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        scrollX: window.scrollX,
-        scrollY: window.scrollY,
-      };
+        if (!triggerElement || !popoverElement) {
+          return { x: 0, y: 0, side: preferredSide, align: preferredAlign };
+        }
 
-      let x = 0;
-      let y = 0;
-      let finalSide = preferredSide;
-      let finalAlign = preferredAlign;
+        const triggerRect = triggerElement.getBoundingClientRect();
+        const popoverRect = popoverElement.getBoundingClientRect();
+        const viewport = {
+          width: window.innerWidth,
+          height: window.innerHeight,
+          scrollX: window.scrollX,
+          scrollY: window.scrollY,
+        };
 
-      // Calculate base position based on side
-      switch (preferredSide) {
-        case "top":
-          x = triggerRect.left + triggerRect.width / 2;
-          y = triggerRect.top - sideOffset;
-          break;
-        case "bottom":
-          x = triggerRect.left + triggerRect.width / 2;
+        let x = 0;
+        let y = 0;
+        let finalSide = preferredSide;
+        const finalAlign = preferredAlign;
+
+        // Calculate base position based on side
+        switch (preferredSide) {
+          case "top":
+            x = triggerRect.left + triggerRect.width / 2;
+            y = triggerRect.top - sideOffset;
+            break;
+          case "bottom":
+            x = triggerRect.left + triggerRect.width / 2;
+            y = triggerRect.bottom + sideOffset;
+            break;
+          case "left":
+            x = triggerRect.left - sideOffset;
+            y = triggerRect.top + triggerRect.height / 2;
+            break;
+          case "right":
+            x = triggerRect.right + sideOffset;
+            y = triggerRect.top + triggerRect.height / 2;
+            break;
+        }
+
+        // Adjust for alignment
+        if (preferredSide === "top" || preferredSide === "bottom") {
+          switch (preferredAlign) {
+            case "start":
+              x = triggerRect.left + alignOffset;
+              break;
+            case "end":
+              x = triggerRect.right - alignOffset;
+              break;
+            case "center":
+              x = triggerRect.left + triggerRect.width / 2 + alignOffset;
+              break;
+          }
+        } else {
+          switch (preferredAlign) {
+            case "start":
+              y = triggerRect.top + alignOffset;
+              break;
+            case "end":
+              y = triggerRect.bottom - alignOffset;
+              break;
+            case "center":
+              y = triggerRect.top + triggerRect.height / 2 + alignOffset;
+              break;
+          }
+        }
+
+        // Flip side if popover would go outside viewport
+        if (preferredSide === "top" && y - popoverRect.height < 0) {
+          finalSide = "bottom";
           y = triggerRect.bottom + sideOffset;
-          break;
-        case "left":
-          x = triggerRect.left - sideOffset;
-          y = triggerRect.top + triggerRect.height / 2;
-          break;
-        case "right":
+        } else if (preferredSide === "bottom" && y + popoverRect.height > viewport.height) {
+          finalSide = "top";
+          y = triggerRect.top - sideOffset;
+        } else if (preferredSide === "left" && x - popoverRect.width < 0) {
+          finalSide = "right";
           x = triggerRect.right + sideOffset;
-          y = triggerRect.top + triggerRect.height / 2;
-          break;
-      }
+        } else if (preferredSide === "right" && x + popoverRect.width > viewport.width) {
+          finalSide = "left";
+          x = triggerRect.left - sideOffset;
+        }
 
-      // Adjust for alignment
-      if (preferredSide === "top" || preferredSide === "bottom") {
-        switch (preferredAlign) {
-          case "start":
-            x = triggerRect.left + alignOffset;
-            break;
-          case "end":
-            x = triggerRect.right - alignOffset;
-            break;
-          case "center":
-            x = triggerRect.left + triggerRect.width / 2 + alignOffset;
-            break;
+        // Adjust position based on final side
+        if (finalSide === "top" || finalSide === "bottom") {
+          if (preferredAlign === "center") {
+            x = Math.max(
+              popoverRect.width / 2,
+              Math.min(x, viewport.width - popoverRect.width / 2)
+            );
+          }
+          if (finalSide === "top") {
+            y -= popoverRect.height;
+          }
+        } else {
+          if (preferredAlign === "center") {
+            y = Math.max(
+              popoverRect.height / 2,
+              Math.min(y, viewport.height - popoverRect.height / 2)
+            );
+          }
+          if (finalSide === "left") {
+            x -= popoverRect.width;
+          }
         }
-      } else {
-        switch (preferredAlign) {
-          case "start":
-            y = triggerRect.top + alignOffset;
-            break;
-          case "end":
-            y = triggerRect.bottom - alignOffset;
-            break;
-          case "center":
-            y = triggerRect.top + triggerRect.height / 2 + alignOffset;
-            break;
-        }
-      }
 
-      // Flip side if popover would go outside viewport
-      if (preferredSide === "top" && y - popoverRect.height < 0) {
-        finalSide = "bottom";
-        y = triggerRect.bottom + sideOffset;
-      } else if (preferredSide === "bottom" && y + popoverRect.height > viewport.height) {
-        finalSide = "top";
-        y = triggerRect.top - sideOffset;
-      } else if (preferredSide === "left" && x - popoverRect.width < 0) {
-        finalSide = "right";
-        x = triggerRect.right + sideOffset;
-      } else if (preferredSide === "right" && x + popoverRect.width > viewport.width) {
-        finalSide = "left";
-        x = triggerRect.left - sideOffset;
-      }
+        // Ensure popover stays within viewport bounds
+        x = Math.max(8, Math.min(x, viewport.width - popoverRect.width - 8));
+        y = Math.max(8, Math.min(y, viewport.height - popoverRect.height - 8));
 
-      // Adjust position based on final side
-      if (finalSide === "top" || finalSide === "bottom") {
-        if (preferredAlign === "center") {
-          x = Math.max(popoverRect.width / 2, Math.min(x, viewport.width - popoverRect.width / 2));
-        }
-        if (finalSide === "top") {
-          y -= popoverRect.height;
-        }
-      } else {
-        if (preferredAlign === "center") {
-          y = Math.max(popoverRect.height / 2, Math.min(y, viewport.height - popoverRect.height / 2));
-        }
-        if (finalSide === "left") {
-          x -= popoverRect.width;
-        }
-      }
-
-      // Ensure popover stays within viewport bounds
-      x = Math.max(8, Math.min(x, viewport.width - popoverRect.width - 8));
-      y = Math.max(8, Math.min(y, viewport.height - popoverRect.height - 8));
-
-      return { x, y, side: finalSide, align: finalAlign };
-    }, [side, align, sideOffset, alignOffset]);
+        return { x, y, side: finalSide, align: finalAlign };
+      },
+      [side, align, sideOffset, alignOffset]
+    );
 
     // Update position when popover is open
     useEffect(() => {
@@ -238,12 +249,12 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
         setPosition(pos);
       };
 
-      window.addEventListener('resize', handleUpdate);
-      window.addEventListener('scroll', handleUpdate, true);
-      
+      window.addEventListener("resize", handleUpdate);
+      window.addEventListener("scroll", handleUpdate, true);
+
       return () => {
-        window.removeEventListener('resize', handleUpdate);
-        window.removeEventListener('scroll', handleUpdate, true);
+        window.removeEventListener("resize", handleUpdate);
+        window.removeEventListener("scroll", handleUpdate, true);
       };
     }, [open, calculatePosition]);
 
@@ -255,17 +266,14 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
         const target = event.target as Node;
         const trigger = triggerRef.current;
         const popover = popoverRef.current;
-        
-        if (
-          trigger && !trigger.contains(target) &&
-          popover && !popover.contains(target)
-        ) {
+
+        if (trigger && !trigger.contains(target) && popover && !popover.contains(target)) {
           onOpenChange?.(false);
         }
       };
 
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [open, closeOnClickOutside, onOpenChange]);
 
     // Handle escape key
@@ -273,14 +281,14 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
       if (!open || !closeOnEscape) return;
 
       const handleEscape = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
           event.preventDefault();
           onOpenChange?.(false);
         }
       };
 
-      document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
     }, [open, closeOnEscape, onOpenChange]);
 
     // Get arrow position styles
@@ -288,35 +296,35 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
       switch (position.side) {
         case "top":
           return {
-            top: '100%',
-            left: '50%',
-            transform: 'translateX(-50%) translateY(-50%)',
-            borderTop: 'none',
-            borderLeft: 'none',
+            top: "100%",
+            left: "50%",
+            transform: "translateX(-50%) translateY(-50%)",
+            borderTop: "none",
+            borderLeft: "none",
           };
         case "bottom":
           return {
-            bottom: '100%',
-            left: '50%',
-            transform: 'translateX(-50%) translateY(50%)',
-            borderBottom: 'none',
-            borderRight: 'none',
+            bottom: "100%",
+            left: "50%",
+            transform: "translateX(-50%) translateY(50%)",
+            borderBottom: "none",
+            borderRight: "none",
           };
         case "left":
           return {
-            left: '100%',
-            top: '50%',
-            transform: 'translateY(-50%) translateX(-50%)',
-            borderLeft: 'none',
-            borderBottom: 'none',
+            left: "100%",
+            top: "50%",
+            transform: "translateY(-50%) translateX(-50%)",
+            borderLeft: "none",
+            borderBottom: "none",
           };
         case "right":
           return {
-            right: '100%',
-            top: '50%',
-            transform: 'translateY(-50%) translateX(50%)',
-            borderRight: 'none',
-            borderTop: 'none',
+            right: "100%",
+            top: "50%",
+            transform: "translateY(-50%) translateX(50%)",
+            borderRight: "none",
+            borderTop: "none",
           };
         default:
           return {};
@@ -329,8 +337,7 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
         {trigger &&
           React.cloneElement(trigger as React.ReactElement, {
             ref: triggerRef,
-          })
-        }
+          })}
 
         {/* Modal overlay */}
         {modal && open && mounted && (
@@ -345,7 +352,7 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
         {open && mounted && (
           <div
             style={{
-              position: 'fixed',
+              position: "fixed",
               left: position.x,
               top: position.y,
               zIndex: modal ? 50 : 30,
@@ -364,23 +371,14 @@ export const LiquidPopover = React.forwardRef<HTMLDivElement, LiquidPopoverProps
               {...props}
             >
               {variant === "menu" ? (
-                <div className="py-1">
-                  {children}
-                </div>
+                <div className="py-1">{children}</div>
               ) : variant === "dialog" ? (
                 children
               ) : (
-                <div className="p-4">
-                  {children}
-                </div>
+                <div className="p-4">{children}</div>
               )}
-              
-              {arrow && (
-                <div
-                  className={cn(arrowVariants({ variant }))}
-                  style={getArrowStyles()}
-                />
-              )}
+
+              {arrow && <div className={cn(arrowVariants({ variant }))} style={getArrowStyles()} />}
             </LiquidGlass>
           </div>
         )}
@@ -422,11 +420,7 @@ interface LiquidPopoverContentProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const LiquidPopoverContent = React.forwardRef<HTMLDivElement, LiquidPopoverContentProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("", className)} {...props}>
       {children}
     </div>
   )
@@ -440,11 +434,7 @@ interface LiquidPopoverHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 
 export const LiquidPopoverHeader = React.forwardRef<HTMLDivElement, LiquidPopoverHeaderProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("px-4 py-3 border-b border-white/10", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("px-4 py-3 border-b border-white/10", className)} {...props}>
       {children}
     </div>
   )
@@ -458,11 +448,7 @@ interface LiquidPopoverFooterProps extends React.HTMLAttributes<HTMLDivElement> 
 
 export const LiquidPopoverFooter = React.forwardRef<HTMLDivElement, LiquidPopoverFooterProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("px-4 py-3 border-t border-white/10", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("px-4 py-3 border-t border-white/10", className)} {...props}>
       {children}
     </div>
   )
@@ -477,35 +463,32 @@ interface LiquidPopoverMenuItemProps extends React.ButtonHTMLAttributes<HTMLButt
   destructive?: boolean;
 }
 
-export const LiquidPopoverMenuItem = React.forwardRef<HTMLButtonElement, LiquidPopoverMenuItemProps>(
-  ({ className, children, icon, destructive, ...props }, ref) => (
-    <button
-      ref={ref}
-      className={cn(
-        "relative flex w-full cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm text-white outline-none transition-colors",
-        "hover:bg-white/10 focus:bg-white/10 focus:text-white",
-        "disabled:pointer-events-none disabled:opacity-50",
-        destructive && "text-red-400 hover:bg-red-500/10 focus:bg-red-500/10",
-        className
-      )}
-      {...props}
-    >
-      {icon && (
-        <span className="mr-2 h-4 w-4 flex-shrink-0">
-          {icon}
-        </span>
-      )}
-      {children}
-    </button>
-  )
-);
+export const LiquidPopoverMenuItem = React.forwardRef<
+  HTMLButtonElement,
+  LiquidPopoverMenuItemProps
+>(({ className, children, icon, destructive, ...props }, ref) => (
+  <button
+    ref={ref}
+    className={cn(
+      "relative flex w-full cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm text-white outline-none transition-colors",
+      "hover:bg-white/10 focus:bg-white/10 focus:text-white",
+      "disabled:pointer-events-none disabled:opacity-50",
+      destructive && "text-red-400 hover:bg-red-500/10 focus:bg-red-500/10",
+      className
+    )}
+    {...props}
+  >
+    {icon && <span className="mr-2 h-4 w-4 flex-shrink-0">{icon}</span>}
+    {children}
+  </button>
+));
 
 LiquidPopoverMenuItem.displayName = "LiquidPopoverMenuItem";
 
-export { 
+export {
   liquidPopoverVariants,
   arrowVariants,
   type LiquidPopoverProps,
   type PopoverSide,
-  type PopoverAlign
+  type PopoverAlign,
 };

@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
-import { useState, useMemo, useCallback } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useMemo, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 import { LiquidButton } from "../liquid-button";
+import { LiquidGlass } from "../liquid-glass";
 
 const liquidPaginationVariants = cva(
   "flex items-center justify-between gap-4 p-4 rounded-lg border border-white/20",
@@ -15,57 +15,56 @@ const liquidPaginationVariants = cva(
         default: "",
         card: "bg-white/5 shadow-lg",
         minimal: "border-0 bg-transparent p-2",
-        compact: "gap-2 p-2"
+        compact: "gap-2 p-2",
       },
       size: {
         sm: "text-sm",
         md: "",
-        lg: "text-lg"
+        lg: "text-lg",
       },
       align: {
         left: "justify-start",
-        center: "justify-center", 
+        center: "justify-center",
         right: "justify-end",
-        between: "justify-between"
-      }
+        between: "justify-between",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "md",
-      align: "between"
-    }
-  }
-);
-
-const paginationButtonVariants = cva(
-  "min-w-[2.5rem] h-10 text-white/80 transition-colors",
-  {
-    variants: {
-      variant: {
-        default: "hover:bg-white/10",
-        ghost: "hover:bg-white/10",
-        outline: "border border-white/20 hover:bg-white/10",
-        filled: "bg-white/10 hover:bg-white/20"
-      },
-      size: {
-        sm: "min-w-[2rem] h-8 text-sm px-2",
-        md: "min-w-[2.5rem] h-10 px-3",
-        lg: "min-w-[3rem] h-12 text-lg px-4"
-      },
-      active: {
-        true: "bg-blue-500/30 text-blue-200 border-blue-500/50",
-        false: ""
-      }
+      align: "between",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-      active: false
-    }
   }
 );
 
-interface LiquidPaginationProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidPaginationVariants> {
+const paginationButtonVariants = cva("min-w-[2.5rem] h-10 text-white/80 transition-colors", {
+  variants: {
+    variant: {
+      default: "hover:bg-white/10",
+      ghost: "hover:bg-white/10",
+      outline: "border border-white/20 hover:bg-white/10",
+      filled: "bg-white/10 hover:bg-white/20",
+    },
+    size: {
+      sm: "min-w-[2rem] h-8 text-sm px-2",
+      md: "min-w-[2.5rem] h-10 px-3",
+      lg: "min-w-[3rem] h-12 text-lg px-4",
+    },
+    active: {
+      true: "bg-blue-500/30 text-blue-200 border-blue-500/50",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+    active: false,
+  },
+});
+
+interface LiquidPaginationProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidPaginationVariants> {
   current: number;
   total: number;
   pageSize?: number;
@@ -88,28 +87,31 @@ interface LiquidPaginationProps extends React.HTMLAttributes<HTMLDivElement>, Va
 }
 
 export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginationProps>(
-  ({
-    className,
-    variant,
-    size,
-    align,
-    current = 1,
-    total = 0,
-    pageSize = 10,
-    showSizeChanger = false,
-    showQuickJumper = false,
-    showTotal = false,
-    hideOnSinglePage = false,
-    disabled = false,
-    simple = false,
-    showLessItems = false,
-    onChange,
-    onShowSizeChange,
-    pageSizeOptions = [10, 20, 50, 100],
-    itemRender,
-    responsive = true,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      align,
+      current = 1,
+      total = 0,
+      pageSize = 10,
+      showSizeChanger = false,
+      showQuickJumper = false,
+      showTotal = false,
+      hideOnSinglePage = false,
+      disabled = false,
+      simple = false,
+      showLessItems = false,
+      onChange,
+      onShowSizeChange,
+      pageSizeOptions = [10, 20, 50, 100],
+      itemRender,
+      responsive = true,
+      ...props
+    },
+    ref
+  ) => {
     const [jumpValue, setJumpValue] = useState("");
     const [currentPageSize, setCurrentPageSize] = useState(pageSize);
 
@@ -126,20 +128,20 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
         startIndex,
         endIndex,
         hasPrev,
-        hasNext
+        hasNext,
       };
     }, [total, currentPageSize, current]);
 
     // Generate page numbers to display
     const getPageNumbers = useCallback(() => {
       const { totalPages } = paginationData;
-      
+
       if (simple || totalPages <= 1) {
         return [];
       }
 
       const delta = showLessItems ? 1 : 2;
-      const range = [];
+      const _range = [];
       const rangeWithDots = [];
 
       // Always show first page
@@ -177,27 +179,33 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
     }, [paginationData, simple, showLessItems, current]);
 
     // Handle page change
-    const handlePageChange = useCallback((page: number) => {
-      if (disabled || page === current || page < 1 || page > paginationData.totalPages) {
-        return;
-      }
-      onChange?.(page, currentPageSize);
-    }, [disabled, current, paginationData.totalPages, onChange, currentPageSize]);
+    const handlePageChange = useCallback(
+      (page: number) => {
+        if (disabled || page === current || page < 1 || page > paginationData.totalPages) {
+          return;
+        }
+        onChange?.(page, currentPageSize);
+      },
+      [disabled, current, paginationData.totalPages, onChange, currentPageSize]
+    );
 
     // Handle page size change
-    const handlePageSizeChange = useCallback((newPageSize: number) => {
-      const newTotalPages = Math.ceil(total / newPageSize);
-      const newPage = Math.min(current, newTotalPages);
-      
-      setCurrentPageSize(newPageSize);
-      onShowSizeChange?.(newPage, newPageSize);
-      onChange?.(newPage, newPageSize);
-    }, [total, current, onShowSizeChange, onChange]);
+    const handlePageSizeChange = useCallback(
+      (newPageSize: number) => {
+        const newTotalPages = Math.ceil(total / newPageSize);
+        const newPage = Math.min(current, newTotalPages);
+
+        setCurrentPageSize(newPageSize);
+        onShowSizeChange?.(newPage, newPageSize);
+        onChange?.(newPage, newPageSize);
+      },
+      [total, current, onShowSizeChange, onChange]
+    );
 
     // Handle quick jump
     const handleQuickJump = useCallback(() => {
-      const page = parseInt(jumpValue);
-      if (!isNaN(page) && page >= 1 && page <= paginationData.totalPages) {
+      const page = parseInt(jumpValue, 10);
+      if (!Number.isNaN(page) && page >= 1 && page <= paginationData.totalPages) {
         handlePageChange(page);
         setJumpValue("");
       }
@@ -217,62 +225,83 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
     // Icons
     const ChevronLeftIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <path
+          fillRule="evenodd"
+          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        />
       </svg>
     );
 
     const ChevronRightIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        <path
+          fillRule="evenodd"
+          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        />
       </svg>
     );
 
     const DoubleChevronLeftIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path fillRule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-        <path fillRule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <path
+          fillRule="evenodd"
+          d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        />
+        <path
+          fillRule="evenodd"
+          d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        />
       </svg>
     );
 
     const DoubleChevronRightIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path fillRule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
-        <path fillRule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+        <path
+          fillRule="evenodd"
+          d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
+        />
+        <path
+          fillRule="evenodd"
+          d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
+        />
       </svg>
     );
 
     // Render page item
-    const renderPageItem = useCallback((item: number | string, isActive: boolean = false) => {
-      const defaultElement = (
-        <LiquidButton
-          variant="ghost"
-          size={size}
-          disabled={disabled}
-          className={cn(
-            paginationButtonVariants({ variant: "ghost", size, active: isActive }),
-            isActive && "bg-blue-500/30 text-blue-200 border-blue-500/50"
-          )}
-        >
-          {item === "jump-prev" ? (
-            <DoubleChevronLeftIcon />
-          ) : item === "jump-next" ? (
-            <DoubleChevronRightIcon />
-          ) : (
-            item
-          )}
-        </LiquidButton>
-      );
-
-      if (itemRender) {
-        return itemRender(
-          typeof item === "number" ? item : current,
-          item === "jump-prev" ? "jump-prev" : item === "jump-next" ? "jump-next" : "page",
-          defaultElement
+    const renderPageItem = useCallback(
+      (item: number | string, isActive = false) => {
+        const defaultElement = (
+          <LiquidButton
+            variant="ghost"
+            size={size}
+            disabled={disabled}
+            className={cn(
+              paginationButtonVariants({ variant: "ghost", size, active: isActive }),
+              isActive && "bg-blue-500/30 text-blue-200 border-blue-500/50"
+            )}
+          >
+            {item === "jump-prev" ? (
+              <DoubleChevronLeftIcon />
+            ) : item === "jump-next" ? (
+              <DoubleChevronRightIcon />
+            ) : (
+              item
+            )}
+          </LiquidButton>
         );
-      }
 
-      return defaultElement;
-    }, [size, disabled, current, itemRender]);
+        if (itemRender) {
+          return itemRender(
+            typeof item === "number" ? item : current,
+            item === "jump-prev" ? "jump-prev" : item === "jump-next" ? "jump-next" : "page",
+            defaultElement
+          );
+        }
+
+        return defaultElement;
+      },
+      [size, disabled, current, itemRender]
+    );
 
     // Don't render if single page and hideOnSinglePage is true
     if (hideOnSinglePage && paginationData.totalPages <= 1) {
@@ -290,11 +319,9 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
         {/* Total info */}
         {showTotal && !simple && (
           <div className="text-sm text-white/70 whitespace-nowrap">
-            {typeof showTotal === "function" ? (
-              showTotal(total, [paginationData.startIndex, paginationData.endIndex])
-            ) : (
-              `Showing ${paginationData.startIndex} to ${paginationData.endIndex} of ${total} entries`
-            )}
+            {typeof showTotal === "function"
+              ? showTotal(total, [paginationData.startIndex, paginationData.endIndex])
+              : `Showing ${paginationData.startIndex} to ${paginationData.endIndex} of ${total} entries`}
           </div>
         )}
 
@@ -310,11 +337,11 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
             >
               <ChevronLeftIcon />
             </LiquidButton>
-            
+
             <span className="text-white/80 px-2">
               {current} / {paginationData.totalPages}
             </span>
-            
+
             <LiquidButton
               variant="ghost"
               size={size}
@@ -329,9 +356,7 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
           /* Full pagination */
           <div className="flex items-center gap-1">
             {/* Previous button */}
-            <div onClick={() => handlePageChange(current - 1)}>
-              {renderPageItem("prev", false)}
-            </div>
+            <div onClick={() => handlePageChange(current - 1)}>{renderPageItem("prev", false)}</div>
 
             {/* Page numbers */}
             {getPageNumbers().map((pageNum, index) => (
@@ -352,9 +377,7 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
             ))}
 
             {/* Next button */}
-            <div onClick={() => handlePageChange(current + 1)}>
-              {renderPageItem("next", false)}
-            </div>
+            <div onClick={() => handlePageChange(current + 1)}>{renderPageItem("next", false)}</div>
           </div>
         )}
 
@@ -420,8 +443,4 @@ export const LiquidPagination = React.forwardRef<HTMLDivElement, LiquidPaginatio
 
 LiquidPagination.displayName = "LiquidPagination";
 
-export { 
-  liquidPaginationVariants,
-  paginationButtonVariants,
-  type LiquidPaginationProps
-};
+export { liquidPaginationVariants, paginationButtonVariants, type LiquidPaginationProps };

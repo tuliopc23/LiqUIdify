@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { setupDOM } from "../test/test-setup";
 
 // Set up DOM environment

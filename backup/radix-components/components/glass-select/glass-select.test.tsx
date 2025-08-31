@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, within } from "../../test/test-utils";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen, within } from "../../test/test-utils";
 import { GlassSelect, type GlassSelectOption } from "./glass-select";
 
 const options: GlassSelectOption[] = [
@@ -47,9 +47,7 @@ describe("GlassSelect", () => {
 
   it("selects an option by click (single select)", () => {
     const onChange = vi.fn();
-    render(
-      <GlassSelect options={options} onChange={onChange} placeholder="Pick" />,
-    );
+    render(<GlassSelect options={options} onChange={onChange} placeholder="Pick" />);
 
     const trigger = screen.getByRole("combobox");
     fireEvent.click(trigger);
@@ -83,9 +81,7 @@ describe("GlassSelect", () => {
 
   it("supports keyboard navigation and selection", () => {
     const onChange = vi.fn();
-    render(
-      <GlassSelect options={options} onChange={onChange} placeholder="Pick" />,
-    );
+    render(<GlassSelect options={options} onChange={onChange} placeholder="Pick" />);
 
     const trigger = screen.getByRole("combobox");
 
@@ -116,9 +112,7 @@ describe("GlassSelect", () => {
   });
 
   it("searchable variant filters options", () => {
-    render(
-      <GlassSelect options={options} searchable placeholder="Search..." />,
-    );
+    render(<GlassSelect options={options} searchable placeholder="Search..." />);
 
     const trigger = screen.getByRole("combobox");
     fireEvent.click(trigger);

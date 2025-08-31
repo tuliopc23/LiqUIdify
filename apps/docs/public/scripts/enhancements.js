@@ -1,10 +1,8 @@
-(function () {
+(() => {
   if (window.__liquidifyEnhancements) return;
   window.__liquidifyEnhancements = true;
 
-  const prefersReducedMotion = matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+  const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const bound = new WeakSet();
   const once = (el) => el && !bound.has(el) && bound.add(el);
 
@@ -16,10 +14,7 @@
     svg.setAttribute("focusable", "false");
     svg.setAttribute("width", "0");
     svg.setAttribute("height", "0");
-    svg.setAttribute(
-      "style",
-      "position:absolute;width:0;height:0;overflow:hidden",
-    );
+    svg.setAttribute("style", "position:absolute;width:0;height:0;overflow:hidden");
     svg.setAttribute(MARK, "");
     svg.innerHTML = `
       <defs>
@@ -84,14 +79,8 @@
       const dy = (e.clientX - cx) / r.width;
       hero.style.setProperty("--lg-tilt-x", `${dx * 18}deg`);
       hero.style.setProperty("--lg-tilt-y", `${-dy * 18}deg`);
-      hero.style.setProperty(
-        "--lg-spotlight-x",
-        `${((e.clientX - r.left) / r.width) * 100}%`,
-      );
-      hero.style.setProperty(
-        "--lg-spotlight-y",
-        `${((e.clientY - r.top) / r.height) * 100}%`,
-      );
+      hero.style.setProperty("--lg-spotlight-x", `${((e.clientX - r.left) / r.width) * 100}%`);
+      hero.style.setProperty("--lg-spotlight-y", `${((e.clientY - r.top) / r.height) * 100}%`);
     };
     hero.addEventListener("pointermove", tilt, { passive: true });
     hero.addEventListener("pointerleave", () => {
@@ -124,9 +113,7 @@
   }
 
   function initBlurUp(root = document) {
-    const imgs = Array.from(root.querySelectorAll("img[data-src]")).filter(
-      (i) => !bound.has(i),
-    );
+    const imgs = Array.from(root.querySelectorAll("img[data-src]")).filter((i) => !bound.has(i));
     if (!imgs.length) return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -140,23 +127,20 @@
           }
         });
       },
-      { rootMargin: "200px" },
+      { rootMargin: "200px" }
     );
     imgs.forEach((i) => io.observe(i));
   }
 
   function initBeforeAfter(root = document) {
     const sliders = Array.from(root.querySelectorAll(".before-after")).filter(
-      (el) => !bound.has(el),
+      (el) => !bound.has(el)
     );
     sliders.forEach((el) => {
       once(el);
       const onMove = (x) => {
         const r = el.getBoundingClientRect();
-        const split = Math.max(
-          0,
-          Math.min(100, ((x - r.left) / r.width) * 100),
-        );
+        const split = Math.max(0, Math.min(100, ((x - r.left) / r.width) * 100));
         el.style.setProperty("--split", `${split}%`);
       };
       el.addEventListener("pointermove", (e) => onMove(e.clientX), {
@@ -170,20 +154,17 @@
 
   function initTocProgress(root = document) {
     if (prefersReducedMotion) return;
-    const sections = Array.from(root.querySelectorAll("section[id]")).filter(
-      (s) => !bound.has(s),
-    );
+    const sections = Array.from(root.querySelectorAll("section[id]")).filter((s) => !bound.has(s));
     if (!sections.length) return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           const id = e.target.id;
           const el = document.querySelector(`[data-toc="${id}"]`);
-          if (el)
-            el.style.setProperty("--progress", String(e.intersectionRatio));
+          if (el) el.style.setProperty("--progress", String(e.intersectionRatio));
         });
       },
-      { threshold: Array.from({ length: 11 }, (_, i) => i / 10) },
+      { threshold: Array.from({ length: 11 }, (_, i) => i / 10) }
     );
     sections.forEach((s) => {
       bound.add(s);
@@ -208,7 +189,7 @@
 
   const main = document.querySelector("main") || document.body;
   const mo = new MutationObserver((muts) => {
-    if (muts.some((m) => m.addedNodes && m.addedNodes.length)) {
+    if (muts.some((m) => m.addedNodes?.length)) {
       runAll(document);
     }
   });

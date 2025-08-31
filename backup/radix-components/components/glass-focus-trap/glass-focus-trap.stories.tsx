@@ -11,8 +11,8 @@ export default meta;
 export const Basic: StoryObj<typeof GlassFocusTrap> = {
   render: () => (
     <GlassFocusTrap>
-      <div tabIndex={0}>Focusable A</div>
-      <div tabIndex={0}>Focusable B</div>
+      <div>Focusable A</div>
+      <div>Focusable B</div>
     </GlassFocusTrap>
   ),
 };

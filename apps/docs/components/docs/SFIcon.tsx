@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface SFIconProps {
   name: string;
@@ -24,23 +24,11 @@ export default function SFIcon({
   className = "",
   color,
 }: SFIconProps) {
-  const iconClasses = [
-    "sf-icon",
-    `sf-icon-${size}`,
-    `sf-icon-${weight}`,
-    `sf-${name}`,
-    className,
-  ]
+  const iconClasses = ["sf-icon", `sf-icon-${size}`, `sf-icon-${weight}`, `sf-${name}`, className]
     .filter(Boolean)
     .join(" ");
 
-  return (
-    <span
-      className={iconClasses}
-      style={color ? { color } : undefined}
-      aria-hidden="true"
-    />
-  );
+  return <span className={iconClasses} style={color ? { color } : undefined} aria-hidden="true" />;
 }
 
 // Text with Icon Component
@@ -72,12 +60,7 @@ export function SFIconText({
 }: SFIconTextProps) {
   return (
     <span className={`sf-icon-text ${className}`}>
-      <SFIcon
-        name={icon}
-        size={iconSize}
-        weight={iconWeight}
-        color={iconColor}
-      />
+      <SFIcon name={icon} size={iconSize} weight={iconWeight} color={iconColor} />
       <span>{children}</span>
     </span>
   );

@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  AlertCircle,
-  Award,
-  CheckCircle,
-  Info,
-  Star,
-  XCircle,
-} from "lucide-react";
+import { AlertCircle, Award, CheckCircle, Info, Star, XCircle } from "lucide-react";
 import { GlassBadge } from "@/components/glass-badge";
 
 const meta = {
@@ -112,15 +105,11 @@ export const StatusIndicators: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-blue-900/80">
-          User Status:
-        </span>
+        <span className="text-sm text-blue-900/80">User Status:</span>
         <GlassBadge variant="success">Active</GlassBadge>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm text-blue-900/80">
-          Subscription:
-        </span>
+        <span className="text-sm text-blue-900/80">Subscription:</span>
         <GlassBadge variant="warning">Expiring Soon</GlassBadge>
       </div>
       <div className="flex items-center gap-2">
@@ -181,9 +170,7 @@ export const TagsAndLabels: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Categories
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Categories</h4>
         <div className="flex flex-wrap gap-2">
           <GlassBadge>Technology</GlassBadge>
           <GlassBadge>Design</GlassBadge>
@@ -193,9 +180,7 @@ export const TagsAndLabels: Story = {
         </div>
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Skills
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Skills</h4>
         <div className="flex flex-wrap gap-2">
           <GlassBadge variant="success">React</GlassBadge>
           <GlassBadge variant="success">TypeScript</GlassBadge>
@@ -247,9 +232,7 @@ export const CustomStyling: Story = {
         <GlassBadge className="border-blue-500/30 bg-gradient-to-r from-purple-500/20 to-pink-500/20">
           Gradient
         </GlassBadge>
-        <GlassBadge className="shadow-lg shadow-white/20">
-          With Shadow
-        </GlassBadge>
+        <GlassBadge className="shadow-lg shadow-white/20">With Shadow</GlassBadge>
         <GlassBadge className="animate-pulse">Animated</GlassBadge>
       </div>
     </div>
@@ -269,9 +252,7 @@ export const RealWorldExamples: Story = {
             <GlassBadge>Admin</GlassBadge>
           </div>
         </div>
-        <p className="mb-3 text-sm text-blue-900/60">
-          Senior Software Engineer
-        </p>
+        <p className="mb-3 text-sm text-blue-900/60">Senior Software Engineer</p>
         <div className="flex flex-wrap gap-2">
           <GlassBadge className="text-xs">React</GlassBadge>
           <GlassBadge className="text-xs">TypeScript</GlassBadge>
@@ -283,12 +264,8 @@ export const RealWorldExamples: Story = {
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
         <div className="mb-2 flex items-start justify-between">
           <div>
-            <h3 className="font-semibold text-blue-900">
-              Premium Package
-            </h3>
-            <p className="mt-1 font-bold text-2xl text-blue-900">
-              $99/mo
-            </p>
+            <h3 className="font-semibold text-blue-900">Premium Package</h3>
+            <p className="mt-1 font-bold text-2xl text-blue-900">$99/mo</p>
           </div>
           <div className="flex flex-col gap-2">
             <GlassBadge variant="warning">Limited Time</GlassBadge>
@@ -306,27 +283,19 @@ export const RealWorldExamples: Story = {
         <h3 className="mb-3 font-semibold text-blue-900">Tasks</h3>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-blue-900/80">
-              Fix navigation bug
-            </span>
+            <span className="text-sm text-blue-900/80">Fix navigation bug</span>
             <GlassBadge variant="error">Critical</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-blue-900/80">
-              Update documentation
-            </span>
+            <span className="text-sm text-blue-900/80">Update documentation</span>
             <GlassBadge variant="warning">High</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-blue-900/80">
-              Refactor auth module
-            </span>
+            <span className="text-sm text-blue-900/80">Refactor auth module</span>
             <GlassBadge>Medium</GlassBadge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-blue-900/80 line-through">
-              Deploy to staging
-            </span>
+            <span className="text-sm text-blue-900/80 line-through">Deploy to staging</span>
             <GlassBadge variant="success">Done</GlassBadge>
           </div>
         </div>
@@ -340,9 +309,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="rounded-lg bg-blue-100/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Light Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Light Background</h3>
         <div className="flex flex-wrap gap-2">
           <GlassBadge variant="default">Default</GlassBadge>
           <GlassBadge variant="success">Success</GlassBadge>
@@ -352,9 +319,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="rounded-lg bg-blue-100/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Dark Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Background</h3>
         <div className="flex flex-wrap gap-2">
           <GlassBadge variant="default">Default</GlassBadge>
           <GlassBadge variant="success">Success</GlassBadge>
@@ -376,8 +341,8 @@ export const AccessibilityDemo: Story = {
   render: () => (
     <div className="max-w-md space-y-4">
       <p className="text-sm text-blue-900/60">
-        Badges should be used for supplementary information. Important status
-        should also be conveyed through text or other means.
+        Badges should be used for supplementary information. Important status should also be
+        conveyed through text or other means.
       </p>
       <div className="space-y-3">
         <div className="flex items-center gap-2">
@@ -389,20 +354,13 @@ export const AccessibilityDemo: Story = {
         <div className="flex items-center gap-2">
           <span className="text-blue-900">Payment Status:</span>
           <GlassBadge variant="warning">Processing</GlassBadge>
-          <span className="text-sm text-blue-900/60">
-            (Expected: 2-3 days)
-          </span>
+          <span className="text-sm text-blue-900/60">(Expected: 2-3 days)</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-blue-900">Account Type:</span>
-          <GlassBadge aria-describedby="premium-description">
-            Premium
-          </GlassBadge>
+          <GlassBadge aria-describedby="premium-description">Premium</GlassBadge>
         </div>
-        <p
-          id="premium-description"
-          className="ml-4 text-blue-900/60 text-xs"
-        >
+        <p id="premium-description" className="ml-4 text-blue-900/60 text-xs">
           Premium accounts have access to all features and priority support.
         </p>
       </div>

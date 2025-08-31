@@ -211,7 +211,9 @@
   backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
   -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
   border: var(--glass-border-width) solid var(--liquid-border-medium);
-  box-shadow: var(--glass-shadow-elevated), 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    var(--glass-shadow-elevated),
+    0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .glass-ultra-thin {
@@ -328,7 +330,7 @@
   .glass-surface,
   .glass-elevated,
   .glass-heavy {
-    transition: none !important;
-    transform: none !important;
+    transition: none;
+    transform: none;
   }
 }

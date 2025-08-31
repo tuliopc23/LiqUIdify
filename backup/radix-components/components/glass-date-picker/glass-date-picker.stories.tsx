@@ -53,10 +53,7 @@ export const Sizes = () => (
 export const CustomFormat = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
     <GlassDatePicker placeholder="MM/DD/YYYY format..." format="MM/dd/yyyy" />
-    <GlassDatePicker
-      placeholder="Full date format..."
-      format="EEEE, MMMM do, yyyy"
-    />
+    <GlassDatePicker placeholder="Full date format..." format="EEEE, MMMM do, yyyy" />
     <GlassDatePicker placeholder="ISO format..." format="yyyy-MM-dd" />
   </div>
 );

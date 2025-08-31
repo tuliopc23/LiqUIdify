@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vitest/config";
+
 import { resolve } from "node:path";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
@@ -28,11 +29,7 @@ export default defineConfig({
       provider: "v8",
       enabled: false,
       include: ["libs/components/src/**/*.{js,ts,jsx,tsx}"],
-      exclude: [
-        "**/test/**",
-        "**/*.{test,spec}.{js,ts,jsx,tsx}",
-        "**/node_modules/**",
-      ],
+      exclude: ["**/test/**", "**/*.{test,spec}.{js,ts,jsx,tsx}", "**/node_modules/**"],
     },
 
     // Simple timeouts

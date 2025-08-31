@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Heart, MessageCircle, Share2, User } from "lucide-react";
-import {
-  GlassSkeleton,
-  SkeletonCard,
-  SkeletonTable,
-  SkeletonText,
-} from "./glass-skeleton";
+import { GlassSkeleton, SkeletonCard, SkeletonTable, SkeletonText } from "./glass-skeleton";
 
 const meta = {
   title: "Components/Feedback/GlassSkeleton",
@@ -189,9 +184,7 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Default Variant
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Default Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="default" />
           <GlassSkeleton width={150} height={20} variant="default" />
@@ -200,9 +193,7 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Shimmer Variant
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Shimmer Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="shimmer" />
           <GlassSkeleton width={150} height={20} variant="shimmer" />
@@ -211,9 +202,7 @@ export const Variants: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Pulse Variant
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Pulse Variant</h3>
         <div className="space-y-3">
           <GlassSkeleton width={200} height={20} variant="pulse" />
           <GlassSkeleton width={150} height={20} variant="pulse" />
@@ -241,35 +230,16 @@ export const Shapes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Rectangle Shapes
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Rectangle Shapes</h3>
         <div className="flex items-center gap-4">
-          <GlassSkeleton
-            shape="rectangle"
-            width={100}
-            height={60}
-            variant="shimmer"
-          />
-          <GlassSkeleton
-            shape="rectangle"
-            width={120}
-            height={80}
-            variant="shimmer"
-          />
-          <GlassSkeleton
-            shape="rectangle"
-            width={80}
-            height={100}
-            variant="shimmer"
-          />
+          <GlassSkeleton shape="rectangle" width={100} height={60} variant="shimmer" />
+          <GlassSkeleton shape="rectangle" width={120} height={80} variant="shimmer" />
+          <GlassSkeleton shape="rectangle" width={80} height={100} variant="shimmer" />
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Circle Shapes
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Circle Shapes</h3>
         <div className="flex items-center gap-4">
           <GlassSkeleton shape="circle" width={40} variant="shimmer" />
           <GlassSkeleton shape="circle" width={60} variant="shimmer" />
@@ -279,9 +249,7 @@ export const Shapes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Line Shapes
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Line Shapes</h3>
         <div className="space-y-3">
           <GlassSkeleton shape="line" width="100%" variant="shimmer" />
           <GlassSkeleton shape="line" width="80%" variant="shimmer" />
@@ -309,36 +277,28 @@ export const PreBuiltPatterns: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Text Skeleton
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Text Skeleton</h3>
         <div className="max-w-md">
           <SkeletonText lines={4} lastLineWidth="70%" />
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Card Skeleton with Avatar
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Card Skeleton with Avatar</h3>
         <div className="max-w-md">
           <SkeletonCard showAvatar />
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Card Skeleton without Avatar
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Card Skeleton without Avatar</h3>
         <div className="max-w-md">
           <SkeletonCard showAvatar={false} />
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Table Skeleton
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Table Skeleton</h3>
         <div className="max-w-2xl">
           <SkeletonTable rows={5} columns={4} />
         </div>
@@ -364,17 +324,10 @@ export const ContentTypeExamples: Story = {
   render: () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Profile Card Loading
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Profile Card Loading</h3>
         <div className="max-w-sm rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-4">
-            <GlassSkeleton
-              shape="circle"
-              width={64}
-              height={64}
-              variant="shimmer"
-            />
+            <GlassSkeleton shape="circle" width={64} height={64} variant="shimmer" />
             <div className="flex-1 space-y-2">
               <GlassSkeleton width="60%" height={20} variant="shimmer" />
               <GlassSkeleton width="40%" height={16} variant="shimmer" />
@@ -391,27 +344,15 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Article Card Loading
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Article Card Loading</h3>
         <div className="max-w-md rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
-          <GlassSkeleton
-            width="100%"
-            height={160}
-            variant="shimmer"
-            className="mb-4"
-          />
+          <GlassSkeleton width="100%" height={160} variant="shimmer" className="mb-4" />
           <div className="space-y-3">
             <GlassSkeleton width="90%" height={24} variant="shimmer" />
             <SkeletonText lines={3} lastLineWidth="60%" />
             <div className="flex items-center gap-4 pt-2">
               <div className="flex items-center gap-2">
-                <GlassSkeleton
-                  shape="circle"
-                  width={24}
-                  height={24}
-                  variant="shimmer"
-                />
+                <GlassSkeleton shape="circle" width={24} height={24} variant="shimmer" />
                 <GlassSkeleton width={60} height={14} variant="shimmer" />
               </div>
               <GlassSkeleton width={80} height={14} variant="shimmer" />
@@ -421,9 +362,7 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Gallery Grid Loading
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Gallery Grid Loading</h3>
         <div className="grid max-w-md grid-cols-3 gap-4">
           {Array.from({ length: 9 }, (_, i) => (
             <GlassSkeleton
@@ -438,18 +377,11 @@ export const ContentTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Chat Message Loading
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Chat Message Loading</h3>
         <div className="max-w-md space-y-4">
           {/* Incoming message */}
           <div className="flex gap-3">
-            <GlassSkeleton
-              shape="circle"
-              width={32}
-              height={32}
-              variant="shimmer"
-            />
+            <GlassSkeleton shape="circle" width={32} height={32} variant="shimmer" />
             <div className="flex-1 space-y-2">
               <GlassSkeleton width="70%" height={16} variant="shimmer" />
               <GlassSkeleton width="50%" height={16} variant="shimmer" />
@@ -461,12 +393,7 @@ export const ContentTypeExamples: Story = {
               <GlassSkeleton width="60%" height={16} variant="shimmer" />
               <GlassSkeleton width="40%" height={16} variant="shimmer" />
             </div>
-            <GlassSkeleton
-              shape="circle"
-              width={32}
-              height={32}
-              variant="shimmer"
-            />
+            <GlassSkeleton shape="circle" width={32} height={32} variant="shimmer" />
           </div>
         </div>
       </div>
@@ -491,9 +418,7 @@ export const RealWorldExamples: Story = {
   render: () => (
     <div className="space-y-12">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Social Media Feed
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Social Media Feed</h3>
         <div className="max-w-lg space-y-6">
           {Array.from({ length: 3 }, (_, postIndex) => (
             <div
@@ -502,22 +427,12 @@ export const RealWorldExamples: Story = {
             >
               {/* Post header */}
               <div className="mb-4 flex items-center gap-3">
-                <GlassSkeleton
-                  shape="circle"
-                  width={48}
-                  height={48}
-                  variant="shimmer"
-                />
+                <GlassSkeleton shape="circle" width={48} height={48} variant="shimmer" />
                 <div className="flex-1 space-y-2">
                   <GlassSkeleton width="40%" height={16} variant="shimmer" />
                   <GlassSkeleton width="25%" height={14} variant="shimmer" />
                 </div>
-                <GlassSkeleton
-                  shape="circle"
-                  width={24}
-                  height={24}
-                  variant="shimmer"
-                />
+                <GlassSkeleton shape="circle" width={24} height={24} variant="shimmer" />
               </div>
 
               {/* Post content */}
@@ -529,30 +444,15 @@ export const RealWorldExamples: Story = {
               {/* Post actions */}
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
-                  <GlassSkeleton
-                    shape="circle"
-                    width={20}
-                    height={20}
-                    variant="shimmer"
-                  />
+                  <GlassSkeleton shape="circle" width={20} height={20} variant="shimmer" />
                   <GlassSkeleton width={30} height={14} variant="shimmer" />
                 </div>
                 <div className="flex items-center gap-2">
-                  <GlassSkeleton
-                    shape="circle"
-                    width={20}
-                    height={20}
-                    variant="shimmer"
-                  />
+                  <GlassSkeleton shape="circle" width={20} height={20} variant="shimmer" />
                   <GlassSkeleton width={30} height={14} variant="shimmer" />
                 </div>
                 <div className="flex items-center gap-2">
-                  <GlassSkeleton
-                    shape="circle"
-                    width={20}
-                    height={20}
-                    variant="shimmer"
-                  />
+                  <GlassSkeleton shape="circle" width={20} height={20} variant="shimmer" />
                   <GlassSkeleton width={30} height={14} variant="shimmer" />
                 </div>
               </div>
@@ -562,21 +462,14 @@ export const RealWorldExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          E-commerce Product Grid
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">E-commerce Product Grid</h3>
         <div className="grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
           {Array.from({ length: 8 }, (_, productIndex) => (
             <div
               key={productIndex}
               className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-4 backdrop-blur-sm"
             >
-              <GlassSkeleton
-                width="100%"
-                height={160}
-                variant="shimmer"
-                className="mb-4"
-              />
+              <GlassSkeleton width="100%" height={160} variant="shimmer" className="mb-4" />
               <div className="space-y-2">
                 <GlassSkeleton width="80%" height={16} variant="shimmer" />
                 <GlassSkeleton width="60%" height={14} variant="shimmer" />
@@ -591,9 +484,7 @@ export const RealWorldExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Dashboard Analytics
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Dashboard Analytics</h3>
         <div className="max-w-4xl rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           {/* Header */}
           <div className="mb-6 flex items-center justify-between">
@@ -608,18 +499,8 @@ export const RealWorldExamples: Story = {
                 key={statIndex}
                 className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4"
               >
-                <GlassSkeleton
-                  width="60%"
-                  height={14}
-                  variant="shimmer"
-                  className="mb-2"
-                />
-                <GlassSkeleton
-                  width="40%"
-                  height={24}
-                  variant="shimmer"
-                  className="mb-2"
-                />
+                <GlassSkeleton width="60%" height={14} variant="shimmer" className="mb-2" />
+                <GlassSkeleton width="40%" height={24} variant="shimmer" className="mb-2" />
                 <GlassSkeleton width="30%" height={12} variant="shimmer" />
               </div>
             ))}
@@ -627,12 +508,7 @@ export const RealWorldExamples: Story = {
 
           {/* Chart */}
           <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-6">
-            <GlassSkeleton
-              width={150}
-              height={20}
-              variant="shimmer"
-              className="mb-4"
-            />
+            <GlassSkeleton width={150} height={20} variant="shimmer" className="mb-4" />
             <GlassSkeleton width="100%" height={300} variant="shimmer" />
           </div>
         </div>
@@ -668,40 +544,29 @@ export const LoadingStatesComparison: Story = {
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Skeleton Loading
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Skeleton Loading</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <SkeletonCard showAvatar />
           </div>
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Actual Content
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Actual Content</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
                 <User className="h-5 w-5 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-blue-900/90">
-                  John Smith
-                </div>
-                <div className="text-sm text-blue-900/60">
-                  2 hours ago
-                </div>
+                <div className="font-medium text-blue-900/90">John Smith</div>
+                <div className="text-sm text-blue-900/60">2 hours ago</div>
               </div>
             </div>
             <div className="mb-4 space-y-2">
-              <h3 className="font-medium text-blue-900/90">
-                Building Better Loading States
-              </h3>
+              <h3 className="font-medium text-blue-900/90">Building Better Loading States</h3>
               <p className="text-sm text-blue-900/70">
-                Skeleton screens provide a better user experience by showing the
-                structure of content before it loads, reducing perceived loading
-                time.
+                Skeleton screens provide a better user experience by showing the structure of
+                content before it loads, reducing perceived loading time.
               </p>
             </div>
             <div className="flex items-center gap-4">
@@ -751,9 +616,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Ocean Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Ocean Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <div className="max-w-md">
             <SkeletonCard showAvatar />
@@ -762,27 +625,18 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Sunset Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Sunset Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <div className="grid max-w-md grid-cols-3 gap-4">
             {Array.from({ length: 6 }, (_, i) => (
-              <GlassSkeleton
-                key={i}
-                width="100%"
-                height={80}
-                variant="shimmer"
-              />
+              <GlassSkeleton key={i} width="100%" height={80} variant="shimmer" />
             ))}
           </div>
         </div>
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Forest Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Forest Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <div className="max-w-2xl">
             <SkeletonTable rows={4} columns={3} />

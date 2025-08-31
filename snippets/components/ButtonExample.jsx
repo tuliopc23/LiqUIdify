@@ -1,7 +1,7 @@
 // filepath: snippets/components/ButtonExample.jsx
-import React, { useState } from "react";
+
+import { useState } from "react";
 import ComponentFrame from "../preview/ComponentFrame";
-import { Button } from "liquidify";
 
 const BASIC_USAGE = `import { GlassButton } from "liquidify";
 
@@ -47,13 +47,14 @@ export default function ButtonExample() {
   const examples = {
     basic: {
       title: "Basic Glass Button",
-      intro: "Primary action trigger with liquid glass effect and hover states following Apple HIG principles.",
+      intro:
+        "Primary action trigger with liquid glass effect and hover states following Apple HIG principles.",
       code: BASIC_USAGE,
       component: (
         <button className="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:scale-95 transition-all duration-200 font-medium shadow-lg backdrop-blur-sm">
           Get Started
         </button>
-      )
+      ),
     },
     variants: {
       title: "Button Variants",
@@ -74,7 +75,7 @@ export default function ButtonExample() {
             Danger
           </button>
         </div>
-      )
+      ),
     },
     sizes: {
       title: "Button Sizes",
@@ -92,8 +93,8 @@ export default function ButtonExample() {
             Large
           </button>
         </div>
-      )
-    }
+      ),
+    },
   };
 
   const currentExample = examples[activeExample];
@@ -102,14 +103,14 @@ export default function ButtonExample() {
     <div className="space-y-4">
       {/* Example selector with Apple-style segmented control */}
       <div className="flex gap-1 p-1 bg-gray-100/50 dark:bg-gray-800/30 rounded-lg backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 w-fit">
-        {Object.entries(examples).map(([key, example]) => (
+        {Object.entries(examples).map(([key, _example]) => (
           <button
             key={key}
             onClick={() => setActiveExample(key)}
             className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-              activeExample === key 
-                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm border border-gray-200/50 dark:border-gray-600/50' 
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
+              activeExample === key
+                ? "bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm border border-gray-200/50 dark:border-gray-600/50"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50/50 dark:hover:bg-gray-700/30"
             }`}
           >
             {key.charAt(0).toUpperCase() + key.slice(1)}

@@ -1,8 +1,8 @@
 // filepath: snippets/components/BreadcrumbsExample.jsx
-import React from "react";
+
+import { GlassBreadcrumbs } from "liquidify";
 import ComponentFrame from "../preview/ComponentFrame.jsx";
 import ProviderWrapper from "../preview/ProviderWrapper.jsx";
-import { GlassBreadcrumbs } from "liquidify";
 
 export default function BreadcrumbsExample() {
   const items = [

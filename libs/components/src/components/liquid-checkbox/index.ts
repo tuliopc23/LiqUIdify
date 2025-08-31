@@ -1,1 +1,5 @@
-export { LiquidCheckbox, liquidCheckboxVariants, type LiquidCheckboxProps } from "./liquid-checkbox";
+export {
+  LiquidCheckbox,
+  type LiquidCheckboxProps,
+  liquidCheckboxVariants,
+} from "./liquid-checkbox";

@@ -39,15 +39,23 @@
     --ios-blue: 0 122 255;
     --ios-blue-hover: 0 86 204;
     --ios-blue-light: 229 241 255;
-    
+
     /* Apple HIG Material colors */
     --material-regular: 255 255 255 / 0.8;
     --material-thick: 255 255 255 / 0.9;
     --material-thin: 255 255 255 / 0.6;
     --material-ultra-thin: 255 255 255 / 0.4;
-    
+
     /* Apple HIG Label colors */
     --label-primary: 0 0 0 / 0.85;
+
+    /* Liquid Glass System - Your original implementation */
+    --liquid-glass-bg: rgba(255, 255, 255, 0.1);
+    --liquid-glass-border: rgba(255, 255, 255, 0.2);
+    --liquid-glass-shadow: rgba(0, 0, 0, 0.1);
+    --liquid-ripple-color: rgba(255, 255, 255, 0.3);
+    --liquid-flow-duration: 0.8s;
+    --liquid-bounce-duration: 0.6s;
     --label-secondary: 60 60 67 / 0.6;
     --label-tertiary: 60 60 67 / 0.3;
     --label-quaternary: 60 60 67 / 0.18;
@@ -78,13 +86,13 @@
     --chart-3: 147 197 253;
     --chart-4: 100 116 139;
     --chart-5: 71 85 105;
-    
+
     /* Apple HIG Material colors - Dark Mode */
     --material-regular: 28 28 30 / 0.8;
     --material-thick: 28 28 30 / 0.9;
     --material-thin: 28 28 30 / 0.6;
     --material-ultra-thin: 28 28 30 / 0.4;
-    
+
     /* Apple HIG Label colors - Dark Mode */
     --label-primary: 255 255 255 / 0.85;
     --label-secondary: 235 235 245 / 0.6;
@@ -141,21 +149,21 @@
 
 /* iOS Blue Component Overrides */
 .ios-blue-bg {
-  background-color: rgba(59, 130, 246, 0.1) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  background-color: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .ios-blue-border {
-  border-color: rgba(59, 130, 246, 0.3) !important;
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
 .ios-blue-text {
-  color: rgb(37, 99, 235) !important;
+  color: rgb(37, 99, 235);
 }
 
 .ios-blue-hover:hover {
-  background-color: rgba(59, 130, 246, 0.2) !important;
+  background-color: rgba(59, 130, 246, 0.2);
 }
 
 /* ===== SHADCN/UI COMPONENT OVERRIDES ===== */
@@ -219,7 +227,7 @@
 *[style*="background-color: rgb(75, 85, 99)"],
 *[style*="background-color: rgb(55, 65, 81)"],
 *[style*="background-color: rgb(31, 41, 55)"] {
-  background-color: var(--color-material-regular) !important;
+  background-color: var(--color-material-regular);
 }
 
 *[style*="color: rgb(156, 163, 175)"],
@@ -227,13 +235,13 @@
 *[style*="color: rgb(75, 85, 99)"],
 *[style*="color: rgb(55, 65, 81)"],
 *[style*="color: rgb(31, 41, 55)"] {
-  color: var(--color-label-primary) !important;
+  color: var(--color-label-primary);
 }
 
 *[style*="border-color: rgb(229, 231, 235)"],
 *[style*="border-color: rgb(209, 213, 219)"],
 *[style*="border-color: rgb(156, 163, 175)"] {
-  border-color: var(--color-separator-non-opaque) !important;
+  border-color: var(--color-separator-non-opaque);
 }
 
 /* ===== COMPREHENSIVE TAILWIND GRAY CLASS OVERRIDES ===== */
@@ -251,7 +259,7 @@
 .text-gray-800,
 .text-gray-900,
 .text-gray-950 {
-  color: var(--color-label-primary) !important;
+  color: var(--color-label-primary);
 }
 
 .text-slate-50,
@@ -265,7 +273,7 @@
 .text-slate-800,
 .text-slate-900,
 .text-slate-950 {
-  color: var(--color-label-primary) !important;
+  color: var(--color-label-primary);
 }
 
 .text-neutral-50,
@@ -279,7 +287,7 @@
 .text-neutral-800,
 .text-neutral-900,
 .text-neutral-950 {
-  color: var(--color-label-primary) !important;
+  color: var(--color-label-primary);
 }
 
 .text-stone-50,
@@ -293,7 +301,7 @@
 .text-stone-800,
 .text-stone-900,
 .text-stone-950 {
-  color: var(--color-label-primary) !important;
+  color: var(--color-label-primary);
 }
 
 /* Background Colors - Gray to Blue */
@@ -308,7 +316,7 @@
 .bg-gray-800,
 .bg-gray-900,
 .bg-gray-950 {
-  background-color: var(--color-material-regular) !important;
+  background-color: var(--color-material-regular);
 }
 
 .bg-slate-50,
@@ -322,7 +330,7 @@
 .bg-slate-800,
 .bg-slate-900,
 .bg-slate-950 {
-  background-color: var(--color-material-regular) !important;
+  background-color: var(--color-material-regular);
 }
 
 .bg-neutral-50,
@@ -336,7 +344,7 @@
 .bg-neutral-800,
 .bg-neutral-900,
 .bg-neutral-950 {
-  background-color: var(--color-material-regular) !important;
+  background-color: var(--color-material-regular);
 }
 
 .bg-stone-50,
@@ -350,7 +358,7 @@
 .bg-stone-800,
 .bg-stone-900,
 .bg-stone-950 {
-  background-color: var(--color-material-regular) !important;
+  background-color: var(--color-material-regular);
 }
 
 /* Border Colors - Gray to Blue */
@@ -365,7 +373,7 @@
 .border-gray-800,
 .border-gray-900,
 .border-gray-950 {
-  border-color: var(--color-separator-non-opaque) !important;
+  border-color: var(--color-separator-non-opaque);
 }
 
 .border-slate-50,
@@ -379,7 +387,7 @@
 .border-slate-800,
 .border-slate-900,
 .border-slate-950 {
-  border-color: var(--color-separator-non-opaque) !important;
+  border-color: var(--color-separator-non-opaque);
 }
 
 .border-neutral-50,
@@ -393,7 +401,7 @@
 .border-neutral-800,
 .border-neutral-900,
 .border-neutral-950 {
-  border-color: var(--color-separator-non-opaque) !important;
+  border-color: var(--color-separator-non-opaque);
 }
 
 .border-stone-50,
@@ -407,7 +415,7 @@
 .border-stone-800,
 .border-stone-900,
 .border-stone-950 {
-  border-color: var(--color-separator-non-opaque) !important;
+  border-color: var(--color-separator-non-opaque);
 }
 
 /* Ring Colors - Gray to Blue */
@@ -422,7 +430,7 @@
 .ring-gray-800,
 .ring-gray-900,
 .ring-gray-950 {
-  --tw-ring-color: var(--color-primary) !important;
+  --tw-ring-color: var(--color-primary);
 }
 
 .ring-slate-50,
@@ -436,7 +444,7 @@
 .ring-slate-800,
 .ring-slate-900,
 .ring-slate-950 {
-  --tw-ring-color: var(--color-primary) !important;
+  --tw-ring-color: var(--color-primary);
 }
 
 /* Placeholder Colors - Gray to Blue */
@@ -451,7 +459,7 @@
 .placeholder-gray-800::placeholder,
 .placeholder-gray-900::placeholder,
 .placeholder-gray-950::placeholder {
-  color: var(--color-label-tertiary) !important;
+  color: var(--color-label-tertiary);
 }
 
 /* Hover and Focus States */
@@ -466,7 +474,7 @@
 .hover\:bg-gray-800:hover,
 .hover\:bg-gray-900:hover,
 .hover\:bg-gray-950:hover {
-  background-color: var(--color-fill-quaternary) !important;
+  background-color: var(--color-fill-quaternary);
 }
 
 .hover\:text-gray-50:hover,
@@ -480,11 +488,11 @@
 .hover\:text-gray-800:hover,
 .hover\:text-gray-900:hover,
 .hover\:text-gray-950:hover {
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
 }
 
 .focus\:ring-gray-500:focus {
-  --tw-ring-color: var(--color-primary) !important;
+  --tw-ring-color: var(--color-primary);
 }
 
 /* Input System */
@@ -594,17 +602,18 @@
 
 /* Core Liquid Glass Animation Keyframes */
 @keyframes liquidJiggle {
-  0%, 100% { 
-    transform: translate(0, 0) rotate(0deg); 
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
-  25% { 
-    transform: translate(-2px, -1px) rotate(-0.5deg); 
+  25% {
+    transform: translate(-2px, -1px) rotate(-0.5deg);
   }
-  50% { 
-    transform: translate(2px, 1px) rotate(0.5deg); 
+  50% {
+    transform: translate(2px, 1px) rotate(0.5deg);
   }
-  75% { 
-    transform: translate(-1px, 2px) rotate(-0.3deg); 
+  75% {
+    transform: translate(-1px, 2px) rotate(-0.3deg);
   }
 }
 
@@ -620,22 +629,24 @@
 }
 
 @keyframes liquidPulse {
-  0%, 100% { 
-    opacity: 1; 
-    transform: scale(1); 
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
-  50% { 
-    opacity: 0.8; 
-    transform: scale(1.05); 
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 
 @keyframes liquidFloat {
-  0%, 100% { 
-    transform: translateY(0px); 
+  0%,
+  100% {
+    transform: translateY(0px);
   }
-  50% { 
-    transform: translateY(-6px); 
+  50% {
+    transform: translateY(-6px);
   }
 }
 
@@ -644,64 +655,64 @@
   .liquid-glass-base {
     @apply relative backdrop-blur-xl bg-white/10 border border-white/20;
   }
-  
+
   .liquid-glass-subtle {
     @apply backdrop-blur-sm bg-white/5 border-white/10;
   }
-  
+
   .liquid-glass-medium {
     @apply backdrop-blur-xl bg-white/10 border-white/20;
   }
-  
+
   .liquid-glass-strong {
     @apply backdrop-blur-3xl bg-white/20 border-white/30;
   }
-  
+
   .liquid-hover {
     @apply hover:bg-white/15 hover:border-white/25 transition-all duration-300;
   }
-  
+
   .liquid-pressed {
     @apply scale-95 bg-white/25 transition-transform duration-150;
   }
-  
+
   .liquid-jiggle {
     animation: liquidJiggle 0.8s ease-out;
   }
-  
+
   .liquid-ripple {
     animation: liquidRipple 0.6s ease-out forwards;
   }
-  
+
   .liquid-pulse {
     animation: liquidPulse 2s ease-in-out infinite;
   }
-  
+
   .liquid-float {
     animation: liquidFloat 3s ease-in-out infinite;
   }
-  
+
   /* Dark Mode Variants */
   .dark .liquid-glass-base {
     @apply bg-black/10 border-white/10;
   }
-  
+
   .dark .liquid-glass-subtle {
     @apply bg-black/5 border-white/5;
   }
-  
+
   .dark .liquid-glass-medium {
     @apply bg-black/10 border-white/10;
   }
-  
+
   .dark .liquid-glass-strong {
     @apply bg-black/20 border-white/20;
   }
-  
+
   .dark .liquid-hover {
     @apply hover:bg-black/15 hover:border-white/15;
   }
-  
+
   .dark .liquid-pressed {
     @apply bg-black/25;
   }
@@ -781,5 +792,258 @@
 
   .form-label {
     color: var(--color-label-primary);
+  }
+}
+
+/* ========================================
+   LIQUID GLASS SYSTEM - Your Implementation
+   ======================================== */
+
+.liquid-glass {
+  background: var(--liquid-glass-bg);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--liquid-glass-border);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all var(--liquid-flow-duration) cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  transform-origin: center center;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-glass:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass:active {
+  transform: translateY(1px) scale(0.96) rotate(0.5deg);
+  border-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.liquid-glass:active::before {
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Liquid Glass Animation Classes */
+.liquid-flow {
+  animation: liquidFlow var(--liquid-flow-duration) cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.liquid-jiggle {
+  animation: liquidJiggle 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.liquid-wave {
+  animation: liquidWave 2s ease-in-out infinite;
+}
+
+.liquid-glow {
+  animation: liquidGlow 3s ease-in-out infinite;
+}
+
+.liquid-float {
+  animation: liquidFloat 6s ease-in-out infinite;
+}
+
+.liquid-pulse {
+  animation: liquidPulse 2s ease-in-out infinite;
+}
+
+.liquid-morph {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.liquid-morph:hover {
+  border-radius: 50%;
+  transform: rotate(5deg) scale(1.1);
+}
+
+.liquid-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-ripple::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--liquid-ripple-color);
+  transform: translate(-50%, -50%);
+  animation: liquidRipple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* Liquid Glass Keyframe Animations */
+@keyframes liquidFlow {
+  0% {
+    transform: scale(1) translateX(0) skewX(0deg);
+  }
+  15% {
+    transform: scale(1.03, 0.97) translateX(8px) skewX(2deg);
+  }
+  30% {
+    transform: scale(0.97, 1.03) translateX(12px) skewX(-1deg);
+  }
+  45% {
+    transform: scale(1.01, 0.99) translateX(6px) skewX(1deg);
+  }
+  60% {
+    transform: scale(0.99, 1.01) translateX(-2px) skewX(-0.5deg);
+  }
+  75% {
+    transform: scale(1.005, 0.995) translateX(1px) skewX(0.2deg);
+  }
+  100% {
+    transform: scale(1) translateX(0) skewX(0deg);
+  }
+}
+
+@keyframes liquidRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes liquidJiggle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1) skewX(0deg);
+  }
+  10% {
+    transform: rotate(1deg) scale(1.02) skewX(1deg);
+  }
+  20% {
+    transform: rotate(-1.5deg) scale(0.98) skewX(-1deg);
+  }
+  30% {
+    transform: rotate(1.2deg) scale(1.01) skewX(0.5deg);
+  }
+  40% {
+    transform: rotate(-0.8deg) scale(0.99) skewX(-0.3deg);
+  }
+  50% {
+    transform: rotate(0.5deg) scale(1.005) skewX(0.2deg);
+  }
+  60% {
+    transform: rotate(-0.3deg) scale(0.995) skewX(-0.1deg);
+  }
+  70% {
+    transform: rotate(0.2deg) scale(1.002) skewX(0.05deg);
+  }
+  80% {
+    transform: rotate(-0.1deg) scale(0.998) skewX(-0.02deg);
+  }
+  90% {
+    transform: rotate(0.05deg) scale(1.001) skewX(0.01deg);
+  }
+}
+
+@keyframes liquidWave {
+  0%,
+  100% {
+    transform: translateY(0px) scaleY(1);
+  }
+  25% {
+    transform: translateY(-2px) scaleY(1.05);
+  }
+  50% {
+    transform: translateY(0px) scaleY(0.95);
+  }
+  75% {
+    transform: translateY(1px) scaleY(1.02);
+  }
+}
+
+@keyframes liquidGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes liquidFloat {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes liquidPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
   }
 }

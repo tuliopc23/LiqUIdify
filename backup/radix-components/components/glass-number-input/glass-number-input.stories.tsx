@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Calculator, DollarSign, Percent } from "lucide-react";
 import { GlassNumberInput } from "./glass-number-input";
 
 const meta: Meta<typeof GlassNumberInput> = {
@@ -252,9 +251,7 @@ export const MultipleInputs: Story = {
 
     return (
       <div className="space-y-4 w-80">
-        <h3 className="text-lg font-semibold text-blue-900">
-          Box Dimensions
-        </h3>
+        <h3 className="text-lg font-semibold text-blue-900">Box Dimensions</h3>
 
         <GlassNumberInput
           label="Width (cm)"

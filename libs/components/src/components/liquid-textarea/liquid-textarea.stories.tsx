@@ -9,7 +9,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A liquid glass textarea component with auto-resize, character counting, and comprehensive form states.",
+        component:
+          "A liquid glass textarea component with auto-resize, character counting, and comprehensive form states.",
       },
     },
   },
@@ -17,30 +18,30 @@ const meta = {
     variant: {
       control: "select",
       options: ["default", "filled", "ghost", "error"],
-      description: "The visual style variant of the textarea"
+      description: "The visual style variant of the textarea",
     },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
-      description: "The size of the textarea"
+      description: "The size of the textarea",
     },
     resize: {
       control: "select",
       options: ["none", "vertical", "horizontal", "both"],
-      description: "The resize behavior"
+      description: "The resize behavior",
     },
     autoResize: {
       control: "boolean",
-      description: "Enable automatic height adjustment"
+      description: "Enable automatic height adjustment",
     },
     showCharCount: {
       control: "boolean",
-      description: "Show character count"
+      description: "Show character count",
     },
     disabled: {
       control: "boolean",
-      description: "Disable the textarea"
-    }
+      description: "Disable the textarea",
+    },
   },
   args: {
     placeholder: "Enter text...",
@@ -66,13 +67,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <LiquidTextarea 
-      {...args}
-      label="Description"
-      rows={4}
-    />
-  ),
+  render: (args) => <LiquidTextarea {...args} label="Description" rows={4} />,
 };
 
 export const Variants: Story = {
@@ -84,26 +79,26 @@ export const Variants: Story = {
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Textarea Variants</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <LiquidTextarea 
-            variant="default" 
+          <LiquidTextarea
+            variant="default"
             label="Default Textarea"
             placeholder="Enter your message..."
             rows={4}
           />
-          <LiquidTextarea 
-            variant="filled" 
+          <LiquidTextarea
+            variant="filled"
             label="Filled Textarea"
             placeholder="Enter your message..."
             rows={4}
           />
-          <LiquidTextarea 
-            variant="ghost" 
+          <LiquidTextarea
+            variant="ghost"
             label="Ghost Textarea"
             placeholder="Enter your message..."
             rows={4}
           />
-          <LiquidTextarea 
-            variant="error" 
+          <LiquidTextarea
+            variant="error"
             label="Error Textarea"
             placeholder="Enter your message..."
             rows={4}
@@ -124,24 +119,9 @@ export const Sizes: Story = {
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Textarea Sizes</h2>
         <div className="space-y-6">
-          <LiquidTextarea 
-            size="sm" 
-            label="Small Textarea"
-            placeholder="Small size..."
-            rows={3}
-          />
-          <LiquidTextarea 
-            size="md" 
-            label="Medium Textarea"
-            placeholder="Medium size..."
-            rows={4}
-          />
-          <LiquidTextarea 
-            size="lg" 
-            label="Large Textarea"
-            placeholder="Large size..."
-            rows={5}
-          />
+          <LiquidTextarea size="sm" label="Small Textarea" placeholder="Small size..." rows={3} />
+          <LiquidTextarea size="md" label="Medium Textarea" placeholder="Medium size..." rows={4} />
+          <LiquidTextarea size="lg" label="Large Textarea" placeholder="Large size..." rows={5} />
         </div>
       </div>
     </div>
@@ -157,28 +137,28 @@ export const ResizeBehavior: Story = {
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Resize Behavior</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <LiquidTextarea 
+          <LiquidTextarea
             label="No Resize"
             placeholder="Cannot be resized..."
             resize="none"
             rows={4}
             helperText="Resize is disabled"
           />
-          <LiquidTextarea 
+          <LiquidTextarea
             label="Vertical Resize"
             placeholder="Can be resized vertically..."
             resize="vertical"
             rows={4}
             helperText="Drag the bottom corner"
           />
-          <LiquidTextarea 
+          <LiquidTextarea
             label="Horizontal Resize"
             placeholder="Can be resized horizontally..."
             resize="horizontal"
             rows={4}
             helperText="Drag the right corner"
           />
-          <LiquidTextarea 
+          <LiquidTextarea
             label="Both Directions"
             placeholder="Can be resized in both directions..."
             resize="both"
@@ -203,7 +183,7 @@ export const AutoResize: Story = {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Auto Resize</h2>
           <div className="space-y-6">
-            <LiquidTextarea 
+            <LiquidTextarea
               label="Auto Resize Textarea"
               placeholder="Start typing and watch me grow..."
               value={value}
@@ -213,8 +193,8 @@ export const AutoResize: Story = {
               maxHeight={200}
               helperText="This textarea automatically adjusts its height"
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Fixed Height (No Auto Resize)"
               placeholder="I stay the same height..."
               rows={4}
@@ -240,7 +220,7 @@ export const CharacterCount: Story = {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Character Count</h2>
           <div className="space-y-6">
-            <LiquidTextarea 
+            <LiquidTextarea
               label="Message (with limit)"
               placeholder="Write your message..."
               value={message}
@@ -250,8 +230,8 @@ export const CharacterCount: Story = {
               helperText="Twitter-style character limit"
               rows={4}
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Bio (no limit)"
               placeholder="Tell us about yourself..."
               value={bio}
@@ -272,14 +252,16 @@ export const Interactive: Story = {
     layout: "fullscreen",
   },
   render: () => {
-    const [autoResizeValue, setAutoResizeValue] = useState("Try typing multiple lines here...\nThe textarea will grow automatically!\n\nKeep typing to see it expand...");
+    const [autoResizeValue, setAutoResizeValue] = useState(
+      "Try typing multiple lines here...\nThe textarea will grow automatically!\n\nKeep typing to see it expand..."
+    );
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-8">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Interactive Features</h2>
           <div className="space-y-6">
-            <LiquidTextarea 
+            <LiquidTextarea
               label="Auto Resize + Character Count"
               placeholder="Start typing..."
               value={autoResizeValue}
@@ -291,16 +273,16 @@ export const Interactive: Story = {
               maxHeight={200}
               helperText="Auto-resize with character limit"
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Disabled State"
               placeholder="I'm disabled..."
               disabled
               value="This textarea is disabled and cannot be edited."
               rows={3}
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Error State"
               placeholder="Enter valid content..."
               errorMessage="Content is required and must be at least 10 characters"
@@ -323,7 +305,7 @@ export const FormExample: Story = {
       title: "",
       description: "",
       notes: "",
-      feedback: ""
+      feedback: "",
     });
 
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -348,29 +330,25 @@ export const FormExample: Story = {
             <h2 className="text-3xl font-bold text-white mb-2">Submit Feedback</h2>
             <p className="text-white/70">Help us improve our liquid glass components</p>
           </div>
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-white/90 mb-2">
-                Title
-              </label>
+              <label className="block text-sm font-medium text-white/90 mb-2">Title</label>
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                 placeholder="Brief title for your feedback..."
                 className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 backdrop-blur-xl focus:bg-white/15 focus:border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               />
-              {errors.title && (
-                <div className="mt-2 text-xs text-red-300">{errors.title}</div>
-              )}
+              {errors.title && <div className="mt-2 text-xs text-red-300">{errors.title}</div>}
             </div>
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Description"
               placeholder="Describe your feedback in detail..."
               value={formData.description}
-              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               autoResize
               minHeight={100}
               maxHeight={200}
@@ -379,28 +357,28 @@ export const FormExample: Story = {
               errorMessage={errors.description}
               helperText="Please provide at least 50 characters"
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Additional Notes (Optional)"
               placeholder="Any additional information..."
               value={formData.notes}
-              onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
               variant="ghost"
               rows={3}
               showCharCount
             />
-            
-            <LiquidTextarea 
+
+            <LiquidTextarea
               label="Overall Experience"
               placeholder="How was your overall experience?"
               value={formData.feedback}
-              onChange={(e) => setFormData(prev => ({ ...prev, feedback: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, feedback: e.target.value }))}
               variant="filled"
               rows={4}
               maxLength={500}
               showCharCount
             />
-            
+
             <button
               type="submit"
               className="w-full bg-white/20 hover:bg-white/30 text-white font-medium py-3 px-6 rounded-xl backdrop-blur-xl border border-white/30 transition-all duration-200"

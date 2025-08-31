@@ -1,76 +1,79 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { LiquidTooltip } from './liquid-tooltip';
-import { LiquidButton } from '../liquid-button';
+import type { Meta, StoryObj } from "@storybook/react";
+import { LiquidButton } from "../liquid-button";
+import { LiquidTooltip } from "./liquid-tooltip";
 
 const meta: Meta<typeof LiquidTooltip> = {
-  title: 'Feedback & Overlay/LiquidTooltip',
+  title: "Feedback & Overlay/LiquidTooltip",
   component: LiquidTooltip,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A tooltip component with smart positioning, collision detection, and Apple HIG liquid glass design.',
+        component:
+          "A tooltip component with smart positioning, collision detection, and Apple HIG liquid glass design.",
       },
     },
   },
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'dark', 'light', 'info', 'success', 'warning', 'error'],
-      description: 'Visual style variant',
+      control: "select",
+      options: ["default", "dark", "light", "info", "success", "warning", "error"],
+      description: "Visual style variant",
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size of the tooltip',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size of the tooltip",
     },
     side: {
-      control: 'select',
-      options: ['top', 'right', 'bottom', 'left'],
-      description: 'Preferred side for positioning',
+      control: "select",
+      options: ["top", "right", "bottom", "left"],
+      description: "Preferred side for positioning",
     },
     align: {
-      control: 'select',
-      options: ['start', 'center', 'end'],
-      description: 'Alignment along the side',
+      control: "select",
+      options: ["start", "center", "end"],
+      description: "Alignment along the side",
     },
     sideOffset: {
-      control: 'number',
-      description: 'Distance from the trigger',
+      control: "number",
+      description: "Distance from the trigger",
     },
     alignOffset: {
-      control: 'number',
-      description: 'Offset along the alignment axis',
+      control: "number",
+      description: "Offset along the alignment axis",
     },
     delayDuration: {
-      control: 'number',
-      description: 'Delay before showing (ms)',
+      control: "number",
+      description: "Delay before showing (ms)",
     },
     skipDelayDuration: {
-      control: 'number',
-      description: 'Skip delay duration (ms)',
+      control: "number",
+      description: "Skip delay duration (ms)",
     },
     arrow: {
-      control: 'boolean',
-      description: 'Show arrow pointer',
+      control: "boolean",
+      description: "Show arrow pointer",
     },
     disableHoverableContent: {
-      control: 'boolean',
-      description: 'Disable hoverable content',
+      control: "boolean",
+      description: "Disable hoverable content",
     },
   },
   decorators: [
     (Story) => (
-      <div style={{ 
-        minHeight: '400px',
-        minWidth: '600px',
-        padding: '6rem',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '12px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <div
+        style={{
+          minHeight: "400px",
+          minWidth: "600px",
+          padding: "6rem",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          borderRadius: "12px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Story />
       </div>
     ),
@@ -83,20 +86,20 @@ type Story = StoryObj<typeof LiquidTooltip>;
 // Icons for examples
 const InfoIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
   </svg>
 );
 
 const UserIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
   </svg>
 );
 
 const HelpIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
   </svg>
 );
 
@@ -171,7 +174,7 @@ export const Positioning: Story = {
           </LiquidTooltip>
         </div>
       </div>
-      
+
       <div className="space-y-6">
         <h3 className="text-white font-medium text-center">Alignment</h3>
         <div className="grid grid-cols-1 gap-4">
@@ -215,19 +218,21 @@ export const WithIcons: Story = {
 export const RichContent: Story = {
   render: () => (
     <div className="flex gap-6">
-      <LiquidTooltip 
+      <LiquidTooltip
         content={
           <div>
             <div className="font-medium mb-1">Rich Content</div>
-            <div className="text-sm opacity-90">This tooltip contains formatted text and multiple lines of content.</div>
+            <div className="text-sm opacity-90">
+              This tooltip contains formatted text and multiple lines of content.
+            </div>
           </div>
         }
         size="lg"
       >
         <LiquidButton>Rich Content</LiquidButton>
       </LiquidTooltip>
-      
-      <LiquidTooltip 
+
+      <LiquidTooltip
         content={
           <div className="space-y-2">
             <div className="font-medium">Keyboard Shortcut</div>
@@ -278,7 +283,8 @@ export const DelaySettings: Story = {
 
 export const LongContent: Story = {
   args: {
-    content: "This is a very long tooltip content that demonstrates how tooltips handle text wrapping and multiple lines of text. It should wrap appropriately and maintain good readability.",
+    content:
+      "This is a very long tooltip content that demonstrates how tooltips handle text wrapping and multiple lines of text. It should wrap appropriately and maintain good readability.",
     size: "lg",
     children: <LiquidButton>Long Content</LiquidButton>,
   },
@@ -309,22 +315,26 @@ export const OnFormElements: Story = {
       <div>
         <label className="block text-sm font-medium text-white mb-2">
           Name
-          <LiquidTooltip content="Enter your full name as it appears on official documents" variant="info" side="right">
+          <LiquidTooltip
+            content="Enter your full name as it appears on official documents"
+            variant="info"
+            side="right"
+          >
             <span className="ml-1 cursor-help">
               <InfoIcon />
             </span>
           </LiquidTooltip>
         </label>
-        <input 
-          type="text" 
+        <input
+          type="text"
           className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
         />
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium text-white mb-2">
           Password
-          <LiquidTooltip 
+          <LiquidTooltip
             content={
               <div className="space-y-1">
                 <div className="font-medium">Password Requirements:</div>
@@ -335,7 +345,7 @@ export const OnFormElements: Story = {
                 </ul>
               </div>
             }
-            variant="info" 
+            variant="info"
             side="right"
             size="lg"
           >
@@ -344,8 +354,8 @@ export const OnFormElements: Story = {
             </span>
           </LiquidTooltip>
         </label>
-        <input 
-          type="password" 
+        <input
+          type="password"
           className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
         />
       </div>
@@ -358,27 +368,37 @@ export const PositioningDemo: Story = {
   render: () => (
     <div className="relative w-full h-64 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center">
       <div className="text-center space-y-4">
-        <p className="text-white/70 text-sm">Move around and hover the button to test positioning</p>
-        <LiquidTooltip 
+        <p className="text-white/70 text-sm">
+          Move around and hover the button to test positioning
+        </p>
+        <LiquidTooltip
           content="This tooltip will automatically position itself to stay within the viewport"
           variant="info"
         >
           <LiquidButton>Hover me anywhere</LiquidButton>
         </LiquidTooltip>
       </div>
-      
+
       {/* Corner buttons to test edge cases */}
       <LiquidTooltip content="Top-left corner" side="bottom" align="start">
-        <button className="absolute top-2 left-2 p-2 bg-white/10 rounded text-white text-xs">TL</button>
+        <button className="absolute top-2 left-2 p-2 bg-white/10 rounded text-white text-xs">
+          TL
+        </button>
       </LiquidTooltip>
       <LiquidTooltip content="Top-right corner" side="bottom" align="end">
-        <button className="absolute top-2 right-2 p-2 bg-white/10 rounded text-white text-xs">TR</button>
+        <button className="absolute top-2 right-2 p-2 bg-white/10 rounded text-white text-xs">
+          TR
+        </button>
       </LiquidTooltip>
       <LiquidTooltip content="Bottom-left corner" side="top" align="start">
-        <button className="absolute bottom-2 left-2 p-2 bg-white/10 rounded text-white text-xs">BL</button>
+        <button className="absolute bottom-2 left-2 p-2 bg-white/10 rounded text-white text-xs">
+          BL
+        </button>
       </LiquidTooltip>
       <LiquidTooltip content="Bottom-right corner" side="top" align="end">
-        <button className="absolute bottom-2 right-2 p-2 bg-white/10 rounded text-white text-xs">BR</button>
+        <button className="absolute bottom-2 right-2 p-2 bg-white/10 rounded text-white text-xs">
+          BR
+        </button>
       </LiquidTooltip>
     </div>
   ),

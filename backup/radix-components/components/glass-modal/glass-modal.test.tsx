@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "../../test/test-utils";
+import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "../../test/test-utils";
 import { GlassModal } from "./glass-modal";
 
 function setupModal(props?: Partial<Parameters<typeof GlassModal>[0]>) {
@@ -10,7 +10,7 @@ function setupModal(props?: Partial<Parameters<typeof GlassModal>[0]>) {
       <GlassModal isOpen={true} onClose={onClose} title="Test Modal" {...props}>
         <button data-testid="inside-button">Inside</button>
       </GlassModal>
-    </div>,
+    </div>
   );
   return { onClose, ...result };
 }

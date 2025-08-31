@@ -155,12 +155,7 @@ export const BottomSide: Story = {
           <p>We use cookies to enhance your browsing experience.</p>
           <div className="mt-4 space-y-2">
             <label htmlFor="form-field" className="flex items-center gap-2">
-              <input
-                id="input-152"
-                type="checkbox"
-                defaultChecked
-                className="rounded"
-              />
+              <input id="input-152" type="checkbox" defaultChecked className="rounded" />
               <span>Necessary cookies</span>
             </label>
             <label htmlFor="form-field" className="flex items-center gap-2">
@@ -301,10 +296,7 @@ export const WithForm: Story = {
         <Drawer.Body>
           <form className="space-y-4">
             <div>
-              <label
-                htmlFor="name-p8c480"
-                className="mb-2 block font-medium text-sm"
-              >
+              <label htmlFor="name-p8c480" className="mb-2 block font-medium text-sm">
                 Name
               </label>
               <input
@@ -315,10 +307,7 @@ export const WithForm: Story = {
               />
             </div>
             <div>
-              <label
-                htmlFor="email-yecb5w"
-                className="mb-2 block font-medium text-sm"
-              >
+              <label htmlFor="email-yecb5w" className="mb-2 block font-medium text-sm">
                 Email
               </label>
               <input
@@ -329,10 +318,7 @@ export const WithForm: Story = {
               />
             </div>
             <div>
-              <label
-                htmlFor="bio-hvgtxu"
-                className="mb-2 block font-medium text-sm"
-              >
+              <label htmlFor="bio-hvgtxu" className="mb-2 block font-medium text-sm">
                 Bio
               </label>
               <textarea
@@ -375,9 +361,7 @@ export const WithoutCloseButton: Story = {
           </Drawer.Header>
           <Drawer.Body>
             <p>This drawer doesn't have a close button in the header.</p>
-            <p className="mt-4">
-              You can close it by clicking outside or using the button below.
-            </p>
+            <p className="mt-4">You can close it by clicking outside or using the button below.</p>
           </Drawer.Body>
           <Drawer.Footer>
             <GlassButton type="button" size="sm" onClick={() => setOpen(false)}>
@@ -416,9 +400,9 @@ export const ScrollableContent: Story = {
             <div key={i} className="mb-4">
               <h3 className="mb-2 font-medium">{i + 1}. Section Title</h3>
               <p className="text-sm text-blue-900/70">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris.
               </p>
             </div>
           ))}

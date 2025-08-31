@@ -1,23 +1,22 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
-
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const Dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   logLevel: "error",
   plugins: [react(), tsconfigPaths()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: resolve(Dirname, "src/index.ts"),
       name: "LiquidifyComponents",
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
     },
-    outDir: resolve(__dirname, "../../dist/libs/components"),
+    outDir: resolve(Dirname, "../../dist/libs/components"),
 
     rollupOptions: {
       external: [
@@ -62,8 +61,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
-      liquidify: resolve(__dirname, "src/index.ts"),
+      "@": resolve(Dirname, "src"),
+      liquidify: resolve(Dirname, "src/index.ts"),
     },
   },
   experimental: {

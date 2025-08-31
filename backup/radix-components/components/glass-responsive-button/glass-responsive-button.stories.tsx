@@ -18,19 +18,11 @@ export default {
 
 export const Playground = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
-    <GlassResponsiveButton variant="primary">
-      Primary Button
-    </GlassResponsiveButton>
-    <GlassResponsiveButton variant="secondary">
-      Secondary Button
-    </GlassResponsiveButton>
-    <GlassResponsiveButton variant="tertiary">
-      Tertiary Button
-    </GlassResponsiveButton>
+    <GlassResponsiveButton variant="primary">Primary Button</GlassResponsiveButton>
+    <GlassResponsiveButton variant="secondary">Secondary Button</GlassResponsiveButton>
+    <GlassResponsiveButton variant="tertiary">Tertiary Button</GlassResponsiveButton>
     <GlassResponsiveButton variant="ghost">Ghost Button</GlassResponsiveButton>
-    <GlassResponsiveButton variant="destructive">
-      Destructive Button
-    </GlassResponsiveButton>
+    <GlassResponsiveButton variant="destructive">Destructive Button</GlassResponsiveButton>
   </div>
 );
 
@@ -89,11 +81,7 @@ export const Sizes = () => (
 
 export const ResponsiveBehavior = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
-    <GlassResponsiveButton
-      variant="primary"
-      responsive
-      leftIcon={<Zap className="h-4 w-4" />}
-    >
+    <GlassResponsiveButton variant="primary" responsive leftIcon={<Zap className="h-4 w-4" />}>
       Responsive Button
     </GlassResponsiveButton>
     <GlassResponsiveButton

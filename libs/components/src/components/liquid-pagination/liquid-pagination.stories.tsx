@@ -1,26 +1,29 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { LiquidPagination } from './liquid-pagination';
-import { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { LiquidPagination } from "./liquid-pagination";
 
 const meta: Meta<typeof LiquidPagination> = {
-  title: 'Data Display/LiquidPagination',
+  title: "Data Display/LiquidPagination",
   component: LiquidPagination,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A pagination component with Apple HIG liquid glass design, supporting quick jumper, page size changer, and custom rendering.',
+        component:
+          "A pagination component with Apple HIG liquid glass design, supporting quick jumper, page size changer, and custom rendering.",
       },
     },
   },
   decorators: [
     (Story) => (
-      <div style={{ 
-        minWidth: '800px',
-        padding: '2rem',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '12px'
-      }}>
+      <div
+        style={{
+          minWidth: "800px",
+          padding: "2rem",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          borderRadius: "12px",
+        }}
+      >
         <Story />
       </div>
     ),
@@ -93,8 +96,8 @@ export const CompactSize: Story = {
     current: 2,
     total: 100,
     pageSize: 10,
-    size: 'sm',
-    variant: 'compact',
+    size: "sm",
+    variant: "compact",
   },
 };
 
@@ -103,8 +106,8 @@ export const LargeSize: Story = {
     current: 1,
     total: 300,
     pageSize: 20,
-    size: 'lg',
-    variant: 'card',
+    size: "lg",
+    variant: "card",
   },
 };
 
@@ -122,32 +125,17 @@ export const Alignment: Story = {
     <div className="space-y-6">
       <div>
         <h3 className="text-white font-medium mb-4">Left Aligned</h3>
-        <LiquidPagination
-          current={2}
-          total={100}
-          pageSize={10}
-          align="left"
-        />
+        <LiquidPagination current={2} total={100} pageSize={10} align="left" />
       </div>
-      
+
       <div>
         <h3 className="text-white font-medium mb-4">Center Aligned</h3>
-        <LiquidPagination
-          current={2}
-          total={100}
-          pageSize={10}
-          align="center"
-        />
+        <LiquidPagination current={2} total={100} pageSize={10} align="center" />
       </div>
-      
+
       <div>
         <h3 className="text-white font-medium mb-4">Right Aligned</h3>
-        <LiquidPagination
-          current={2}
-          total={100}
-          pageSize={10}
-          align="right"
-        />
+        <LiquidPagination current={2} total={100} pageSize={10} align="right" />
       </div>
     </div>
   ),
@@ -158,41 +146,22 @@ export const Variants: Story = {
     <div className="space-y-6">
       <div>
         <h3 className="text-white font-medium mb-4">Default</h3>
-        <LiquidPagination
-          current={3}
-          total={150}
-          pageSize={10}
-        />
+        <LiquidPagination current={3} total={150} pageSize={10} />
       </div>
-      
+
       <div>
         <h3 className="text-white font-medium mb-4">Card</h3>
-        <LiquidPagination
-          current={3}
-          total={150}
-          pageSize={10}
-          variant="card"
-        />
+        <LiquidPagination current={3} total={150} pageSize={10} variant="card" />
       </div>
-      
+
       <div>
         <h3 className="text-white font-medium mb-4">Minimal</h3>
-        <LiquidPagination
-          current={3}
-          total={150}
-          pageSize={10}
-          variant="minimal"
-        />
+        <LiquidPagination current={3} total={150} pageSize={10} variant="minimal" />
       </div>
-      
+
       <div>
         <h3 className="text-white font-medium mb-4">Compact</h3>
-        <LiquidPagination
-          current={3}
-          total={150}
-          pageSize={10}
-          variant="compact"
-        />
+        <LiquidPagination current={3} total={150} pageSize={10} variant="compact" />
       </div>
     </div>
   ),
@@ -236,12 +205,19 @@ export const FullFeatured: Story = {
     showQuickJumper: true,
     showTotal: (total, range) => (
       <div className="text-sm text-white/70">
-        <div>Total: <strong className="text-white">{total}</strong> items</div>
-        <div>Page: <strong className="text-white">{range[0]}-{range[1]}</strong></div>
+        <div>
+          Total: <strong className="text-white">{total}</strong> items
+        </div>
+        <div>
+          Page:{" "}
+          <strong className="text-white">
+            {range[0]}-{range[1]}
+          </strong>
+        </div>
       </div>
     ),
     pageSizeOptions: [10, 20, 50, 100, 200],
-    variant: 'card',
+    variant: "card",
   },
 };
 
@@ -251,20 +227,20 @@ export const Interactive: Story = {
     const [current, setCurrent] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [total, setTotal] = useState(247);
-    const [variant, setVariant] = useState<'default' | 'card' | 'minimal' | 'compact'>('default');
-    const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
+    const [variant, setVariant] = useState<"default" | "card" | "minimal" | "compact">("default");
+    const [size, setSize] = useState<"sm" | "md" | "lg">("md");
     const [showExtras, setShowExtras] = useState(true);
 
     const handleChange = (page: number, size?: number) => {
       setCurrent(page);
       if (size) setPageSize(size);
-      console.log('Page changed:', page, size);
+      console.log("Page changed:", page, size);
     };
 
     const handleShowSizeChange = (page: number, size: number) => {
       setCurrent(page);
       setPageSize(size);
-      console.log('Page size changed:', page, size);
+      console.log("Page size changed:", page, size);
     };
 
     const totalPages = Math.ceil(total / pageSize);
@@ -276,7 +252,7 @@ export const Interactive: Story = {
         {/* Controls */}
         <div className="bg-white/10 p-4 rounded-lg space-y-4">
           <h3 className="text-white font-medium">Pagination Controls</h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-white/80 mb-2">Total Items:</label>
@@ -295,7 +271,7 @@ export const Interactive: Story = {
                 className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm text-white/80 mb-2">Page Size:</label>
               <select
@@ -324,14 +300,14 @@ export const Interactive: Story = {
             <div>
               <label className="block text-sm text-white/80 mb-2">Variant:</label>
               <div className="flex gap-1">
-                {(['default', 'card', 'minimal', 'compact'] as const).map((v) => (
+                {(["default", "card", "minimal", "compact"] as const).map((v) => (
                   <button
                     key={v}
                     onClick={() => setVariant(v)}
                     className={`px-3 py-1 text-sm rounded transition-colors capitalize ${
                       variant === v
-                        ? 'bg-blue-500/30 text-blue-200'
-                        : 'bg-white/10 text-white/80 hover:bg-white/20'
+                        ? "bg-blue-500/30 text-blue-200"
+                        : "bg-white/10 text-white/80 hover:bg-white/20"
                     }`}
                   >
                     {v}
@@ -343,14 +319,14 @@ export const Interactive: Story = {
             <div>
               <label className="block text-sm text-white/80 mb-2">Size:</label>
               <div className="flex gap-1">
-                {(['sm', 'md', 'lg'] as const).map((s) => (
+                {(["sm", "md", "lg"] as const).map((s) => (
                   <button
                     key={s}
                     onClick={() => setSize(s)}
                     className={`px-3 py-1 text-sm rounded transition-colors capitalize ${
                       size === s
-                        ? 'bg-blue-500/30 text-blue-200'
-                        : 'bg-white/10 text-white/80 hover:bg-white/20'
+                        ? "bg-blue-500/30 text-blue-200"
+                        : "bg-white/10 text-white/80 hover:bg-white/20"
                     }`}
                   >
                     {s}
@@ -401,8 +377,11 @@ export const Interactive: Story = {
           showQuickJumper={showExtras}
           showTotal={(total, range) => (
             <div className="text-sm text-white/70">
-              Showing <span className="text-white font-medium">{range[0]}-{range[1]}</span> of{' '}
-              <span className="text-white font-medium">{total}</span> entries
+              Showing{" "}
+              <span className="text-white font-medium">
+                {range[0]}-{range[1]}
+              </span>{" "}
+              of <span className="text-white font-medium">{total}</span> entries
             </div>
           )}
         />
@@ -414,7 +393,10 @@ export const Interactive: Story = {
             {Array.from({ length: Math.min(pageSize, total - startIndex + 1) }, (_, i) => {
               const itemIndex = startIndex + i;
               return (
-                <div key={itemIndex} className="flex items-center justify-between py-2 px-3 bg-white/5 rounded">
+                <div
+                  key={itemIndex}
+                  className="flex items-center justify-between py-2 px-3 bg-white/5 rounded"
+                >
                   <span className="text-white">Item {itemIndex}</span>
                   <span className="text-white/60 text-sm">Sample data item</span>
                 </div>

@@ -1,1 +1,6 @@
-export { LiquidNavbar, liquidNavbarVariants, type LiquidNavbarProps, type NavItem } from "./liquid-navbar";
+export {
+  LiquidNavbar,
+  type LiquidNavbarProps,
+  liquidNavbarVariants,
+  type NavItem,
+} from "./liquid-navbar";

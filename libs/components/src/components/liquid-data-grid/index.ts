@@ -1,11 +1,11 @@
-export { 
-  LiquidDataGrid,
-  liquidDataGridVariants,
-  gridHeaderVariants,
-  gridCellVariants,
-  type LiquidDataGridProps,
-  type GridColumn,
-  type SortDirection,
+export {
+  type CellEditor,
   type FilterType,
-  type CellEditor
+  type GridColumn,
+  gridCellVariants,
+  gridHeaderVariants,
+  LiquidDataGrid,
+  type LiquidDataGridProps,
+  liquidDataGridVariants,
+  type SortDirection,
 } from "./liquid-data-grid";

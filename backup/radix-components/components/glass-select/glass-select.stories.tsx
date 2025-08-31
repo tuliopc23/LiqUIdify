@@ -89,7 +89,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Basic options for examples
-const basicOptions: Array<GlassSelectOption> = [
+const basicOptions: GlassSelectOption[] = [
   { value: "react", label: "React" },
   { value: "vue", label: "Vue" },
   { value: "angular", label: "Angular" },
@@ -98,7 +98,7 @@ const basicOptions: Array<GlassSelectOption> = [
 ];
 
 // Country options for examples
-const countryOptions: Array<GlassSelectOption> = [
+const countryOptions: GlassSelectOption[] = [
   { value: "us", label: "United States" },
   { value: "uk", label: "United Kingdom" },
   { value: "ca", label: "Canada" },
@@ -196,7 +196,7 @@ export const InteractiveDemo: Story = {
     const [framework, setFramework] = useState("");
     const [priority, setPriority] = useState("");
 
-    const priorityOptions: Array<GlassSelectOption> = [
+    const priorityOptions: GlassSelectOption[] = [
       { value: "low", label: "Low Priority" },
       { value: "medium", label: "Medium Priority" },
       { value: "high", label: "High Priority" },
@@ -263,16 +263,13 @@ export const InteractiveDemo: Story = {
             </h4>
             <div className="space-y-1 text-blue-900 text-sm dark:text-blue-900">
               <p>
-                Country:{" "}
-                <span className="font-medium">{country || "None"}</span>
+                Country: <span className="font-medium">{country || "None"}</span>
               </p>
               <p>
-                Framework:{" "}
-                <span className="font-medium">{framework || "None"}</span>
+                Framework: <span className="font-medium">{framework || "None"}</span>
               </p>
               <p>
-                Priority:{" "}
-                <span className="font-medium">{priority || "None"}</span>
+                Priority: <span className="font-medium">{priority || "None"}</span>
               </p>
             </div>
           </div>
@@ -291,14 +288,14 @@ export const FormIntegration: Story = {
       experience: "",
     });
 
-    const roleOptions: Array<GlassSelectOption> = [
+    const roleOptions: GlassSelectOption[] = [
       { value: "developer", label: "Developer" },
       { value: "designer", label: "Designer" },
       { value: "manager", label: "Project Manager" },
       { value: "analyst", label: "Business Analyst" },
     ];
 
-    const departmentOptions: Array<GlassSelectOption> = [
+    const departmentOptions: GlassSelectOption[] = [
       { value: "engineering", label: "Engineering" },
       { value: "design", label: "Design" },
       { value: "marketing", label: "Marketing" },
@@ -306,7 +303,7 @@ export const FormIntegration: Story = {
       { value: "hr", label: "Human Resources" },
     ];
 
-    const experienceOptions: Array<GlassSelectOption> = [
+    const experienceOptions: GlassSelectOption[] = [
       { value: "0-2", label: "0-2 years" },
       { value: "3-5", label: "3-5 years" },
       { value: "6-10", label: "6-10 years" },
@@ -350,9 +347,7 @@ export const FormIntegration: Story = {
             <GlassSelect
               options={departmentOptions}
               value={formData.department}
-              onChange={(value) =>
-                setFormData({ ...formData, department: value })
-              }
+              onChange={(value) => setFormData({ ...formData, department: value })}
               placeholder="Select department"
             />
           </div>
@@ -367,9 +362,7 @@ export const FormIntegration: Story = {
             <GlassSelect
               options={experienceOptions}
               value={formData.experience}
-              onChange={(value) =>
-                setFormData({ ...formData, experience: value })
-              }
+              onChange={(value) => setFormData({ ...formData, experience: value })}
               placeholder="Select experience level"
             />
           </div>
@@ -378,9 +371,7 @@ export const FormIntegration: Story = {
         <button
           type="submit"
           className="w-full rounded-lg bg-blue-500 px-4 py-2 text-blue-900 transition-colors hover:bg-blue-500"
-          disabled={
-            !formData.role || !formData.department || !formData.experience
-          }
+          disabled={!formData.role || !formData.department || !formData.experience}
         >
           Submit Registration
         </button>
@@ -394,7 +385,7 @@ export const AccessibilityDemo: Story = {
   render: () => {
     const [selectedValue, setSelectedValue] = useState("");
 
-    const accessibilityOptions: Array<GlassSelectOption> = [
+    const accessibilityOptions: GlassSelectOption[] = [
       { value: "screen-reader", label: "Screen Reader Compatible" },
       { value: "keyboard-nav", label: "Full Keyboard Navigation" },
       { value: "aria-labels", label: "ARIA Labels Support" },
@@ -419,11 +410,7 @@ export const AccessibilityDemo: Story = {
             {selectedValue && (
               <div className="rounded-lg bg-blue-500 p-4 dark:bg-blue-500/20">
                 <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-900">
-                  {
-                    accessibilityOptions.find(
-                      (opt) => opt.value === selectedValue,
-                    )?.label
-                  }
+                  {accessibilityOptions.find((opt) => opt.value === selectedValue)?.label}
                 </h4>
                 <p className="text-blue-900 text-sm dark:text-blue-900">
                   {selectedValue === "screen-reader" &&
@@ -473,7 +460,7 @@ export const ThemeShowcase: Story = {
     const [lightValue, setLightValue] = useState("");
     const [darkValue, setDarkValue] = useState("");
 
-    const themeOptions: Array<GlassSelectOption> = [
+    const themeOptions: GlassSelectOption[] = [
       { value: "system", label: "System Default" },
       { value: "light", label: "Light Theme" },
       { value: "dark", label: "Dark Theme" },
@@ -483,9 +470,7 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="rounded-lg bg-blue-100 p-6">
-          <h3 className="mb-4 font-semibold text-blue-900 text-lg">
-            Light Theme
-          </h3>
+          <h3 className="mb-4 font-semibold text-blue-900 text-lg">Light Theme</h3>
           <GlassSelect
             options={themeOptions}
             value={lightValue}
@@ -495,9 +480,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="rounded-lg bg-blue-100 p-6">
-          <h3 className="mb-4 font-semibold text-lg text-blue-900">
-            Dark Theme
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Theme</h3>
           <GlassSelect
             options={themeOptions}
             value={darkValue}

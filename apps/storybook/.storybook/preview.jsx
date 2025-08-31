@@ -1,6 +1,8 @@
 import React from "react";
 // Use package CSS export to mirror consumer usage
-import "liquidify/css";
+// import "liquidify/css";
+// Import the updated CSS with liquid glass system directly
+import "../../../libs/components/src/styles/new-design-system.css";
 // Wrap stories with the library's ThemeProvider so global theme toggle works
 import { ThemeProvider, useTheme } from "@/hooks/use-theme";
 

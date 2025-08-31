@@ -104,9 +104,6 @@ export const EdgeCases = () => (
 
 export const Categories = () => (
   <div className="apple-glass mx-auto max-w-md p-8">
-    <CommandPalette
-      items={sampleCommands}
-      placeholder="Commands are organized by category..."
-    />
+    <CommandPalette items={sampleCommands} placeholder="Commands are organized by category..." />
   </div>
 );

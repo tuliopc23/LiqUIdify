@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LiquidCard, LiquidCardHeader, LiquidCardTitle, LiquidCardDescription, LiquidCardContent, LiquidCardFooter } from "./liquid-card";
 import { LiquidButton } from "../liquid-button";
+import {
+  LiquidCard,
+  LiquidCardContent,
+  LiquidCardDescription,
+  LiquidCardFooter,
+  LiquidCardHeader,
+  LiquidCardTitle,
+} from "./liquid-card";
 
 const meta = {
   title: "Components/LiquidCard",
@@ -9,7 +16,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible liquid glass card component with sub-components for structured content layout following Apple's design principles.",
+        component:
+          "A flexible liquid glass card component with sub-components for structured content layout following Apple's design principles.",
       },
     },
   },
@@ -17,30 +25,30 @@ const meta = {
     variant: {
       control: "select",
       options: ["default", "elevated", "interactive", "navigation", "feature", "glass"],
-      description: "The visual style variant of the card"
+      description: "The visual style variant of the card",
     },
     size: {
       control: "select",
       options: ["sm", "md", "lg", "xl"],
-      description: "The size/padding of the card"
+      description: "The size/padding of the card",
     },
     spacing: {
       control: "select",
       options: ["none", "sm", "md", "lg", "xl"],
-      description: "Internal spacing between content elements"
+      description: "Internal spacing between content elements",
     },
     rippleEffect: {
       control: "boolean",
-      description: "Enable ripple effect on click"
+      description: "Enable ripple effect on click",
     },
     hoverGlow: {
       control: "boolean",
-      description: "Enable hover glow effect"
+      description: "Enable hover glow effect",
     },
     dragPhysics: {
       control: "boolean",
-      description: "Enable drag physics with jiggle animation"
-    }
+      description: "Enable drag physics with jiggle animation",
+    },
   },
   args: {
     variant: "default",
@@ -67,19 +75,23 @@ type Story = StoryObj<typeof meta>;
 // Icons for stories
 const StarIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
   </svg>
 );
 
 const RocketIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M10.75 2.567a.25.25 0 0 0-.5 0L8.717 6.34a1.25 1.25 0 0 1-.65.65L4.433 8.25a.25.25 0 0 0 0 .5l3.634 1.26a1.25 1.25 0 0 1 .65.65l1.533 3.634a.25.25 0 0 0 .5 0l1.533-3.634a1.25 1.25 0 0 1 .65-.65l3.634-1.533a.25.25 0 0 0 0-.5L12.933 6.99a1.25 1.25 0 0 1-.65-.65L10.75 2.567Z"/>
+    <path d="M10.75 2.567a.25.25 0 0 0-.5 0L8.717 6.34a1.25 1.25 0 0 1-.65.65L4.433 8.25a.25.25 0 0 0 0 .5l3.634 1.26a1.25 1.25 0 0 1 .65.65l1.533 3.634a.25.25 0 0 0 .5 0l1.533-3.634a1.25 1.25 0 0 1 .65-.65l3.634-1.533a.25.25 0 0 0 0-.5L12.933 6.99a1.25 1.25 0 0 1-.65-.65L10.75 2.567Z" />
   </svg>
 );
 
 const ShieldIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M9.661 2.237a.531.531 0 01.678 0 11.947 11.947 0 007.078 2.749.5.5 0 01.031.893 11.676 11.676 0 00-2.708 15.147.5.5 0 01-.165.55c-1.045.8-2.213 1.374-3.495 1.374S7.898 22.426 6.853 21.626a.5.5 0 01-.165-.55 11.676 11.676 0 00-2.708-15.147.5.5 0 01.031-.893A11.947 11.947 0 009.661 2.237zM13.4 11.957a.75.75 0 10-1.061-1.061L9.75 13.485l-1.22-1.22a.75.75 0 00-1.06 1.061l1.75 1.75a.75.75 0 001.06 0l3.12-3.119z" clipRule="evenodd"/>
+    <path
+      fillRule="evenodd"
+      d="M9.661 2.237a.531.531 0 01.678 0 11.947 11.947 0 007.078 2.749.5.5 0 01.031.893 11.676 11.676 0 00-2.708 15.147.5.5 0 01-.165.55c-1.045.8-2.213 1.374-3.495 1.374S7.898 22.426 6.853 21.626a.5.5 0 01-.165-.55 11.676 11.676 0 00-2.708-15.147.5.5 0 01.031-.893A11.947 11.947 0 009.661 2.237zM13.4 11.957a.75.75 0 10-1.061-1.061L9.75 13.485l-1.22-1.22a.75.75 0 00-1.06 1.061l1.75 1.75a.75.75 0 001.06 0l3.12-3.119z"
+      clipRule="evenodd"
+    />
   </svg>
 );
 
@@ -116,35 +128,35 @@ export const Variants: Story = {
               <LiquidCardDescription>Standard glass card</LiquidCardDescription>
             </LiquidCardHeader>
           </LiquidCard>
-          
+
           <LiquidCard variant="elevated">
             <LiquidCardHeader>
               <LiquidCardTitle>Elevated</LiquidCardTitle>
               <LiquidCardDescription>Enhanced shadow and depth</LiquidCardDescription>
             </LiquidCardHeader>
           </LiquidCard>
-          
+
           <LiquidCard variant="interactive">
             <LiquidCardHeader>
               <LiquidCardTitle>Interactive</LiquidCardTitle>
               <LiquidCardDescription>Hover effects and cursor pointer</LiquidCardDescription>
             </LiquidCardHeader>
           </LiquidCard>
-          
+
           <LiquidCard variant="navigation">
             <LiquidCardHeader>
               <LiquidCardTitle>Navigation</LiquidCardTitle>
               <LiquidCardDescription>Subtle style for nav elements</LiquidCardDescription>
             </LiquidCardHeader>
           </LiquidCard>
-          
+
           <LiquidCard variant="feature">
             <LiquidCardHeader>
               <LiquidCardTitle>Feature</LiquidCardTitle>
               <LiquidCardDescription>Gradient background highlight</LiquidCardDescription>
             </LiquidCardHeader>
           </LiquidCard>
-          
+
           <LiquidCard variant="glass">
             <LiquidCardHeader>
               <LiquidCardTitle>Glass</LiquidCardTitle>
@@ -170,17 +182,17 @@ export const Sizes: Story = {
             <LiquidCardTitle className="text-base">Small</LiquidCardTitle>
             <LiquidCardDescription>Compact card</LiquidCardDescription>
           </LiquidCard>
-          
+
           <LiquidCard size="md">
             <LiquidCardTitle>Medium</LiquidCardTitle>
             <LiquidCardDescription>Default size card</LiquidCardDescription>
           </LiquidCard>
-          
+
           <LiquidCard size="lg">
             <LiquidCardTitle className="text-xl">Large</LiquidCardTitle>
             <LiquidCardDescription>Spacious card</LiquidCardDescription>
           </LiquidCard>
-          
+
           <LiquidCard size="xl">
             <LiquidCardTitle className="text-2xl">Extra Large</LiquidCardTitle>
             <LiquidCardDescription>Maximum space card</LiquidCardDescription>
@@ -230,9 +242,7 @@ export const WithActions: Story = {
               <LiquidButton size="sm" variant="ghost">
                 Learn More
               </LiquidButton>
-              <LiquidButton size="sm">
-                Get Started
-              </LiquidButton>
+              <LiquidButton size="sm">Get Started</LiquidButton>
             </LiquidCardFooter>
           </LiquidCard>
 
@@ -286,9 +296,7 @@ export const Interactive: Story = {
                 <StarIcon />
               </div>
               <LiquidCardTitle>Interactive Card</LiquidCardTitle>
-              <LiquidCardDescription>
-                Click me to see the ripple effect!
-              </LiquidCardDescription>
+              <LiquidCardDescription>Click me to see the ripple effect!</LiquidCardDescription>
             </LiquidCardHeader>
             <LiquidCardContent>
               <p className="text-white/80 text-sm">
@@ -303,9 +311,7 @@ export const Interactive: Story = {
                 🎭
               </div>
               <LiquidCardTitle>Drag Physics</LiquidCardTitle>
-              <LiquidCardDescription>
-                Drag me around and watch the jiggle!
-              </LiquidCardDescription>
+              <LiquidCardDescription>Drag me around and watch the jiggle!</LiquidCardDescription>
             </LiquidCardHeader>
             <LiquidCardContent>
               <p className="text-white/80 text-sm">
@@ -357,7 +363,8 @@ export const ContentShowcase: Story = {
             </LiquidCardContent>
             <LiquidCardFooter>
               <div className="text-white/60 text-sm">
-                <span className="line-through">$199</span> <span className="text-white font-semibold">$99</span>
+                <span className="line-through">$199</span>{" "}
+                <span className="text-white font-semibold">$99</span>
               </div>
               <LiquidButton size="sm">Upgrade</LiquidButton>
             </LiquidCardFooter>
@@ -405,7 +412,10 @@ export const ContentShowcase: Story = {
                   Your app is running smoothly with excellent performance metrics.
                 </LiquidCardDescription>
                 <div className="mt-4 w-full bg-white/10 rounded-full h-2">
-                  <div className="bg-gradient-to-r from-emerald-400 to-teal-500 h-2 rounded-full" style={{ width: '94%' }}></div>
+                  <div
+                    className="bg-gradient-to-r from-emerald-400 to-teal-500 h-2 rounded-full"
+                    style={{ width: "94%" }}
+                  ></div>
                 </div>
               </div>
             </LiquidCardContent>

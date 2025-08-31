@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 // SF Symbols component with proper Apple design integration
 interface SFSymbolProps {
@@ -148,10 +148,7 @@ export function SFSymbol({
   const symbolFile = SF_SYMBOLS_MAP[name];
 
   if (!symbolFile) {
-    console.warn(
-      `SF Symbol "${name}" not found. Available symbols:`,
-      Object.keys(SF_SYMBOLS_MAP)
-    );
+    console.warn(`SF Symbol "${name}" not found. Available symbols:`, Object.keys(SF_SYMBOLS_MAP));
     return null;
   }
 
@@ -245,21 +242,10 @@ export function SFSymbolGrid() {
       "square.and.pencil.circle",
     ],
     Interface: ["circle", "circle.fill", "square", "capsule", "display"],
-    Development: [
-      "terminal",
-      "terminal.fill",
-      "keyboard",
-      "keyboard.fill",
-      "key",
-    ],
+    Development: ["terminal", "terminal.fill", "keyboard", "keyboard.fill", "key"],
     Cloud: ["cloud", "cloud.fill", "square.and.arrow.up.circle"],
     Media: ["pause.circle", "stop.circle", "stop.circle.fill", "backward"],
-    Utilities: [
-      "magnifyingglass.plus",
-      "magnifyingglass.minus",
-      "switch.2",
-      "switch.programmable",
-    ],
+    Utilities: ["magnifyingglass.plus", "magnifyingglass.minus", "switch.2", "switch.programmable"],
   };
 
   return (

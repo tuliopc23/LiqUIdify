@@ -117,27 +117,15 @@ export const Variants: Story = {
   render: () => (
     <div className="flex items-center gap-6">
       <div className="text-center">
-        <GlassAvatar
-          variant="circular"
-          src="https://i.pravatar.cc/150?img=8"
-          size="lg"
-        />
+        <GlassAvatar variant="circular" src="https://i.pravatar.cc/150?img=8" size="lg" />
         <p className="mt-2 text-sm text-blue-900/60">Circular</p>
       </div>
       <div className="text-center">
-        <GlassAvatar
-          variant="rounded"
-          src="https://i.pravatar.cc/150?img=9"
-          size="lg"
-        />
+        <GlassAvatar variant="rounded" src="https://i.pravatar.cc/150?img=9" size="lg" />
         <p className="mt-2 text-sm text-blue-900/60">Rounded</p>
       </div>
       <div className="text-center">
-        <GlassAvatar
-          variant="square"
-          src="https://i.pravatar.cc/150?img=10"
-          size="lg"
-        />
+        <GlassAvatar variant="square" src="https://i.pravatar.cc/150?img=10" size="lg" />
         <p className="mt-2 text-sm text-blue-900/60">Square</p>
       </div>
     </div>
@@ -148,11 +136,7 @@ export const Variants: Story = {
 export const WithBorders: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <GlassAvatar
-        showBorder
-        src="https://i.pravatar.cc/150?img=11"
-        size="md"
-      />
+      <GlassAvatar showBorder src="https://i.pravatar.cc/150?img=11" size="md" />
       <GlassAvatar showBorder fallback="Jane Smith" size="md" />
       <GlassAvatar showBorder size="md" />
     </div>
@@ -165,35 +149,19 @@ export const StatusIndicators: Story = {
     <div className="space-y-6">
       <div className="flex items-center gap-6">
         <div className="text-center">
-          <GlassAvatar
-            status="online"
-            src="https://i.pravatar.cc/150?img=12"
-            size="lg"
-          />
+          <GlassAvatar status="online" src="https://i.pravatar.cc/150?img=12" size="lg" />
           <p className="mt-2 text-sm text-blue-900/60">Online</p>
         </div>
         <div className="text-center">
-          <GlassAvatar
-            status="away"
-            src="https://i.pravatar.cc/150?img=13"
-            size="lg"
-          />
+          <GlassAvatar status="away" src="https://i.pravatar.cc/150?img=13" size="lg" />
           <p className="mt-2 text-sm text-blue-900/60">Away</p>
         </div>
         <div className="text-center">
-          <GlassAvatar
-            status="busy"
-            src="https://i.pravatar.cc/150?img=14"
-            size="lg"
-          />
+          <GlassAvatar status="busy" src="https://i.pravatar.cc/150?img=14" size="lg" />
           <p className="mt-2 text-sm text-blue-900/60">Busy</p>
         </div>
         <div className="text-center">
-          <GlassAvatar
-            status="offline"
-            src="https://i.pravatar.cc/150?img=15"
-            size="lg"
-          />
+          <GlassAvatar status="offline" src="https://i.pravatar.cc/150?img=15" size="lg" />
           <p className="mt-2 text-sm text-blue-900/60">Offline</p>
         </div>
       </div>
@@ -236,9 +204,7 @@ export const AvatarGroups: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">
-          Stacked avatars
-        </h4>
+        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">Stacked avatars</h4>
         <div className="-space-x-3 flex">
           <GlassAvatar
             src="https://i.pravatar.cc/150?img=16"
@@ -264,40 +230,17 @@ export const AvatarGroups: Story = {
             showBorder
             className="z-10"
           />
-          <GlassAvatar
-            fallback="+5"
-            size="md"
-            showBorder
-            className="z-0 bg-blue-100"
-          />
+          <GlassAvatar fallback="+5" size="md" showBorder className="z-0 bg-blue-100" />
         </div>
       </div>
 
       <div>
-        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">
-          Team members
-        </h4>
+        <h4 className="mb-3 font-semibold text-sm text-blue-900/80">Team members</h4>
         <div className="flex gap-2">
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=20"
-            size="sm"
-            status="online"
-          />
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=21"
-            size="sm"
-            status="busy"
-          />
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=22"
-            size="sm"
-            status="away"
-          />
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=23"
-            size="sm"
-            status="offline"
-          />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=20" size="sm" status="online" />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=21" size="sm" status="busy" />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=22" size="sm" status="away" />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=23" size="sm" status="offline" />
         </div>
       </div>
     </div>
@@ -310,91 +253,52 @@ export const RealWorldExamples: Story = {
     <div className="max-w-2xl space-y-6">
       {/* User profile card */}
       <div className="flex items-center gap-4 rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <GlassAvatar
-          src="https://i.pravatar.cc/150?img=24"
-          size="xl"
-          status="online"
-          showBorder
-        />
+        <GlassAvatar src="https://i.pravatar.cc/150?img=24" size="xl" status="online" showBorder />
         <div className="flex-1">
-          <h3 className="font-semibold text-blue-900">
-            Sarah Johnson
-          </h3>
-          <p className="text-sm text-blue-900/60">
-            Product Designer
-          </p>
+          <h3 className="font-semibold text-blue-900">Sarah Johnson</h3>
+          <p className="text-sm text-blue-900/60">Product Designer</p>
           <div className="mt-2 flex gap-2">
-            <span className="text-blue-900/40 text-xs">
-              sarah.johnson@company.com
-            </span>
+            <span className="text-blue-900/40 text-xs">sarah.johnson@company.com</span>
           </div>
         </div>
       </div>
 
       {/* Message list */}
       <div className="space-y-3 rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          Recent Messages
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">Recent Messages</h4>
         <div className="flex items-start gap-3">
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=25"
-            size="sm"
-            status="online"
-          />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=25" size="sm" status="online" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-blue-900">
-                Mike Chen
-              </span>
-              <span className="text-blue-900/40 text-xs">
-                2 min ago
-              </span>
+              <span className="font-medium text-sm text-blue-900">Mike Chen</span>
+              <span className="text-blue-900/40 text-xs">2 min ago</span>
             </div>
-            <p className="text-sm text-blue-900/60">
-              Hey, are you available for a quick call?
-            </p>
+            <p className="text-sm text-blue-900/60">Hey, are you available for a quick call?</p>
           </div>
         </div>
         <div className="flex items-start gap-3">
           <GlassAvatar fallback="Emma Davis" size="sm" status="away" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm text-blue-900">
-                Emma Davis
-              </span>
-              <span className="text-blue-900/40 text-xs">
-                15 min ago
-              </span>
+              <span className="font-medium text-sm text-blue-900">Emma Davis</span>
+              <span className="text-blue-900/40 text-xs">15 min ago</span>
             </div>
-            <p className="text-sm text-blue-900/60">
-              I've updated the design files.
-            </p>
+            <p className="text-sm text-blue-900/60">I've updated the design files.</p>
           </div>
         </div>
       </div>
 
       {/* Comment section */}
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          Comments
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">Comments</h4>
         <div className="space-y-4">
           <div className="flex gap-3">
-            <GlassAvatar
-              src="https://i.pravatar.cc/150?img=26"
-              size="sm"
-              variant="rounded"
-            />
+            <GlassAvatar src="https://i.pravatar.cc/150?img=26" size="sm" variant="rounded" />
             <div className="flex-1 space-y-1">
               <div className="rounded-lg bg-blue-100/5 p-3">
                 <div className="mb-1 flex items-center gap-2">
-                  <span className="font-medium text-sm text-blue-900">
-                    Alex Turner
-                  </span>
-                  <span className="text-blue-900/40 text-xs">
-                    1 hour ago
-                  </span>
+                  <span className="font-medium text-sm text-blue-900">Alex Turner</span>
+                  <span className="text-blue-900/40 text-xs">1 hour ago</span>
                 </div>
                 <p className="text-sm text-blue-900/80">
                   Great work on this component! The glass effect looks amazing.
@@ -422,10 +326,7 @@ export const ErrorHandling: Story = {
             fallback="John Doe"
             size="lg"
           />
-          <GlassAvatar
-            src="https://invalid-url-that-will-fail.com/image.jpg"
-            size="lg"
-          />
+          <GlassAvatar src="https://invalid-url-that-will-fail.com/image.jpg" size="lg" />
         </div>
       </div>
     </div>
@@ -441,11 +342,7 @@ export const CustomStyling: Story = {
         size="lg"
         className="ring-2 ring-purple-500 ring-offset-2 ring-offset-black/20"
       />
-      <GlassAvatar
-        fallback="GB"
-        size="lg"
-        className="shadow-blue-500/50 shadow-lg"
-      />
+      <GlassAvatar fallback="GB" size="lg" className="shadow-blue-500/50 shadow-lg" />
       <GlassAvatar
         src="https://i.pravatar.cc/150?img=28"
         size="lg"
@@ -462,30 +359,18 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="rounded-lg bg-blue-100/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Light Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Light Background</h3>
         <div className="flex items-center gap-4">
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=29"
-            size="lg"
-            showBorder
-          />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=29" size="lg" showBorder />
           <GlassAvatar fallback="John Doe" size="lg" showBorder />
           <GlassAvatar size="lg" showBorder />
         </div>
       </div>
 
       <div className="rounded-lg bg-blue-100/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Dark Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Background</h3>
         <div className="flex items-center gap-4">
-          <GlassAvatar
-            src="https://i.pravatar.cc/150?img=30"
-            size="lg"
-            showBorder
-          />
+          <GlassAvatar src="https://i.pravatar.cc/150?img=30" size="lg" showBorder />
           <GlassAvatar fallback="Jane Smith" size="lg" showBorder />
           <GlassAvatar size="lg" showBorder />
         </div>
@@ -504,8 +389,8 @@ export const AccessibilityDemo: Story = {
   render: () => (
     <div className="max-w-md space-y-4">
       <p className="text-sm text-blue-900/60">
-        All avatars include proper alt text for screen readers. When used in
-        interactive elements, ensure proper labeling.
+        All avatars include proper alt text for screen readers. When used in interactive elements,
+        ensure proper labeling.
       </p>
       <div className="space-y-3">
         <div className="flex items-center gap-3">
@@ -514,9 +399,7 @@ export const AccessibilityDemo: Story = {
             alt="Profile picture of Sarah Williams"
             size="md"
           />
-          <span className="text-blue-900">
-            Sarah Williams (with alt text)
-          </span>
+          <span className="text-blue-900">Sarah Williams (with alt text)</span>
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -525,9 +408,7 @@ export const AccessibilityDemo: Story = {
             aria-label="Open John Doe's profile"
           >
             <GlassAvatar fallback="John Doe" size="md" />
-            <span className="text-blue-900">
-              John Doe (clickable with aria-label)
-            </span>
+            <span className="text-blue-900">John Doe (clickable with aria-label)</span>
           </button>
         </div>
       </div>

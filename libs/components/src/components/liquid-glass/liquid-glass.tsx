@@ -1,383 +1,239 @@
 "use client";
 
 import * as React from "react";
-import { useState, useRef, useCallback, type ReactNode } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type ReactNode, useCallback, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 
-const liquidGlassVariants = cva(
-  "relative overflow-hidden transition-all duration-300 ease-out",
-  {
-    variants: {
-      variant: {
-        button: "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer select-none",
-        card: "flex flex-col",
-        panel: "flex flex-col",
-        floating: "inline-flex items-center justify-center shadow-2xl",
-        navigation: "flex items-center"
-      },
-      intensity: {
-        subtle: "backdrop-blur-sm bg-white/5 border border-white/10",
-        medium: "backdrop-blur-xl bg-white/10 border border-white/20", 
-        strong: "backdrop-blur-3xl bg-white/20 border border-white/30"
-      },
-      size: {
-        sm: "text-sm",
-        md: "text-base", 
-        lg: "text-lg",
-        xl: "text-xl"
-      },
-      radius: {
-        sm: "rounded-lg",
-        md: "rounded-xl",
-        lg: "rounded-2xl",
-        xl: "rounded-3xl",
-        full: "rounded-full"
-      }
-    },
-    compoundVariants: [
-      {
-        variant: "button",
-        size: "sm",
-        class: "px-4 py-2 rounded-xl"
-      },
-      {
-        variant: "button", 
-        size: "md",
-        class: "px-6 py-3 rounded-2xl"
-      },
-      {
-        variant: "button",
-        size: "lg", 
-        class: "px-8 py-4 rounded-2xl"
-      },
-      {
-        variant: "button",
-        size: "xl",
-        class: "px-10 py-5 rounded-3xl"
-      },
-      {
-        variant: "card",
-        class: "p-6 rounded-3xl"
-      },
-      {
-        variant: "panel",
-        class: "p-8 rounded-2xl"
-      },
-      {
-        variant: "floating",
-        class: "p-4 rounded-full"
-      },
-      {
-        variant: "navigation",
-        class: "px-4 py-2 rounded-xl"
-      }
-    ],
-    defaultVariants: {
-      variant: "card",
-      intensity: "medium", 
-      size: "md",
-      radius: "lg"
-    }
-  }
-);
-
-interface LiquidGlassProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidGlassVariants> {
+interface LiquidGlassProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  variant?: "button" | "card" | "panel" | "floating";
+  intensity?: "subtle" | "medium" | "strong";
   rippleEffect?: boolean;
-  hoverGlow?: boolean;
-  dragPhysics?: boolean;
+  flowOnHover?: boolean;
+  stretchOnDrag?: boolean;
   onDragStart?: () => void;
   onDragEnd?: () => void;
-  asChild?: boolean;
-}
-
-interface Ripple {
-  id: number;
-  x: number;
-  y: number;
 }
 
 export const LiquidGlass = React.forwardRef<HTMLDivElement, LiquidGlassProps>(
-  ({ 
-    children,
-    className,
-    variant,
-    intensity,
-    size,
-    radius,
-    rippleEffect = true,
-    hoverGlow = true,
-    dragPhysics = false,
-    onDragStart,
-    onDragEnd,
-    onClick,
-    onMouseDown,
-    onMouseMove,
-    onMouseUp,
-    onMouseLeave,
-    onMouseEnter,
-    onTouchStart,
-    onTouchMove,
-    onTouchEnd,
-    style,
-    ...props
-  }, ref) => {
+  (
+    {
+      children,
+      className,
+      style,
+      variant = "card",
+      intensity = "medium",
+      rippleEffect = true,
+      flowOnHover = false,
+      stretchOnDrag = true,
+      onClick,
+      onDragStart,
+      onDragEnd,
+      ...props
+    },
+    ref
+  ) => {
+    const [isJiggling, setIsJiggling] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const [wobbleOffset, setWobbleOffset] = useState({ x: 0, y: 0 });
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-    const [ripples, setRipples] = useState<Ripple[]>([]);
-    const [isJiggling, setIsJiggling] = useState(false);
-
+    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
     const elementRef = useRef<HTMLDivElement>(null);
     const dragStartPos = useRef({ x: 0, y: 0 });
     const rippleCounter = useRef(0);
 
-    React.useImperativeHandle(ref, () => elementRef.current!);
+    const getVariantClasses = () => {
+      const baseClasses = "liquid-glass relative overflow-hidden";
 
-    const createRipple = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-      if (!rippleEffect || !elementRef.current) return;
-
-      const rect = elementRef.current.getBoundingClientRect();
-      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-      
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-
-      const newRipple: Ripple = {
-        id: rippleCounter.current++,
-        x,
-        y,
-      };
-
-      setRipples(prev => [...prev, newRipple]);
-
-      setTimeout(() => {
-        setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
-      }, 600);
-    }, [rippleEffect]);
-
-    const handleMouseDown = useCallback((e: React.MouseEvent) => {
-      if (dragPhysics) {
-        setIsDragging(true);
-        dragStartPos.current = { x: e.clientX, y: e.clientY };
-        onDragStart?.();
+      switch (variant) {
+        case "button":
+          return `${baseClasses} px-6 py-3 rounded-2xl cursor-pointer select-none`;
+        case "card":
+          return `${baseClasses} p-6 rounded-3xl`;
+        case "panel":
+          return `${baseClasses} p-4 rounded-2xl`;
+        case "floating":
+          return `${baseClasses} p-4 rounded-2xl shadow-2xl`;
+        default:
+          return `${baseClasses} p-4 rounded-2xl`;
       }
-      
-      setIsPressed(true);
-      createRipple(e);
-      onMouseDown?.(e);
-    }, [dragPhysics, onDragStart, createRipple, onMouseDown]);
+    };
 
-    const handleMouseMove = useCallback((e: React.MouseEvent) => {
-      if (hoverGlow && elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        setCursorPos({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
+    const getAnimationClasses = () => {
+      let classes = "";
+      if (isJiggling) classes += " liquid-jiggle";
+      if (flowOnHover && isHovering) classes += " liquid-flow";
+      if (rippleEffect) classes += " liquid-ripple";
+      return classes;
+    };
 
-      if (isDragging) {
-        const deltaX = e.clientX - dragStartPos.current.x;
-        const deltaY = e.clientY - dragStartPos.current.y;
-        setDragOffset({ x: deltaX * 0.1, y: deltaY * 0.1 });
-      }
+    const handleClick = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (onClick) {
+          onClick(e);
+        }
 
-      onMouseMove?.(e);
-    }, [hoverGlow, isDragging, onMouseMove]);
+        if (rippleEffect) {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const rippleId = rippleCounter.current++;
 
-    const handleMouseUp = useCallback((e: React.MouseEvent) => {
-      if (isDragging) {
-        setIsDragging(false);
-        setDragOffset({ x: 0, y: 0 });
-        onDragEnd?.();
-        
+          setRipples((prev) => [...prev, { id: rippleId, x, y }]);
+
+          // Clean up ripple after animation
+          setTimeout(() => {
+            setRipples((prev) => prev.filter((ripple) => ripple.id !== rippleId));
+          }, 600);
+        }
+
+        // Trigger jiggle effect
         setIsJiggling(true);
-        setTimeout(() => setIsJiggling(false), 800);
-      }
-      
-      setIsPressed(false);
-      onMouseUp?.(e);
-    }, [isDragging, onDragEnd, onMouseUp]);
+        setTimeout(() => setIsJiggling(false), 600);
+      },
+      [onClick, rippleEffect]
+    );
 
-    const handleMouseEnter = useCallback((e: React.MouseEvent) => {
+    const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
       setIsHovering(true);
-      onMouseEnter?.(e);
-    }, [onMouseEnter]);
+      if (flowOnHover) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        setCursorPos({ x, y });
+      }
+    }, [flowOnHover]);
 
-    const handleMouseLeave = useCallback((e: React.MouseEvent) => {
+    const handleMouseLeave = useCallback(() => {
       setIsHovering(false);
-      setIsPressed(false);
-      if (isDragging) {
-        handleMouseUp(e);
-      }
-      onMouseLeave?.(e);
-    }, [isDragging, handleMouseUp, onMouseLeave]);
+    }, []);
 
-    const handleClick = useCallback((e: React.MouseEvent) => {
-      createRipple(e);
-      onClick?.(e);
-    }, [createRipple, onClick]);
+    const handleMouseMove = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (flowOnHover && isHovering) {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setCursorPos({ x, y });
+        }
+      },
+      [flowOnHover, isHovering]
+    );
 
-    const handleTouchStart = useCallback((e: React.TouchEvent) => {
-      const touch = e.touches[0];
-      if (dragPhysics) {
-        setIsDragging(true);
-        dragStartPos.current = { x: touch.clientX, y: touch.clientY };
-        onDragStart?.();
-      }
-      
+    const handleMouseDown = useCallback(() => {
       setIsPressed(true);
-      createRipple(e);
-      onTouchStart?.(e);
-    }, [dragPhysics, onDragStart, createRipple, onTouchStart]);
+    }, []);
 
-    const handleTouchMove = useCallback((e: React.TouchEvent) => {
-      const touch = e.touches[0];
-      
-      if (hoverGlow && elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        setCursorPos({
-          x: touch.clientX - rect.left,
-          y: touch.clientY - rect.top,
-        });
+    const handleMouseUp = useCallback(() => {
+      setIsPressed(false);
+    }, []);
+
+    // Touch event handlers for mobile
+    const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+      setIsPressed(true);
+      if (stretchOnDrag) {
+        const touch = e.touches[0];
+        if (touch && elementRef.current) {
+          const rect = elementRef.current.getBoundingClientRect();
+          dragStartPos.current = {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top,
+          };
+          setIsDragging(true);
+          onDragStart?.();
+        }
       }
+    }, [stretchOnDrag, onDragStart]);
 
-      if (isDragging) {
-        e.preventDefault();
-        const deltaX = touch.clientX - dragStartPos.current.x;
-        const deltaY = touch.clientY - dragStartPos.current.y;
-        setDragOffset({ x: deltaX * 0.1, y: deltaY * 0.1 });
-      }
+    const handleTouchMove = useCallback(
+      (e: React.TouchEvent<HTMLDivElement>) => {
+        if (isDragging && stretchOnDrag) {
+          const touch = e.touches[0];
+          if (touch && elementRef.current) {
+            const rect = elementRef.current.getBoundingClientRect();
+            const currentX = touch.clientX - rect.left;
+            const currentY = touch.clientY - rect.top;
+            const offsetX = currentX - dragStartPos.current.x;
+            const offsetY = currentY - dragStartPos.current.y;
+            setDragOffset({ x: offsetX * 0.1, y: offsetY * 0.1 });
+          }
+        }
+      },
+      [isDragging, stretchOnDrag]
+    );
 
-      onTouchMove?.(e);
-    }, [hoverGlow, isDragging, onTouchMove]);
-
-    const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    const handleTouchEnd = useCallback(() => {
+      setIsPressed(false);
       if (isDragging) {
         setIsDragging(false);
         setDragOffset({ x: 0, y: 0 });
         onDragEnd?.();
-        
-        setIsJiggling(true);
-        setTimeout(() => setIsJiggling(false), 800);
       }
-      
-      setIsPressed(false);
-      onTouchEnd?.(e);
-    }, [isDragging, onDragEnd, onTouchEnd]);
+    }, [isDragging, onDragEnd]);
 
-    const transformStyle = React.useMemo(() => {
-      if (isJiggling) {
-        return {
-          animation: "liquidJiggle 0.8s ease-out",
-          transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)`
-        };
-      }
-      
-      return isDragging ? {
-        transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) scale(1.02)`,
-        transition: "none"
-      } : {
-        transform: isPressed ? "scale(0.98)" : "scale(1)",
-        transition: "transform 0.15s ease-out"
-      };
-    }, [isJiggling, isDragging, dragOffset, isPressed]);
+    const dynamicStyle: React.CSSProperties = {
+      ...style,
+      transform: isDragging
+        ? `translate(${dragOffset.x}px, ${dragOffset.y}px) ${
+            isPressed ? "scale(0.96)" : ""
+          }`
+        : isPressed
+        ? "scale(0.96)"
+        : "",
+      ...wobbleOffset,
+    };
 
     return (
-      <>
-        <style jsx>{`
-          @keyframes liquidJiggle {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-2px, -1px) rotate(-0.5deg); }
-            50% { transform: translate(2px, 1px) rotate(0.5deg); }
-            75% { transform: translate(-1px, 2px) rotate(-0.3deg); }
+      <div
+        ref={(node) => {
+          elementRef.current = node;
+          if (typeof ref === "function") {
+            ref(node);
+          } else if (ref) {
+            ref.current = node;
           }
-          
-          @keyframes liquidRipple {
-            0% {
-              transform: translate(-50%, -50%) scale(0);
-              opacity: 1;
-            }
-            100% {
-              transform: translate(-50%, -50%) scale(20);
-              opacity: 0;
-            }
-          }
-        `}</style>
-        
-        <div
-          ref={elementRef}
-          className={cn(
-            liquidGlassVariants({ variant, intensity, size, radius }),
-            "hover:bg-white/15 hover:border-white/25",
-            isPressed && "bg-white/20 border-white/30",
-            className
-          )}
-          style={{ ...transformStyle, ...style }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleClick}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          {...props}
-        >
-          {/* Hover Glow Effect */}
-          {hoverGlow && isHovering && (
-            <div
-              className="absolute pointer-events-none transition-opacity duration-200 z-10"
-              style={{
-                left: cursorPos.x,
-                top: cursorPos.y,
-                width: "80px",
-                height: "80px",
-                background: "radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)",
-                borderRadius: "50%",
-                transform: "translate(-50%, -50%)",
-                filter: "blur(10px)",
-              }}
-            />
-          )}
+        }}
+        className={cn(getVariantClasses(), getAnimationClasses(), className)}
+        style={dynamicStyle}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        {...props}
+      >
+        {/* Content with proper z-index */}
+        <div className="relative z-10">{children}</div>
 
-          {/* Ripple Effects */}
-          {ripples.map((ripple) => (
-            <div
-              key={ripple.id}
-              className="absolute pointer-events-none z-20"
-              style={{
-                left: ripple.x,
-                top: ripple.y,
-                width: "4px",
-                height: "4px",
-                borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.4)",
-                transform: "translate(-50%, -50%)",
-                animation: "liquidRipple 0.6s ease-out forwards",
-              }}
-            />
-          ))}
-
-          {/* Content */}
-          <div className="relative z-30">
-            {children}
-          </div>
-
-          {/* Glass Highlight */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-5" />
-        </div>
-      </>
+        {/* Dynamic ripple effects */}
+        {ripples.map((ripple) => (
+          <div
+            key={ripple.id}
+            className="absolute pointer-events-none z-5"
+            style={{
+              left: ripple.x,
+              top: ripple.y,
+              width: "20px",
+              height: "20px",
+              borderRadius: "50%",
+              background: "var(--liquid-ripple-color)",
+              transform: "translate(-50%, -50%)",
+              animation: "liquidRipple 0.6s ease-out",
+            }}
+          />
+        ))}
+      </div>
     );
   }
 );
 
 LiquidGlass.displayName = "LiquidGlass";
 
-export { liquidGlassVariants, type LiquidGlassProps };
+export type { LiquidGlassProps };

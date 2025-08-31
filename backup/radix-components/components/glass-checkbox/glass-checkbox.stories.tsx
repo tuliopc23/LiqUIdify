@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Bell,
-  File,
-  Globe,
-  Mail,
-  MessageCircle,
-  Settings,
-  Shield,
-} from "lucide-react";
+import { Bell, File, Globe, Mail, MessageCircle, Settings, Shield } from "lucide-react";
 import React from "react";
 import { GlassButton } from "../glass-button-refactored";
 import { GlassCard } from "../glass-card-refactored";
@@ -214,9 +206,7 @@ export const BasicExamples: Story = {
   render: () => (
     <div className="space-y-6">
       <div className="space-y-4">
-        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-          States
-        </h3>
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">States</h3>
         <div className="space-y-3">
           <GlassCheckbox label="Unchecked" />
           <GlassCheckbox label="Checked" defaultChecked />
@@ -226,9 +216,7 @@ export const BasicExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-          Without Labels
-        </h3>
+        <h3 className="font-medium text-blue-900 text-sm dark:text-blue-900">Without Labels</h3>
         <div className="flex items-center gap-4">
           <GlassCheckbox aria-label="Option 1" />
           <GlassCheckbox aria-label="Option 2" defaultChecked />
@@ -270,7 +258,7 @@ export const InteractiveDemo: Story = {
     });
 
     const allChecked = Object.values(checkedItems).every(Boolean);
-    const _someChecked = Object.values(checkedItems).some(Boolean);
+    const SomeChecked = Object.values(checkedItems).some(Boolean);
 
     const handleParentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.checked;
@@ -283,8 +271,7 @@ export const InteractiveDemo: Story = {
     };
 
     const handleChildChange =
-      (key: keyof typeof checkedItems) =>
-      (e: React.ChangeEvent<HTMLInputElement>) => {
+      (key: keyof typeof checkedItems) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setCheckedItems((prev) => ({
           ...prev,
           [key]: e.target.checked,
@@ -301,7 +288,7 @@ export const InteractiveDemo: Story = {
               onChange={handleParentChange}
               ref={(el) => {
                 if (el) {
-                  el.indeterminate = _someChecked && !allChecked;
+                  el.indeterminate = SomeChecked && !allChecked;
                 }
               }}
             />
@@ -355,8 +342,7 @@ export const FormExamples: Story = {
     };
 
     const handleChange =
-      (field: keyof typeof formData) =>
-      (e: React.ChangeEvent<HTMLInputElement>) => {
+      (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData((prev) => ({
           ...prev,
           [field]: e.target.checked,
@@ -369,9 +355,7 @@ export const FormExamples: Story = {
         <GlassCard>
           <GlassCard.Header>
             <GlassCard.Title>Create Account</GlassCard.Title>
-            <GlassCard.Description>
-              Please review and accept our terms
-            </GlassCard.Description>
+            <GlassCard.Description>Please review and accept our terms</GlassCard.Description>
           </GlassCard.Header>
           <GlassCard.Content>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -393,12 +377,7 @@ export const FormExamples: Story = {
                   onChange={handleChange("marketing")}
                 />
               </div>
-              <GlassButton
-                type="submit"
-                variant="primary"
-                fullWidth
-                disabled={!formData.terms}
-              >
+              <GlassButton type="submit" variant="primary" fullWidth disabled={!formData.terms}>
                 Sign Up
               </GlassButton>
             </form>
@@ -409,9 +388,7 @@ export const FormExamples: Story = {
         <GlassCard>
           <GlassCard.Header>
             <GlassCard.Title>Notification Settings</GlassCard.Title>
-            <GlassCard.Description>
-              Choose what you want to be notified about
-            </GlassCard.Description>
+            <GlassCard.Description>Choose what you want to be notified about</GlassCard.Description>
           </GlassCard.Header>
           <GlassCard.Content>
             <div className="space-y-4">
@@ -455,17 +432,12 @@ export const RealWorldExamples: Story = {
           <GlassCard>
             <GlassCard.Header>
               <GlassCard.Title>Today's Tasks</GlassCard.Title>
-              <GlassCard.Description>
-                Track your daily progress
-              </GlassCard.Description>
+              <GlassCard.Description>Track your daily progress</GlassCard.Description>
             </GlassCard.Header>
             <GlassCard.Content>
               <div className="space-y-3">
                 <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
-                  <GlassCheckbox
-                    label="Complete project proposal"
-                    defaultChecked
-                  />
+                  <GlassCheckbox label="Complete project proposal" defaultChecked />
                   <span className="text-blue-900 text-sm">High</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-blue-100 dark:hover:bg-blue-100">
@@ -526,9 +498,7 @@ export const RealWorldExamples: Story = {
           <GlassCard.Content>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="space-y-3">
-                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-                  Storage
-                </h4>
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Storage</h4>
                 <div className="space-y-2">
                   <GlassCheckbox label="100GB Storage" defaultChecked />
                   <GlassCheckbox label="Unlimited Bandwidth" defaultChecked />
@@ -538,9 +508,7 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-                  Security
-                </h4>
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Security</h4>
                 <div className="space-y-2">
                   <GlassCheckbox label="SSL Certificate" defaultChecked />
                   <GlassCheckbox label="DDoS Protection" defaultChecked />
@@ -550,9 +518,7 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-                  Support
-                </h4>
+                <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Support</h4>
                 <div className="space-y-2">
                   <GlassCheckbox label="Email Support" defaultChecked />
                   <GlassCheckbox label="Live Chat" />
@@ -579,9 +545,7 @@ export const RealWorldExamples: Story = {
         <GlassCard>
           <GlassCard.Header>
             <GlassCard.Title>User Permissions</GlassCard.Title>
-            <GlassCard.Description>
-              Configure access levels for team members
-            </GlassCard.Description>
+            <GlassCard.Description>Configure access levels for team members</GlassCard.Description>
           </GlassCard.Header>
           <GlassCard.Content>
             <div className="space-y-4">
@@ -662,9 +626,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
-          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">
-            Dark Theme
-          </h3>
+          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">Dark Theme</h3>
           <div className="space-y-3">
             <GlassCheckbox label="Unchecked option" />
             <GlassCheckbox label="Checked option" defaultChecked />
@@ -697,10 +659,7 @@ export const AccessibilityShowcase: Story = {
               <GlassCheckbox label="First option (Tab here)" />
               <GlassCheckbox label="Second option (Tab again)" />
               <GlassCheckbox label="Third option (Space to toggle)" />
-              <GlassCheckbox
-                label="Disabled option (Skipped in tab order)"
-                disabled
-              />
+              <GlassCheckbox label="Disabled option (Skipped in tab order)" disabled />
             </form>
           </GlassCard.Content>
         </GlassCard>
@@ -711,22 +670,12 @@ export const AccessibilityShowcase: Story = {
         <GlassCard>
           <GlassCard.Content>
             <div className="space-y-3">
-              <GlassCheckbox
-                label="Option with description"
-                aria-describedby="option1-desc"
-              />
-              <p
-                id="option1-desc"
-                className="pl-8 text-blue-900 text-sm dark:text-blue-900"
-              >
+              <GlassCheckbox label="Option with description" aria-describedby="option1-desc" />
+              <p id="option1-desc" className="pl-8 text-blue-900 text-sm dark:text-blue-900">
                 This checkbox has additional context for screen readers.
               </p>
 
-              <GlassCheckbox
-                label="Required option"
-                required
-                aria-required="true"
-              />
+              <GlassCheckbox label="Required option" required aria-required="true" />
 
               <GlassCheckbox aria-label="Option without visible label" />
               <p className="pl-8 text-blue-900 text-sm dark:text-blue-900">
@@ -775,23 +724,14 @@ export const AccessibilityShowcase: Story = {
                   aria-describedby="terms-error"
                   className="border-blue-500"
                 />
-                <p
-                  id="terms-error"
-                  className="pl-8 text-blue-900 text-sm dark:text-blue-900"
-                >
+                <p id="terms-error" className="pl-8 text-blue-900 text-sm dark:text-blue-900">
                   You must accept the terms to continue.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <GlassCheckbox
-                  label="Receive marketing emails"
-                  aria-describedby="marketing-help"
-                />
-                <p
-                  id="marketing-help"
-                  className="pl-8 text-blue-900 text-sm dark:text-blue-900"
-                >
+                <GlassCheckbox label="Receive marketing emails" aria-describedby="marketing-help" />
+                <p id="marketing-help" className="pl-8 text-blue-900 text-sm dark:text-blue-900">
                   You can unsubscribe at any time.
                 </p>
               </div>
@@ -816,31 +756,15 @@ export const CustomStyling: Story = {
             </GlassCard.Header>
             <GlassCard.Content>
               <div className="space-y-3">
-                <GlassCheckbox
-                  label="Primary Blue"
-                  className="accent-blue-500"
-                  defaultChecked
-                />
-                <GlassCheckbox
-                  label="Success Green"
-                  className="accent-green-500"
-                  defaultChecked
-                />
+                <GlassCheckbox label="Primary Blue" className="accent-blue-500" defaultChecked />
+                <GlassCheckbox label="Success Green" className="accent-green-500" defaultChecked />
                 <GlassCheckbox
                   label="Warning Yellow"
                   className="accent-yellow-500"
                   defaultChecked
                 />
-                <GlassCheckbox
-                  label="Danger Red"
-                  className="accent-red-500"
-                  defaultChecked
-                />
-                <GlassCheckbox
-                  label="Purple"
-                  className="accent-purple-500"
-                  defaultChecked
-                />
+                <GlassCheckbox label="Danger Red" className="accent-red-500" defaultChecked />
+                <GlassCheckbox label="Purple" className="accent-purple-500" defaultChecked />
               </div>
             </GlassCard.Content>
           </GlassCard>
@@ -851,21 +775,9 @@ export const CustomStyling: Story = {
             </GlassCard.Header>
             <GlassCard.Content>
               <div className="space-y-3">
-                <GlassCheckbox
-                  label="Rounded"
-                  className="rounded-full"
-                  defaultChecked
-                />
-                <GlassCheckbox
-                  label="No Rounded"
-                  className="rounded-none"
-                  defaultChecked
-                />
-                <GlassCheckbox
-                  label="Thick Border"
-                  className="border-4"
-                  defaultChecked
-                />
+                <GlassCheckbox label="Rounded" className="rounded-full" defaultChecked />
+                <GlassCheckbox label="No Rounded" className="rounded-none" defaultChecked />
+                <GlassCheckbox label="Thick Border" className="border-4" defaultChecked />
                 <GlassCheckbox
                   label="Large with Shadow"
                   className="scale-125 shadow-lg"

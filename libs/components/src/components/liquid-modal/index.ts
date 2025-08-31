@@ -1,13 +1,13 @@
-export { 
+export {
   LiquidModal,
-  LiquidModalTrigger,
   LiquidModalContent,
-  LiquidModalHeader,
-  LiquidModalTitle,
   LiquidModalDescription,
   LiquidModalFooter,
+  LiquidModalHeader,
+  type LiquidModalProps,
+  LiquidModalTitle,
+  LiquidModalTrigger,
   liquidModalVariants,
   modalContentVariants,
   overlayVariants,
-  type LiquidModalProps 
 } from "./liquid-modal";

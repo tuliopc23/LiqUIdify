@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useEffect, useState } from "react";
-import {
-  DotsSpinner,
-  GlassSpinner,
-  PulseSpinner,
-  RingSpinner,
-  WaveSpinner,
-} from "./glass-spinner";
+import { DotsSpinner, GlassSpinner, PulseSpinner, RingSpinner, WaveSpinner } from "./glass-spinner";
 
 const meta = {
   title: "Components/GlassSpinner",
@@ -36,15 +30,7 @@ It includes multiple spinner variants and customization options for different us
     variant: {
       description: "Visual variant of the spinner",
       control: { type: "select" },
-      options: [
-        "default",
-        "primary",
-        "secondary",
-        "success",
-        "warning",
-        "error",
-        "glass",
-      ],
+      options: ["default", "primary", "secondary", "success", "warning", "error", "glass"],
     },
     size: {
       description: "Size of the spinner",
@@ -98,39 +84,27 @@ export const Variants: Story = {
     <div className="grid grid-cols-3 gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner variant="default" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Default
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Default</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="primary" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Primary
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Primary</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="secondary" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Secondary
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Secondary</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="success" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Success
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Success</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="warning" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Warning
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Warning</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner variant="error" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Error
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Error</p>
       </div>
       <div className="space-y-2 rounded-lg bg-blue-100 p-4 text-center">
         <GlassSpinner variant="glass" />
@@ -146,39 +120,27 @@ export const Sizes: Story = {
     <div className="flex items-center gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner size="xs" />
-        <p className="text-blue-900 text-xs dark:text-blue-900">
-          XS
-        </p>
+        <p className="text-blue-900 text-xs dark:text-blue-900">XS</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="sm" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Small
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Small</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="md" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Medium
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Medium</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="lg" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Large
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Large</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="xl" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          XL
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">XL</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner size="2xl" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          2XL
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">2XL</p>
       </div>
     </div>
   ),
@@ -190,21 +152,15 @@ export const Speeds: Story = {
     <div className="flex gap-8">
       <div className="space-y-2 text-center">
         <GlassSpinner speed="slow" size="lg" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Slow
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Slow</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="normal" size="lg" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Normal
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Normal</p>
       </div>
       <div className="space-y-2 text-center">
         <GlassSpinner speed="fast" size="lg" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Fast
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Fast</p>
       </div>
     </div>
   ),
@@ -215,20 +171,12 @@ export const WithLabels: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-2">
-        <GlassSpinner
-          showLabel
-          label="Loading content..."
-          orientation="horizontal"
-        />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Horizontal orientation
-        </p>
+        <GlassSpinner showLabel label="Loading content..." orientation="horizontal" />
+        <p className="text-blue-900 text-sm dark:text-blue-900">Horizontal orientation</p>
       </div>
       <div className="space-y-2">
         <GlassSpinner showLabel label="Please wait..." orientation="vertical" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Vertical orientation
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Vertical orientation</p>
       </div>
     </div>
   ),
@@ -366,21 +314,15 @@ export const LoadingCards: Story = {
     <div className="grid grid-cols-3 gap-4">
       <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <GlassSpinner variant="primary" size="lg" />
-        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
-          Loading posts...
-        </p>
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">Loading posts...</p>
       </div>
       <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <PulseSpinner />
-        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
-          Fetching data...
-        </p>
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">Fetching data...</p>
       </div>
       <div className="rounded-lg bg-blue-100 p-6 text-center dark:bg-blue-100">
         <WaveSpinner />
-        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">
-          Processing...
-        </p>
+        <p className="mt-4 text-blue-900 text-sm dark:text-blue-900">Processing...</p>
       </div>
     </div>
   ),
@@ -404,12 +346,7 @@ export const DataTableLoading: Story = {
           </div>
           {loading ? (
             <div className="p-16 text-center">
-              <GlassSpinner
-                size="xl"
-                variant="primary"
-                showLabel
-                label="Loading users..."
-              />
+              <GlassSpinner size="xl" variant="primary" showLabel label="Loading users..." />
             </div>
           ) : (
             <table className="w-full">
@@ -492,9 +429,7 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-blue-100 p-6">
-        <h3 className="mb-4 font-semibold text-blue-900">
-          Dark Theme
-        </h3>
+        <h3 className="mb-4 font-semibold text-blue-900">Dark Theme</h3>
         <div className="flex gap-4">
           <GlassSpinner variant="primary" />
           <GlassSpinner variant="secondary" />
@@ -532,9 +467,7 @@ export const CustomStyling: Story = {
 
       <div className="space-y-4 text-center">
         <div className="rainbow-spinner inline-block h-12 w-12 rounded-full border-4" />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Custom Rainbow Spinner
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Custom Rainbow Spinner</p>
       </div>
 
       <div className="space-y-4 text-center">
@@ -542,9 +475,7 @@ export const CustomStyling: Story = {
           size="xl"
           className="!border-4 !border-gradient-to-r !from-purple-500 !to-pink-500"
         />
-        <p className="text-blue-900 text-sm dark:text-blue-900">
-          Gradient Border Spinner
-        </p>
+        <p className="text-blue-900 text-sm dark:text-blue-900">Gradient Border Spinner</p>
       </div>
     </div>
   ),

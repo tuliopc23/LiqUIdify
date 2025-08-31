@@ -1,5 +1,5 @@
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { PRODUCTION_COMPONENTS } from "./production-stories.config.js";
 
 // ---------------------------------------------------------------------------
@@ -26,8 +26,7 @@ function buildProductionStoryGlobs() {
   const flatList = Object.values(PRODUCTION_COMPONENTS).flat();
 
   return flatList.map(
-    (componentName) =>
-      `${basePath}/${componentName}/**/*.stories.@(js|jsx|ts|tsx|mdx)`,
+    (componentName) => `${basePath}/${componentName}/**/*.stories.@(js|jsx|ts|tsx|mdx)`
   );
 }
 
@@ -60,8 +59,7 @@ const config = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
   },
   staticDirs: ["../public"],
@@ -115,16 +113,11 @@ const config = {
           ...config.build?.rollupOptions,
           onwarn(warning, warn) {
             // Suppress "use client" directive warnings
-            if (
-              warning.message &&
-              warning.message.includes(
-                "Module level directives cause errors when bundled",
-              )
-            ) {
+            if (warning.message?.includes("Module level directives cause errors when bundled")) {
               return;
             }
             // Suppress "use client" warnings
-            if (warning.message && warning.message.includes('"use client"')) {
+            if (warning.message?.includes('"use client"')) {
               return;
             }
             warn(warning);
@@ -159,7 +152,7 @@ const config = {
       config.define = {
         ...config.define,
         "process.env.NODE_ENV": JSON.stringify(
-          configType === "PRODUCTION" ? "production" : "development",
+          configType === "PRODUCTION" ? "production" : "development"
         ),
       };
 

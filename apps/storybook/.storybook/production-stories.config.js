@@ -1,13 +1,10 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Compute absolute path to the components directory relative to this config file
 const baseDir = path.dirname(fileURLToPath(import.meta.url));
-const componentsDir = path.resolve(
-  baseDir,
-  "../../../libs/components/src/components",
-);
+const componentsDir = path.resolve(baseDir, "../../../libs/components/src/components");
 
 function safeReadDir(dir) {
   try {

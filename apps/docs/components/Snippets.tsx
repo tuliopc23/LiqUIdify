@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { SnippetPreview } from "./SnippetPreview";
 import { Tabs } from "./Tabs";
 
@@ -189,9 +189,7 @@ export function Example() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-              Getting Started
-            </h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Getting Started</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Build beautiful interfaces with liquid glass components
             </p>
@@ -243,9 +241,7 @@ export function Example() {
           placeholder="Enter your email"
           className="w-full px-4 py-2 bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          We'll never share your email
-        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">We'll never share your email</p>
       </div>
     </SnippetPreview>
   );
@@ -296,9 +292,7 @@ export function Example() {
               </svg>
             </div>
             <div className="flex-1">
-              <h4 className="font-medium text-gray-900 dark:text-white text-sm">
-                Success!
-              </h4>
+              <h4 className="font-medium text-gray-900 dark:text-white text-sm">Success!</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Your changes have been saved.
               </p>

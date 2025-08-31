@@ -1,50 +1,44 @@
 "use client";
 
-import * as React from "react";
-import { useState, useCallback, useRef, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { LiquidGlass } from "../liquid-glass";
 
-const liquidAccordionVariants = cva(
-  "w-full space-y-2",
-  {
-    variants: {
-      variant: {
-        default: "",
-        card: "space-y-0 overflow-hidden rounded-lg border border-white/20",
-        minimal: "space-y-1",
-        separated: "space-y-4"
-      },
-      size: {
-        sm: "text-sm",
-        md: "",
-        lg: "text-lg"
-      }
+const liquidAccordionVariants = cva("w-full space-y-2", {
+  variants: {
+    variant: {
+      default: "",
+      card: "space-y-0 overflow-hidden rounded-lg border border-white/20",
+      minimal: "space-y-1",
+      separated: "space-y-4",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md"
-    }
-  }
-);
+    size: {
+      sm: "text-sm",
+      md: "",
+      lg: "text-lg",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
-const accordionItemVariants = cva(
-  "overflow-hidden transition-all duration-200",
-  {
-    variants: {
-      variant: {
-        default: "rounded-lg border border-white/20",
-        card: "border-b border-white/10 last:border-b-0",
-        minimal: "border-b border-white/5 last:border-b-0",
-        separated: "rounded-lg border border-white/20 shadow-sm"
-      }
+const accordionItemVariants = cva("overflow-hidden transition-all duration-200", {
+  variants: {
+    variant: {
+      default: "rounded-lg border border-white/20",
+      card: "border-b border-white/10 last:border-b-0",
+      minimal: "border-b border-white/5 last:border-b-0",
+      separated: "rounded-lg border border-white/20 shadow-sm",
     },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 const accordionTriggerVariants = cva(
   "flex w-full items-center justify-between p-4 font-medium text-left text-white transition-colors hover:bg-white/5 focus:bg-white/5 focus:outline-none focus:ring-2 focus:ring-blue-500/50",
@@ -54,48 +48,45 @@ const accordionTriggerVariants = cva(
         default: "",
         card: "border-0",
         minimal: "px-0 py-3",
-        separated: ""
+        separated: "",
       },
       size: {
         sm: "p-3 text-sm",
         md: "p-4",
-        lg: "p-5 text-lg"
+        lg: "p-5 text-lg",
       },
       disabled: {
         true: "opacity-50 cursor-not-allowed hover:bg-transparent focus:bg-transparent",
-        false: ""
-      }
+        false: "",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "md",
-      disabled: false
-    }
+      disabled: false,
+    },
   }
 );
 
-const accordionContentVariants = cva(
-  "overflow-hidden text-white/80 transition-all duration-200",
-  {
-    variants: {
-      variant: {
-        default: "px-4 pb-4",
-        card: "px-4 pb-4",
-        minimal: "pb-3",
-        separated: "px-4 pb-4"
-      },
-      size: {
-        sm: "px-3 pb-3 text-sm",
-        md: "px-4 pb-4",
-        lg: "px-5 pb-5 text-lg"
-      }
+const accordionContentVariants = cva("overflow-hidden text-white/80 transition-all duration-200", {
+  variants: {
+    variant: {
+      default: "px-4 pb-4",
+      card: "px-4 pb-4",
+      minimal: "pb-3",
+      separated: "px-4 pb-4",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md"
-    }
-  }
-);
+    size: {
+      sm: "px-3 pb-3 text-sm",
+      md: "px-4 pb-4",
+      lg: "px-5 pb-5 text-lg",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
 interface AccordionItem {
   key: string;
@@ -106,7 +97,9 @@ interface AccordionItem {
   extra?: React.ReactNode;
 }
 
-interface LiquidAccordionProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidAccordionVariants> {
+interface LiquidAccordionProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidAccordionVariants> {
   items?: AccordionItem[];
   activeKey?: string | string[];
   defaultActiveKey?: string | string[];
@@ -131,24 +124,27 @@ interface LiquidAccordionItemProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 export const LiquidAccordion = React.forwardRef<HTMLDivElement, LiquidAccordionProps>(
-  ({
-    className,
-    variant,
-    size,
-    items,
-    activeKey,
-    defaultActiveKey,
-    onChange,
-    accordion = false,
-    collapsible = true,
-    bordered = true,
-    expandIcon,
-    expandIconPosition = "right",
-    ghost = false,
-    destroyInactivePanel = false,
-    children,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      items,
+      activeKey,
+      defaultActiveKey,
+      onChange,
+      accordion = false,
+      collapsible = true,
+      bordered = true,
+      expandIcon,
+      expandIconPosition = "right",
+      ghost = false,
+      destroyInactivePanel = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     // State for controlled/uncontrolled mode
     const [internalActiveKey, setInternalActiveKey] = useState<string | string[]>(() => {
       if (activeKey !== undefined) return activeKey;
@@ -159,46 +155,58 @@ export const LiquidAccordion = React.forwardRef<HTMLDivElement, LiquidAccordionP
     const currentActiveKey = activeKey !== undefined ? activeKey : internalActiveKey;
 
     // Handle item toggle
-    const handleItemToggle = useCallback((key: string) => {
-      let newActiveKey: string | string[];
+    const handleItemToggle = useCallback(
+      (key: string) => {
+        let newActiveKey: string | string[];
 
-      if (accordion) {
-        // Single item mode - only one can be open
-        const currentKey = currentActiveKey as string;
-        if (currentKey === key && collapsible) {
-          newActiveKey = "";
+        if (accordion) {
+          // Single item mode - only one can be open
+          const currentKey = currentActiveKey as string;
+          if (currentKey === key && collapsible) {
+            newActiveKey = "";
+          } else {
+            newActiveKey = key;
+          }
         } else {
-          newActiveKey = key;
+          // Multiple items mode
+          const currentKeys = Array.isArray(currentActiveKey) ? currentActiveKey : [];
+          if (currentKeys.includes(key)) {
+            newActiveKey = currentKeys.filter((k) => k !== key);
+          } else {
+            newActiveKey = [...currentKeys, key];
+          }
         }
-      } else {
-        // Multiple items mode
-        const currentKeys = Array.isArray(currentActiveKey) ? currentActiveKey : [];
-        if (currentKeys.includes(key)) {
-          newActiveKey = currentKeys.filter(k => k !== key);
-        } else {
-          newActiveKey = [...currentKeys, key];
-        }
-      }
 
-      if (activeKey === undefined) {
-        setInternalActiveKey(newActiveKey);
-      }
-      onChange?.(newActiveKey);
-    }, [accordion, collapsible, currentActiveKey, activeKey, onChange]);
+        if (activeKey === undefined) {
+          setInternalActiveKey(newActiveKey);
+        }
+        onChange?.(newActiveKey);
+      },
+      [accordion, collapsible, currentActiveKey, activeKey, onChange]
+    );
 
     // Check if item is active
-    const isItemActive = useCallback((key: string) => {
-      if (accordion) {
-        return currentActiveKey === key;
-      }
-      return Array.isArray(currentActiveKey) && currentActiveKey.includes(key);
-    }, [accordion, currentActiveKey]);
+    const isItemActive = useCallback(
+      (key: string) => {
+        if (accordion) {
+          return currentActiveKey === key;
+        }
+        return Array.isArray(currentActiveKey) && currentActiveKey.includes(key);
+      },
+      [accordion, currentActiveKey]
+    );
 
     // Default expand icon
-    const defaultExpandIcon = ({ isActive, disabled }: { isActive: boolean; disabled?: boolean }) => (
+    const defaultExpandIcon = ({
+      isActive,
+      disabled,
+    }: {
+      isActive: boolean;
+      disabled?: boolean;
+    }) => (
       <svg
         width="16"
-        height="16" 
+        height="16"
         viewBox="0 0 16 16"
         fill="currentColor"
         className={cn(
@@ -207,7 +215,10 @@ export const LiquidAccordion = React.forwardRef<HTMLDivElement, LiquidAccordionP
           disabled && "opacity-50"
         )}
       >
-        <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        <path
+          fillRule="evenodd"
+          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+        />
       </svg>
     );
 
@@ -284,16 +295,10 @@ const useAccordionContext = () => {
 
 // Individual accordion item component
 export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccordionItemProps>(
-  ({
-    className,
-    title,
-    itemKey,
-    disabled = false,
-    extra,
-    showArrow = true,
-    children,
-    ...props
-  }, ref) => {
+  (
+    { className, title, itemKey, disabled = false, extra, showArrow = true, children, ...props },
+    ref
+  ) => {
     const context = useAccordionContext();
     const {
       isItemActive,
@@ -303,7 +308,7 @@ export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccord
       expandIcon,
       expandIconPosition,
       destroyInactivePanel,
-      bordered
+      bordered,
     } = context;
 
     const isActive = isItemActive(itemKey);
@@ -315,7 +320,7 @@ export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccord
       if (contentRef.current) {
         setContentHeight(contentRef.current.scrollHeight);
       }
-    }, [children, isActive]);
+    }, []);
 
     const handleToggle = useCallback(() => {
       if (!disabled) {
@@ -323,31 +328,27 @@ export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccord
       }
     }, [disabled, itemKey, onItemToggle]);
 
-    const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        handleToggle();
-      }
-    }, [handleToggle]);
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleToggle();
+        }
+      },
+      [handleToggle]
+    );
 
     return (
       <LiquidGlass
         ref={ref}
         variant="card"
         intensity="subtle"
-        className={cn(
-          accordionItemVariants({ variant }),
-          !bordered && "border-0",
-          className
-        )}
+        className={cn(accordionItemVariants({ variant }), !bordered && "border-0", className)}
         {...props}
       >
         {/* Trigger */}
         <button
-          className={cn(
-            accordionTriggerVariants({ variant, size, disabled }),
-            "group"
-          )}
+          className={cn(accordionTriggerVariants({ variant, size, disabled }), "group")}
           onClick={handleToggle}
           onKeyDown={handleKeyDown}
           disabled={disabled}
@@ -357,28 +358,18 @@ export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccord
         >
           {/* Left expand icon */}
           {showArrow && expandIconPosition === "left" && (
-            <div className="mr-3 flex-shrink-0">
-              {expandIcon({ isActive, disabled })}
-            </div>
+            <div className="mr-3 flex-shrink-0">{expandIcon({ isActive, disabled })}</div>
           )}
 
           {/* Title */}
-          <div className="flex-1 text-left">
-            {title}
-          </div>
+          <div className="flex-1 text-left">{title}</div>
 
           {/* Extra content */}
-          {extra && (
-            <div className="ml-2 flex-shrink-0 text-white/60">
-              {extra}
-            </div>
-          )}
+          {extra && <div className="ml-2 flex-shrink-0 text-white/60">{extra}</div>}
 
           {/* Right expand icon */}
           {showArrow && expandIconPosition === "right" && (
-            <div className="ml-3 flex-shrink-0">
-              {expandIcon({ isActive, disabled })}
-            </div>
+            <div className="ml-3 flex-shrink-0">{expandIcon({ isActive, disabled })}</div>
           )}
         </button>
 
@@ -393,10 +384,7 @@ export const LiquidAccordionItem = React.forwardRef<HTMLDivElement, LiquidAccord
           aria-labelledby={`accordion-trigger-${itemKey}`}
           role="region"
         >
-          <div
-            ref={contentRef}
-            className={accordionContentVariants({ variant, size })}
-          >
+          <div ref={contentRef} className={accordionContentVariants({ variant, size })}>
             {destroyInactivePanel && !isActive ? null : children}
           </div>
         </div>
@@ -416,13 +404,9 @@ interface LiquidAccordionHeaderProps extends React.HTMLAttributes<HTMLDivElement
 export const LiquidAccordionHeader = React.forwardRef<HTMLDivElement, LiquidAccordionHeaderProps>(
   ({ className, children, level = 3, ...props }, ref) => {
     const Component = `h${level}` as keyof JSX.IntrinsicElements;
-    
+
     return (
-      <Component
-        ref={ref}
-        className={cn("font-medium text-white", className)}
-        {...props}
-      >
+      <Component ref={ref} className={cn("font-medium text-white", className)} {...props}>
         {children}
       </Component>
     );
@@ -438,11 +422,7 @@ interface LiquidAccordionContentProps extends React.HTMLAttributes<HTMLDivElemen
 
 export const LiquidAccordionContent = React.forwardRef<HTMLDivElement, LiquidAccordionContentProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("text-white/80 leading-relaxed", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("text-white/80 leading-relaxed", className)} {...props}>
       {children}
     </div>
   )
@@ -450,12 +430,12 @@ export const LiquidAccordionContent = React.forwardRef<HTMLDivElement, LiquidAcc
 
 LiquidAccordionContent.displayName = "LiquidAccordionContent";
 
-export { 
+export {
   liquidAccordionVariants,
   accordionItemVariants,
   accordionTriggerVariants,
   accordionContentVariants,
   type LiquidAccordionProps,
   type LiquidAccordionItemProps,
-  type AccordionItem
+  type AccordionItem,
 };

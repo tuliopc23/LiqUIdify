@@ -8,8 +8,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "A table component with glassmorphic styling for displaying structured data.",
+        component: "A table component with glassmorphic styling for displaying structured data.",
       },
     },
   },
@@ -43,7 +42,7 @@ interface Product {
 }
 
 // Sample data
-const users: Array<User> = [
+const users: User[] = [
   {
     id: 1,
     name: "John Doe",
@@ -81,7 +80,7 @@ const users: Array<User> = [
   },
 ];
 
-const products: Array<Product> = [
+const products: Product[] = [
   {
     id: 1,
     name: "Laptop Pro",
@@ -146,9 +145,7 @@ export const WithCustomRendering: Story = {
         render: (value) => (
           <span
             className={`rounded-full px-2 py-1 font-medium text-xs ${
-              value === "active"
-                ? "bg-blue-500/20 text-blue-900"
-                : "bg-blue-500/20 text-blue-900"
+              value === "active" ? "bg-blue-500/20 text-blue-900" : "bg-blue-500/20 text-blue-900"
             }`}
           >
             {value}
@@ -158,9 +155,7 @@ export const WithCustomRendering: Story = {
       {
         key: "role",
         header: "Role",
-        render: (value) => (
-          <span className="font-medium text-primary">{value}</span>
-        ),
+        render: (value) => <span className="font-medium text-primary">{value}</span>,
       },
     ],
   },
@@ -176,19 +171,13 @@ export const ProductTable: Story = {
       {
         key: "price",
         header: "Price",
-        render: (value) => (
-          <span className="font-mono">${value.toFixed(2)}</span>
-        ),
+        render: (value) => <span className="font-mono">${value.toFixed(2)}</span>,
       },
       {
         key: "stock",
         header: "Stock",
         render: (value) => (
-          <span
-            className={`font-medium ${
-              value < 10 ? "text-blue-900" : "text-blue-900"
-            }`}
-          >
+          <span className={`font-medium ${value < 10 ? "text-blue-900" : "text-blue-900"}`}>
             {value} units
           </span>
         ),
@@ -257,9 +246,7 @@ export const StyledTable: Story = {
         key: "role",
         header: "Role",
         render: (value) => (
-          <span className="rounded-lg bg-primary/10 px-3 py-1 text-primary text-sm">
-            {value}
-          </span>
+          <span className="rounded-lg bg-primary/10 px-3 py-1 text-primary text-sm">{value}</span>
         ),
       },
       {

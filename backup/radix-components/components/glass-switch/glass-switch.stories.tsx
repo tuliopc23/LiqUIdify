@@ -104,15 +104,9 @@ export const Controlled: Story = {
 
     return (
       <div className="space-y-4">
-        <GlassSwitch
-          {...args}
-          checked={checked}
-          onChange={setChecked}
-          label="Toggle me"
-        />
+        <GlassSwitch {...args} checked={checked} onChange={setChecked} label="Toggle me" />
         <p className="text-blue-900 text-sm dark:text-blue-900">
-          Switch is:{" "}
-          <span className="font-semibold">{checked ? "ON" : "OFF"}</span>
+          Switch is: <span className="font-semibold">{checked ? "ON" : "OFF"}</span>
         </p>
       </div>
     );
@@ -203,9 +197,7 @@ export const InteractiveDemo: Story = {
     return (
       <div
         className={`w-96 rounded-lg p-6 transition-colors ${
-          isDarkMode
-            ? "bg-blue-100 text-blue-900"
-            : "bg-blue-100 text-blue-900"
+          isDarkMode ? "bg-blue-100 text-blue-900" : "bg-blue-100 text-blue-900"
         }`}
       >
         <h3 className="mb-6 font-semibold text-lg">System Settings</h3>
@@ -213,11 +205,7 @@ export const InteractiveDemo: Story = {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {isDarkMode ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
+              {isDarkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
               <span className="font-medium">Theme</span>
             </div>
             <GlassSwitch checked={isDarkMode} onChange={setIsDarkMode} />
@@ -225,41 +213,26 @@ export const InteractiveDemo: Story = {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {isNotificationsOn ? (
-                <Bell className="h-5 w-5" />
-              ) : (
-                <BellOff className="h-5 w-5" />
-              )}
+              {isNotificationsOn ? <Bell className="h-5 w-5" /> : <BellOff className="h-5 w-5" />}
               <span className="font-medium">Notifications</span>
             </div>
-            <GlassSwitch
-              checked={isNotificationsOn}
-              onChange={setIsNotificationsOn}
-            />
+            <GlassSwitch checked={isNotificationsOn} onChange={setIsNotificationsOn} />
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {isWifiOn ? (
-                <Wifi className="h-5 w-5" />
-              ) : (
-                <WifiOff className="h-5 w-5" />
-              )}
+              {isWifiOn ? <Wifi className="h-5 w-5" /> : <WifiOff className="h-5 w-5" />}
               <span className="font-medium">Wi-Fi</span>
             </div>
             <GlassSwitch checked={isWifiOn} onChange={setIsWifiOn} />
           </div>
         </div>
 
-        <div
-          className={`mt-6 rounded-lg p-4 ${
-            isDarkMode ? "bg-blue-100" : "bg-blue-100"
-          }`}
-        >
+        <div className={`mt-6 rounded-lg p-4 ${isDarkMode ? "bg-blue-100" : "bg-blue-100"}`}>
           <p className="text-sm opacity-75">
-            {isDarkMode ? "Dark mode is active" : "Light mode is active"}.
-            Notifications are {isNotificationsOn ? "enabled" : "disabled"}.
-            Wi-Fi is {isWifiOn ? "connected" : "disconnected"}.
+            {isDarkMode ? "Dark mode is active" : "Light mode is active"}. Notifications are{" "}
+            {isNotificationsOn ? "enabled" : "disabled"}. Wi-Fi is{" "}
+            {isWifiOn ? "connected" : "disconnected"}.
           </p>
         </div>
       </div>
@@ -295,9 +268,7 @@ export const FormIntegration: Story = {
 
         <div className="space-y-4">
           <div className="space-y-3">
-            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-              Notifications
-            </h4>
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Notifications</h4>
             <GlassSwitch
               checked={formData.emailNotifications}
               onChange={(checked) => updateField("emailNotifications", checked)}
@@ -316,9 +287,7 @@ export const FormIntegration: Story = {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-              Privacy
-            </h4>
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Privacy</h4>
             <GlassSwitch
               checked={formData.dataSharing}
               onChange={(checked) => updateField("dataSharing", checked)}
@@ -327,9 +296,7 @@ export const FormIntegration: Story = {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">
-              Security
-            </h4>
+            <h4 className="font-medium text-blue-900 text-sm dark:text-blue-900">Security</h4>
             <GlassSwitch
               checked={formData.twoFactor}
               onChange={(checked) => updateField("twoFactor", checked)}
@@ -360,9 +327,7 @@ export const StatusIndicators: Story = {
 
     return (
       <div className="space-y-6">
-        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">
-          Quick Settings
-        </h3>
+        <h3 className="font-semibold text-blue-900 text-lg dark:text-blue-900">Quick Settings</h3>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
@@ -375,17 +340,13 @@ export const StatusIndicators: Story = {
               <div>
                 <p className="font-medium">Profile Visibility</p>
                 <p className="text-blue-900 text-sm">
-                  {status.visibility
-                    ? "Visible to everyone"
-                    : "Hidden from search"}
+                  {status.visibility ? "Visible to everyone" : "Hidden from search"}
                 </p>
               </div>
             </div>
             <GlassSwitch
               checked={status.visibility}
-              onChange={(checked) =>
-                setStatus({ ...status, visibility: checked })
-              }
+              onChange={(checked) => setStatus({ ...status, visibility: checked })}
             />
           </div>
 
@@ -419,17 +380,13 @@ export const StatusIndicators: Story = {
               <div>
                 <p className="font-medium">Security Mode</p>
                 <p className="text-blue-900 text-sm">
-                  {status.security
-                    ? "Enhanced security active"
-                    : "Standard security"}
+                  {status.security ? "Enhanced security active" : "Standard security"}
                 </p>
               </div>
             </div>
             <GlassSwitch
               checked={status.security}
-              onChange={(checked) =>
-                setStatus({ ...status, security: checked })
-              }
+              onChange={(checked) => setStatus({ ...status, security: checked })}
             />
           </div>
         </div>
@@ -459,10 +416,7 @@ export const AccessibilityDemo: Story = {
               label="Screen reader optimizations"
               aria-describedby="screen-reader-desc"
             />
-            <p
-              id="screen-reader-desc"
-              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
-            >
+            <p id="screen-reader-desc" className="ml-9 text-blue-900 text-sm dark:text-blue-900">
               Optimize interface for screen reader users
             </p>
 
@@ -472,10 +426,7 @@ export const AccessibilityDemo: Story = {
               label="High contrast mode"
               aria-describedby="high-contrast-desc"
             />
-            <p
-              id="high-contrast-desc"
-              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
-            >
+            <p id="high-contrast-desc" className="ml-9 text-blue-900 text-sm dark:text-blue-900">
               Increase color contrast for better visibility
             </p>
 
@@ -485,10 +436,7 @@ export const AccessibilityDemo: Story = {
               label="Reduce motion"
               aria-describedby="reduced-motion-desc"
             />
-            <p
-              id="reduced-motion-desc"
-              className="ml-9 text-blue-900 text-sm dark:text-blue-900"
-            >
+            <p id="reduced-motion-desc" className="ml-9 text-blue-900 text-sm dark:text-blue-900">
               Minimize animations and transitions
             </p>
           </div>
@@ -525,15 +473,9 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="rounded-lg bg-blue-100 p-6">
-          <h3 className="mb-4 font-semibold text-blue-900 text-lg">
-            Light Theme
-          </h3>
+          <h3 className="mb-4 font-semibold text-blue-900 text-lg">Light Theme</h3>
           <div className="space-y-3">
-            <GlassSwitch
-              checked={lightChecked}
-              onChange={setLightChecked}
-              label="Enable feature"
-            />
+            <GlassSwitch checked={lightChecked} onChange={setLightChecked} label="Enable feature" />
             <GlassSwitch
               checked={!lightChecked}
               onChange={(checked) => setLightChecked(!checked)}
@@ -543,15 +485,9 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="rounded-lg bg-blue-100 p-6">
-          <h3 className="mb-4 font-semibold text-lg text-blue-900">
-            Dark Theme
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Theme</h3>
           <div className="space-y-3">
-            <GlassSwitch
-              checked={darkChecked}
-              onChange={setDarkChecked}
-              label="Enable feature"
-            />
+            <GlassSwitch checked={darkChecked} onChange={setDarkChecked} label="Enable feature" />
             <GlassSwitch
               checked={!darkChecked}
               onChange={(checked) => setDarkChecked(!checked)}

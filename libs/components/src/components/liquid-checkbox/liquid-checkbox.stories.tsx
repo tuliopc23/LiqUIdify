@@ -9,7 +9,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A liquid glass checkbox component with card variants, indeterminate state, and comprehensive form states.",
+        component:
+          "A liquid glass checkbox component with card variants, indeterminate state, and comprehensive form states.",
       },
     },
   },
@@ -17,29 +18,29 @@ const meta = {
     variant: {
       control: "select",
       options: ["default", "card"],
-      description: "The visual style variant of the checkbox"
+      description: "The visual style variant of the checkbox",
     },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
-      description: "The size of the checkbox"
+      description: "The size of the checkbox",
     },
     checked: {
       control: "boolean",
-      description: "Whether the checkbox is checked"
+      description: "Whether the checkbox is checked",
     },
     indeterminate: {
       control: "boolean",
-      description: "Whether the checkbox is in indeterminate state"
+      description: "Whether the checkbox is in indeterminate state",
     },
     disabled: {
       control: "boolean",
-      description: "Disable the checkbox"
+      description: "Disable the checkbox",
     },
     error: {
       control: "boolean",
-      description: "Show error state"
-    }
+      description: "Show error state",
+    },
   },
   args: {
     label: "Checkbox Label",
@@ -75,13 +76,13 @@ export const Variants: Story = {
       <div className="max-w-2xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Checkbox Variants</h2>
         <div className="space-y-6">
-          <LiquidCheckbox 
-            variant="default" 
+          <LiquidCheckbox
+            variant="default"
             label="Default Checkbox"
             description="Standard checkbox with minimal styling"
           />
-          <LiquidCheckbox 
-            variant="card" 
+          <LiquidCheckbox
+            variant="card"
             label="Card Checkbox"
             description="Enhanced checkbox with card-like glass background"
           />
@@ -100,18 +101,18 @@ export const Sizes: Story = {
       <div className="max-w-2xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Checkbox Sizes</h2>
         <div className="space-y-6">
-          <LiquidCheckbox 
-            size="sm" 
+          <LiquidCheckbox
+            size="sm"
             label="Small Checkbox"
             description="Compact size for dense layouts"
           />
-          <LiquidCheckbox 
-            size="md" 
+          <LiquidCheckbox
+            size="md"
             label="Medium Checkbox"
             description="Default size for most use cases"
           />
-          <LiquidCheckbox 
-            size="lg" 
+          <LiquidCheckbox
+            size="lg"
             label="Large Checkbox"
             description="Larger size for emphasis or accessibility"
           />
@@ -134,43 +135,39 @@ export const States: Story = {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Checkbox States</h2>
           <div className="space-y-6">
-            <LiquidCheckbox 
+            <LiquidCheckbox
               label="Unchecked"
               checked={false}
               description="Default unchecked state"
             />
-            <LiquidCheckbox 
-              label="Checked"
-              checked={true}
-              description="Selected/checked state"
-            />
-            <LiquidCheckbox 
+            <LiquidCheckbox label="Checked" checked={true} description="Selected/checked state" />
+            <LiquidCheckbox
               label="Interactive Checkbox"
               checked={checked}
               onChange={(e) => setChecked(e.target.checked)}
               description="Click to toggle this checkbox"
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               label="Indeterminate"
               indeterminate={indeterminate}
-              onChange={(e) => {
+              onChange={(_e) => {
                 setIndeterminate(false);
               }}
               description="Partial selection state - click to make it checked"
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               label="Disabled Unchecked"
               disabled
               checked={false}
               description="Cannot be interacted with"
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               label="Disabled Checked"
               disabled
               checked={true}
               description="Cannot be interacted with"
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               label="Error State"
               error
               errorMessage="This field is required"
@@ -192,7 +189,7 @@ export const CardVariant: Story = {
       notifications: true,
       newsletter: false,
       analytics: true,
-      marketing: false
+      marketing: false,
     });
 
     return (
@@ -200,33 +197,37 @@ export const CardVariant: Story = {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Card Variant Showcase</h2>
           <div className="space-y-4">
-            <LiquidCheckbox 
+            <LiquidCheckbox
               variant="card"
               label="Push Notifications"
               description="Receive instant notifications for important updates and messages"
               checked={preferences.notifications}
-              onChange={(e) => setPreferences(prev => ({ ...prev, notifications: e.target.checked }))}
+              onChange={(e) =>
+                setPreferences((prev) => ({ ...prev, notifications: e.target.checked }))
+              }
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               variant="card"
               label="Newsletter Subscription"
               description="Get weekly updates about new features and product announcements"
               checked={preferences.newsletter}
-              onChange={(e) => setPreferences(prev => ({ ...prev, newsletter: e.target.checked }))}
+              onChange={(e) =>
+                setPreferences((prev) => ({ ...prev, newsletter: e.target.checked }))
+              }
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               variant="card"
               label="Analytics & Usage Data"
               description="Help us improve by sharing anonymous usage statistics"
               checked={preferences.analytics}
-              onChange={(e) => setPreferences(prev => ({ ...prev, analytics: e.target.checked }))}
+              onChange={(e) => setPreferences((prev) => ({ ...prev, analytics: e.target.checked }))}
             />
-            <LiquidCheckbox 
+            <LiquidCheckbox
               variant="card"
               label="Marketing Communications"
               description="Receive promotional offers and marketing materials"
               checked={preferences.marketing}
-              onChange={(e) => setPreferences(prev => ({ ...prev, marketing: e.target.checked }))}
+              onChange={(e) => setPreferences((prev) => ({ ...prev, marketing: e.target.checked }))}
             />
           </div>
         </div>
@@ -240,12 +241,12 @@ export const Interactive: Story = {
     layout: "fullscreen",
   },
   render: () => {
-    const [selectAll, setSelectAll] = useState(false);
+    const [_selectAll, setSelectAll] = useState(false);
     const [items, setItems] = useState({
       item1: false,
       item2: false,
       item3: false,
-      item4: false
+      item4: false,
     });
 
     const allSelected = Object.values(items).every(Boolean);
@@ -258,25 +259,25 @@ export const Interactive: Story = {
         item1: checked,
         item2: checked,
         item3: checked,
-        item4: checked
+        item4: checked,
       });
     };
 
     const handleItemChange = (key: keyof typeof items, checked: boolean) => {
-      setItems(prev => ({ ...prev, [key]: checked }));
+      setItems((prev) => ({ ...prev, [key]: checked }));
     };
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-8">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Interactive Examples</h2>
-          
+
           <div className="space-y-6">
             {/* Select All Example */}
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
               <h3 className="text-xl font-semibold text-white mb-4">Select All Pattern</h3>
               <div className="space-y-4">
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   variant="card"
                   label="Select All Items"
                   description="Toggle all items below"
@@ -285,25 +286,25 @@ export const Interactive: Story = {
                   onChange={(e) => handleSelectAll(e.target.checked)}
                 />
                 <div className="ml-6 space-y-3">
-                  <LiquidCheckbox 
+                  <LiquidCheckbox
                     label="Item 1"
                     checked={items.item1}
-                    onChange={(e) => handleItemChange('item1', e.target.checked)}
+                    onChange={(e) => handleItemChange("item1", e.target.checked)}
                   />
-                  <LiquidCheckbox 
+                  <LiquidCheckbox
                     label="Item 2"
                     checked={items.item2}
-                    onChange={(e) => handleItemChange('item2', e.target.checked)}
+                    onChange={(e) => handleItemChange("item2", e.target.checked)}
                   />
-                  <LiquidCheckbox 
+                  <LiquidCheckbox
                     label="Item 3"
                     checked={items.item3}
-                    onChange={(e) => handleItemChange('item3', e.target.checked)}
+                    onChange={(e) => handleItemChange("item3", e.target.checked)}
                   />
-                  <LiquidCheckbox 
+                  <LiquidCheckbox
                     label="Item 4"
                     checked={items.item4}
-                    onChange={(e) => handleItemChange('item4', e.target.checked)}
+                    onChange={(e) => handleItemChange("item4", e.target.checked)}
                   />
                 </div>
               </div>
@@ -312,7 +313,7 @@ export const Interactive: Story = {
             {/* Terms and Conditions */}
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
               <h3 className="text-xl font-semibold text-white mb-4">Terms & Conditions</h3>
-              <LiquidCheckbox 
+              <LiquidCheckbox
                 variant="card"
                 label="I agree to the Terms of Service"
                 description="By checking this box, you agree to our terms and conditions"
@@ -336,19 +337,19 @@ export const FormExample: Story = {
         notifications: true,
         darkMode: false,
         autoSave: true,
-        analytics: false
+        analytics: false,
       },
       privacy: {
         shareData: false,
         cookies: true,
-        tracking: false
+        tracking: false,
       },
       communication: {
         newsletter: false,
         updates: true,
-        marketing: false
+        marketing: false,
       },
-      terms: false
+      terms: false,
     });
 
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -375,41 +376,47 @@ export const FormExample: Story = {
             <h2 className="text-3xl font-bold text-white mb-2">Account Settings</h2>
             <p className="text-white/70">Customize your experience</p>
           </div>
-          
+
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Features Section */}
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
               <h3 className="text-lg font-semibold text-white mb-4">Features</h3>
               <div className="space-y-4">
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   variant="card"
                   label="Push Notifications"
                   description="Receive notifications for important updates"
                   checked={formData.features.notifications}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    features: { ...prev.features, notifications: e.target.checked }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      features: { ...prev.features, notifications: e.target.checked },
+                    }))
+                  }
                 />
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   variant="card"
                   label="Dark Mode"
                   description="Use dark theme across the application"
                   checked={formData.features.darkMode}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    features: { ...prev.features, darkMode: e.target.checked }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      features: { ...prev.features, darkMode: e.target.checked },
+                    }))
+                  }
                 />
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   variant="card"
                   label="Auto Save"
                   description="Automatically save your work"
                   checked={formData.features.autoSave}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    features: { ...prev.features, autoSave: e.target.checked }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      features: { ...prev.features, autoSave: e.target.checked },
+                    }))
+                  }
                 />
               </div>
             </div>
@@ -418,38 +425,42 @@ export const FormExample: Story = {
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
               <h3 className="text-lg font-semibold text-white mb-4">Privacy</h3>
               <div className="space-y-4">
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   label="Share usage data"
                   description="Help improve the product by sharing anonymous usage data"
                   checked={formData.privacy.shareData}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    privacy: { ...prev.privacy, shareData: e.target.checked }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      privacy: { ...prev.privacy, shareData: e.target.checked },
+                    }))
+                  }
                 />
-                <LiquidCheckbox 
+                <LiquidCheckbox
                   label="Allow cookies"
                   description="Enable cookies for better user experience"
                   checked={formData.privacy.cookies}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    privacy: { ...prev.privacy, cookies: e.target.checked }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      privacy: { ...prev.privacy, cookies: e.target.checked },
+                    }))
+                  }
                 />
               </div>
             </div>
 
             {/* Terms */}
-            <LiquidCheckbox 
+            <LiquidCheckbox
               variant="card"
               label="I agree to the Terms of Service and Privacy Policy"
               description="Required to save your settings"
               checked={formData.terms}
-              onChange={(e) => setFormData(prev => ({ ...prev, terms: e.target.checked }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, terms: e.target.checked }))}
               error={Boolean(errors.terms)}
               helperText={errors.terms}
             />
-            
+
             <button
               type="submit"
               className="w-full bg-white/20 hover:bg-white/30 text-white font-medium py-3 px-6 rounded-xl backdrop-blur-xl border border-white/30 transition-all duration-200"

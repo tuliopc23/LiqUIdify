@@ -1,54 +1,47 @@
 "use client";
 
-import * as React from "react";
-import { useState, useCallback, useRef, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 
-const liquidTabsVariants = cva(
-  "w-full",
-  {
-    variants: {
-      variant: {
-        default: "",
-        card: "bg-white/5 rounded-2xl p-1 border border-white/10",
-        pills: "",
-        underline: ""
-      },
-      orientation: {
-        horizontal: "flex flex-col",
-        vertical: "flex flex-row"
-      }
+const liquidTabsVariants = cva("w-full", {
+  variants: {
+    variant: {
+      default: "",
+      card: "bg-white/5 rounded-2xl p-1 border border-white/10",
+      pills: "",
+      underline: "",
     },
-    defaultVariants: {
-      variant: "default",
-      orientation: "horizontal"
-    }
-  }
-);
+    orientation: {
+      horizontal: "flex flex-col",
+      vertical: "flex flex-row",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    orientation: "horizontal",
+  },
+});
 
-const tabListVariants = cva(
-  "relative flex",
-  {
-    variants: {
-      variant: {
-        default: "border-b border-white/20",
-        card: "bg-white/5 rounded-xl p-1",
-        pills: "gap-2",
-        underline: "border-b border-white/20"
-      },
-      orientation: {
-        horizontal: "flex-row",
-        vertical: "flex-col border-r border-white/20 border-b-0 min-w-48"
-      }
+const tabListVariants = cva("relative flex", {
+  variants: {
+    variant: {
+      default: "border-b border-white/20",
+      card: "bg-white/5 rounded-xl p-1",
+      pills: "gap-2",
+      underline: "border-b border-white/20",
     },
-    defaultVariants: {
-      variant: "default",
-      orientation: "horizontal"
-    }
-  }
-);
+    orientation: {
+      horizontal: "flex-row",
+      vertical: "flex-col border-r border-white/20 border-b-0 min-w-48",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    orientation: "horizontal",
+  },
+});
 
 const tabTriggerVariants = cva(
   "relative flex items-center justify-center gap-2 px-4 py-2 text-white/70 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed",
@@ -57,18 +50,19 @@ const tabTriggerVariants = cva(
       variant: {
         default: "hover:bg-white/5 data-[state=active]:text-white data-[state=active]:bg-white/10",
         card: "rounded-lg hover:bg-white/10 data-[state=active]:bg-white/15 data-[state=active]:text-white",
-        pills: "rounded-full bg-white/5 hover:bg-white/10 data-[state=active]:bg-white/20 data-[state=active]:text-white",
-        underline: "hover:bg-white/5 data-[state=active]:text-white"
+        pills:
+          "rounded-full bg-white/5 hover:bg-white/10 data-[state=active]:bg-white/20 data-[state=active]:text-white",
+        underline: "hover:bg-white/5 data-[state=active]:text-white",
       },
       orientation: {
         horizontal: "whitespace-nowrap",
-        vertical: "w-full justify-start text-left"
-      }
+        vertical: "w-full justify-start text-left",
+      },
     },
     defaultVariants: {
       variant: "default",
-      orientation: "horizontal"
-    }
+      orientation: "horizontal",
+    },
   }
 );
 
@@ -81,7 +75,9 @@ interface TabItem {
   content?: React.ReactNode;
 }
 
-interface LiquidTabsProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidTabsVariants> {
+interface LiquidTabsProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidTabsVariants> {
   tabs: TabItem[];
   value?: string;
   defaultValue?: string;
@@ -90,17 +86,20 @@ interface LiquidTabsProps extends React.HTMLAttributes<HTMLDivElement>, VariantP
 }
 
 export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
-  ({
-    className,
-    variant,
-    orientation,
-    tabs,
-    value: controlledValue,
-    defaultValue,
-    onValueChange,
-    animateIndicator = true,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      orientation,
+      tabs,
+      value: controlledValue,
+      defaultValue,
+      onValueChange,
+      animateIndicator = true,
+      ...props
+    },
+    ref
+  ) => {
     const [internalValue, setInternalValue] = useState(defaultValue || tabs[0]?.value || "");
     const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
     const tabListRef = useRef<HTMLDivElement>(null);
@@ -109,12 +108,15 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
     const value = controlledValue ?? internalValue;
     const isVertical = orientation === "vertical";
 
-    const handleValueChange = useCallback((newValue: string) => {
-      if (controlledValue === undefined) {
-        setInternalValue(newValue);
-      }
-      onValueChange?.(newValue);
-    }, [controlledValue, onValueChange]);
+    const handleValueChange = useCallback(
+      (newValue: string) => {
+        if (controlledValue === undefined) {
+          setInternalValue(newValue);
+        }
+        onValueChange?.(newValue);
+      },
+      [controlledValue, onValueChange]
+    );
 
     // Update indicator position
     const updateIndicator = useCallback(() => {
@@ -125,27 +127,27 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
 
       if (activeTab && tabList) {
         const tabRect = activeTab.getBoundingClientRect();
-        const listRect = tabList.getBoundingClientRect();
+        const _listRect = tabList.getBoundingClientRect();
 
         if (isVertical) {
           setIndicatorStyle({
-            position: 'absolute',
+            position: "absolute",
             right: 0,
             top: activeTab.offsetTop,
             height: tabRect.height,
-            width: '2px',
-            backgroundColor: 'rgb(59 130 246)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            width: "2px",
+            backgroundColor: "rgb(59 130 246)",
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           });
         } else {
           setIndicatorStyle({
-            position: 'absolute',
+            position: "absolute",
             bottom: 0,
             left: activeTab.offsetLeft,
             width: tabRect.width,
-            height: '2px',
-            backgroundColor: 'rgb(59 130 246)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            height: "2px",
+            backgroundColor: "rgb(59 130 246)",
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           });
         }
       }
@@ -159,8 +161,8 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
     // Update indicator on window resize
     useEffect(() => {
       const handleResize = () => updateIndicator();
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     }, [updateIndicator]);
 
     const renderTabTrigger = (tab: TabItem) => {
@@ -179,19 +181,13 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
           onClick={() => !tab.disabled && handleValueChange(tab.value)}
           disabled={tab.disabled}
           data-state={isActive ? "active" : "inactive"}
-          className={cn(
-            tabTriggerVariants({ variant, orientation })
-          )}
+          className={cn(tabTriggerVariants({ variant, orientation }))}
           role="tab"
           aria-selected={isActive}
           aria-controls={`panel-${tab.value}`}
           id={`tab-${tab.value}`}
         >
-          {tab.icon && (
-            <span className="w-4 h-4 flex-shrink-0">
-              {tab.icon}
-            </span>
-          )}
+          {tab.icon && <span className="w-4 h-4 flex-shrink-0">{tab.icon}</span>}
           <span>{tab.label}</span>
           {tab.badge && (
             <span className="ml-2 px-2 py-0.5 bg-blue-500/20 text-blue-200 text-xs rounded-full">
@@ -202,7 +198,7 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
       );
     };
 
-    const activeTab = tabs.find(tab => tab.value === value);
+    const _activeTab = tabs.find((tab) => tab.value === value);
 
     return (
       <div
@@ -218,7 +214,7 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
           aria-orientation={orientation}
         >
           {tabs.map(renderTabTrigger)}
-          
+
           {/* Animated Indicator */}
           {animateIndicator && (variant === "default" || variant === "underline") && (
             <div style={indicatorStyle} />
@@ -226,13 +222,10 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
         </div>
 
         {/* Tab Panels */}
-        <div className={cn(
-          "flex-1",
-          isVertical && "ml-4"
-        )}>
+        <div className={cn("flex-1", isVertical && "ml-4")}>
           {tabs.map((tab) => {
             const isActive = value === tab.value;
-            
+
             return (
               <div
                 key={tab.value}
@@ -261,7 +254,9 @@ export const LiquidTabs = React.forwardRef<HTMLDivElement, LiquidTabsProps>(
 LiquidTabs.displayName = "LiquidTabs";
 
 // Sub-components for advanced usage
-interface LiquidTabsListProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof tabListVariants> {
+interface LiquidTabsListProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof tabListVariants> {
   children: React.ReactNode;
 }
 
@@ -281,7 +276,9 @@ export const LiquidTabsList = React.forwardRef<HTMLDivElement, LiquidTabsListPro
 
 LiquidTabsList.displayName = "LiquidTabsList";
 
-interface LiquidTabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof tabTriggerVariants> {
+interface LiquidTabsTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof tabTriggerVariants> {
   value: string;
   children: React.ReactNode;
 }
@@ -323,10 +320,10 @@ export const LiquidTabsContent = React.forwardRef<HTMLDivElement, LiquidTabsCont
 
 LiquidTabsContent.displayName = "LiquidTabsContent";
 
-export { 
-  liquidTabsVariants, 
-  tabListVariants, 
+export {
+  liquidTabsVariants,
+  tabListVariants,
   tabTriggerVariants,
-  type LiquidTabsProps, 
-  type TabItem 
+  type LiquidTabsProps,
+  type TabItem,
 };

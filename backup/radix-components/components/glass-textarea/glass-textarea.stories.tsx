@@ -92,8 +92,7 @@ export const WithCharacterCount: Story = {
     placeholder: "Tell us about yourself...",
     maxLength: 200,
     showCharacterCount: true,
-    defaultValue:
-      "I'm a developer who loves creating beautiful user interfaces.",
+    defaultValue: "I'm a developer who loves creating beautiful user interfaces.",
   },
 };
 
@@ -152,9 +151,7 @@ export const Required: Story = {
 // Interactive Examples
 export const CharacterLimitExample: Story = {
   render: () => {
-    const [text, setText] = useState(
-      "Start typing to see the character count...",
-    );
+    const [text, setText] = useState("Start typing to see the character count...");
     const maxLength = 100;
 
     return (
@@ -177,7 +174,7 @@ export const CharacterLimitExample: Story = {
 export const AutoResizeDemo: Story = {
   render: () => {
     const [text, setText] = useState(
-      "Type more content to see the textarea grow automatically...\n\nAdd multiple lines to see the auto-resize in action.",
+      "Type more content to see the textarea grow automatically...\n\nAdd multiple lines to see the auto-resize in action."
     );
 
     return (
@@ -205,9 +202,7 @@ export const FormExample: Story = {
 
     return (
       <div className="w-96 space-y-4">
-        <h3 className="text-lg font-semibold text-blue-900">
-          Contact Form
-        </h3>
+        <h3 className="text-lg font-semibold text-blue-900">Contact Form</h3>
 
         <div>
           <input

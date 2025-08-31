@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  AlertCircle,
-  Archive,
-  CheckCircle,
-  FileText,
-  Image,
-  Video,
-} from "lucide-react";
+import { AlertCircle, Archive, CheckCircle, FileText, Image, Video } from "lucide-react";
 import { useState } from "react";
 import { type FileUploadItem, GlassFileUpload } from "./glass-file-upload";
 
@@ -249,18 +242,12 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Simple File Upload
-        </h3>
-        <GlassFileUpload
-          onFilesChange={(files) => console.log("Files:", files)}
-        />
+        <h3 className="font-medium text-sm text-blue-900/80">Simple File Upload</h3>
+        <GlassFileUpload onFilesChange={(files) => console.log("Files:", files)} />
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Single File Upload
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Single File Upload</h3>
         <GlassFileUpload
           onFilesChange={(files) => console.log("Files:", files)}
           multiple={false}
@@ -271,9 +258,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          With File Restrictions
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">With File Restrictions</h3>
         <GlassFileUpload
           onFilesChange={(files) => console.log("Files:", files)}
           accept="image/*"
@@ -303,9 +288,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Small Size
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Small Size</h3>
         <GlassFileUpload
           size="sm"
           dropzoneText="Drop files here"
@@ -315,9 +298,7 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Medium Size
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Medium Size</h3>
         <GlassFileUpload
           size="md"
           onFilesChange={(files) => console.log("Medium upload:", files)}
@@ -325,13 +306,8 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Large Size
-        </h3>
-        <GlassFileUpload
-          size="lg"
-          onFilesChange={(files) => console.log("Large upload:", files)}
-        />
+        <h3 className="font-medium text-sm text-blue-900/80">Large Size</h3>
+        <GlassFileUpload size="lg" onFilesChange={(files) => console.log("Large upload:", files)} />
       </div>
     </div>
   ),
@@ -354,29 +330,18 @@ export const FileTypeExamples: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Image Upload
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Image Upload</h3>
         <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Image className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-blue-900/90">
-                Image Gallery
-              </div>
-              <div className="text-sm text-blue-900/60">
-                Upload photos and images
-              </div>
+              <div className="font-medium text-blue-900/90">Image Gallery</div>
+              <div className="text-sm text-blue-900/60">Upload photos and images</div>
             </div>
           </div>
           <GlassFileUpload
             accept="image/*"
-            allowedTypes={[
-              "image/jpeg",
-              "image/png",
-              "image/gif",
-              "image/webp",
-            ]}
+            allowedTypes={["image/jpeg", "image/png", "image/gif", "image/webp"]}
             maxFiles={10}
             maxFileSize={5 * 1024 * 1024}
             dropzoneText="Drop images here (JPEG, PNG, GIF, WebP)"
@@ -386,28 +351,18 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Document Upload
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Document Upload</h3>
         <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <FileText className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-blue-900/90">
-                Document Manager
-              </div>
-              <div className="text-sm text-blue-900/60">
-                Upload PDFs and documents
-              </div>
+              <div className="font-medium text-blue-900/90">Document Manager</div>
+              <div className="text-sm text-blue-900/60">Upload PDFs and documents</div>
             </div>
           </div>
           <GlassFileUpload
             accept=".pdf,.doc,.docx,.txt"
-            allowedTypes={[
-              "application/pdf",
-              "application/msword",
-              "text/plain",
-            ]}
+            allowedTypes={["application/pdf", "application/msword", "text/plain"]}
             maxFiles={5}
             maxFileSize={20 * 1024 * 1024}
             dropzoneText="Drop documents here (PDF, DOC, TXT)"
@@ -417,19 +372,13 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Media Upload
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Media Upload</h3>
         <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Video className="h-5 w-5 text-blue-900" />
             <div>
-              <div className="font-medium text-blue-900/90">
-                Media Library
-              </div>
-              <div className="text-sm text-blue-900/60">
-                Upload videos and audio files
-              </div>
+              <div className="font-medium text-blue-900/90">Media Library</div>
+              <div className="text-sm text-blue-900/60">Upload videos and audio files</div>
             </div>
           </div>
           <GlassFileUpload
@@ -461,11 +410,9 @@ export const FileTypeExamples: Story = {
 // Upload states and progress
 export const UploadStates: Story = {
   render: () => {
-    const [_uploadingFiles, setUploadingFiles] = useState<
-      Array<FileUploadItem>
-    >([]);
+    const [_uploadingFiles, setUploadingFiles] = useState<FileUploadItem[]>([]);
 
-    const simulateUpload = async (_files: Array<File>) => {
+    const simulateUpload = async (_files: File[]) => {
       // Simulate upload progress
       for (let i = 0; i <= 100; i += 10) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -474,7 +421,7 @@ export const UploadStates: Story = {
             ...file,
             progress: i,
             status: i === 100 ? "success" : "uploading",
-          })),
+          }))
         );
       }
     };
@@ -482,9 +429,7 @@ export const UploadStates: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Upload with Progress
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Upload with Progress</h3>
           <GlassFileUpload
             onFilesChange={setUploadingFiles}
             onUpload={simulateUpload}
@@ -494,9 +439,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Error State Example
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Error State Example</h3>
           <GlassFileUpload
             onFilesChange={(files) => console.log("Files with errors:", files)}
             maxFileSize={1024} // Very small limit to trigger errors
@@ -505,9 +448,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Disabled State
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Disabled State</h3>
           <GlassFileUpload disabled dropzoneText="Upload is disabled" />
         </div>
       </div>
@@ -530,32 +471,22 @@ export const UploadStates: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => {
-    const [profileFiles, setProfileFiles] = useState<Array<FileUploadItem>>([]);
-    const [portfolioFiles, setPortfolioFiles] = useState<Array<FileUploadItem>>(
-      [],
-    );
-    const [_documentFiles, setDocumentFiles] = useState<Array<FileUploadItem>>(
-      [],
-    );
+    const [profileFiles, setProfileFiles] = useState<FileUploadItem[]>([]);
+    const [portfolioFiles, setPortfolioFiles] = useState<FileUploadItem[]>([]);
+    const [_documentFiles, setDocumentFiles] = useState<FileUploadItem[]>([]);
 
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Profile Picture Upload
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Profile Picture Upload</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
                 <Image className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-blue-900/90">
-                  Profile Picture
-                </div>
-                <div className="text-sm text-blue-900/60">
-                  Upload a profile photo (max 2MB)
-                </div>
+                <div className="font-medium text-blue-900/90">Profile Picture</div>
+                <div className="text-sm text-blue-900/60">Upload a profile photo (max 2MB)</div>
               </div>
             </div>
             <GlassFileUpload
@@ -578,18 +509,14 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Portfolio Upload
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Portfolio Upload</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
                 <Archive className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-blue-900/90">
-                  Portfolio Gallery
-                </div>
+                <div className="font-medium text-blue-900/90">Portfolio Gallery</div>
                 <div className="text-sm text-blue-900/60">
                   Upload your work samples and portfolio items
                 </div>
@@ -610,10 +537,7 @@ export const RealWorldExamples: Story = {
                 </div>
                 <div className="mt-2 space-y-1">
                   {portfolioFiles.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 text-blue-900/60 text-xs"
-                    >
+                    <div key={index} className="flex items-center gap-2 text-blue-900/60 text-xs">
                       <CheckCircle className="h-3 w-3 text-blue-900" />
                       {file.file.name}
                     </div>
@@ -625,18 +549,14 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Document Submission
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Document Submission</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
                 <FileText className="h-6 w-6 text-blue-900" />
               </div>
               <div>
-                <div className="font-medium text-blue-900/90">
-                  Legal Documents
-                </div>
+                <div className="font-medium text-blue-900/90">Legal Documents</div>
                 <div className="text-sm text-blue-900/60">
                   Submit required documentation (PDF only)
                 </div>
@@ -688,7 +608,7 @@ export const RealWorldExamples: Story = {
 // Accessibility showcase
 export const AccessibilityShowcase: Story = {
   render: () => {
-    const [files, setFiles] = useState<Array<FileUploadItem>>([]);
+    const [files, setFiles] = useState<FileUploadItem[]>([]);
 
     return (
       <div className="space-y-6">
@@ -708,8 +628,8 @@ export const AccessibilityShowcase: Story = {
 
         <div className="space-y-4">
           <p className="text-sm text-blue-900/60">
-            Try using keyboard navigation: Tab to focus the upload area,
-            Space/Enter to open file dialog
+            Try using keyboard navigation: Tab to focus the upload area, Space/Enter to open file
+            dialog
           </p>
           <GlassFileUpload
             onFilesChange={setFiles}
@@ -721,9 +641,7 @@ export const AccessibilityShowcase: Story = {
 
         {files.length > 0 && (
           <div className="rounded-lg border border-blue-500 bg-blue-500 p-4 dark:border-blue-500 dark:bg-blue-500/20">
-            <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">
-              Upload Status
-            </h4>
+            <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-900">Upload Status</h4>
             <div className="space-y-2">
               {files.map((file, index) => (
                 <div
@@ -775,9 +693,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Ocean Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Ocean Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <GlassFileUpload
             dropzoneText="Drop files into the ocean..."
@@ -788,9 +704,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Sunset Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Sunset Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <GlassFileUpload
             dropzoneText="Upload files to the sunset..."
@@ -801,9 +715,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-sm text-blue-900/80">
-          Forest Theme
-        </h3>
+        <h3 className="font-medium text-sm text-blue-900/80">Forest Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <GlassFileUpload
             dropzoneText="Plant files in the forest..."

@@ -8,7 +8,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "The foundational LiquidGlass component implementing Apple's Liquid Glass design language with physics-based interactions.",
+        component:
+          "The foundational LiquidGlass component implementing Apple's Liquid Glass design language with physics-based interactions.",
       },
     },
   },
@@ -16,35 +17,35 @@ const meta = {
     variant: {
       control: "select",
       options: ["button", "card", "panel", "floating", "navigation"],
-      description: "The visual variant of the glass component"
+      description: "The visual variant of the glass component",
     },
     intensity: {
-      control: "select", 
+      control: "select",
       options: ["subtle", "medium", "strong"],
-      description: "The intensity of the glass effect"
+      description: "The intensity of the glass effect",
     },
     size: {
       control: "select",
       options: ["sm", "md", "lg", "xl"],
-      description: "The size of the component"
+      description: "The size of the component",
     },
     radius: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "full"],
-      description: "The border radius of the component"
+      description: "The border radius of the component",
     },
     rippleEffect: {
       control: "boolean",
-      description: "Enable ripple effect on click/touch"
+      description: "Enable ripple effect on click/touch",
     },
     hoverGlow: {
       control: "boolean",
-      description: "Enable hover glow effect that follows cursor"
+      description: "Enable hover glow effect that follows cursor",
     },
     dragPhysics: {
-      control: "boolean", 
-      description: "Enable drag physics with jiggle animation"
-    }
+      control: "boolean",
+      description: "Enable drag physics with jiggle animation",
+    },
   },
   args: {
     variant: "card",
@@ -186,8 +187,8 @@ export const Interactive: Story = {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-white">Hover & Click Effects</h3>
-            <LiquidGlass 
-              variant="button" 
+            <LiquidGlass
+              variant="button"
               className="justify-center cursor-pointer"
               rippleEffect={true}
               hoverGlow={true}
@@ -197,11 +198,7 @@ export const Interactive: Story = {
           </div>
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-white">Drag Physics</h3>
-            <LiquidGlass 
-              variant="card"
-              dragPhysics={true}
-              className="cursor-move"
-            >
+            <LiquidGlass variant="card" dragPhysics={true} className="cursor-move">
               <div className="text-white text-center">
                 <h4 className="font-semibold mb-2">Drag Me!</h4>
                 <p className="text-sm opacity-80">Watch the jiggle animation</p>
@@ -238,7 +235,7 @@ export const CustomContent: Story = {
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-8">
       <div className="max-w-4xl mx-auto space-y-8">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Custom Content Examples</h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LiquidGlass variant="card">
             <div className="text-white">

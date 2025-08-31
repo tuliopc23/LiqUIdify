@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
-import { useState, useEffect, useCallback, createContext, useContext } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { cn } from "../../lib/utils";
-import { LiquidGlass } from "../liquid-glass";
 import { LiquidButton } from "../liquid-button";
+import { LiquidGlass } from "../liquid-glass";
 
 const liquidToastVariants = cva(
   "relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-lg border p-4 pr-8 shadow-lg pointer-events-auto",
@@ -16,12 +16,12 @@ const liquidToastVariants = cva(
         destructive: "border-red-500/50 text-red-100 [&>svg]:text-red-400",
         warning: "border-yellow-500/50 text-yellow-100 [&>svg]:text-yellow-400",
         success: "border-green-500/50 text-green-100 [&>svg]:text-green-400",
-        info: "border-blue-500/50 text-blue-100 [&>svg]:text-blue-400"
-      }
+        info: "border-blue-500/50 text-blue-100 [&>svg]:text-blue-400",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
+      variant: "default",
+    },
   }
 );
 
@@ -56,42 +56,51 @@ export const useToast = () => {
 interface ToastProviderProps {
   children: React.ReactNode;
   maxToasts?: number;
-  position?: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+  position?:
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
 }
 
-export const ToastProvider: React.FC<ToastProviderProps> = ({ 
-  children, 
+export const ToastProvider: React.FC<ToastProviderProps> = ({
+  children,
   maxToasts = 5,
-  position = "bottom-right"
+  position = "bottom-right",
 }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const toast = useCallback((toastData: Omit<Toast, "id">) => {
-    const id = Math.random().toString(36).substr(2, 9);
-    const newToast: Toast = {
-      id,
-      duration: 5000,
-      dismissible: true,
-      ...toastData,
-    };
+  const toast = useCallback(
+    (toastData: Omit<Toast, "id">) => {
+      const id = Math.random().toString(36).substr(2, 9);
+      const newToast: Toast = {
+        id,
+        duration: 5000,
+        dismissible: true,
+        ...toastData,
+      };
 
-    setToasts(prev => {
-      const updated = [newToast, ...prev];
-      return updated.slice(0, maxToasts);
-    });
+      setToasts((prev) => {
+        const updated = [newToast, ...prev];
+        return updated.slice(0, maxToasts);
+      });
 
-    // Auto dismiss
-    if (newToast.duration && newToast.duration > 0) {
-      setTimeout(() => {
-        dismiss(id);
-      }, newToast.duration);
-    }
+      // Auto dismiss
+      if (newToast.duration && newToast.duration > 0) {
+        setTimeout(() => {
+          dismiss(id);
+        }, newToast.duration);
+      }
 
-    return id;
-  }, [maxToasts]);
+      return id;
+    },
+    [maxToasts, dismiss]
+  );
 
   const dismiss = useCallback((toastId: string) => {
-    setToasts(prev => prev.filter(t => t.id !== toastId));
+    setToasts((prev) => prev.filter((t) => t.id !== toastId));
   }, []);
 
   const dismissAll = useCallback(() => {
@@ -100,7 +109,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
 
   const getPositionStyles = () => {
     const base = "fixed z-50 flex flex-col gap-2 max-h-screen w-full max-w-sm pointer-events-none";
-    
+
     switch (position) {
       case "top-left":
         return `${base} top-4 left-4`;
@@ -138,7 +147,9 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   );
 };
 
-interface LiquidToastProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof liquidToastVariants> {
+interface LiquidToastProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof liquidToastVariants> {
   toast: Toast;
   onDismiss: (id: string) => void;
 }
@@ -166,41 +177,71 @@ const LiquidToastComponent = React.forwardRef<HTMLDivElement, LiquidToastProps>(
       switch (toast.variant) {
         case "destructive":
           return (
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="15" y1="9" x2="9" y2="15"/>
-              <line x1="9" y1="9" x2="15" y2="15"/>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
             </svg>
           );
         case "warning":
           return (
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
             </svg>
           );
         case "success":
           return (
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22,4 12,14.01 9,11.01"/>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22,4 12,14.01 9,11.01" />
             </svg>
           );
         case "info":
           return (
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="16" x2="12" y2="12"/>
-              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
             </svg>
           );
         default:
           return (
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="8" x2="12" y2="12"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
           );
       }
@@ -208,7 +249,7 @@ const LiquidToastComponent = React.forwardRef<HTMLDivElement, LiquidToastProps>(
 
     const CloseIcon = () => (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
       </svg>
     );
 
@@ -230,32 +271,18 @@ const LiquidToastComponent = React.forwardRef<HTMLDivElement, LiquidToastProps>(
       >
         <div className="flex items-start space-x-3 flex-1">
           {/* Icon */}
-          {(toast.icon !== null) && (
-            <div className="flex-shrink-0 mt-0.5">
-              {toast.icon || getDefaultIcon()}
-            </div>
+          {toast.icon !== null && (
+            <div className="flex-shrink-0 mt-0.5">{toast.icon || getDefaultIcon()}</div>
           )}
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            {toast.title && (
-              <div className="font-medium leading-none mb-1">
-                {toast.title}
-              </div>
-            )}
-            {toast.description && (
-              <div className="text-sm opacity-90">
-                {toast.description}
-              </div>
-            )}
+            {toast.title && <div className="font-medium leading-none mb-1">{toast.title}</div>}
+            {toast.description && <div className="text-sm opacity-90">{toast.description}</div>}
           </div>
 
           {/* Action */}
-          {toast.action && (
-            <div className="flex-shrink-0">
-              {toast.action}
-            </div>
-          )}
+          {toast.action && <div className="flex-shrink-0">{toast.action}</div>}
         </div>
 
         {/* Dismiss button */}
@@ -274,10 +301,10 @@ const LiquidToastComponent = React.forwardRef<HTMLDivElement, LiquidToastProps>(
         {/* Progress bar for timed toasts */}
         {toast.duration && toast.duration > 0 && (
           <div className="absolute bottom-0 left-0 h-1 bg-current opacity-20 animate-pulse">
-            <div 
+            <div
               className="h-full bg-current opacity-60"
               style={{
-                animation: `toast-progress ${toast.duration}ms linear forwards`
+                animation: `toast-progress ${toast.duration}ms linear forwards`,
               }}
             />
           </div>
@@ -306,7 +333,7 @@ export const toast = {
       ...options,
     });
   },
-  
+
   error: (message: string, options?: Partial<Toast>) => {
     const context = React.useContext(ToastContext);
     if (!context) {
@@ -319,7 +346,7 @@ export const toast = {
       ...options,
     });
   },
-  
+
   warning: (message: string, options?: Partial<Toast>) => {
     const context = React.useContext(ToastContext);
     if (!context) {
@@ -332,7 +359,7 @@ export const toast = {
       ...options,
     });
   },
-  
+
   info: (message: string, options?: Partial<Toast>) => {
     const context = React.useContext(ToastContext);
     if (!context) {
@@ -345,7 +372,7 @@ export const toast = {
       ...options,
     });
   },
-  
+
   default: (message: string, options?: Partial<Toast>) => {
     const context = React.useContext(ToastContext);
     if (!context) {
@@ -383,9 +410,4 @@ if (typeof document !== "undefined") {
   }
 }
 
-export { 
-  liquidToastVariants,
-  type Toast,
-  type ToastContextType,
-  type LiquidToastProps 
-};
+export { liquidToastVariants, type Toast, type ToastContextType, type LiquidToastProps };

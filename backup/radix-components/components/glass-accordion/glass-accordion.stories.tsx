@@ -70,27 +70,23 @@ export const Single: Story = {
         <GlassAccordionItem value="item-1">
           <GlassAccordionTrigger>What is glassmorphism?</GlassAccordionTrigger>
           <GlassAccordionContent>
-            Glassmorphism is a design trend that uses transparency, blur
-            effects, and subtle borders to create a glass-like appearance. It
-            provides depth and hierarchy while maintaining visual lightness.
+            Glassmorphism is a design trend that uses transparency, blur effects, and subtle borders
+            to create a glass-like appearance. It provides depth and hierarchy while maintaining
+            visual lightness.
           </GlassAccordionContent>
         </GlassAccordionItem>
         <GlassAccordionItem value="item-2">
-          <GlassAccordionTrigger>
-            How do I use this component?
-          </GlassAccordionTrigger>
+          <GlassAccordionTrigger>How do I use this component?</GlassAccordionTrigger>
           <GlassAccordionContent>
-            Import the component and use it like any other React component. You
-            can control which items are expanded, customize the appearance with
-            variants, and add your own content.
+            Import the component and use it like any other React component. You can control which
+            items are expanded, customize the appearance with variants, and add your own content.
           </GlassAccordionContent>
         </GlassAccordionItem>
         <GlassAccordionItem value="item-3">
           <GlassAccordionTrigger>Is it accessible?</GlassAccordionTrigger>
           <GlassAccordionContent>
-            Yes! This component is built on Radix UI primitives, providing full
-            keyboard navigation, ARIA attributes, and screen reader support out
-            of the box.
+            Yes! This component is built on Radix UI primitives, providing full keyboard navigation,
+            ARIA attributes, and screen reader support out of the box.
           </GlassAccordionContent>
         </GlassAccordionItem>
       </GlassAccordion>
@@ -122,15 +118,15 @@ export const Multiple: Story = {
         <GlassAccordionItem value="item-2">
           <GlassAccordionTrigger>Technical Details</GlassAccordionTrigger>
           <GlassAccordionContent>
-            Built with Radix UI for robust accessibility and behavior. Uses
-            Framer Motion for smooth animations and Tailwind CSS for styling.
+            Built with Radix UI for robust accessibility and behavior. Uses Framer Motion for smooth
+            animations and Tailwind CSS for styling.
           </GlassAccordionContent>
         </GlassAccordionItem>
         <GlassAccordionItem value="item-3">
           <GlassAccordionTrigger>Browser Support</GlassAccordionTrigger>
           <GlassAccordionContent>
-            Works in all modern browsers that support CSS backdrop-filter.
-            Gracefully degrades in older browsers.
+            Works in all modern browsers that support CSS backdrop-filter. Gracefully degrades in
+            older browsers.
           </GlassAccordionContent>
         </GlassAccordionItem>
       </GlassAccordion>
@@ -147,31 +143,22 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Small
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Small</h3>
         <GlassAccordion type="single" size="sm" collapsible>
           <GlassAccordionItem value="item-1" size="sm">
-            <GlassAccordionTrigger size="sm">
-              Small Accordion
-            </GlassAccordionTrigger>
+            <GlassAccordionTrigger size="sm">Small Accordion</GlassAccordionTrigger>
             <GlassAccordionContent size="sm">
-              This accordion uses the small size variant with reduced padding
-              and smaller text.
+              This accordion uses the small size variant with reduced padding and smaller text.
             </GlassAccordionContent>
           </GlassAccordionItem>
         </GlassAccordion>
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Medium (Default)
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Medium (Default)</h3>
         <GlassAccordion type="single" size="md" collapsible>
           <GlassAccordionItem value="item-1" size="md">
-            <GlassAccordionTrigger size="md">
-              Medium Accordion
-            </GlassAccordionTrigger>
+            <GlassAccordionTrigger size="md">Medium Accordion</GlassAccordionTrigger>
             <GlassAccordionContent size="md">
               This is the default size with standard padding and text size.
             </GlassAccordionContent>
@@ -180,17 +167,12 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Large
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Large</h3>
         <GlassAccordion type="single" size="lg" collapsible>
           <GlassAccordionItem value="item-1" size="lg">
-            <GlassAccordionTrigger size="lg">
-              Large Accordion
-            </GlassAccordionTrigger>
+            <GlassAccordionTrigger size="lg">Large Accordion</GlassAccordionTrigger>
             <GlassAccordionContent size="lg">
-              The large variant has increased padding and larger text for better
-              visibility.
+              The large variant has increased padding and larger text for better visibility.
             </GlassAccordionContent>
           </GlassAccordionItem>
         </GlassAccordion>
@@ -208,9 +190,7 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Default
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Default</h3>
         <GlassAccordion type="single" variant="default" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Default Style</GlassAccordionTrigger>
@@ -222,9 +202,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Enhanced
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Enhanced</h3>
         <GlassAccordion type="single" variant="enhanced" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Enhanced Style</GlassAccordionTrigger>
@@ -236,9 +214,7 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-blue-900">
-          Ghost
-        </h3>
+        <h3 className="mb-2 font-semibold text-sm text-blue-900">Ghost</h3>
         <GlassAccordion type="single" variant="ghost" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Ghost Style</GlassAccordionTrigger>
@@ -262,17 +238,13 @@ export const NoIcon: Story = {
     <div className="w-[600px]">
       <GlassAccordion type="single" collapsible>
         <GlassAccordionItem value="item-1">
-          <GlassAccordionTrigger showIcon={false}>
-            No Chevron Icon
-          </GlassAccordionTrigger>
+          <GlassAccordionTrigger showIcon={false}>No Chevron Icon</GlassAccordionTrigger>
           <GlassAccordionContent>
             This accordion trigger doesn't show the chevron icon.
           </GlassAccordionContent>
         </GlassAccordionItem>
         <GlassAccordionItem value="item-2">
-          <GlassAccordionTrigger showIcon={false}>
-            Clean Look
-          </GlassAccordionTrigger>
+          <GlassAccordionTrigger showIcon={false}>Clean Look</GlassAccordionTrigger>
           <GlassAccordionContent>
             Useful when you want a cleaner appearance or custom indicators.
           </GlassAccordionContent>
@@ -317,17 +289,11 @@ export const Controlled: Story = {
           </button>
         </div>
 
-        <GlassAccordion
-          type="single"
-          value={value}
-          onValueChange={setValue}
-          collapsible
-        >
+        <GlassAccordion type="single" value={value} onValueChange={setValue} collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>First Item</GlassAccordionTrigger>
             <GlassAccordionContent>
-              This accordion is controlled - use the buttons above to change the
-              active item.
+              This accordion is controlled - use the buttons above to change the active item.
             </GlassAccordionContent>
           </GlassAccordionItem>
           <GlassAccordionItem value="item-2">
@@ -362,27 +328,19 @@ export const ComplexContent: Story = {
           <GlassAccordionContent>
             <div className="space-y-4">
               <div>
-                <h4 className="mb-2 font-semibold text-blue-900">
-                  Props
-                </h4>
+                <h4 className="mb-2 font-semibold text-blue-900">Props</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-1">
                     <code className="text-blue-900">type</code>
-                    <span className="text-blue-900 opacity-70">
-                      "single" | "multiple"
-                    </span>
+                    <span className="text-blue-900 opacity-70">"single" | "multiple"</span>
                   </div>
                   <div className="flex justify-between py-1">
                     <code className="text-blue-900">size</code>
-                    <span className="text-blue-900 opacity-70">
-                      "sm" | "md" | "lg"
-                    </span>
+                    <span className="text-blue-900 opacity-70">"sm" | "md" | "lg"</span>
                   </div>
                   <div className="flex justify-between py-1">
                     <code className="text-blue-900">variant</code>
-                    <span className="text-blue-900 opacity-70">
-                      "default" | "solid" | "ghost"
-                    </span>
+                    <span className="text-blue-900 opacity-70">"default" | "solid" | "ghost"</span>
                   </div>
                 </div>
               </div>
@@ -423,15 +381,14 @@ export const CompoundPattern: Story = {
         <Accordion.Item value="item-1">
           <Accordion.Trigger>Using Compound Components</Accordion.Trigger>
           <Accordion.Content>
-            You can also use the compound component pattern with dot notation
-            for a cleaner API.
+            You can also use the compound component pattern with dot notation for a cleaner API.
           </Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="item-2">
           <Accordion.Trigger>Benefits</Accordion.Trigger>
           <Accordion.Content>
-            This pattern groups related components together and makes the
-            relationship between them clearer.
+            This pattern groups related components together and makes the relationship between them
+            clearer.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
@@ -448,14 +405,10 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div className="rounded-lg bg-blue-100/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Light Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Light Background</h3>
         <GlassAccordion type="single" collapsible>
           <GlassAccordionItem value="item-1">
-            <GlassAccordionTrigger>
-              Glassmorphism on Light
-            </GlassAccordionTrigger>
+            <GlassAccordionTrigger>Glassmorphism on Light</GlassAccordionTrigger>
             <GlassAccordionContent>
               The glass effect adapts beautifully to different backgrounds.
             </GlassAccordionContent>
@@ -464,9 +417,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="rounded-lg bg-blue-100/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Dark Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Background</h3>
         <GlassAccordion type="single" collapsible>
           <GlassAccordionItem value="item-1">
             <GlassAccordionTrigger>Glassmorphism on Dark</GlassAccordionTrigger>

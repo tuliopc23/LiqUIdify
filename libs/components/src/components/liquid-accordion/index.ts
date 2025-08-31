@@ -1,13 +1,13 @@
-export { 
-  LiquidAccordion,
-  LiquidAccordionItem,
-  LiquidAccordionHeader,
-  LiquidAccordionContent,
-  liquidAccordionVariants,
+export {
+  type AccordionItem,
+  accordionContentVariants,
   accordionItemVariants,
   accordionTriggerVariants,
-  accordionContentVariants,
-  type LiquidAccordionProps,
+  LiquidAccordion,
+  LiquidAccordionContent,
+  LiquidAccordionHeader,
+  LiquidAccordionItem,
   type LiquidAccordionItemProps,
-  type AccordionItem
+  type LiquidAccordionProps,
+  liquidAccordionVariants,
 } from "./liquid-accordion";

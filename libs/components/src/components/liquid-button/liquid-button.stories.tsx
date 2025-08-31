@@ -8,7 +8,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A liquid glass button component implementing Apple's design language with interactive physics and smooth animations.",
+        component:
+          "A liquid glass button component implementing Apple's design language with interactive physics and smooth animations.",
       },
     },
   },
@@ -16,38 +17,38 @@ const meta = {
     variant: {
       control: "select",
       options: ["primary", "secondary", "ghost", "danger", "success"],
-      description: "The visual style variant of the button"
+      description: "The visual style variant of the button",
     },
     size: {
       control: "select",
       options: ["sm", "md", "lg", "xl"],
-      description: "The size of the button"
+      description: "The size of the button",
     },
     loading: {
       control: "boolean",
-      description: "Show loading spinner"
+      description: "Show loading spinner",
     },
     disabled: {
       control: "boolean",
-      description: "Disable the button"
+      description: "Disable the button",
     },
     iconPosition: {
       control: "select",
       options: ["left", "right"],
-      description: "Position of the icon"
+      description: "Position of the icon",
     },
     rippleEffect: {
       control: "boolean",
-      description: "Enable ripple effect on click"
+      description: "Enable ripple effect on click",
     },
     hoverGlow: {
-      control: "boolean", 
-      description: "Enable hover glow effect"
+      control: "boolean",
+      description: "Enable hover glow effect",
     },
     dragPhysics: {
       control: "boolean",
-      description: "Enable drag physics with jiggle animation"
-    }
+      description: "Enable drag physics with jiggle animation",
+    },
   },
   args: {
     children: "Button",
@@ -75,19 +76,19 @@ type Story = StoryObj<typeof meta>;
 // Simple arrow icon for stories
 const ArrowIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M8.22 2.97a.75.75 0 0 1 1.06 0L14.53 8.22a.75.75 0 0 1 0 1.06L9.28 14.53a.75.75 0 0 1-1.06-1.06L12.44 9.25H2.75a.75.75 0 0 1 0-1.5h9.69L8.22 4.03a.75.75 0 0 1 0-1.06Z"/>
+    <path d="M8.22 2.97a.75.75 0 0 1 1.06 0L14.53 8.22a.75.75 0 0 1 0 1.06L9.28 14.53a.75.75 0 0 1-1.06-1.06L12.44 9.25H2.75a.75.75 0 0 1 0-1.5h9.69L8.22 4.03a.75.75 0 0 1 0-1.06Z" />
   </svg>
 );
 
 const PlusIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2Z"/>
+    <path d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2Z" />
   </svg>
 );
 
 const HeartIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-    <path d="M8 14.25s6-4.5 6-8.25A3.75 3.75 0 0 0 8 3.25 3.75 3.75 0 0 0 2 6c0 3.75 6 8.25 6 8.25Z"/>
+    <path d="M8 14.25s6-4.5 6-8.25A3.75 3.75 0 0 0 8 3.25 3.75 3.75 0 0 0 2 6c0 3.75 6 8.25 6 8.25Z" />
   </svg>
 );
 
@@ -209,9 +210,7 @@ export const Interactive: Story = {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-white">Drag Physics</h3>
             <div className="space-y-4">
-              <LiquidButton dragPhysics>
-                Drag Me!
-              </LiquidButton>
+              <LiquidButton dragPhysics>Drag Me!</LiquidButton>
               <LiquidButton dragPhysics variant="danger" icon={<HeartIcon />}>
                 Drag with Icon
               </LiquidButton>

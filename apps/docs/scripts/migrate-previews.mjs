@@ -1,9 +1,9 @@
 #!/usr/bin/env node
+import fs from "node:fs/promises";
+import path from "node:path";
 // Codemod: wrap runnable snippet examples with PreviewCodeTabs and ensure absolute imports.
 // Scans apps/docs/components/**/*.mdx and wraps usages like <SomethingExample />.
 import { glob } from "glob";
-import fs from "node:fs/promises";
-import path from "node:path";
 
 const root = process.cwd();
 
@@ -22,7 +22,7 @@ const ensureImport = (src, importLine) => {
 const wrapUsage = (src, name) => {
   const pattern = new RegExp(
     `(^|\n)\\s*<${name}(\\s[^>]*)?>\\s*</${name}>|(^|\n)\\s*<${name}(\\s*[^>]*)?/?>`,
-    "g",
+    "g"
   );
   let changed = false;
   src = src.replace(pattern, (m) => {
@@ -35,21 +35,17 @@ const wrapUsage = (src, name) => {
 
 const run = async () => {
   const files = await glob("apps/docs/components/**/*.mdx");
-  let updated = [];
+  const updated = [];
 
   for (const file of files) {
     let src = await fs.readFile(file, "utf8");
     let fileChanged = false;
 
     // Ensure PreviewCodeTabs import absolute
-    src = ensureImport(
-      src,
-      "import PreviewCodeTabs from '/snippets/components/PreviewCodeTabs'",
-    );
+    src = ensureImport(src, "import PreviewCodeTabs from '/snippets/components/PreviewCodeTabs'");
 
     // Detect any JSX tag ending with Example and wrap it
-    const exampleTagRegex =
-      /<([A-Z][A-Za-z0-9]+Example)(\s[^>]*)?(\/)?>(?:\s*<\/\1>)?/g;
+    const exampleTagRegex = /<([A-Z][A-Za-z0-9]+Example)(\s[^>]*)?(\/)?>(?:\s*<\/\1>)?/g;
     let match;
     const seen = new Set();
     while ((match = exampleTagRegex.exec(src))) {

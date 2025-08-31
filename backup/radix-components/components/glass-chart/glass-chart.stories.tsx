@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  BarChart,
-  type ChartDataPoint,
-  DonutChart,
-  LineChart,
-} from "./glass-chart";
+import { BarChart, type ChartDataPoint, DonutChart, LineChart } from "./glass-chart";
 
 const meta = {
   title: "Components/GlassChart",
@@ -23,7 +18,7 @@ const meta = {
 export default meta;
 
 // Sample data
-const lineChartData: Array<ChartDataPoint> = [
+const lineChartData: ChartDataPoint[] = [
   { label: "Jan", value: 65 },
   { label: "Feb", value: 78 },
   { label: "Mar", value: 82 },
@@ -33,7 +28,7 @@ const lineChartData: Array<ChartDataPoint> = [
   { label: "Jul", value: 88 },
 ];
 
-const barChartData: Array<ChartDataPoint> = [
+const barChartData: ChartDataPoint[] = [
   { label: "Product A", value: 1250, color: "#3b82f6" },
   { label: "Product B", value: 2100, color: "#8b5cf6" },
   { label: "Product C", value: 1800, color: "#ec4899" },
@@ -41,7 +36,7 @@ const barChartData: Array<ChartDataPoint> = [
   { label: "Product E", value: 2300, color: "#f59e0b" },
 ];
 
-const donutChartData: Array<ChartDataPoint> = [
+const donutChartData: ChartDataPoint[] = [
   { label: "Desktop", value: 45, color: "#3b82f6" },
   { label: "Mobile", value: 35, color: "#8b5cf6" },
   { label: "Tablet", value: 20, color: "#ec4899" },
@@ -59,12 +54,7 @@ export const LineChartDefault: StoryObj = {
 export const LineChartWithoutDots: StoryObj = {
   render: () => (
     <div className="p-8">
-      <LineChart
-        data={lineChartData}
-        width={600}
-        height={300}
-        showDots={false}
-      />
+      <LineChart data={lineChartData} width={600} height={300} showDots={false} />
     </div>
   ),
 };
@@ -72,12 +62,7 @@ export const LineChartWithoutDots: StoryObj = {
 export const LineChartWithoutGradient: StoryObj = {
   render: () => (
     <div className="p-8">
-      <LineChart
-        data={lineChartData}
-        width={600}
-        height={300}
-        gradient={false}
-      />
+      <LineChart data={lineChartData} width={600} height={300} gradient={false} />
     </div>
   ),
 };
@@ -85,12 +70,7 @@ export const LineChartWithoutGradient: StoryObj = {
 export const LineChartThickStroke: StoryObj = {
   render: () => (
     <div className="p-8">
-      <LineChart
-        data={lineChartData}
-        width={600}
-        height={300}
-        strokeWidth={5}
-      />
+      <LineChart data={lineChartData} width={600} height={300} strokeWidth={5} />
     </div>
   ),
 };
@@ -98,12 +78,7 @@ export const LineChartThickStroke: StoryObj = {
 export const LineChartNoAnimation: StoryObj = {
   render: () => (
     <div className="p-8">
-      <LineChart
-        data={lineChartData}
-        width={600}
-        height={300}
-        animated={false}
-      />
+      <LineChart data={lineChartData} width={600} height={300} animated={false} />
     </div>
   ),
 };
@@ -120,12 +95,7 @@ export const BarChartDefault: StoryObj = {
 export const BarChartHorizontal: StoryObj = {
   render: () => (
     <div className="p-8">
-      <BarChart
-        data={barChartData}
-        width={400}
-        height={400}
-        orientation="horizontal"
-      />
+      <BarChart data={barChartData} width={400} height={400} orientation="horizontal" />
     </div>
   ),
 };
@@ -133,12 +103,7 @@ export const BarChartHorizontal: StoryObj = {
 export const BarChartWithoutValues: StoryObj = {
   render: () => (
     <div className="p-8">
-      <BarChart
-        data={barChartData}
-        width={600}
-        height={300}
-        showValues={false}
-      />
+      <BarChart data={barChartData} width={600} height={300} showValues={false} />
     </div>
   ),
 };
@@ -181,12 +146,7 @@ export const DonutChartWithCenterContent: StoryObj = {
 export const DonutChartLargeInnerRadius: StoryObj = {
   render: () => (
     <div className="p-8">
-      <DonutChart
-        data={donutChartData}
-        width={300}
-        height={300}
-        innerRadius={90}
-      />
+      <DonutChart data={donutChartData} width={300} height={300} innerRadius={90} />
     </div>
   ),
 };
@@ -194,12 +154,7 @@ export const DonutChartLargeInnerRadius: StoryObj = {
 export const DonutChartSmallInnerRadius: StoryObj = {
   render: () => (
     <div className="p-8">
-      <DonutChart
-        data={donutChartData}
-        width={300}
-        height={300}
-        innerRadius={30}
-      />
+      <DonutChart data={donutChartData} width={300} height={300} innerRadius={30} />
     </div>
   ),
 };
@@ -207,12 +162,7 @@ export const DonutChartSmallInnerRadius: StoryObj = {
 export const DonutChartWithoutLabels: StoryObj = {
   render: () => (
     <div className="p-8">
-      <DonutChart
-        data={donutChartData}
-        width={300}
-        height={300}
-        showLabels={false}
-      />
+      <DonutChart data={donutChartData} width={300} height={300} showLabels={false} />
     </div>
   ),
 };

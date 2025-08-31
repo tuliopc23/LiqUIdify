@@ -1,11 +1,11 @@
-export { 
-  LiquidTable,
-  liquidTableVariants,
-  tableHeaderVariants,
-  tableCellVariants,
-  tableRowVariants,
-  type LiquidTableProps,
+export {
   type Column,
+  type ColumnAlign,
+  LiquidTable,
+  type LiquidTableProps,
+  liquidTableVariants,
   type SortDirection,
-  type ColumnAlign
+  tableCellVariants,
+  tableHeaderVariants,
+  tableRowVariants,
 } from "./liquid-table";

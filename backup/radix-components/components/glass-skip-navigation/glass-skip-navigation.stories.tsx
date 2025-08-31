@@ -31,41 +31,26 @@ or accepts custom links.
         <Story />
         <div className="p-8">
           <header>
-            <nav
-              id="navigation"
-              className="mb-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-            >
+            <nav id="navigation" className="mb-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
               <h2 className="mb-2 font-semibold text-lg">Navigation</h2>
               <ul className="flex gap-4">
                 <li>
-                  <a
-                    href="#placeholder"
-                    className="text-blue-900 hover:underline"
-                  >
+                  <a href="#placeholder" className="text-blue-900 hover:underline">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#placeholder"
-                    className="text-blue-900 hover:underline"
-                  >
+                  <a href="#placeholder" className="text-blue-900 hover:underline">
                     About
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#placeholder"
-                    className="text-blue-900 hover:underline"
-                  >
+                  <a href="#placeholder" className="text-blue-900 hover:underline">
                     Services
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#placeholder"
-                    className="text-blue-900 hover:underline"
-                  >
+                  <a href="#placeholder" className="text-blue-900 hover:underline">
                     Contact
                   </a>
                 </li>
@@ -76,8 +61,8 @@ or accepts custom links.
           <main id="main-content" className="mb-8">
             <h1 className="mb-4 font-bold text-2xl">Main Content</h1>
             <p className="mb-4">
-              Press Tab to reveal the skip navigation links. This helps keyboard
-              users quickly navigate to important sections of the page.
+              Press Tab to reveal the skip navigation links. This helps keyboard users quickly
+              navigate to important sections of the page.
             </p>
             <section id="features" className="mb-8">
               <h2 className="mb-2 font-semibold text-xl">Features Section</h2>
@@ -89,18 +74,12 @@ or accepts custom links.
             </section>
           </main>
 
-          <aside
-            id="sidebar"
-            className="mb-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-          >
+          <aside id="sidebar" className="mb-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
             <h2 className="mb-2 font-semibold text-lg">Sidebar</h2>
             <p>Additional content and links.</p>
           </aside>
 
-          <footer
-            id="footer"
-            className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-          >
+          <footer id="footer" className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
             <h2 className="mb-2 font-semibold text-lg">Footer</h2>
             <p>© 2024 Your Company. All rights reserved.</p>
           </footer>
@@ -178,9 +157,7 @@ export const Positions: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="rounded-lg border-2 border-blue-200 border-dashed p-4 dark:border-blue-200">
-        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
-          Top Position (Default)
-        </p>
+        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">Top Position (Default)</p>
         <div className="relative h-32">
           <GlassSkipNavigation
             position="top"
@@ -194,9 +171,7 @@ export const Positions: Story = {
       </div>
 
       <div className="rounded-lg border-2 border-blue-200 border-dashed p-4 dark:border-blue-200">
-        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
-          Left Position
-        </p>
+        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">Left Position</p>
         <div className="relative h-32">
           <GlassSkipNavigation
             position="left"
@@ -210,9 +185,7 @@ export const Positions: Story = {
       </div>
 
       <div className="rounded-lg border-2 border-blue-200 border-dashed p-4 dark:border-blue-200">
-        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
-          Right Position
-        </p>
+        <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">Right Position</p>
         <div className="relative h-32">
           <GlassSkipNavigation
             position="right"
@@ -236,32 +209,23 @@ export const WithInstructions: Story = {
         <h3 className="mb-2 font-semibold">Keyboard Navigation Instructions</h3>
         <ol className="list-inside list-decimal space-y-1 text-sm">
           <li>
-            Press{" "}
-            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">
-              Tab
-            </kbd>{" "}
+            Press <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">Tab</kbd>{" "}
             to focus the skip links
           </li>
           <li>
             Use{" "}
-            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">
-              Arrow Keys
-            </kbd>{" "}
+            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">Arrow Keys</kbd>{" "}
             to navigate between links
           </li>
           <li>
             Press{" "}
-            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">
-              Enter
-            </kbd>{" "}
-            to jump to the section
+            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">Enter</kbd> to
+            jump to the section
           </li>
           <li>
             Press{" "}
-            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">
-              Escape
-            </kbd>{" "}
-            to hide the menu
+            <kbd className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-100">Escape</kbd> to
+            hide the menu
           </li>
         </ol>
       </div>
@@ -274,18 +238,12 @@ export const WithInstructions: Story = {
         ]}
       />
 
-      <div
-        id="demo-content"
-        className="mt-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-      >
+      <div id="demo-content" className="mt-8 rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
         <h2 className="mb-2 font-semibold text-lg">Demo Content</h2>
         <p>This is the main content area that can be skipped to.</p>
       </div>
 
-      <div
-        id="demo-footer"
-        className="mt-4 rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-      >
+      <div id="demo-footer" className="mt-4 rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
         <h2 className="mb-2 font-semibold text-lg">Demo Footer</h2>
         <p>This is the footer area.</p>
       </div>
@@ -307,10 +265,7 @@ export const RealWorldExample: Story = {
       />
 
       <header className="bg-blue-100 shadow dark:bg-blue-100">
-        <nav
-          id="main-navigation"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        >
+        <nav id="main-navigation" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between">
             <div className="flex">
               <div className="flex flex-shrink-0 items-center">
@@ -354,53 +309,36 @@ export const RealWorldExample: Story = {
         </nav>
       </header>
 
-      <main
-        id="main-content"
-        className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"
-      >
+      <main id="main-content" className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <h1 className="mb-4 font-bold text-3xl text-blue-900 dark:text-blue-900">
             Welcome to Our Website
           </h1>
           <div className="prose dark:prose-invert max-w-none">
             <p>
-              This example demonstrates how skip navigation works in a
-              real-world website layout. The skip links allow keyboard users to
-              quickly navigate to important sections.
+              This example demonstrates how skip navigation works in a real-world website layout.
+              The skip links allow keyboard users to quickly navigate to important sections.
             </p>
             <h2>Why Skip Navigation Matters</h2>
             <p>
-              Skip navigation links are crucial for accessibility, especially
-              for users who rely on keyboard navigation or screen readers. They
-              allow users to bypass repetitive content and jump directly to the
-              main content or other important sections.
+              Skip navigation links are crucial for accessibility, especially for users who rely on
+              keyboard navigation or screen readers. They allow users to bypass repetitive content
+              and jump directly to the main content or other important sections.
             </p>
           </div>
         </div>
       </main>
 
-      <footer
-        id="footer-nav"
-        className="bg-blue-100 text-blue-900 dark:bg-blue-100"
-      >
+      <footer id="footer-nav" className="bg-blue-100 text-blue-900 dark:bg-blue-100">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <nav className="flex space-x-4">
-            <a
-              href="#placeholder"
-              className="text-blue-900 hover:text-blue-900"
-            >
+            <a href="#placeholder" className="text-blue-900 hover:text-blue-900">
               Privacy Policy
             </a>
-            <a
-              href="#placeholder"
-              className="text-blue-900 hover:text-blue-900"
-            >
+            <a href="#placeholder" className="text-blue-900 hover:text-blue-900">
               Terms of Service
             </a>
-            <a
-              href="#placeholder"
-              className="text-blue-900 hover:text-blue-900"
-            >
+            <a href="#placeholder" className="text-blue-900 hover:text-blue-900">
               Contact Us
             </a>
           </nav>
@@ -465,8 +403,7 @@ export const AccessibilityTesting: Story = {
       <div className="mb-8 rounded-lg bg-blue-500 p-4 dark:bg-blue-500">
         <h3 className="mb-2 font-semibold">Screen Reader Testing</h3>
         <p className="mb-2 text-sm">
-          Enable your screen reader and navigate through the skip links to test
-          accessibility.
+          Enable your screen reader and navigate through the skip links to test accessibility.
         </p>
         <ul className="list-inside list-disc space-y-1 text-sm">
           <li>Links should be announced as "Skip to [section] link"</li>
@@ -484,26 +421,17 @@ export const AccessibilityTesting: Story = {
       />
 
       <div className="mt-8 space-y-4">
-        <section
-          id="test-1"
-          className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-        >
+        <section id="test-1" className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h2 className="font-semibold text-lg">First Test Section</h2>
           <p>Content of the first section.</p>
         </section>
 
-        <section
-          id="test-2"
-          className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-        >
+        <section id="test-2" className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h2 className="font-semibold text-lg">Second Test Section</h2>
           <p>Content of the second section.</p>
         </section>
 
-        <section
-          id="test-3"
-          className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100"
-        >
+        <section id="test-3" className="rounded-lg bg-blue-100 p-4 dark:bg-blue-100">
           <h2 className="font-semibold text-lg">Third Test Section</h2>
           <p>Content of the third section.</p>
         </section>

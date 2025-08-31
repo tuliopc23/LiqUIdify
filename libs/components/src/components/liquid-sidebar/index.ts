@@ -1,1 +1,7 @@
-export { LiquidSidebar, liquidSidebarVariants, type LiquidSidebarProps, type SidebarItem, type SidebarSection } from "./liquid-sidebar";
+export {
+  LiquidSidebar,
+  type LiquidSidebarProps,
+  liquidSidebarVariants,
+  type SidebarItem,
+  type SidebarSection,
+} from "./liquid-sidebar";

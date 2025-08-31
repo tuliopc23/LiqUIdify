@@ -33,12 +33,7 @@ export default {
 
 export const Playground = () => (
   <div className="apple-glass mx-auto max-w-md p-8">
-    <GlassCombobox
-      options={sampleOptions}
-      placeholder="Select a fruit..."
-      searchable
-      clearable
-    />
+    <GlassCombobox options={sampleOptions} placeholder="Select a fruit..." searchable clearable />
   </div>
 );
 
@@ -54,12 +49,7 @@ export const EdgeCases = () => (
     </div>
     <div>
       <h3 className="mb-2 text-blue-900">Loading State</h3>
-      <GlassCombobox
-        options={sampleOptions}
-        placeholder="Loading..."
-        loading
-        searchable
-      />
+      <GlassCombobox options={sampleOptions} placeholder="Loading..." loading searchable />
     </div>
     <div>
       <h3 className="mb-2 text-blue-900">Empty State</h3>
@@ -75,23 +65,13 @@ export const EdgeCases = () => (
 
 export const Sizes = () => (
   <div className="apple-glass mx-auto max-w-md space-y-4 p-8">
-    <GlassCombobox
-      options={sampleOptions}
-      placeholder="Small size..."
-      size="sm"
-      searchable
-    />
+    <GlassCombobox options={sampleOptions} placeholder="Small size..." size="sm" searchable />
     <GlassCombobox
       options={sampleOptions}
       placeholder="Medium size (default)..."
       size="md"
       searchable
     />
-    <GlassCombobox
-      options={sampleOptions}
-      placeholder="Large size..."
-      size="lg"
-      searchable
-    />
+    <GlassCombobox options={sampleOptions} placeholder="Large size..." size="lg" searchable />
   </div>
 );

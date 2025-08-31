@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import {
-  Home,
-  User,
-  Settings,
   Bell,
-  Search,
-  Heart,
-  ShoppingCart,
   BookOpen,
-  Music,
   Camera,
+  Heart,
+  Home,
   MessageCircle,
+  Music,
+  Search,
+  Settings,
+  ShoppingCart,
   Star,
+  User,
 } from "lucide-react";
+import { useState } from "react";
 import { GlassMobileNav, type NavItem } from "./glass-mobile-nav";
 
 const meta: Meta<typeof GlassMobileNav> = {
@@ -233,8 +233,7 @@ export const InteractiveExample: Story = {
 
         {clickedItem && (
           <div className="px-4 py-2 bg-blue-500/20 text-blue-900 rounded-lg text-sm">
-            Clicked:{" "}
-            {basicNavItems.find((item) => item.id === clickedItem)?.label}
+            Clicked: {basicNavItems.find((item) => item.id === clickedItem)?.label}
           </div>
         )}
       </div>
@@ -326,9 +325,7 @@ export const ECommerceExample: Story = {
           header={
             <div className="flex items-center space-x-2">
               <ShoppingCart className="h-6 w-6 text-blue-900" />
-              <h2 className="text-lg font-semibold text-blue-900">
-                ShopApp
-              </h2>
+              <h2 className="text-lg font-semibold text-blue-900">ShopApp</h2>
             </div>
           }
           footer={
@@ -340,10 +337,7 @@ export const ECommerceExample: Story = {
         />
 
         <div className="text-center text-blue-900/80">
-          <p>
-            Active:{" "}
-            {ecommerceItems.find((item) => item.id === activeItem)?.label}
-          </p>
+          <p>Active: {ecommerceItems.find((item) => item.id === activeItem)?.label}</p>
         </div>
       </div>
     );

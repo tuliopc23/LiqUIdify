@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  CreditCard,
-  File,
-  Folder,
-  Package,
-  Settings,
-  ShoppingCart,
-  User,
-} from "lucide-react";
+import { CreditCard, File, Folder, Package, Settings, ShoppingCart, User } from "lucide-react";
 import React from "react";
 import { type BreadcrumbItem, GlassBreadcrumbs } from "./glass-breadcrumbs";
 
@@ -27,8 +19,7 @@ const meta = {
   argTypes: {
     items: {
       control: "object",
-      description:
-        "Array of breadcrumb items with label, href, onClick, and optional icon",
+      description: "Array of breadcrumb items with label, href, onClick, and optional icon",
     },
     size: {
       control: "select",
@@ -50,8 +41,7 @@ const meta = {
     },
     maxItems: {
       control: "number",
-      description:
-        "Maximum number of items to display (truncates middle items)",
+      description: "Maximum number of items to display (truncates middle items)",
     },
     className: {
       control: "text",
@@ -131,9 +121,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Small
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Small</h4>
         <GlassBreadcrumbs
           size="sm"
           items={[
@@ -144,9 +132,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Medium (Default)
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Medium (Default)</h4>
         <GlassBreadcrumbs
           size="md"
           items={[
@@ -157,9 +143,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Large
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Large</h4>
         <GlassBreadcrumbs
           size="lg"
           items={[
@@ -185,9 +169,7 @@ export const Variants: Story = {
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Default
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Default</h4>
         <GlassBreadcrumbs
           variant="default"
           items={[
@@ -198,9 +180,7 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Solid
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Solid</h4>
         <GlassBreadcrumbs
           variant="solid"
           items={[
@@ -211,9 +191,7 @@ export const Variants: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-          Ghost
-        </h4>
+        <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Ghost</h4>
         <GlassBreadcrumbs
           variant="ghost"
           items={[
@@ -242,11 +220,7 @@ export const NoHomeIcon: Story = {
 // Custom separator
 export const CustomSeparator: Story = {
   args: {
-    items: [
-      { label: "Step 1", href: "#" },
-      { label: "Step 2", href: "#" },
-      { label: "Step 3" },
-    ],
+    items: [{ label: "Step 1", href: "#" }, { label: "Step 2", href: "#" }, { label: "Step 3" }],
   },
   render: () => (
     <div className="w-[600px] space-y-4">
@@ -267,11 +241,7 @@ export const CustomSeparator: Story = {
         separator={<span className="mx-2 text-blue-900/40">/</span>}
       />
       <GlassBreadcrumbs
-        items={[
-          { label: "First", href: "#" },
-          { label: "Second", href: "#" },
-          { label: "Third" },
-        ]}
+        items={[{ label: "First", href: "#" }, { label: "Second", href: "#" }, { label: "Third" }]}
         separator={<span className="mx-2 text-blue-900/40">•</span>}
       />
     </div>
@@ -305,21 +275,15 @@ export const WithTruncation: Story = {
     return (
       <div className="w-[600px] space-y-4">
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-            Full path
-          </h4>
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Full path</h4>
           <GlassBreadcrumbs items={longPath} />
         </div>
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-            Max 5 items
-          </h4>
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Max 5 items</h4>
           <GlassBreadcrumbs items={longPath} maxItems={5} />
         </div>
         <div>
-          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">
-            Max 3 items
-          </h4>
+          <h4 className="mb-2 font-semibold text-sm text-blue-900/80">Max 3 items</h4>
           <GlassBreadcrumbs items={longPath} maxItems={3} />
         </div>
       </div>
@@ -340,9 +304,7 @@ export const RealWorldExamples: Story = {
     <div className="w-[700px] space-y-6">
       {/* E-commerce */}
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          E-commerce Navigation
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">E-commerce Navigation</h4>
         <GlassBreadcrumbs
           items={[
             {
@@ -359,9 +321,7 @@ export const RealWorldExamples: Story = {
 
       {/* File system */}
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          File System
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">File System</h4>
         <GlassBreadcrumbs
           items={[
             { label: "Root", icon: <Folder className="h-4 w-4" />, href: "/" },
@@ -383,9 +343,7 @@ export const RealWorldExamples: Story = {
 
       {/* Multi-step form */}
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          Checkout Process
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">Checkout Process</h4>
         <GlassBreadcrumbs
           variant="ghost"
           items={[
@@ -401,18 +359,14 @@ export const RealWorldExamples: Story = {
             },
             { label: "Payment", icon: <CreditCard className="h-4 w-4" /> },
           ]}
-          separator={
-            <span className="mx-3 text-blue-900/40">→</span>
-          }
+          separator={<span className="mx-3 text-blue-900/40">→</span>}
           showHome={false}
         />
       </div>
 
       {/* Admin panel */}
       <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-        <h4 className="mb-3 font-semibold text-blue-900">
-          Admin Dashboard
-        </h4>
+        <h4 className="mb-3 font-semibold text-blue-900">Admin Dashboard</h4>
         <GlassBreadcrumbs
           size="sm"
           items={[
@@ -433,14 +387,11 @@ export const InteractiveDemo: Story = {
     items: [{ label: "Home" }],
   },
   render: () => {
-    const [path, setPath] = React.useState<Array<string>>(["Home"]);
+    const [path, setPath] = React.useState<string[]>(["Home"]);
 
-    const items: Array<BreadcrumbItem> = path.map((label, index) => ({
+    const items: BreadcrumbItem[] = path.map((label, index) => ({
       label,
-      onClick:
-        index < path.length - 1
-          ? () => setPath(path.slice(0, index + 1))
-          : undefined,
+      onClick: index < path.length - 1 ? () => setPath(path.slice(0, index + 1)) : undefined,
     }));
 
     const addLevel = (label: string) => {
@@ -483,8 +434,7 @@ export const InteractiveDemo: Story = {
         </div>
 
         <p className="text-sm text-blue-900/60">
-          Click breadcrumb items to navigate back, or use buttons to add new
-          levels.
+          Click breadcrumb items to navigate back, or use buttons to add new levels.
         </p>
       </div>
     );
@@ -503,9 +453,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="w-[600px] space-y-8">
       <div className="rounded-lg bg-blue-100/10 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Light Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Light Background</h3>
         <GlassBreadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -517,9 +465,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="rounded-lg bg-blue-100/30 p-6">
-        <h3 className="mb-4 font-semibold text-lg text-blue-900">
-          Dark Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900">Dark Background</h3>
         <GlassBreadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -550,15 +496,13 @@ export const AccessibilityDemo: Story = {
   render: () => (
     <div className="max-w-2xl space-y-4">
       <p className="text-sm text-blue-900/60">
-        Breadcrumbs include proper ARIA labels and current page indication. The
-        navigation is keyboard accessible with proper focus management.
+        Breadcrumbs include proper ARIA labels and current page indication. The navigation is
+        keyboard accessible with proper focus management.
       </p>
 
       <div className="space-y-4">
         <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-          <h4 className="mb-2 font-semibold text-sm text-blue-900">
-            Standard navigation
-          </h4>
+          <h4 className="mb-2 font-semibold text-sm text-blue-900">Standard navigation</h4>
           <GlassBreadcrumbs
             items={[
               { label: "Store", href: "/store" },
@@ -568,15 +512,12 @@ export const AccessibilityDemo: Story = {
             ]}
           />
           <p className="mt-2 text-blue-900/60 text-xs">
-            The last item is marked with aria-current="page" and is not
-            clickable.
+            The last item is marked with aria-current="page" and is not clickable.
           </p>
         </div>
 
         <div className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-4">
-          <h4 className="mb-2 font-semibold text-sm text-blue-900">
-            With keyboard navigation
-          </h4>
+          <h4 className="mb-2 font-semibold text-sm text-blue-900">With keyboard navigation</h4>
           <GlassBreadcrumbs
             items={[
               { label: "Admin", onClick: () => alert("Navigate to Admin") },

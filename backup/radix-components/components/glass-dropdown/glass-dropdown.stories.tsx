@@ -250,12 +250,7 @@ export const BasicExamples: Story = {
 
       <GlassDropdown
         trigger={
-          <GlassButton
-            type="button"
-            variant="ghost"
-            iconOnly
-            aria-label="More options"
-          >
+          <GlassButton type="button" variant="ghost" iconOnly aria-label="More options">
             <MoreVertical className="h-4 w-4" />
           </GlassButton>
         }
@@ -467,68 +462,65 @@ export const RealWorldExamples: Story = {
             </Card.Header>
             <Card.Content>
               <div className="grid grid-cols-4 gap-4">
-                {[
-                  "Document.pdf",
-                  "Presentation.pptx",
-                  "Spreadsheet.xlsx",
-                  "Image.png",
-                ].map((file) => (
-                  <div
-                    key={file}
-                    className="cursor-pointer rounded-lg border border-blue-200 p-4 hover:bg-blue-100 dark:border-blue-200 dark:hover:bg-blue-100"
-                  >
-                    <div className="mb-2 flex items-center justify-between">
-                      <FileText className="h-8 w-8 text-blue-900" />
-                      <GlassDropdown
-                        trigger={
-                          <button
-                            type="button"
-                            className="opacity-0 transition-opacity hover:opacity-100"
-                          >
-                            <MoreVertical className="h-4 w-4" />
-                          </button>
-                        }
-                        items={[
-                          {
-                            label: "Open",
-                            value: "open",
-                            icon: <Eye className="h-4 w-4" />,
-                          },
-                          {
-                            label: "Rename",
-                            value: "rename",
-                            icon: <Edit className="h-4 w-4" />,
-                          },
-                          {
-                            label: "Copy",
-                            value: "copy",
-                            icon: <Copy className="h-4 w-4" />,
-                          },
-                          { separator: true, value: "sep1", label: "" },
-                          {
-                            label: "Share",
-                            value: "share",
-                            icon: <Share2 className="h-4 w-4" />,
-                          },
-                          {
-                            label: "Download",
-                            value: "download",
-                            icon: <Download className="h-4 w-4" />,
-                          },
-                          { separator: true, value: "sep2", label: "" },
-                          {
-                            label: "Delete",
-                            value: "delete",
-                            icon: <Trash2 className="h-4 w-4" />,
-                          },
-                        ]}
-                        align="end"
-                      />
+                {["Document.pdf", "Presentation.pptx", "Spreadsheet.xlsx", "Image.png"].map(
+                  (file) => (
+                    <div
+                      key={file}
+                      className="cursor-pointer rounded-lg border border-blue-200 p-4 hover:bg-blue-100 dark:border-blue-200 dark:hover:bg-blue-100"
+                    >
+                      <div className="mb-2 flex items-center justify-between">
+                        <FileText className="h-8 w-8 text-blue-900" />
+                        <GlassDropdown
+                          trigger={
+                            <button
+                              type="button"
+                              className="opacity-0 transition-opacity hover:opacity-100"
+                            >
+                              <MoreVertical className="h-4 w-4" />
+                            </button>
+                          }
+                          items={[
+                            {
+                              label: "Open",
+                              value: "open",
+                              icon: <Eye className="h-4 w-4" />,
+                            },
+                            {
+                              label: "Rename",
+                              value: "rename",
+                              icon: <Edit className="h-4 w-4" />,
+                            },
+                            {
+                              label: "Copy",
+                              value: "copy",
+                              icon: <Copy className="h-4 w-4" />,
+                            },
+                            { separator: true, value: "sep1", label: "" },
+                            {
+                              label: "Share",
+                              value: "share",
+                              icon: <Share2 className="h-4 w-4" />,
+                            },
+                            {
+                              label: "Download",
+                              value: "download",
+                              icon: <Download className="h-4 w-4" />,
+                            },
+                            { separator: true, value: "sep2", label: "" },
+                            {
+                              label: "Delete",
+                              value: "delete",
+                              icon: <Trash2 className="h-4 w-4" />,
+                            },
+                          ]}
+                          align="end"
+                        />
+                      </div>
+                      <p className="truncate font-medium text-sm">{file}</p>
+                      <p className="text-blue-900 text-xs">2.4 MB</p>
                     </div>
-                    <p className="truncate font-medium text-sm">{file}</p>
-                    <p className="text-blue-900 text-xs">2.4 MB</p>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </Card.Content>
           </Card>
@@ -540,11 +532,7 @@ export const RealWorldExamples: Story = {
           <div className="flex justify-center">
             <GlassDropdown
               trigger={
-                <GlassButton
-                  type="button"
-                  variant="ghost"
-                  className="flex items-center gap-2"
-                >
+                <GlassButton type="button" variant="ghost" className="flex items-center gap-2">
                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600" />
                   <span>John Doe</span>
                   <ChevronDown className="h-4 w-4" />
@@ -635,24 +623,17 @@ export const RealWorldExamples: Story = {
                             project.status === "Pending" &&
                               "bg-blue-500 text-blue-900 dark:bg-blue-500/20 dark:text-blue-900",
                             project.status === "Completed" &&
-                              "bg-blue-500 text-blue-900 dark:bg-blue-500/20 dark:text-blue-900",
+                              "bg-blue-500 text-blue-900 dark:bg-blue-500/20 dark:text-blue-900"
                           )}
                         >
                           {project.status}
                         </span>
                       </td>
-                      <td className="py-3 text-blue-900 dark:text-blue-900">
-                        {project.date}
-                      </td>
+                      <td className="py-3 text-blue-900 dark:text-blue-900">{project.date}</td>
                       <td className="py-3 text-right">
                         <GlassDropdown
                           trigger={
-                            <GlassButton
-                              type="button"
-                              variant="ghost"
-                              iconOnly
-                              size="sm"
-                            >
+                            <GlassButton type="button" variant="ghost" iconOnly size="sm">
                               <MoreVertical className="h-4 w-4" />
                             </GlassButton>
                           }
@@ -813,9 +794,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4 rounded-xl bg-blue-100/80 p-6 dark:bg-blue-100/80">
-          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">
-            Dark Theme
-          </h3>
+          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-900">Dark Theme</h3>
           <GlassDropdown
             trigger={<GlassButton type="button">Dark Theme Menu</GlassButton>}
             items={[

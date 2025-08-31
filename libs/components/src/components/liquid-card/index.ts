@@ -1,10 +1,10 @@
-export { 
+export {
   LiquidCard,
-  LiquidCardHeader,
-  LiquidCardTitle,
-  LiquidCardDescription,
   LiquidCardContent,
+  LiquidCardDescription,
   LiquidCardFooter,
+  LiquidCardHeader,
+  type LiquidCardProps,
+  LiquidCardTitle,
   liquidCardVariants,
-  type LiquidCardProps 
 } from "./liquid-card";

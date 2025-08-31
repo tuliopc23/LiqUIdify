@@ -6,8 +6,8 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { ArrowRight, Download, Heart } from "lucide-react";
 import { GlassButton } from "./glass-button";
-import { Heart, Download, ArrowRight, Loader2 } from "lucide-react";
 
 const meta: Meta<typeof GlassButton> = {
   title: "Components/Liquid Glass/Button",
@@ -137,8 +137,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "All available button sizes with consistent liquid glass styling.",
+        story: "All available button sizes with consistent liquid glass styling.",
       },
     },
   },
@@ -185,8 +184,7 @@ export const IconOnly: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Icon-only buttons with square aspect ratio and liquid glass effect.",
+        story: "Icon-only buttons with square aspect ratio and liquid glass effect.",
       },
     },
   },
@@ -211,8 +209,7 @@ export const Loading: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Loading states with spinner animation and optional loading text.",
+        story: "Loading states with spinner animation and optional loading text.",
       },
     },
   },
@@ -224,16 +221,13 @@ export const InteractiveStates: Story = {
     <div className="flex flex-wrap gap-4 items-center">
       <GlassButton>Normal</GlassButton>
       <GlassButton disabled>Disabled</GlassButton>
-      <GlassButton className="hover:scale-110 active:scale-95">
-        Custom Hover
-      </GlassButton>
+      <GlassButton className="hover:scale-110 active:scale-95">Custom Hover</GlassButton>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story:
-          "Different interactive states showing the liquid glass hover and active effects.",
+        story: "Different interactive states showing the liquid glass hover and active effects.",
       },
     },
   },
@@ -297,8 +291,7 @@ export const DarkMode: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Liquid glass buttons in dark mode with adjusted colors and effects.",
+        story: "Liquid glass buttons in dark mode with adjusted colors and effects.",
       },
     },
     backgrounds: {
@@ -312,12 +305,9 @@ export const ComplexExample: Story = {
   render: () => (
     <div className="space-y-6 p-6 max-w-md">
       <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold text-blue-900">
-          Liquid Glass Demo
-        </h2>
+        <h2 className="text-2xl font-bold text-blue-900">Liquid Glass Demo</h2>
         <p className="text-blue-900/80">
-          Experience the signature liquid glass effect with realistic depth and
-          shine.
+          Experience the signature liquid glass effect with realistic depth and shine.
         </p>
       </div>
 
@@ -330,11 +320,7 @@ export const ComplexExample: Story = {
           <GlassButton variant="secondary" className="flex-1">
             Cancel
           </GlassButton>
-          <GlassButton
-            variant="primary"
-            className="flex-1"
-            rightIcon={<ArrowRight />}
-          >
+          <GlassButton variant="primary" className="flex-1" rightIcon={<ArrowRight />}>
             Continue
           </GlassButton>
         </div>

@@ -1,10 +1,10 @@
-export { 
-  LiquidTooltip,
-  LiquidTooltipTrigger,
-  LiquidTooltipContent,
-  liquidTooltipVariants,
+export {
   arrowVariants,
+  LiquidTooltip,
+  LiquidTooltipContent,
   type LiquidTooltipProps,
+  LiquidTooltipTrigger,
+  liquidTooltipVariants,
+  type TooltipAlign,
   type TooltipSide,
-  type TooltipAlign
 } from "./liquid-tooltip";

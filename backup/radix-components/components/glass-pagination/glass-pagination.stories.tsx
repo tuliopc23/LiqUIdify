@@ -204,11 +204,7 @@ export const Playground: Story = {
 
     return (
       <div className="flex min-h-[200px] items-center justify-center">
-        <GlassPagination
-          {...args}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-        />
+        <GlassPagination {...args} currentPage={currentPage} onPageChange={setCurrentPage} />
       </div>
     );
   },
@@ -224,9 +220,7 @@ export const Variants: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Default Variant
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Default Variant</h3>
           <GlassPagination
             currentPage={page1}
             totalPages={10}
@@ -236,9 +230,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Solid Variant
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Solid Variant</h3>
           <GlassPagination
             currentPage={page2}
             totalPages={10}
@@ -248,9 +240,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Ghost Variant
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Ghost Variant</h3>
           <GlassPagination
             currentPage={page3}
             totalPages={10}
@@ -285,39 +275,18 @@ export const Sizes: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Small Size
-          </h3>
-          <GlassPagination
-            currentPage={page1}
-            totalPages={8}
-            onPageChange={setPage1}
-            size="sm"
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Small Size</h3>
+          <GlassPagination currentPage={page1} totalPages={8} onPageChange={setPage1} size="sm" />
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Medium Size
-          </h3>
-          <GlassPagination
-            currentPage={page2}
-            totalPages={8}
-            onPageChange={setPage2}
-            size="md"
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Medium Size</h3>
+          <GlassPagination currentPage={page2} totalPages={8} onPageChange={setPage2} size="md" />
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Large Size
-          </h3>
-          <GlassPagination
-            currentPage={page3}
-            totalPages={8}
-            onPageChange={setPage3}
-            size="lg"
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Large Size</h3>
+          <GlassPagination currentPage={page3} totalPages={8} onPageChange={setPage3} size="lg" />
         </div>
       </div>
     );
@@ -347,48 +316,23 @@ export const States: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            First Page
-          </h3>
-          <GlassPagination
-            currentPage={page1}
-            totalPages={10}
-            onPageChange={setPage1}
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">First Page</h3>
+          <GlassPagination currentPage={page1} totalPages={10} onPageChange={setPage1} />
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Middle Page
-          </h3>
-          <GlassPagination
-            currentPage={page2}
-            totalPages={10}
-            onPageChange={setPage2}
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Middle Page</h3>
+          <GlassPagination currentPage={page2} totalPages={10} onPageChange={setPage2} />
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Last Page
-          </h3>
-          <GlassPagination
-            currentPage={page3}
-            totalPages={10}
-            onPageChange={setPage3}
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Last Page</h3>
+          <GlassPagination currentPage={page3} totalPages={10} onPageChange={setPage3} />
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Disabled State
-          </h3>
-          <GlassPagination
-            currentPage={page4}
-            totalPages={10}
-            onPageChange={setPage4}
-            disabled
-          />
+          <h3 className="font-medium text-sm text-blue-900/80">Disabled State</h3>
+          <GlassPagination currentPage={page4} totalPages={10} onPageChange={setPage4} disabled />
         </div>
       </div>
     );
@@ -417,9 +361,7 @@ export const ConfigurationExamples: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Compact Mode (No First/Last)
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Compact Mode (No First/Last)</h3>
           <GlassPagination
             currentPage={page1}
             totalPages={20}
@@ -443,9 +385,7 @@ export const ConfigurationExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            No Ellipsis Mode
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">No Ellipsis Mode</h3>
           <GlassPagination
             currentPage={page3}
             totalPages={50}
@@ -481,25 +421,16 @@ export const RealWorldExamples: Story = {
     return (
       <div className="flex flex-col gap-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Search Results Pagination
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Search Results Pagination</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 text-sm text-blue-900/60">
               Showing results 21-30 of 100 total results
             </div>
             <div className="space-y-2">
               {Array.from({ length: 5 }, (_, i) => (
-                <div
-                  key={i}
-                  className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-3"
-                >
-                  <div className="font-medium text-blue-900/90">
-                    Result {21 + i}
-                  </div>
-                  <div className="text-sm text-blue-900/60">
-                    Search result description...
-                  </div>
+                <div key={i} className="rounded-lg border border-blue-300/10 bg-blue-100/5 p-3">
+                  <div className="font-medium text-blue-900/90">Result {21 + i}</div>
+                  <div className="text-sm text-blue-900/60">Search result description...</div>
                 </div>
               ))}
             </div>
@@ -515,17 +446,11 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Data Table Pagination
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Data Table Pagination</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center justify-between">
-              <div className="text-sm text-blue-900/60">
-                Showing 111-120 of 500 items
-              </div>
-              <div className="text-sm text-blue-900/60">
-                Page {tablePage} of 50
-              </div>
+              <div className="text-sm text-blue-900/60">Showing 111-120 of 500 items</div>
+              <div className="text-sm text-blue-900/60">Page {tablePage} of 50</div>
             </div>
             <div className="overflow-hidden rounded-lg border border-blue-300/10">
               <table className="w-full">
@@ -545,15 +470,9 @@ export const RealWorldExamples: Story = {
                 <tbody>
                   {Array.from({ length: 10 }, (_, i) => (
                     <tr key={i} className="border-blue-300/5 border-t">
-                      <td className="px-4 py-3 text-sm text-blue-900/90">
-                        Item {111 + i}
-                      </td>
-                      <td className="px-4 py-3 text-blue-900 text-sm">
-                        Active
-                      </td>
-                      <td className="px-4 py-3 text-sm text-blue-900/60">
-                        2024-01-15
-                      </td>
+                      <td className="px-4 py-3 text-sm text-blue-900/90">Item {111 + i}</td>
+                      <td className="px-4 py-3 text-blue-900 text-sm">Active</td>
+                      <td className="px-4 py-3 text-sm text-blue-900/60">2024-01-15</td>
                     </tr>
                   ))}
                 </tbody>
@@ -571,9 +490,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Image Gallery Pagination
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Image Gallery Pagination</h3>
           <div className="rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <div className="mb-4 grid grid-cols-4 gap-4">
               {Array.from({ length: 12 }, (_, i) => (
@@ -681,9 +598,7 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Ocean Theme
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Ocean Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
             <GlassPagination
               currentPage={page1}
@@ -695,9 +610,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Sunset Theme
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Sunset Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
             <GlassPagination
               currentPage={page2}
@@ -709,9 +622,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-sm text-blue-900/80">
-            Forest Theme
-          </h3>
+          <h3 className="font-medium text-sm text-blue-900/80">Forest Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
             <GlassPagination
               currentPage={page3}

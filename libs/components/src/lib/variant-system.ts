@@ -4,126 +4,119 @@
  * Centralized variant management for LiqUIdify components
  */
 
-import { clsx, type ClassValue } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 
 function cn(...inputs: ClassValue[]) {
- return clsx(inputs);
+  return clsx(inputs);
 }
 
 type VariantProps<T> = {
- [K in keyof T]?: T[K] extends Record<string, any>
- ? keyof T[K]
- : T[K] extends readonly (infer U)[]
- ? U
- : never;
+  [K in keyof T]?: T[K] extends Record<string, any>
+    ? keyof T[K]
+    : T[K] extends readonly (infer U)[]
+      ? U
+      : never;
 };
 
 // Alias for backward compatibility
 export type InferVariantProps<T> = VariantProps<T>;
 
 interface ComponentVariants {
- variant?:
- | "default"
- | "primary"
- | "secondary"
- | "destructive"
- | "outline"
- | "ghost"
- | "link";
- size?: "sm" | "md" | "lg" | "xl";
- intent?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
+  variant?: "default" | "primary" | "secondary" | "destructive" | "outline" | "ghost" | "link";
+  size?: "sm" | "md" | "lg" | "xl";
+  intent?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
 }
 
 interface GlassVariants extends ComponentVariants {
- intensity?: "subtle" | "medium" | "strong" | "extreme";
- blur?: "none" | "sm" | "md" | "lg" | "xl";
- opacity?: number;
+  intensity?: "subtle" | "medium" | "strong" | "extreme";
+  blur?: "none" | "sm" | "md" | "lg" | "xl";
+  opacity?: number;
 }
 
 // More flexible variant config type
 type VariantConfig = Record<string, any>;
 
 export const createVariants = <T extends VariantConfig>(
- config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> },
+  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> }
 ) => {
- return (props?: VariantProps<T>) => {
- const classes: string[] = [];
+  return (props?: VariantProps<T>) => {
+    const classes: string[] = [];
 
- // Add base classes if defined
- if (config.base) {
- if (Array.isArray(config.base)) {
- classes.push(...config.base);
- } else {
- classes.push(config.base);
- }
- }
+    // Add base classes if defined
+    if (config.base) {
+      if (Array.isArray(config.base)) {
+        classes.push(...config.base);
+      } else {
+        classes.push(config.base);
+      }
+    }
 
- // Merge with defaults
- const finalProps = { ...config.defaults, ...props };
+    // Merge with defaults
+    const finalProps = { ...config.defaults, ...props };
 
- // Process each variant
- for (const [key, value] of Object.entries(finalProps)) {
- if (value !== undefined && value !== null && config[key]) {
- const variantValue = config[key];
+    // Process each variant
+    for (const [key, value] of Object.entries(finalProps)) {
+      if (value !== undefined && value !== null && config[key]) {
+        const variantValue = config[key];
 
- // Handle different variant structures
- if (typeof variantValue === "object" && !Array.isArray(variantValue)) {
- // It's a variant map
- const classValue = variantValue[value as string];
- if (classValue) {
- if (Array.isArray(classValue)) {
- classes.push(...(classValue as string[]));
- } else if (typeof classValue === "object") {
- // Handle compound variants
- if (classValue.class) {
- classes.push(classValue.class as string);
- }
- } else {
- classes.push(classValue as string);
- }
- }
- } else if (typeof variantValue === "string") {
- // Direct string value
- if (value === true) {
- classes.push(variantValue);
- }
- }
- }
- }
+        // Handle different variant structures
+        if (typeof variantValue === "object" && !Array.isArray(variantValue)) {
+          // It's a variant map
+          const classValue = variantValue[value as string];
+          if (classValue) {
+            if (Array.isArray(classValue)) {
+              classes.push(...(classValue as string[]));
+            } else if (typeof classValue === "object") {
+              // Handle compound variants
+              if (classValue.class) {
+                classes.push(classValue.class as string);
+              }
+            } else {
+              classes.push(classValue as string);
+            }
+          }
+        } else if (typeof variantValue === "string") {
+          // Direct string value
+          if (value === true) {
+            classes.push(variantValue);
+          }
+        }
+      }
+    }
 
- return cn(...classes);
- };
+    return cn(...classes);
+  };
 };
 
 const glassVariants = createVariants({
- variant: {
-  default: "/10 border-blue-300/20",
-  primary: "bg-apple-blue-500/10 border-apple-blue-500/20",
-  secondary: "/15 border-blue-300/25",
- destructive: "/10 border-blue-500/20",
- outline: "border-2 bg-transparent",
- ghost: "bg-transparent border-transparent hover:/10",
- link: "bg-transparent border-transparent underline-offset-4 hover:underline",
- },
- size: {
- sm: "h-8 px-3 text-sm",
- md: "h-10 px-4 text-base",
- lg: "h-12 px-6 text-lg",
- xl: "h-14 px-8 text-xl",
- },
- intensity: {
- subtle: "backdrop-blur-sm",
- medium: "backdrop-blur-md",
- strong: "backdrop-blur-lg",
- extreme: "backdrop-blur-xl",
- },
- blur: {
- none: "backdrop-blur-none",
- sm: "backdrop-blur-sm",
- md: "backdrop-blur-md",
- lg: "backdrop-blur-lg",
- xl: "backdrop-blur-xl",
- },
+  variant: {
+    default: "/10 border-blue-300/20",
+    primary: "bg-apple-blue-500/10 border-apple-blue-500/20",
+    secondary: "/15 border-blue-300/25",
+    destructive: "/10 border-blue-500/20",
+    outline: "border-2 bg-transparent",
+    ghost: "bg-transparent border-transparent hover:/10",
+    link: "bg-transparent border-transparent underline-offset-4 hover:underline",
+  },
+  size: {
+    sm: "h-8 px-3 text-sm",
+    md: "h-10 px-4 text-base",
+    lg: "h-12 px-6 text-lg",
+    xl: "h-14 px-8 text-xl",
+  },
+  intensity: {
+    subtle: "backdrop-blur-sm",
+    medium: "backdrop-blur-md",
+    strong: "backdrop-blur-lg",
+    extreme: "backdrop-blur-xl",
+  },
+  blur: {
+    none: "backdrop-blur-none",
+    sm: "backdrop-blur-sm",
+    md: "backdrop-blur-md",
+    lg: "backdrop-blur-lg",
+    xl: "backdrop-blur-xl",
+  },
 });
 
 type GlassVariantProps = VariantProps<typeof glassVariants>;

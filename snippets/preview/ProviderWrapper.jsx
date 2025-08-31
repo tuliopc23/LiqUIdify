@@ -1,5 +1,3 @@
-// filepath: snippets/preview/ProviderWrapper.jsx
-import React from "react";
 // Import library styles (exported via "liquidify/styles")
 import "liquidify/styles";
 

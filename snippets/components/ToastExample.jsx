@@ -1,7 +1,8 @@
 // filepath: snippets/components/ToastExample.jsx
+
+import { Button, Toast } from "liquidify";
 import React from "react";
 import ComponentFrame from "../preview/ComponentFrame";
-import { Toast, Button } from "liquidify";
 
 const USAGE = `import { Toast, Button } from "liquidify";
 
@@ -25,7 +26,12 @@ export default function ToastExample() {
     >
       <div className="flex items-center gap-3">
         <Button onClick={() => setOpen(true)}>Show toast</Button>
-        <Toast open={open} onOpenChange={setOpen} title="Saved" description="Your changes have been saved." />
+        <Toast
+          open={open}
+          onOpenChange={setOpen}
+          title="Saved"
+          description="Your changes have been saved."
+        />
       </div>
     </ComponentFrame>
   );

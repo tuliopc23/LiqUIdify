@@ -1,10 +1,5 @@
 // Enhanced wrapper for existing snippet components with Apple design
-export function SnippetShowcase({
-  snippetComponent,
-  title,
-  description,
-  category,
-}) {
+export function SnippetShowcase({ snippetComponent, title, description, category }) {
   return (
     <div className="mb-8">
       {/* Category Header */}
@@ -23,9 +18,7 @@ export function SnippetShowcase({
       {/* Optional description */}
       {description && (
         <div className="mt-4 p-4 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg border border-blue-200/30 dark:border-blue-800/30">
-          <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
-            {description}
-          </p>
+          <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">{description}</p>
         </div>
       )}
     </div>
@@ -38,9 +31,7 @@ export function SnippetGallery({ children, title, description }) {
     <div className="space-y-8">
       {title && (
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            {title}
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
           {description && (
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {description}
@@ -99,17 +90,11 @@ function App() {
           key={index}
           className="bg-white/80 dark:bg-black/40 backdrop-blur-xl rounded-xl p-6 border border-gray-200/30 dark:border-gray-700/30 shadow-lg"
         >
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-            {example.title}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            {example.description}
-          </p>
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{example.title}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{example.description}</p>
           <div className="bg-gray-900 rounded-lg p-3 overflow-x-auto">
             <pre className="text-sm text-gray-100">
-              <code className={`language-${example.language}`}>
-                {example.code}
-              </code>
+              <code className={`language-${example.language}`}>{example.code}</code>
             </pre>
           </div>
         </div>

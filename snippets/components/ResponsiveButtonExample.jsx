@@ -1,7 +1,7 @@
 // filepath: snippets/components/ResponsiveButtonExample.jsx
-import React from "react";
-import ComponentFrame from "../preview/ComponentFrame";
+
 import { ResponsiveButton } from "liquidify";
+import ComponentFrame from "../preview/ComponentFrame";
 
 const USAGE = `import { ResponsiveButton } from "liquidify";
 

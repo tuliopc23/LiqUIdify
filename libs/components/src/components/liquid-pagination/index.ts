@@ -1,6 +1,6 @@
-export { 
+export {
   LiquidPagination,
+  type LiquidPaginationProps,
   liquidPaginationVariants,
   paginationButtonVariants,
-  type LiquidPaginationProps
 } from "./liquid-pagination";

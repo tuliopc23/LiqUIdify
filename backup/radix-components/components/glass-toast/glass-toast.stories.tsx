@@ -177,21 +177,16 @@ const PositionDemo = ({ position }: { position: string }) => {
 export const Positions: Story = {
   render: () => (
     <div className="space-y-8">
-      {[
-        "top-right",
-        "top-left",
-        "bottom-right",
-        "bottom-left",
-        "top-center",
-        "bottom-center",
-      ].map((position) => (
-        <div key={position}>
-          <h3 className="mb-2 font-medium text-sm">{position}</h3>
-          <ToastProvider position={position as unknown}>
-            <PositionDemo position={position} />
-          </ToastProvider>
-        </div>
-      ))}
+      {["top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center"].map(
+        (position) => (
+          <div key={position}>
+            <h3 className="mb-2 font-medium text-sm">{position}</h3>
+            <ToastProvider position={position as unknown}>
+              <PositionDemo position={position} />
+            </ToastProvider>
+          </div>
+        )
+      )}
     </div>
   ),
 };
@@ -391,8 +386,7 @@ const RealWorldDemo = () => {
     addToast({
       type: "error",
       title: "Network Error",
-      description:
-        "Unable to connect to the server. Please check your internet connection.",
+      description: "Unable to connect to the server. Please check your internet connection.",
       duration: 8000,
       action: {
         label: "Retry",
@@ -459,8 +453,7 @@ const FormValidationDemo = () => {
     if (!email) errors.push("Email is required");
     if (!email.includes("@")) errors.push("Invalid email format");
     if (!password) errors.push("Password is required");
-    if (password.length < 8)
-      errors.push("Password must be at least 8 characters");
+    if (password.length < 8) errors.push("Password must be at least 8 characters");
 
     if (errors.length > 0) {
       errors.forEach((error) => {
@@ -483,14 +476,9 @@ const FormValidationDemo = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-80 space-y-4">
-      <h3 className="mb-4 font-semibold">
-        Login Form (with validation toasts)
-      </h3>
+      <h3 className="mb-4 font-semibold">Login Form (with validation toasts)</h3>
       <div>
-        <label
-          htmlFor="email-56avvb"
-          className="mb-1 block font-medium text-sm"
-        >
+        <label htmlFor="email-56avvb" className="mb-1 block font-medium text-sm">
           Email
         </label>
         <input
@@ -503,10 +491,7 @@ const FormValidationDemo = () => {
         />
       </div>
       <div>
-        <label
-          htmlFor="password-t1xfsq"
-          className="mb-1 block font-medium text-sm"
-        >
+        <label htmlFor="password-t1xfsq" className="mb-1 block font-medium text-sm">
           Password
         </label>
         <input
@@ -550,9 +535,7 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-blue-100 p-6">
-        <h3 className="mb-4 font-semibold text-blue-900">
-          Dark Theme
-        </h3>
+        <h3 className="mb-4 font-semibold text-blue-900">Dark Theme</h3>
         <div className="space-y-2">
           <GlassToast type="success" message="Success toast in dark theme" />
           <GlassToast type="error" message="Error toast in dark theme" />

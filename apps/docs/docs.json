@@ -21,12 +21,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "index",
-        "getting-started/installation", 
-        "getting-started/quickstart",
-        "snippets"
-      ]
+      "pages": ["index", "getting-started/installation", "getting-started/quickstart", "snippets"]
     }
   ],
   "footerSocials": {

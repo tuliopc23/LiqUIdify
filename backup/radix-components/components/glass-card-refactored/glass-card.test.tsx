@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "../../test/test-utils";
 import { GlassCard } from "./glass-card";
 
@@ -7,7 +7,7 @@ describe("GlassCard", () => {
     render(
       <GlassCard data-testid="test-card">
         <p>Card content</p>
-      </GlassCard>,
+      </GlassCard>
     );
 
     const card = screen.getByTestId("test-card");
@@ -19,7 +19,7 @@ describe("GlassCard", () => {
     render(
       <GlassCard variant="elevated" data-testid="elevated-card">
         Content
-      </GlassCard>,
+      </GlassCard>
     );
 
     const card = screen.getByTestId("elevated-card");
@@ -32,7 +32,7 @@ describe("GlassCard", () => {
     render(
       <GlassCard onClick={handleClick} data-testid="clickable-card">
         Clickable content
-      </GlassCard>,
+      </GlassCard>
     );
 
     const card = screen.getByTestId("clickable-card");
@@ -46,7 +46,7 @@ describe("GlassCard", () => {
           <GlassCard.Title>Card Title</GlassCard.Title>
         </GlassCard.Header>
         <div>Body content</div>
-      </GlassCard>,
+      </GlassCard>
     );
 
     expect(screen.getByText("Card Title")).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe("GlassCard", () => {
     render(
       <GlassCard className="custom-class" data-testid="custom-card">
         Content
-      </GlassCard>,
+      </GlassCard>
     );
 
     const card = screen.getByTestId("custom-card");

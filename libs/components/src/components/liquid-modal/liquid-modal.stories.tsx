@@ -1,64 +1,67 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { LiquidModal } from './liquid-modal';
-import { LiquidButton } from '../liquid-button';
-import { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { LiquidButton } from "../liquid-button";
+import { LiquidModal } from "./liquid-modal";
 
 const meta: Meta<typeof LiquidModal> = {
-  title: 'Feedback & Overlay/LiquidModal',
+  title: "Feedback & Overlay/LiquidModal",
   component: LiquidModal,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A modal dialog component with Apple HIG liquid glass design, focus management, and accessibility features.',
+        component:
+          "A modal dialog component with Apple HIG liquid glass design, focus management, and accessibility features.",
       },
     },
   },
   argTypes: {
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl', 'full'],
-      description: 'Size of the modal',
+      control: "select",
+      options: ["sm", "md", "lg", "xl", "full"],
+      description: "Size of the modal",
     },
     variant: {
-      control: 'select',
-      options: ['default', 'card', 'dialog', 'sheet'],
-      description: 'Visual style variant',
+      control: "select",
+      options: ["default", "card", "dialog", "sheet"],
+      description: "Visual style variant",
     },
     overlayVariant: {
-      control: 'select',
-      options: ['default', 'dark', 'light', 'blur'],
-      description: 'Overlay backdrop style',
+      control: "select",
+      options: ["default", "dark", "light", "blur"],
+      description: "Overlay backdrop style",
     },
     closeOnOverlayClick: {
-      control: 'boolean',
-      description: 'Close modal when clicking overlay',
+      control: "boolean",
+      description: "Close modal when clicking overlay",
     },
     closeOnEscape: {
-      control: 'boolean',
-      description: 'Close modal when pressing Escape',
+      control: "boolean",
+      description: "Close modal when pressing Escape",
     },
     showCloseButton: {
-      control: 'boolean',
-      description: 'Show close button in header',
+      control: "boolean",
+      description: "Show close button in header",
     },
     preventScroll: {
-      control: 'boolean',
-      description: 'Prevent body scroll when open',
+      control: "boolean",
+      description: "Prevent body scroll when open",
     },
     trapFocus: {
-      control: 'boolean',
-      description: 'Trap focus within modal',
+      control: "boolean",
+      description: "Trap focus within modal",
     },
   },
   decorators: [
     (Story) => (
-      <div style={{ 
-        minHeight: '400px',
-        padding: '2rem',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '12px'
-      }}>
+      <div
+        style={{
+          minHeight: "400px",
+          padding: "2rem",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          borderRadius: "12px",
+        }}
+      >
         <Story />
       </div>
     ),
@@ -72,8 +75,8 @@ type Story = StoryObj<typeof LiquidModal>;
 const SampleContent = () => (
   <div className="space-y-4">
     <p className="text-white/90">
-      This is a sample modal content. You can put any content here including forms, 
-      images, or other components.
+      This is a sample modal content. You can put any content here including forms, images, or other
+      components.
     </p>
     <div className="bg-white/10 p-4 rounded-lg">
       <h3 className="font-medium text-white mb-2">Example Section</h3>
@@ -88,23 +91,23 @@ const FormContent = () => (
   <div className="space-y-4">
     <div>
       <label className="block text-sm font-medium text-white mb-2">Name</label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Enter your name"
         className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
       />
     </div>
     <div>
       <label className="block text-sm font-medium text-white mb-2">Email</label>
-      <input 
-        type="email" 
+      <input
+        type="email"
         placeholder="Enter your email"
         className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
       />
     </div>
     <div>
       <label className="block text-sm font-medium text-white mb-2">Message</label>
-      <textarea 
+      <textarea
         placeholder="Enter your message"
         rows={4}
         className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
@@ -119,9 +122,7 @@ const ModalWrapper = ({ children, ...props }: any) => {
 
   return (
     <>
-      <LiquidButton onClick={() => setOpen(true)}>
-        Open Modal
-      </LiquidButton>
+      <LiquidButton onClick={() => setOpen(true)}>Open Modal</LiquidButton>
       <LiquidModal open={open} onOpenChange={setOpen} {...props}>
         {children}
       </LiquidModal>
@@ -143,7 +144,7 @@ export const Default: Story = {
 
 export const WithFooter: Story = {
   render: (args) => (
-    <ModalWrapper 
+    <ModalWrapper
       {...args}
       footer={
         <div className="flex justify-end gap-2">
@@ -163,7 +164,7 @@ export const WithFooter: Story = {
 
 export const FormModal: Story = {
   render: (args) => (
-    <ModalWrapper 
+    <ModalWrapper
       {...args}
       footer={
         <div className="flex justify-end gap-2">
@@ -197,8 +198,12 @@ export const SmallSize: Story = {
     showCloseButton: false,
     footer: (
       <div className="flex justify-end gap-2">
-        <LiquidButton variant="ghost" size="sm">Cancel</LiquidButton>
-        <LiquidButton variant="destructive" size="sm">Delete</LiquidButton>
+        <LiquidButton variant="ghost" size="sm">
+          Cancel
+        </LiquidButton>
+        <LiquidButton variant="destructive" size="sm">
+          Delete
+        </LiquidButton>
       </div>
     ),
   },
@@ -275,10 +280,11 @@ export const FullscreenModal: Story = {
         <div className="text-white">
           <h2 className="text-2xl font-bold mb-4">Fullscreen Experience</h2>
           <p className="text-white/80 mb-6">
-            This modal takes up the full viewport, perfect for immersive experiences or complex forms.
+            This modal takes up the full viewport, perfect for immersive experiences or complex
+            forms.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
           {Array.from({ length: 6 }, (_, i) => (
             <div key={i} className="bg-white/10 p-6 rounded-lg">
@@ -365,31 +371,29 @@ export const NoCloseButton: Story = {
 export const Interactive: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
-    const [size, setSize] = useState<'sm' | 'md' | 'lg' | 'xl' | 'full'>('md');
-    const [variant, setVariant] = useState<'default' | 'card' | 'dialog' | 'sheet'>('default');
+    const [size, setSize] = useState<"sm" | "md" | "lg" | "xl" | "full">("md");
+    const [variant, setVariant] = useState<"default" | "card" | "dialog" | "sheet">("default");
     const [showFooter, setShowFooter] = useState(true);
 
     return (
       <div className="space-y-6">
         <div className="space-y-4">
-          <LiquidButton onClick={() => setOpen(true)}>
-            Open Interactive Modal
-          </LiquidButton>
-          
+          <LiquidButton onClick={() => setOpen(true)}>Open Interactive Modal</LiquidButton>
+
           <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20 space-y-4">
             <h3 className="text-white font-medium">Modal Controls</h3>
-            
+
             <div>
               <label className="block text-sm text-white/80 mb-2">Size:</label>
               <div className="flex gap-2">
-                {(['sm', 'md', 'lg', 'xl', 'full'] as const).map((s) => (
+                {(["sm", "md", "lg", "xl", "full"] as const).map((s) => (
                   <button
                     key={s}
                     onClick={() => setSize(s)}
                     className={`px-3 py-1 text-sm rounded transition-colors capitalize ${
                       size === s
-                        ? 'bg-blue-500/30 text-blue-200'
-                        : 'bg-white/10 text-white/80 hover:bg-white/20'
+                        ? "bg-blue-500/30 text-blue-200"
+                        : "bg-white/10 text-white/80 hover:bg-white/20"
                     }`}
                   >
                     {s}
@@ -401,14 +405,14 @@ export const Interactive: Story = {
             <div>
               <label className="block text-sm text-white/80 mb-2">Variant:</label>
               <div className="flex gap-2">
-                {(['default', 'card', 'dialog', 'sheet'] as const).map((v) => (
+                {(["default", "card", "dialog", "sheet"] as const).map((v) => (
                   <button
                     key={v}
                     onClick={() => setVariant(v)}
                     className={`px-3 py-1 text-sm rounded transition-colors capitalize ${
                       variant === v
-                        ? 'bg-blue-500/30 text-blue-200'
-                        : 'bg-white/10 text-white/80 hover:bg-white/20'
+                        ? "bg-blue-500/30 text-blue-200"
+                        : "bg-white/10 text-white/80 hover:bg-white/20"
                     }`}
                   >
                     {v}
@@ -438,25 +442,30 @@ export const Interactive: Story = {
           variant={variant}
           title="Interactive Modal"
           description={`This is a ${size} ${variant} modal`}
-          footer={showFooter ? (
-            <div className="flex justify-end gap-2">
-              <LiquidButton variant="ghost" onClick={() => setOpen(false)}>
-                Cancel
-              </LiquidButton>
-              <LiquidButton onClick={() => setOpen(false)}>
-                Confirm
-              </LiquidButton>
-            </div>
-          ) : undefined}
+          footer={
+            showFooter ? (
+              <div className="flex justify-end gap-2">
+                <LiquidButton variant="ghost" onClick={() => setOpen(false)}>
+                  Cancel
+                </LiquidButton>
+                <LiquidButton onClick={() => setOpen(false)}>Confirm</LiquidButton>
+              </div>
+            ) : undefined
+          }
         >
           <div className="space-y-4">
-            <p className="text-white/90">
-              Current configuration:
-            </p>
+            <p className="text-white/90">Current configuration:</p>
             <div className="bg-white/10 p-4 rounded-lg space-y-2">
-              <div className="text-sm text-white/80">Size: <span className="text-white font-mono">{size}</span></div>
-              <div className="text-sm text-white/80">Variant: <span className="text-white font-mono">{variant}</span></div>
-              <div className="text-sm text-white/80">Footer: <span className="text-white font-mono">{showFooter ? 'shown' : 'hidden'}</span></div>
+              <div className="text-sm text-white/80">
+                Size: <span className="text-white font-mono">{size}</span>
+              </div>
+              <div className="text-sm text-white/80">
+                Variant: <span className="text-white font-mono">{variant}</span>
+              </div>
+              <div className="text-sm text-white/80">
+                Footer:{" "}
+                <span className="text-white font-mono">{showFooter ? "shown" : "hidden"}</span>
+              </div>
             </div>
           </div>
         </LiquidModal>

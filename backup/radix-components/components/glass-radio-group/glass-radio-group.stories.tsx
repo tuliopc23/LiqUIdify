@@ -294,9 +294,7 @@ export const PaymentMethod: Story = {
                 <CreditCard className="h-5 w-5" />
                 <div>
                   <p className="font-medium">Credit Card</p>
-                  <p className="text-blue-900 text-sm">
-                    Visa, Mastercard, Amex
-                  </p>
+                  <p className="text-blue-900 text-sm">Visa, Mastercard, Amex</p>
                 </div>
               </div>
             </div>
@@ -307,9 +305,7 @@ export const PaymentMethod: Story = {
                 <Shield className="h-5 w-5" />
                 <div>
                   <p className="font-medium">PayPal</p>
-                  <p className="text-blue-900 text-sm">
-                    Fast and secure
-                  </p>
+                  <p className="text-blue-900 text-sm">Fast and secure</p>
                 </div>
               </div>
             </div>
@@ -320,9 +316,7 @@ export const PaymentMethod: Story = {
                 <Zap className="h-5 w-5" />
                 <div>
                   <p className="font-medium">Cryptocurrency</p>
-                  <p className="text-blue-900 text-sm">
-                    Bitcoin, Ethereum
-                  </p>
+                  <p className="text-blue-900 text-sm">Bitcoin, Ethereum</p>
                 </div>
               </div>
             </div>
@@ -399,9 +393,7 @@ export const ThemeSelection: Story = {
               <Monitor className="h-4 w-4" />
               <div className="flex-1">
                 <p className="font-medium">System</p>
-                <p className="text-blue-900 text-sm">
-                  Match system preference
-                </p>
+                <p className="text-blue-900 text-sm">Match system preference</p>
               </div>
             </div>
           </RadioGroup.Item>
@@ -418,9 +410,7 @@ export const Survey: Story = {
 
     return (
       <div className="w-full max-w-md">
-        <h3 className="mb-2 font-semibold">
-          How satisfied are you with our service?
-        </h3>
+        <h3 className="mb-2 font-semibold">How satisfied are you with our service?</h3>
         <p className="mb-4 text-blue-900 text-sm dark:text-blue-900">
           Your feedback helps us improve
         </p>
@@ -462,9 +452,7 @@ export const DisabledState: Story = {
           <RadioGroup.Item value="option2" disabled>
             Disabled Option
           </RadioGroup.Item>
-          <RadioGroup.Item value="option3">
-            Another Available Option
-          </RadioGroup.Item>
+          <RadioGroup.Item value="option3">Another Available Option</RadioGroup.Item>
         </RadioGroup>
       </div>
       <div>

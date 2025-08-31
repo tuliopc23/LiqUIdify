@@ -1,10 +1,10 @@
-export { 
+export {
   LiquidToast,
-  ToastProvider,
-  useToast,
-  toast,
+  type LiquidToastProps,
   liquidToastVariants,
   type Toast,
   type ToastContextType,
-  type LiquidToastProps 
+  ToastProvider,
+  toast,
+  useToast,
 } from "./liquid-toast";

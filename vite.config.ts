@@ -1,7 +1,8 @@
 // vite.config.ts
-import { defineConfig } from "vite";
+
+import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "client",
@@ -11,10 +12,7 @@ export default defineConfig({
       // Ensure the more specific alias resolves first
       {
         find: "liquidify/css",
-        replacement: resolve(
-          __dirname,
-          "./libs/components/src/styles/index.css",
-        ),
+        replacement: resolve(__dirname, "./libs/components/src/styles/index.css"),
       },
       {
         find: "liquidify",

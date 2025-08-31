@@ -1,15 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  CheckCircle,
-  Download,
-  RefreshCw,
-  Save,
-  Send,
-  Upload,
-} from "lucide-react";
+import { CheckCircle, Download, RefreshCw, Save, Send, Upload } from "lucide-react";
 import { useState } from "react";
 import { GlassButton } from "../glass-button-refactored";
-import { Card } from "../glass-card-refactored";
 import { GlassLoading } from "./glass-loading";
 
 const meta = {
@@ -134,9 +126,7 @@ export const Variants: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
       <div className="text-center">
-        <h3 className="mb-4 font-medium text-blue-900/90">
-          Spinner
-        </h3>
+        <h3 className="mb-4 font-medium text-blue-900/90">Spinner</h3>
         <GlassLoading variant="spinner" size="lg" />
       </div>
 
@@ -164,9 +154,7 @@ export const Sizes: Story = {
     <div className="space-y-8">
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="text-center">
-          <h3 className="mb-4 font-medium text-blue-900/90">
-            Size: {size}
-          </h3>
+          <h3 className="mb-4 font-medium text-blue-900/90">Size: {size}</h3>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <GlassLoading variant="spinner" size={size} />
             <GlassLoading variant="dots" size={size} />
@@ -222,9 +210,7 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Button Loading States
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Button Loading States</h3>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <GlassButton
               type="button"
@@ -237,15 +223,9 @@ export const RealWorldExamples: Story = {
                 }
               }}
               disabled={loadingStates.save}
-              leftIcon={
-                loadingStates.save ? undefined : <Save className="h-4 w-4" />
-              }
+              leftIcon={loadingStates.save ? undefined : <Save className="h-4 w-4" />}
             >
-              {loadingStates.save ? (
-                <GlassLoading variant="spinner" size="sm" />
-              ) : (
-                "Save"
-              )}
+              {loadingStates.save ? <GlassLoading variant="spinner" size="sm" /> : "Save"}
             </GlassButton>
 
             <GlassButton
@@ -259,17 +239,9 @@ export const RealWorldExamples: Story = {
                 }
               }}
               disabled={loadingStates.upload}
-              leftIcon={
-                loadingStates.upload ? undefined : (
-                  <Upload className="h-4 w-4" />
-                )
-              }
+              leftIcon={loadingStates.upload ? undefined : <Upload className="h-4 w-4" />}
             >
-              {loadingStates.upload ? (
-                <GlassLoading variant="dots" size="sm" />
-              ) : (
-                "Upload"
-              )}
+              {loadingStates.upload ? <GlassLoading variant="dots" size="sm" /> : "Upload"}
             </GlassButton>
 
             <GlassButton
@@ -283,17 +255,9 @@ export const RealWorldExamples: Story = {
                 }
               }}
               disabled={loadingStates.download}
-              leftIcon={
-                loadingStates.download ? undefined : (
-                  <Download className="h-4 w-4" />
-                )
-              }
+              leftIcon={loadingStates.download ? undefined : <Download className="h-4 w-4" />}
             >
-              {loadingStates.download ? (
-                <GlassLoading variant="pulse" size="sm" />
-              ) : (
-                "Download"
-              )}
+              {loadingStates.download ? <GlassLoading variant="pulse" size="sm" /> : "Download"}
             </GlassButton>
 
             <GlassButton
@@ -307,57 +271,35 @@ export const RealWorldExamples: Story = {
                 }
               }}
               disabled={loadingStates.send}
-              leftIcon={
-                loadingStates.send ? undefined : <Send className="h-4 w-4" />
-              }
+              leftIcon={loadingStates.send ? undefined : <Send className="h-4 w-4" />}
             >
-              {loadingStates.send ? (
-                <GlassLoading variant="bars" size="sm" />
-              ) : (
-                "Send"
-              )}
+              {loadingStates.send ? <GlassLoading variant="bars" size="sm" /> : "Send"}
             </GlassButton>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Card Loading States
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Card Loading States</h3>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <GlassCard className="p-6">
               <div className="text-center">
-                <GlassLoading
-                  variant="spinner"
-                  size="lg"
-                  text="Loading dashboard data..."
-                />
+                <GlassLoading variant="spinner" size="lg" text="Loading dashboard data..." />
               </div>
             </GlassCard>
 
             <GlassCard className="p-6">
               <div className="text-center">
-                <GlassLoading
-                  variant="dots"
-                  size="lg"
-                  text="Fetching user profile..."
-                />
+                <GlassLoading variant="dots" size="lg" text="Fetching user profile..." />
               </div>
             </GlassCard>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Full Page Loading
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Full Page Loading</h3>
           <div className="relative h-64 overflow-hidden rounded-xl border border-blue-300/10 bg-blue-100/5 backdrop-blur-sm">
             <div className="absolute inset-0 flex items-center justify-center">
-              <GlassLoading
-                variant="pulse"
-                size="xl"
-                text="Loading application..."
-              />
+              <GlassLoading variant="pulse" size="xl" text="Loading application..." />
             </div>
           </div>
         </div>
@@ -369,9 +311,7 @@ export const RealWorldExamples: Story = {
 // Interactive demo with different contexts
 export const InteractiveDemo: Story = {
   render: () => {
-    const [variant, setVariant] = useState<
-      "spinner" | "dots" | "pulse" | "bars"
-    >("spinner");
+    const [variant, setVariant] = useState<"spinner" | "dots" | "pulse" | "bars">("spinner");
     const [size, setSize] = useState<"sm" | "md" | "lg" | "xl">("md");
     const [showText, setShowText] = useState(true);
     const [customText, setCustomText] = useState("Loading...");
@@ -380,9 +320,7 @@ export const InteractiveDemo: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Interactive Controls
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Interactive Controls</h3>
           <div className="grid grid-cols-1 gap-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-4 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-4">
             <div>
               <label
@@ -395,9 +333,7 @@ export const InteractiveDemo: Story = {
                 id="variant-select"
                 value={variant}
                 onChange={(e) =>
-                  setVariant(
-                    e.target.value as "spinner" | "dots" | "pulse" | "bars",
-                  )
+                  setVariant(e.target.value as "spinner" | "dots" | "pulse" | "bars")
                 }
                 className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 text-sm text-blue-900 backdrop-blur-sm"
               >
@@ -418,9 +354,7 @@ export const InteractiveDemo: Story = {
               <select
                 id="size-select"
                 value={size}
-                onChange={(e) =>
-                  setSize(e.target.value as "sm" | "md" | "lg" | "xl")
-                }
+                onChange={(e) => setSize(e.target.value as "sm" | "md" | "lg" | "xl")}
                 className="w-full rounded-lg border border-blue-300/20 bg-blue-100/10 px-3 py-2 text-sm text-blue-900 backdrop-blur-sm"
               >
                 <option value="sm">Small</option>
@@ -458,9 +392,7 @@ export const InteractiveDemo: Story = {
                   checked={showText}
                   onChange={(e) => setShowText(e.target.checked)}
                 />
-                <span className="text-sm text-blue-900/90">
-                  Show Text
-                </span>
+                <span className="text-sm text-blue-900/90">Show Text</span>
               </label>
 
               <label
@@ -473,18 +405,14 @@ export const InteractiveDemo: Story = {
                   checked={isLoading}
                   onChange={(e) => setIsLoading(e.target.checked)}
                 />
-                <span className="text-sm text-blue-900/90">
-                  Is Loading
-                </span>
+                <span className="text-sm text-blue-900/90">Is Loading</span>
               </label>
             </div>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Live Preview
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Live Preview</h3>
           <div className="text-center">
             {isLoading ? (
               <GlassLoading
@@ -513,9 +441,7 @@ export const PerformanceShowcase: Story = {
     return (
       <div className="space-y-8">
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            Performance Test
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Performance Test</h3>
           <div className="mb-4">
             <GlassButton
               type="button"
@@ -553,9 +479,7 @@ export const PerformanceShowcase: Story = {
         </div>
 
         <div>
-          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-            CPU-Friendly Animations
-          </h3>
+          <h3 className="mb-4 font-semibold text-lg text-blue-900/90">CPU-Friendly Animations</h3>
           <div className="space-y-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
             <ul className="space-y-2 text-sm text-blue-900/80">
               <li className="flex items-center gap-2">
@@ -591,9 +515,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Light Theme Simulation
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Light Theme Simulation</h3>
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="text-center">
@@ -613,9 +535,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Dark Theme (Current)
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Dark Theme (Current)</h3>
         <div className="rounded-xl bg-gradient-to-br from-blue-900 to-blue-800 p-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="text-center">
@@ -635,9 +555,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Colorful Background
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Colorful Background</h3>
         <div className="rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 p-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="text-center">
@@ -664,9 +582,7 @@ export const AccessibilityShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Accessibility Features
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Accessibility Features</h3>
         <div className="space-y-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <ul className="space-y-2 text-sm text-blue-900/80">
             <li className="flex items-center gap-2">
@@ -698,38 +614,24 @@ export const AccessibilityShowcase: Story = {
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Screen Reader Test
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Screen Reader Test</h3>
         <div className="text-center">
-          <GlassLoading
-            variant="spinner"
-            size="lg"
-            text="Loading content for screen readers..."
-          />
+          <GlassLoading variant="spinner" size="lg" text="Loading content for screen readers..." />
           <p className="mt-4 text-sm text-blue-900/60">
-            This loading indicator includes proper ARIA attributes for assistive
-            technologies
+            This loading indicator includes proper ARIA attributes for assistive technologies
           </p>
         </div>
       </div>
 
       <div>
-        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">
-          Reduced Motion Support
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg text-blue-900/90">Reduced Motion Support</h3>
         <div className="space-y-4 rounded-xl border border-blue-300/10 bg-blue-100/5 p-6 backdrop-blur-sm">
           <p className="text-sm text-blue-900/80">
-            When users have "prefers-reduced-motion" enabled, animations are
-            automatically reduced or replaced with subtle alternatives to
-            accommodate motion sensitivity.
+            When users have "prefers-reduced-motion" enabled, animations are automatically reduced
+            or replaced with subtle alternatives to accommodate motion sensitivity.
           </p>
           <div className="text-center">
-            <GlassLoading
-              variant="pulse"
-              size="lg"
-              text="Reduced motion friendly loading..."
-            />
+            <GlassLoading variant="pulse" size="lg" text="Reduced motion friendly loading..." />
           </div>
         </div>
       </div>

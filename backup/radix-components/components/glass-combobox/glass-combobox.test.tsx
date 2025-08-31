@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, within } from "../../test/test-utils";
-import { GlassCombobox, type ComboboxOption } from "./glass-combobox";
+import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen, within } from "../../test/test-utils";
+import { type ComboboxOption, GlassCombobox } from "./glass-combobox";
 
 const options: ComboboxOption[] = [
   { value: "react", label: "React" },
@@ -22,13 +22,7 @@ describe("GlassCombobox", () => {
 
   it("filters options by typing and selects with Enter", () => {
     const onChange = vi.fn();
-    render(
-      <GlassCombobox
-        options={options}
-        onChange={onChange}
-        placeholder="Search"
-      />,
-    );
+    render(<GlassCombobox options={options} onChange={onChange} placeholder="Search" />);
 
     const trigger = screen.getByRole("combobox");
     fireEvent.click(trigger);

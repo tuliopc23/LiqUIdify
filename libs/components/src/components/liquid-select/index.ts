@@ -1,1 +1,6 @@
-export { LiquidSelect, liquidSelectVariants, type LiquidSelectProps, type SelectOption } from "./liquid-select";
+export {
+  LiquidSelect,
+  type LiquidSelectProps,
+  liquidSelectVariants,
+  type SelectOption,
+} from "./liquid-select";

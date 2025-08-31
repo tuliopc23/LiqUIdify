@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 
 interface SnippetPreviewProps {
   title: string;
@@ -32,15 +33,12 @@ export function SnippetPreview({
     }
   };
 
-  const baseClasses =
-    "relative rounded-xl overflow-hidden border transition-all duration-300";
+  const baseClasses = "relative rounded-xl overflow-hidden border transition-all duration-300";
   const variantClasses = {
-    default:
-      "bg-white/50 dark:bg-black/20 border-gray-200/50 dark:border-gray-700/50",
+    default: "bg-white/50 dark:bg-black/20 border-gray-200/50 dark:border-gray-700/50",
     elevated:
       "bg-white/80 dark:bg-black/40 border-gray-200/30 dark:border-gray-700/30 shadow-lg backdrop-blur-xl",
-    minimal:
-      "bg-gray-50/50 dark:bg-gray-900/30 border-gray-200/30 dark:border-gray-700/30",
+    minimal: "bg-gray-50/50 dark:bg-gray-900/30 border-gray-200/30 dark:border-gray-700/30",
   };
 
   return (
@@ -49,13 +47,9 @@ export function SnippetPreview({
       <div className="px-6 py-4 border-b border-gray-200/30 dark:border-gray-700/30 bg-white/30 dark:bg-black/20">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-              {title}
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{title}</h3>
             {description && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {description}
-              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
             )}
           </div>
 
@@ -74,11 +68,7 @@ export function SnippetPreview({
               >
                 {copied ? (
                   <>
-                    <svg
-                      className="w-3 h-3"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -89,11 +79,7 @@ export function SnippetPreview({
                   </>
                 ) : (
                   <>
-                    <svg
-                      className="w-3 h-3"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
                       <path d="M3 5a2 2 0 012-2 3 3 0 003 3h6a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L14.586 13H19v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
                     </svg>
@@ -108,9 +94,7 @@ export function SnippetPreview({
 
       {/* Preview Area */}
       <div className="px-6 py-8 bg-gradient-to-br from-gray-50/50 to-white/30 dark:from-gray-900/30 dark:to-black/20">
-        <div className="flex items-center justify-center min-h-[120px]">
-          {children}
-        </div>
+        <div className="flex items-center justify-center min-h-[120px]">{children}</div>
       </div>
 
       {/* Code Block */}

@@ -162,23 +162,17 @@ export const StepIntervals: Story = {
     return (
       <div className="w-80 space-y-8">
         <div>
-          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
-            Step: 1
-          </h3>
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">Step: 1</h3>
           <GlassSlider min={0} max={10} step={1} />
         </div>
 
         <div>
-          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
-            Step: 0.1
-          </h3>
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">Step: 0.1</h3>
           <GlassSlider min={0} max={1} step={0.1} />
         </div>
 
         <div>
-          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">
-            Step: 5
-          </h3>
+          <h3 className="mb-2 font-medium text-blue-900 text-sm dark:text-blue-900">Step: 5</h3>
           <GlassSlider min={0} max={100} step={5} />
         </div>
       </div>
@@ -403,9 +397,7 @@ export const FormIntegration: Story = {
               max={20}
               step={1}
               value={formData.experience}
-              onChange={(value) =>
-                setFormData({ ...formData, experience: value })
-              }
+              onChange={(value) => setFormData({ ...formData, experience: value })}
             />
           </div>
 
@@ -437,9 +429,7 @@ export const FormIntegration: Story = {
               max={40}
               step={5}
               value={formData.availability}
-              onChange={(value) =>
-                setFormData({ ...formData, availability: value })
-              }
+              onChange={(value) => setFormData({ ...formData, availability: value })}
             />
           </div>
         </div>
@@ -468,11 +458,7 @@ export const AccessibilityDemo: Story = {
           </h3>
 
           <div className="space-y-4">
-            <GlassSlider
-              value={value}
-              onChange={setValue}
-              aria-label="Demonstration slider"
-            />
+            <GlassSlider value={value} onChange={setValue} aria-label="Demonstration slider" />
 
             <div className="rounded-lg bg-blue-500 p-4 dark:bg-blue-500/20">
               <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-900">

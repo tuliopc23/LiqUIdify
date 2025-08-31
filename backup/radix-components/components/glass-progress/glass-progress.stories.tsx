@@ -87,21 +87,15 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Small
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Small</p>
         <GlassProgress value={40} size="sm" />
       </div>
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Medium
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Medium</p>
         <GlassProgress value={60} size="md" />
       </div>
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Large
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Large</p>
         <GlassProgress value={80} size="lg" />
       </div>
     </div>
@@ -126,21 +120,15 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Default Glass
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Default Glass</p>
         <GlassProgress value={70} variant="default" />
       </div>
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Gradient
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Gradient</p>
         <GlassProgress value={70} variant="gradient" />
       </div>
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Minimal
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Minimal</p>
         <GlassProgress value={70} variant="minimal" />
       </div>
     </div>
@@ -244,9 +232,7 @@ export const MultipleProgress: Story = {
           <div key={index}>
             <div className="mb-2 flex items-center justify-between">
               <span className="font-medium text-sm">{task.name}</span>
-              <span className="text-blue-900 text-sm dark:text-blue-900">
-                {task.progress}%
-              </span>
+              <span className="text-blue-900 text-sm dark:text-blue-900">{task.progress}%</span>
             </div>
             <GlassProgress value={task.progress} color={task.color} />
           </div>
@@ -261,9 +247,7 @@ export const CustomMaxValue: Story = {
   render: () => (
     <div className="space-y-6">
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Steps: 7 out of 10
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Steps: 7 out of 10</p>
         <GlassProgress value={7} max={10} showValue />
       </div>
       <div>
@@ -273,9 +257,7 @@ export const CustomMaxValue: Story = {
         <GlassProgress value={1250} max={2000} color="purple" />
       </div>
       <div>
-        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">
-          Storage: 4.5GB / 10GB
-        </p>
+        <p className="mb-2 text-blue-900 text-sm dark:text-blue-900">Storage: 4.5GB / 10GB</p>
         <GlassProgress value={4.5} max={10} color="red" />
       </div>
     </div>
@@ -317,9 +299,7 @@ export const RealWorldExamples: Story = {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-sm">document.pdf</span>
-              <span className="text-blue-900 text-sm">
-                {Math.round(uploadProgress)}%
-              </span>
+              <span className="text-blue-900 text-sm">{Math.round(uploadProgress)}%</span>
             </div>
             <GlassProgress value={uploadProgress} size="sm" color="blue" />
             <button
@@ -346,15 +326,9 @@ export const RealWorldExamples: Story = {
               <div key={item.skill}>
                 <div className="mb-1 flex justify-between">
                   <span className="font-medium text-sm">{item.skill}</span>
-                  <span className="text-blue-900 text-sm">
-                    {item.level}%
-                  </span>
+                  <span className="text-blue-900 text-sm">{item.level}%</span>
                 </div>
-                <GlassProgress
-                  value={item.level}
-                  size="sm"
-                  color={item.color}
-                />
+                <GlassProgress value={item.level} size="sm" color={item.color} />
               </div>
             ))}
           </div>
@@ -369,36 +343,21 @@ export const RealWorldExamples: Story = {
                 <span className="text-sm">CPU Usage</span>
                 <span className="text-blue-900 text-sm">45%</span>
               </div>
-              <GlassProgress
-                value={45}
-                size="sm"
-                color="blue"
-                variant="minimal"
-              />
+              <GlassProgress value={45} size="sm" color="blue" variant="minimal" />
             </div>
             <div>
               <div className="mb-1 flex justify-between">
                 <span className="text-sm">Memory</span>
                 <span className="text-blue-900 text-sm">72%</span>
               </div>
-              <GlassProgress
-                value={72}
-                size="sm"
-                color="yellow"
-                variant="minimal"
-              />
+              <GlassProgress value={72} size="sm" color="yellow" variant="minimal" />
             </div>
             <div>
               <div className="mb-1 flex justify-between">
                 <span className="text-sm">Disk Space</span>
                 <span className="text-blue-900 text-sm">89%</span>
               </div>
-              <GlassProgress
-                value={89}
-                size="sm"
-                color="red"
-                variant="minimal"
-              />
+              <GlassProgress value={89} size="sm" color="red" variant="minimal" />
             </div>
           </div>
         </div>
@@ -483,9 +442,7 @@ export const ThemeVariations: Story = {
         </div>
       </div>
       <div className="rounded-lg bg-blue-100 p-6">
-        <h3 className="mb-4 font-semibold text-blue-900">
-          Dark Theme
-        </h3>
+        <h3 className="mb-4 font-semibold text-blue-900">Dark Theme</h3>
         <div className="space-y-3">
           <GlassProgress value={60} showValue />
           <GlassProgress value={60} variant="gradient" color="purple" />
