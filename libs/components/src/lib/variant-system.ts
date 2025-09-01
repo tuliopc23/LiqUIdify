@@ -1,14 +1,10 @@
 /**
- * Variant System
+ * Variant System for LiqUIdify Components
  *
- * Centralized variant management for LiqUIdify components
+ * Centralized variant management using Panda CSS patterns and tokens
  */
 
-import { type ClassValue, clsx } from "clsx";
-
-function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
-}
+import { cx } from "../../../../styled-system/css";
 
 type VariantProps<T> = {
   [K in keyof T]?: T[K] extends Record<string, any>
@@ -84,38 +80,38 @@ export const createVariants = <T extends VariantConfig>(
       }
     }
 
-    return cn(...classes);
+    return cx(...classes);
   };
 };
 
 const glassVariants = createVariants({
   variant: {
-    default: "/10 border-blue-300/20",
-    primary: "bg-apple-blue-500/10 border-apple-blue-500/20",
-    secondary: "/15 border-blue-300/25",
-    destructive: "/10 border-blue-500/20",
-    outline: "border-2 bg-transparent",
-    ghost: "bg-transparent border-transparent hover:/10",
-    link: "bg-transparent border-transparent underline-offset-4 hover:underline",
+    default: "liquid-glass",
+    primary: "liquid-glass",
+    secondary: "liquid-glass",
+    destructive: "liquid-glass",
+    outline: "liquid-glass",
+    ghost: "liquid-glass",
+    link: "liquid-glass",
   },
   size: {
-    sm: "h-8 px-3 text-sm",
-    md: "h-10 px-4 text-base",
-    lg: "h-12 px-6 text-lg",
-    xl: "h-14 px-8 text-xl",
+    sm: "",
+    md: "",
+    lg: "",
+    xl: "",
   },
   intensity: {
-    subtle: "backdrop-blur-sm",
-    medium: "backdrop-blur-md",
-    strong: "backdrop-blur-lg",
-    extreme: "backdrop-blur-xl",
+    subtle: "",
+    medium: "",
+    strong: "",
+    extreme: "",
   },
   blur: {
-    none: "backdrop-blur-none",
-    sm: "backdrop-blur-sm",
-    md: "backdrop-blur-md",
-    lg: "backdrop-blur-lg",
-    xl: "backdrop-blur-xl",
+    none: "",
+    sm: "",
+    md: "",
+    lg: "",
+    xl: "",
   },
 });
 

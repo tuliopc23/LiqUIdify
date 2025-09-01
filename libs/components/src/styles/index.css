@@ -1,8 +1,0 @@
-/**
- * LiqUIdify Component Library - Main CSS Entry Point
- *
- * This file serves as the primary CSS entry point for the component library.
- * It imports the core design system styles.
- */
-
-@import "./new-design-system.css";

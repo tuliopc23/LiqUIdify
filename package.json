@@ -14,14 +14,16 @@
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
   "dependencies": {
+    "@park-ui/panda-preset": "^0.43.1",
     "knip": "^5.63.0"
   },
   "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@biomejs/biome": "^2.2.2",
+    "@pandacss/dev": "^1.2.0",
+    "@pandacss/postcss": "^1.2.0",
     "@playwright/test": "^1.55.0",
-    "@tailwindcss/postcss": "^4.1.12",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -42,8 +44,6 @@
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.12",
-    "tailwindcss-filters": "^3.0.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
@@ -142,6 +142,7 @@
     "access": "public"
   },
   "scripts": {
+    "prepare": "panda codegen",
     "dev:all": "node scripts/dev.mjs",
     "dev:quick": "concurrently \"bun run --filter @liquidify/components build:watch\" \"bun run --filter @liquidify/storybook-app dev\"",
     "build": "bun run build:lib && bun run build:storybook",

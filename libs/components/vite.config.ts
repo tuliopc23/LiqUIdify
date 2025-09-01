@@ -23,10 +23,11 @@ export default defineConfig({
         "react",
         "react-dom",
         "react/jsx-runtime",
-        /^@radix-ui/,
-        "clsx",
+        "@ark-ui/react",
         "framer-motion",
         "lucide-react",
+        // Mark styled-system as external to avoid bundling duplication
+        /^\.\.\/\.\.\/\.\.\/styled-system/,
       ],
       output: [
         {
@@ -35,8 +36,8 @@ export default defineConfig({
           entryFileNames: "index.mjs",
           chunkFileNames: "chunks/[name]-[hash].mjs",
           assetFileNames: (assetInfo) => {
-            if (assetInfo?.name?.endsWith(".css")) {
-              return "new-design-system.css";
+            if (assetInfo?.names?.[0]?.endsWith(".css")) {
+              return "liquid-glass-components.css";
             }
             return "assets/[name]-[hash][extname]";
           },
@@ -47,8 +48,8 @@ export default defineConfig({
           entryFileNames: "index.cjs",
           chunkFileNames: "chunks/[name]-[hash].cjs",
           assetFileNames: (assetInfo) => {
-            if (assetInfo?.name?.endsWith(".css")) {
-              return "new-design-system.css";
+            if (assetInfo?.names?.[0]?.endsWith(".css")) {
+              return "liquid-glass-components.css";
             }
             return "assets/[name]-[hash][extname]";
           },

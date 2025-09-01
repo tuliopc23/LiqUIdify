@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiqUIdify Tabs Demo - Liquid Glass</title>
+    <style>
+        /* Panda CSS Generated Styles - Tabs with Liquid Glass */
+        .tabs__root {
+            /* Liquid Glass Container */
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05)
+            );
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .tabs__root::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .tabs__list {
+            display: flex;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.08),
+                rgba(255, 255, 255, 0.02)
+            );
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 20px;
+            gap: 4px;
+        }
+
+        .tabs__trigger {
+            /* Liquid Glass Tab Button */
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tabs__trigger:hover {
+            color: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05)
+            );
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tabs__trigger[data-state="active"] {
+            /* Active Liquid Glass State */
+            background: linear-gradient(
+                135deg,
+                rgba(59, 130, 246, 0.3),
+                rgba(99, 102, 241, 0.2)
+            );
+            border-color: rgba(99, 102, 241, 0.4);
+            color: white;
+            box-shadow: 
+                0 4px 16px rgba(99, 102, 241, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .tabs__trigger[data-state="active"]::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .tabs__content {
+            /* Liquid Glass Content Area */
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.06),
+                rgba(255, 255, 255, 0.02)
+            );
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            animation: fadeIn 0.3s ease-out;
+            position: relative;
+        }
+
+        .tabs__content h3 {
+            margin: 0 0 16px 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs__content p {
+            margin: 0 0 16px 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.08),
+                rgba(255, 255, 255, 0.02)
+            );
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.12),
+                rgba(255, 255, 255, 0.04)
+            );
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .feature-card h4 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Body Styling */
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #667eea 0%,
+                #764ba2 100%
+            );
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 32px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Hidden content */
+        .tabs__content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌊 LiqUIdify Tabs Demo</h1>
+    <p class="subtitle">
+        Experience our liquid glass tabs component with automatic mass auto-application. 
+        Each tab showcases different aspects of the LiqUIdify design system.
+    </p>
+
+    <div class="tabs__root">
+        <div class="tabs__list" role="tablist">
+            <button class="tabs__trigger" data-state="active" onclick="switchTab('overview')" role="tab">
+                🌟 Overview
+            </button>
+            <button class="tabs__trigger" onclick="switchTab('features')" role="tab">
+                ⚡ Features
+            </button>
+            <button class="tabs__trigger" onclick="switchTab('components')" role="tab">
+                🧩 Components
+            </button>
+            <button class="tabs__trigger" onclick="switchTab('integration')" role="tab">
+                🔗 Integration
+            </button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tabs__content" id="overview" role="tabpanel">
+            <h3>🌊 Liquid Glass Design System</h3>
+            <p>
+                Welcome to LiqUIdify - a revolutionary design system that brings liquid glass aesthetics 
+                to modern web applications. Our glassmorphism components provide depth, elegance, and 
+                visual hierarchy through translucent surfaces and subtle lighting effects.
+            </p>
+            <p>
+                This tabs component demonstrates our mass auto-application architecture where Ark UI 
+                components automatically inherit liquid glass styling through Panda CSS slot recipes.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎨 Glassmorphism</h4>
+                    <p>Translucent surfaces with backdrop blur effects</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ Zero Config</h4>
+                    <p>Automatic styling through mass auto-application</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Tab -->
+        <div class="tabs__content hidden" id="features" role="tabpanel">
+            <h3>⚡ Key Features</h3>
+            <p>
+                LiqUIdify provides a comprehensive set of features designed for modern web development 
+                with a focus on visual excellence and developer experience.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔄 Mass Auto-Application</h4>
+                    <p>19 components automatically styled through Panda CSS recipes</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Type Safety</h4>
+                    <p>Full TypeScript support with proper slot type inference</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🚀 Performance</h4>
+                    <p>JIT CSS generation - only used variants create CSS</p>
+                </div>
+                <div class="feature-card">
+                    <h4>♿ Accessibility</h4>
+                    <p>WCAG 2.1 AA compliance with proper ARIA support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Components Tab -->
+        <div class="tabs__content hidden" id="components" role="tabpanel">
+            <h3>🧩 Available Components</h3>
+            <p>
+                Our component library includes 19 Ark UI components with automatic liquid glass styling. 
+                Each component maintains full functionality while adding beautiful glassmorphism effects.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📁 Slot Recipes (14)</h4>
+                    <p>Dialog, Menu, Select, Tabs, Tooltip, Popover, Toast, Accordion, and more</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎛️ Simple Recipes (5)</h4>
+                    <p>Avatar, Checkbox, Switch, Slider, Progress</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎨 Custom Components</h4>
+                    <p>Button and LiquidGlass wrapper components</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔧 Extensible</h4>
+                    <p>Easy to add new components to the system</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Tab -->
+        <div class="tabs__content hidden" id="integration" role="tabpanel">
+            <h3>🔗 Developer Integration</h3>
+            <p>
+                Integrating LiqUIdify into your project is seamless. Our mass auto-application 
+                architecture ensures that you get beautiful liquid glass styling without any 
+                manual configuration.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📦 Import & Use</h4>
+                    <p>Simply import components - styling is automatic</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🛠️ Build Integration</h4>
+                    <p>Works with Vite, Next.js, and other modern build tools</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎨 Panda CSS</h4>
+                    <p>Powered by Panda CSS for optimal performance</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📚 Documentation</h4>
+                    <p>Comprehensive docs with examples and guides</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Remove active state from all triggers
+            document.querySelectorAll('.tabs__trigger').forEach(trigger => {
+                trigger.setAttribute('data-state', '');
+            });
+
+            // Hide all content panels
+            document.querySelectorAll('.tabs__content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Activate clicked trigger
+            event.target.setAttribute('data-state', 'active');
+
+            // Show corresponding content
+            document.getElementById(tabId).classList.remove('hidden');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const triggers = Array.from(document.querySelectorAll('.tabs__trigger'));
+            const currentIndex = triggers.findIndex(trigger => trigger.getAttribute('data-state') === 'active');
+            
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                let newIndex;
+                
+                if (e.key === 'ArrowLeft') {
+                    newIndex = currentIndex > 0 ? currentIndex - 1 : triggers.length - 1;
+                } else {
+                    newIndex = currentIndex < triggers.length - 1 ? currentIndex + 1 : 0;
+                }
+                
+                triggers[newIndex].click();
+                triggers[newIndex].focus();
+            }
+        });
+    </script>
+</body>
+</html>

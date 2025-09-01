@@ -1,70 +1,43 @@
 /**
- * ClassName utility for combining CSS classes
+ * ClassName utility for combining CSS classes with Panda CSS
  *
- * Provides a robust utility for combining CSS classes with proper handling of
- * conditional classes, arrays, and objects.
+ * Provides a robust utility for combining CSS classes using Panda's cx utility
+ * with proper handling of conditional classes, arrays, and objects.
  */
 
-import { type ClassValue, clsx } from "clsx";
+import { cx } from "../../../../../styled-system/css";
 
 /**
- * Combines multiple class values into a single string
+ * Combines multiple class values into a single string using Panda CSS
  *
  * @param inputs - Array of class values (strings, objects, arrays)
  * @returns Combined class string
  *
  * @example
- * cn('base-class', { 'active': isActive }, ['additional', 'classes'])
+ * cn('base-class', 'additional-class')
  */
-export function cn(...inputs: ClassValue[]): string {
-  return clsx(inputs);
+export function cn(...inputs: Parameters<typeof cx>): string {
+  return cx(...inputs);
 }
 
 /**
- * Creates a conditional className utility with predefined variants
- *
- * @param base - Base class string
- * @param variants - Object of variant classes
- * @returns Function that applies variants based on props
- */
-function _createVariantClass<T extends Record<string, string>>(base: string, variants: T) {
-  return (props: Partial<Record<keyof T, boolean>>): string => {
-    const variantClasses = Object.entries(variants)
-      .filter(([key]) => props[key as keyof T])
-      .map(([, value]) => value);
-
-    return cn(base, ...variantClasses);
-  };
-}
-
-/**
- * Creates a size-based className utility
- *
- * @param sizeMap - Object mapping size keys to class strings
- * @returns Function that returns class based on size prop
- */
-function _createSizeClass<T extends Record<string, string>>(sizeMap: T) {
-  return (size: keyof T): string => sizeMap[size] || "";
-}
-
-/**
- * Surface effect class utilities
- * Provides neutral surface classes for consistent styling
+ * Surface effect class utilities using pre-generated Panda CSS classes
+ * Provides liquid glass surface classes for consistent styling
  */
 export const SURFACE_CLASSES = {
-  default: "bg-white border border-blue-200 shadow-sm",
-  elevated: "bg-white border border-blue-300 shadow-md",
-  floating: "bg-white border border-blue-300 shadow-lg",
-  overlay: "bg-white border border-blue-400 shadow-xl",
-  hover: "hover:shadow-md transition-shadow duration-200",
-  active: "active:scale-[0.98] transition-transform duration-100",
-  pressed: "scale-[0.98] bg-blue-50",
-  interactive: "cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.98]",
-  disabled: "opacity-50 cursor-not-allowed pointer-events-none",
+  default: "liquid-glass",
+  elevated: "liquid-glass liquid-flow",
+  floating: "liquid-glass liquid-wobble-active",
+  overlay: "liquid-glass",
+  hover: "liquid-flow",
+  active: "liquid-pressed",
+  pressed: "liquid-pressed",
+  interactive: "liquid-flow",
+  disabled: "",
 } as const;
 
 /**
- * Get surface effect classes
+ * Get surface effect classes using liquid glass styling
  *
  * @param variant - The surface variant to apply
  * @returns The corresponding surface classes
@@ -81,7 +54,7 @@ export function getGlassClass(variant: keyof typeof SURFACE_CLASSES = "default")
 }
 
 /**
- * Focus ring utility for accessibility
+ * Focus ring utility for accessibility using Panda CSS tokens
  * Provides consistent focus ring styling across components
  */
 export function focusRing(visible = true): string {
@@ -89,25 +62,18 @@ export function focusRing(visible = true): string {
     return "";
   }
 
-  return cn(
-    "focus:outline-none",
-    "focus:ring-2",
-    "focus:ring-blue-500",
-    "focus:ring-opacity-50",
-    "focus:ring-offset-2",
-    "focus:ring-offset-white"
-  );
+  return "focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2";
 }
 
 /**
- * Micro-interaction utility
+ * Micro-interaction utility using liquid glass animations
  * Provides subtle interaction feedback
  */
 function createMicroInteraction(type: "hover" | "active" | "focus" = "hover"): string {
   const interactions = {
-    hover: "hover:scale-[1.02] hover:shadow-lg transition-all duration-200",
-    active: "active:scale-[0.98] transition-all duration-100",
-    focus: "focus:scale-[1.01] focus:shadow-md transition-all duration-150",
+    hover: "liquid-flow",
+    active: "liquid-pressed",
+    focus: "liquid-flow",
   };
 
   return interactions[type];
@@ -116,19 +82,6 @@ function createMicroInteraction(type: "hover" | "active" | "focus" = "hover"): s
 // Create microInteraction object with both function and properties
 export const microInteraction = Object.assign(createMicroInteraction, {
   gentle: createMicroInteraction("hover"),
-  interactive: "hover:scale-[1.02] hover:shadow-lg transition-all duration-200",
-  smooth: "hover:scale-[1.01] transition-all duration-150",
+  interactive: "liquid-flow",
+  smooth: "liquid-flow",
 });
-
-/**
- * Animation duration utilities
- */
-const ANIMATION_DURATIONS = {
-  fast: "duration-150",
-  normal: "duration-300",
-  slow: "duration-500",
-} as const;
-
-function _animationDuration(speed: keyof typeof ANIMATION_DURATIONS = "normal"): string {
-  return ANIMATION_DURATIONS[speed];
-}

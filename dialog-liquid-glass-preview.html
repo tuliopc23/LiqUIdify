@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiqUIdify Dialog Component - Liquid Glass Preview</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Liquid Glass Dialog Styles - Generated from Panda CSS Recipe */
+        .dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .dialog-content {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                        inset 0 2px 4px rgba(0, 0, 0, 0.1), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4), 
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.15), 
+                        0 0 20px rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            animation: dialogAppear 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .dialog-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dialog-content::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: inherit;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dialog-title {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 1);
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .dialog-description {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .dialog-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 1);
+            z-index: 3;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .dialog-close:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.05);
+        }
+
+        .dialog-trigger {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                        inset 0 2px 4px rgba(0, 0, 0, 0.1), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4), 
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.15), 
+                        0 0 20px rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 1);
+            font-weight: 500;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .dialog-trigger::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dialog-trigger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2), 
+                        inset 0 2px 4px rgba(0, 0, 0, 0.1), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.5), 
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.15), 
+                        0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .dialog-trigger span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dialog-actions {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .dialog-button {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            color: rgba(255, 255, 255, 1);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .dialog-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .dialog-button.primary {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.3) 100%);
+            border-color: rgba(96, 165, 250, 0.4);
+        }
+
+        .demo-container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .demo-title {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 32px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes dialogAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes backdropAppear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .dialog-backdrop.show {
+            animation: backdropAppear 0.3s ease-out;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            animation: rippleEffect 0.6s ease-out;
+        }
+
+        @keyframes rippleEffect {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .feature-item {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .feature-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+            pointer-events: none;
+        }
+
+        .feature-title {
+            position: relative;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            position: relative;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">LiqUIdify Dialog</h1>
+        <p class="demo-subtitle">Apple-inspired liquid glass dialog component with blur effects and smooth animations</p>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-title">✨ Liquid Glass Effect</div>
+                <div class="feature-description">Translucent background with backdrop blur and gradient overlays</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🎨 Apple Design Language</div>
+                <div class="feature-description">Inspired by macOS and iOS interface design patterns</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">⚡ Smooth Animations</div>
+                <div class="feature-description">Fluid transitions with custom easing curves</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🔍 Perfect Shadows</div>
+                <div class="feature-description">Multi-layered shadows with inner highlights</div>
+            </div>
+        </div>
+
+        <button class="dialog-trigger" onclick="openDialog()">
+            <span>Open Dialog</span>
+        </button>
+    </div>
+
+    <!-- Dialog -->
+    <div id="dialog-backdrop" class="dialog-backdrop hidden">
+        <div class="dialog-content">
+            <button class="dialog-close" onclick="closeDialog()">×</button>
+            
+            <h2 class="dialog-title">Welcome to LiqUIdify</h2>
+            
+            <p class="dialog-description">
+                This is a preview of the Dialog component from the LiqUIdify design system. 
+                Notice the beautiful liquid glass effect with backdrop blur, subtle gradients, 
+                and the multi-layered shadow system that creates depth and visual hierarchy.
+            </p>
+            
+            <p class="dialog-description">
+                The component features:
+                <br>• Backdrop blur for depth
+                <br>• Gradient overlays for glass effect  
+                <br>• Multi-layer shadow system
+                <br>• Smooth animations with custom easing
+                <br>• Full accessibility support
+            </p>
+            
+            <div class="dialog-actions">
+                <button class="dialog-button" onclick="closeDialog()">Cancel</button>
+                <button class="dialog-button primary" onclick="closeDialog()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDialog() {
+            const backdrop = document.getElementById('dialog-backdrop');
+            backdrop.classList.remove('hidden');
+            backdrop.classList.add('show');
+            
+            // Add ripple effect to trigger button
+            const button = event.currentTarget;
+            createRipple(button, event);
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDialog() {
+            const backdrop = document.getElementById('dialog-backdrop');
+            backdrop.classList.add('hidden');
+            backdrop.classList.remove('show');
+            
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        function createRipple(element, event) {
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Close dialog on backdrop click
+        document.getElementById('dialog-backdrop').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDialog();
+            }
+        });
+
+        // Close dialog on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDialog();
+            }
+        });
+
+        // Add hover effects to buttons
+        document.querySelectorAll('.dialog-trigger, .dialog-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-1px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('dialog-trigger')) {
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+            
+            button.addEventListener('click', function(e) {
+                createRipple(this, e);
+            });
+        });
+    </script>
+</body>
+</html>

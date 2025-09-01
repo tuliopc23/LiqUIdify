@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Button Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* CSS Variables */
+        :root {
+            --liquid-glass-bg: rgba(255, 255, 255, 0.1);
+            --liquid-glass-border: rgba(255, 255, 255, 0.2);
+            --liquid-ripple-color: rgba(255, 255, 255, 0.3);
+            --liquid-flow-duration: 0.8s;
+            --liquid-bounce-duration: 0.6s;
+        }
+
+        /* Liquid Glass Base Styles */
+        .liquid-glass {
+            background: var(--liquid-glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--liquid-glass-border);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+                0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all var(--liquid-flow-duration) cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            transform-origin: center center;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .liquid-glass::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: inherit;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.02) 50%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Button Base Styles - Combined with Liquid Glass */
+        .liquid-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 500;
+            font-size: 16px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            white-space: nowrap;
+            
+            /* Liquid Glass Effects Applied Directly */
+            background: var(--liquid-glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--liquid-glass-border);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+                0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all var(--liquid-flow-duration) cubic-bezier(0.23, 1, 0.32, 1);
+            transform-origin: center center;
+            overflow: hidden;
+        }
+
+        .liquid-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .liquid-button::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: inherit;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.02) 50%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ensure button content is above pseudo elements */
+        .liquid-button > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Button Variants */
+        .liquid-button--primary {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.3) 100%);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+        }
+
+        .liquid-button--secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .liquid-button--ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .liquid-button--danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.3) 100%);
+            border: 1px solid rgba(248, 113, 113, 0.4);
+        }
+
+        /* Button Sizes */
+        .liquid-button--sm {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 12px;
+        }
+
+        .liquid-button--lg {
+            padding: 16px 32px;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+
+        .liquid-button--xl {
+            padding: 20px 40px;
+            font-size: 20px;
+            border-radius: 24px;
+        }
+
+        /* Hover Effects */
+        .liquid-button:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 16px 50px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        /* Active/Pressed States */
+        .liquid-button:active {
+            transform: translateY(1px) scale(0.96);
+            border-color: rgba(255, 255, 255, 0.5);
+            transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Wobble Animation */
+        .liquid-wobble {
+            animation: liquid-wobble 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes liquid-wobble {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            8% {
+                transform: scale(1.12) rotate(-2deg);
+            }
+            16% {
+                transform: scale(0.92) rotate(2.5deg);
+            }
+            24% {
+                transform: scale(1.06) rotate(-1.8deg);
+            }
+            32% {
+                transform: scale(0.95) rotate(1.5deg);
+            }
+            40% {
+                transform: scale(1.04) rotate(-1deg);
+            }
+            48% {
+                transform: scale(0.97) rotate(0.8deg);
+            }
+            56% {
+                transform: scale(1.02) rotate(-0.6deg);
+            }
+            64% {
+                transform: scale(0.99) rotate(0.4deg);
+            }
+            72% {
+                transform: scale(1.01) rotate(-0.3deg);
+            }
+            80% {
+                transform: scale(0.995) rotate(0.2deg);
+            }
+            88% {
+                transform: scale(1.005) rotate(-0.1deg);
+            }
+            96% {
+                transform: scale(0.998) rotate(0.05deg);
+            }
+        }
+
+        /* Demo Layout */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .demo-section {
+            margin-bottom: 60px;
+        }
+
+        .demo-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .demo-description {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Disabled State */
+        .liquid-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Variants Section -->
+        <div class="demo-section">
+            <h1 class="demo-title">Liquid Glass Button Variants</h1>
+            <p class="demo-description">Interactive glassmorphism buttons with physics-based animations</p>
+            <div class="demo-grid">
+                <button class="liquid-button liquid-button--primary">Primary</button>
+                <button class="liquid-button liquid-button--secondary">Secondary</button>
+                <button class="liquid-button liquid-button--ghost">Ghost</button>
+                <button class="liquid-button liquid-button--danger">Danger</button>
+            </div>
+        </div>
+
+        <!-- Sizes Section -->
+        <div class="demo-section">
+            <h2 class="demo-title">Button Sizes</h2>
+            <div class="demo-grid">
+                <button class="liquid-button liquid-button--primary liquid-button--sm">Small</button>
+                <button class="liquid-button liquid-button--primary">Medium</button>
+                <button class="liquid-button liquid-button--primary liquid-button--lg">Large</button>
+                <button class="liquid-button liquid-button--primary liquid-button--xl">Extra Large</button>
+            </div>
+        </div>
+
+        <!-- States Section -->
+        <div class="demo-section">
+            <h2 class="demo-title">Button States</h2>
+            <div class="demo-grid">
+                <button class="liquid-button liquid-button--primary">Normal</button>
+                <button class="liquid-button liquid-button--primary">
+                    <div class="loading-spinner"></div>
+                    Loading
+                </button>
+                <button class="liquid-button liquid-button--primary" disabled>Disabled</button>
+            </div>
+        </div>
+
+        <!-- Interactive Section -->
+        <div class="demo-section">
+            <h2 class="demo-title">Interactive Effects</h2>
+            <p class="demo-description">Click, hover, and watch the liquid physics in action</p>
+            <div class="demo-grid">
+                <button class="liquid-button liquid-button--primary liquid-button--lg" id="ripple-btn">
+                    Click for Ripple Effect
+                </button>
+                <button class="liquid-button liquid-button--secondary liquid-button--lg" id="wobble-btn">
+                    Click for Wobble
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ripple Effect Function
+        function createRipple(event, element) {
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '8px';
+            ripple.style.height = '8px';
+            
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Wobble Effect Function
+        function addWobble(element) {
+            element.classList.add('liquid-wobble');
+            setTimeout(() => {
+                element.classList.remove('liquid-wobble');
+            }, 1800);
+        }
+
+        // Add Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ripple effect for all liquid buttons
+            document.querySelectorAll('.liquid-button').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    createRipple(e, this);
+                });
+            });
+
+            // Special wobble effect for wobble button
+            const wobbleBtn = document.getElementById('wobble-btn');
+            if (wobbleBtn) {
+                wobbleBtn.addEventListener('click', function() {
+                    addWobble(this);
+                });
+            }
+
+            // Enhanced ripple for ripple button
+            const rippleBtn = document.getElementById('ripple-btn');
+            if (rippleBtn) {
+                rippleBtn.addEventListener('click', function(e) {
+                    createRipple(e, this);
+                });
+            }
+        });
+
+        // Touch Support
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>

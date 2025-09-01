@@ -3,72 +3,25 @@
 Essential guidance for AI coding agents in LiqUIdify repository.
 
 ## Build/Test Commands
-
 ```bash
 bun run build:lib                    # Build component library
 bun run type-check                   # TypeScript checking
-bun run lint                         # Lint with qlty
-bun run format                       # Format code
+bun run lint                         # Lint with Biome
+bun run format                       # Format with Biome
 bun test                             # Run all tests
 bun run test:coverage               # Tests with coverage
 vitest run path/to/file.test.tsx     # Run single test
 ```
 
 ## Code Style Guidelines
-
-### TypeScript
-
-- Strict mode enabled, explicit types required
-- Components use `forwardRef<Element, Props>`
-- Import types with `import type`
-- No implicit `any` types
-
-### Import Order
-
-1. External libraries (React, Radix UI)
-2. Internal utilities/hooks
-3. Type imports
-
-### Naming
-
-- Components: PascalCase (`GlassButton`)
-- Functions: camelCase (`useLiquidGlass`)
-- Files: kebab-case (`glass-button.tsx`)
-- Tests: `.test.tsx`, Stories: `.stories.tsx`
-
-### Component Structure
-
-```typescript
-/** JSDoc description */
-import { ... } from "...";
-
-// Types first
-interface Props extends React.HTMLAttributes<Element> { ... }
-
-// Component with forwardRef
-export const Component = forwardRef<Element, Props>((props, ref) => {
-  // Implementation
-});
-Component.displayName = "Component";
-```
-
-### Testing
-
-- Vitest + Testing Library
-- Test accessibility, variants, edge cases
-- Use `describe/it` blocks with clear descriptions
-
-### Accessibility
-
-- WCAG 2.1 AA compliance required
-- ARIA attributes, keyboard navigation
-- Screen reader support, focus management
-
-### Performance
-
-- Use `React.memo` for expensive components
-- Tree-shaking friendly exports
-- 60fps animations, minimize layout thrashing</content>
+- **TypeScript**: Strict mode, explicit types, no implicit `any`
+- **Components**: Use `forwardRef<Element, Props>` with `displayName`
+- **Imports**: External libs → internal utils → type imports
+- **Naming**: PascalCase components, camelCase functions, kebab-case files
+- **Formatting**: Biome (2 spaces, 100 width, double quotes)
+- **Testing**: Vitest + Testing Library, test accessibility & edge cases
+- **Accessibility**: WCAG 2.1 AA compliance required
+- **Performance**: Use `React.memo`, tree-shaking friendly exports</content>
   </xai:function_call/>
   </xai:function_call name="run">
   <parameter name="command">cat AGENTS.md | wc -l

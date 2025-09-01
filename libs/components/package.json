@@ -29,18 +29,17 @@
     "type-check": "bunx tsc --noEmit --project tsconfig.lib.json"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
+    "@ark-ui/react": "^5.22.0",
+    "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.23.12",
-    "lucide-react": "^0.539.0",
-    "tailwind-merge": "^2.5.4"
+    "lucide-react": "^0.539.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
+    "@pandacss/dev": "^1.2.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.3.3",
-    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.9.2",
     "vite": "^7.1.2",
     "vite-tsconfig-paths": "^5.1.4"

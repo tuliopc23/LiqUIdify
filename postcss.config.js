@@ -1,20 +1,20 @@
 /**
  * Root PostCSS configuration
  *
- * Enables Tailwind CSS and Autoprefixer across:
+ * Enables Panda CSS and Autoprefixer across:
  * - Storybook (apps/storybook) via Vite
  * - Library builds (libs/components) via Vite
  *
- * Using Tailwind CSS v4 syntax.
+ * Using Panda CSS for styling.
  */
 
-import tailwind from "@tailwindcss/postcss";
+import pandacss from "@pandacss/postcss";
 import autoprefixer from "autoprefixer";
 
 export default {
   plugins: [
-    // Tailwind utilities and @theme/@utility processing
-    tailwind(),
+    // Panda CSS utilities and token processing
+    pandacss(),
     // Vendor prefixing based on the project's browserslist
     autoprefixer(),
   ],
