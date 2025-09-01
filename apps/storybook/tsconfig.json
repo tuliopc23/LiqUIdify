@@ -1,40 +1,37 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
+    // Environment setup & latest features
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "ES2022",
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
     "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Path mapping for components
     "baseUrl": ".",
-    "types": ["vite/client"],
     "paths": {
-      "@/*": ["../../libs/components/src/*"],
-      "@/components/*": ["../../libs/components/src/components/*"],
-      "@/core/*": ["../../libs/components/src/core/*"],
-      "@/hooks/*": ["../../libs/components/src/hooks/*"],
-      "@/styles/*": ["../../libs/components/src/styles/*"],
-      "@/tokens/*": ["../../libs/components/src/tokens/*"],
-      "@/types/*": ["../../libs/components/src/types/*"]
+      "@liquidify/components": ["../../libs/components/src"],
+      "@liquidify/components/*": ["../../libs/components/src/*"]
     }
   },
-  "include": ["./**/*", "../../reset.d.ts"],
-  "exclude": [
-    "node_modules",
-    "storybook-static",
-    "**/*.test.*",
-    "**/*.spec.*",
-    "../../libs/components/src/stories/**",
-    "../../libs/components/src/examples/**",
-    "../../libs/components/src/test/**",
-    "../../libs/components/src/**/__tests__/**"
-  ]
+  "include": ["src", ".storybook", "../../styled-system"]
 }

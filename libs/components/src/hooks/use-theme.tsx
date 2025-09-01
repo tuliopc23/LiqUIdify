@@ -56,9 +56,9 @@ export function ThemeProvider({
     // Set data attribute for theme
     root.dataset.theme = theme;
 
-    // Only set minimal compatibility properties for shadcn/ui and docs
+    // Only set minimal compatibility properties for docs
     const compatibilityProperties = {
-      // Semantic colors (shadcn/ui compatibility)
+      // Semantic colors for docs compatibility
       "--background": theme === "dark" ? "222.2 84% 4.9%" : "0 0% 100%",
       "--foreground": theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
       "--card": theme === "dark" ? "222.2 84% 4.9%" : "0 0% 100%",
