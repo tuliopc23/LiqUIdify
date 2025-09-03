@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiqUIdify Components - Apple HIG Style Showcase</title>
+    <style>
+        /* Apple-inspired design system */
+        :root {
+            /* Colors */
+            --sf-blue: #007AFF;
+            --sf-purple: #5856D6;
+            --sf-green: #34C759;
+            --sf-red: #FF3B30;
+            --sf-orange: #FF9500;
+            --sf-yellow: #FFCC00;
+            --sf-pink: #FF2D92;
+            --sf-gray: #8E8E93;
+            
+            /* Backgrounds */
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1E;
+            --bg-tertiary: #2C2C2E;
+            --bg-quaternary: #3A3A3C;
+            
+            /* Text */
+            --text-primary: #FFFFFF;
+            --text-secondary: #EBEBF5;
+            --text-tertiary: #EBEBF599;
+            --text-quaternary: #EBEBF54D;
+            
+            /* Glass effects */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-blur: 20px;
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Border radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-xxl) var(--spacing-lg);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .component-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .component-preview {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .component-description {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+        
+        /* Component styles */
+        .liquid-button {
+            background: linear-gradient(135deg, var(--sf-blue) 0%, var(--sf-purple) 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
+        
+        .liquid-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+        }
+        
+        .liquid-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            color: var(--text-primary);
+        }
+        
+        .liquid-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+        
+        .liquid-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .liquid-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .liquid-tab {
+            flex: 1;
+            padding: 8px 16px;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+        
+        .liquid-tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .liquid-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .liquid-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-purple));
+            width: 70%;
+            border-radius: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        .liquid-switch {
+            width: 50px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .liquid-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .liquid-switch.active {
+            background: var(--sf-green);
+        }
+        
+        .liquid-switch.active::after {
+            transform: translateX(20px);
+        }
+        
+        .liquid-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--sf-pink), var(--sf-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .liquid-badge {
+            background: var(--sf-red);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .liquid-modal {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-xl);
+            max-width: 200px;
+            text-align: center;
+        }
+        
+        .liquid-toast {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .liquid-slider {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .liquid-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-purple));
+            border-radius: 3px;
+        }
+        
+        .liquid-slider::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 55%;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @media (max-width: 768px) {
+            .component-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>LiqUIdify Components</h1>
+            <p>Apple Human Interface Guidelines compliant React components with liquid glass aesthetics</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Core Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <button class="liquid-button">Get Started</button>
+                    </div>
+                    <h3 class="component-title">GlassButton</h3>
+                    <p class="component-description">Interactive buttons with magnetic hover effects, ripple animations, and multiple variants for different use cases.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-card">
+                            <h4 style="margin-bottom: 8px;">Welcome</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">This is a glass card component</p>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassCard</h3>
+                    <p class="component-description">Container components with glassmorphism effects, perfect for grouping content with visual hierarchy.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <input class="liquid-input" type="text" placeholder="Enter your text..." />
+                    </div>
+                    <h3 class="component-title">GlassInput</h3>
+                    <p class="component-description">Form inputs with validation states, icons, and seamless glass styling for modern interfaces.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-modal">
+                            <h4 style="margin-bottom: 8px;">Modal Title</h4>
+                            <p style="font-size: 0.8rem;">Modal content goes here</p>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassModal</h3>
+                    <p class="component-description">Overlay dialogs with focus management, animations, and accessibility features built-in.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Navigation Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-tabs">
+                            <div class="liquid-tab active">Home</div>
+                            <div class="liquid-tab">About</div>
+                            <div class="liquid-tab">Contact</div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassTabs</h3>
+                    <p class="component-description">Tabbed interfaces with smooth transitions, keyboard navigation, and indicator animations.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <span>Home</span>
+                            <span>›</span>
+                            <span>Components</span>
+                            <span>›</span>
+                            <span style="color: var(--text-primary);">Tabs</span>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassBreadcrumbs</h3>
+                    <p class="component-description">Navigation breadcrumbs with customizable separators and hover effects for wayfinding.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: flex; gap: 12px;">
+                            <div style="width: 20px; height: 2px; background: var(--text-primary); border-radius: 1px;"></div>
+                            <div style="width: 20px; height: 2px; background: var(--text-primary); border-radius: 1px;"></div>
+                            <div style="width: 20px; height: 2px; background: var(--text-primary); border-radius: 1px;"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassMobileNav</h3>
+                    <p class="component-description">Mobile-optimized navigation with gesture support and smooth animations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Form Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 20px; height: 20px; background: var(--sf-blue); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">✓</div>
+                            <span>Enable notifications</span>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassCheckbox</h3>
+                    <p class="component-description">Stylized checkboxes with smooth animations and group management capabilities.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-switch active"></div>
+                    </div>
+                    <h3 class="component-title">GlassSwitch</h3>
+                    <p class="component-description">Toggle switches with fluid animations and customizable states for settings interfaces.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-slider"></div>
+                    </div>
+                    <h3 class="component-title">GlassSlider</h3>
+                    <p class="component-description">Range sliders with smooth dragging interactions and value display options.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="position: relative; display: inline-block; width: 150px;">
+                            <div class="liquid-input" style="padding-right: 30px; cursor: pointer;">Select option</div>
+                            <div style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;">▼</div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassSelect</h3>
+                    <p class="component-description">Dropdown selectors with search functionality and keyboard navigation support.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Feedback Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-progress">
+                            <div class="liquid-progress-fill"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassProgress</h3>
+                    <p class="component-description">Progress indicators with linear, circular, and step variants for loading states.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-toast">
+                            <div style="width: 16px; height: 16px; background: var(--sf-green); border-radius: 50%;"></div>
+                            <span style="font-size: 0.9rem;">Success message</span>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassToast</h3>
+                    <p class="component-description">Notification toasts with positioning, actions, and auto-dismiss functionality.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: flex; gap: 4px;">
+                            <div style="width: 8px; height: 8px; background: var(--sf-blue); border-radius: 50%; animation: pulse 1.5s infinite;"></div>
+                            <div style="width: 8px; height: 8px; background: var(--sf-blue); border-radius: 50%; animation: pulse 1.5s infinite 0.2s;"></div>
+                            <div style="width: 8px; height: 8px; background: var(--sf-blue); border-radius: 50%; animation: pulse 1.5s infinite 0.4s;"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassLoading</h3>
+                    <p class="component-description">Loading spinners with multiple variants including dots, bars, and pulse animations.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-badge">New</div>
+                    </div>
+                    <h3 class="component-title">GlassBadge</h3>
+                    <p class="component-description">Status badges and notification indicators with customizable colors and positioning.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Data Display Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="liquid-avatar">JD</div>
+                    </div>
+                    <h3 class="component-title">GlassAvatar</h3>
+                    <p class="component-description">User avatars with fallback text, image support, and various sizing options.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100px;">
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                            <div style="height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassTable</h3>
+                    <p class="component-description">Data tables with sorting, filtering, pagination, and responsive layouts.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="position: relative; width: 60px; height: 60px;">
+                            <svg style="transform: rotate(-90deg);" width="60" height="60">
+                                <circle cx="30" cy="30" r="25" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
+                                <circle cx="30" cy="30" r="25" fill="none" stroke="url(#gradient)" stroke-width="4" stroke-dasharray="110" stroke-dashoffset="33" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#007AFF"/>
+                                        <stop offset="100%" style="stop-color:#5856D6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: 600;">70%</div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassChart</h3>
+                    <p class="component-description">Data visualization components including line, bar, and donut charts with animations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Advanced Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--sf-green);">
+                            <div>&lt;GlassButton&gt;</div>
+                            <div style="margin-left: 16px;">Click me</div>
+                            <div>&lt;/GlassButton&gt;</div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">GlassPlayground</h3>
+                    <p class="component-description">Interactive code playground with live editing and real-time component preview.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+                            <div style="font-size: 1.2rem; font-weight: 600;">60 FPS</div>
+                            <div style="width: 100px; height: 4px; background: var(--sf-green); border-radius: 2px;"></div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Performance</div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">PerformanceMonitor</h3>
+                    <p class="component-description">Real-time performance metrics display with FPS, memory usage, and render time tracking.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div style="position: relative; width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px; backdrop-filter: blur(20px);">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05)); border-radius: 30px; backdrop-filter: blur(10px);"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">AppleLiquidGlass</h3>
+                    <p class="component-description">Advanced glassmorphism effects following Apple's latest design language with dynamic blur and vibrancy.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.liquid-switch').forEach(switch_ => {
+            switch_.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.liquid-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const parent = this.parentElement;
+                parent.querySelectorAll('.liquid-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.component-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

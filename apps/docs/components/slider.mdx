@@ -3,55 +3,24 @@ title: Slider
 description: Interactive range slider with liquid glass styling and smooth animations.
 ---
 
-import { GlassSlider } from "@liquidify/react";
-import { useState } from "react";
+import { Slider } from "liquidify";
 
 ### Example
 
 ```tsx
+import { Slider } from "liquidify";
+
 export default function Demo() {
-  const [value, setValue] = useState(50);
-  const [volume, setVolume] = useState(75);
-  const [price, setPrice] = useState(250);
-
   return (
-    <div className="space-y-8 p-6">
-      <div>
-        <h3 className="text-liquid-text-inverse mb-4">Basic Slider</h3>
-        <GlassSlider
-          value={value}
-          onChange={setValue}
-          min={0}
-          max={100}
-          step={1}
-        />
-      </div>
+    <div>
+      <h3>Basic Slider</h3>
+      <Slider label="Basic" min={0} max={100} />
 
-      <div>
-        <h3 className="text-liquid-text-inverse mb-4">Volume Control</h3>
-        <GlassSlider
-          value={volume}
-          onChange={setVolume}
-          min={0}
-          max={100}
-          step={5}
-          variant="minimal"
-        />
-      </div>
+      <h3>Volume Control</h3>
+      <Slider label="Volume" min={0} max={100} step={5} />
 
-      <div>
-        <h3 className="text-liquid-text-inverse mb-4">
-          Price Range ($100-$500)
-        </h3>
-        <GlassSlider
-          value={price}
-          onChange={setPrice}
-          min={100}
-          max={500}
-          step={10}
-          showValue={true}
-        />
-      </div>
+      <h3>Price Range ($100-$500)</h3>
+      <Slider label="Price" min={100} max={500} step={10} />
     </div>
   );
 }
@@ -59,50 +28,35 @@ export default function Demo() {
 
 ## Props
 
-| Prop        | Type                      | Default     | Description                       |
-| ----------- | ------------------------- | ----------- | --------------------------------- |
-| `value`     | `number`                  | `0`         | Current slider value              |
-| `onChange`  | `(value: number) => void` | -           | Callback fired when value changes |
-| `min`       | `number`                  | `0`         | Minimum value                     |
-| `max`       | `number`                  | `100`       | Maximum value                     |
-| `step`      | `number`                  | `1`         | Step increment                    |
-| `disabled`  | `boolean`                 | `false`     | Whether slider is disabled        |
-| `showValue` | `boolean`                 | `true`      | Show current value above slider   |
-| `variant`   | `'default' \| 'minimal'`  | `'default'` | Visual style variant              |
-| `className` | `string`                  | -           | Additional CSS classes            |
+| Prop        | Type                         | Default | Description                           |
+| ----------- | ---------------------------- | ------- | ------------------------------------- |
+| `label`     | `string`                     | -       | Optional label displayed above track  |
+| `size`      | `'sm' \| 'md' \| 'lg'`      | `'md'`  | Control size                          |
+| `min`       | `number`                     | `0`     | Minimum value                         |
+| `max`       | `number`                     | `100`   | Maximum value                         |
+| `step`      | `number`                     | `1`     | Step increment                        |
+| `disabled`  | `boolean`                    | `false` | Whether slider is disabled            |
+| `className` | `string`                     | -       | Additional className if needed        |
+| ...rest     | Slider root props (from Ark) | -       | You can pass any Ark Slider props     |
 
 ## Usage Patterns
 
 ### Volume Control
 
 ```tsx
-<GlassSlider
-  value={volume}
-  onChange={setVolume}
-  min={0}
-  max={100}
-  step={5}
-  variant="minimal"
-/>
+<Slider label="Volume" min={0} max={100} step={5} />
 ```
 
 ### Price Range
 
 ```tsx
-<GlassSlider
-  value={price}
-  onChange={setPrice}
-  min={100}
-  max={500}
-  step={50}
-  showValue={true}
-/>
+<Slider label="Price" min={100} max={500} step={10} />
 ```
 
 ### Disabled State
 
 ```tsx
-<GlassSlider value={50} disabled={true} />
+<Slider label="Disabled" min={0} max={100} disabled />
 ```
 
 ## Accessibility

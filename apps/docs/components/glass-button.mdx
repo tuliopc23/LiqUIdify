@@ -3,7 +3,7 @@ title: "Glass Button"
 description: "Glass morphism button with Liquid Glass variants, adaptive effects, and accessible interaction states."
 ---
 
-import { GlassButton } from "@liquidify/react";
+import { Button } from "liquidify";
 import { SFSymbol } from "../components/SFSymbol";
 
 # Glass Button
@@ -16,19 +16,19 @@ import { SFSymbol } from "../components/SFSymbol";
 
 <div className="glass-surface p-6 rounded-xl mb-8">
   <div className="flex flex-wrap gap-3">
-    <GlassButton variant="primary">
+    <Button variant="primary">
       <div className="flex items-center gap-2">
         <SFSymbol name="play-fill" size="sm" color="white" />
         Primary
       </div>
-    </GlassButton>
-    <GlassButton variant="secondary">
+    </Button>
+    <Button variant="secondary">
       <div className="flex items-center gap-2">
         <SFSymbol name="gear" size="sm" color="var(--ios-blue)" />
         Secondary
       </div>
-    </GlassButton>
-    <GlassButton variant="ghost">
+    </Button>
+    <Button variant="ghost">
       <div className="flex items-center gap-2">
         <SFSymbol
           name="sparkles"
@@ -37,13 +37,13 @@ import { SFSymbol } from "../components/SFSymbol";
         />
         Ghost
       </div>
-    </GlassButton>
-    <GlassButton variant="destructive">
+    </Button>
+    <Button variant="destructive">
       <div className="flex items-center gap-2">
         <SFSymbol name="trash" size="sm" color="white" />
         Destructive
       </div>
-    </GlassButton>
+    </Button>
   </div>
 </div>
 
@@ -56,22 +56,20 @@ import { SFSymbol } from "../components/SFSymbol";
       Install the Liquidify package to get access to all glass components.
     </span>
   </div>
-  ```bash npm install @liquidify/react ```
+  ```bash npm install liquidify ```
 </div>
 
 ## <div className="flex items-center gap-3 text-title-2 mb-4"><SFSymbol name="play-circle" size="xl" color="var(--ios-green)" />Basic Usage</div>
 
 ```tsx
-import { GlassButton } from "@liquidify/react";
+import { Button } from "liquidify";
+import "liquidify/styles";
 
 export function MyComponent() {
   return (
-    <GlassButton variant="primary" onClick={() => console.log("Clicked!")}>
-      <div className="flex items-center gap-2">
-        <SFSymbol name="hand-tap" size="sm" color="white" />
-        Click me
-      </div>
-    </GlassButton>
+    <Button variant="primary" onClick={() => console.log("Clicked!")}>
+      Click me
+    </Button>
   );
 }
 ```
@@ -84,22 +82,22 @@ export function MyComponent() {
       <SFSymbol name="star-fill" size="sm" color="var(--ios-blue)" />
       <p className="text-headline font-semibold">Primary</p>
     </div>
-    <GlassButton variant="primary">
+    <Button variant="primary">
       <div className="flex items-center gap-2">
         <SFSymbol name="checkmark" size="sm" color="white" />
         Primary Button
       </div>
-    </GlassButton>
+    </Button>
   </div>
   {/* Secondary */}
   <div>
     <p className="text-xs mb-2 font-medium">Secondary</p>
-    <GlassButton variant="secondary">Secondary Button</GlassButton>
+    <Button variant="secondary">Secondary Button</Button>
   </div>
   {/* Ghost */}
   <div>
     <p className="text-xs mb-2 font-medium">Ghost</p>
-    <GlassButton variant="ghost">Ghost Button</GlassButton>
+    <Button variant="ghost">Ghost Button</Button>
   </div>
   {/* Destructive */}
   <div>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiqUIdify Styled Components - Apple HIG Showcase</title>
+    <style>
+        /* Apple-inspired design system */
+        :root {
+            /* Colors */
+            --sf-blue: #007AFF;
+            --sf-purple: #5856D6;
+            --sf-green: #34C759;
+            --sf-red: #FF3B30;
+            --sf-orange: #FF9500;
+            --sf-yellow: #FFCC00;
+            --sf-pink: #FF2D92;
+            --sf-gray: #8E8E93;
+            
+            /* Backgrounds */
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1E;
+            --bg-tertiary: #2C2C2E;
+            --bg-quaternary: #3A3A3C;
+            
+            /* Text */
+            --text-primary: #FFFFFF;
+            --text-secondary: #EBEBF5;
+            --text-tertiary: #EBEBF599;
+            --text-quaternary: #EBEBF54D;
+            
+            /* Glass effects */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-blur: 20px;
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Border radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-xxl) var(--spacing-lg);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .section {
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .component-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .component-preview {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .component-description {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+        
+        /* Styled Component Examples */
+        .liquid-button {
+            background: linear-gradient(135deg, var(--sf-blue) 0%, var(--sf-purple) 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
+        
+        .liquid-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+        }
+        
+        .liquid-accordion {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: var(--spacing-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .liquid-glass-base {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .liquid-glass-base::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .liquid-glass-content {
+            position: relative;
+            z-index: 2;
+            color: var(--text-primary);
+        }
+        
+        .demo-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .demo-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-sm);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+        
+        .demo-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .component-category {
+            display: inline-block;
+            background: var(--sf-purple);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .component-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            
+            .stats {
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>LiqUIdify Styled Components</h1>
+            <p>Apple Human Interface Guidelines compliant React components with custom liquid glass styling</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Styled Components</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">HIG Compliant</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">TypeScript</div>
+                    <div class="stat-label">First</div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Custom Styled Components</h2>
+            <div class="component-grid">
+                
+                <!-- Button Component -->
+                <div class="component-card floating">
+                    <div class="component-category">Core</div>
+                    <div class="component-preview">
+                        <button class="liquid-button">Get Started</button>
+                    </div>
+                    <h3 class="component-title">Button</h3>
+                    <p class="component-description">Interactive button component with magnetic hover effects, ripple animations, and multiple variants. Features liquid glass styling with smooth transitions and accessibility support.</p>
+                </div>
+
+                <!-- Accordion Component -->
+                <div class="component-card floating" style="animation-delay: 0.2s;">
+                    <div class="component-category">Core</div>
+                    <div class="component-preview">
+                        <div class="liquid-accordion" style="width: 100%; max-width: 250px;">
+                            <div class="accordion-header">
+                                <span>Expand Section</span>
+                                <span style="transform: rotate(0deg); transition: transform 0.2s;">▼</span>
+                            </div>
+                            <div style="padding: 0 var(--spacing-md) var(--spacing-sm); opacity: 0.7; font-size: 0.9rem;">
+                                Accordion content with smooth animations
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">Accordion</h3>
+                    <p class="component-description">Collapsible content component with smooth expand/collapse animations. Supports multiple panels, keyboard navigation, and customizable styling with liquid glass effects.</p>
+                </div>
+
+                <!-- Liquid Glass Base Component -->
+                <div class="component-card floating" style="animation-delay: 0.4s;">
+                    <div class="component-category">Core</div>
+                    <div class="component-preview">
+                        <div class="liquid-glass-base" style="max-width: 200px; padding: var(--spacing-md);">
+                            <div class="liquid-glass-content">
+                                <h4 style="margin-bottom: 8px; font-size: 1rem;">Liquid Glass</h4>
+                                <p style="font-size: 0.8rem; opacity: 0.8;">Apple-style glass effect</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">Liquid Glass</h3>
+                    <p class="component-description">Foundation component implementing Apple's Liquid Glass design language. Provides backdrop blur, vibrancy effects, and proper contrast management for readable content.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section class="section">
+            <h2 class="section-title">Interactive Demonstrations</h2>
+            <div class="component-grid">
+                
+                <div class="component-card">
+                    <div class="component-category">Demo</div>
+                    <div class="component-preview">
+                        <div class="demo-showcase">
+                            <div class="demo-item">
+                                <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--sf-blue), var(--sf-purple)); border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <div style="font-size: 0.8rem;">Primary</div>
+                            </div>
+                            <div class="demo-item">
+                                <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--sf-green), var(--sf-blue)); border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <div style="font-size: 0.8rem;">Success</div>
+                            </div>
+                            <div class="demo-item">
+                                <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--sf-red), var(--sf-pink)); border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <div style="font-size: 0.8rem;">Danger</div>
+                            </div>
+                            <div class="demo-item">
+                                <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--sf-orange), var(--sf-yellow)); border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <div style="font-size: 0.8rem;">Warning</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">Liquid Glass Demo</h3>
+                    <p class="component-description">Interactive demonstration component showcasing various liquid glass effects, color variants, and animation states with real-time controls.</p>
+                </div>
+
+                <!-- Component Architecture Info -->
+                <div class="component-card">
+                    <div class="component-category">Architecture</div>
+                    <div class="component-preview">
+                        <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="width: 12px; height: 12px; background: var(--sf-blue); border-radius: 50%;"></div>
+                                <span style="font-size: 0.9rem;">Panda CSS</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="width: 12px; height: 12px; background: var(--sf-purple); border-radius: 50%;"></div>
+                                <span style="font-size: 0.9rem;">Ark UI Primitives</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="width: 12px; height: 12px; background: var(--sf-green); border-radius: 50%;"></div>
+                                <span style="font-size: 0.9rem;">TypeScript</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">Design System</h3>
+                    <p class="component-description">Built on Panda CSS with comprehensive design tokens, Ark UI accessibility primitives, and full TypeScript support for a robust development experience.</p>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="component-card">
+                    <div class="component-category">Performance</div>
+                    <div class="component-preview">
+                        <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--sf-green);">&lt; 30KB</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Bundle Size</div>
+                            <div style="width: 60px; height: 4px; background: var(--sf-green); border-radius: 2px; margin-top: 4px;"></div>
+                        </div>
+                    </div>
+                    <h3 class="component-title">Optimized Build</h3>
+                    <p class="component-description">Tree-shakeable components with optimized bundle sizes, 60fps animations, and minimal runtime overhead for production applications.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Details -->
+        <section class="section">
+            <div style="text-align: center; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--spacing-xxl); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%); pointer-events: none;"></div>
+                <div style="position: relative; z-index: 2;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: var(--spacing-lg); background: linear-gradient(135deg, var(--sf-blue), var(--sf-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Production Ready</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: var(--spacing-xl); max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">These 3 custom-styled components form the foundation of LiqUIdify's design system, with 48+ additional Ark UI components automatically styled through Panda CSS slot recipes.</p>
+                    <div style="display: flex; justify-content: center; gap: var(--spacing-lg); flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                            <div style="width: 8px; height: 8px; background: var(--sf-green); border-radius: 50%;"></div>
+                            <span>WCAG 2.1 AA</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                            <div style="width: 8px; height: 8px; background: var(--sf-blue); border-radius: 50%;"></div>
+                            <span>TypeScript First</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                            <div style="width: 8px; height: 8px; background: var(--sf-purple); border-radius: 50%;"></div>
+                            <span>Apple HIG</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.component-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click interaction to accordion
+        document.querySelector('.accordion-header').addEventListener('click', function() {
+            const arrow = this.querySelector('span:last-child');
+            const isExpanded = arrow.style.transform === 'rotate(180deg)';
+            arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+
+        // Add button click effect
+        document.querySelectorAll('.liquid-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'translateY(0) scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-2px) scale(1)';
+                }, 150);
+            });
+        });
+
+        // Floating animation with stagger
+        document.querySelectorAll('.floating').forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+    </script>
+</body>
+</html>

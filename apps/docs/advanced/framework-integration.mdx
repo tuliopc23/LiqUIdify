@@ -240,7 +240,6 @@ export default function RootLayout({
    // postcss.config.js
    export default {
      plugins: {
-       tailwindcss: {},
        autoprefixer: {},
        ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
      },
@@ -592,6 +591,6 @@ module.exports = {
 ## 📚 Related Documentation
 
 - [Getting Started](/getting-started/installation): Basic installation
-- [Project Setup](/getting-started/project-setup): Tailwind configuration
+- [Project Setup](/getting-started/project-setup): Minimal integration
 - [Performance Guide](/core-concepts/performance): Optimization tips
 - [SSR Guide](/advanced/framework-integration#ssr-considerations): Server-side rendering details

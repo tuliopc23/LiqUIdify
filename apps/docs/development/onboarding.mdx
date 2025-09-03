@@ -76,7 +76,7 @@ LiqUIdify/
 - **`libs/components/`**: Main component library source
 - **`apps/docs/mint.json`**: Documentation site configuration
 - **`vitest.config.ts`**: Testing configuration
-- **`tailwind.config.ts`**: Tailwind CSS configuration
+- **`panda.config.ts`**: Styling system configuration (tokens, recipes)
 
 ## 🛠️ Development Workflow
 
@@ -217,7 +217,7 @@ Look for issues labeled:
 ### Styling Guidelines
 
 - **CSS-in-JS**: Use CSS variables for theming
-- **Tailwind Integration**: Components work with or without Tailwind
+- **Styling System**: Components ship with built-in styles; utility frameworks are optional
 - **Responsive Design**: Mobile-first approach
 - **Dark Mode**: Support light/dark themes
 - **Reduced Motion**: Respect `prefers-reduced-motion`
@@ -342,7 +342,7 @@ A: Use `bun run test --watch` and add `console.log` or use VS Code debugger.
 A: Ensure you've created a `.stories.tsx` file and it exports proper story objects.
 
 **Q: How do I add a new design token?**
-A: Update `tailwind.config.ts` and the theme system in `libs/components/src/theme/`.
+A: Update `panda.config.ts` and the design tokens/recipes under `styled-system/`.
 
 **Q: What's the difference between `variant` and `size` props?**
 A: `variant` controls visual style (primary, secondary), `size` controls dimensions (sm, md, lg).

@@ -55,25 +55,25 @@ import { SFSymbol, SFSymbolGrid } from "./components/SFSymbol";
 </Tip>
 
 ```bash
-npm install @liquidify/react
+npm install liquidify
 # or
-yarn add @liquidify/react
+bun add liquidify
 # or
-pnpm add @liquidify/react
+yarn add liquidify
+# or
+pnpm add liquidify
 ```
 
 <Frame>
 ```tsx Basic Usage
-import { GlassButton, ThemeProvider } from '@liquidify/react'
+import { Button } from 'liquidify'
+import 'liquidify/styles'
 
 function App() {
-return (
-<ThemeProvider>
-<GlassButton variant="primary">Get Started</GlassButton>
-</ThemeProvider>
-)
+  return (
+    <Button variant="primary">Get Started</Button>
+  )
 }
-
 ```
 </Frame>
 
