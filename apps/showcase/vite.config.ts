@@ -12,7 +12,10 @@ export default defineConfig({
     alias: [
       // Point showcase to source library for reliable dev/preview.
       // Note: add a specific alias for `liquidify/styles` before the generic one
-      { find: "liquidify/styles", replacement: resolve(__dirname, "../../libs/components/src/styles/panda.css") },
+      {
+        find: "liquidify/styles",
+        replacement: resolve(__dirname, "../../libs/components/src/styles/panda.css"),
+      },
       { find: "liquidify", replacement: resolve(__dirname, "../../libs/components/src/index.ts") },
     ],
   },

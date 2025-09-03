@@ -1,4 +1,5 @@
 import React from "react";
+import { createListCollection } from "@ark-ui/react";
 import {
   Button,
   LiquidAccordion,
@@ -46,12 +47,44 @@ import {
   FileUpload,
   AngleSlider,
   SignaturePad,
+  setTheme,
+  getTheme,
 } from "liquidify";
 
-class CardBoundary extends React.Component<{ label: string; children: React.ReactNode }, { error?: Error }>{
+// Collections for typed components
+const selectOptions = createListCollection({
+  items: [
+    { label: "One", value: "one" },
+    { label: "Two", value: "two" },
+  ],
+});
+
+const comboboxOptions = createListCollection({
+  items: [
+    { label: "Alpha", value: "alpha" },
+    { label: "Bravo", value: "bravo" },
+    { label: "Charlie", value: "charlie" },
+  ],
+});
+
+const listboxOptions = createListCollection({
+  items: [
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+  ],
+});
+
+class CardBoundary extends React.Component<
+  { label: string; children: React.ReactNode },
+  { error?: Error }
+> {
   state = { error: undefined as Error | undefined };
-  static getDerivedStateFromError(error: Error) { return { error }; }
-  componentDidCatch() { /* no-op */ }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  componentDidCatch() {
+    /* no-op */
+  }
   render() {
     if (this.state.error) {
       return (
@@ -64,7 +97,15 @@ class CardBoundary extends React.Component<{ label: string; children: React.Reac
   }
 }
 
-function Card({ title, sub, children }: { title: string; sub?: string; children: React.ReactNode }) {
+function Card({
+  title,
+  sub,
+  children,
+}: {
+  title: string;
+  sub?: string;
+  children: React.ReactNode;
+}) {
   return (
     <article className="card" tabIndex={0} aria-label={title}>
       <div className="card-sheen" aria-hidden="true" />
@@ -92,7 +133,9 @@ export default function App() {
             </div>
           </div>
           <div>
-            <button className="chip" onClick={() => toggleTheme()}>Toggle theme</button>
+            <button className="chip" onClick={() => toggleTheme()}>
+              Toggle theme
+            </button>
           </div>
         </div>
       </header>
@@ -121,14 +164,7 @@ export default function App() {
             </Card>
 
             <Card title="Slider">
-              <Slider.Root defaultValue={[40]} style={{ width: 220 }}>
-                <Slider.Control>
-                  <Slider.Track>
-                    <Slider.Range />
-                  </Slider.Track>
-                  <Slider.Thumb index={0} />
-                </Slider.Control>
-              </Slider.Root>
+              <Slider defaultValue={[40]} style={{ width: 220 }} />
             </Card>
 
             <Card title="Progress (Linear)">
@@ -185,14 +221,14 @@ export default function App() {
                 <Menu.Trigger>Open menu</Menu.Trigger>
                 <Menu.Positioner>
                   <Menu.Content>
-                    <Menu.Item>
+                    <Menu.Item value="profile">
                       <Menu.ItemText>Profile</Menu.ItemText>
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item value="settings">
                       <Menu.ItemText>Settings</Menu.ItemText>
                     </Menu.Item>
                     <Menu.Separator />
-                    <Menu.Item>
+                    <Menu.Item value="signout">
                       <Menu.ItemText>Sign out</Menu.ItemText>
                     </Menu.Item>
                   </Menu.Content>
@@ -201,16 +237,15 @@ export default function App() {
             </Card>
 
             <Card title="Select">
-              <Select.Root>
+              <Select.Root collection={selectOptions as any}>
                 <Select.Trigger>Choose</Select.Trigger>
                 <Select.Positioner>
                   <Select.Content>
-                    <Select.Item value="one">
-                      <Select.ItemText>One</Select.ItemText>
-                    </Select.Item>
-                    <Select.Item value="two">
-                      <Select.ItemText>Two</Select.ItemText>
-                    </Select.Item>
+                    {selectOptions.items.map((item) => (
+                      <Select.Item key={item.value} item={item}>
+                        <Select.ItemText>{item.label}</Select.ItemText>
+                      </Select.Item>
+                    ))}
                   </Select.Content>
                 </Select.Positioner>
               </Select.Root>
@@ -261,16 +296,15 @@ export default function App() {
             </Card>
 
             <Card title="Combobox">
-              <Combobox.Root>
+              <Combobox.Root collection={comboboxOptions as any}>
                 <Combobox.Input placeholder="Search..." />
                 <Combobox.Positioner>
                   <Combobox.Content>
-                    <Combobox.Item value="alpha">
-                      <Combobox.ItemText>Alpha</Combobox.ItemText>
-                    </Combobox.Item>
-                    <Combobox.Item value="bravo">
-                      <Combobox.ItemText>Bravo</Combobox.ItemText>
-                    </Combobox.Item>
+                    {comboboxOptions.items.map((item) => (
+                      <Combobox.Item key={item.value} item={item}>
+                        <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                      </Combobox.Item>
+                    ))}
                   </Combobox.Content>
                 </Combobox.Positioner>
               </Combobox.Root>
@@ -312,18 +346,11 @@ export default function App() {
             </Card>
 
             <Card title="Pin Input">
-              <PinInput.Root otp>
-                <PinInput.Input index={0} />
-                <PinInput.Input index={1} />
-                <PinInput.Input index={2} />
-                <PinInput.Input index={3} />
-              </PinInput.Root>
+              <PinInput length={4} />
             </Card>
 
             <Card title="Color Picker">
-              <ColorPicker.Root defaultValue={{ hex: "#0a84ff" }}>
-                <ColorPicker.ChannelSlider channel="hue" />
-              </ColorPicker.Root>
+              <ColorPicker />
             </Card>
 
             <Card title="Editable">
@@ -350,7 +377,7 @@ export default function App() {
                 <Clipboard.Label>Copy text</Clipboard.Label>
                 <Clipboard.Input readOnly />
                 <Clipboard.Trigger>Copy</Clipboard.Trigger>
-                <Clipboard.Indicator copiedText="Copied!" copyText="Copy" />
+                <Clipboard.Indicator copied="Copied!" />
               </Clipboard.Root>
             </Card>
           </div>
@@ -361,21 +388,24 @@ export default function App() {
           <p>Lists, steps, pagination, rating.</p>
           <div className="grid">
             <Card title="Listbox">
-              <Listbox.Root>
+              <Listbox.Root collection={listboxOptions as any}>
                 <Listbox.Label>Fruits</Listbox.Label>
                 <Listbox.Content>
-                  <Listbox.Item value="apple"><Listbox.ItemText>Apple</Listbox.ItemText></Listbox.Item>
-                  <Listbox.Item value="banana"><Listbox.ItemText>Banana</Listbox.ItemText></Listbox.Item>
+                  {listboxOptions.items.map((item) => (
+                    <Listbox.Item key={item.value} item={item}>
+                      <Listbox.ItemText>{item.label}</Listbox.ItemText>
+                    </Listbox.Item>
+                  ))}
                 </Listbox.Content>
               </Listbox.Root>
             </Card>
 
             <Card title="Steps">
-              <Steps.Root count={4} value={2} />
+              <Steps.Root count={4} step={2} />
             </Card>
 
             <Card title="Pagination">
-              <Pagination.Root count={10} pageSize={10} page={3} />
+              <Pagination.Root count={10} defaultPageSize={10} defaultPage={3} />
             </Card>
 
             <Card title="Rating Group">
@@ -383,7 +413,7 @@ export default function App() {
             </Card>
 
             <Card title="Carousel">
-              <Carousel.Root>
+              <Carousel.Root slideCount={3}>
                 <Carousel.ItemGroup>
                   <Carousel.Item index={0}>Slide 1</Carousel.Item>
                   <Carousel.Item index={1}>Slide 2</Carousel.Item>
@@ -402,7 +432,7 @@ export default function App() {
             </Card>
 
             <Card title="Timer">
-              <Timer.Root startSeconds={5} />
+              <Timer.Root startMs={5000} />
             </Card>
           </div>
         </section>
@@ -424,15 +454,24 @@ export default function App() {
 
             <Card title="Segment Group">
               <SegmentGroup.Root value="one">
-                <SegmentGroup.Item value="one"><SegmentGroup.ItemText>One</SegmentGroup.ItemText></SegmentGroup.Item>
-                <SegmentGroup.Item value="two"><SegmentGroup.ItemText>Two</SegmentGroup.ItemText></SegmentGroup.Item>
+                <SegmentGroup.Item value="one">
+                  <SegmentGroup.ItemText>One</SegmentGroup.ItemText>
+                </SegmentGroup.Item>
+                <SegmentGroup.Item value="two">
+                  <SegmentGroup.ItemText>Two</SegmentGroup.ItemText>
+                </SegmentGroup.Item>
               </SegmentGroup.Root>
             </Card>
 
             <Card title="Splitter">
-              <Splitter.Root id="s1" orientation="horizontal" style={{ width: 320, height: 140 }}>
+              <Splitter.Root
+                id="s1"
+                orientation="horizontal"
+                panels={[{ id: "p1" }, { id: "p2" }]}
+                style={{ width: 320, height: 140 }}
+              >
                 <Splitter.Panel id="p1">Left</Splitter.Panel>
-                <Splitter.ResizeTrigger id="rt1" />
+                <Splitter.ResizeTrigger id="p1:p2" />
                 <Splitter.Panel id="p2">Right</Splitter.Panel>
               </Splitter.Root>
             </Card>
@@ -500,32 +539,9 @@ export default function App() {
               </SignaturePad.Root>
             </Card>
 
-            <Card title="Tree View">
-              <TreeView.Root>
-                <TreeView.Label>Files</TreeView.Label>
-                <TreeView.Tree>
-                  <TreeView.Branch>
-                    <TreeView.BranchText>src</TreeView.BranchText>
-                    <TreeView.Item>
-                      <TreeView.ItemText>index.ts</TreeView.ItemText>
-                    </TreeView.Item>
-                  </TreeView.Branch>
-                </TreeView.Tree>
-              </TreeView.Root>
-            </Card>
+            {/** Tree View demo omitted for now (collection setup required) */}
 
-            <Card title="Tour">
-              <Tour.Root open>
-                <Tour.Positioner>
-                  <Tour.Content>
-                    <Tour.Title>Welcome</Tour.Title>
-                    <Tour.Description>Quick tour</Tour.Description>
-                    <Tour.ActionTrigger>Next</Tour.ActionTrigger>
-                    <Tour.CloseTrigger>Close</Tour.CloseTrigger>
-                  </Tour.Content>
-                </Tour.Positioner>
-              </Tour.Root>
-            </Card>
+            {/** Tour demo omitted for now (steps state required) */}
           </div>
         </section>
       </main>
@@ -534,7 +550,6 @@ export default function App() {
 }
 
 function toggleTheme() {
-  const root = document.documentElement;
-  const cur = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  root.dataset.theme = cur === "light" ? "dark" : "light";
+  const next = (getTheme() === "light" ? "dark" : "light") as "light" | "dark";
+  setTheme(next, { storageKey: "theme" });
 }

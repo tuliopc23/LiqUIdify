@@ -22,12 +22,12 @@ function toChar(code) {
 function toName(code) {
   let name = "";
   let x;
-  for (x = Math.abs(code); x > 52; x = x / 52 | 0) name = toChar(x % 52) + name;
+  for (x = Math.abs(code); x > 52; x = (x / 52) | 0) name = toChar(x % 52) + name;
   return toChar(x % 52) + name;
 }
 function toPhash(h, x) {
   let i = x.length;
-  while (i) h = h * 33 ^ x.charCodeAt(--i);
+  while (i) h = (h * 33) ^ x.charCodeAt(--i);
   return h;
 }
 function toHash(value) {
@@ -112,16 +112,13 @@ function mapObject(obj, fn) {
 
 // src/normalize-style-object.ts
 function toResponsiveObject(values, breakpoints) {
-  return values.reduce(
-    (acc, current, index) => {
-      const key = breakpoints[index];
-      if (current != null) {
-        acc[key] = current;
-      }
-      return acc;
-    },
-    {}
-  );
+  return values.reduce((acc, current, index) => {
+    const key = breakpoints[index];
+    if (current != null) {
+      acc[key] = current;
+    }
+    return acc;
+  }, {});
 }
 function normalizeStyleObject(styles, context, shorthand = true) {
   const { utility, conditions } = context;
@@ -133,7 +130,7 @@ function normalizeStyleObject(styles, context, shorthand = true) {
     },
     {
       stop: (value) => Array.isArray(value),
-      getKey: shorthand ? (prop) => hasShorthand ? resolveShorthand(prop) : prop : void 0
+      getKey: shorthand ? (prop) => (hasShorthand ? resolveShorthand(prop) : prop) : void 0,
     }
   );
 }
@@ -142,9 +139,9 @@ function normalizeStyleObject(styles, context, shorthand = true) {
 var fallbackCondition = {
   shift: (v) => v,
   finalize: (v) => v,
-  breakpoints: { keys: [] }
+  breakpoints: { keys: [] },
 };
-var sanitize = (value) => typeof value === "string" ? value.replaceAll(/[\n\s]+/g, " ") : value;
+var sanitize = (value) => (typeof value === "string" ? value.replaceAll(/[\n\s]+/g, " ") : value);
 function createCss(context) {
   const { utility, hash, conditions: conds = fallbackCondition } = context;
   const formatClassName = (str) => [utility.prefix, str].filter(Boolean).join("-");
@@ -208,7 +205,8 @@ var fnRegExp = new RegExp(`^(${fns.join("|")})\\(.*\\)`);
 var isCssFunction = (v) => typeof v === "string" && fnRegExp.test(v);
 
 // src/is-css-unit.ts
-var lengthUnits = "cm,mm,Q,in,pc,pt,px,em,ex,ch,rem,lh,rlh,vw,vh,vmin,vmax,vb,vi,svw,svh,lvw,lvh,dvw,dvh,cqw,cqh,cqi,cqb,cqmin,cqmax,%";
+var lengthUnits =
+  "cm,mm,Q,in,pc,pt,px,em,ex,ch,rem,lh,rlh,vw,vh,vmin,vmax,vb,vi,svw,svh,lvw,lvh,dvw,dvh,cqw,cqh,cqi,cqb,cqmin,cqmax,%";
 var lengthUnitsPattern = `(?:${lengthUnits.split(",").join("|")})`;
 var lengthRegExp = new RegExp(`^[+-]?[0-9]*.?[0-9]+(?:[eE][+-]?[0-9]+)?${lengthUnitsPattern}$`);
 var isCssUnit = (v) => typeof v === "string" && lengthRegExp.test(v);
@@ -221,11 +219,14 @@ var patternFns = {
   map: mapObject,
   isCssFunction,
   isCssVar,
-  isCssUnit
+  isCssUnit,
 };
 var getPatternStyles = (pattern, styles) => {
   if (!pattern?.defaultValues) return styles;
-  const defaults = typeof pattern.defaultValues === "function" ? pattern.defaultValues(styles) : pattern.defaultValues;
+  const defaults =
+    typeof pattern.defaultValues === "function"
+      ? pattern.defaultValues(styles)
+      : pattern.defaultValues;
   return Object.assign({}, defaults, compact(styles));
 };
 
@@ -236,7 +237,9 @@ var getSlotRecipes = (recipe = {}) => {
     base: recipe.base?.[slot] ?? {},
     variants: {},
     defaultVariants: recipe.defaultVariants ?? {},
-    compoundVariants: recipe.compoundVariants ? getSlotCompoundVariant(recipe.compoundVariants, slot) : []
+    compoundVariants: recipe.compoundVariants
+      ? getSlotCompoundVariant(recipe.compoundVariants, slot)
+      : [],
   });
   const slots = recipe.slots ?? [];
   const recipeParts = slots.map((slot) => [slot, init(slot)]);
@@ -250,7 +253,10 @@ var getSlotRecipes = (recipe = {}) => {
   }
   return Object.fromEntries(recipeParts);
 };
-var getSlotCompoundVariant = (compoundVariants, slotName) => compoundVariants.filter((compoundVariant) => compoundVariant.css[slotName]).map((compoundVariant) => ({ ...compoundVariant, css: compoundVariant.css[slotName] }));
+var getSlotCompoundVariant = (compoundVariants, slotName) =>
+  compoundVariants
+    .filter((compoundVariant) => compoundVariant.css[slotName])
+    .map((compoundVariant) => ({ ...compoundVariant, css: compoundVariant.css[slotName] }));
 
 // src/split-props.ts
 function splitProps(props, ...keys) {
@@ -300,10 +306,8 @@ export {
   toHash,
   uniq,
   walkObject,
-  withoutSpace
+  withoutSpace,
 };
-
-
 
 // src/normalize-html.ts
 var htmlProps = ["htmlSize", "htmlTranslate", "htmlWidth", "htmlHeight"];
@@ -314,15 +318,12 @@ function normalizeHTMLProps(props) {
   return Object.fromEntries(Object.entries(props).map(([key, value]) => [convert(key), value]));
 }
 normalizeHTMLProps.keys = htmlProps;
-export {
-  normalizeHTMLProps
-};
-
+export { normalizeHTMLProps };
 
 export function __spreadValues(a, b) {
-  return { ...a, ...b }
+  return { ...a, ...b };
 }
 
 export function __objRest(source, exclude) {
-  return Object.fromEntries(Object.entries(source).filter(([key]) => !exclude.includes(key)))
+  return Object.fromEntries(Object.entries(source).filter(([key]) => !exclude.includes(key)));
 }

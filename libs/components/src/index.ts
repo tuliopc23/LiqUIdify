@@ -81,6 +81,7 @@ export * from "./components/demo/liquid-glass-demo";
 // Utilities
 export * from "./lib/css";
 export * from "./core/utils/responsive";
+export * from "./lib/theme";
 
 // Hooks
 export * from "./hooks/use-device-capabilities";

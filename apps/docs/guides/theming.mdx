@@ -7,6 +7,26 @@ description: "Master Liquidify's sophisticated theming system - liquid glass int
 
 Liquidify features a comprehensive theming system that enables deep customization of the liquid glass aesthetic while maintaining Apple HIG design principles and accessibility standards.
 
+## Quick Start: Programmatic Theme Control
+
+Use the library helpers to control the theme at runtime via the `data-theme` attribute. The value persists to `localStorage`.
+
+```tsx
+import { initTheme, setTheme, getTheme } from "liquidify";
+import "liquidify/styles";
+
+// Initialize on app startup (reads localStorage or system preference)
+initTheme({ storageKey: "liquidify-theme" });
+
+// Example: simple toggle handler
+function toggleTheme() {
+  const next = getTheme() === "light" ? "dark" : "light";
+  setTheme(next, { storageKey: "liquidify-theme" });
+}
+```
+
+These helpers update `document.documentElement.dataset.theme` to `"light" | "dark"` and keep class names (`light`, `dark`, `theme-light`, `theme-dark`) in sync for compatibility.
+
 ## 🎨 Theme Architecture Overview
 
 ### Core Theme Provider Setup

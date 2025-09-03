@@ -110,23 +110,17 @@ function App() {
 ### Programmatic Theme Control
 
 ```tsx
-function CustomControls() {
-  const { theme, setTheme } = useTheme();
+import { initTheme, setTheme, getTheme } from "liquidify";
 
+initTheme({ storageKey: "liquidify-theme" });
+
+function CustomControls() {
+  const theme = getTheme();
   return (
     <div className="flex gap-2">
-      <button
-        onClick={() => setTheme("light")}
-        className={theme === "light" ? "active" : ""}
-      >
-        Light
-      </button>
-      <button
-        onClick={() => setTheme("dark")}
-        className={theme === "dark" ? "active" : ""}
-      >
-        Dark
-      </button>
+      <button onClick={() => setTheme("light")} className={theme === "light" ? "active" : ""}>Light</button>
+      <button onClick={() => setTheme("dark")} className={theme === "dark" ? "active" : ""}>Dark</button>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle</button>
     </div>
   );
 }

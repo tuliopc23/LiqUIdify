@@ -5,6 +5,7 @@
       "name": "liquidify",
       "dependencies": {
         "@park-ui/panda-preset": "^0.43.1",
+        "cache": "^3.0.0",
         "knip": "^5.63.0",
       },
       "devDependencies": {
@@ -680,6 +681,8 @@
 
     "cac": ["cac@6.7.14", "", {}, "sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ=="],
 
+    "cache": ["cache@3.0.0", "", { "dependencies": { "ds": "^1.4.2" } }, "sha512-sNoM5jithfalxIceo/uFFm5bOlGjux2y8jEvjNb0F/cACWQaMmWuEPTLl6GzLHdFcNsbWBBdqkBd9NyefZ5UQQ=="],
+
     "caniuse-api": ["caniuse-api@3.0.0", "", { "dependencies": { "browserslist": "^4.0.0", "caniuse-lite": "^1.0.0", "lodash.memoize": "^4.1.2", "lodash.uniq": "^4.5.0" } }, "sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw=="],
 
     "caniuse-lite": ["caniuse-lite@1.0.30001739", "", {}, "sha512-y+j60d6ulelrNSwpPyrHdl+9mJnQzHBr08xm48Qno0nSk4h3Qojh+ziv2qE6rXf4k3tadF4o1J/1tAbVm1NtnA=="],
@@ -749,6 +752,8 @@
     "dev": ["dev@0.1.3", "", { "dependencies": { "inotify": ">= 0.1.6" }, "bin": { "node-dev": "./node-dev.sh" } }, "sha512-flCHQwAkXk3+1up/wo93Ms9E5Wf9K28ZGA7Oz55nBZ8OTdPPhyvZrwsT+twtySTFHIwv0w9CUNtagZgu1MgzXQ=="],
 
     "dom-accessibility-api": ["dom-accessibility-api@0.6.3", "", {}, "sha512-7ZgogeTnjuHbo+ct10G9Ffp0mif17idi0IyWNVA/wcwcm7NPOD/WEHVP3n7n3MhXqxoIYm8d6MuZohYWIZ4T3w=="],
+
+    "ds": ["ds@1.4.2", "", {}, "sha512-d5nMCjfod+srvE/1Bnt/u+L++6N8KJx3ZAi95AGp0g6RtfuGDNlGciWL/iiwKHsFVBVnA3/HEFUq5SW1NgTQ3Q=="],
 
     "effect": ["effect@3.10.15", "", { "dependencies": { "fast-check": "^3.21.0" } }, "sha512-LdczPAFbtij3xGr9i+8PyDtuWdlXjSY5UJ8PKrYrr0DClKfR/OW3j8sxtambWYljzJAYD865KFhv7LdbWdG7VQ=="],
 

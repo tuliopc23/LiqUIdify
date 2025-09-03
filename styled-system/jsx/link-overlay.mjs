@@ -1,14 +1,14 @@
-import { createElement, forwardRef } from 'react'
+import { createElement, forwardRef } from "react";
 
-import { splitProps } from '../helpers.mjs';
-import { getLinkOverlayStyle } from '../patterns/link-overlay.mjs';
-import { styled } from './factory.mjs';
+import { splitProps } from "../helpers.mjs";
+import { getLinkOverlayStyle } from "../patterns/link-overlay.mjs";
+import { styled } from "./factory.mjs";
 
 export const LinkOverlay = /* @__PURE__ */ forwardRef(function LinkOverlay(props, ref) {
-  const [patternProps, restProps] = splitProps(props, [])
+  const [patternProps, restProps] = splitProps(props, []);
 
-const styleProps = getLinkOverlayStyle(patternProps)
-const mergedProps = { ref, ...styleProps, ...restProps }
+  const styleProps = getLinkOverlayStyle(patternProps);
+  const mergedProps = { ref, ...styleProps, ...restProps };
 
-return createElement(styled.a, mergedProps)
-  })
+  return createElement(styled.a, mergedProps);
+});

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@park-ui/panda-preset": "^0.43.1",
+    "cache": "^3.0.0",
     "knip": "^5.63.0"
   },
   "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
@@ -156,7 +157,6 @@
     "clean:all": "bun run clean && bun run clean:node",
     "clean:node": "rm -rf node_modules bun.lock && bun install",
     "dev": "bun run --filter @liquidify/components dev",
-
     "dev:docs": "bun run --filter @liquidify/docs dev",
     "docs:css": "bun run --filter @liquidify/docs build:css",
     "docs:build": "bun run --filter @liquidify/docs build",

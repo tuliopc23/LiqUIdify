@@ -9,6 +9,21 @@ LiqUIdify provides a comprehensive theming system that adapts beautifully to bot
 
 ## Theme Architecture
 
+### Programmatic Control (Library Helpers)
+
+```tsx
+import { initTheme, setTheme } from "liquidify";
+import "liquidify/styles";
+
+// Initialize once (uses stored or system preference)
+initTheme({ storageKey: "liquidify-theme" });
+
+// Toggle anywhere
+function onToggle() {
+  setTheme((document.documentElement.dataset.theme === "light" ? "dark" : "light") as "light" | "dark");
+}
+```
+
 ### CSS Custom Properties
 
 ```css
