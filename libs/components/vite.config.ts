@@ -35,9 +35,9 @@ export default defineConfig({
           exports: "named",
           entryFileNames: "index.mjs",
           chunkFileNames: "chunks/[name]-[hash].mjs",
-          assetFileNames: (assetInfo) => {
+      assetFileNames: (assetInfo) => {
             if (assetInfo?.names?.[0]?.endsWith(".css")) {
-              return "liquid-glass-components.css";
+              return "liquidify.css";
             }
             return "assets/[name]-[hash][extname]";
           },
@@ -47,9 +47,9 @@ export default defineConfig({
           exports: "named",
           entryFileNames: "index.cjs",
           chunkFileNames: "chunks/[name]-[hash].cjs",
-          assetFileNames: (assetInfo) => {
+      assetFileNames: (assetInfo) => {
             if (assetInfo?.names?.[0]?.endsWith(".css")) {
-              return "liquid-glass-components.css";
+              return "liquidify.css";
             }
             return "assets/[name]-[hash][extname]";
           },

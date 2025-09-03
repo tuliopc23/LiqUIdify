@@ -1,6 +1,9 @@
 // Main entry point for the LiqUIdify component library - Apple Design Language for Web
 // Now powered by Panda CSS with liquid glass effects
 
+// Styles: trigger Panda CSS generation for tokens/recipes/utilities when building the library
+import "./styles/panda.css";
+
 // Core Components with Liquid Glass Styling
 export * from "./components/button";
 export * from "./components/accordion";

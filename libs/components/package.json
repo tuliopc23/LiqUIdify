@@ -13,7 +13,7 @@
       "import": "../../dist/libs/components/index.mjs",
       "require": "../../dist/libs/components/index.cjs"
     },
-    "./styles": "../../dist/libs/components/new-design-system.css"
+    "./styles": "../../dist/libs/components/liquidify.css"
   },
   "files": [
     "dist/**/*.{js,mjs,cjs,d.ts,css}",

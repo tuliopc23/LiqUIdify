@@ -1,0 +1,3 @@
+/* Panda CSS layers for the component library */
+@layer reset, base, tokens, recipes, utilities;
+
