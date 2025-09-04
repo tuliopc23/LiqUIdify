@@ -216,6 +216,58 @@ export default defineConfig({
             "3xl": { value: "32px" },
           },
         },
+
+        // Typography tokens
+        fonts: {
+          sans: {
+            value:
+              "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+          },
+          display: {
+            value:
+              "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+          },
+          mono: { value: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace" },
+        },
+        fontSizes: {
+          xs: { value: "0.75rem" },  // 12px
+          sm: { value: "0.875rem" }, // 14px
+          md: { value: "1rem" },     // 16px
+          lg: { value: "1.125rem" }, // 18px
+          xl: { value: "1.25rem" },  // 20px
+          "2xl": { value: "1.5rem" },  // 24px
+          "3xl": { value: "1.875rem" }, // 30px
+          "4xl": { value: "2.25rem" },  // 36px
+          "5xl": { value: "3rem" },     // 48px
+          "6xl": { value: "3.75rem" },  // 60px
+        },
+        lineHeights: {
+          none: { value: "1" },
+          tight: { value: "1.1" },
+          snug: { value: "1.3" },
+          normal: { value: "1.5" },
+          relaxed: { value: "1.7" },
+          loose: { value: "1.9" },
+        },
+        fontWeights: {
+          thin: { value: "100" },
+          extralight: { value: "200" },
+          light: { value: "300" },
+          normal: { value: "400" },
+          medium: { value: "500" },
+          semibold: { value: "600" },
+          bold: { value: "700" },
+          extrabold: { value: "800" },
+          black: { value: "900" },
+        },
+        letterSpacings: {
+          tighter: { value: "-0.02em" },
+          tight: { value: "-0.01em" },
+          normal: { value: "0" },
+          wide: { value: "0.01em" },
+          wider: { value: "0.02em" },
+          widest: { value: "0.04em" },
+        },
       },
 
       // All animations from HTML demo

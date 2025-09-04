@@ -78,6 +78,7 @@ export const testUtils = {
    * Mocks a module for testing
    */
   mockModule<T extends Record<string, any>>(modulePath: string, mockImplementation: T) {
-    return vi.mock(modulePath, () => mockImplementation);
+    // Use doMock to avoid Vitest hoisting and allow dynamic module paths
+    return vi.doMock(modulePath, () => mockImplementation as any);
   },
 };
