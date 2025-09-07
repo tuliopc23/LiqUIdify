@@ -1,41 +1,41 @@
-import { compact, getSlotCompoundVariant, memo, splitProps } from "../helpers.js";
-import { createRecipe } from "./create-recipe.js";
+import { compact, getSlotCompoundVariant, memo, splitProps } from '../helpers.js';
+import { createRecipe } from './create-recipe.js';
 
-const tooltipDefaultVariants = {};
-const tooltipCompoundVariants = [];
+const tooltipDefaultVariants = {}
+const tooltipCompoundVariants = []
 
 const tooltipSlotNames = [
-  ["trigger", "tooltip__trigger"],
-  ["positioner", "tooltip__positioner"],
-  ["content", "tooltip__content"],
-];
-const tooltipSlotFns = /* @__PURE__ */ tooltipSlotNames.map(([slotName, slotKey]) => [
-  slotName,
-  createRecipe(
-    slotKey,
-    tooltipDefaultVariants,
-    getSlotCompoundVariant(tooltipCompoundVariants, slotName)
-  ),
-]);
+  [
+    "trigger",
+    "tooltip__trigger"
+  ],
+  [
+    "positioner",
+    "tooltip__positioner"
+  ],
+  [
+    "content",
+    "tooltip__content"
+  ]
+]
+const tooltipSlotFns = /* @__PURE__ */ tooltipSlotNames.map(([slotName, slotKey]) => [slotName, createRecipe(slotKey, tooltipDefaultVariants, getSlotCompoundVariant(tooltipCompoundVariants, slotName))])
 
 const tooltipFn = memo((props = {}) => {
-  return Object.fromEntries(
-    tooltipSlotFns.map(([slotName, slotFn]) => [slotName, slotFn.recipeFn(props)])
-  );
-});
+  return Object.fromEntries(tooltipSlotFns.map(([slotName, slotFn]) => [slotName, slotFn.recipeFn(props)]))
+})
 
-const tooltipVariantKeys = [];
-const getVariantProps = (variants) => ({ ...tooltipDefaultVariants, ...compact(variants) });
+const tooltipVariantKeys = []
+const getVariantProps = (variants) => ({ ...tooltipDefaultVariants, ...compact(variants) })
 
 export const tooltip = /* @__PURE__ */ Object.assign(tooltipFn, {
   __recipe__: false,
-  __name__: "tooltip",
+  __name__: 'tooltip',
   raw: (props) => props,
   classNameMap: {},
   variantKeys: tooltipVariantKeys,
   variantMap: {},
   splitVariantProps(props) {
-    return splitProps(props, tooltipVariantKeys);
+    return splitProps(props, tooltipVariantKeys)
   },
-  getVariantProps,
-});
+  getVariantProps
+})

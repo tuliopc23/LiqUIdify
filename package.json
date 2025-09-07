@@ -16,12 +16,12 @@
   "dependencies": {
     "@park-ui/panda-preset": "^0.43.1",
     "cache": "^3.0.0",
-    "knip": "^5.63.0"
+    "knip": "^5.63.1"
   },
   "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@biomejs/biome": "^2.2.2",
+    "@biomejs/biome": "^2.2.3",
     "@pandacss/dev": "^1.2.0",
     "@pandacss/postcss": "^1.2.0",
     "@playwright/test": "^1.55.0",
@@ -32,7 +32,7 @@
     "@types/bun": "^1.2.21",
     "@types/jscodeshift": "^17.3.0",
     "@types/jsdom": "~21.1.7",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.3.1",
     "@types/react": "~19.1.12",
     "@types/react-dom": "~19.1.9",
     "@vitest/ui": "3.2.4",
