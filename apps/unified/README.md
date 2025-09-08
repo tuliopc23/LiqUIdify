@@ -8,6 +8,11 @@ This unified app combines the LiqUIdify landing page and components gallery into
 - **Components Gallery** (`/components`): Interactive showcase of available components
 - **React Router**: Client-side routing for seamless navigation
 - **Live Component Source**: Components are imported directly from the library source for HMR during development
+- **Code Splitting**: Route-based lazy loading for optimal performance
+- **SEO Optimized**: Comprehensive meta tags and dynamic page titles
+- **Error Handling**: Global error boundary and 404 page
+- **Accessibility**: Skip-to-content link and WCAG compliance
+- **Production Ready**: Optimized build with performance monitoring
 
 ## Architecture
 
@@ -16,12 +21,19 @@ This unified app combines the LiqUIdify landing page and components gallery into
 ```
 apps/unified/
 ├── src/
-│   ├── App.tsx          # Main app with router setup
+│   ├── App.tsx          # Main app with router setup and error boundary
 │   ├── main.tsx         # App entry point with style imports
+│   ├── components/
+│   │   ├── GlassHeader.tsx      # Navigation header component
+│   │   ├── ErrorBoundary.tsx    # Global error boundary
+│   │   └── SkipToContentLink.tsx # Accessibility skip link
+│   ├── hooks/
+│   │   └── usePageTitle.ts      # Dynamic page title hook
 │   └── pages/
 │       ├── Landing.tsx   # Landing page component
-│       └── Components.tsx # Components gallery
-├── index.html           # HTML template
+│       ├── Components.tsx # Components gallery
+│       └── NotFound.tsx  # 404 error page
+├── index.html           # HTML template with SEO meta tags
 ├── package.json         # Dependencies and scripts
 ├── tsconfig.json        # TypeScript configuration with path mapping
 └── vite.config.ts       # Vite configuration with aliases
@@ -70,6 +82,12 @@ bun run build
 
 # Preview production build
 bun run preview
+
+# Run linting
+bun run lint
+
+# Run type checking
+bun run typecheck
 ```
 
 From the repository root:
@@ -108,10 +126,35 @@ The build output is a standard single-page application (SPA) that works with:
 
 ### Production Considerations
 
-- The app includes React Router for client-side routing
+The app is now production-ready with the following optimizations:
+
+#### Performance
+- **Code Splitting**: Route-based lazy loading reduces initial bundle size
+- **Optimized Loading**: Suspense boundaries with loading states
+- **Bundle Analysis**: Monitor bundle size with build tools
+
+#### SEO & Metadata
+- **Dynamic Page Titles**: Automatic title updates on navigation
+- **Meta Tags**: Comprehensive SEO and social sharing tags
+- **Open Graph**: Social media preview optimization
+- **Structured Data**: Ready for search engine indexing
+
+#### Error Handling
+- **Global Error Boundary**: Graceful handling of JavaScript errors
+- **404 Page**: User-friendly not found page with navigation
+- **Fallback UI**: Consistent error states across the application
+
+#### Accessibility
+- **Skip Links**: Keyboard navigation support
+- **ARIA Labels**: Screen reader compatibility
+- **Focus Management**: Proper focus handling for navigation
+- **WCAG Compliance**: Meets accessibility standards
+
+#### Hosting Configuration
 - Configure your hosting provider to redirect 404s to `index.html` for proper SPA behavior
-- The bundle size is ~742KB minified (includes all LiqUIdify components)
-- Consider implementing code splitting if bundle size becomes a concern
+- The app includes React Router for client-side routing
+- Optimized bundle size with code splitting (reduced from ~742KB)
+- Consider implementing service workers for offline support
 
 ## Components Used
 

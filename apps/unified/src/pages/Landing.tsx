@@ -1,7 +1,10 @@
 import { Button, LiquidGlass } from "liquidify";
 import { css } from "../../../../styled-system/css";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export default function Landing() {
+  usePageTitle("LiqUIdify — Home");
+
   const heroClass = css({
     minH: "calc(100dvh - 80px)",
     display: "flex",
@@ -33,7 +36,7 @@ export default function Landing() {
   const actionsClass = css({ display: "flex", gap: 4, flexWrap: "wrap" });
 
   return (
-    <main className={heroClass}>
+    <main id="main-content" className={heroClass}>
       <LiquidGlass intensity="medium" className={cardClass}>
         <p className={kickerClass}>New Release</p>
         <h1 className={titleClass}>Liquid Glass for the Web</h1>

@@ -1,7 +1,10 @@
 import { Button, Switch, LiquidGlass } from "liquidify";
 import { css } from "../../../../styled-system/css";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export default function Components() {
+  usePageTitle("LiqUIdify — Components");
+
   const pageClass = css({ px: 6, py: 6 });
   const titleClass = css({ mt: 0, mb: 6, fontSize: "3xl", fontWeight: "semibold" });
   const gridClass = css({
@@ -27,7 +30,7 @@ export default function Components() {
   const rowClass = css({ display: "flex", gap: 3, flexWrap: "wrap" });
 
   return (
-    <main className={pageClass}>
+    <main id="main-content" className={pageClass}>
       <h2 className={titleClass}>Components Gallery</h2>
       <div className={gridClass}>
         <LiquidGlass intensity="subtle" className={cardClass}>
