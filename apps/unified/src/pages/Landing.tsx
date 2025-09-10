@@ -1,4 +1,4 @@
-import { Button, LiquidGlass } from "liquidify";
+import { Button } from "liquidify";
 import { css } from "../../../../styled-system/css";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -20,6 +20,10 @@ export default function Landing() {
     p: 8,
     borderRadius: "xl",
     color: "token(colors.text.glass.primary)",
+    background: "token(colors.glass.bg)",
+    backdropFilter: "blur(token(blurs.glass.md))",
+    border: "1px solid token(colors.glass.border)",
+    boxShadow: "token(shadows.glass.base)",
     // Fallback & accessibility
     '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
       backgroundColor: "rgba(20,20,20,0.7)",
@@ -37,7 +41,7 @@ export default function Landing() {
 
   return (
     <main id="main-content" className={heroClass}>
-      <LiquidGlass intensity="medium" className={cardClass}>
+      <div className={cardClass}>
         <p className={kickerClass}>New Release</p>
         <h1 className={titleClass}>Liquid Glass for the Web</h1>
         <p className={bodyClass}>
@@ -49,7 +53,7 @@ export default function Landing() {
             <Button variant="secondary">Explore Components</Button>
           </a>
         </div>
-      </LiquidGlass>
+      </div>
     </main>
   );
 }

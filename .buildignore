@@ -4,10 +4,8 @@
 **/__tests__/**
 **/tests/**
 
-# Storybook files
+# Development files
 **/*.stories.*
-**/.storybook/**
-**/storybook-static/**
 
 # Development examples and demos
 **/examples/**
@@ -34,12 +32,9 @@ vitest.config.ts
 postcss.config.js
 
 # Development tools
-.storybook/
 .vscode/
 .idea/
 .github/
-.turbo/
-.nx/
 
 # Templates and liquid glass artifacts
 **/*liquid-glass-template*

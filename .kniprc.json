@@ -2,7 +2,6 @@
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
     "apps/docs/src/main.tsx",
-    "apps/storybook/src/main.ts",
     "libs/components/src/index.ts",
     "scripts/**/*.ts"
   ],
@@ -10,19 +9,12 @@
   "ignore": [
     "dist/**",
     "node_modules/**",
-    ".nx/**",
     "**/*.d.ts",
     "vite.config.ts",
     "vitest.config.mts",
-    "tailwind.config.ts",
     "**/*.config.{ts,js,mjs}"
   ],
   "ignoreDependencies": [
-    "nx",
-    "@nx/vite",
-    "@nx/playwright",
-    "@nx/react",
-    "@nx/storybook",
     "vite",
     "vitest",
     "vite-plugin-dts",

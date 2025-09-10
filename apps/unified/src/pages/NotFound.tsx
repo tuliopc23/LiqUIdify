@@ -1,4 +1,4 @@
-import { Button, LiquidGlass } from "liquidify";
+import { Button } from "liquidify";
 import { css } from "../../../../styled-system/css";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -63,7 +63,7 @@ export default function NotFound() {
 
   return (
     <main id="main-content" className={containerClass}>
-      <LiquidGlass intensity="medium" className={cardClass}>
+      <div className={cardClass}>
         <div className={errorCodeClass}>404</div>
         <h1 className={titleClass}>Page Not Found</h1>
         <p className={bodyClass}>

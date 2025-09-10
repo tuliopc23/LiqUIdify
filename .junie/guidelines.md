@@ -12,18 +12,15 @@ This document captures project-specific knowledge useful for advanced contributo
   - TypeScript base config: `tsconfig.base.json` defines `@/*` path → `libs/components/src/*`.
 - Library build
   - Build library only: `bun run build:lib` (delegates to `@liquidify/components` package build).
-  - Build everything (lib + storybook): `bun run build` or `bun run build:all`.
+  - Build everything: `bun run build` or `bun run build:all`.
   - Types only: `bun run build:types`.
   - Watch mode for local iteration: `bun run build:watch`.
-- Storybook
-  - Dev: `bun run storybook` (or `bun run dev:storybook`).
-  - Build: `bun run build:storybook` or `bun run --cwd apps/storybook build`.
 - Sanity/health
   - Type-check: `bun run type-check` (root + components package).
   - Workspace verification: `bun run workspace:verify` and `bun run workspace:info`.
   - Exports verification: `bun run exports:verify`.
 - CSS/Styling toolchain
-  - Tailwind CSS v4 (`tailwindcss` and `@tailwindcss/postcss`) + `lightningcss` (see `lightningcss.config.js`).
+  - Panda CSS for design system and styling + `lightningcss` for optimization (see `lightningcss.config.js`).
   - CSS entry for consumers is exported as `liquidify/css` or `liquidify/styles`.
 
 Notes
@@ -110,17 +107,17 @@ Troubleshooting
 - Export map
   - If you add new bundles or components that should be public, update `package.json` `exports` and ensure build emits `d.ts` accordingly.
 - Code style and QA
-  - Formatting and lint scripts are wired to `qlty` (`bun run format`, `bun run lint`). If `qlty` isn’t available locally, use your editor’s formatter and run `type-check` as a minimum. CI may enforce checks.
+  - Formatting and lint scripts are wired to `biome` (`bun run format`, `bun run lint`). If `qlty` isn’t available locally, use your editor’s formatter and run `type-check` as a minimum. CI may enforce checks.
 - Common pitfalls
   - Tests must run under `jsdom` with our setup; avoid direct DOM APIs not supported by jsdom without mocks.
   - Do not import from built artifacts (`dist/...`) inside source/tests; always import from `libs/components/src` or via the `liquidify` alias provided in the test config when appropriate.
-  - When changing Tailwind configuration or CSS pipeline, verify storybook builds and run `stories:coverage` script if relevant.
+  - When changing Panda CSS configuration or CSS pipeline, verify builds and run tests if relevant.
 
 ## Quick Commands Reference
 
 - Build lib: `bun run build:lib`
 - Dev (components): `bun run dev`
-- Storybook dev: `bun run storybook`
+- Unified app dev: `bun run unified:dev`
 - Run all tests: `bun run test` or `npx vitest -c vitest.config.mts run`
 - Single test file: `npx vitest -c vitest.config.mts run <path-to-spec>`
 - Coverage: `npx vitest -c vitest.config.mts run --coverage`

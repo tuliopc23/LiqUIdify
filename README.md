@@ -7,24 +7,23 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
-[![Storybook](https://img.shields.io/badge/Storybook-52%2B%20Components-ff4785)](https://liquidify-storybook.vercel.app)
 
-> 🚀 **Production-ready React component library** with glassmorphism design. 52+ components, TypeScript-first, WCAG 2.1 AA compliant, tree-shakeable, and framework agnostic.
+> 🚀 **Production-ready React component library** with Apple's Liquid Glass design language. Built on Ark UI primitives with Panda CSS styling system. TypeScript-first, WCAG 2.1 AA compliant, and optimized for modern React applications.
 
 ## ✨ Features
 
-- 🎨 **52+ Glassmorphism Components** - Beautiful, modern UI components with glass effects
-- ⚡ **Optimized Performance** - Core bundle < 30KB, full bundle < 60KB
-- 🔧 **TypeScript First** - Full type safety and IntelliSense support
+- 🍎 **Apple Liquid Glass Design** - Authentic Apple-inspired glassmorphism with backdrop blur effects
+- 🏗️ **Ark UI Foundation** - Built on accessible, headless component primitives
+- 🎨 **Panda CSS Styling** - Build-time CSS-in-JS with excellent developer experience
+- ⚡ **Optimized Performance** - Tree-shakeable bundles with automatic CSS generation
+- 🔧 **TypeScript First** - Full type safety with comprehensive type definitions
 - ♿ **WCAG 2.1 AA Compliant** - Keyboard navigation, screen reader support, focus management
-- 🎯 **Tree Shakeable** - Import only what you need with modular architecture
-- 📱 **Responsive & Adaptive** - Mobile-first with touch gesture support
-- 🌙 **Theme System** - Dark mode, custom themes, CSS variables
-- 🔄 **Framework Agnostic** - Works with Next.js, Remix, Vite, CRA
-- 📦 **Multiple Entry Points** - Core, forms, navigation, feedback bundles
-- 🎭 **Smooth Animations** - 60fps with GPU acceleration
-- 🛡️ **Enterprise Ready** - Security audited, fully tested
-- 📚 **Comprehensive Docs** - Storybook, API docs, migration guides
+- 📱 **Responsive Design** - Mobile-first with Apple Human Interface Guidelines
+- 🌙 **Theme System** - Light/dark modes with CSS custom properties
+- 🔄 **Framework Agnostic** - Works with Next.js, Remix, Vite, and any React setup
+- 🎭 **Smooth Animations** - 60fps animations with Framer Motion integration
+- 🛡️ **Production Ready** - Fully tested with comprehensive accessibility coverage
+- 📚 **Comprehensive Docs** - Mintlify documentation with live examples
 
 ## 🚀 Quick Start
 
@@ -47,127 +46,108 @@ bun add liquidify
 ### Basic Usage
 
 ```tsx
-import {
-  GlassButton,
-  GlassCard,
-  UnifiedGlassProvider,
-  LiquidGlassDefs,
-} from "liquidify";
-import "liquidify/css";
+import { Button, Card, Input } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
-    <UnifiedGlassProvider>
-      {/* Injects SVG filter defs once so CSS filter:url(#...) works */}
-      <LiquidGlassDefs />
-      <GlassCard variant="elevated" className="liquid-glass">
-        <h1>Welcome to LiqUIdify</h1>
-        <p>Beautiful glassmorphism components for modern React apps.</p>
-        <GlassButton variant="primary" size="large">
+    <div className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+      <Card className="max-w-md mx-auto p-6">
+        <h1 className="text-2xl font-semibold mb-4 text-gray-900">
+          Welcome to LiqUIdify
+        </h1>
+        <Input placeholder="Enter your name" className="mb-4" />
+        <Button variant="primary" className="w-full">
           Get Started
-        </GlassButton>
-      </GlassCard>
-    </UnifiedGlassProvider>
+        </Button>
+      </Card>
+    </div>
   );
 }
 ```
 
-### Modular Imports
+All components automatically inherit the Apple Liquid Glass styling through Panda CSS recipes.
 
-```tsx
-// Import specific components for smaller bundle size
-import { GlassButton } from "liquidify/button";
-import { GlassCard } from "liquidify/card";
-import { GlassModal } from "liquidify/modal";
+### Architecture
 
-// Import component bundles by category
-import * as Core from "liquidify/core";
-import * as Forms from "liquidify/forms";
-import * as Navigation from "liquidify/navigation";
-import * as Feedback from "liquidify/feedback";
+LiqUIdify is built on three core technologies:
 
-// Import just the CSS you need
-import "liquidify/css"; // All styles
-```
+- **[Ark UI](https://ark-ui.com/)** - Accessible, headless component primitives
+- **[Panda CSS](https://panda-css.com/)** - Build-time CSS-in-JS with type safety
+- **Apple Design Language** - Authentic liquid glass effects and interactions
+
+Components are automatically styled through Panda CSS slot recipes, providing consistent Apple-inspired design without manual class application.
 
 ## 📚 Documentation
 
-- 📚 **[Storybook](https://liquidify-storybook.vercel.app)** - Live component playground with 52+ interactive examples
-- 📘 **[Documentation Site](https://liquidify-docs.vercel.app)** - Comprehensive guides and API reference
-- 🚀 **[Getting Started](https://liquidify-docs.vercel.app/guide/)** - Quick setup and basic usage
+- 📘 **[Documentation Site](https://liquidify.mintlify.app)** - Comprehensive guides and API reference built with Mintlify
+- 🚀 **[Getting Started](https://liquidify.mintlify.app/getting-started/quickstart)** - Quick setup and basic usage
+- 🎨 **[Component Showcase](https://liquidify-showcase.vercel.app)** - Live component examples and demos
 - ♿ **[Accessibility Guide](./docs/ACCESSIBILITY_GUIDE.md)** - WCAG compliance and best practices
 - 📊 **[Performance Guide](./docs/PERFORMANCE_GUIDE.md)** - Optimization tips and benchmarks
 - 🔄 **[Migration Guide](./docs/MIGRATION_GUIDE.md)** - Migrate from other UI libraries
 - 🛡️ **[Security](./SECURITY.md)** - Security policies and reporting
 
-## 🎨 Component Categories
+## 🎨 Component Library
 
-### 🎯 Core Components (15KB bundle)
+### Built on Ark UI Primitives
 
-- `GlassButton` - Interactive buttons with magnetic hover and ripple effects
-- `GlassCard` - Container components with compound component pattern
-- `GlassInput` - Form inputs with validation states and icons
-- `GlassModal` - Overlay dialogs with focus trap and animations
-- `GlassErrorBoundary` - Graceful error handling with glass styling
-- `GlassFocusTrap` - Accessibility-focused component wrapper
+All components are built on [Ark UI](https://ark-ui.com/) primitives, providing:
 
-### 📝 Form Components (8KB bundle)
+- **Accessibility First** - WCAG 2.1 AA compliance out of the box
+- **Headless Architecture** - Behavior separated from styling
+- **Keyboard Navigation** - Full keyboard support for all interactions
+- **Screen Reader Support** - Proper ARIA attributes and announcements
+- **Focus Management** - Intelligent focus handling and trapping
 
-- `GlassFormField` - Complete form field wrapper with validation
-- `GlassCheckbox` & `GlassCheckboxGroup` - Styled checkboxes with groups
-- `GlassRadioGroup` - Radio button groups with proper ARIA
-- `GlassSelect` - Dropdown selectors with search functionality
-- `GlassTextarea` - Multi-line text inputs with auto-grow
-- `GlassSlider` - Range sliders with custom styling
-- `GlassSwitch` - Toggle switches with smooth animations
-- `GlassNumberInput` - Number inputs with increment/decrement
-- `GlassDatePicker` - Date selection with calendar popup
-- `GlassFileUpload` - Drag & drop file upload with progress
+### Apple Liquid Glass Styling
 
-### 🧭 Navigation Components (6KB bundle)
+Components automatically receive Apple-inspired styling through Panda CSS:
 
-- `GlassTabs` - Tabbed interfaces with keyboard navigation
-- `GlassBreadcrumbs` - Navigation breadcrumbs with separators
-- `GlassMobileNav` - Mobile-optimized navigation
-- `GlassSkipNavigation` - Accessibility skip links
+- **Backdrop Blur Effects** - Authentic glassmorphism with CSS backdrop-filter
+- **Smooth Animations** - 60fps animations with proper easing curves
+- **Consistent Spacing** - 16px border radius standard across all components
+- **iOS Color Palette** - Authentic Apple color system with proper contrast ratios
+- **Responsive Design** - Mobile-first approach following Apple HIG guidelines
+### Available Components
 
-### 💬 Feedback Components (5KB bundle)
+The library includes all standard UI components built on Ark UI primitives:
 
-- `GlassToast` - Notification toasts with positioning
-- `GlassProgress` - Progress indicators (linear, circular, steps)
-- `GlassLoading` - Loading spinners (spinner, dots, pulse, bars)
-- `GlassNotification` - System notifications with actions
-- `GlassSkeleton` - Loading placeholders with shimmer effects
+**Form & Input Components:**
+- Button, Input, Textarea, Select, Checkbox, Radio Group, Switch, Slider
+- Date Picker, File Upload, Number Input, Password Input, Pin Input
 
-### 📊 Advanced Components (12KB bundle)
+**Layout & Navigation:**
+- Card, Dialog, Drawer, Popover, Tooltip, Tabs, Accordion
+- Menu, Breadcrumbs, Pagination, Steps
 
-- `GlassChart` - Data visualization (Line, Bar, Donut charts)
-- `GlassTable` - Data tables with sorting, filtering, pagination
-- `GlassPlayground` - Interactive code playground with live editing
-- `GlassPerformanceMonitor` - Real-time performance metrics
-- `AppleLiquidGlass` - Advanced glassmorphism effects
+**Feedback & Display:**
+- Toast, Progress, Loading, Avatar, Badge, Skeleton
+- Alert, Banner, Timeline
 
-### ♿ Accessibility Components (4KB bundle)
+**Advanced Components:**
+- Table, Tree View, Chart, Command Palette, Color Picker
+- Carousel, Splitter, Floating Panel, Tour
 
-- `GlassAccessibleDemo` - Accessibility features demonstration
-- `GlassFocusDemo` - Focus management examples
-- `GlassLiveRegion` - Screen reader announcements
-- `GlassVisuallyHidden` - Screen reader only content
+All components automatically inherit Apple Liquid Glass styling through Panda CSS slot recipes.
 
 ## 🎯 Framework Integration
 
 ### Next.js
 
 ```tsx
-// pages/_app.tsx
-import { ThemeProvider } from "liquidify";
+// app/layout.tsx (App Router)
 import "liquidify/styles";
 
-export default function App({ Component, pageProps }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <html lang="en">
+      <body>{children}</body>
+    </html>
   );
 }
 ```
@@ -375,12 +355,17 @@ bun install
 ## Adding New Packages/Apps
 
 - Add new apps to `apps/` and new libraries to `libs/`.
-- Use Vite, Bun, and qlty for all new projects.
+- Use Vite, Bun, and Biome for all new projects.
 - Update `vite.config.ts` and `package.json` workspaces if needed.
 
-## No Nx Required
+## Modern Toolchain
 
-This monorepo is powered by Bun workspaces and Vite. Nx is no longer required or used.
+This monorepo is powered by:
+- **Bun** - Fast package manager and runtime
+- **Vite** - Lightning-fast build tool
+- **Panda CSS** - Build-time CSS-in-JS
+- **Biome** - Fast linter and formatter
+- **Vitest** - Blazing fast unit testing
 
 ## 📄 License
 
@@ -389,15 +374,15 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 ## 🙏 Acknowledgments
 
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
-- [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Ark UI](https://ark-ui.com/) - Accessible component primitives
+- [Panda CSS](https://panda-css.com/) - Build-time CSS-in-JS with excellent DX
 - [React](https://reactjs.org/) - UI library
 
 ## 📊 Project Status
 
 | Metric            | Status                            |
 | ----------------- | --------------------------------- |
-| Components        | 52/52 with Storybook coverage     |
+| Components        | 40+ with comprehensive coverage    |
 | Bundle Size       | < 30KB (core), < 60KB (full)      |
 | TypeScript        | 100% coverage                     |
 | Accessibility     | WCAG 2.1 AA compliant             |
@@ -415,7 +400,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 ## 🔗 Links
 
-- **[📖 Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
+- **[📖 Documentation](https://liquidify.mintlify.app)** - Comprehensive documentation site
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
   **[📦 NPM](https://www.npmjs.com/package/liquidify)**
 - **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions

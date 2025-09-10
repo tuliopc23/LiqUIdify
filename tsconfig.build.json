@@ -21,8 +21,7 @@
     "**/*.backup",
     "**/*.md",
     "**/*.mdx",
-    ".storybook/**",
-    "storybook-static/**",
+
     "**/__mocks__/**",
     "node_modules",
     "dist",

@@ -20,8 +20,8 @@ npm install
 # Start development server (component development)
 bun run dev
 
-# Start Storybook (component playground)
-bun run storybook
+# Start Unified App (component showcase)
+bun run unified:dev
 
 # Start documentation site
 bun run docs:dev
@@ -36,8 +36,8 @@ bun run build
 # Build just the component library
 bun run build:lib
 
-# Build Storybook site
-bun run build:storybook
+# Build Unified App
+bun run unified:build
 
 # Build documentation site
 bun run docs:build
@@ -91,7 +91,7 @@ bun run audit:contrast
 
 ## Architecture Overview
 
-LiqUIdify is a React component library with a focus on glassmorphism design and accessibility. The repository is structured as a Bun workspace monorepo:
+LiqUIdify is a React component library built on Ark UI primitives with Apple's Liquid Glass design language, styled using Panda CSS. The repository is structured as a Bun workspace monorepo:
 
 ### Repository Structure
 
@@ -99,7 +99,8 @@ LiqUIdify is a React component library with a focus on glassmorphism design and 
 LiqUIdify/
 ├── apps/                     # Applications
 │   ├── docs/                # Documentation (Mintlify)
-│   └── storybook/           # Component playground
+│   ├── showcase/            # Component showcase (Vite)
+│   └── unified/             # Unified landing + showcase app
 ├── libs/                    # Core libraries
 │   └── components/          # Main component library
 │       ├── src/
@@ -126,11 +127,11 @@ glass-component/
 
 Components use a combination of:
 
-- TypeScript for type safety
-- React hooks for state management
-- Panda CSS for styling (comprehensive design system)
-- Ark UI for accessible component primitives
-- ARIA attributes for accessibility
+- **Ark UI** - Accessible, headless component primitives
+- **Panda CSS** - Build-time CSS-in-JS with comprehensive design system
+- **TypeScript** - Full type safety and excellent developer experience
+- **Framer Motion** - Smooth animations and interactions
+- **Apple Design Language** - Authentic liquid glass effects and styling
 
 ### Build System
 
@@ -152,7 +153,7 @@ Components use a combination of:
 ### Documentation System
 
 - **Mintlify**: Main documentation site with Apple-inspired design
-- **Storybook**: Interactive component playground (removed but referenced)
+- **Unified App**: Interactive component showcase and landing page
 - **MDX Files**: Rich content with live code examples
 - **Configuration**: `docs.json` for navigation and theming
 - **Component Documentation**: Individual .mdx files in `/apps/docs/components/`
@@ -372,9 +373,9 @@ The library exports components in organized bundles:
 
 ## Development Workflow
 
-1. **Component Development**: Use the component generator for new components
+1. **Component Development**: Build components on Ark UI primitives with Panda CSS styling
 2. **Testing**: Write comprehensive unit tests with accessibility checks
-3. **Documentation**: Create Storybook stories and component documentation
+3. **Documentation**: Create component documentation and examples
 4. **Build Validation**: Ensure clean builds and proper exports
 5. **Performance**: Monitor bundle size and runtime performance
 6. **Accessibility**: Test with screen readers and keyboard navigation

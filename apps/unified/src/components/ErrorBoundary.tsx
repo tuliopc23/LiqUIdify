@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import { Button, LiquidGlass } from "liquidify";
+import { Button } from "liquidify";
 import { css } from "../../../../styled-system/css";
 
 interface Props {
@@ -49,6 +49,10 @@ export class ErrorBoundary extends Component<Props, State> {
         borderRadius: "xl",
         color: "token(colors.text.glass.primary)",
         textAlign: "center",
+        background: "token(colors.glass.bg)",
+        backdropFilter: "blur(token(blurs.glass.md))",
+        border: "1px solid token(colors.glass.border)",
+        boxShadow: "token(shadows.glass.base)",
         // Fallback & accessibility
         '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
           backgroundColor: "rgba(20,20,20,0.7)",
@@ -88,7 +92,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
       return (
         <main className={containerClass}>
-          <LiquidGlass intensity="medium" className={cardClass}>
+          <div className={cardClass}>
             <div className={iconClass}>⚠️</div>
             <h1 className={titleClass}>Something went wrong</h1>
             <p className={bodyClass}>
@@ -103,7 +107,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 Go Home
               </Button>
             </div>
-          </LiquidGlass>
+          </div>
         </main>
       );
     }

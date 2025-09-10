@@ -56,7 +56,7 @@ docs
 scripts
 *.config.js
 !postcss.config.js
-!tailwind.config.ts
+
 !apps/storybook/.storybook/*.config.js
 
 # Package files

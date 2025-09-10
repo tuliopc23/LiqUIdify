@@ -1,4 +1,4 @@
-import { Button, Switch, LiquidGlass } from "liquidify";
+import { Button, Switch } from "liquidify";
 import { css } from "../../../../styled-system/css";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -16,8 +16,11 @@ export default function Components() {
     p: 6,
     borderRadius: "xl",
     color: "token(colors.text.glass.primary)",
+    background: "token(colors.glass.bg)",
+    backdropFilter: "blur(token(blurs.glass.md))",
     border: "1px solid",
-    borderColor: "token(colors.glass.medium.border)",
+    borderColor: "token(colors.glass.border)",
+    boxShadow: "token(shadows.glass.base)",
     '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
       backgroundColor: "rgba(20,20,20,0.7)",
     },
@@ -33,17 +36,17 @@ export default function Components() {
     <main id="main-content" className={pageClass}>
       <h2 className={titleClass}>Components Gallery</h2>
       <div className={gridClass}>
-        <LiquidGlass intensity="subtle" className={cardClass}>
+        <div className={cardClass}>
           <h3 className={h3Class}>Button</h3>
           <div className={rowClass}>
             <Button>Default</Button>
             <Button variant="secondary">Secondary</Button>
           </div>
-        </LiquidGlass>
-        <LiquidGlass intensity="subtle" className={cardClass}>
+        </div>
+        <div className={cardClass}>
           <h3 className={h3Class}>Switch</h3>
           <Switch defaultChecked />
-        </LiquidGlass>
+        </div>
       </div>
     </main>
   );

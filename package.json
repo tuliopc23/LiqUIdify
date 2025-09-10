@@ -56,46 +56,7 @@
       "import": "./dist/libs/components/index.mjs",
       "require": "./dist/libs/components/index.cjs"
     },
-    "./core": {
-      "types": "./dist/libs/components/bundles/core.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./forms": {
-      "types": "./dist/libs/components/bundles/forms.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./navigation": {
-      "types": "./dist/libs/components/bundles/navigation.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./feedback": {
-      "types": "./dist/libs/components/bundles/feedback.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./layout": {
-      "types": "./dist/libs/components/bundles/layout.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./data-display": {
-      "types": "./dist/libs/components/bundles/data-display.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./accessibility": {
-      "types": "./dist/libs/components/bundles/accessibility.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
-    "./components/*": {
-      "types": "./dist/libs/components/components/*/index.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
-    },
+
     "./css": "./dist/libs/components/liquidify.css",
     "./styles": "./dist/libs/components/liquidify.css",
     "./package.json": "./package.json"
@@ -195,7 +156,7 @@
     "exports:verify": "bun run scripts/check-exports.mjs",
     "setup:dev": "node scripts/setup-dev.mjs",
     "prepublishOnly": "bun run type-check && bun run build:lib",
-    "stories:coverage": "node scripts/story-coverage.js",
+
     "build:analyze": "node scripts/build-analyze.cjs",
     "build:analyze:compressed": "node scripts/build-analyze.cjs --compressed",
     "audit:contrast": "node scripts/contrast-audit.js",

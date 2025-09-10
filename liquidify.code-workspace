@@ -62,20 +62,12 @@
       "typescript": "html",
       "typescriptreact": "html"
     },
-    "tailwindCSS.includeLanguages": {
-      "typescript": "html",
-      "typescriptreact": "html"
-    },
-    "tailwindCSS.experimental.classRegex": [
-      ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-      ["classnames\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-      ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-    ]
+
   },
   "extensions": {
     "recommendations": [
       "esbenp.prettier-vscode",
-      "bradlc.vscode-tailwindcss",
+
       "ms-vscode.vscode-typescript-next",
       "formulahendry.auto-rename-tag",
       "christian-kohler.path-intellisense",
@@ -119,10 +111,10 @@
         "problemMatcher": ["$tsc"]
       },
       {
-        "label": "🎨 Start Storybook",
+        "label": "🎨 Start Unified App",
         "type": "shell",
         "command": "bun",
-        "args": ["run", "storybook"],
+        "args": ["run", "unified:dev"],
         "group": "build",
         "presentation": {
           "echo": true,
