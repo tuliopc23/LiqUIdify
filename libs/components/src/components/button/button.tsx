@@ -14,23 +14,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cx(
+          // Use Panda recipe classes for full styling (variants + sizes)
           button({ variant, size }),
-          css({
-            borderRadius: "md",
-            backdropFilter: "blur(10px)",
-            background: "colors.glass.bg",
-            border: "1px solid",
-            borderColor: "colors.glass.border",
-            boxShadow: "shadows.glass.base",
-            transition: "all 0.2s ease",
-            _hover: {
-              transform: "translateY(-1px)",
-              boxShadow: "shadows.glass.hover",
-            },
-            _active: {
-              transform: "translateY(0px)",
-            },
-          }),
           className
         )}
         {...props}

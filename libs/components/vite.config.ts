@@ -11,10 +11,12 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
     lib: {
-      entry: resolve(Dirname, "src/index.ts"),
+      entry: {
+        index: resolve(Dirname, "src/index.ts"),
+        "components/button/index": resolve(Dirname, "src/components/button/index.ts"),
+      },
       name: "LiquidifyComponents",
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
     },
     outDir: resolve(Dirname, "../../dist/libs/components"),
 
@@ -33,7 +35,8 @@ export default defineConfig({
         {
           format: "es",
           exports: "named",
-          entryFileNames: "index.mjs",
+          entryFileNames: (chunkInfo) =>
+            chunkInfo.name === "index" ? "index.mjs" : `${chunkInfo.name}.mjs`,
           chunkFileNames: "chunks/[name]-[hash].mjs",
           assetFileNames: (assetInfo) => {
             if (assetInfo?.names?.[0]?.endsWith(".css")) {
@@ -45,7 +48,8 @@ export default defineConfig({
         {
           format: "cjs",
           exports: "named",
-          entryFileNames: "index.cjs",
+          entryFileNames: (chunkInfo) =>
+            chunkInfo.name === "index" ? "index.cjs" : `${chunkInfo.name}.cjs`,
           chunkFileNames: "chunks/[name]-[hash].cjs",
           assetFileNames: (assetInfo) => {
             if (assetInfo?.names?.[0]?.endsWith(".css")) {

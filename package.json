@@ -56,8 +56,11 @@
       "import": "./dist/libs/components/index.mjs",
       "require": "./dist/libs/components/index.cjs"
     },
-
-    "./css": "./dist/libs/components/liquidify.css",
+    "./button": {
+      "types": "./dist/libs/components/components/button/index.d.ts",
+      "import": "./dist/libs/components/components/button/index.mjs",
+      "require": "./dist/libs/components/components/button/index.cjs"
+    },
     "./styles": "./dist/libs/components/liquidify.css",
     "./package.json": "./package.json"
   },
@@ -94,7 +97,8 @@
   "name": "liquidify",
   "peerDependencies": {
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react-dom": "^18 || ^19",
+    "@ark-ui/react": "^5.22.0"
   },
   "repository": {
     "type": "git",
@@ -104,7 +108,7 @@
     "access": "public"
   },
   "scripts": {
-    "prepare": "panda codegen",
+    "prepare": "bunx panda build",
     "dev:all": "node scripts/dev.mjs",
     "dev:quick": "concurrently \"bun run --filter @liquidify/components build:watch\"",
     "build": "bun run build:lib",
@@ -155,7 +159,7 @@
     "workspace:info": "node scripts/workspace-info.mjs",
     "exports:verify": "bun run scripts/check-exports.mjs",
     "setup:dev": "node scripts/setup-dev.mjs",
-    "prepublishOnly": "bun run type-check && bun run build:lib",
+    "prepublishOnly": "bun run --filter @liquidify/components type-check && bun run build:lib",
 
     "build:analyze": "node scripts/build-analyze.cjs",
     "build:analyze:compressed": "node scripts/build-analyze.cjs --compressed",

@@ -74,7 +74,12 @@ export interface UtilityValues {
 	maxBlockSize: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
 	boxSize: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
 	color: Tokens["colors"];
+	fontFamily: Tokens["fonts"];
+	fontSize: Tokens["fontSizes"];
+	fontWeight: Tokens["fontWeights"];
 	fontSmoothing: "antialiased" | "subpixel-antialiased";
+	letterSpacing: Tokens["letterSpacings"];
+	lineHeight: Tokens["lineHeights"];
 	textDecorationColor: Tokens["colors"];
 	textEmphasisColor: Tokens["colors"];
 	textIndent: Tokens["spacing"];
@@ -128,7 +133,8 @@ export interface UtilityValues {
 	transitionTimingFunction: Tokens["easings"];
 	transitionDelay: Tokens["durations"];
 	transitionDuration: Tokens["durations"];
-	transition: "all" | "common" | "background" | "colors" | "opacity" | "shadow" | "transform";
+	transitionProperty: "common" | "colors" | "size" | "position" | "background";
+	transition: "all" | "common" | "size" | "position" | "background" | "colors" | "opacity" | "shadow" | "transform";
 	animationName: "liquidRipple" | "liquidJiggle" | "liquidFlow" | "liquidBounce";
 	animationTimingFunction: Tokens["easings"];
 	animationDuration: Tokens["durations"];

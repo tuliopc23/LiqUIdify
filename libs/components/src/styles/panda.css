@@ -1,6 +1,41 @@
 /* Panda CSS layers for the component library */
 @layer reset, base, tokens, recipes, utilities;
 
+/* Base glass surface class to guarantee pre-styled components in consumer apps */
+@layer recipes {
+  .glass-surface {
+    position: relative;
+    overflow: hidden;
+    background: var(--colors-glass-bg);
+    backdrop-filter: blur(var(--blurs-glass-md));
+    border: 1px solid var(--colors-glass-border);
+    box-shadow: var(--shadows-glass-base);
+    transition: all var(--durations-glass-flow) var(--easings-glass-flow);
+    transform-origin: center center;
+  }
+  .glass-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--colors-glass-gradients-before);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .glass-surface::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: inherit;
+    background: var(--colors-glass-gradients-after);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
 /* Theme overrides for typography tokens (light/dark) */
 :root[data-theme="dark"] {
   --colors-text-glass-primary: rgba(255, 255, 255, 1);

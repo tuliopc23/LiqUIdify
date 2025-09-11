@@ -25,10 +25,10 @@ export function cn(...inputs: Parameters<typeof cx>): string {
  * Provides liquid glass surface classes for consistent styling
  */
 export const SURFACE_CLASSES = {
-  default: "liquid-glass",
-  elevated: "liquid-glass liquid-flow",
-  floating: "liquid-glass liquid-wobble-active",
-  overlay: "liquid-glass",
+  default: "glass-surface",
+  elevated: "glass-surface liquid-flow",
+  floating: "glass-surface liquid-wobble-active",
+  overlay: "glass-surface",
   hover: "liquid-flow",
   active: "liquid-pressed",
   pressed: "liquid-pressed",

@@ -12,27 +12,27 @@ const tokens = {
     "variable": "var(--colors-glass-ripple)"
   },
   "colors.glass.subtle.bg": {
-    "value": "rgba(255, 255, 255, 0.05)",
+    "value": "rgba(255, 255, 255, 0.06)",
     "variable": "var(--colors-glass-subtle-bg)"
   },
   "colors.glass.subtle.border": {
-    "value": "rgba(255, 255, 255, 0.1)",
+    "value": "rgba(255, 255, 255, 0.12)",
     "variable": "var(--colors-glass-subtle-border)"
   },
   "colors.glass.medium.bg": {
-    "value": "rgba(255, 255, 255, 0.1)",
+    "value": "rgba(255, 255, 255, 0.12)",
     "variable": "var(--colors-glass-medium-bg)"
   },
   "colors.glass.medium.border": {
-    "value": "rgba(255, 255, 255, 0.2)",
+    "value": "rgba(255, 255, 255, 0.22)",
     "variable": "var(--colors-glass-medium-border)"
   },
   "colors.glass.strong.bg": {
-    "value": "rgba(255, 255, 255, 0.2)",
+    "value": "rgba(255, 255, 255, 0.22)",
     "variable": "var(--colors-glass-strong-bg)"
   },
   "colors.glass.strong.border": {
-    "value": "rgba(255, 255, 255, 0.3)",
+    "value": "rgba(255, 255, 255, 0.34)",
     "variable": "var(--colors-glass-strong-border)"
   },
   "colors.glass.gradients.before": {
@@ -44,19 +44,19 @@ const tokens = {
     "variable": "var(--colors-glass-gradients-after)"
   },
   "colors.button.primary.bg": {
-    "value": "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.3) 100%)",
+    "value": "linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%)",
     "variable": "var(--colors-button-primary-bg)"
   },
   "colors.button.primary.border": {
-    "value": "rgba(96, 165, 250, 0.4)",
+    "value": "rgba(0, 122, 255, 0.50)",
     "variable": "var(--colors-button-primary-border)"
   },
   "colors.button.secondary.bg": {
-    "value": "rgba(255, 255, 255, 0.1)",
+    "value": "var(--colors-glass-medium-bg)",
     "variable": "var(--colors-button-secondary-bg)"
   },
   "colors.button.secondary.border": {
-    "value": "rgba(255, 255, 255, 0.2)",
+    "value": "var(--colors-glass-medium-border)",
     "variable": "var(--colors-button-secondary-border)"
   },
   "colors.button.ghost.bg": {
@@ -64,51 +64,51 @@ const tokens = {
     "variable": "var(--colors-button-ghost-bg)"
   },
   "colors.button.ghost.border": {
-    "value": "rgba(255, 255, 255, 0.1)",
+    "value": "var(--colors-glass-subtle-border)",
     "variable": "var(--colors-button-ghost-border)"
   },
   "colors.button.danger.bg": {
-    "value": "linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.3) 100%)",
+    "value": "linear-gradient(135deg, rgba(255, 59, 48, 0.30) 0%, rgba(255, 59, 48, 0.30) 100%)",
     "variable": "var(--colors-button-danger-bg)"
   },
   "colors.button.danger.border": {
-    "value": "rgba(248, 113, 113, 0.4)",
+    "value": "rgba(255, 59, 48, 0.50)",
     "variable": "var(--colors-button-danger-border)"
   },
   "colors.button.success.bg": {
-    "value": "linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(22, 163, 74, 0.3) 100%)",
+    "value": "linear-gradient(135deg, rgba(76, 217, 100, 0.30) 0%, rgba(76, 217, 100, 0.30) 100%)",
     "variable": "var(--colors-button-success-bg)"
   },
   "colors.button.success.border": {
-    "value": "rgba(74, 222, 128, 0.4)",
+    "value": "rgba(76, 217, 100, 0.50)",
     "variable": "var(--colors-button-success-border)"
   },
   "colors.button.warning.bg": {
-    "value": "linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.3) 100%)",
+    "value": "linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%)",
     "variable": "var(--colors-button-warning-bg)"
   },
   "colors.button.warning.border": {
-    "value": "rgba(253, 224, 71, 0.4)",
+    "value": "rgba(255, 149, 0, 0.50)",
     "variable": "var(--colors-button-warning-border)"
   },
   "colors.accent.primary": {
-    "value": "rgba(59, 130, 246, 0.8)",
+    "value": "#007aff",
     "variable": "var(--colors-accent-primary)"
   },
   "colors.accent.secondary": {
-    "value": "rgba(168, 85, 247, 0.8)",
+    "value": "#5956d6",
     "variable": "var(--colors-accent-secondary)"
   },
   "colors.accent.success": {
-    "value": "rgba(34, 197, 94, 0.8)",
+    "value": "#4cd964",
     "variable": "var(--colors-accent-success)"
   },
   "colors.accent.warning": {
-    "value": "rgba(251, 191, 36, 0.8)",
+    "value": "#ff9500",
     "variable": "var(--colors-accent-warning)"
   },
   "colors.accent.danger": {
-    "value": "rgba(239, 68, 68, 0.8)",
+    "value": "#ff3b30",
     "variable": "var(--colors-accent-danger)"
   },
   "colors.text.glass.primary": {
@@ -139,6 +139,14 @@ const tokens = {
     "value": "8px",
     "variable": "var(--radii-sm)"
   },
+  "radii.control": {
+    "value": "12px",
+    "variable": "var(--radii-control)"
+  },
+  "radii.field": {
+    "value": "10px",
+    "variable": "var(--radii-field)"
+  },
   "radii.md": {
     "value": "16px",
     "variable": "var(--radii-md)"
@@ -152,12 +160,32 @@ const tokens = {
     "variable": "var(--radii-xl)"
   },
   "radii.2xl": {
-    "value": "32px",
+    "value": "28px",
     "variable": "var(--radii-2xl)"
   },
   "radii.full": {
     "value": "9999px",
     "variable": "var(--radii-full)"
+  },
+  "radii.roles.control": {
+    "value": "var(--radii-control)",
+    "variable": "var(--radii-roles-control)"
+  },
+  "radii.roles.field": {
+    "value": "var(--radii-field)",
+    "variable": "var(--radii-roles-field)"
+  },
+  "radii.roles.card": {
+    "value": "var(--radii-lg)",
+    "variable": "var(--radii-roles-card)"
+  },
+  "radii.roles.sheet": {
+    "value": "var(--radii-xl)",
+    "variable": "var(--radii-roles-sheet)"
+  },
+  "radii.roles.surfaceLg": {
+    "value": "var(--radii-2xl)",
+    "variable": "var(--radii-roles-surface-lg)"
   },
   "radii.glass.xs": {
     "value": "var(--radii-xs)",
@@ -298,6 +326,142 @@ const tokens = {
   "spacing.glass.3xl": {
     "value": "32px",
     "variable": "var(--spacing-glass-3xl)"
+  },
+  "fonts.sans": {
+    "value": "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+    "variable": "var(--fonts-sans)"
+  },
+  "fonts.display": {
+    "value": "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+    "variable": "var(--fonts-display)"
+  },
+  "fonts.mono": {
+    "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+    "variable": "var(--fonts-mono)"
+  },
+  "fontSizes.xs": {
+    "value": "0.75rem",
+    "variable": "var(--font-sizes-xs)"
+  },
+  "fontSizes.sm": {
+    "value": "0.875rem",
+    "variable": "var(--font-sizes-sm)"
+  },
+  "fontSizes.md": {
+    "value": "1rem",
+    "variable": "var(--font-sizes-md)"
+  },
+  "fontSizes.lg": {
+    "value": "1.125rem",
+    "variable": "var(--font-sizes-lg)"
+  },
+  "fontSizes.xl": {
+    "value": "1.25rem",
+    "variable": "var(--font-sizes-xl)"
+  },
+  "fontSizes.2xl": {
+    "value": "1.5rem",
+    "variable": "var(--font-sizes-2xl)"
+  },
+  "fontSizes.3xl": {
+    "value": "1.875rem",
+    "variable": "var(--font-sizes-3xl)"
+  },
+  "fontSizes.4xl": {
+    "value": "2.25rem",
+    "variable": "var(--font-sizes-4xl)"
+  },
+  "fontSizes.5xl": {
+    "value": "3rem",
+    "variable": "var(--font-sizes-5xl)"
+  },
+  "fontSizes.6xl": {
+    "value": "3.75rem",
+    "variable": "var(--font-sizes-6xl)"
+  },
+  "lineHeights.none": {
+    "value": "1",
+    "variable": "var(--line-heights-none)"
+  },
+  "lineHeights.tight": {
+    "value": "1.1",
+    "variable": "var(--line-heights-tight)"
+  },
+  "lineHeights.snug": {
+    "value": "1.3",
+    "variable": "var(--line-heights-snug)"
+  },
+  "lineHeights.normal": {
+    "value": "1.5",
+    "variable": "var(--line-heights-normal)"
+  },
+  "lineHeights.relaxed": {
+    "value": "1.7",
+    "variable": "var(--line-heights-relaxed)"
+  },
+  "lineHeights.loose": {
+    "value": "1.9",
+    "variable": "var(--line-heights-loose)"
+  },
+  "fontWeights.thin": {
+    "value": "100",
+    "variable": "var(--font-weights-thin)"
+  },
+  "fontWeights.extralight": {
+    "value": "200",
+    "variable": "var(--font-weights-extralight)"
+  },
+  "fontWeights.light": {
+    "value": "300",
+    "variable": "var(--font-weights-light)"
+  },
+  "fontWeights.normal": {
+    "value": "400",
+    "variable": "var(--font-weights-normal)"
+  },
+  "fontWeights.medium": {
+    "value": "500",
+    "variable": "var(--font-weights-medium)"
+  },
+  "fontWeights.semibold": {
+    "value": "600",
+    "variable": "var(--font-weights-semibold)"
+  },
+  "fontWeights.bold": {
+    "value": "700",
+    "variable": "var(--font-weights-bold)"
+  },
+  "fontWeights.extrabold": {
+    "value": "800",
+    "variable": "var(--font-weights-extrabold)"
+  },
+  "fontWeights.black": {
+    "value": "900",
+    "variable": "var(--font-weights-black)"
+  },
+  "letterSpacings.tighter": {
+    "value": "-0.02em",
+    "variable": "var(--letter-spacings-tighter)"
+  },
+  "letterSpacings.tight": {
+    "value": "-0.01em",
+    "variable": "var(--letter-spacings-tight)"
+  },
+  "letterSpacings.normal": {
+    "value": "0",
+    "variable": "var(--letter-spacings-normal)"
+  },
+  "letterSpacings.wide": {
+    "value": "0.01em",
+    "variable": "var(--letter-spacings-wide)"
+  },
+  "letterSpacings.wider": {
+    "value": "0.02em",
+    "variable": "var(--letter-spacings-wider)"
+  },
+  "letterSpacings.widest": {
+    "value": "0.04em",
+    "variable": "var(--letter-spacings-widest)"
   },
   "spacing.glass.-xs": {
     "value": "calc(var(--spacing-glass-xs) * -1)",

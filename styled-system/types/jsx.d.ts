@@ -14,13 +14,20 @@ export interface UnstyledProps {
   unstyled?: boolean | undefined
 }
 
+export interface AsProps {
+  /**
+   * The element to render as
+   */
+  as?: ElementType | undefined
+}
+
 export type ComponentProps<T extends ElementType> = DistributiveOmit<ComponentPropsWithoutRef<T>, 'ref'> & {
   ref?: Ref<ElementRef<T>>
 }
 
 export interface StyledComponent<T extends ElementType, P extends Dict = {}> {
-  (props: JsxHTMLProps<ComponentProps<T> & UnstyledProps, Assign<JsxStyleProps, P>>): JSX.Element
-  displayName?: string
+  (props: JsxHTMLProps<ComponentProps<T> & UnstyledProps & AsProps, Assign<JsxStyleProps, P>>): JSX.Element
+  displayName?: string | undefined
 }
 
 interface RecipeFn {
@@ -29,12 +36,12 @@ interface RecipeFn {
 
 interface JsxFactoryOptions<TProps extends Dict> {
   dataAttr?: boolean
-  defaultProps?: TProps
+  defaultProps?: Partial<TProps>
   shouldForwardProp?: (prop: string, variantKeys: string[]) => boolean
   forwardProps?: string[]
 }
 
-export type JsxRecipeProps<T extends ElementType, P extends Dict> = JsxHTMLProps<ComponentProps<T> & UnstyledProps, P>;
+export type JsxRecipeProps<T extends ElementType, P extends Dict> = JsxHTMLProps<ComponentProps<T> & UnstyledProps & AsProps, P>;
 
 export type JsxElement<T extends ElementType, P extends Dict> = T extends StyledComponent<infer A, infer B>
   ? StyledComponent<A, Pretty<DistributiveUnion<P, B>>>
@@ -55,6 +62,6 @@ export type JsxElements = {
 
 export type Styled = JsxFactory & JsxElements
 
-export type HTMLStyledProps<T extends ElementType> = JsxHTMLProps<ComponentProps<T> & UnstyledProps, JsxStyleProps>
+export type HTMLStyledProps<T extends ElementType> = JsxHTMLProps<ComponentProps<T> & UnstyledProps & AsProps, JsxStyleProps>
 
 export type StyledVariantProps<T extends StyledComponent<any, any>> = T extends StyledComponent<any, infer Props> ? Props : never

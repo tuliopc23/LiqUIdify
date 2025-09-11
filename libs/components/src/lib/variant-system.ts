@@ -86,13 +86,13 @@ export const createVariants = <T extends VariantConfig>(
 
 const glassVariants = createVariants({
   variant: {
-    default: "liquid-glass",
-    primary: "liquid-glass",
-    secondary: "liquid-glass",
-    destructive: "liquid-glass",
-    outline: "liquid-glass",
-    ghost: "liquid-glass",
-    link: "liquid-glass",
+    default: "glass-surface",
+    primary: "glass-surface",
+    secondary: "glass-surface",
+    destructive: "glass-surface",
+    outline: "glass-surface",
+    ghost: "glass-surface",
+    link: "glass-surface",
   },
   size: {
     sm: "",

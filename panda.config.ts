@@ -26,18 +26,18 @@ export default defineConfig({
             border: { value: "rgba(255, 255, 255, 0.2)" },
             ripple: { value: "rgba(255, 255, 255, 0.3)" },
 
-            // Glass intensities
+            // Glass intensities (balanced for Apple-like translucency)
             subtle: {
-              bg: { value: "rgba(255, 255, 255, 0.05)" },
-              border: { value: "rgba(255, 255, 255, 0.1)" },
+              bg: { value: "rgba(255, 255, 255, 0.06)" },
+              border: { value: "rgba(255, 255, 255, 0.12)" },
             },
             medium: {
-              bg: { value: "rgba(255, 255, 255, 0.1)" },
-              border: { value: "rgba(255, 255, 255, 0.2)" },
+              bg: { value: "rgba(255, 255, 255, 0.12)" },
+              border: { value: "rgba(255, 255, 255, 0.22)" },
             },
             strong: {
-              bg: { value: "rgba(255, 255, 255, 0.2)" },
-              border: { value: "rgba(255, 255, 255, 0.3)" },
+              bg: { value: "rgba(255, 255, 255, 0.22)" },
+              border: { value: "rgba(255, 255, 255, 0.34)" },
             },
 
             // Glass gradients for pseudo-elements
@@ -53,53 +53,61 @@ export default defineConfig({
             },
           },
 
-          // Component Variants
+          // Component Variants (Apple-inspired, token-driven)
           button: {
+            // Primary actions use the Apple Blue accent, blended for glass context
             primary: {
               bg: {
                 value:
-                  "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.3) 100%)",
+                  "linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%)",
               },
-              border: { value: "rgba(96, 165, 250, 0.4)" },
+              border: { value: "rgba(0, 122, 255, 0.50)" },
             },
+            // Neutral/glassy surface — keep mostly translucent
             secondary: {
-              bg: { value: "rgba(255, 255, 255, 0.1)" },
-              border: { value: "rgba(255, 255, 255, 0.2)" },
+              bg: { value: "{colors.glass.medium.bg}" },
+              border: { value: "{colors.glass.medium.border}" },
             },
             ghost: {
               bg: { value: "transparent" },
-              border: { value: "rgba(255, 255, 255, 0.1)" },
+              border: { value: "{colors.glass.subtle.border}" },
             },
+            // Contextual accents mapped to Apple palette tokens
             danger: {
               bg: {
                 value:
-                  "linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.3) 100%)",
+                  "linear-gradient(135deg, rgba(255, 59, 48, 0.30) 0%, rgba(255, 59, 48, 0.30) 100%)",
               },
-              border: { value: "rgba(248, 113, 113, 0.4)" },
+              border: { value: "rgba(255, 59, 48, 0.50)" },
             },
             success: {
               bg: {
                 value:
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(22, 163, 74, 0.3) 100%)",
+                  "linear-gradient(135deg, rgba(76, 217, 100, 0.30) 0%, rgba(76, 217, 100, 0.30) 100%)",
               },
-              border: { value: "rgba(74, 222, 128, 0.4)" },
+              border: { value: "rgba(76, 217, 100, 0.50)" },
             },
             warning: {
               bg: {
                 value:
-                  "linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.3) 100%)",
+                  "linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%)",
               },
-              border: { value: "rgba(253, 224, 71, 0.4)" },
+              border: { value: "rgba(255, 149, 0, 0.50)" },
             },
           },
 
-          // Status colors
+          // Apple System Accents (tokens only; used across recipes)
           accent: {
-            primary: { value: "rgba(59, 130, 246, 0.8)" },
-            secondary: { value: "rgba(168, 85, 247, 0.8)" },
-            success: { value: "rgba(34, 197, 94, 0.8)" },
-            warning: { value: "rgba(251, 191, 36, 0.8)" },
-            danger: { value: "rgba(239, 68, 68, 0.8)" },
+            // Blue — primary accent used widely for actions
+            primary: { value: "#007aff" },
+            // Purple — secondary accent
+            secondary: { value: "#5956d6" },
+            // Green — success
+            success: { value: "#4cd964" },
+            // Orange — warning
+            warning: { value: "#ff9500" },
+            // Red — error/destructive
+            danger: { value: "#ff3b30" },
           },
 
           // Text colors for glass components
@@ -115,25 +123,37 @@ export default defineConfig({
 
         // Comprehensive border radius system - PRIMARY STANDARD: md (16px)
         radii: {
-          // Global component defaults
+          // Global component defaults (Apple-aligned)
           none: { value: "0px" },
-          xs: { value: "4px" }, // Minimal rounding (inputs, small elements)
-          sm: { value: "8px" }, // Subtle rounding (chips, tags)
-          md: { value: "16px" }, // PRIMARY STANDARD - Default for all components
-          lg: { value: "20px" }, // Prominent rounding (cards, modals)
-          xl: { value: "24px" }, // Large rounding (hero sections)
-          "2xl": { value: "32px" }, // Extra large rounding (special cases)
-          full: { value: "9999px" }, // Pills, avatars
+          xs: { value: "4px" },
+          sm: { value: "8px" },
+          // Role-specific tokens (do not hardcode in components)
+          control: { value: "12px" }, // System buttons
+          field: { value: "10px" },   // Text fields / search
+          md: { value: "16px" },      // Default
+          lg: { value: "20px" },      // Cards / alerts
+          xl: { value: "24px" },      // Sheets / large popovers
+          "2xl": { value: "28px" },  // Very large surfaces
+          full: { value: "9999px" },
+
+          // Roles map for clarity (indirection for future tuning)
+          roles: {
+            control: { value: "{radii.control}" },
+            field: { value: "{radii.field}" },
+            card: { value: "{radii.lg}" },
+            sheet: { value: "{radii.xl}" },
+            surfaceLg: { value: "{radii.2xl}" },
+          },
 
           // Glass-specific radius tokens (inherits from above)
           glass: {
-            xs: { value: "{radii.xs}" }, // 4px
-            sm: { value: "{radii.sm}" }, // 8px
-            md: { value: "{radii.md}" }, // 16px - PRIMARY DEFAULT
-            lg: { value: "{radii.lg}" }, // 20px
-            xl: { value: "{radii.xl}" }, // 24px
-            "2xl": { value: "{radii.2xl}" }, // 32px
-            full: { value: "{radii.full}" }, // 9999px
+            xs: { value: "{radii.xs}" },
+            sm: { value: "{radii.sm}" },
+            md: { value: "{radii.md}" },
+            lg: { value: "{radii.lg}" },
+            xl: { value: "{radii.xl}" },
+            "2xl": { value: "{radii.2xl}" },
+            full: { value: "{radii.full}" },
           },
         },
 
@@ -342,7 +362,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.card)",
               maxWidth: "500px",
               width: "100%",
               maxHeight: "90vh",
@@ -397,7 +417,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.control)",
               cursor: "pointer",
               display: "inline-flex",
               alignItems: "center",
@@ -785,7 +805,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.control)",
               cursor: "pointer",
               display: "inline-flex",
               alignItems: "center",
@@ -808,7 +828,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.sheet)",
               minWidth: "300px",
               padding: "token(spacing.glass.lg)",
               zIndex: 50,
@@ -878,7 +898,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.card)",
               display: "flex",
               alignItems: "flex-start",
               gap: "token(spacing.glass.md)",
@@ -1072,7 +1092,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.field)",
               padding: "token(spacing.glass.md)",
               cursor: "pointer",
               display: "flex",
@@ -1116,7 +1136,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.sheet)",
               maxHeight: "200px",
               overflowY: "auto",
               _before: {
@@ -1178,7 +1198,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.field)",
               padding: "token(spacing.glass.md)",
               cursor: "pointer",
               display: "flex",
@@ -1221,7 +1241,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.sheet)",
               padding: "token(spacing.glass.lg)",
               _before: {
                 content: '""',
@@ -1363,7 +1383,7 @@ export default defineConfig({
               backdropFilter: "blur(token(blurs.glass.md))",
               border: "1px solid token(colors.glass.border)",
               boxShadow: "token(shadows.glass.base)",
-              borderRadius: "token(radii.md)",
+              borderRadius: "token(radii.roles.field)",
               overflow: "hidden",
               _before: {
                 content: '""',
@@ -1677,7 +1697,7 @@ export default defineConfig({
       // Recipe for base liquid glass component
       recipes: {
         liquidGlass: {
-          className: "liquid-glass",
+          className: "glass-surface",
           base: {
             position: "relative",
             overflow: "hidden",
@@ -1855,19 +1875,19 @@ export default defineConfig({
             size: {
               sm: {
                 padding: "token(spacing.glass.sm) token(spacing.glass.md)",
-                borderRadius: "token(radii.sm)", // 8px
+                borderRadius: "token(radii.roles.field)",
                 fontSize: "14px",
                 minHeight: "36px",
               },
               md: {
                 padding: "token(spacing.glass.md) token(spacing.glass.lg)",
-                borderRadius: "token(radii.md)", // 16px - PRIMARY DEFAULT
+                borderRadius: "token(radii.roles.control)",
                 fontSize: "16px",
                 minHeight: "44px",
               },
               lg: {
                 padding: "token(spacing.glass.lg) token(spacing.glass.xl)",
-                borderRadius: "token(radii.lg)", // 20px
+                borderRadius: "token(radii.md)",
                 fontSize: "18px",
                 minHeight: "52px",
               },

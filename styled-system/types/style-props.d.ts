@@ -2358,7 +2358,7 @@ font?: ConditionalValue<CssProperties["font"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-family
    */
-fontFamily?: ConditionalValue<CssProperties["fontFamily"] | AnyString>
+fontFamily?: ConditionalValue<UtilityValues["fontFamily"] | CssVars | CssProperties["fontFamily"] | AnyString>
  /**
    * The **`font-feature-settings`** CSS property controls advanced typographic features in OpenType fonts.
    *
@@ -2443,7 +2443,7 @@ fontPalette?: ConditionalValue<CssProperties["fontPalette"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-fontSize?: ConditionalValue<CssProperties["fontSize"] | AnyString>
+fontSize?: ConditionalValue<UtilityValues["fontSize"] | CssVars | CssProperties["fontSize"] | AnyString>
  /**
    * The **`font-size-adjust`** CSS property sets the size of lower-case letters relative to the current font size (which defines the size of upper-case letters).
    *
@@ -2708,7 +2708,7 @@ fontVariationSettings?: ConditionalValue<CssProperties["fontVariationSettings"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
    */
-fontWeight?: ConditionalValue<CssProperties["fontWeight"] | AnyString>
+fontWeight?: ConditionalValue<UtilityValues["fontWeight"] | CssVars | CssProperties["fontWeight"] | AnyString>
  /**
    * The **`forced-color-adjust`** CSS property allows authors to opt certain elements out of forced colors mode. This then restores the control of those values to CSS.
    *
@@ -3264,7 +3264,7 @@ left?: ConditionalValue<UtilityValues["left"] | CssVars | CssProperties["left"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-letterSpacing?: ConditionalValue<CssProperties["letterSpacing"] | AnyString>
+letterSpacing?: ConditionalValue<UtilityValues["letterSpacing"] | CssVars | CssProperties["letterSpacing"] | AnyString>
  lightingColor?: ConditionalValue<CssProperties["lightingColor"] | AnyString>
  /**
    * The **`line-break`** CSS property sets how to break lines of Chinese, Japanese, or Korean (CJK) text when working with punctuation and symbols.
@@ -3300,7 +3300,7 @@ lineClamp?: ConditionalValue<CssProperties["lineClamp"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-lineHeight?: ConditionalValue<CssProperties["lineHeight"] | AnyString>
+lineHeight?: ConditionalValue<UtilityValues["lineHeight"] | CssVars | CssProperties["lineHeight"] | AnyString>
  /**
    * The **`line-height-step`** CSS property sets the step unit for line box heights. When the property is set, line box heights are rounded up to the closest multiple of the unit.
    *
@@ -5907,7 +5907,7 @@ transitionDuration?: ConditionalValue<UtilityValues["transitionDuration"] | CssV
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-transitionProperty?: ConditionalValue<CssProperties["transitionProperty"] | AnyString>
+transitionProperty?: ConditionalValue<UtilityValues["transitionProperty"] | CssVars | CssProperties["transitionProperty"] | AnyString>
  /**
    * The **`transition-timing-function`** CSS property sets how intermediate values are calculated for CSS properties being affected by a transition effect.
    *

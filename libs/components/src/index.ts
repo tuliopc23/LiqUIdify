@@ -3,6 +3,8 @@
 
 // Styles: trigger Panda CSS generation for tokens/recipes/utilities when building the library
 import "./styles/panda.css";
+// Include extracted Panda recipe CSS so components are fully pre-styled out of the box
+import "../../../styled-system/styles.css";
 
 // Basic UI Components
 export * from "./components/button";
