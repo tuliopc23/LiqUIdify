@@ -34,8 +34,8 @@ jobs:
         run: bun run build:lib
 
 
-      - name: Run accessibility tests
-        run: bun run test:a11y
+      - name: Run unit tests
+        run: bun run test
 
       - name: Upload contrast audit results
         uses: actions/upload-artifact@v4

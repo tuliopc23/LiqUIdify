@@ -65,8 +65,8 @@ CI and release (what GitHub Actions run)
 Gotchas and heads-ups (verified)
 - Rolldown config references
   - Some scripts reference rolldown.config.ts (e.g., libs/components dev/build:watch), but no such file was found. Prefer the Vite-based build (bun run build:lib) or add the missing config if you intend to use rolldown.
-- E2E tests
-  - There are Playwright-style tests under tests/e2e, but vitest.config.mts excludes tests/e2e/**, and no Playwright config file was found. These tests are not executed by bun run test or the current CI.
+- Tests policy
+  - This repo runs unit tests only (Vitest). E2E and Playwright are out of scope here.
 
 Where things are defined
 - Root package and scripts: package.json

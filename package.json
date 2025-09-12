@@ -62,7 +62,12 @@
       "require": "./dist/libs/components/components/button/index.cjs"
     },
     "./styles": "./dist/libs/components/liquidify.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./*": {
+      "types": "./dist/libs/components/components/*/index.d.ts",
+      "import": "./dist/libs/components/components/*/index.mjs",
+      "require": "./dist/libs/components/components/*/index.cjs"
+    }
   },
   "files": [
     "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
@@ -131,13 +136,7 @@
     "check:fix": "biome check --write .",
     "health-check": "bun run type-check && bun run check && bun run build:lib",
     "test": "vitest -c vitest.config.mts run",
-    "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
-    "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
-    "test:build": "bun run build:lib && vitest run libs/components/src/test/build-validation.test.ts",
     "test:coverage": "bun test --coverage",
-    "test:e2e": "vitest run libs/components/src/test/e2e-workflows.test.tsx",
-    "test:integration": "vitest run libs/components/src/test/integration.test.tsx",
-    "test:performance": "vitest run libs/components/src/test/performance-integration.test.tsx",
     "type-check": "bunx tsc --noEmit --project tsconfig.json && bun run --filter @liquidify/components type-check",
     "type-check:watch": "bunx tsc --noEmit --project tsconfig.json --watch",
     "validate:config": "test -f libs/components/rolldown.config.ts || (echo 'rolldown.config.ts not found' && exit 1)",
