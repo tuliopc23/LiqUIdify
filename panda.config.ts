@@ -4,9 +4,7 @@ export default defineConfig({
   preflight: true,
   presets: ["@pandacss/preset-base", "@park-ui/panda-preset"],
 
-  include: [
-    "./libs/components/src/**/*.{js,jsx,ts,tsx}",
-  ],
+  include: ["./libs/components/src/**/*.{js,jsx,ts,tsx}"],
 
   exclude: [],
 
@@ -127,11 +125,11 @@ export default defineConfig({
           sm: { value: "8px" },
           // Role-specific tokens (do not hardcode in components)
           control: { value: "12px" }, // System buttons
-          field: { value: "10px" },   // Text fields / search
-          md: { value: "16px" },      // Default
-          lg: { value: "20px" },      // Cards / alerts
-          xl: { value: "24px" },      // Sheets / large popovers
-          "2xl": { value: "28px" },  // Very large surfaces
+          field: { value: "10px" }, // Text fields / search
+          md: { value: "16px" }, // Default
+          lg: { value: "20px" }, // Cards / alerts
+          xl: { value: "24px" }, // Sheets / large popovers
+          "2xl": { value: "28px" }, // Very large surfaces
           full: { value: "9999px" },
 
           // Roles map for clarity (indirection for future tuning)
@@ -238,26 +236,26 @@ export default defineConfig({
         // Typography tokens
         fonts: {
           sans: {
-            value:
-              "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+            value: '"SF Pro Display", sans-serif',
           },
           display: {
-            value:
-              "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+            value: '"SF Pro Display", sans-serif',
           },
-          mono: { value: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace" },
+          mono: {
+            value: '"SF Mono", monospace',
+          },
         },
         fontSizes: {
-          xs: { value: "0.75rem" },  // 12px
+          xs: { value: "0.75rem" }, // 12px
           sm: { value: "0.875rem" }, // 14px
-          md: { value: "1rem" },     // 16px
+          md: { value: "1rem" }, // 16px
           lg: { value: "1.125rem" }, // 18px
-          xl: { value: "1.25rem" },  // 20px
-          "2xl": { value: "1.5rem" },  // 24px
+          xl: { value: "1.25rem" }, // 20px
+          "2xl": { value: "1.5rem" }, // 24px
           "3xl": { value: "1.875rem" }, // 30px
-          "4xl": { value: "2.25rem" },  // 36px
-          "5xl": { value: "3rem" },     // 48px
-          "6xl": { value: "3.75rem" },  // 60px
+          "4xl": { value: "2.25rem" }, // 36px
+          "5xl": { value: "3rem" }, // 48px
+          "6xl": { value: "3.75rem" }, // 60px
         },
         lineHeights: {
           none: { value: "1" },
@@ -723,7 +721,7 @@ export default defineConfig({
               background: "transparent",
               borderRadius: "token(radii.sm)",
               fontSize: "14px",
-              fontWeight: 500,
+              fontWeight: "token(fontWeights.medium)",
               color: "token(colors.text.glass.primary)",
               transition: "all token(durations.glass.quick) token(easings.glass.flow)",
               _hover: {
@@ -957,7 +955,7 @@ export default defineConfig({
               background: "token(colors.glass.bg)",
               border: "1px solid token(colors.glass.border)",
               fontSize: "14px",
-              fontWeight: 500,
+              fontWeight: "token(fontWeights.medium)",
               cursor: "pointer",
               color: "token(colors.text.glass.primary)",
               _hover: {
@@ -1053,7 +1051,7 @@ export default defineConfig({
               border: "none",
               cursor: "pointer",
               fontSize: "16px",
-              fontWeight: 500,
+              fontWeight: "token(fontWeights.medium)",
               textAlign: "left",
               color: "token(colors.text.glass.primary)",
               transition: "all token(durations.glass.quick) token(easings.glass.flow)",
@@ -1334,7 +1332,7 @@ export default defineConfig({
               padding: "token(spacing.glass.sm) token(spacing.glass.md)",
               cursor: "pointer",
               fontSize: "14px",
-              fontWeight: "500",
+              fontWeight: "token(fontWeights.medium)",
               color: "token(colors.text.glass.primary)",
               _hover: { background: "token(colors.glass.subtle.bg)" },
             },
@@ -1357,7 +1355,7 @@ export default defineConfig({
             },
             itemName: {
               fontSize: "14px",
-              fontWeight: "500",
+              fontWeight: "token(fontWeights.medium)",
               color: "token(colors.text.glass.primary)",
             },
             itemSizeText: {
@@ -1516,7 +1514,7 @@ export default defineConfig({
               padding: "token(spacing.glass.sm) token(spacing.glass.md)",
               cursor: "pointer",
               fontSize: "14px",
-              fontWeight: "500",
+              fontWeight: "token(fontWeights.medium)",
               color: "token(colors.text.glass.primary)",
               minWidth: "32px",
               textAlign: "center",
@@ -1784,7 +1782,7 @@ export default defineConfig({
             userSelect: "none",
             whiteSpace: "nowrap",
             fontFamily: "inherit",
-            fontWeight: 500,
+            fontWeight: "token(fontWeights.semibold)",
 
             // Liquid Glass Foundation
             background: "token(colors.glass.bg)",
@@ -2943,7 +2941,7 @@ export default defineConfig({
     },
 
     body: {
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
+      fontFamily: '"SF Pro Display", sans-serif',
       margin: 0,
       padding: 0,
     },

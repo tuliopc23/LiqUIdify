@@ -21,7 +21,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "bun run clean && bunx vite build && cp src/styles/panda.css ../../dist/libs/components/panda.css && test -f ../../styled-system/styles.css && cp ../../styled-system/styles.css ../../dist/libs/components/recipes.css || true && bun run build:types",
+    "build": "bun run clean && bunx vite build && bun run build:types",
     "build:types": "bunx tsc -p tsconfig.lib.json --pretty false --noEmitOnError false",
     "build:watch": "bunx vite build --config vite.config.ts --watch",
     "clean": "rm -rf dist",
@@ -32,7 +32,7 @@
     "@ark-ui/react": "^5.22.0",
     "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.23.12",
-    "lucide-react": "^0.539.0"
+    "lucide-react": "^0.544.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",

@@ -1,0 +1,173 @@
+/* SF Pro Display Font Import from CDN */
+@import url("https://v1.fontapi.ir/css/SFProDisplay");
+
+/* New Design System - SF Pro Font Implementation */
+
+/* Font Family Updates */
+:root {
+  --font-family-primary: "SF Pro Display", sans-serif;
+  --font-family-display: "SF Pro Display", sans-serif;
+  --font-family-body: "SF Pro Display", sans-serif;
+  --font-family-mono: "SF Mono", monospace;
+
+  /* SF Pro Display Weight Hierarchy (Apple HIG Variable Font Guidelines) */
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --font-weight-black: 900;
+
+  /* Typography Scale - Variable Weight Hierarchy */
+  --typography-display-weight: var(--font-weight-bold); /* Large headings */
+  --typography-headline-weight: var(--font-weight-semibold); /* Section headers */
+  --typography-body-weight: var(--font-weight-regular); /* Primary content */
+  --typography-caption-weight: var(--font-weight-medium); /* Secondary content */
+  --typography-button-weight: var(--font-weight-semibold); /* Interactive elements */
+}
+
+/* Global Font Application */
+* {
+  font-family: var(--font-family-body);
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-weight: var(--typography-body-weight);
+  letter-spacing: -0.022em;
+  line-height: 1.5;
+}
+
+/* Typography Styles for Components */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--typography-display-weight);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-family-body);
+  font-weight: var(--typography-body-weight);
+  letter-spacing: -0.016em;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-family-mono);
+  font-weight: 400;
+}
+
+/* Component-Specific Font Styles */
+.btn,
+.button,
+.button-primary,
+.button-secondary {
+  font-family: var(--font-family-body);
+  font-weight: var(--typography-button-weight);
+  letter-spacing: -0.01em;
+}
+
+.input,
+.textarea,
+.select,
+.form-control {
+  font-family: var(--font-family-body);
+  font-weight: var(--typography-body-weight);
+  letter-spacing: -0.016em;
+}
+
+/* Apple HIG Typography Scales */
+.text-caption {
+  font-size: 12px;
+  line-height: 1.333;
+  font-weight: var(--typography-caption-weight);
+  letter-spacing: -0.004em;
+}
+
+.text-body {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: var(--typography-body-weight);
+  letter-spacing: -0.022em;
+}
+
+.text-headline {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: var(--typography-headline-weight);
+  letter-spacing: -0.022em;
+}
+
+.text-title1,
+h1 {
+  font-size: 28px;
+  line-height: 1.3;
+  font-weight: var(--typography-display-weight);
+  letter-spacing: -0.025em;
+}
+
+.text-title2,
+h2 {
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: var(--typography-headline-weight);
+  letter-spacing: -0.025em;
+}
+
+.text-title3,
+h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: var(--typography-headline-weight);
+  letter-spacing: -0.022em;
+}
+
+/* Liquid Glass Theme Font Adjustments */
+.glass-surface,
+.bg-liquid,
+.bg-liquid-readable {
+  font-family: var(--font-family-body);
+  font-weight: var(--typography-body-weight);
+  letter-spacing: -0.016em;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+  }
+
+  h1,
+  .text-title1 {
+    font-size: 24px;
+    letter-spacing: -0.022em;
+  }
+
+  h2,
+  .text-title2 {
+    font-size: 20px;
+    letter-spacing: -0.022em;
+  }
+}
+
+/* Ensure smooth font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

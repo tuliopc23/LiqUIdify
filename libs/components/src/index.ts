@@ -3,11 +3,17 @@
 
 // Styles: trigger Panda CSS generation for tokens/recipes/utilities when building the library
 import "./styles/panda.css";
+// Include new design system with SF Pro font
+import "./styles/new-design-system.css";
 // Include extracted Panda recipe CSS so components are fully pre-styled out of the box
 import "../../../styled-system/styles.css";
 
 // Basic UI Components
 export * from "./components/button";
+export * from "./components/icons";
+export * from "./components/icon-button";
+
+// Core UI Components (Ark UI + Panda CSS)
 
 // Core UI Components (Ark UI + Panda CSS)
 export * from "./components/ark-ui/dialog/dialog";
@@ -73,9 +79,6 @@ export * from "./components/ark-ui/signature-pad/signature-pad";
 // Interactive Control Components
 export * from "./components/ark-ui/toggle/toggle";
 export * from "./components/ark-ui/toggle-group/toggle-group";
-
-
-
 
 // Utilities
 export * from "./lib/css";

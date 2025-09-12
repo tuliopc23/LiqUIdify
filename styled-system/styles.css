@@ -1,8 +1,10 @@
 @layer reset, base, tokens, recipes, utilities;
 
-@layer reset{
-  html,:host {
-    --font-fallback: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+@layer reset {
+  html,
+  :host {
+    --font-fallback:
+      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -11,213 +13,268 @@
     tab-size: 4;
     font-family: var(--global-font-body, var(--font-fallback));
     -webkit-tap-highlight-color: transparent;
-}
+  }
 
-  *,::before,::after,::backdrop,::file-selector-button {
+  *,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
     margin: 0px;
     padding: 0px;
     border-width: 0px;
     border-style: solid;
     border-color: var(--global-color-border, currentcolor);
     box-sizing: border-box;
-}
+  }
 
   hr {
     color: inherit;
     height: 0px;
     border-top-width: 1px;
-}
+  }
 
   body {
     line-height: inherit;
     height: 100%;
-}
+  }
 
   img {
     border-style: none;
-}
+  }
 
-  img,svg,video,canvas,audio,iframe,embed,object {
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
     display: block;
     vertical-align: middle;
-}
+  }
 
-  img,video {
+  img,
+  video {
     max-width: 100%;
     height: auto;
-}
+  }
 
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     text-wrap: balance;
     font-size: inherit;
     font-weight: inherit;
-}
+  }
 
-  p,h1,h2,h3,h4,h5,h6 {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     overflow-wrap: break-word;
-}
+  }
 
-  ol,ul,menu {
+  ol,
+  ul,
+  menu {
     list-style: none;
-}
+  }
 
-  button,input:where([type='button'], [type='reset'], [type='submit']),::file-selector-button {
+  button,
+  input:where([type="button"], [type="reset"], [type="submit"]),
+  ::file-selector-button {
     appearance: button;
     -webkit-appearance: button;
-}
+  }
 
-  button,input,optgroup,select,textarea,::file-selector-button {
+  button,
+  input,
+  optgroup,
+  select,
+  textarea,
+  ::file-selector-button {
     font: inherit;
     background: transparent;
     font-feature-settings: inherit;
     font-variation-settings: inherit;
     letter-spacing: inherit;
     color: inherit;
-}
+  }
 
   ::placeholder {
     --placeholder-fallback: rgba(0, 0, 0, 0.5);
     opacity: 1;
     color: var(--global-color-placeholder, var(--placeholder-fallback));
-}
+  }
 
   @supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
     ::placeholder {
       --placeholder-fallback: color-mix(in oklab, currentcolor 50%, transparent);
-}
-}
+    }
+  }
 
   ::selection {
     background-color: var(--global-color-selection, rgba(0, 115, 255, 0.3));
-}
+  }
 
   textarea {
     resize: vertical;
-}
+  }
 
   table {
     border-color: inherit;
     text-indent: 0px;
     border-collapse: collapse;
-}
+  }
 
   summary {
     display: list-item;
-}
+  }
 
   small {
     font-size: 80%;
-}
+  }
 
-  sub,sup {
+  sub,
+  sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
-}
+  }
 
   sub {
     bottom: -0.25em;
-}
+  }
 
   sup {
     top: -0.5em;
-}
+  }
 
   dialog {
     padding: 0px;
-}
+  }
 
   a {
     text-decoration: inherit;
     color: inherit;
-}
+  }
 
   abbr:where([title]) {
     text-decoration: underline dotted;
-}
+  }
 
-  b,strong {
+  b,
+  strong {
     font-weight: bolder;
-}
+  }
 
-  code,kbd,samp,pre {
-    --font-mono-fallback: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New';
+  code,
+  kbd,
+  samp,
+  pre {
+    --font-mono-fallback:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New";
     font-family: var(--global-font-mono, var(--font-mono-fallback));
     font-size: 1em;
     font-feature-settings: normal;
     font-variation-settings: normal;
-}
+  }
 
   progress {
     vertical-align: baseline;
-}
+  }
 
-  ::-webkit-search-decoration,::-webkit-search-cancel-button {
+  ::-webkit-search-decoration,
+  ::-webkit-search-cancel-button {
     -webkit-appearance: none;
-}
+  }
 
-  ::-webkit-inner-spin-button,::-webkit-outer-spin-button {
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
     height: auto;
-}
+  }
 
   :-moz-ui-invalid {
     box-shadow: none;
-}
+  }
 
   :-moz-focusring {
     outline: auto;
-}
+  }
 
-  [hidden]:where(:not([hidden='until-found'])) {
+  [hidden]:where(:not([hidden="until-found"])) {
     display: none !important;
-}
+  }
 }
 
-@layer base{
+@layer base {
   :root {
-    --made-with-panda: '🐼';
-}
+    --made-with-panda: "🐼";
+  }
 
   * {
     box-sizing: border-box;
     touch-action: manipulation;
-}
+  }
 
   body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-}
+    font-family: "SF Pro Display", sans-serif;
+  }
 
-  button,input,textarea,select,[role='button'],[role='combobox'],[role='textbox'],.card,.panel,.dialog,.popover,.tooltip,.dropdown {
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  [role="combobox"],
+  [role="textbox"],
+  .card,
+  .panel,
+  .dialog,
+  .popover,
+  .tooltip,
+  .dropdown {
     border-radius: var(--radii-md);
-}
+  }
 
   .liquid-wobble-active {
     animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
-}
+  }
 
   .liquid-pressed {
     transition: all var(--durations-glass-instant) var(--easings-glass-flow);
     transform: translateY(1px) scale(0.96);
-}
+  }
 
   .liquid-flow {
     animation: liquidFlow var(--durations-glass-flow) var(--easings-glass-flow);
-}
+  }
 
   @keyframes spin {
     0% {
       transform: rotate(0deg);
-}
+    }
 
     100% {
       transform: rotate(360deg);
-}
-}
+    }
+  }
 
-  *,::before,::after,::backdrop {
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
     --blur: /*-*/ /*-*/;
     --brightness: /*-*/ /*-*/;
     --contrast: /*-*/ /*-*/;
@@ -251,10 +308,10 @@
     --skew-y: 0;
     --scale-x: 1;
     --scale-y: 1;
-}
+  }
 }
 
-@layer tokens{
+@layer tokens {
   :where(:root, :host) {
     --colors-glass-bg: rgba(255, 255, 255, 0.1);
     --colors-glass-border: rgba(255, 255, 255, 0.2);
@@ -265,20 +322,46 @@
     --colors-glass-medium-border: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-bg: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-border: rgba(255, 255, 255, 0.34);
-    --colors-glass-gradients-before: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
-    --colors-glass-gradients-after: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
-    --colors-button-primary-bg: linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%);
-    --colors-button-primary-border: rgba(0, 122, 255, 0.50);
+    --colors-glass-gradients-before: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    --colors-glass-gradients-after: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    --colors-button-primary-bg: linear-gradient(
+      135deg,
+      rgba(0, 122, 255, 0.3) 0%,
+      rgba(0, 122, 255, 0.3) 100%
+    );
+    --colors-button-primary-border: rgba(0, 122, 255, 0.5);
     --colors-button-secondary-bg: var(--colors-glass-medium-bg);
     --colors-button-secondary-border: var(--colors-glass-medium-border);
     --colors-button-ghost-bg: transparent;
     --colors-button-ghost-border: var(--colors-glass-subtle-border);
-    --colors-button-danger-bg: linear-gradient(135deg, rgba(255, 59, 48, 0.30) 0%, rgba(255, 59, 48, 0.30) 100%);
-    --colors-button-danger-border: rgba(255, 59, 48, 0.50);
-    --colors-button-success-bg: linear-gradient(135deg, rgba(76, 217, 100, 0.30) 0%, rgba(76, 217, 100, 0.30) 100%);
-    --colors-button-success-border: rgba(76, 217, 100, 0.50);
-    --colors-button-warning-bg: linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%);
-    --colors-button-warning-border: rgba(255, 149, 0, 0.50);
+    --colors-button-danger-bg: linear-gradient(
+      135deg,
+      rgba(255, 59, 48, 0.3) 0%,
+      rgba(255, 59, 48, 0.3) 100%
+    );
+    --colors-button-danger-border: rgba(255, 59, 48, 0.5);
+    --colors-button-success-bg: linear-gradient(
+      135deg,
+      rgba(76, 217, 100, 0.3) 0%,
+      rgba(76, 217, 100, 0.3) 100%
+    );
+    --colors-button-success-border: rgba(76, 217, 100, 0.5);
+    --colors-button-warning-bg: linear-gradient(
+      135deg,
+      rgba(255, 149, 0, 0.3) 0%,
+      rgba(255, 149, 0, 0.3) 100%
+    );
+    --colors-button-warning-border: rgba(255, 149, 0, 0.5);
     --colors-accent-primary: #007aff;
     --colors-accent-secondary: #5956d6;
     --colors-accent-success: #4cd964;
@@ -314,11 +397,35 @@
     --blurs-glass-md: 10px;
     --blurs-glass-lg: 20px;
     --blurs-glass-xl: 30px;
-    --shadows-glass-base: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
+    --shadows-glass-base:
+      0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(
+        255,
+        255,
+        255,
+        0.4
+      ), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
     --shadows-glass-sm: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    --shadows-glass-md: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
-    --shadows-glass-lg: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
-    --shadows-glass-hover: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
+    --shadows-glass-md:
+      0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(
+        255,
+        255,
+        255,
+        0.4
+      ), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
+    --shadows-glass-lg:
+      0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(
+        255,
+        255,
+        255,
+        0.5
+      ), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
+    --shadows-glass-hover:
+      0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(
+        255,
+        255,
+        255,
+        0.5
+      ), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
     --durations-glass-flow: 0.8s;
     --durations-glass-bounce: 0.6s;
     --durations-glass-quick: 0.2s;
@@ -338,9 +445,9 @@
     --spacing-glass-xl: 20px;
     --spacing-glass-2xl: 24px;
     --spacing-glass-3xl: 32px;
-    --fonts-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    --fonts-display: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    --fonts-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --fonts-sans: "SF Pro Display", sans-serif;
+    --fonts-display: "SF Pro Display", sans-serif;
+    --fonts-mono: "SF Mono", monospace;
     --font-sizes-xs: 0.75rem;
     --font-sizes-sm: 0.875rem;
     --font-sizes-md: 1rem;
@@ -372,99 +479,101 @@
     --letter-spacings-wide: 0.01em;
     --letter-spacings-wider: 0.02em;
     --letter-spacings-widest: 0.04em;
-}
+  }
 
   @keyframes liquidRipple {
     0% {
       transform: scale(0);
       opacity: 1;
-}
+    }
 
     50% {
       opacity: 0.6;
-}
+    }
 
     100% {
       transform: scale(4);
       opacity: 0;
-}
-}
+    }
+  }
 
   @keyframes liquidJiggle {
-    0%,100% {
+    0%,
+    100% {
       transform: scale(1) rotate(0deg);
-}
+    }
 
     8% {
       transform: scale(1.12) rotate(-2deg);
-}
+    }
 
     16% {
       transform: scale(0.92) rotate(2.5deg);
-}
+    }
 
     24% {
       transform: scale(1.06) rotate(-1.8deg);
-}
+    }
 
     32% {
       transform: scale(0.95) rotate(1.5deg);
-}
+    }
 
     40% {
       transform: scale(1.04) rotate(-1deg);
-}
+    }
 
     48% {
       transform: scale(0.97) rotate(0.8deg);
-}
+    }
 
     56% {
       transform: scale(1.02) rotate(-0.6deg);
-}
+    }
 
     64% {
       transform: scale(0.99) rotate(0.4deg);
-}
+    }
 
     72% {
       transform: scale(1.01) rotate(-0.3deg);
-}
+    }
 
     80% {
       transform: scale(0.995) rotate(0.2deg);
-}
+    }
 
     88% {
       transform: scale(1.005) rotate(-0.1deg);
-}
+    }
 
     96% {
       transform: scale(0.998) rotate(0.05deg);
-}
-}
+    }
+  }
 
   @keyframes liquidFlow {
     0% {
       transform: translateY(0) scale(1);
-}
+    }
 
     50% {
       transform: translateY(-2px) scale(1.02);
-}
+    }
 
     100% {
       transform: translateY(0) scale(1);
-}
-}
+    }
+  }
 
   @keyframes liquidBounce {
-    0%,100% {
+    0%,
+    100% {
       transform: translateY(0);
-}
+    }
 
     50% {
       transform: translateY(-4px);
-}
-}
+    }
+  }
 }

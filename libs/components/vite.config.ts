@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const Dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -34,7 +35,22 @@ function discoverEntries() {
 
 export default defineConfig({
   logLevel: "error",
-  plugins: [react(), tsconfigPaths()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "src/styles/panda.css",
+          dest: ".",
+        },
+        {
+          src: "../../styled-system/styles.css",
+          dest: ".",
+        },
+      ],
+    }),
+  ],
   build: {
     lib: {
       entry: discoverEntries(),
