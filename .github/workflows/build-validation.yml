@@ -29,11 +29,7 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Validate configuration
-        run: bun run validate:config
 
       - name: Health check
         run: bun run health-check
 
-      - name: Verify Storybook build
-        run: bun run storybook:verify

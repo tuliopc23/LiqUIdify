@@ -1,7 +1,7 @@
 import { memo, splitProps } from '../helpers.js';
 import { createRecipe, mergeRecipes } from './create-recipe.js';
 
-const liquidGlassFn = /* @__PURE__ */ createRecipe('liquid-glass', {
+const liquidGlassFn = /* @__PURE__ */ createRecipe('glass-surface', {
   "intensity": "medium",
   "size": "md"
 }, [])

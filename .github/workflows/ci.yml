@@ -47,8 +47,6 @@ jobs:
       - name: Run tests
         run: bun run test
 
-      - name: Build Storybook
-        run: bun run build:storybook
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -56,5 +54,4 @@ jobs:
           name: build-artifacts
           path: |
             dist/
-            apps/storybook/storybook-static/
           retention-days: 7

@@ -311,14 +311,6 @@ bun install
   ```sh
   bun run build:lib
   ```
-- **Run Storybook:**
-  ```sh
-  bun run storybook
-  ```
-- **Build Storybook static site:**
-  ```sh
-  bun run build:storybook
-  ```
 - **Run VitePress docs (dev):**
   ```sh
   bun run docs:dev
@@ -417,7 +409,6 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 <div align="center">
   <p>Made with ❤️ by <a href="https://tuliocunha.dev">Tulio Pinheiro Cunha</a></p>
   <p>
-    <a href="https://liquidify-storybook.vercel.app">📖 Storybook</a> •
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
 <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a>
     <a href="https://liquidify-docs.vercel.app/api/">📋 API Docs</a>

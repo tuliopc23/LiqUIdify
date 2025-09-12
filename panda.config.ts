@@ -6,7 +6,6 @@ export default defineConfig({
 
   include: [
     "./libs/components/src/**/*.{js,jsx,ts,tsx}",
-    "./apps/**/*.{js,jsx,ts,tsx}",
     "./examples/**/*.{js,jsx,ts,tsx}",
   ],
 
