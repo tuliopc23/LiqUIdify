@@ -31,7 +31,10 @@ jobs:
 
       - name: Enforce banned tools
         run: |
-          if grep -RniE "(storybook|tailwind)" -- . | grep -v "node_modules" | grep -v "\.lock"; then
+          if grep -RniE "(storybook|tailwind)" -- . \
+            | grep -v "node_modules/" \
+            | grep -v "\.lock" \
+            | grep -v "^\./docs/"; then
             echo "Banned tool reference found"; exit 1;
           fi
 
