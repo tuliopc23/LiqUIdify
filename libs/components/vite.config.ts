@@ -1,4 +1,5 @@
-import { resolve } from "node:path";
+import { resolve, relative, join } from "node:path";
+import { readdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -6,15 +7,37 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 const Dirname = fileURLToPath(new URL(".", import.meta.url));
 
+function discoverEntries() {
+  const entries: Record<string, string> = {
+    index: resolve(Dirname, "src/index.ts"),
+  };
+  const base = resolve(Dirname, "src/components");
+
+  function walk(dir: string) {
+    for (const dirent of readdirSync(dir, { withFileTypes: true })) {
+      if (dirent.isDirectory()) {
+        const sub = join(dir, dirent.name);
+        const idx = join(sub, "index.ts");
+        if (existsSync(idx)) {
+          const rel = relative(resolve(Dirname, "src"), idx).replace(/\\/g, "/");
+          const entryName = rel.replace(/\.ts$/, ""); // e.g. components/button/index
+          entries[entryName] = idx;
+        }
+        walk(sub);
+      }
+    }
+  }
+
+  if (existsSync(base)) walk(base);
+  return entries;
+}
+
 export default defineConfig({
   logLevel: "error",
   plugins: [react(), tsconfigPaths()],
   build: {
     lib: {
-      entry: {
-        index: resolve(Dirname, "src/index.ts"),
-        "components/button/index": resolve(Dirname, "src/components/button/index.ts"),
-      },
+      entry: discoverEntries(),
       name: "LiquidifyComponents",
       formats: ["es", "cjs"],
     },
