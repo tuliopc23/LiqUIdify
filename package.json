@@ -116,12 +116,12 @@
     "build:docs": "echo 'Docs are built and deployed via Mintlify platform'",
     "build:all": "bun run build:lib && bun run build:docs",
     "build:types": "bun run --filter @liquidify/components build:types",
-    "build:watch": "bun run --filter @liquidify/components build:watch",
+    "build:watch": "bunx vite build --config libs/components/vite.config.ts --watch",
     "check:tsconfig": "tsc --noEmit --project tsconfig.json",
     "clean": "bun run --filter @liquidify/components clean",
     "clean:all": "bun run clean && bun run clean:node",
     "clean:node": "rm -rf node_modules bun.lock && bun install",
-    "dev": "bun run --filter @liquidify/components dev",
+    "dev": "bunx vite --config libs/components/vite.config.ts",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "format:fix": "biome format --write .",
@@ -161,7 +161,6 @@
   "types": "./dist/libs/components/index.d.ts",
   "version": "1.3.7",
   "workspaces": [
-    "examples/*",
     "libs/*"
   ]
 }

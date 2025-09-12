@@ -23,9 +23,9 @@
   "scripts": {
     "build": "bun run clean && bunx vite build && cp src/styles/panda.css ../../dist/libs/components/panda.css && test -f ../../styled-system/styles.css && cp ../../styled-system/styles.css ../../dist/libs/components/recipes.css || true && bun run build:types",
     "build:types": "bunx tsc -p tsconfig.lib.json --pretty false --noEmitOnError false",
-    "build:watch": "bunx rolldown -c rolldown.config.ts --watch",
+    "build:watch": "bunx vite build --config vite.config.ts --watch",
     "clean": "rm -rf dist",
-    "dev": "bunx vite -c rolldown.config.ts",
+    "dev": "bunx vite -c vite.config.ts",
     "type-check": "bunx tsc --noEmit --project tsconfig.lib.json"
   },
   "dependencies": {
