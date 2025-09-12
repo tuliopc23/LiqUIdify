@@ -21,9 +21,9 @@
   "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@biomejs/biome": "^2.2.3",
-    "@pandacss/dev": "^1.2.0",
-    "@pandacss/postcss": "^1.2.0",
+    "@biomejs/biome": "^2.2.4",
+    "@pandacss/dev": "^1.3.0",
+    "@pandacss/postcss": "^1.3.0",
     "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -98,7 +98,7 @@
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
-    "@ark-ui/react": "^5.22.0"
+    "@ark-ui/react": "^5.23.0"
   },
   "repository": {
     "type": "git",
@@ -122,13 +122,6 @@
     "clean:all": "bun run clean && bun run clean:node",
     "clean:node": "rm -rf node_modules bun.lock && bun install",
     "dev": "bun run --filter @liquidify/components dev",
-    "dev:docs": "bun run --filter @liquidify/docs dev",
-    "dev:unified": "bun run --filter @liquidify/unified dev",
-    "docs:css": "bun run --filter @liquidify/docs build:css",
-    "docs:build": "bun run --filter @liquidify/docs build",
-    "docs:dev": "bun run --filter @liquidify/docs dev",
-    "docs:links": "bun run --filter @liquidify/docs links",
-    "docs:preview": "bun run --filter @liquidify/docs preview",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "format:fix": "biome format --write .",
@@ -137,10 +130,6 @@
     "check": "biome check .",
     "check:fix": "biome check --write .",
     "health-check": "bun run type-check && bun run check && bun run build:lib",
-    "preview": "bun run build && bun run docs:preview",
-    "showcase:dev": "bunx vite --config apps/showcase/vite.config.ts",
-    "showcase:build": "bunx vite build --config apps/showcase/vite.config.ts",
-    "showcase:preview": "bunx vite preview --config apps/showcase/vite.config.ts --open",
     "test": "vitest -c vitest.config.mts run",
     "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
     "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
@@ -151,16 +140,12 @@
     "test:performance": "vitest run libs/components/src/test/performance-integration.test.tsx",
     "type-check": "bunx tsc --noEmit --project tsconfig.json && bun run --filter @liquidify/components type-check",
     "type-check:watch": "bunx tsc --noEmit --project tsconfig.json --watch",
-    "unified:build": "bun run --filter @liquidify/unified build",
-    "unified:dev": "bun run --filter @liquidify/unified dev",
-    "unified:preview": "bun run --filter @liquidify/unified preview",
     "validate:config": "test -f libs/components/rolldown.config.ts || (echo 'rolldown.config.ts not found' && exit 1)",
     "workspace:verify": "node scripts/verify-workspaces.mjs",
     "workspace:info": "node scripts/workspace-info.mjs",
     "exports:verify": "bun run scripts/check-exports.mjs",
     "setup:dev": "node scripts/setup-dev.mjs",
     "prepublishOnly": "bun run --filter @liquidify/components type-check && bun run build:lib",
-
     "build:analyze": "node scripts/build-analyze.cjs",
     "build:analyze:compressed": "node scripts/build-analyze.cjs --compressed",
     "audit:contrast": "node scripts/contrast-audit.js",
@@ -176,7 +161,6 @@
   "types": "./dist/libs/components/index.d.ts",
   "version": "1.3.7",
   "workspaces": [
-    "apps/*",
     "examples/*",
     "libs/*"
   ]
