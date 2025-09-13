@@ -115,7 +115,7 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",
-    "tag": "beta"
+    "tag": "latest"
   },
   "scripts": {
     "prepare": "bunx panda build",
