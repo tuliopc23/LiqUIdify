@@ -31,8 +31,8 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      if (window?.localStorage) {
-        return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+      if (typeof window !== "undefined" && window.localStorage) {
+        return (window.localStorage.getItem(storageKey) as Theme) || defaultTheme;
       }
     } catch {
       // Logging disabled
@@ -94,7 +94,7 @@ export function ThemeProvider({
       document.body.className = `${document.body.className.replaceAll(/\b(light|dark|theme-light|theme-dark)\b/g, "")} ${theme} theme-${theme}`;
     }
 
-    if (process?.env && process.env.NODE_ENV !== "production") {
+    if (typeof process !== "undefined" && process.env && process.env.NODE_ENV !== "production") {
       console.log(`🎨 Theme applied: ${theme}`, {
         compatibilityProperties: Object.keys(compatibilityProperties).length,
         dataTheme: root.dataset.theme,

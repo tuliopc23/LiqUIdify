@@ -45,4 +45,5 @@ jobs:
           path: |
             contrast-audit-report.json
             a11y-test-results.json
+          if-no-files-found: ignore
           retention-days: 7

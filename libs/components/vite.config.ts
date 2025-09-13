@@ -57,10 +57,6 @@ export default defineConfig({
         ) {
           return true;
         }
-        // Treat styled-system JS as external, but allow CSS assets to be bundled
-        if (/^\.\.\/\.\.\/\.\.\/styled-system/.test(source)) {
-          return !source.endsWith(".css");
-        }
         // Never externalize CSS files
         if (source.endsWith(".css")) {
           return false;

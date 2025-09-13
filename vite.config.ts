@@ -11,10 +11,6 @@ export default defineConfig({
     alias: [
       // Ensure the more specific alias resolves first
       {
-        find: "liquidify/css",
-        replacement: resolve(__dirname, "./libs/components/src/styles/index.css"),
-      },
-      {
         find: "liquidify",
         replacement: resolve(__dirname, "./libs/components/src/index.ts"),
       },

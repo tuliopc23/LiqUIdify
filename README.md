@@ -1,11 +1,11 @@
 # 🌊 LiqUIdify
 
-[![npm version](https://img.shields.io/npm/v/liquidify)](https://www.npmjs.com/package/liquidify)
-[![npm downloads](https://img.shields.io/npm/dm/liquidify)](https://www.npmjs.com/package/liquidify)
+[![npm version](https://img.shields.io/npm/v/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
+[![npm downloads](https://img.shields.io/npm/dm/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
 [![Build Status](https://github.com/tuliopc23/LiqUIdify/actions/workflows/ci.yml/badge.svg)](https://github.com/tuliopc23/LiqUIdify/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify-react)](https://bundlephobia.com/package/liquidify-react)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 
 > 🚀 **Production-ready React component library** with Apple's Liquid Glass design language. 40+ components built on Ark UI primitives with Panda CSS styling. TypeScript-first, WCAG 2.1 AA compliant, and optimized for modern React applications.
@@ -31,7 +31,7 @@
 
 ```bash
 # Core library
-bun add liquidify
+bun add liquidify-react
 
 # Required peer dependencies
 bun add react react-dom @ark-ui/react framer-motion lucide-react
@@ -39,15 +39,15 @@ bun add react react-dom @ark-ui/react framer-motion lucide-react
 
 Other package managers:
 ```bash
-npm install liquidify react react-dom @ark-ui/react framer-motion lucide-react
-yarn add liquidify react react-dom @ark-ui/react framer-motion lucide-react
-pnpm add liquidify react react-dom @ark-ui/react framer-motion lucide-react
+npm install liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
+yarn add liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
+pnpm add liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
 ```
 
 ### Basic Usage
 
 ```tsx
-import { Button } from "liquidify";
+import { Button } from "liquidify-react";
 
 function App() {
   return (
@@ -296,7 +296,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 - **[📖 Documentation](https://docs.useliquidify.dev)** - Comprehensive guides and API reference
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
-- **[📦 NPM](https://www.npmjs.com/package/liquidify)** - Package installation
+- **[📦 NPM](https://www.npmjs.com/package/liquidify-react)** - Package installation
 - **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
 
 ## 🤝 Community
@@ -309,7 +309,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
   <p>Made with ❤️ by <a href="https://tuliocunha.dev">Tulio Pinheiro Cunha</a></p>
   <p>
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
-    <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a> •
+    <a href="https://www.npmjs.com/package/liquidify-react">📦 NPM</a> •
     <a href="https://docs.useliquidify.dev">📖 Docs</a>
   </p>
   <p>

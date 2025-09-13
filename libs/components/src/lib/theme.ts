@@ -14,8 +14,12 @@ function getRoot(root?: HTMLElement): HTMLElement | null {
 }
 
 export function getSystemTheme(): Theme {
-  if (matchMedia?.("(prefers-color-scheme: dark)").matches) {
-    return "dark";
+  if (typeof window !== "undefined") {
+    const mm = window.matchMedia?.("(prefers-color-scheme: dark)");
+    if (mm?.matches) return "dark";
+  } else if (typeof globalThis !== "undefined") {
+    const mm = (globalThis as any).matchMedia?.("(prefers-color-scheme: dark)");
+    if (mm?.matches) return "dark";
   }
   return "light";
 }
@@ -23,8 +27,8 @@ export function getSystemTheme(): Theme {
 export function getTheme(options: ThemeOptions = {}): Theme {
   const { storageKey = DEFAULT_STORAGE_KEY, root } = options;
   try {
-    if (window?.localStorage) {
-      const stored = localStorage.getItem(storageKey) as Theme | null;
+    if (typeof window !== "undefined" && window.localStorage) {
+      const stored = window.localStorage.getItem(storageKey) as Theme | null;
       if (stored === "light" || stored === "dark") return stored;
     }
   } catch {
@@ -47,8 +51,8 @@ export function setTheme(theme: Theme, options: ThemeOptions = {}): Theme {
     el.dataset.theme = theme;
   }
   try {
-    if (window?.localStorage) {
-      localStorage.setItem(storageKey, theme);
+    if (typeof window !== "undefined" && window.localStorage) {
+      window.localStorage.setItem(storageKey, theme);
     }
   } catch {
     // ignore storage errors

@@ -13,17 +13,14 @@
   "bugs": {
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
-  "dependencies": {
-    "@park-ui/panda-preset": "^0.43.1",
-    "cache": "^3.0.0",
-    "knip": "^5.63.1"
-  },
+  "dependencies": {},
   "description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@biomejs/biome": "^2.2.4",
     "@pandacss/dev": "^1.3.0",
     "@pandacss/postcss": "^1.3.0",
+    "@park-ui/panda-preset": "^0.43.1",
     "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -43,6 +40,7 @@
     "happy-dom": "^18.0.1",
     "jscodeshift": "^17.3.0",
     "jsdom": "^26.1.0",
+    "knip": "^5.63.1",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -100,7 +98,7 @@
   "license": "MIT",
   "main": "./dist/libs/components/index.cjs",
   "module": "./dist/libs/components/index.mjs",
-  "name": "liquidify",
+  "name": "liquidify-react",
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
@@ -119,7 +117,6 @@
   },
   "scripts": {
     "prepare": "bunx panda build",
-    "dev:all": "node scripts/dev.mjs",
     "dev:quick": "concurrently \"bun run --filter @liquidify/components build:watch\"",
     "build": "bun run build:lib",
     "build:lib": "bun run --filter @liquidify/components build",
@@ -145,14 +142,7 @@
     "type-check": "bunx tsc --noEmit --project tsconfig.json && bun run --filter @liquidify/components type-check",
     "type-check:watch": "bunx tsc --noEmit --project tsconfig.json --watch",
     "validate:config": "test -f libs/components/rolldown.config.ts || (echo 'rolldown.config.ts not found' && exit 1)",
-    "workspace:verify": "node scripts/verify-workspaces.mjs",
-    "workspace:info": "node scripts/workspace-info.mjs",
-    "exports:verify": "bun run scripts/check-exports.mjs",
-    "setup:dev": "node scripts/setup-dev.mjs",
     "prepublishOnly": "bun run --filter @liquidify/components type-check && bun run build:lib",
-    "build:analyze": "node scripts/build-analyze.cjs",
-    "build:analyze:compressed": "node scripts/build-analyze.cjs --compressed",
-    "audit:contrast": "node scripts/contrast-audit.js",
     "scan:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' || true",
     "ci:guard:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' && echo 'ERROR: Legacy liquid-glass artifacts found' && exit 1 || echo 'OK: No legacy artifacts found'"
   },
@@ -163,7 +153,14 @@
   "style": "./dist/libs/components/liquidify.css",
   "type": "module",
   "types": "./dist/libs/components/index.d.ts",
-  "version": "0.6.0",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/libs/components/components/*/index.d.ts"
+      ]
+    }
+  },
+  "version": "0.6.1",
   "workspaces": [
     "libs/*"
   ]

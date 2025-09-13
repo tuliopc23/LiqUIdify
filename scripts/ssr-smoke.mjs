@@ -29,14 +29,14 @@ async function importComponents() {
 
 async function main() {
   try {
-    // ThemeProvider hits `localStorage` which isn't available in a pure
-    // Node SSR context. Smoke-test only a simple visual component.
-    const { GlassButton } = await importComponents();
-    
+    // ThemeProvider touches localStorage in some flows; avoid provider and
+    // smoke-test a simple component export.
+    const { Button } = await importComponents();
+
     const html = renderToString(
-      React.createElement(GlassButton, null, 'Hello')
+      React.createElement(Button, null, 'Hello')
     );
-    
+
     if (html && html.includes('Hello')) {
       console.log('✅ SSR smoke test passed: Components render correctly on the server');
       process.exit(0);
