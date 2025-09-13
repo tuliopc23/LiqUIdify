@@ -104,7 +104,9 @@
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
-    "@ark-ui/react": "^5.23.0"
+    "@ark-ui/react": "^5.23.0",
+    "framer-motion": "^12",
+    "lucide-react": "^0.544.0"
   },
   "repository": {
     "type": "git",

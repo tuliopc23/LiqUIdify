@@ -18,14 +18,7 @@ type VariantProps<T> = {
 export type InferVariantProps<T> = VariantProps<T>;
 
 interface _ComponentVariants {
-  variant?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "destructive"
-    | "outline"
-    | "ghost"
-    | "link";
+  variant?: "default" | "primary" | "secondary" | "destructive" | "outline" | "ghost" | "link";
   size?: "sm" | "md" | "lg" | "xl";
   intent?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
 }
@@ -34,7 +27,7 @@ interface _ComponentVariants {
 type VariantConfig = Record<string, unknown>;
 
 export const createVariants = <T extends VariantConfig>(
-  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> },
+  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> }
 ) => {
   return (props?: VariantProps<T>) => {
     const classes: string[] = [];
@@ -59,14 +52,15 @@ export const createVariants = <T extends VariantConfig>(
         // Handle different variant structures
         if (typeof variantValue === "object" && !Array.isArray(variantValue)) {
           // It's a variant map
-          const classValue = variantValue[value as string];
+          const classValue = (variantValue as Record<string, unknown>)[value as string];
           if (classValue) {
             if (Array.isArray(classValue)) {
               classes.push(...(classValue as string[]));
             } else if (typeof classValue === "object") {
               // Handle compound variants
-              if (classValue.class) {
-                classes.push(classValue.class as string);
+              const compoundVariant = classValue as Record<string, unknown>;
+              if (compoundVariant.class) {
+                classes.push(compoundVariant.class as string);
               }
             } else {
               classes.push(classValue as string);

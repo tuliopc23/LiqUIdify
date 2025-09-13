@@ -1,4 +1,3 @@
-export {
-  IconButton,
-  type IconButtonProps,
-} from "./IconButton";
+import "../../styles/global";
+
+export { IconButton, type IconButtonProps } from "./IconButton";

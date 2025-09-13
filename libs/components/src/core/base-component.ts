@@ -11,13 +11,7 @@ import type { HTMLAttributes } from "react";
 type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Core component variants
-type ComponentVariant =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "ghost"
-  | "destructive"
-  | "apple";
+type ComponentVariant = "primary" | "secondary" | "tertiary" | "ghost" | "destructive" | "apple";
 
 // Glass effect intensity levels
 type GlassIntensity = "subtle" | "medium" | "strong";

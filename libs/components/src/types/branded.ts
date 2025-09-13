@@ -47,9 +47,7 @@ type AccessibleContrast = Brand<number, "AccessibleContrast">;
 
 const createAccessibleContrast = (ratio: number): AccessibleContrast => {
   if (!isValidContrastRatio(ratio)) {
-    throw new Error(
-      `Contrast ratio ${ratio} does not meet WCAG standards. Minimum is 3:1`,
-    );
+    throw new Error(`Contrast ratio ${ratio} does not meet WCAG standards. Minimum is 3:1`);
   }
   return ratio as AccessibleContrast;
 };
@@ -106,8 +104,7 @@ const _createCSSUnit = (value: string): CSSUnit => {
 };
 
 function isValidCSSUnit(value: string): boolean {
-  const pattern =
-    /^-?\d*\.?\d+(px|em|rem|%|vh|vw|vmin|vmax|ch|ex|cm|mm|in|pt|pc)$/;
+  const pattern = /^-?\d*\.?\d+(px|em|rem|%|vh|vw|vmin|vmax|ch|ex|cm|mm|in|pt|pc)$/;
   return pattern.test(value) || value === "0" || value === "auto";
 }
 
@@ -121,9 +118,7 @@ type AnimationDuration = Brand<number, "AnimationDuration">;
 
 const _createAnimationDuration = (ms: number): AnimationDuration => {
   if (ms < 0 || ms > 10_000) {
-    throw new Error(
-      `Animation duration must be between 0 and 10000ms, got ${ms}`,
-    );
+    throw new Error(`Animation duration must be between 0 and 10000ms, got ${ms}`);
   }
   return ms as AnimationDuration;
 };
@@ -151,20 +146,11 @@ const _createZIndex = (value: number): ZIndex => {
  */
 type ThemeName = Brand<string, "ThemeName">;
 
-const VALID_THEMES = [
-  "light",
-  "dark",
-  "auto",
-  "ocean",
-  "forest",
-  "sunset",
-] as const;
+const VALID_THEMES = ["light", "dark", "auto", "ocean", "forest", "sunset"] as const;
 
 const _createThemeName = (name: string): ThemeName => {
-  if (!VALID_THEMES.includes(name as ThemeName)) {
-    throw new Error(
-      `Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(", ")}`,
-    );
+  if (!VALID_THEMES.includes(name as (typeof VALID_THEMES)[number])) {
+    throw new Error(`Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(", ")}`);
   }
   return name as ThemeName;
 };
@@ -180,10 +166,8 @@ export type ComponentSize = Brand<string, "ComponentSize">;
 const VALID_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 
 export const createComponentSize = (size: string): ComponentSize => {
-  if (!VALID_SIZES.includes(size as ComponentSize)) {
-    throw new Error(
-      `Invalid component size: ${size}. Valid sizes: ${VALID_SIZES.join(", ")}`,
-    );
+  if (!VALID_SIZES.includes(size as (typeof VALID_SIZES)[number])) {
+    throw new Error(`Invalid component size: ${size}. Valid sizes: ${VALID_SIZES.join(", ")}`);
   }
   return size as ComponentSize;
 };
@@ -214,10 +198,10 @@ const _isBrandedType = {
     typeof value === "number" && value >= -999 && value <= 9999,
 
   isThemeName: (value: unknown): value is ThemeName =>
-    typeof value === "string" && VALID_THEMES.includes(value as ThemeName),
+    typeof value === "string" && VALID_THEMES.includes(value as (typeof VALID_THEMES)[number]),
 
   isComponentSize: (value: unknown): value is ComponentSize =>
-    typeof value === "string" && VALID_SIZES.includes(value as ComponentSize),
+    typeof value === "string" && VALID_SIZES.includes(value as (typeof VALID_SIZES)[number]),
 };
 
 /**
@@ -238,10 +222,7 @@ const _brandedUtils = {
   /**
    * Calculate and validate contrast ratio
    */
-  calculateContrast: (
-    _fg: GlassColor,
-    _bg: GlassColor,
-  ): AccessibleContrast | null => {
+  calculateContrast: (_fg: GlassColor, _bg: GlassColor): AccessibleContrast | null => {
     // This would integrate with the contrast checker utility
     // For now, return a mock implementation
     const mockRatio = 4.5;

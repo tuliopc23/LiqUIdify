@@ -3,7 +3,7 @@ import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { viteStaticCopy } from "vite-plugin-static-copy";
+
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const Dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -20,7 +20,10 @@ function discoverEntries() {
         const sub = join(dir, dirent.name);
         const idx = join(sub, "index.ts");
         if (existsSync(idx)) {
-          const rel = relative(resolve(Dirname, "src"), idx).replace(/\\/g, "/");
+          const rel = relative(resolve(Dirname, "src"), idx).replace(
+            /\\/g,
+            "/",
+          );
           const entryName = rel.replace(/\.ts$/, ""); // e.g. components/button/index
           entries[entryName] = idx;
         }
@@ -34,23 +37,8 @@ function discoverEntries() {
 }
 
 export default defineConfig({
-  logLevel: "error",
-  plugins: [
-    react(),
-    tsconfigPaths(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: "src/styles/panda.css",
-          dest: ".",
-        },
-        {
-          src: "../../styled-system/styles.css",
-          dest: ".",
-        },
-      ],
-    }),
-  ],
+  logLevel: "info",
+  plugins: [react(), tsconfigPaths()],
   build: {
     lib: {
       entry: discoverEntries(),
@@ -60,16 +48,28 @@ export default defineConfig({
     outDir: resolve(Dirname, "../../dist/libs/components"),
 
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "@ark-ui/react",
-        "framer-motion",
-        "lucide-react",
-        // Mark styled-system as external to avoid bundling duplication
-        /^\.\.\/\.\.\/\.\.\/styled-system/,
-      ],
+      external: (source) => {
+        // Keep core runtime deps external
+        if (
+          source === "react" ||
+          source === "react-dom" ||
+          source === "react/jsx-runtime" ||
+          source === "@ark-ui/react" ||
+          source === "framer-motion" ||
+          source === "lucide-react"
+        ) {
+          return true;
+        }
+        // Treat styled-system JS as external, but allow CSS assets to be bundled
+        if (/^\.\.\/\.\.\/\.\.\/styled-system/.test(source)) {
+          return !source.endsWith(".css");
+        }
+        // Never externalize CSS files
+        if (source.endsWith(".css")) {
+          return false;
+        }
+        return false;
+      },
       output: [
         {
           format: "es",

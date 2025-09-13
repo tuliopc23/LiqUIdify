@@ -1,5 +1,41 @@
-import type { LucideProps } from "lucide-react";
-import { type ComponentType, forwardRef, lazy } from "react";
+import {
+  Home,
+  ChevronLeft,
+  ChevronRight,
+  ArrowLeft,
+  ArrowRight,
+  Menu,
+  Plus,
+  Minus,
+  Edit,
+  Trash2,
+  Settings,
+  Search,
+  Check,
+  X,
+  AlertCircle,
+  Info,
+  CheckCircle,
+  XCircle,
+  Play,
+  Pause,
+  Volume2,
+  Eye,
+  EyeOff,
+  File,
+  Folder,
+  Download,
+  Upload,
+  Mail,
+  Phone,
+  MessageCircle,
+  User,
+  Users,
+  LogIn,
+  LogOut,
+  type LucideProps,
+} from "lucide-react";
+import { type ComponentType, forwardRef } from "react";
 
 // SF Symbols-like icon mapping for common use cases
 export type IconName =
@@ -57,61 +93,62 @@ export const iconSizes = {
 
 export type IconSize = keyof typeof iconSizes;
 
-// Lazy load icons for better tree shaking
+// Eager icon map to avoid Suspense requirements
 const iconMap: Record<IconName, ComponentType<LucideProps>> = {
   // Navigation
-  home: lazy(() => import("lucide-react").then((m) => ({ default: m.Home }))),
-  "chevron-left": lazy(() => import("lucide-react").then((m) => ({ default: m.ChevronLeft }))),
-  "chevron-right": lazy(() => import("lucide-react").then((m) => ({ default: m.ChevronRight }))),
-  "arrow-left": lazy(() => import("lucide-react").then((m) => ({ default: m.ArrowLeft }))),
-  "arrow-right": lazy(() => import("lucide-react").then((m) => ({ default: m.ArrowRight }))),
-  menu: lazy(() => import("lucide-react").then((m) => ({ default: m.Menu }))),
+  home: Home,
+  "chevron-left": ChevronLeft,
+  "chevron-right": ChevronRight,
+  "arrow-left": ArrowLeft,
+  "arrow-right": ArrowRight,
+  menu: Menu,
 
   // Actions
-  plus: lazy(() => import("lucide-react").then((m) => ({ default: m.Plus }))),
-  minus: lazy(() => import("lucide-react").then((m) => ({ default: m.Minus }))),
-  edit: lazy(() => import("lucide-react").then((m) => ({ default: m.Edit }))),
-  "trash-2": lazy(() => import("lucide-react").then((m) => ({ default: m.Trash2 }))),
-  settings: lazy(() => import("lucide-react").then((m) => ({ default: m.Settings }))),
-  search: lazy(() => import("lucide-react").then((m) => ({ default: m.Search }))),
+  plus: Plus,
+  minus: Minus,
+  edit: Edit,
+  "trash-2": Trash2,
+  settings: Settings,
+  search: Search,
 
   // Status
-  check: lazy(() => import("lucide-react").then((m) => ({ default: m.Check }))),
-  x: lazy(() => import("lucide-react").then((m) => ({ default: m.X }))),
-  "alert-circle": lazy(() => import("lucide-react").then((m) => ({ default: m.AlertCircle }))),
-  info: lazy(() => import("lucide-react").then((m) => ({ default: m.Info }))),
-  "check-circle": lazy(() => import("lucide-react").then((m) => ({ default: m.CheckCircle }))),
-  "x-circle": lazy(() => import("lucide-react").then((m) => ({ default: m.XCircle }))),
+  check: Check,
+  x: X,
+  "alert-circle": AlertCircle,
+  info: Info,
+  "check-circle": CheckCircle,
+  "x-circle": XCircle,
 
   // Media
-  play: lazy(() => import("lucide-react").then((m) => ({ default: m.Play }))),
-  pause: lazy(() => import("lucide-react").then((m) => ({ default: m.Pause }))),
-  "volume-2": lazy(() => import("lucide-react").then((m) => ({ default: m.Volume2 }))),
-  eye: lazy(() => import("lucide-react").then((m) => ({ default: m.Eye }))),
-  "eye-off": lazy(() => import("lucide-react").then((m) => ({ default: m.EyeOff }))),
+  play: Play,
+  pause: Pause,
+  "volume-2": Volume2,
+  eye: Eye,
+  "eye-off": EyeOff,
 
   // Files
-  file: lazy(() => import("lucide-react").then((m) => ({ default: m.File }))),
-  folder: lazy(() => import("lucide-react").then((m) => ({ default: m.Folder }))),
-  download: lazy(() => import("lucide-react").then((m) => ({ default: m.Download }))),
-  upload: lazy(() => import("lucide-react").then((m) => ({ default: m.Upload }))),
+  file: File,
+  folder: Folder,
+  download: Download,
+  upload: Upload,
 
   // Communication
-  mail: lazy(() => import("lucide-react").then((m) => ({ default: m.Mail }))),
-  phone: lazy(() => import("lucide-react").then((m) => ({ default: m.Phone }))),
-  "message-circle": lazy(() => import("lucide-react").then((m) => ({ default: m.MessageCircle }))),
+  mail: Mail,
+  phone: Phone,
+  "message-circle": MessageCircle,
 
   // User
-  user: lazy(() => import("lucide-react").then((m) => ({ default: m.User }))),
-  users: lazy(() => import("lucide-react").then((m) => ({ default: m.Users }))),
-  "log-in": lazy(() => import("lucide-react").then((m) => ({ default: m.LogIn }))),
-  "log-out": lazy(() => import("lucide-react").then((m) => ({ default: m.LogOut }))),
+  user: User,
+  users: Users,
+  "log-in": LogIn,
+  "log-out": LogOut,
 };
 
 export interface IconProps extends Omit<LucideProps, "size"> {
   name: IconName;
   size?: IconSize | number;
   className?: string;
+  title?: string;
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
@@ -124,8 +161,25 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       return null;
     }
 
-    return <IconComponent ref={ref} size={iconSize} className={className} {...props} />;
-  }
+    const labelled = Boolean(
+      props["aria-label"] ?? props["aria-labelledby"] ?? props.title,
+    );
+    const hasAriaHiddenProp = Object.hasOwn(props, "aria-hidden");
+    const defaultAriaHidden = labelled ? undefined : true;
+    const extraAria = hasAriaHiddenProp
+      ? {}
+      : { "aria-hidden": defaultAriaHidden };
+
+    return (
+      <IconComponent
+        ref={ref}
+        size={iconSize}
+        className={className}
+        {...props}
+        {...extraAria}
+      />
+    );
+  },
 );
 
 Icon.displayName = "Icon";

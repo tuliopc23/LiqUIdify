@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { IconButton } from "../iconButton";
-import { Icon } from "../icons";
+import { Icon, type IconName } from "../icons";
 
 /**
  * Example component showcasing the new Lucide-based icon system
  * This demonstrates contextual imports and SF Symbols-like icon usage
  */
 export const IconExamples = () => {
-  const [selectedIcon, setSelectedIcon] = useState<string>("home");
+  const [selectedIcon, setSelectedIcon] = useState<IconName>("home");
 
-  const commonIcons = [
+  const commonIcons: IconName[] = [
     "home",
     "search",
     "settings",
@@ -28,7 +28,7 @@ export const IconExamples = () => {
     "upload",
     "folder",
     "file",
-  ] as const;
+  ];
 
   return (
     <div className="space-y-8">
@@ -91,36 +91,11 @@ export const IconExamples = () => {
       <section className="space-y-4">
         <h2 className="text-lg font-medium">IconButton Examples</h2>
         <div className="flex flex-wrap gap-4 p-4 border rounded-lg">
-          <IconButton
-            icon="search"
-            variant="primary"
-            size="sm"
-            aria-label="Search"
-          />
-          <IconButton
-            icon="plus"
-            variant="secondary"
-            size="md"
-            aria-label="Add new item"
-          />
-          <IconButton
-            icon="settings"
-            variant="ghost"
-            size="lg"
-            aria-label="Open settings"
-          />
-          <IconButton
-            icon="trash-2"
-            variant="danger"
-            size="sm"
-            aria-label="Delete item"
-          />
-          <IconButton
-            icon="download"
-            variant="success"
-            size="md"
-            aria-label="Download file"
-          />
+          <IconButton icon="search" variant="primary" size="sm" aria-label="Search" />
+          <IconButton icon="plus" variant="secondary" size="md" aria-label="Add new item" />
+          <IconButton icon="settings" variant="ghost" size="lg" aria-label="Open settings" />
+          <IconButton icon="trash-2" variant="danger" size="sm" aria-label="Delete item" />
+          <IconButton icon="download" variant="success" size="md" aria-label="Download file" />
         </div>
       </section>
 
@@ -129,9 +104,7 @@ export const IconExamples = () => {
         <h2 className="text-lg font-medium">Interactive Icon Gallery</h2>
         <div className="p-4 border rounded-lg">
           <div className="mb-4">
-            <p className="text-sm text-muted-foreground mb-2">
-              Click an icon below:
-            </p>
+            <p className="text-sm text-muted-foreground mb-2">Click an icon below:</p>
             <div className="flex gap-2 mb-4">
               {commonIcons.map((iconName) => (
                 <button
@@ -192,12 +165,7 @@ export const IconExamples = () => {
                   placeholder="Password"
                   className="flex-1 bg-transparent outline-none"
                 />
-                <IconButton
-                  icon="eye"
-                  variant="ghost"
-                  size="sm"
-                  aria-label="Toggle visibility"
-                />
+                <IconButton icon="eye" variant="ghost" size="sm" aria-label="Toggle visibility" />
               </div>
             </div>
           </div>
@@ -206,30 +174,10 @@ export const IconExamples = () => {
           <div className="p-4 border rounded-lg">
             <h3 className="font-medium mb-3">Action Buttons</h3>
             <div className="flex flex-wrap gap-2">
-              <IconButton
-                icon="edit"
-                variant="primary"
-                size="sm"
-                aria-label="Edit"
-              />
-              <IconButton
-                icon="download"
-                variant="secondary"
-                size="sm"
-                aria-label="Download"
-              />
-              <IconButton
-                icon="settings"
-                variant="ghost"
-                size="sm"
-                aria-label="Share"
-              />
-              <IconButton
-                icon="trash-2"
-                variant="danger"
-                size="sm"
-                aria-label="Delete"
-              />
+              <IconButton icon="edit" variant="primary" size="sm" aria-label="Edit" />
+              <IconButton icon="download" variant="secondary" size="sm" aria-label="Download" />
+              <IconButton icon="settings" variant="ghost" size="sm" aria-label="Share" />
+              <IconButton icon="trash-2" variant="danger" size="sm" aria-label="Delete" />
             </div>
           </div>
         </div>

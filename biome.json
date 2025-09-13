@@ -218,11 +218,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/use-device-capabilities.tsx",
-        "**/use-ssr-safe.ts",
-        "**/branded.ts"
-      ],
+      "includes": ["**/use-device-capabilities.tsx", "**/use-ssr-safe.ts", "**/branded.ts"],
       "linter": {
         "rules": {
           "suspicious": {

@@ -1,3 +1,4 @@
+import "../../styles/global";
 // Export only the main Icon component and related types
 export {
   Icon,
