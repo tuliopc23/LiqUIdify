@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const visuallyHiddenConfig = {
   transform(props) {
@@ -11,8 +11,8 @@ const visuallyHiddenConfig = {
 };
 
 export const getVisuallyHiddenStyle = (styles = {}) => {
-  const _styles = getPatternStyles(visuallyHiddenConfig, styles);
-  return visuallyHiddenConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(visuallyHiddenConfig, styles);
+  return visuallyHiddenConfig.transform(Styles, patternFns);
 };
 
 export const visuallyHidden = (styles) => css(getVisuallyHiddenStyle(styles));

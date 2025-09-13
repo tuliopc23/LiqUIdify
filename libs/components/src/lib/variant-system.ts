@@ -7,7 +7,7 @@
 import { cx } from "../../../../styled-system/css";
 
 type VariantProps<T> = {
-  [K in keyof T]?: T[K] extends Record<string, any>
+  [K in keyof T]?: T[K] extends Record<string, unknown>
     ? keyof T[K]
     : T[K] extends readonly (infer U)[]
       ? U
@@ -17,23 +17,24 @@ type VariantProps<T> = {
 // Alias for backward compatibility
 export type InferVariantProps<T> = VariantProps<T>;
 
-interface ComponentVariants {
-  variant?: "default" | "primary" | "secondary" | "destructive" | "outline" | "ghost" | "link";
+interface _ComponentVariants {
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "ghost"
+    | "link";
   size?: "sm" | "md" | "lg" | "xl";
   intent?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
 }
 
-interface GlassVariants extends ComponentVariants {
-  intensity?: "subtle" | "medium" | "strong" | "extreme";
-  blur?: "none" | "sm" | "md" | "lg" | "xl";
-  opacity?: number;
-}
-
 // More flexible variant config type
-type VariantConfig = Record<string, any>;
+type VariantConfig = Record<string, unknown>;
 
 export const createVariants = <T extends VariantConfig>(
-  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> }
+  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> },
 ) => {
   return (props?: VariantProps<T>) => {
     const classes: string[] = [];
@@ -84,7 +85,7 @@ export const createVariants = <T extends VariantConfig>(
   };
 };
 
-const glassVariants = createVariants({
+const _glassVariants = createVariants({
   variant: {
     default: "glass-surface",
     primary: "glass-surface",
@@ -114,5 +115,3 @@ const glassVariants = createVariants({
     xl: "",
   },
 });
-
-type GlassVariantProps = VariantProps<typeof glassVariants>;

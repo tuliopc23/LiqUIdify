@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { Button, ButtonProps } from "../button";
-import { Icon, IconName, IconProps } from "../icons";
 import { css, cx } from "../../../../../styled-system/css";
+import { Button, type ButtonProps } from "../button";
+import { Icon, type IconName, type IconProps } from "../icons";
 
 export interface IconButtonProps extends Omit<ButtonProps, "children"> {
   icon: IconName;

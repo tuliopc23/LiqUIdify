@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const floatConfig = {
   transform(props, { map }) {
@@ -45,8 +45,8 @@ const floatConfig = {
 };
 
 export const getFloatStyle = (styles = {}) => {
-  const _styles = getPatternStyles(floatConfig, styles);
-  return floatConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(floatConfig, styles);
+  return floatConfig.transform(Styles, patternFns);
 };
 
 export const float = (styles) => css(getFloatStyle(styles));

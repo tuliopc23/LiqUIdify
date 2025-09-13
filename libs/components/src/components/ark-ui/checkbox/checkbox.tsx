@@ -1,12 +1,12 @@
 "use client";
 
 import { Checkbox as ArkCheckbox } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  checkbox,
   type CheckboxVariantProps,
+  checkbox,
 } from "../../../../../../styled-system/recipes/checkbox";
-import type { ComponentProps } from "react";
 
 export interface CheckboxProps
   extends ComponentProps<typeof ArkCheckbox.Root>,

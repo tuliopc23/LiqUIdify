@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const hstackConfig = {
   transform(props) {
@@ -17,8 +17,8 @@ const hstackConfig = {
 };
 
 export const getHstackStyle = (styles = {}) => {
-  const _styles = getPatternStyles(hstackConfig, styles);
-  return hstackConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(hstackConfig, styles);
+  return hstackConfig.transform(Styles, patternFns);
 };
 
 export const hstack = (styles) => css(getHstackStyle(styles));

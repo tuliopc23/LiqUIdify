@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const boxConfig = {
   transform(props) {
@@ -8,8 +8,8 @@ const boxConfig = {
 };
 
 export const getBoxStyle = (styles = {}) => {
-  const _styles = getPatternStyles(boxConfig, styles);
-  return boxConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(boxConfig, styles);
+  return boxConfig.transform(Styles, patternFns);
 };
 
 export const box = (styles) => css(getBoxStyle(styles));

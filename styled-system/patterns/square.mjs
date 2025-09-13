@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const squareConfig = {
   transform(props) {
@@ -17,8 +17,8 @@ const squareConfig = {
 };
 
 export const getSquareStyle = (styles = {}) => {
-  const _styles = getPatternStyles(squareConfig, styles);
-  return squareConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(squareConfig, styles);
+  return squareConfig.transform(Styles, patternFns);
 };
 
 export const square = (styles) => css(getSquareStyle(styles));

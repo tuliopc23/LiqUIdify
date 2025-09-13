@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const linkOverlayConfig = {
   transform(props) {
@@ -9,7 +9,7 @@ const linkOverlayConfig = {
         position: "absolute",
         inset: "0",
         zIndex: "0",
-        ...props["_before"],
+        ...props._before,
       },
       ...props,
     };
@@ -17,8 +17,8 @@ const linkOverlayConfig = {
 };
 
 export const getLinkOverlayStyle = (styles = {}) => {
-  const _styles = getPatternStyles(linkOverlayConfig, styles);
-  return linkOverlayConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(linkOverlayConfig, styles);
+  return linkOverlayConfig.transform(Styles, patternFns);
 };
 
 export const linkOverlay = (styles) => css(getLinkOverlayStyle(styles));

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { css, cx } from "../../../../../styled-system/css";
+import { cx } from "../../../../../styled-system/css";
 import { button } from "../../../../../styled-system/recipes";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

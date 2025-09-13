@@ -5,18 +5,19 @@
  * share to ensure consistency and proper composition.
  */
 
-import type {
-  ComponentPropsWithoutRef,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  RefAttributes,
-} from "react";
+import type { HTMLAttributes } from "react";
 
 // Core component size variants
 type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Core component variants
-type ComponentVariant = "primary" | "secondary" | "tertiary" | "ghost" | "destructive" | "apple";
+type ComponentVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "destructive"
+  | "apple";
 
 // Glass effect intensity levels
 type GlassIntensity = "subtle" | "medium" | "strong";
@@ -86,18 +87,6 @@ interface CompoundComponentProps {
   children?: React.ReactNode;
 }
 
-// Layout component props
-interface LayoutGlassProps extends BaseGlassProps {
-  /** Padding size */
-  padding?: ComponentSize | "none";
-  /** Margin size */
-  margin?: ComponentSize | "none";
-  /** Border radius */
-  radius?: ComponentSize | "none" | "full";
-  /** Enable responsive behavior */
-  responsive?: boolean;
-}
-
 // Form component props
 export interface FormGlassProps extends InteractiveGlassProps {
   /** Form field name */
@@ -122,46 +111,7 @@ export interface FormGlassProps extends InteractiveGlassProps {
   readonly?: boolean;
 }
 
-// Generic component reference type
-type ComponentRef<T extends HTMLElement = HTMLElement> = React.RefObject<T>;
-
-// Component prop types for different HTML elements
-type ButtonProps = ComponentPropsWithoutRef<"button">;
-type DivProps = ComponentPropsWithoutRef<"div">;
-type InputProps = ComponentPropsWithoutRef<"input">;
-type TextareaProps = ComponentPropsWithoutRef<"textarea">;
-type SelectProps = ComponentPropsWithoutRef<"select">;
-type LabelProps = ComponentPropsWithoutRef<"label">;
-type SpanProps = ComponentPropsWithoutRef<"span">;
-type HeadingProps = ComponentPropsWithoutRef<"h1">;
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
-
-// Polymorphic component props
-type PolymorphicProps<T extends React.ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
-
-// Component factory types
-type GlassComponent<T extends HTMLElement, P = {}> = ForwardRefExoticComponent<
-  P & RefAttributes<T>
->;
-
-// Compound component factory
-type CompoundGlassComponent<T extends HTMLElement, P = {}> = GlassComponent<
-  T,
-  P & CompoundComponentProps
->;
-
 // Event handler types
-type GlassEventHandler<T extends HTMLElement, E extends Event = Event> = (
-  event: E & { currentTarget: T }
-) => void;
-
-// Common event handlers
-type ClickHandler = GlassEventHandler<HTMLElement, MouseEvent>;
-type KeyHandler = GlassEventHandler<HTMLElement, KeyboardEvent>;
-type FocusHandler = GlassEventHandler<HTMLElement, FocusEvent>;
-type ChangeHandler = GlassEventHandler<HTMLInputElement, Event>;
 
 // Accessibility props
 interface AccessibilityProps {
@@ -221,13 +171,9 @@ interface UnifiedGlassProps
 }
 
 // Type utilities
-type OmitGlassProps<T, K extends keyof T> = Omit<T, K>;
-type PickGlassProps<T, K extends keyof T> = Pick<T, K>;
-type RequiredGlassProps<T> = Required<T>;
-type PartialGlassProps<T> = Partial<T>;
 
 // Generic component props builder
 export type ComponentPropsBuilder<
   T extends HTMLElement,
-  P extends Record<string, unknown> = {},
+  P extends Record<string, unknown> = Record<string, never>,
 > = UnifiedGlassProps & HTMLAttributes<T> & P;

@@ -1,12 +1,12 @@
 import { createElement, forwardRef, useMemo } from "react";
-import { css, cx, cva } from "../css/index.js";
+import { css, cva, cx } from "../css/index.js";
+import { normalizeHTMLProps, splitProps } from "../helpers.js";
 import {
-  defaultShouldForwardProp,
-  composeShouldForwardProps,
   composeCvaFn,
+  composeShouldForwardProps,
+  defaultShouldForwardProp,
   getDisplayName,
 } from "./factory-helper.js";
-import { splitProps, normalizeHTMLProps } from "../helpers.js";
 import { isCssProperty } from "./is-valid-prop.js";
 
 function styledFn(Dynamic, configOrCva = {}, options = {}) {
@@ -23,12 +23,12 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
     options.defaultProps
   );
 
-  const __cvaFn__ = composeCvaFn(Dynamic.__cva__, cvaFn);
-  const __shouldForwardProps__ = composeShouldForwardProps(Dynamic, shouldForwardProp);
-  const __base__ = Dynamic.__base__ || Dynamic;
+  const CvaFn = composeCvaFn(Dynamic.__cva__, cvaFn);
+  const ShouldForwardProps = composeShouldForwardProps(Dynamic, shouldForwardProp);
+  const Base = Dynamic.__base__ || Dynamic;
 
   const StyledComponent = /* @__PURE__ */ forwardRef(function StyledComponent(props, ref) {
-    const { as: Element = __base__, unstyled, children, ...restProps } = props;
+    const { as: Element = Base, unstyled, children, ...restProps } = props;
 
     const combinedProps = useMemo(() => Object.assign({}, defaultProps, restProps), [restProps]);
 
@@ -36,17 +36,17 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
       return splitProps(
         combinedProps,
         normalizeHTMLProps.keys,
-        __shouldForwardProps__,
-        __cvaFn__.variantKeys,
+        ShouldForwardProps,
+        CvaFn.variantKeys,
         isCssProperty
       );
     }, [combinedProps]);
 
     function recipeClass() {
       const { css: cssStyles, ...propStyles } = styleProps;
-      const compoundVariantStyles = __cvaFn__.__getCompoundVariantCss__?.(variantProps);
+      const compoundVariantStyles = CvaFn.__getCompoundVariantCss__?.(variantProps);
       return cx(
-        __cvaFn__(variantProps, false),
+        CvaFn(variantProps, false),
         css(compoundVariantStyles, propStyles, cssStyles),
         combinedProps.className
       );
@@ -54,7 +54,7 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
 
     function cvaClass() {
       const { css: cssStyles, ...propStyles } = styleProps;
-      const cvaStyles = __cvaFn__.raw(variantProps);
+      const cvaStyles = CvaFn.raw(variantProps);
       return cx(css(cvaStyles, propStyles, cssStyles), combinedProps.className);
     }
 
@@ -79,11 +79,11 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
     );
   });
 
-  const name = getDisplayName(__base__);
+  const name = getDisplayName(Base);
 
   StyledComponent.displayName = `styled.${name}`;
-  StyledComponent.__cva__ = __cvaFn__;
-  StyledComponent.__base__ = __base__;
+  StyledComponent.__cva__ = CvaFn;
+  StyledComponent.__base__ = Base;
   StyledComponent.__shouldForwardProps__ = shouldForwardProp;
 
   return StyledComponent;

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Icon } from "../icons";
 import { IconButton } from "../iconButton";
-import { Button } from "../button";
+import { Icon } from "../icons";
 
 /**
  * Example component showcasing the new Lucide-based icon system
@@ -137,6 +136,7 @@ export const IconExamples = () => {
               {commonIcons.map((iconName) => (
                 <button
                   key={iconName}
+                  type="button"
                   onClick={() => setSelectedIcon(iconName)}
                   className={`p-2 rounded border transition-colors ${
                     selectedIcon === iconName
@@ -150,7 +150,7 @@ export const IconExamples = () => {
             </div>
           </div>
           <div className="flex items-center gap-4 p-4 bg-muted rounded">
-            <Icon name={selectedIcon as any} size="2xl" />
+            <Icon name={selectedIcon} size="2xl" />
             <div>
               <p className="font-medium">Selected: {selectedIcon}</p>
               <p className="text-sm text-muted-foreground">

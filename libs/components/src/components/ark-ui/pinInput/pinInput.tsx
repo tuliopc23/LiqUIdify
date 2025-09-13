@@ -1,12 +1,12 @@
 "use client";
 
 import { PinInput as ArkPinInput } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  pinInput,
   type PinInputVariantProps,
+  pinInput,
 } from "../../../../../../styled-system/recipes/pinInput";
-import type { ComponentProps } from "react";
 
 export interface PinInputProps
   extends ComponentProps<typeof ArkPinInput.Root>,
@@ -19,18 +19,33 @@ export const PinInput = forwardRef<HTMLDivElement, PinInputProps>(
   ({ label, length = 4, size, children, className, ...props }, ref) => {
     const [variantProps, restProps] = pinInput.splitVariantProps({ size });
 
+    // Generate stable keys that don't rely on array index
+    const inputKeys = Array.from(
+      { length },
+      (_, i) => `input-${i}-of-${length}`,
+    );
+
     return (
-      <ArkPinInput.Root ref={ref} className={className} {...restProps} {...props}>
+      <ArkPinInput.Root
+        ref={ref}
+        className={className}
+        {...restProps}
+        {...props}
+      >
         {label && <ArkPinInput.Label>{label}</ArkPinInput.Label>}
         <ArkPinInput.Control>
-          {Array.from({ length }, (_, index) => (
-            <ArkPinInput.Input key={index} index={index} className={pinInput(variantProps)} />
+          {inputKeys.map((key, index) => (
+            <ArkPinInput.Input
+              key={key}
+              index={index}
+              className={pinInput(variantProps)}
+            />
           ))}
         </ArkPinInput.Control>
         {children}
       </ArkPinInput.Root>
     );
-  }
+  },
 );
 
 PinInput.displayName = "PinInput";

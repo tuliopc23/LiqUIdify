@@ -1,12 +1,12 @@
 "use client";
 
 import { Switch as ArkSwitch } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  switchToggle,
   type SwitchToggleVariantProps,
+  switchToggle,
 } from "../../../../../../styled-system/recipes/switch-toggle";
-import type { ComponentProps } from "react";
 
 export interface SwitchProps
   extends ComponentProps<typeof ArkSwitch.Root>,

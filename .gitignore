@@ -59,3 +59,4 @@ Thumbs.db
 reports/bundle/stats.html
 reports/bundle/bundle-analysis.html
 operator-mono-nerd-fonts
+.aider*

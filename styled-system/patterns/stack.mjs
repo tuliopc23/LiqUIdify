@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const stackConfig = {
   transform(props) {
@@ -17,8 +17,8 @@ const stackConfig = {
 };
 
 export const getStackStyle = (styles = {}) => {
-  const _styles = getPatternStyles(stackConfig, styles);
-  return stackConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(stackConfig, styles);
+  return stackConfig.transform(Styles, patternFns);
 };
 
 export const stack = (styles) => css(getStackStyle(styles));

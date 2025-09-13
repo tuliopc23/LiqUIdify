@@ -31,7 +31,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      if (typeof window !== "undefined" && window.localStorage) {
+      if (window?.localStorage) {
         return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
       }
     } catch {
@@ -104,7 +104,7 @@ export function ThemeProvider({
     theme,
     setTheme: (theme: Theme) => {
       try {
-        if (typeof window !== "undefined" && window.localStorage) {
+        if (window?.localStorage) {
           localStorage.setItem(storageKey, theme);
         }
       } catch {

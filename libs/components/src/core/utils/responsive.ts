@@ -11,17 +11,18 @@ import { BREAKPOINTS, type BreakpointKey } from "../constants";
 /**
  * Generate responsive size classes based on breakpoints
  */
-function _responsiveSize(size: string | number, breakpoint?: BreakpointKey): string {
-  if (typeof size === "number") {
-    size = `${size}px`;
-  }
+function _responsiveSize(
+  size: string | number,
+  breakpoint?: BreakpointKey,
+): string {
+  const sizeStr = typeof size === "number" ? `${size}px` : size;
 
   if (!breakpoint) {
-    return size;
+    return sizeStr;
   }
 
   const breakpointPrefix = breakpoint === "xs" ? "" : `${breakpoint}:`;
-  return `${breakpointPrefix}${size}`;
+  return `${breakpointPrefix}${sizeStr}`;
 }
 
 /**
@@ -42,7 +43,7 @@ const _touchTarget = Object.assign(createTouchTarget, {
  */
 function createMicroInteraction(
   type: "hover" | "focus" | "active" | "press" = "hover",
-  intensity: "subtle" | "medium" | "strong" = "medium"
+  intensity: "subtle" | "medium" | "strong" = "medium",
 ): string {
   const intensityClasses = {
     subtle: {
@@ -119,7 +120,10 @@ function getCurrentBreakpoint(): BreakpointKey {
 /**
  * Check if screen size matches a breakpoint condition
  */
-function _matchesBreakpoint(condition: "up" | "down" | "only", breakpoint: BreakpointKey): boolean {
+function _matchesBreakpoint(
+  condition: "up" | "down" | "only",
+  breakpoint: BreakpointKey,
+): boolean {
   if (typeof window === "undefined") {
     return false;
   }
@@ -143,7 +147,10 @@ function _matchesBreakpoint(condition: "up" | "down" | "only", breakpoint: Break
         return width >= breakpointValue;
       }
 
-      return width >= breakpointValue && width < Number.parseInt(BREAKPOINTS[nextBreakpoint], 10);
+      return (
+        width >= breakpointValue &&
+        width < Number.parseInt(BREAKPOINTS[nextBreakpoint], 10)
+      );
     }
     default: {
       return false;
@@ -156,7 +163,7 @@ function _matchesBreakpoint(condition: "up" | "down" | "only", breakpoint: Break
  */
 function _createResponsiveClasses(
   baseClass: string,
-  breakpoints: Partial<Record<BreakpointKey, string>>
+  breakpoints: Partial<Record<BreakpointKey, string>>,
 ): string {
   const classes = [baseClass];
 
@@ -173,7 +180,10 @@ function _createResponsiveClasses(
 /**
  * Container query utilities (for modern browsers)
  */
-function _containerQuery(size: "xs" | "sm" | "md" | "lg" | "xl", className: string): string {
+function _containerQuery(
+  size: "xs" | "sm" | "md" | "lg" | "xl",
+  className: string,
+): string {
   const containerSizes = {
     xs: "@xs",
     sm: "@sm",
@@ -212,7 +222,7 @@ function _fluidTypography(
   minSize: number,
   maxSize: number,
   minViewport = 320,
-  maxViewport = 1200
+  maxViewport = 1200,
 ): string {
   const slope = (maxSize - minSize) / (maxViewport - minViewport);
   const yAxisIntersection = -minViewport * slope + minSize;
@@ -223,7 +233,9 @@ function _fluidTypography(
 /**
  * Generate responsive grid classes
  */
-function _responsiveGrid(columns: Partial<Record<BreakpointKey, number>>): string {
+function _responsiveGrid(
+  columns: Partial<Record<BreakpointKey, number>>,
+): string {
   const classes: string[] = [];
 
   for (const [breakpoint, cols] of Object.entries(columns)) {
@@ -266,7 +278,9 @@ function _useMediaQuery(query: string): boolean {
  * Responsive breakpoint hook
  */
 function _useBreakpoint(): BreakpointKey {
-  const [breakpoint, setBreakpoint] = React.useState<BreakpointKey>(() => getCurrentBreakpoint());
+  const [breakpoint, setBreakpoint] = React.useState<BreakpointKey>(() =>
+    getCurrentBreakpoint(),
+  );
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -289,7 +303,9 @@ function _useBreakpoint(): BreakpointKey {
 /**
  * Responsive visibility utilities
  */
-function _responsiveVisibility(show: Partial<Record<BreakpointKey, boolean>>): string {
+function _responsiveVisibility(
+  show: Partial<Record<BreakpointKey, boolean>>,
+): string {
   const classes: string[] = [];
 
   for (const [breakpoint, isVisible] of Object.entries(show)) {
@@ -305,9 +321,3 @@ function _responsiveVisibility(show: Partial<Record<BreakpointKey, boolean>>): s
 import * as React from "react";
 
 // Type exports
-type ResponsiveValue<T> = T | Partial<Record<BreakpointKey, T>>;
-
-interface ResponsiveConfig {
-  breakpoints?: Partial<Record<BreakpointKey, number>>;
-  containerSizes?: Partial<Record<BreakpointKey, string>>;
-}

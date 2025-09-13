@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const containerConfig = {
   transform(props) {
@@ -14,8 +14,8 @@ const containerConfig = {
 };
 
 export const getContainerStyle = (styles = {}) => {
-  const _styles = getPatternStyles(containerConfig, styles);
-  return containerConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(containerConfig, styles);
+  return containerConfig.transform(Styles, patternFns);
 };
 
 export const container = (styles) => css(getContainerStyle(styles));

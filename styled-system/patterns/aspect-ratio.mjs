@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const aspectRatioConfig = {
   transform(props, { map }) {
@@ -31,8 +31,8 @@ const aspectRatioConfig = {
 };
 
 export const getAspectRatioStyle = (styles = {}) => {
-  const _styles = getPatternStyles(aspectRatioConfig, styles);
-  return aspectRatioConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(aspectRatioConfig, styles);
+  return aspectRatioConfig.transform(Styles, patternFns);
 };
 
 export const aspectRatio = (styles) => css(getAspectRatioStyle(styles));

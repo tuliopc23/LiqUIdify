@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const circleConfig = {
   transform(props) {
@@ -18,8 +18,8 @@ const circleConfig = {
 };
 
 export const getCircleStyle = (styles = {}) => {
-  const _styles = getPatternStyles(circleConfig, styles);
-  return circleConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(circleConfig, styles);
+  return circleConfig.transform(Styles, patternFns);
 };
 
 export const circle = (styles) => css(getCircleStyle(styles));

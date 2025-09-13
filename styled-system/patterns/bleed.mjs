@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const bleedConfig = {
   transform(props, { map, isCssUnit, isCssVar }) {
@@ -17,8 +17,8 @@ const bleedConfig = {
 };
 
 export const getBleedStyle = (styles = {}) => {
-  const _styles = getPatternStyles(bleedConfig, styles);
-  return bleedConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(bleedConfig, styles);
+  return bleedConfig.transform(Styles, patternFns);
 };
 
 export const bleed = (styles) => css(getBleedStyle(styles));

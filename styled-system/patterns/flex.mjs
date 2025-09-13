@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const flexConfig = {
   transform(props) {
@@ -19,8 +19,8 @@ const flexConfig = {
 };
 
 export const getFlexStyle = (styles = {}) => {
-  const _styles = getPatternStyles(flexConfig, styles);
-  return flexConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(flexConfig, styles);
+  return flexConfig.transform(Styles, patternFns);
 };
 
 export const flex = (styles) => css(getFlexStyle(styles));

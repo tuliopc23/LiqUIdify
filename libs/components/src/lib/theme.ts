@@ -14,7 +14,7 @@ function getRoot(root?: HTMLElement): HTMLElement | null {
 }
 
 export function getSystemTheme(): Theme {
-  if (typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)").matches) {
+  if (matchMedia?.("(prefers-color-scheme: dark)").matches) {
     return "dark";
   }
   return "light";
@@ -23,7 +23,7 @@ export function getSystemTheme(): Theme {
 export function getTheme(options: ThemeOptions = {}): Theme {
   const { storageKey = DEFAULT_STORAGE_KEY, root } = options;
   try {
-    if (typeof window !== "undefined" && window.localStorage) {
+    if (window?.localStorage) {
       const stored = localStorage.getItem(storageKey) as Theme | null;
       if (stored === "light" || stored === "dark") return stored;
     }
@@ -47,7 +47,7 @@ export function setTheme(theme: Theme, options: ThemeOptions = {}): Theme {
     el.dataset.theme = theme;
   }
   try {
-    if (typeof window !== "undefined" && window.localStorage) {
+    if (window?.localStorage) {
       localStorage.setItem(storageKey, theme);
     }
   } catch {

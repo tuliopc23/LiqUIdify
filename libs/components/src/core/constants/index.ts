@@ -6,7 +6,7 @@
  */
 
 // Glass effect constants
-const GLASS_INTENSITY_VALUES = {
+const _GLASS_INTENSITY_VALUES = {
   weak: 0.3,
   medium: 0.6,
   strong: 0.8,
@@ -21,7 +21,7 @@ const _GLASS_BLUR_VALUES = {
 } as const;
 
 // Animation constants
-const ANIMATION_DURATIONS = {
+const _ANIMATION_DURATIONS = {
   fast: 150,
   medium: 300,
   slow: 500,
@@ -36,7 +36,7 @@ const _SPRING_CONFIGS = {
 } as const;
 
 // Component size constants
-const SIZE_VALUES = {
+const _SIZE_VALUES = {
   xs: "0.5rem",
   sm: "0.75rem",
   md: "1rem",
@@ -53,7 +53,7 @@ const _PADDING_VALUES = {
 } as const;
 
 // Border radius constants
-const BORDER_RADIUS_VALUES = {
+const _BORDER_RADIUS_VALUES = {
   none: "0",
   sm: "0.125rem",
   md: "0.25rem",
@@ -90,7 +90,7 @@ export const BREAKPOINTS = {
 } as const;
 
 // Color constants
-const GLASS_COLORS = {
+const _GLASS_COLORS = {
   light: {
     backdrop: "rgba(255, 255, 255, 0.7)",
     overlay: "rgba(255, 255, 255, 0.1)",
@@ -129,7 +129,7 @@ const _A11Y_CONSTANTS = {
 } as const;
 
 // Error tracking constants
-const ERROR_TYPES = {
+const _ERROR_TYPES = {
   RENDER_ERROR: "render_error",
   ASYNC_ERROR: "async_error",
   NETWORK_ERROR: "network_error",
@@ -146,7 +146,7 @@ const _DEV_CONSTANTS = {
 } as const;
 
 // CSS class prefixes
-const CLASS_PREFIXES = {
+const _CLASS_PREFIXES = {
   glass: "glass-",
   component: "liquid-",
   utility: "util-",
@@ -155,7 +155,7 @@ const CLASS_PREFIXES = {
 } as const;
 
 // Animation easing functions
-const EASING_FUNCTIONS = {
+const _EASING_FUNCTIONS = {
   linear: "linear",
   easeIn: "cubic-bezier(0.4, 0, 1, 1)",
   easeOut: "cubic-bezier(0, 0, 0.2, 1)",
@@ -165,12 +165,4 @@ const EASING_FUNCTIONS = {
 } as const;
 
 // Export type-only versions for better TypeScript support
-type GlassIntensityKey = keyof typeof GLASS_INTENSITY_VALUES;
-type AnimationDurationKey = keyof typeof ANIMATION_DURATIONS;
-type ComponentSizeKey = keyof typeof SIZE_VALUES;
-type BorderRadiusKey = keyof typeof BORDER_RADIUS_VALUES;
 export type BreakpointKey = keyof typeof BREAKPOINTS;
-type GlassColorKey = keyof typeof GLASS_COLORS;
-type ErrorTypeKey = keyof typeof ERROR_TYPES;
-type ClassPrefixKey = keyof typeof CLASS_PREFIXES;
-type EasingFunctionKey = keyof typeof EASING_FUNCTIONS;

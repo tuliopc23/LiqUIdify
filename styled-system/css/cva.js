@@ -1,4 +1,4 @@
-import { compact, mergeProps, memo, splitProps, uniq } from "../helpers.js";
+import { compact, memo, mergeProps, splitProps, uniq } from "../helpers.js";
 import { css, mergeCss } from "./css.js";
 
 const defaults = (conf) => ({

@@ -1,12 +1,12 @@
 "use client";
 
 import { Progress as ArkProgress } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  progress,
   type ProgressVariantProps,
+  progress,
 } from "../../../../../../styled-system/recipes/progress";
-import type { ComponentProps } from "react";
 
 export interface ProgressProps
   extends ComponentProps<typeof ArkProgress.Root>,

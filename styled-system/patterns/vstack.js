@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const vstackConfig = {
   transform(props) {
@@ -17,8 +17,8 @@ const vstackConfig = {
 };
 
 export const getVstackStyle = (styles = {}) => {
-  const _styles = getPatternStyles(vstackConfig, styles);
-  return vstackConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(vstackConfig, styles);
+  return vstackConfig.transform(Styles, patternFns);
 };
 
 export const vstack = (styles) => css(getVstackStyle(styles));

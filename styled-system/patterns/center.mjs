@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const centerConfig = {
   transform(props) {
@@ -14,8 +14,8 @@ const centerConfig = {
 };
 
 export const getCenterStyle = (styles = {}) => {
-  const _styles = getPatternStyles(centerConfig, styles);
-  return centerConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(centerConfig, styles);
+  return centerConfig.transform(Styles, patternFns);
 };
 
 export const center = (styles) => css(getCenterStyle(styles));

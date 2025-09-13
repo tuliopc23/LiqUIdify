@@ -12,10 +12,10 @@
  * @param index - Fallback index if no stable property is found
  * @returns A stable string key
  */
-export function getItemKey<T extends Record<string, any>>(
+export function getItemKey<T extends Record<string, unknown>>(
   item: T,
   prefix = "item",
-  index = 0
+  index = 0,
 ): string {
   // Try to find a stable identifier property
   const stableProps = ["id", "key", "href", "label", "name", "value"];
@@ -36,7 +36,10 @@ export function getItemKey<T extends Record<string, any>>(
  * @param identifier - The identifier (usually an index or id)
  * @returns A stable string key
  */
-export function generateStaticKey(prefix: string, identifier: string | number): string {
+export function generateStaticKey(
+  prefix: string,
+  identifier: string | number,
+): string {
   return `${prefix}-${identifier}`;
 }
 

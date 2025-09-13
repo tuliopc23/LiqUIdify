@@ -2,7 +2,7 @@
 function isObject(value) {
   return typeof value === "object" && value != null && !Array.isArray(value);
 }
-var isObjectOrArray = (obj) => typeof obj === "object" && obj !== null;
+const isObjectOrArray = (obj) => typeof obj === "object" && obj !== null;
 
 // src/compact.ts
 function compact(value) {
@@ -10,7 +10,7 @@ function compact(value) {
 }
 
 // src/condition.ts
-var isBaseCondition = (v) => v === "base";
+const isBaseCondition = (v) => v === "base";
 function filterBaseConditions(c) {
   return c.slice().filter((v) => !isBaseCondition(v));
 }
@@ -35,7 +35,7 @@ function toHash(value) {
 }
 
 // src/important.ts
-var importantRegex = /\s*!(important)?/i;
+const importantRegex = /\s*!(important)?/i;
 function isImportant(value) {
   return typeof value === "string" ? importantRegex.test(value) : false;
 }
@@ -47,7 +47,7 @@ function withoutSpace(str) {
 }
 
 // src/memo.ts
-var memo = (fn) => {
+const memo = (fn) => {
   const cache = /* @__PURE__ */ new Map();
   const get = (...args) => {
     const key = JSON.stringify(args);
@@ -62,7 +62,7 @@ var memo = (fn) => {
 };
 
 // src/merge-props.ts
-var MERGE_OMIT = /* @__PURE__ */ new Set(["__proto__", "constructor", "prototype"]);
+const MERGE_OMIT = /* @__PURE__ */ new Set(["__proto__", "constructor", "prototype"]);
 function mergeProps(...sources) {
   return sources.reduce((prev, obj) => {
     if (!obj) return prev;
@@ -81,7 +81,7 @@ function mergeProps(...sources) {
 }
 
 // src/walk-object.ts
-var isNotNullish = (element) => element != null;
+const isNotNullish = (element) => element != null;
 function walkObject(target, predicate, options = {}) {
   const { stop, getKey } = options;
   function inner(value, path = []) {
@@ -136,12 +136,12 @@ function normalizeStyleObject(styles, context, shorthand = true) {
 }
 
 // src/classname.ts
-var fallbackCondition = {
+const fallbackCondition = {
   shift: (v) => v,
   finalize: (v) => v,
   breakpoints: { keys: [] },
 };
-var sanitize = (value) => (typeof value === "string" ? value.replaceAll(/[\n\s]+/g, " ") : value);
+const sanitize = (value) => (typeof value === "string" ? value.replaceAll(/[\n\s]+/g, " ") : value);
 function createCss(context) {
   const { utility, hash, conditions: conds = fallbackCondition } = context;
   const formatClassName = (str) => [utility.prefix, str].filter(Boolean).join("-");
@@ -192,36 +192,36 @@ function createMergeCss(context) {
 }
 
 // src/hypenate-property.ts
-var wordRegex = /([A-Z])/g;
-var msRegex = /^ms-/;
-var hypenateProperty = memo((property) => {
+const wordRegex = /([A-Z])/g;
+const msRegex = /^ms-/;
+const hypenateProperty = memo((property) => {
   if (property.startsWith("--")) return property;
   return property.replace(wordRegex, "-$1").replace(msRegex, "-ms-").toLowerCase();
 });
 
 // src/is-css-function.ts
-var fns = ["min", "max", "clamp", "calc"];
-var fnRegExp = new RegExp(`^(${fns.join("|")})\\(.*\\)`);
-var isCssFunction = (v) => typeof v === "string" && fnRegExp.test(v);
+const fns = ["min", "max", "clamp", "calc"];
+const fnRegExp = new RegExp(`^(${fns.join("|")})\\(.*\\)`);
+const isCssFunction = (v) => typeof v === "string" && fnRegExp.test(v);
 
 // src/is-css-unit.ts
-var lengthUnits =
+const lengthUnits =
   "cm,mm,Q,in,pc,pt,px,em,ex,ch,rem,lh,rlh,vw,vh,vmin,vmax,vb,vi,svw,svh,lvw,lvh,dvw,dvh,cqw,cqh,cqi,cqb,cqmin,cqmax,%";
-var lengthUnitsPattern = `(?:${lengthUnits.split(",").join("|")})`;
-var lengthRegExp = new RegExp(`^[+-]?[0-9]*.?[0-9]+(?:[eE][+-]?[0-9]+)?${lengthUnitsPattern}$`);
-var isCssUnit = (v) => typeof v === "string" && lengthRegExp.test(v);
+const lengthUnitsPattern = `(?:${lengthUnits.split(",").join("|")})`;
+const lengthRegExp = new RegExp(`^[+-]?[0-9]*.?[0-9]+(?:[eE][+-]?[0-9]+)?${lengthUnitsPattern}$`);
+const isCssUnit = (v) => typeof v === "string" && lengthRegExp.test(v);
 
 // src/is-css-var.ts
-var isCssVar = (v) => typeof v === "string" && /^var\(--.+\)$/.test(v);
+const isCssVar = (v) => typeof v === "string" && /^var\(--.+\)$/.test(v);
 
 // src/pattern-fns.ts
-var patternFns = {
+const patternFns = {
   map: mapObject,
   isCssFunction,
   isCssVar,
   isCssUnit,
 };
-var getPatternStyles = (pattern, styles) => {
+const getPatternStyles = (pattern, styles) => {
   if (!pattern?.defaultValues) return styles;
   const defaults =
     typeof pattern.defaultValues === "function"
@@ -231,7 +231,7 @@ var getPatternStyles = (pattern, styles) => {
 };
 
 // src/slot.ts
-var getSlotRecipes = (recipe = {}) => {
+const getSlotRecipes = (recipe = {}) => {
   const init = (slot) => ({
     className: [recipe.className, slot].filter(Boolean).join("__"),
     base: recipe.base?.[slot] ?? {},
@@ -253,7 +253,7 @@ var getSlotRecipes = (recipe = {}) => {
   }
   return Object.fromEntries(recipeParts);
 };
-var getSlotCompoundVariant = (compoundVariants, slotName) =>
+const getSlotCompoundVariant = (compoundVariants, slotName) =>
   compoundVariants
     .filter((compoundVariant) => compoundVariant.css[slotName])
     .map((compoundVariant) => ({ ...compoundVariant, css: compoundVariant.css[slotName] }));
@@ -278,7 +278,7 @@ function splitProps(props, ...keys) {
 }
 
 // src/uniq.ts
-var uniq = (...items) => {
+const uniq = (...items) => {
   const set = items.reduce((acc, currItems) => {
     if (currItems) {
       currItems.forEach((item) => acc.add(item));
@@ -310,7 +310,7 @@ export {
 };
 
 // src/normalize-html.ts
-var htmlProps = ["htmlSize", "htmlTranslate", "htmlWidth", "htmlHeight"];
+const htmlProps = ["htmlSize", "htmlTranslate", "htmlWidth", "htmlHeight"];
 function convert(key) {
   return htmlProps.includes(key) ? key.replace("html", "").toLowerCase() : key;
 }

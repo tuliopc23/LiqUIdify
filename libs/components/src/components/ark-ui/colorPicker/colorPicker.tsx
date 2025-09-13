@@ -1,12 +1,12 @@
 "use client";
 
 import { ColorPicker as ArkColorPicker } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  colorPicker,
   type ColorPickerVariantProps,
+  colorPicker,
 } from "../../../../../../styled-system/recipes/colorPicker";
-import type { ComponentProps } from "react";
 
 export interface ColorPickerProps
   extends ComponentProps<typeof ArkColorPicker.Root>,

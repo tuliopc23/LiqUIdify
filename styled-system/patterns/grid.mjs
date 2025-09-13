@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.mjs";
 import { css } from "../css/index.mjs";
+import { getPatternStyles, patternFns } from "../helpers.mjs";
 
 const gridConfig = {
   transform(props, { map, isCssUnit }) {
@@ -25,8 +25,8 @@ const gridConfig = {
 };
 
 export const getGridStyle = (styles = {}) => {
-  const _styles = getPatternStyles(gridConfig, styles);
-  return gridConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(gridConfig, styles);
+  return gridConfig.transform(Styles, patternFns);
 };
 
 export const grid = (styles) => css(getGridStyle(styles));

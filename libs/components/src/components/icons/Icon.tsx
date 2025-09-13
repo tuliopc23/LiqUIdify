@@ -1,5 +1,5 @@
-import { LucideProps } from "lucide-react";
-import { forwardRef, lazy, ComponentType } from "react";
+import type { LucideProps } from "lucide-react";
+import { type ComponentType, forwardRef, lazy } from "react";
 
 // SF Symbols-like icon mapping for common use cases
 export type IconName =

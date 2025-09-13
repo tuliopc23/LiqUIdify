@@ -1,12 +1,12 @@
 "use client";
 
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/react";
+import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 import {
-  ratingGroup,
   type RatingGroupVariantProps,
+  ratingGroup,
 } from "../../../../../../styled-system/recipes/ratingGroup";
-import type { ComponentProps } from "react";
 
 export interface RatingGroupProps
   extends ComponentProps<typeof ArkRatingGroup.Root>,

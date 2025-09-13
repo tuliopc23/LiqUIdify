@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { renderToString } from "react-dom/server";
+import { describe, expect, it } from "vitest";
 import { Button } from "../components/button";
 
 describe("SSR smoke", () => {

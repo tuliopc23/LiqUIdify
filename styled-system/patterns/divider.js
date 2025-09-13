@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const dividerConfig = {
   transform(props, { map }) {
@@ -22,8 +22,8 @@ const dividerConfig = {
 };
 
 export const getDividerStyle = (styles = {}) => {
-  const _styles = getPatternStyles(dividerConfig, styles);
-  return dividerConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(dividerConfig, styles);
+  return dividerConfig.transform(Styles, patternFns);
 };
 
 export const divider = (styles) => css(getDividerStyle(styles));

@@ -56,8 +56,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
         false;
 
       // Check SVG filter support
-      const hasSVGFilters =
-        (typeof CSS !== "undefined" && CSS.supports?.("filter", "url(#test)")) || false;
+      const hasSVGFilters = CSS?.supports?.("filter", "url(#test)") || false;
 
       // Check GPU availability (WebGL support as proxy)
       let hasGPU = false;

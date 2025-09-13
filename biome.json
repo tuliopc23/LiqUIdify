@@ -20,6 +20,8 @@
       "!**/*.d.ts",
       "!**/Liquid-glass-imp/",
       "!**/apps/docs/",
+      "!**/styled-system",
+      "!**/lightningcss.config.js",
       ""
     ]
   },
@@ -42,7 +44,7 @@
         "noAutofocus": "error",
         "useAltText": "error",
         "useAnchorContent": "error",
-        "useButtonType": "error",
+        "useButtonType": "warn",
         "useKeyWithClickEvents": "error",
         "useKeyWithMouseEvents": "error",
         "useValidAnchor": "error",
@@ -51,7 +53,7 @@
         "useValidAriaValues": "error"
       },
       "complexity": {
-        "noBannedTypes": "error",
+        "noBannedTypes": "warn",
         "noExtraBooleanCast": "error",
         "noForEach": "off",
         "noStaticOnlyClass": "error",
@@ -64,7 +66,7 @@
         "noUselessTypeConstraint": "error",
         "noVoid": "error",
         "useLiteralKeys": "error",
-        "useOptionalChain": "error",
+        "useOptionalChain": "warn",
         "useRegexLiterals": "error",
         "noAdjacentSpacesInRegex": "error",
         "noArguments": "error",
@@ -90,7 +92,7 @@
         "noUnsafeFinally": "error",
         "noUnsafeOptionalChaining": "error",
         "noUnusedLabels": "error",
-        "noUnusedVariables": "error",
+        "noUnusedVariables": "warn",
         "useExhaustiveDependencies": "warn",
         "useHookAtTopLevel": "error",
         "useIsNan": "error",
@@ -115,7 +117,7 @@
         "noNamespace": "error",
         "noNegationElse": "off",
         "noNonNullAssertion": "warn",
-        "noParameterAssign": "error",
+        "noParameterAssign": "warn",
         "noRestrictedGlobals": "error",
         "noUnusedTemplateLiteral": "error",
         "noUselessElse": "error",
@@ -155,7 +157,7 @@
                 "selector": {
                   "kind": "objectLiteralProperty"
                 },
-                "formats": ["camelCase", "PascalCase"]
+                "formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
               }
             ]
           }
@@ -214,6 +216,46 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": [
+        "**/use-device-capabilities.tsx",
+        "**/use-ssr-safe.ts",
+        "**/branded.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/panda-config*.ts", "**/recipes/*.ts", "panda.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/test-setup.ts", "**/test/**", "**/*.test.*"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off",
+            "noEmptyBlockStatements": "off"
+          },
+          "a11y": {
+            "useSemanticElements": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "double",

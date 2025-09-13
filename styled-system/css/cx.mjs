@@ -1,7 +1,7 @@
 function cx() {
-  let str = "",
-    i = 0,
-    arg;
+  let str = "";
+  let i = 0;
+  let arg;
 
   for (; i < arguments.length; ) {
     if ((arg = arguments[i++]) && typeof arg === "string") {

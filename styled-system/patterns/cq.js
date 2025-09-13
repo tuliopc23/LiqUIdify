@@ -1,5 +1,5 @@
-import { getPatternStyles, patternFns } from "../helpers.js";
 import { css } from "../css/index.js";
+import { getPatternStyles, patternFns } from "../helpers.js";
 
 const cqConfig = {
   transform(props) {
@@ -14,8 +14,8 @@ const cqConfig = {
 };
 
 export const getCqStyle = (styles = {}) => {
-  const _styles = getPatternStyles(cqConfig, styles);
-  return cqConfig.transform(_styles, patternFns);
+  const Styles = getPatternStyles(cqConfig, styles);
+  return cqConfig.transform(Styles, patternFns);
 };
 
 export const cq = (styles) => css(getCqStyle(styles));
