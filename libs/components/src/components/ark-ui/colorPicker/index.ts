@@ -1,4 +1,5 @@
 import "../../../styles/global";
+
 /**
  * Re-export ColorPicker components for subpath imports
  */

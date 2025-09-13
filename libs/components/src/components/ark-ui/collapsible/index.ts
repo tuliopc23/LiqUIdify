@@ -1,4 +1,5 @@
 import "../../../styles/global";
+
 /**
  * Re-export Collapsible components for subpath imports
  */

@@ -20,10 +20,7 @@ function discoverEntries() {
         const sub = join(dir, dirent.name);
         const idx = join(sub, "index.ts");
         if (existsSync(idx)) {
-          const rel = relative(resolve(Dirname, "src"), idx).replace(
-            /\\/g,
-            "/",
-          );
+          const rel = relative(resolve(Dirname, "src"), idx).replace(/\\/g, "/");
           const entryName = rel.replace(/\.ts$/, ""); // e.g. components/button/index
           entries[entryName] = idx;
         }

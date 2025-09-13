@@ -1,24 +1,24 @@
-import { memo, splitProps } from "../helpers.js";
-import { createRecipe, mergeRecipes } from "./create-recipe.js";
+import { memo, splitProps } from '../helpers.js';
+import { createRecipe, mergeRecipes } from './create-recipe.js';
 
-const splitterFn = /* @__PURE__ */ createRecipe("splitter", {}, []);
+const splitterFn = /* @__PURE__ */ createRecipe('splitter', {}, [])
 
-const splitterVariantMap = {};
+const splitterVariantMap = {}
 
-const splitterVariantKeys = Object.keys(splitterVariantMap);
+const splitterVariantKeys = Object.keys(splitterVariantMap)
 
 export const splitter = /* @__PURE__ */ Object.assign(memo(splitterFn.recipeFn), {
   __recipe__: true,
-  __name__: "splitter",
+  __name__: 'splitter',
   __getCompoundVariantCss__: splitterFn.__getCompoundVariantCss__,
   raw: (props) => props,
   variantKeys: splitterVariantKeys,
   variantMap: splitterVariantMap,
   merge(recipe) {
-    return mergeRecipes(this, recipe);
+    return mergeRecipes(this, recipe)
   },
   splitVariantProps(props) {
-    return splitProps(props, splitterVariantKeys);
+    return splitProps(props, splitterVariantKeys)
   },
   getVariantProps: splitterFn.getVariantProps,
-});
+})

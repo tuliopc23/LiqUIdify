@@ -1,4 +1,5 @@
 import "../../../styles/global";
+
 /**
  * Re-export Slider components for subpath imports
  */

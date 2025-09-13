@@ -64,23 +64,17 @@ export function ThemeProvider({
       "--card": theme === "dark" ? "222.2 84% 4.9%" : "0 0% 100%",
       "--card-foreground": theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
       "--popover": theme === "dark" ? "222.2 84% 4.9%" : "0 0% 100%",
-      "--popover-foreground":
-        theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
+      "--popover-foreground": theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
       "--primary": theme === "dark" ? "217.2 91.2% 59.8%" : "221.2 83.2% 53.3%",
-      "--primary-foreground":
-        theme === "dark" ? "222.2 84% 4.9%" : "210 40% 98%",
+      "--primary-foreground": theme === "dark" ? "222.2 84% 4.9%" : "210 40% 98%",
       "--secondary": theme === "dark" ? "217.2 32.6% 17.5%" : "210 40% 96%",
-      "--secondary-foreground":
-        theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
+      "--secondary-foreground": theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
       "--muted": theme === "dark" ? "217.2 32.6% 17.5%" : "210 40% 96%",
-      "--muted-foreground":
-        theme === "dark" ? "215 20.2% 65.1%" : "215.4 16.3% 46.9%",
+      "--muted-foreground": theme === "dark" ? "215 20.2% 65.1%" : "215.4 16.3% 46.9%",
       "--accent": theme === "dark" ? "217.2 32.6% 17.5%" : "210 40% 96%",
-      "--accent-foreground":
-        theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
+      "--accent-foreground": theme === "dark" ? "210 40% 98%" : "222.2 84% 4.9%",
       "--destructive": theme === "dark" ? "0 62.8% 30.6%" : "0 84.2% 60.2%",
-      "--destructive-foreground":
-        theme === "dark" ? "210 40% 98%" : "210 40% 98%",
+      "--destructive-foreground": theme === "dark" ? "210 40% 98%" : "210 40% 98%",
       "--border": theme === "dark" ? "217.2 32.6% 17.5%" : "214.3 31.8% 91.4%",
       "--input": theme === "dark" ? "217.2 32.6% 17.5%" : "214.3 31.8% 91.4%",
       "--ring": theme === "dark" ? "224.3 76.3% 94.1%" : "221.2 83.2% 53.3%",

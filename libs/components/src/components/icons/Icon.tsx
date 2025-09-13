@@ -1,39 +1,39 @@
 import {
-  Home,
-  ChevronLeft,
-  ChevronRight,
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
-  Menu,
-  Plus,
-  Minus,
-  Edit,
-  Trash2,
-  Settings,
-  Search,
   Check,
-  X,
-  AlertCircle,
-  Info,
   CheckCircle,
-  XCircle,
-  Play,
-  Pause,
-  Volume2,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Edit,
   Eye,
   EyeOff,
   File,
   Folder,
-  Download,
-  Upload,
-  Mail,
-  Phone,
-  MessageCircle,
-  User,
-  Users,
+  Home,
+  Info,
   LogIn,
   LogOut,
   type LucideProps,
+  Mail,
+  Menu,
+  MessageCircle,
+  Minus,
+  Pause,
+  Phone,
+  Play,
+  Plus,
+  Search,
+  Settings,
+  Trash2,
+  Upload,
+  User,
+  Users,
+  Volume2,
+  X,
+  XCircle,
 } from "lucide-react";
 import { type ComponentType, forwardRef } from "react";
 
@@ -161,25 +161,15 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       return null;
     }
 
-    const labelled = Boolean(
-      props["aria-label"] ?? props["aria-labelledby"] ?? props.title,
-    );
+    const labelled = Boolean(props["aria-label"] ?? props["aria-labelledby"] ?? props.title);
     const hasAriaHiddenProp = Object.hasOwn(props, "aria-hidden");
     const defaultAriaHidden = labelled ? undefined : true;
-    const extraAria = hasAriaHiddenProp
-      ? {}
-      : { "aria-hidden": defaultAriaHidden };
+    const extraAria = hasAriaHiddenProp ? {} : { "aria-hidden": defaultAriaHidden };
 
     return (
-      <IconComponent
-        ref={ref}
-        size={iconSize}
-        className={className}
-        {...props}
-        {...extraAria}
-      />
+      <IconComponent ref={ref} size={iconSize} className={className} {...props} {...extraAria} />
     );
-  },
+  }
 );
 
 Icon.displayName = "Icon";

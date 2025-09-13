@@ -8,7 +8,7 @@
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 
-> 🚀 **Production-ready React component library** with Apple's Liquid Glass design language. Built on Ark UI primitives with Panda CSS styling system. TypeScript-first, WCAG 2.1 AA compliant, and optimized for modern React applications.
+> 🚀 **Production-ready React component library** with Apple's Liquid Glass design language. 40+ components built on Ark UI primitives with Panda CSS styling. TypeScript-first, WCAG 2.1 AA compliant, and optimized for modern React applications.
 
 ## ✨ Features
 
@@ -30,43 +30,35 @@
 ### Installation
 
 ```bash
-# npm
-npm install liquidify
-
-# yarn
-yarn add liquidify
-
-# pnpm
-pnpm add liquidify
-
-# bun
+# Core library
 bun add liquidify
+
+# Required peer dependencies
+bun add react react-dom @ark-ui/react framer-motion lucide-react
+```
+
+Other package managers:
+```bash
+npm install liquidify react react-dom @ark-ui/react framer-motion lucide-react
+yarn add liquidify react react-dom @ark-ui/react framer-motion lucide-react
+pnpm add liquidify react react-dom @ark-ui/react framer-motion lucide-react
 ```
 
 ### Basic Usage
 
 ```tsx
-import { Button, Card, Input } from "liquidify";
-import "liquidify/styles";
+import { Button } from "liquidify";
 
 function App() {
   return (
-    <div className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-      <Card className="max-w-md mx-auto p-6">
-        <h1 className="text-2xl font-semibold mb-4 text-gray-900">
-          Welcome to LiqUIdify
-        </h1>
-        <Input placeholder="Enter your name" className="mb-4" />
-        <Button variant="primary" className="w-full">
-          Get Started
-        </Button>
-      </Card>
-    </div>
+    <Button variant="primary">
+      Get Started
+    </Button>
   );
 }
 ```
 
-All components automatically inherit the Apple Liquid Glass styling through Panda CSS recipes.
+Components automatically include Apple Liquid Glass styling through Panda CSS recipes.
 
 ### Architecture
 
@@ -80,9 +72,7 @@ Components are automatically styled through Panda CSS slot recipes, providing co
 
 ## 📚 Documentation
 
-- 📘 **[Documentation Site](https://liquidify.mintlify.app)** - Comprehensive guides and API reference built with Mintlify
-- 🚀 **[Getting Started](https://liquidify.mintlify.app/getting-started/quickstart)** - Quick setup and basic usage
-- 🎨 **[Component Showcase](https://liquidify-showcase.vercel.app)** - Live component examples and demos
+- 📖 **[Full Documentation](https://docs.useliquidify.dev)** - Comprehensive guides and API reference
 - ♿ **[Accessibility Guide](./docs/ACCESSIBILITY_GUIDE.md)** - WCAG compliance and best practices
 - 📊 **[Performance Guide](./docs/PERFORMANCE_GUIDE.md)** - Optimization tips and benchmarks
 - 🔄 **[Migration Guide](./docs/MIGRATION_GUIDE.md)** - Migrate from other UI libraries
@@ -111,33 +101,40 @@ Components automatically receive Apple-inspired styling through Panda CSS:
 - **Responsive Design** - Mobile-first approach following Apple HIG guidelines
 ### Available Components
 
-The library includes all standard UI components built on Ark UI primitives:
+40+ components built on Ark UI primitives with Apple Liquid Glass styling:
 
 **Form & Input Components:**
-- Button, Input, Textarea, Select, Checkbox, Radio Group, Switch, Slider
-- Date Picker, File Upload, Number Input, Password Input, Pin Input
+- Button, IconButton, Checkbox, Radio Group, Switch, Slider
+- Input, Textarea, Select, Combobox, Date Picker, File Upload
+- Number Input, Password Input, Pin Input, Tags Input
 
 **Layout & Navigation:**
-- Card, Dialog, Drawer, Popover, Tooltip, Tabs, Accordion
-- Menu, Breadcrumbs, Pagination, Steps
+- Dialog, Popover, Tooltip, Tabs, Accordion, Collapsible
+- Menu, Pagination, Steps, Splitter
 
 **Feedback & Display:**
-- Toast, Progress, Loading, Avatar, Badge, Skeleton
-- Alert, Banner, Timeline
+- Toast, Progress, Avatar, Scroll Area, Hover Card
+- Floating Panel, Tour, Timer, QR Code
 
 **Advanced Components:**
-- Table, Tree View, Chart, Command Palette, Color Picker
-- Carousel, Splitter, Floating Panel, Tour
+- Tree View, Color Picker, Angle Slider, Signature Pad
+- Carousel, Rating Group, Segment Group, Toggle Group
 
-All components automatically inherit Apple Liquid Glass styling through Panda CSS slot recipes.
+All components include pre-built Apple Liquid Glass styling.
 
 ## 🎯 Framework Integration
+
+LiqUIdify works with any React framework. Components include all necessary styles automatically.
 
 ### Next.js
 
 ```tsx
-// app/layout.tsx (App Router)
-import "liquidify/styles";
+// app/layout.tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My App",
+};
 
 export default function RootLayout({
   children,
@@ -152,212 +149,117 @@ export default function RootLayout({
 }
 ```
 
-### Vite
+### Vite + React
 
 ```tsx
 // main.tsx
-import { ThemeProvider } from "liquidify";
-import "liquidify/styles";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ThemeProvider>
+  <React.StrictMode>
     <App />
-  </ThemeProvider>,
+  </React.StrictMode>
 );
-```
-
-### Remix
-
-```tsx
-// app/root.tsx
-import { ThemeProvider } from "liquidify";
-import liquidifyStyles from "liquidify/styles";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: liquidifyStyles },
-];
-
-export default function App() {
-  return (
-    <html>
-      <head>
-        <Links />
-      </head>
-      <body>
-        <ThemeProvider>
-          <Outlet />
-        </ThemeProvider>
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 ```
 
 ## 🎨 Theming
 
-LiqUIdify supports comprehensive theming:
+LiqUIdify uses Panda CSS for theming with CSS custom properties. Components automatically adapt to your design system.
 
-```tsx
-import { ThemeProvider, createTheme } from "liquidify";
+### Design Tokens
 
-const customTheme = createTheme({
-  colors: {
-    primary: "#667eea",
-    secondary: "#764ba2",
-    glass: {
-      background: "rgba(255, 255, 255, 0.1)",
-      border: "rgba(255, 255, 255, 0.2)",
-      blur: "10px",
-    },
-  },
-  animations: {
-    duration: "0.3s",
-    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-  },
-});
+The library includes comprehensive design tokens for Apple-inspired theming:
 
-function App() {
-  return <ThemeProvider theme={customTheme}>{/* Your app */}</ThemeProvider>;
+- **Colors**: Primary, secondary, glass effects, and semantic colors
+- **Typography**: SF Pro font family with proper scaling
+- **Spacing**: Consistent spacing scale following Apple HIG
+- **Animations**: Smooth transitions with proper easing curves
+
+### Customization
+
+Extend the theme using Panda CSS configuration or CSS custom properties:
+
+```css
+:root {
+  --colors-primary: #007aff;
+  --colors-glass-bg: rgba(255, 255, 255, 0.1);
+  --radius-lg: 16px;
 }
 ```
 
-### Readable vs Decorative Surfaces
-
-LiqUIdify distinguishes between decorative translucent glass and readable surfaces:
-
-- `--lg-bg-color` / `.bg-liquid`: lighter, more translucent (use for purely visual chrome)
-- `--lg-bg-readable` / `.bg-liquid-readable`: higher opacity for WCAG AA text contrast
-- `--lg-text` / `--lg-text-inverse`: automatic pairing for light/dark / accent contexts
-
-When placing body text, prefer wrapping content in a container that uses `.bg-liquid-readable` (or components that already apply it internally) to guarantee contrast (≥4.5:1). Decorative backgrounds are fine for icons or large display text.
-
-### Utility Classes
-
-Included CSS exports provide helpful utilities:
-
-```css
-.bg-liquid           /* decorative glass */
-.bg-liquid-readable  /* readable surface */
-.text-liquid-primary
-.text-liquid-inverse
-.text-liquid-accent
-```
-
-These are optional; components already ship with sensible defaults.
-
 ## ⚡ Performance
 
-LiqUIdify is built for performance:
+LiqUIdify is optimized for production:
 
-- **Bundle Size**: < 30KB total (gzipped)
 - **Tree Shaking**: Import only what you use
-- **Lazy Loading**: Components load on demand
-- **60fps Animations**: Smooth, hardware-accelerated
-- **Memory Efficient**: Optimized for long-running apps
-
-### Bundle Analysis
-
-```bash
-# Analyze your bundle
-npm run analyze:bundles
-
-# Check bundle size budget
-npm run bundle:budget:check
-```
+- **Build-time CSS**: Panda CSS generates minimal stylesheets
+- **60fps Animations**: Hardware-accelerated with Framer Motion
+- **Memory Efficient**: Optimized for long-running applications
+- **TypeScript**: Full type safety with zero runtime overhead
 
 ## 🧪 Testing
 
-LiqUIdify components are thoroughly tested:
-
 ```bash
-# Run unit tests
-npm test
+# Run all tests
+bun run test
 
-# Run E2E tests
-npm run test:e2e
+# Run single test file
+vitest run <path-to-test-file>
 
-# Run accessibility tests
-npm run test:a11y
-
-# Run visual regression tests
-npm run test:visual
+# Run with coverage
+bun test --coverage
 ```
+
+Other package managers:
+```bash
+npm test
+yarn test
+pnpm test
+```
+
+Built with Vitest and @testing-library/react for reliable testing.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
+We welcome contributions! See our [Contributing Guide](./CONTRIBUTING.md) for details.
 
-## Monorepo Structure
-
-- `apps/` — Applications (Storybook, docs, etc.)
-- `libs/` — Libraries (component library, shared code)
-
-## Getting Started
-
-Install dependencies:
+### Development
 
 ```sh
+# Install dependencies
 bun install
+
+# Build library
+bun run build:lib
+
+# Type check
+bun run type-check
+
+# Lint and format
+bun run lint
+bun run format
+
+# Run tests
+bun run test
 ```
 
-## Scripts (Bun-powered)
+Other package managers:
+```sh
+npm run build:lib  # npm run type-check, etc.
+yarn build:lib     # yarn type-check, etc.
+pnpm build:lib     # pnpm type-check, etc.
+```
 
-- **Build everything:**
-  ```sh
-  bun run build
-  ```
-- **Build component library:**
-  ```sh
-  bun run build:lib
-  ```
-- **Run VitePress docs (dev):**
-  ```sh
-  bun run docs:dev
-  ```
-- **Build VitePress docs:**
-  ```sh
-  bun run docs:build
-  ```
-- **Preview VitePress docs:**
-  ```sh
-  bun run docs:preview
-  ```
-- **Lint all code:**
-  ```sh
-  bun run lint
-  ```
-- **Format all code:**
-  ```sh
-  bun run format
-  ```
-- **Format and fix:**
-  ```sh
-  bun run format:fix
-  ```
-- **Run tests:**
-  ```sh
-  bun run test
-  ```
-- **Type-check:**
-  ```sh
-  bun run type-check
-  ```
+### Tech Stack
 
-## Adding New Packages/Apps
-
-- Add new apps to `apps/` and new libraries to `libs/`.
-- Use Vite, Bun, and Biome for all new projects.
-- Update `vite.config.ts` and `package.json` workspaces if needed.
-
-## Modern Toolchain
-
-This monorepo is powered by:
-- **Bun** - Fast package manager and runtime
+- **Bun** - Primary package manager and runtime
 - **Vite** - Lightning-fast build tool
 - **Panda CSS** - Build-time CSS-in-JS
 - **Biome** - Fast linter and formatter
 - **Vitest** - Blazing fast unit testing
+- **TypeScript** - Full type safety
 
 ## 📄 License
 
@@ -372,14 +274,14 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 ## 📊 Project Status
 
-| Metric            | Status                            |
-| ----------------- | --------------------------------- |
-| Components        | 40+ with comprehensive coverage    |
-| Bundle Size       | < 30KB (core), < 60KB (full)      |
-| TypeScript        | 100% coverage                     |
-| Accessibility     | WCAG 2.1 AA compliant             |
-| Framework Support | Next.js, Vite, Remix, Gatsby, CRA |
-| Test Coverage     | 95%+                              |
+| Metric            | Status                        |
+| ----------------- | ----------------------------- |
+| Components        | 40+ with Apple Liquid Glass   |
+| TypeScript        | 100% coverage                 |
+| Accessibility     | WCAG 2.1 AA compliant         |
+| Framework Support | React 18+, all major frameworks |
+| Build System      | Vite + Panda CSS              |
+| Package Manager   | Bun                           |
 
 ![GitHub stars](https://img.shields.io/github/stars/tuliopc23/LiqUIdify?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/tuliopc23/LiqUIdify?style=social)
@@ -392,16 +294,13 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 ## 🔗 Links
 
-- **[📖 Documentation](https://liquidify.mintlify.app)** - Comprehensive documentation site
+- **[📖 Documentation](https://docs.useliquidify.dev)** - Comprehensive guides and API reference
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
-  **[📦 NPM](https://www.npmjs.com/package/liquidify)**
-- **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions
+- **[📦 NPM](https://www.npmjs.com/package/liquidify)** - Package installation
 - **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
 
 ## 🤝 Community
 
-- **Discord** - [Join our community](https://discord.gg/liquidify)
-- **Twitter** - [@liquidify_ui](https://twitter.com/liquidify_ui) for updates
 - **Contributing** - See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
 
 ---
@@ -410,10 +309,10 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
   <p>Made with ❤️ by <a href="https://tuliocunha.dev">Tulio Pinheiro Cunha</a></p>
   <p>
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
-<a href="https://www.npmjs.com/package/liquidify">📦 NPM</a>
-    <a href="https://liquidify-docs.vercel.app/api/">📋 API Docs</a>
+    <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a> •
+    <a href="https://docs.useliquidify.dev">📖 Docs</a>
   </p>
   <p>
-    <strong>52 components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>
+    <strong>40+ components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>
   </p>
 </div>

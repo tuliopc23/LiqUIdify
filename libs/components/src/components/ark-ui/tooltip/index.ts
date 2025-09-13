@@ -1,4 +1,5 @@
 import "../../../styles/global";
+
 /**
  * Re-export Tooltip components for subpath imports
  */

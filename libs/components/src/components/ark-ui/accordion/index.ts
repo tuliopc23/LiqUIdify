@@ -1,4 +1,5 @@
 import "../../../styles/global";
+
 // Re-export Accordion components for subpath imports
 export * from "./accordion";
 
