@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import {
   colorPicker,
   type ColorPickerVariantProps,
-} from "../../../../../../styled-system/recipes/color-picker";
+} from "../../../../../../styled-system/recipes/colorPicker";
 import type { ComponentProps } from "react";
 
 export interface ColorPickerProps

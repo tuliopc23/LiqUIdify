@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import {
   ratingGroup,
   type RatingGroupVariantProps,
-} from "../../../../../../styled-system/recipes/rating-group";
+} from "../../../../../../styled-system/recipes/ratingGroup";
 import type { ComponentProps } from "react";
 
 export interface RatingGroupProps

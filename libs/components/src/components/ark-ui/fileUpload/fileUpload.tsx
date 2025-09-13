@@ -2,7 +2,7 @@
 
 import { FileUpload as ArkFileUpload } from "@ark-ui/react";
 import { createStyleContext } from "../../../../../../styled-system/jsx";
-import { fileUpload } from "../../../../../../styled-system/recipes/file-upload";
+import { fileUpload } from "../../../../../../styled-system/recipes/fileUpload";
 
 const { withRootProvider, withContext } = createStyleContext(fileUpload);
 

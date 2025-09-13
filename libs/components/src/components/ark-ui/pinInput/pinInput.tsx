@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import {
   pinInput,
   type PinInputVariantProps,
-} from "../../../../../../styled-system/recipes/pin-input";
+} from "../../../../../../styled-system/recipes/pinInput";
 import type { ComponentProps } from "react";
 
 export interface PinInputProps

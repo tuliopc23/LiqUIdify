@@ -2,7 +2,7 @@
 
 import { NumberInput as ArkNumberInput } from "@ark-ui/react";
 import { createStyleContext } from "../../../../../../styled-system/jsx";
-import { numberInput } from "../../../../../../styled-system/recipes/number-input";
+import { numberInput } from "../../../../../../styled-system/recipes/numberInput";
 
 const { withRootProvider, withContext } = createStyleContext(numberInput);
 
