@@ -1991,6 +1991,153 @@ export default defineConfig({
 					},
 				},
 
+        // Card – hairline border, subtle hover lift, optional glass
+        card: {
+          className: "card",
+          base: {
+            borderRadius: "token(radii.lg)",
+            border: "1px solid {colors.border.default}",
+            background: "{colors.bg.surface}",
+            transition:
+              "transform .15s ease, border-color .15s ease, box-shadow .15s ease",
+            _hover: {
+              transform: "translateY(-2px)",
+              borderColor: "{colors.glass.border}",
+            },
+          },
+          variants: {
+            variant: {
+              solid: {},
+              glass: {
+                background: "{colors.glass.bg}",
+                border: "1px solid {colors.glass.border}",
+                backdropFilter: "blur(token(blurs.glass.md))",
+              },
+              elevated: { boxShadow: "token(shadows.glass.sm)" },
+            },
+            padded: { true: { padding: "14px" }, false: {} },
+          },
+          defaultVariants: { variant: "solid", padded: true },
+        },
+
+        // Badge / Pill – translucent glass pill
+        badge: {
+          className: "badge",
+          base: {
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "6px 12px",
+            borderRadius: "token(radii.full)",
+            border: "1px solid {colors.glass.border}",
+            background: "{colors.glass.bg}",
+            backdropFilter: "blur(token(blurs.glass.md))",
+            fontWeight: 600,
+            fontSize: "14px",
+          },
+          variants: {
+            tone: {
+              neutral: { color: "{colors.text.glass.primary}" },
+              blue: {
+                color: "white",
+                background: "{colors.accent.primary}",
+                border: "1px solid transparent",
+              },
+            },
+          },
+          defaultVariants: { tone: "neutral" },
+        },
+
+        // SymbolTile – Apple-like icon tile
+        symbolTile: {
+          className: "symbol",
+          base: {
+            width: "48px",
+            height: "48px",
+            display: "grid",
+            placeItems: "center",
+            borderRadius: "token(radii.md)",
+            border: "1px solid {colors.glass.border}",
+            backgroundImage:
+              "linear-gradient(180deg, rgba(255,255,255,.12), transparent)",
+          },
+          variants: {
+            tint: {
+              gray: { background: "{colors.bg.surface}" },
+              blue: {
+                background:
+                  "color-mix(in oklch, var(--colors-blue-500) 20%, transparent)",
+              },
+              indigo: {
+                background:
+                  "color-mix(in oklch, var(--colors-indigo-500) 20%, transparent)",
+              },
+              teal: {
+                background:
+                  "color-mix(in oklch, var(--colors-teal-500) 20%, transparent)",
+              },
+            },
+          },
+          defaultVariants: { tint: "gray" },
+        },
+
+        // Navbar – adds glass only when scrolled via .is-scrolled
+        navbar: {
+          className: "navbar",
+          base: {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 50,
+            transition:
+              "background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease",
+            _class: {
+              "&.is-scrolled": {
+                background: "{colors.glass.bg}",
+                borderBottomWidth: "1px",
+                borderColor: "{colors.border.default}",
+                backdropFilter: "blur(token(blurs.glass.md))",
+              },
+            },
+          },
+        },
+
+        // Input – for raw HTML inputs (use Ark UI Field for headless wrappers)
+        input: {
+          className: "field-input",
+          base: {
+            width: "100%",
+            padding: "10px 12px",
+            borderRadius: "token(radii.field)",
+            border: "1px solid {colors.border.default}",
+            background: "{colors.bg.surface}",
+            color: "{colors.text.glass.primary}",
+            _placeholder: { color: "{colors.text.glass.muted}" },
+            outline: "none",
+            _focusVisible: {
+              boxShadow: "0 0 0 3px rgba(10,132,255,.35)",
+              borderColor: "{colors.accent.primary}",
+            },
+          },
+          variants: {
+            variant: {
+              solid: {},
+              glass: {
+                background: "{colors.glass.bg}",
+                border: "1px solid {colors.glass.border}",
+                backdropFilter: "blur(token(blurs.glass.md))",
+              },
+            },
+            size: {
+              sm: { fontSize: "14px", paddingBlock: "8px" },
+              md: { fontSize: "15px" },
+              lg: { fontSize: "16px", paddingBlock: "12px" },
+            },
+          },
+          defaultVariants: { variant: "solid", size: "md" },
+        },
+
 				// Avatar - Profile picture component
 				avatar: {
 					className: "avatar",

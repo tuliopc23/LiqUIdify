@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LiqUIdify Components Preview</title>
+    <!-- Use the built library CSS that includes Panda tokens + recipes -->
+    <link rel="stylesheet" href="./dist/libs/components/liquidify.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #f6f7f8, #e2e4e8);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      }
+      .preview-shell {
+        width: min(920px, 94vw);
+        padding: 32px;
+        display: grid;
+        gap: 24px;
+      }
+      .section-title {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      /* Make segmented tabs look centered in the preview */
+      .center { display: grid; place-items: center; }
+    </style>
+  </head>
+  <body>
+    <main class="preview-shell">
+      <h1 class="section-title">LiqUIdify — Quick Preview</h1>
+
+      <!-- Component 1: Segmented Tabs (Ark UI styled via Panda slot recipe) -->
+      <section>
+        <h2 class="section-title" style="font-size:18px;">Segmented Tabs</h2>
+        <div class="tabs__root">
+          <div class="tabs__list">
+            <button class="tabs__trigger" aria-selected="true" type="button">Overview</button>
+            <button class="tabs__trigger" type="button">Components</button>
+            <button class="tabs__trigger" type="button">Tokens</button>
+          </div>
+          <div class="tabs__content" style="margin-top:12px;">
+            This is the active tab content. The segmented styling comes from Panda slot recipe
+            classes: <code>tabs__list</code>, <code>tabs__trigger</code>, <code>tabs__content</code>.
+          </div>
+        </div>
+      </section>
+
+      <!-- Component 2: Glass Button (recipe className: liquid-button) -->
+      <section>
+        <h2 class="section-title" style="font-size:18px;">Button</h2>
+        <div class="center" style="gap:12px; grid-auto-flow: column;">
+          <button class="liquid-button liquid-button--variant_primary liquid-button--size_md" type="button">Primary</button>
+          <button class="liquid-button liquid-button--variant_secondary liquid-button--size_md" type="button">Secondary</button>
+          <button class="liquid-button liquid-button--variant_danger liquid-button--size_md" type="button">Danger</button>
+        </div>
+      </section>
+
+      <!-- Optional: simple Card using default recipe base class if available in your CSS build -->
+      <section>
+        <h2 class="section-title" style="font-size:18px;">Card (optional)</h2>
+        <div class="card" style="padding:16px;">
+          <div style="font-weight:600; margin-bottom:6px;">Hello, glassy world</div>
+          <div style="color:rgba(0,0,0,.6)">This card uses the <code>card</code> recipe base class.</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -288,6 +288,25 @@
     --colors-text-glass-secondary: rgba(255, 255, 255, 0.9);
     --colors-text-glass-muted: rgba(255, 255, 255, 0.7);
     --colors-text-glass-disabled: rgba(255, 255, 255, 0.5);
+    --colors-gray-50: #FBFBFD;
+    --colors-gray-100: #F6F7F8;
+    --colors-gray-200: #E2E4E8;
+    --colors-gray-300: #C6C9D0;
+    --colors-gray-600: #50545B;
+    --colors-gray-700: #2A2B2E;
+    --colors-gray-800: #1A1B1E;
+    --colors-gray-900: #111214;
+    --colors-blue-500: #0A84FF;
+    --colors-indigo-500: #5E5CE6;
+    --colors-teal-500: #64D2FF;
+    --colors-green-500: #34C759;
+    --colors-orange-500: #FF9F0A;
+    --colors-pink-500: #FF375F;
+    --colors-bg-canvas: var(--colors-gray-50);
+    --colors-bg-surface: var(--colors-gray-100);
+    --colors-bg-subtle: #F2F3F5;
+    --colors-border-default: var(--colors-gray-200);
+    --colors-border-hairline: color-mix(in oklch, #000 10%, transparent);
     --radii-none: 0px;
     --radii-xs: 4px;
     --radii-sm: 8px;
@@ -319,6 +338,54 @@
     --shadows-glass-md: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
     --shadows-glass-lg: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
     --shadows-glass-hover: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+  --shadows-text-styles-display {
+    font-family: display;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+
+  --shadows-text-styles-display fontSize {
+    base: clamp(36px, 2.5vw + 20px, 56px);
+}
+
+  --shadows-text-styles-title1 {
+    font-family: display;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+  --shadows-text-styles-title1 fontSize {
+    base: clamp(24px, 1vw + 16px, 32px);
+}
+
+  --shadows-text-styles-title1 {
+    line-height: 1.2;
+}
+
+  --shadows-text-styles-title3 {
+    font-family: display;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: 18px;
+    line-height: 1.25;
+}
+
+  --shadows-text-styles-body {
+    font-family: sans;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+  --shadows-text-styles-caption {
+    font-family: sans;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+  :where(:root, :host) {
     --durations-glass-flow: 0.8s;
     --durations-glass-bounce: 0.6s;
     --durations-glass-quick: 0.2s;
@@ -1394,34 +1461,6 @@
       right: 2px;
       bottom: 2px;
 }
-
-    .switch {
-      background: var(--colors-glass-bg);
-      border: 1px solid var(--colors-glass-border);
-      padding: 2px;
-      overflow: hidden;
-      border-radius: var(--radii-full);
-      position: relative;
-      backdrop-filter: blur(var(--blurs-glass-md));
-      -webkit-backdrop-filter: blur(var(--blurs-glass-md));
-      box-shadow: var(--shadows-glass-base);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-}
-
-    .switch::before {
-      background: var(--colors-glass-gradients-before);
-      border-radius: inherit;
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-}
 }
 
   .liquid-button--variant_primary {
@@ -1665,11 +1704,6 @@
     border-radius: var(--radii-lg);
     font-size: 18px;
 }
-
-  .switch--size_md {
-    width: 44px;
-    height: 24px;
-}
 }
 
 @layer recipes.slots{
@@ -1799,79 +1833,46 @@
       background: var(--colors-glass-subtle-bg);
 }
 
-    .tabs__root {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-}
-
     .tabs__list {
-      background: var(--colors-glass-bg);
-      border: 1px solid var(--colors-glass-border);
-      padding: var(--spacing-glass-xs);
-      overflow: hidden;
+      padding: 4px;
+      background: var(--colors-bg-subtle);
+      border: 1px solid var(--colors-border-default);
+      gap: 4px;
       border-radius: var(--radii-md);
-      gap: var(--spacing-glass-xs);
-      position: relative;
-      backdrop-filter: blur(var(--blurs-glass-md));
-      -webkit-backdrop-filter: blur(var(--blurs-glass-md));
-      box-shadow: var(--shadows-glass-base);
-      display: flex;
-      align-items: center;
-}
-
-    .tabs__list::before {
-      background: var(--colors-glass-gradients-before);
-      border-radius: inherit;
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      display: inline-flex;
 }
 
     .tabs__trigger {
-      padding: var(--spacing-glass-md) var(--spacing-glass-lg);
-      border: none;
-      background: transparent;
+      padding: 10px 12px;
       border-radius: var(--radii-sm);
-      transition: all var(--durations-glass-quick) var(--easings-glass-flow);
-      position: relative;
-      z-index: 2;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: var(--font-weights-medium);
-      color: var(--colors-text-glass-primary);
+      transition: color .15s ease, background-color .15s ease;
+      font-weight: 600;
+      color: var(--colors-text-glass-muted);
 }
 
-    .tabs__trigger[data-state=active] {
-      background: var(--colors-glass-medium-bg);
+    .tabs__trigger:is([aria-selected=true], [data-selected]) {
+      background: var(--colors-glass-bg);
+      border: 1px solid var(--colors-glass-border);
+      color: var(--colors-text-glass-primary);
+      backdrop-filter: blur(var(--blurs-glass-md));
+      -webkit-backdrop-filter: blur(var(--blurs-glass-md));
+}
+
+    .tabs__trigger:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+      opacity: 0.5;
+      cursor: not-allowed;
 }
 
     .tabs__trigger:is(:hover, [data-hover]) {
-      background: var(--colors-glass-subtle-bg);
-}
-
-    .tabs__content {
-      padding: var(--spacing-glass-lg) 0;
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-      position: relative;
-      z-index: 2;
       color: var(--colors-text-glass-primary);
 }
 
+    .tabs__content {
+      margin-top: 12px;
+}
+
     .tabs__indicator {
-      background: var(--colors-glass-medium-bg);
-      border-radius: var(--radii-sm);
-      transition: all var(--durations-glass-quick) var(--easings-glass-flow);
-      position: absolute;
+      display: none;
 }
 
     .tooltip__trigger {
@@ -3054,159 +3055,5 @@
   .toast__root--status_error {
     border-left-color: var(--colors-accent-danger);
     border-left-width: 4px;
-}
-}
-
-@layer utilities{
-  .p_token\(spacing\.glass\.sm\) {
-    padding: var(--spacing-glass-sm);
-}
-
-  .mx_auto {
-    margin-inline: auto;
-}
-
-  .px_24px {
-    padding-inline: 24px;
-}
-
-  .py_10px {
-    padding-block: 10px;
-}
-
-  .gap_12px {
-    gap: 12px;
-}
-
-  .gap_20px {
-    gap: 20px;
-}
-
-  .gap_16px {
-    gap: 16px;
-}
-
-  .d_inline-flex {
-    display: inline-flex;
-}
-
-  .ai_center {
-    align-items: center;
-}
-
-  .jc_center {
-    justify-content: center;
-}
-
-  .asp_1 {
-    aspect-ratio: 1;
-}
-
-  .pos_fixed {
-    position: fixed;
-}
-
-  .z_50 {
-    z-index: 50;
-}
-
-  .d_flex {
-    display: flex;
-}
-
-  .jc_space-between {
-    justify-content: space-between;
-}
-
-  .ff_sans {
-    font-family: var(--fonts-sans);
-}
-
-  .fw_700 {
-    font-weight: 700;
-}
-
-  .ls_-0\.01em {
-    letter-spacing: -0.01em;
-}
-
-  .c_muted {
-    color: muted;
-}
-
-  .ta_center {
-    text-align: center;
-}
-
-  .text-style_display {
-    text-style: display;
-}
-
-  .c_text {
-    color: text;
-}
-
-  .d_grid {
-    display: grid;
-}
-
-  .grid-tc_repeat\(auto-fill\,_minmax\(260px\,_1fr\)\) {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-}
-
-  .fw_600 {
-    font-weight: 600;
-}
-
-  .min-w_auto {
-    min-width: auto;
-}
-
-  .top_0 {
-    top: 0;
-}
-
-  .left_0 {
-    left: 0;
-}
-
-  .right_0 {
-    right: 0;
-}
-
-  .max-w_1100px {
-    max-width: 1100px;
-}
-
-  .mt_70px {
-    margin-top: 70px;
-}
-
-  .pb_64px {
-    padding-bottom: 64px;
-}
-
-  .mb_24px {
-    margin-bottom: 24px;
-}
-
-  .mt_8px {
-    margin-top: 8px;
-}
-
-  .mt_10px {
-    margin-top: 10px;
-}
-
-  .mt_32px {
-    margin-top: 32px;
-}
-
-  .mt_24px {
-    margin-top: 24px;
-}
-
-  .hover\:c_text:is(:hover, [data-hover]) {
-    color: text;
 }
 }
