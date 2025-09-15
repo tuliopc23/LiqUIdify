@@ -16,14 +16,14 @@ export const TourSpotlight = ArkTour.Spotlight;
 
 // Compound component API
 export const Tour = {
-  Root: TourRoot,
-  Positioner: TourPositioner,
-  Content: TourContent,
-  Arrow: TourArrow,
-  ArrowTip: TourArrowTip,
-  CloseTrigger: TourCloseTrigger,
-  Title: TourTitle,
-  Description: TourDescription,
-  ActionTrigger: TourActionTrigger,
-  Spotlight: TourSpotlight,
+	Root: TourRoot,
+	Positioner: TourPositioner,
+	Content: TourContent,
+	Arrow: TourArrow,
+	ArrowTip: TourArrowTip,
+	CloseTrigger: TourCloseTrigger,
+	Title: TourTitle,
+	Description: TourDescription,
+	ActionTrigger: TourActionTrigger,
+	Spotlight: TourSpotlight,
 };

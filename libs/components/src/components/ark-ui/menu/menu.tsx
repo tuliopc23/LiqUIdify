@@ -17,11 +17,11 @@ export const MenuSeparator = withContext(ArkMenu.Separator, "separator");
 
 // Compound component API
 export const Menu = {
-  Root: MenuRoot,
-  Trigger: MenuTrigger,
-  Positioner: MenuPositioner,
-  Content: MenuContent,
-  Item: MenuItem,
-  ItemText: MenuItemText,
-  Separator: MenuSeparator,
+	Root: MenuRoot,
+	Trigger: MenuTrigger,
+	Positioner: MenuPositioner,
+	Content: MenuContent,
+	Item: MenuItem,
+	ItemText: MenuItemText,
+	Separator: MenuSeparator,
 };

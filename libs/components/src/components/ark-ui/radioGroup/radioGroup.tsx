@@ -9,13 +9,19 @@ const { withRootProvider, withContext } = createStyleContext(radioGroup);
 // Auto-styled Ark UI RadioGroup components with liquid glass
 export const RadioGroupRoot = withRootProvider(ArkRadioGroup.Root);
 export const RadioGroupItem = withContext(ArkRadioGroup.Item, "item");
-export const RadioGroupItemControl = withContext(ArkRadioGroup.ItemControl, "itemControl");
-export const RadioGroupItemText = withContext(ArkRadioGroup.ItemText, "itemText");
+export const RadioGroupItemControl = withContext(
+	ArkRadioGroup.ItemControl,
+	"itemControl",
+);
+export const RadioGroupItemText = withContext(
+	ArkRadioGroup.ItemText,
+	"itemText",
+);
 
 // Compound component API
 export const RadioGroup = {
-  Root: RadioGroupRoot,
-  Item: RadioGroupItem,
-  ItemControl: RadioGroupItemControl,
-  ItemText: RadioGroupItemText,
+	Root: RadioGroupRoot,
+	Item: RadioGroupItem,
+	ItemControl: RadioGroupItemControl,
+	ItemText: RadioGroupItemText,
 };

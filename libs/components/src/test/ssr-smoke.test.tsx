@@ -3,8 +3,8 @@ import { describe, expect, it } from "vitest";
 import { Button } from "../components/button";
 
 describe("SSR smoke", () => {
-  it("renders Button on the server", () => {
-    const html = renderToString(<Button>Test</Button>);
-    expect(html).toContain("Test");
-  });
+	it("renders Button on the server", () => {
+		const html = renderToString(<Button>Test</Button>);
+		expect(html).toContain("Test");
+	});
 });

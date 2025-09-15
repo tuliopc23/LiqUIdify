@@ -17,15 +17,15 @@ export const TagsInputHiddenInput = ArkTagsInput.HiddenInput;
 
 // Compound component API
 export const TagsInput = {
-  Root: TagsInputRoot,
-  Label: TagsInputLabel,
-  Control: TagsInputControl,
-  Input: TagsInputInput,
-  ClearTrigger: TagsInputClearTrigger,
-  Item: TagsInputItem,
-  ItemPreview: TagsInputItemPreview,
-  ItemText: TagsInputItemText,
-  ItemInput: TagsInputItemInput,
-  ItemDeleteTrigger: TagsInputItemDeleteTrigger,
-  HiddenInput: TagsInputHiddenInput,
+	Root: TagsInputRoot,
+	Label: TagsInputLabel,
+	Control: TagsInputControl,
+	Input: TagsInputInput,
+	ClearTrigger: TagsInputClearTrigger,
+	Item: TagsInputItem,
+	ItemPreview: TagsInputItemPreview,
+	ItemText: TagsInputItemText,
+	ItemInput: TagsInputItemInput,
+	ItemDeleteTrigger: TagsInputItemDeleteTrigger,
+	HiddenInput: TagsInputHiddenInput,
 };

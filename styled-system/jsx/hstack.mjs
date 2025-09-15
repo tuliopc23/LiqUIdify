@@ -5,10 +5,10 @@ import { getHstackStyle } from "../patterns/hstack.mjs";
 import { styled } from "./factory.mjs";
 
 export const HStack = /* @__PURE__ */ forwardRef(function HStack(props, ref) {
-  const [patternProps, restProps] = splitProps(props, ["justify", "gap"]);
+	const [patternProps, restProps] = splitProps(props, ["justify", "gap"]);
 
-  const styleProps = getHstackStyle(patternProps);
-  const mergedProps = { ref, ...styleProps, ...restProps };
+	const styleProps = getHstackStyle(patternProps);
+	const mergedProps = { ref, ...styleProps, ...restProps };
 
-  return createElement(styled.div, mergedProps);
+	return createElement(styled.div, mergedProps);
 });

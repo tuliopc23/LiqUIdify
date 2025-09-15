@@ -14,12 +14,12 @@ export const AngleSliderValueText = ArkAngleSlider.ValueText;
 
 // Compound component API
 export const AngleSlider = {
-  Root: AngleSliderRoot,
-  Control: AngleSliderControl,
-  HiddenInput: AngleSliderHiddenInput,
-  Label: AngleSliderLabel,
-  MarkerGroup: AngleSliderMarkerGroup,
-  Marker: AngleSliderMarker,
-  Thumb: AngleSliderThumb,
-  ValueText: AngleSliderValueText,
+	Root: AngleSliderRoot,
+	Control: AngleSliderControl,
+	HiddenInput: AngleSliderHiddenInput,
+	Label: AngleSliderLabel,
+	MarkerGroup: AngleSliderMarkerGroup,
+	Marker: AngleSliderMarker,
+	Thumb: AngleSliderThumb,
+	ValueText: AngleSliderValueText,
 };

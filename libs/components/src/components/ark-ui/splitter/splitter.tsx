@@ -9,7 +9,7 @@ export const SplitterResizeTrigger = ArkSplitter.ResizeTrigger;
 
 // Compound component API
 export const Splitter = {
-  Root: SplitterRoot,
-  Panel: SplitterPanel,
-  ResizeTrigger: SplitterResizeTrigger,
+	Root: SplitterRoot,
+	Panel: SplitterPanel,
+	ResizeTrigger: SplitterResizeTrigger,
 };

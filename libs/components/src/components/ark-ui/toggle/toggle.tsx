@@ -7,5 +7,5 @@ export const ToggleRoot = ArkToggle.Root;
 
 // Compound component API
 export const Toggle = {
-  Root: ToggleRoot,
+	Root: ToggleRoot,
 };

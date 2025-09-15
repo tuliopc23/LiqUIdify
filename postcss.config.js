@@ -12,10 +12,10 @@ import pandacss from "@pandacss/postcss";
 import autoprefixer from "autoprefixer";
 
 export default {
-  plugins: [
-    // Panda CSS utilities and token processing
-    pandacss(),
-    // Vendor prefixing based on the project's browserslist
-    autoprefixer(),
-  ],
+	plugins: [
+		// Panda CSS utilities and token processing
+		pandacss(),
+		// Vendor prefixing based on the project's browserslist
+		autoprefixer(),
+	],
 };

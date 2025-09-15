@@ -9,7 +9,7 @@ export const QrCodePattern = ArkQrCode.Pattern;
 
 // Compound component API
 export const QrCode = {
-  Root: QrCodeRoot,
-  Frame: QrCodeFrame,
-  Pattern: QrCodePattern,
+	Root: QrCodeRoot,
+	Frame: QrCodeFrame,
+	Pattern: QrCodePattern,
 };

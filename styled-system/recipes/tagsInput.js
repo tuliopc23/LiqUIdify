@@ -7,18 +7,21 @@ const tagsInputVariantMap = {};
 
 const tagsInputVariantKeys = Object.keys(tagsInputVariantMap);
 
-export const tagsInput = /* @__PURE__ */ Object.assign(memo(tagsInputFn.recipeFn), {
-  __recipe__: true,
-  __name__: "tagsInput",
-  __getCompoundVariantCss__: tagsInputFn.__getCompoundVariantCss__,
-  raw: (props) => props,
-  variantKeys: tagsInputVariantKeys,
-  variantMap: tagsInputVariantMap,
-  merge(recipe) {
-    return mergeRecipes(this, recipe);
-  },
-  splitVariantProps(props) {
-    return splitProps(props, tagsInputVariantKeys);
-  },
-  getVariantProps: tagsInputFn.getVariantProps,
-});
+export const tagsInput = /* @__PURE__ */ Object.assign(
+	memo(tagsInputFn.recipeFn),
+	{
+		__recipe__: true,
+		__name__: "tagsInput",
+		__getCompoundVariantCss__: tagsInputFn.__getCompoundVariantCss__,
+		raw: (props) => props,
+		variantKeys: tagsInputVariantKeys,
+		variantMap: tagsInputVariantMap,
+		merge(recipe) {
+			return mergeRecipes(this, recipe);
+		},
+		splitVariantProps(props) {
+			return splitProps(props, tagsInputVariantKeys);
+		},
+		getVariantProps: tagsInputFn.getVariantProps,
+	},
+);

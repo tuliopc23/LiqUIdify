@@ -12,10 +12,10 @@ export const ProgressLinearRange = ArkProgress.Range;
 
 // Compound component API
 export const ProgressLinear = {
-  Root: ProgressLinearRoot,
-  Label: ProgressLinearLabel,
-  ValueText: ProgressLinearValueText,
-  View: ProgressLinearView,
-  Track: ProgressLinearTrack,
-  Range: ProgressLinearRange,
+	Root: ProgressLinearRoot,
+	Label: ProgressLinearLabel,
+	ValueText: ProgressLinearValueText,
+	View: ProgressLinearView,
+	Track: ProgressLinearTrack,
+	Range: ProgressLinearRange,
 };

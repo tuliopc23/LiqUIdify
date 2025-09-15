@@ -14,12 +14,12 @@ export const FieldRequiredIndicator = ArkField.RequiredIndicator;
 
 // Compound component API
 export const Field = {
-  Root: FieldRoot,
-  Label: FieldLabel,
-  Input: FieldInput,
-  Textarea: FieldTextarea,
-  Select: FieldSelect,
-  ErrorText: FieldErrorText,
-  HelperText: FieldHelperText,
-  RequiredIndicator: FieldRequiredIndicator,
+	Root: FieldRoot,
+	Label: FieldLabel,
+	Input: FieldInput,
+	Textarea: FieldTextarea,
+	Select: FieldSelect,
+	ErrorText: FieldErrorText,
+	HelperText: FieldHelperText,
+	RequiredIndicator: FieldRequiredIndicator,
 };

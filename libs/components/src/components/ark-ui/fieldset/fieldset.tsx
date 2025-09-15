@@ -10,8 +10,8 @@ export const FieldsetErrorText = ArkFieldset.ErrorText;
 
 // Compound component API
 export const Fieldset = {
-  Root: FieldsetRoot,
-  Legend: FieldsetLegend,
-  HelperText: FieldsetHelperText,
-  ErrorText: FieldsetErrorText,
+	Root: FieldsetRoot,
+	Legend: FieldsetLegend,
+	HelperText: FieldsetHelperText,
+	ErrorText: FieldsetErrorText,
 };

@@ -3,13 +3,15 @@
 ## Build/Lint/Test Commands
 - **Build library**: `bun run build:lib`
 - **Type check**: `bun run type-check`
+- **Type check watch**: `bun run type-check:watch`
 - **Lint**: `biome lint .`
 - **Lint fix**: `biome lint --write .`
 - **Format**: `biome format --write .`
 - **Full check**: `biome check .`
+- **Health check**: `bun run health-check`
 - **Run all tests**: `vitest -c vitest.config.mts run`
 - **Run single test**: `vitest run <path-to-test-file>`
-- **Test coverage**: `bun test --coverage`
+- **Test coverage**: `bun run test:coverage`
 
 ## Code Style Guidelines
 
@@ -17,6 +19,7 @@
 - **Formatter**: Biome (2 spaces, 100 line width, LF endings)
 - **JSX**: Double quotes, semicolons always, bracket spacing
 - **Imports**: Auto-organized with Biome assist
+- **Markdown**: markdownlint/style/prettier (120 char line length)
 
 ### TypeScript
 - **Strict mode**: Enabled with noImplicitAny, strictNullChecks
@@ -45,4 +48,4 @@
 ### Testing
 - **Framework**: Vitest with jsdom
 - **Library**: @testing-library/react
-- **Setup**: test-setup.ts with DOM environment
+- **Setup**: test-setup.ts with DOM environment, React 19 compatibility

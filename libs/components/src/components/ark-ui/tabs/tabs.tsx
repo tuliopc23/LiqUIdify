@@ -15,9 +15,9 @@ export const TabsIndicator = withContext(ArkTabs.Indicator, "indicator");
 
 // Compound component API
 export const Tabs = {
-  Root: TabsRoot,
-  List: TabsList,
-  Trigger: TabsTrigger,
-  Content: TabsContent,
-  Indicator: TabsIndicator,
+	Root: TabsRoot,
+	List: TabsList,
+	Trigger: TabsTrigger,
+	Content: TabsContent,
+	Indicator: TabsIndicator,
 };

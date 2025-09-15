@@ -15,13 +15,13 @@ export const ProgressCircularCircleRange = ArkProgress.CircleRange;
 
 // Compound component API
 export const ProgressCircular = {
-  Root: ProgressCircularRoot,
-  Label: ProgressCircularLabel,
-  ValueText: ProgressCircularValueText,
-  View: ProgressCircularView,
-  Track: ProgressCircularTrack,
-  Range: ProgressCircularRange,
-  Circle: ProgressCircularCircle,
-  CircleTrack: ProgressCircularCircleTrack,
-  CircleRange: ProgressCircularCircleRange,
+	Root: ProgressCircularRoot,
+	Label: ProgressCircularLabel,
+	ValueText: ProgressCircularValueText,
+	View: ProgressCircularView,
+	Track: ProgressCircularTrack,
+	Range: ProgressCircularRange,
+	Circle: ProgressCircularCircle,
+	CircleTrack: ProgressCircularCircleTrack,
+	CircleRange: ProgressCircularCircleRange,
 };

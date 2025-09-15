@@ -12,10 +12,10 @@ export const SignaturePadGuide = ArkSignaturePad.Guide;
 
 // Compound component API
 export const SignaturePad = {
-  Root: SignaturePadRoot,
-  Label: SignaturePadLabel,
-  Control: SignaturePadControl,
-  Segment: SignaturePadSegment,
-  ClearTrigger: SignaturePadClearTrigger,
-  Guide: SignaturePadGuide,
+	Root: SignaturePadRoot,
+	Label: SignaturePadLabel,
+	Control: SignaturePadControl,
+	Segment: SignaturePadSegment,
+	ClearTrigger: SignaturePadClearTrigger,
+	Guide: SignaturePadGuide,
 };

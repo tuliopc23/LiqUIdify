@@ -8,6 +8,6 @@ export const ToggleGroupItem = ArkToggleGroup.Item;
 
 // Compound component API
 export const ToggleGroup = {
-  Root: ToggleGroupRoot,
-  Item: ToggleGroupItem,
+	Root: ToggleGroupRoot,
+	Item: ToggleGroupItem,
 };

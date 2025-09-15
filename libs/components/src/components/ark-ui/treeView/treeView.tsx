@@ -17,15 +17,15 @@ export const TreeViewItemText = ArkTreeView.ItemText;
 
 // Compound component API
 export const TreeView = {
-  Root: TreeViewRoot,
-  Label: TreeViewLabel,
-  Tree: TreeViewTree,
-  Branch: TreeViewBranch,
-  BranchControl: TreeViewBranchControl,
-  BranchContent: TreeViewBranchContent,
-  BranchIndicator: TreeViewBranchIndicator,
-  BranchText: TreeViewBranchText,
-  Item: TreeViewItem,
-  ItemIndicator: TreeViewItemIndicator,
-  ItemText: TreeViewItemText,
+	Root: TreeViewRoot,
+	Label: TreeViewLabel,
+	Tree: TreeViewTree,
+	Branch: TreeViewBranch,
+	BranchControl: TreeViewBranchControl,
+	BranchContent: TreeViewBranchContent,
+	BranchIndicator: TreeViewBranchIndicator,
+	BranchText: TreeViewBranchText,
+	Item: TreeViewItem,
+	ItemIndicator: TreeViewItemIndicator,
+	ItemText: TreeViewItemText,
 };

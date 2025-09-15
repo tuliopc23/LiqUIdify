@@ -12,10 +12,10 @@ export const HoverCardArrowTip = ArkHoverCard.ArrowTip;
 
 // Compound component API
 export const HoverCard = {
-  Root: HoverCardRoot,
-  Trigger: HoverCardTrigger,
-  Positioner: HoverCardPositioner,
-  Content: HoverCardContent,
-  Arrow: HoverCardArrow,
-  ArrowTip: HoverCardArrowTip,
+	Root: HoverCardRoot,
+	Trigger: HoverCardTrigger,
+	Positioner: HoverCardPositioner,
+	Content: HoverCardContent,
+	Arrow: HoverCardArrow,
+	ArrowTip: HoverCardArrowTip,
 };

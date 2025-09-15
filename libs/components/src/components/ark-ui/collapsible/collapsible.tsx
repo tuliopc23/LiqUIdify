@@ -10,8 +10,8 @@ export const CollapsibleIndicator = ArkCollapsible.Indicator;
 
 // Compound component API
 export const Collapsible = {
-  Root: CollapsibleRoot,
-  Trigger: CollapsibleTrigger,
-  Content: CollapsibleContent,
-  Indicator: CollapsibleIndicator,
+	Root: CollapsibleRoot,
+	Trigger: CollapsibleTrigger,
+	Content: CollapsibleContent,
+	Indicator: CollapsibleIndicator,
 };

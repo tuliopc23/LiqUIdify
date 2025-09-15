@@ -12,10 +12,10 @@ export const TimerActionTrigger = ArkTimer.ActionTrigger;
 
 // Compound component API
 export const Timer = {
-  Root: TimerRoot,
-  Area: TimerArea,
-  Item: TimerItem,
-  Separator: TimerSeparator,
-  Control: TimerControl,
-  ActionTrigger: TimerActionTrigger,
+	Root: TimerRoot,
+	Area: TimerArea,
+	Item: TimerItem,
+	Separator: TimerSeparator,
+	Control: TimerControl,
+	ActionTrigger: TimerActionTrigger,
 };

@@ -11,9 +11,9 @@ export const ScrollAreaCorner = ArkScrollArea.Corner;
 
 // Compound component API
 export const ScrollArea = {
-  Root: ScrollAreaRoot,
-  Viewport: ScrollAreaViewport,
-  Scrollbar: ScrollAreaScrollbar,
-  Thumb: ScrollAreaThumb,
-  Corner: ScrollAreaCorner,
+	Root: ScrollAreaRoot,
+	Viewport: ScrollAreaViewport,
+	Scrollbar: ScrollAreaScrollbar,
+	Thumb: ScrollAreaThumb,
+	Corner: ScrollAreaCorner,
 };

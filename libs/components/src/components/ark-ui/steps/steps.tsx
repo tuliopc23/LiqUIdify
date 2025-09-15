@@ -17,15 +17,15 @@ export const StepsProgress = ArkSteps.Progress;
 
 // Compound component API
 export const Steps = {
-  Root: StepsRoot,
-  List: StepsList,
-  Item: StepsItem,
-  Trigger: StepsTrigger,
-  Indicator: StepsIndicator,
-  Separator: StepsSeparator,
-  Content: StepsContent,
-  CompletedContent: StepsCompletedContent,
-  NextTrigger: StepsNextTrigger,
-  PrevTrigger: StepsPrevTrigger,
-  Progress: StepsProgress,
+	Root: StepsRoot,
+	List: StepsList,
+	Item: StepsItem,
+	Trigger: StepsTrigger,
+	Indicator: StepsIndicator,
+	Separator: StepsSeparator,
+	Content: StepsContent,
+	CompletedContent: StepsCompletedContent,
+	NextTrigger: StepsNextTrigger,
+	PrevTrigger: StepsPrevTrigger,
+	Progress: StepsProgress,
 };

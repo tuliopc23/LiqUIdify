@@ -9,13 +9,19 @@ const { withContext } = createStyleContext(accordion);
 // Auto-styled Ark UI Accordion components with liquid glass
 export const AccordionRoot = withContext(ArkAccordion.Root, "root");
 export const AccordionItem = withContext(ArkAccordion.Item, "item");
-export const AccordionItemTrigger = withContext(ArkAccordion.ItemTrigger, "trigger");
-export const AccordionItemContent = withContext(ArkAccordion.ItemContent, "content");
+export const AccordionItemTrigger = withContext(
+	ArkAccordion.ItemTrigger,
+	"trigger",
+);
+export const AccordionItemContent = withContext(
+	ArkAccordion.ItemContent,
+	"content",
+);
 
 // Compound component API
 export const Accordion = {
-  Root: AccordionRoot,
-  Item: AccordionItem,
-  ItemTrigger: AccordionItemTrigger,
-  ItemContent: AccordionItemContent,
+	Root: AccordionRoot,
+	Item: AccordionItem,
+	ItemTrigger: AccordionItemTrigger,
+	ItemContent: AccordionItemContent,
 };

@@ -6,16 +6,16 @@ import { setupDOM } from "./test-setup";
 // This is a minimal implementation to get tests working again
 
 interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
-  // Add custom options here if needed
+	// Add custom options here if needed
 }
 
 /**
  * Custom render function that wraps components with necessary providers
  */
 const customRender = (ui: ReactElement, options: CustomRenderOptions = {}) => {
-  // Ensure DOM is set up before rendering
-  setupDOM();
-  return render(ui, options);
+	// Ensure DOM is set up before rendering
+	setupDOM();
+	return render(ui, options);
 };
 
 // Re-export everything from testing-library

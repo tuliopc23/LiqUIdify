@@ -15,13 +15,13 @@ export const FloatingPanelDragTrigger = ArkFloatingPanel.DragTrigger;
 
 // Compound component API
 export const FloatingPanel = {
-  Root: FloatingPanelRoot,
-  Trigger: FloatingPanelTrigger,
-  Positioner: FloatingPanelPositioner,
-  Content: FloatingPanelContent,
-  Header: FloatingPanelHeader,
-  Title: FloatingPanelTitle,
-  CloseTrigger: FloatingPanelCloseTrigger,
-  ResizeTrigger: FloatingPanelResizeTrigger,
-  DragTrigger: FloatingPanelDragTrigger,
+	Root: FloatingPanelRoot,
+	Trigger: FloatingPanelTrigger,
+	Positioner: FloatingPanelPositioner,
+	Content: FloatingPanelContent,
+	Header: FloatingPanelHeader,
+	Title: FloatingPanelTitle,
+	CloseTrigger: FloatingPanelCloseTrigger,
+	ResizeTrigger: FloatingPanelResizeTrigger,
+	DragTrigger: FloatingPanelDragTrigger,
 };

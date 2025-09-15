@@ -1,8 +1,8 @@
 {
-  "rules": {
-    "selector-class-pattern": null,
-    "custom-property-pattern": null,
-    "block-no-empty": true,
-    "color-no-invalid-hex": true
-  }
+	"rules": {
+		"selector-class-pattern": null,
+		"custom-property-pattern": null,
+		"block-no-empty": true,
+		"color-no-invalid-hex": true
+	}
 }

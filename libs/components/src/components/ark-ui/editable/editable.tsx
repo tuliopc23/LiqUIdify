@@ -14,12 +14,12 @@ export const EditableCancelTrigger = ArkEditable.CancelTrigger;
 
 // Compound component API
 export const Editable = {
-  Root: EditableRoot,
-  Area: EditableArea,
-  Input: EditableInput,
-  Preview: EditablePreview,
-  Control: EditableControl,
-  EditTrigger: EditableEditTrigger,
-  SubmitTrigger: EditableSubmitTrigger,
-  CancelTrigger: EditableCancelTrigger,
+	Root: EditableRoot,
+	Area: EditableArea,
+	Input: EditableInput,
+	Preview: EditablePreview,
+	Control: EditableControl,
+	EditTrigger: EditableEditTrigger,
+	SubmitTrigger: EditableSubmitTrigger,
+	CancelTrigger: EditableCancelTrigger,
 };

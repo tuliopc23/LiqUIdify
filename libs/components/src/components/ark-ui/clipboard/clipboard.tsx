@@ -13,11 +13,11 @@ export const ClipboardValueText = ArkClipboard.ValueText;
 
 // Compound component API
 export const Clipboard = {
-  Root: ClipboardRoot,
-  Control: ClipboardControl,
-  Input: ClipboardInput,
-  Label: ClipboardLabel,
-  Trigger: ClipboardTrigger,
-  Indicator: ClipboardIndicator,
-  ValueText: ClipboardValueText,
+	Root: ClipboardRoot,
+	Control: ClipboardControl,
+	Input: ClipboardInput,
+	Label: ClipboardLabel,
+	Trigger: ClipboardTrigger,
+	Indicator: ClipboardIndicator,
+	ValueText: ClipboardValueText,
 };

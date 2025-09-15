@@ -14,16 +14,19 @@ export const SelectContent = withContext(ArkSelect.Content, "content");
 export const SelectItem = withContext(ArkSelect.Item, "item");
 export const SelectItemText = withContext(ArkSelect.ItemText, "itemText");
 export const SelectIndicator = withContext(ArkSelect.Indicator, "indicator");
-export const SelectClearTrigger = withContext(ArkSelect.ClearTrigger, "clearTrigger");
+export const SelectClearTrigger = withContext(
+	ArkSelect.ClearTrigger,
+	"clearTrigger",
+);
 
 // Compound component API
 export const Select = {
-  Root: SelectRoot,
-  Trigger: SelectTrigger,
-  Positioner: SelectPositioner,
-  Content: SelectContent,
-  Item: SelectItem,
-  ItemText: SelectItemText,
-  Indicator: SelectIndicator,
-  ClearTrigger: SelectClearTrigger,
+	Root: SelectRoot,
+	Trigger: SelectTrigger,
+	Positioner: SelectPositioner,
+	Content: SelectContent,
+	Item: SelectItem,
+	ItemText: SelectItemText,
+	Indicator: SelectIndicator,
+	ClearTrigger: SelectClearTrigger,
 };

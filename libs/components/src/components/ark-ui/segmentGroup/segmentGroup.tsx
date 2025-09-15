@@ -11,9 +11,9 @@ export const SegmentGroupItemControl = ArkSegmentGroup.ItemControl;
 
 // Compound component API
 export const SegmentGroup = {
-  Root: SegmentGroupRoot,
-  Indicator: SegmentGroupIndicator,
-  Item: SegmentGroupItem,
-  ItemText: SegmentGroupItemText,
-  ItemControl: SegmentGroupItemControl,
+	Root: SegmentGroupRoot,
+	Indicator: SegmentGroupIndicator,
+	Item: SegmentGroupItem,
+	ItemText: SegmentGroupItemText,
+	ItemControl: SegmentGroupItemControl,
 };

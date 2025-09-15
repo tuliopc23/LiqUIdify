@@ -14,12 +14,12 @@ export const ListboxItemGroupLabel = ArkListbox.ItemGroupLabel;
 
 // Compound component API
 export const Listbox = {
-  Root: ListboxRoot,
-  Label: ListboxLabel,
-  Content: ListboxContent,
-  Item: ListboxItem,
-  ItemText: ListboxItemText,
-  ItemIndicator: ListboxItemIndicator,
-  ItemGroup: ListboxItemGroup,
-  ItemGroupLabel: ListboxItemGroupLabel,
+	Root: ListboxRoot,
+	Label: ListboxLabel,
+	Content: ListboxContent,
+	Item: ListboxItem,
+	ItemText: ListboxItemText,
+	ItemIndicator: ListboxItemIndicator,
+	ItemGroup: ListboxItemGroup,
+	ItemGroupLabel: ListboxItemGroupLabel,
 };
