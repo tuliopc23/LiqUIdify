@@ -1,26 +1,15 @@
 import { defineConfig } from "@pandacss/dev";
-import { button, card, badge, symbolTile, navbar, input, tabs } from "./liquidify-hig-liquid-glass-pack/src/theme/recipes";
 
 export default defineConfig({
 	preflight: true,
 	presets: ["@pandacss/preset-base", "@park-ui/panda-preset"],
 
-	include: ["./libs/components/src/**/*.{js,jsx,ts,tsx}", "./liquidify-hig-liquid-glass-pack/src/**/*.{js,jsx,ts,tsx}"],
+	include: ["./libs/components/src/**/*.{js,jsx,ts,tsx}"],
 
 	exclude: [],
 
 	// Essential for component library build tools (tsup, bun, vite)
 	outExtension: "js",
-
-	recipes: {
-		button: button,
-		card: card,
-		badge: badge,
-		symbolTile: symbolTile,
-		navbar: navbar,
-		input: input,
-		tabs: tabs,
-	},
 
 	theme: {
 		extend: {
@@ -103,18 +92,25 @@ export default defineConfig({
 						},
 					},
 
-					// Apple System Accents (tokens only; used across recipes)
+					// Apple System Accents (exact Apple system colors)
 					accent: {
-						// Blue — primary accent used widely for actions
-						primary: { value: "#007aff" },
-						// Purple — secondary accent
-						secondary: { value: "#5956d6" },
-						// Green — success
-						success: { value: "#4cd964" },
-						// Orange — warning
-						warning: { value: "#ff9500" },
-						// Red — error/destructive
-						danger: { value: "#ff3b30" },
+						// Blue — iOS/macOS system blue (exact Apple color)
+						primary: { value: "#007AFF" },
+						// Purple — iOS/macOS system purple
+						secondary: { value: "#5856D6" },
+						// Green — iOS/macOS system green
+						success: { value: "#34C759" },
+						// Orange — iOS/macOS system orange
+						warning: { value: "#FF9500" },
+						// Red — iOS/macOS system red
+						danger: { value: "#FF3B30" },
+						// Additional Apple system colors
+						indigo: { value: "#5856D6" },
+						teal: { value: "#5AC8FA" },
+						cyan: { value: "#32D74B" },
+						mint: { value: "#00C7BE" },
+						pink: { value: "#FF2D92" },
+						yellow: { value: "#FFCC00" },
 					},
 
 					// Text colors for glass components
@@ -126,24 +122,50 @@ export default defineConfig({
 							disabled: { value: "rgba(255, 255, 255, 0.5)" },
 						},
 					},
-          // HIG-aligned neutral palette and semantics (light defaults)
+          // Apple system grays (exact HIG specifications)
           gray: {
-            50: { value: "#FBFBFD" },
-            100: { value: "#F6F7F8" },
-            200: { value: "#E2E4E8" },
-            300: { value: "#C6C9D0" },
-            600: { value: "#50545B" },
-            700: { value: "#2A2B2E" },
-            800: { value: "#1A1B1E" },
-            900: { value: "#111214" },
+            50: { value: "#FAFAFA" },
+            100: { value: "#F5F5F7" },
+            200: { value: "#E5E5EA" },
+            300: { value: "#D1D1D6" },
+            400: { value: "#C7C7CC" },
+            500: { value: "#AEAEB2" },
+            600: { value: "#8E8E93" },
+            700: { value: "#636366" },
+            800: { value: "#48484A" },
+            900: { value: "#1C1C1E" },
           },
-          // Base brand hues (used by recipes/tokens)
-          blue: { 500: { value: "#0A84FF" } },
-          indigo: { 500: { value: "#5E5CE6" } },
-          teal: { 500: { value: "#64D2FF" } },
-          green: { 500: { value: "#34C759" } },
-          orange: { 500: { value: "#FF9F0A" } },
-          pink: { 500: { value: "#FF375F" } },
+          // Apple system colors (exact values)
+          blue: {
+            100: { value: "#D1E9FF" },
+            500: { value: "#007AFF" },
+            600: { value: "#0056CC" },
+          },
+          indigo: {
+            100: { value: "#D1D1FF" },
+            500: { value: "#5856D6" },
+            600: { value: "#3634A3" },
+          },
+          teal: {
+            100: { value: "#B8F2FF" },
+            500: { value: "#5AC8FA" },
+            600: { value: "#0A84FF" },
+          },
+          green: {
+            100: { value: "#D8F5A2" },
+            500: { value: "#34C759" },
+            600: { value: "#248A3D" },
+          },
+          orange: {
+            100: { value: "#FFE5B4" },
+            500: { value: "#FF9500" },
+            600: { value: "#C93400" },
+          },
+          pink: {
+            100: { value: "#FFD1DC" },
+            500: { value: "#FF2D92" },
+            600: { value: "#D70015" },
+          },
           // Surface tiers and borders (light defaults; override per app theme if needed)
           bg: {
             canvas: { value: "{colors.gray.50}" },
@@ -159,31 +181,44 @@ export default defineConfig({
           },
 				},
 
-				// Comprehensive border radius system - PRIMARY STANDARD: md (16px)
+				// Apple-exact border radius system (matches iOS/macOS HIG)
 				radii: {
-					// Global component defaults (Apple-aligned)
+					// Base radius values (Apple standard)
 					none: { value: "0px" },
-					xs: { value: "4px" },
-					sm: { value: "8px" },
-					// Role-specific tokens (do not hardcode in components)
-					control: { value: "12px" }, // System buttons
-					field: { value: "10px" }, // Text fields / search
-					md: { value: "16px" }, // Default
-					lg: { value: "20px" }, // Cards / alerts
-					xl: { value: "24px" }, // Sheets / large popovers
-					"2xl": { value: "28px" }, // Very large surfaces
+					xs: { value: "4px" },    // Small elements
+					sm: { value: "6px" },    // Compact buttons, badges
+					md: { value: "8px" },    // Standard buttons, controls
+					lg: { value: "12px" },   // Cards, input fields
+					xl: { value: "16px" },   // Large cards, sheets
+					"2xl": { value: "20px" }, // Very large surfaces
+					"3xl": { value: "24px" }, // Hero elements
 					full: { value: "9999px" },
 
-					// Roles map for clarity (indirection for future tuning)
+					// Apple-specific component roles (exact HIG compliance)
 					roles: {
-						control: { value: "{radii.control}" },
-						field: { value: "{radii.field}" },
-						card: { value: "{radii.lg}" },
-						sheet: { value: "{radii.xl}" },
-						surfaceLg: { value: "{radii.2xl}" },
+						// Buttons (8px for standard, 6px for compact)
+						button: { value: "8px" },
+						buttonCompact: { value: "6px" },
+						buttonLarge: { value: "10px" },
+
+						// Input fields (8px standard)
+						field: { value: "8px" },
+						fieldLarge: { value: "10px" },
+
+						// Cards and surfaces (12px standard, 16px for large)
+						card: { value: "12px" },
+						cardLarge: { value: "16px" },
+
+						// Sheets and modals (16px-20px)
+						sheet: { value: "16px" },
+						modal: { value: "20px" },
+
+						// Pills and badges (full radius)
+						pill: { value: "{radii.full}" },
+						badge: { value: "{radii.full}" },
 					},
 
-					// Glass-specific radius tokens (inherits from above)
+					// Glass-specific radius tokens (inherits Apple standards)
 					glass: {
 						xs: { value: "{radii.xs}" },
 						sm: { value: "{radii.sm}" },
@@ -191,6 +226,7 @@ export default defineConfig({
 						lg: { value: "{radii.lg}" },
 						xl: { value: "{radii.xl}" },
 						"2xl": { value: "{radii.2xl}" },
+						"3xl": { value: "{radii.3xl}" },
 						full: { value: "{radii.full}" },
 					},
 				},
@@ -326,24 +362,38 @@ export default defineConfig({
 					},
 				},
 				fontSizes: {
-					xs: { value: "0.75rem" }, // 12px
-					sm: { value: "0.875rem" }, // 14px
-					md: { value: "1rem" }, // 16px
-					lg: { value: "1.125rem" }, // 18px
-					xl: { value: "1.25rem" }, // 20px
-					"2xl": { value: "1.5rem" }, // 24px
-					"3xl": { value: "1.875rem" }, // 30px
-					"4xl": { value: "2.25rem" }, // 36px
-					"5xl": { value: "3rem" }, // 48px
-					"6xl": { value: "3.75rem" }, // 60px
+					// Apple HIG Typography Scale (exact specifications)
+					caption2: { value: "11px" },   // Caption 2
+					caption1: { value: "12px" },   // Caption 1
+					footnote: { value: "13px" },   // Footnote
+					subheadline: { value: "15px" }, // Subheadline
+					callout: { value: "16px" },    // Callout
+					body: { value: "17px" },       // Body (default reading size)
+					headline: { value: "17px" },   // Headline
+					title3: { value: "20px" },     // Title 3
+					title2: { value: "22px" },     // Title 2
+					title1: { value: "28px" },     // Title 1
+					largeTitle: { value: "34px" }, // Large Title
+
+					// Legacy size mapping for compatibility
+					xs: { value: "11px" }, // caption2
+					sm: { value: "13px" }, // footnote
+					md: { value: "17px" }, // body
+					lg: { value: "20px" }, // title3
+					xl: { value: "22px" }, // title2
+					"2xl": { value: "28px" }, // title1
+					"3xl": { value: "34px" }, // largeTitle
 				},
 				lineHeights: {
+					// Apple HIG Line Heights (optimized for readability)
+					tight: { value: "1.1" },     // For large titles
+					snug: { value: "1.2" },      // For headlines
+					normal: { value: "1.25" },   // For body text (Apple's preferred)
+					relaxed: { value: "1.4" },   // For longer content
+					loose: { value: "1.6" },     // For captions
+
+					// Legacy mapping
 					none: { value: "1" },
-					tight: { value: "1.1" },
-					snug: { value: "1.3" },
-					normal: { value: "1.5" },
-					relaxed: { value: "1.7" },
-					loose: { value: "1.9" },
 				},
 				fontWeights: {
 					thin: { value: "100" },
@@ -438,14 +488,14 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.roles.card)",
+							borderRadius: "token(radii.roles.modal)",
 							maxWidth: "500px",
 							width: "100%",
 							maxHeight: "90vh",
-							padding: "token(spacing.glass.2xl)",
+							padding: "24px",
 							display: "flex",
 							flexDirection: "column",
-							gap: "token(spacing.glass.lg)",
+							gap: "16px",
 							_before: {
 								content: '""',
 								position: "absolute",
@@ -475,16 +525,16 @@ export default defineConfig({
 							position: "relative",
 							zIndex: 2,
 							color: "token(colors.text.glass.primary)",
-							fontSize: "20px",
-							fontWeight: 600,
-							lineHeight: 1.2,
+							fontSize: "token(fontSizes.title3)",
+							fontWeight: "token(fontWeights.bold)",
+							lineHeight: "token(lineHeights.snug)",
 						},
 						description: {
 							position: "relative",
 							zIndex: 2,
 							color: "token(colors.text.glass.secondary)",
-							fontSize: "16px",
-							lineHeight: 1.5,
+							fontSize: "token(fontSizes.body)",
+							lineHeight: "token(lineHeights.normal)",
 						},
 						trigger: {
 							position: "relative",
@@ -765,7 +815,7 @@ export default defineConfig({
 					},
 				},
 
-        // Tabs - Segmented control look per HIG
+        // Tabs - Apple HIG segmented control
 				tabs: {
 					className: "tabs",
 					jsx: ["Tabs"],
@@ -774,16 +824,18 @@ export default defineConfig({
             root: {},
             list: {
               display: "inline-flex",
-              gap: "4px",
-              borderRadius: "token(radii.md)",
-              padding: "4px",
+              gap: "2px",
+              borderRadius: "token(radii.roles.button)",
+              padding: "2px",
               background: "{colors.bg.subtle}",
               border: "1px solid {colors.border.default}",
             },
             trigger: {
-              padding: "10px 12px",
-              borderRadius: "token(radii.sm)",
-              fontWeight: 600,
+              padding: "8px 12px",
+              borderRadius: "token(radii.roles.buttonCompact)",
+              fontWeight: "token(fontWeights.semibold)",
+              fontSize: "token(fontSizes.subheadline)",
+              lineHeight: "token(lineHeights.snug)",
               color: "{colors.text.glass.muted}",
               transition: "color .15s ease, background-color .15s ease",
               _hover: { color: "{colors.text.glass.primary}" },
@@ -795,7 +847,11 @@ export default defineConfig({
               },
               _disabled: { opacity: 0.5, cursor: "not-allowed" },
             },
-            content: { marginTop: "12px" },
+            content: {
+              marginTop: "16px",
+              fontSize: "token(fontSizes.body)",
+              lineHeight: "token(lineHeights.normal)",
+            },
             indicator: { display: "none" },
 					},
 				},
@@ -1960,28 +2016,36 @@ export default defineConfig({
 						},
 						size: {
 							sm: {
-								padding: "token(spacing.glass.sm) token(spacing.glass.md)",
-								borderRadius: "token(radii.roles.field)",
-								fontSize: "14px",
-								minHeight: "36px",
+								padding: "8px 12px",
+								borderRadius: "token(radii.roles.buttonCompact)",
+								fontSize: "token(fontSizes.footnote)",
+								minHeight: "32px",
+								fontWeight: "token(fontWeights.semibold)",
+								lineHeight: "token(lineHeights.snug)",
 							},
 							md: {
-								padding: "token(spacing.glass.md) token(spacing.glass.lg)",
-								borderRadius: "token(radii.roles.control)",
-								fontSize: "16px",
+								padding: "10px 16px",
+								borderRadius: "token(radii.roles.button)",
+								fontSize: "token(fontSizes.body)",
 								minHeight: "44px",
+								fontWeight: "token(fontWeights.semibold)",
+								lineHeight: "token(lineHeights.normal)",
 							},
 							lg: {
-								padding: "token(spacing.glass.lg) token(spacing.glass.xl)",
-								borderRadius: "token(radii.md)",
-								fontSize: "18px",
-								minHeight: "52px",
+								padding: "12px 20px",
+								borderRadius: "token(radii.roles.buttonLarge)",
+								fontSize: "token(fontSizes.title3)",
+								minHeight: "50px",
+								fontWeight: "token(fontWeights.semibold)",
+								lineHeight: "token(lineHeights.snug)",
 							},
 							xl: {
-								padding: "token(spacing.glass.xl) token(spacing.glass.2xl)",
-								borderRadius: "token(radii.xl)", // 24px
-								fontSize: "20px",
-								minHeight: "60px",
+								padding: "16px 24px",
+								borderRadius: "token(radii.lg)",
+								fontSize: "token(fontSizes.title2)",
+								minHeight: "56px",
+								fontWeight: "token(fontWeights.bold)",
+								lineHeight: "token(lineHeights.snug)",
 							},
 						},
 					},
@@ -1991,11 +2055,11 @@ export default defineConfig({
 					},
 				},
 
-        // Card – hairline border, subtle hover lift, optional glass
+        // Card – Apple HIG compliant card design
         card: {
           className: "card",
           base: {
-            borderRadius: "token(radii.lg)",
+            borderRadius: "token(radii.roles.card)",
             border: "1px solid {colors.border.default}",
             background: "{colors.bg.surface}",
             transition:
@@ -2020,20 +2084,21 @@ export default defineConfig({
           defaultVariants: { variant: "solid", padded: true },
         },
 
-        // Badge / Pill – translucent glass pill
+        // Badge / Pill – Apple HIG compliant badge design
         badge: {
           className: "badge",
           base: {
             display: "inline-flex",
             alignItems: "center",
-            gap: "8px",
-            padding: "6px 12px",
-            borderRadius: "token(radii.full)",
+            gap: "6px",
+            padding: "4px 8px",
+            borderRadius: "token(radii.roles.pill)",
             border: "1px solid {colors.glass.border}",
             background: "{colors.glass.bg}",
             backdropFilter: "blur(token(blurs.glass.md))",
-            fontWeight: 600,
-            fontSize: "14px",
+            fontWeight: "token(fontWeights.semibold)",
+            fontSize: "token(fontSizes.caption1)",
+            lineHeight: "token(lineHeights.snug)",
           },
           variants: {
             tone: {
@@ -2081,7 +2146,7 @@ export default defineConfig({
           defaultVariants: { tint: "gray" },
         },
 
-        // Navbar – adds glass only when scrolled via .is-scrolled
+        // Navbar – Apple HIG navigation bar
         navbar: {
           className: "navbar",
           base: {
@@ -2090,33 +2155,39 @@ export default defineConfig({
             left: 0,
             right: 0,
             zIndex: 50,
+            padding: "12px 16px",
+            fontSize: "token(fontSizes.body)",
+            fontWeight: "token(fontWeights.semibold)",
+            lineHeight: "token(lineHeights.normal)",
             transition:
               "background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease",
             _class: {
               "&.is-scrolled": {
                 background: "{colors.glass.bg}",
                 borderBottomWidth: "1px",
-                borderColor: "{colors.border.default}",
+                borderColor: "{colors.border.hairline}",
                 backdropFilter: "blur(token(blurs.glass.md))",
               },
             },
           },
         },
 
-        // Input – for raw HTML inputs (use Ark UI Field for headless wrappers)
+        // Input – Apple HIG compliant input fields
         input: {
           className: "field-input",
           base: {
             width: "100%",
             padding: "10px 12px",
-            borderRadius: "token(radii.field)",
+            borderRadius: "token(radii.roles.field)",
             border: "1px solid {colors.border.default}",
             background: "{colors.bg.surface}",
             color: "{colors.text.glass.primary}",
+            fontSize: "token(fontSizes.body)",
+            lineHeight: "token(lineHeights.normal)",
             _placeholder: { color: "{colors.text.glass.muted}" },
             outline: "none",
             _focusVisible: {
-              boxShadow: "0 0 0 3px rgba(10,132,255,.35)",
+              boxShadow: "0 0 0 3px rgba(0,122,255,.35)",
               borderColor: "{colors.accent.primary}",
             },
           },
@@ -2130,9 +2201,21 @@ export default defineConfig({
               },
             },
             size: {
-              sm: { fontSize: "14px", paddingBlock: "8px" },
-              md: { fontSize: "15px" },
-              lg: { fontSize: "16px", paddingBlock: "12px" },
+              sm: {
+                fontSize: "token(fontSizes.footnote)",
+                paddingBlock: "8px",
+                borderRadius: "token(radii.roles.field)",
+              },
+              md: {
+                fontSize: "token(fontSizes.body)",
+                paddingBlock: "10px",
+                borderRadius: "token(radii.roles.field)",
+              },
+              lg: {
+                fontSize: "token(fontSizes.callout)",
+                paddingBlock: "12px",
+                borderRadius: "token(radii.roles.fieldLarge)",
+              },
             },
           },
           defaultVariants: { variant: "solid", size: "md" },

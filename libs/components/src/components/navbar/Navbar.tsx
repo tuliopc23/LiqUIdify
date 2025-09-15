@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { css, cx } from "../../../../../styled-system/css";
+import { navbar } from "../../../../../styled-system/recipes/navbar";
 
 export function Navbar() {
 	const [scrolled, setScrolled] = useState(false);
@@ -13,12 +14,7 @@ export function Navbar() {
 	}, []);
 
 	return (
-		<nav
-			className={cx(
-				css({ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50 }),
-				scrolled ? "navbar is-scrolled" : "navbar",
-			)}
-		>
+		<nav className={cx(navbar(), scrolled ? "is-scrolled" : "")}>
 			<div
 				className={css({
 					maxW: "1100px",

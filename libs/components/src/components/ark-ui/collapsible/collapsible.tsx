@@ -1,17 +1,31 @@
 "use client";
 
 import { Collapsible as ArkCollapsible } from "@ark-ui/react";
+import type { ComponentProps } from "react";
+import { forwardRef } from "react";
+import { collapsible } from "../../../../../../styled-system/recipes/collapsible";
 
-// Auto-styled Ark UI Collapsible components with liquid glass styling
-export const CollapsibleRoot = ArkCollapsible.Root;
-export const CollapsibleTrigger = ArkCollapsible.Trigger;
-export const CollapsibleContent = ArkCollapsible.Content;
-export const CollapsibleIndicator = ArkCollapsible.Indicator;
+export interface CollapsibleProps
+	extends ComponentProps<typeof ArkCollapsible.Root> {
+	triggerText?: string;
+}
 
-// Compound component API
-export const Collapsible = {
-	Root: CollapsibleRoot,
-	Trigger: CollapsibleTrigger,
-	Content: CollapsibleContent,
-	Indicator: CollapsibleIndicator,
-};
+export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
+	({ triggerText, children, className, ...props }, ref) => {
+		return (
+			<ArkCollapsible.Root
+				ref={ref}
+				className={[collapsible(), className].filter(Boolean).join(" ")}
+				{...props}
+			>
+				<ArkCollapsible.Trigger>
+					{triggerText || "Toggle"}
+					<ArkCollapsible.Indicator>▼</ArkCollapsible.Indicator>
+				</ArkCollapsible.Trigger>
+				<ArkCollapsible.Content>{children}</ArkCollapsible.Content>
+			</ArkCollapsible.Root>
+		);
+	},
+);
+
+Collapsible.displayName = "Collapsible";

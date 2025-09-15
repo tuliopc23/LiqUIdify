@@ -11,7 +11,7 @@ export interface ButtonProps
 		| "danger"
 		| "success"
 		| "warning";
-	size?: "sm" | "md" | "lg";
+	size?: "sm" | "md" | "lg" | "xl";
 	children: React.ReactNode;
 }
 

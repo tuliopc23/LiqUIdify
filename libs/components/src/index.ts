@@ -8,15 +8,15 @@ import "./styles/new-design-system.css";
 // Include extracted Panda recipe CSS so components are fully pre-styled out of the box
 import "../../../styled-system/styles.css";
 
+export * from "./components/badge";
 // Basic UI Components
 export * from "./components/button";
+export * from "./components/card";
 export * from "./components/iconButton";
 export * from "./components/icons";
-export * from "./components/card";
-export * from "./components/badge";
-export * from "./components/symbolTile";
-export * from "./components/navbar";
 export * from "./components/liquidBackdrop";
+export * from "./components/navbar";
+export * from "./components/symbolTile";
 
 // Core UI Components (Ark UI + Panda CSS)
 

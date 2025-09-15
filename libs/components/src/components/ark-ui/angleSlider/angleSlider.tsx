@@ -1,25 +1,43 @@
 "use client";
 
 import { AngleSlider as ArkAngleSlider } from "@ark-ui/react";
+import type { ComponentProps } from "react";
+import { forwardRef } from "react";
+import {
+	type AngleSliderVariantProps,
+	angleSlider,
+} from "../../../../../../styled-system/recipes/angle-slider";
 
-// Auto-styled Ark UI Angle Slider components with liquid glass styling
-export const AngleSliderRoot = ArkAngleSlider.Root;
-export const AngleSliderControl = ArkAngleSlider.Control;
-export const AngleSliderHiddenInput = ArkAngleSlider.HiddenInput;
-export const AngleSliderLabel = ArkAngleSlider.Label;
-export const AngleSliderMarkerGroup = ArkAngleSlider.MarkerGroup;
-export const AngleSliderMarker = ArkAngleSlider.Marker;
-export const AngleSliderThumb = ArkAngleSlider.Thumb;
-export const AngleSliderValueText = ArkAngleSlider.ValueText;
+export interface AngleSliderProps
+	extends ComponentProps<typeof ArkAngleSlider.Root>,
+		AngleSliderVariantProps {
+	label?: string;
+}
 
-// Compound component API
-export const AngleSlider = {
-	Root: AngleSliderRoot,
-	Control: AngleSliderControl,
-	HiddenInput: AngleSliderHiddenInput,
-	Label: AngleSliderLabel,
-	MarkerGroup: AngleSliderMarkerGroup,
-	Marker: AngleSliderMarker,
-	Thumb: AngleSliderThumb,
-	ValueText: AngleSliderValueText,
-};
+export const AngleSlider = forwardRef<HTMLDivElement, AngleSliderProps>(
+	({ label, size, children, className, ...props }, ref) => {
+		const [variantProps, restProps] = angleSlider.splitVariantProps({ size });
+
+		return (
+			<ArkAngleSlider.Root
+				ref={ref}
+				className={[angleSlider(variantProps), className]
+					.filter(Boolean)
+					.join(" ")}
+				{...restProps}
+				{...props}
+			>
+				{(label || children) && (
+					<ArkAngleSlider.Label>{label || children}</ArkAngleSlider.Label>
+				)}
+				<ArkAngleSlider.Control>
+					<ArkAngleSlider.Thumb />
+				</ArkAngleSlider.Control>
+				<ArkAngleSlider.ValueText />
+				<ArkAngleSlider.HiddenInput />
+			</ArkAngleSlider.Root>
+		);
+	},
+);
+
+AngleSlider.displayName = "AngleSlider";

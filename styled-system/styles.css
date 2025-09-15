@@ -279,29 +279,49 @@
     --colors-button-success-border: rgba(76, 217, 100, 0.50);
     --colors-button-warning-bg: linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%);
     --colors-button-warning-border: rgba(255, 149, 0, 0.50);
-    --colors-accent-primary: #007aff;
-    --colors-accent-secondary: #5956d6;
-    --colors-accent-success: #4cd964;
-    --colors-accent-warning: #ff9500;
-    --colors-accent-danger: #ff3b30;
+    --colors-accent-primary: #007AFF;
+    --colors-accent-secondary: #5856D6;
+    --colors-accent-success: #34C759;
+    --colors-accent-warning: #FF9500;
+    --colors-accent-danger: #FF3B30;
+    --colors-accent-indigo: #5856D6;
+    --colors-accent-teal: #5AC8FA;
+    --colors-accent-cyan: #32D74B;
+    --colors-accent-mint: #00C7BE;
+    --colors-accent-pink: #FF2D92;
+    --colors-accent-yellow: #FFCC00;
     --colors-text-glass-primary: rgba(255, 255, 255, 1);
     --colors-text-glass-secondary: rgba(255, 255, 255, 0.9);
     --colors-text-glass-muted: rgba(255, 255, 255, 0.7);
     --colors-text-glass-disabled: rgba(255, 255, 255, 0.5);
-    --colors-gray-50: #FBFBFD;
-    --colors-gray-100: #F6F7F8;
-    --colors-gray-200: #E2E4E8;
-    --colors-gray-300: #C6C9D0;
-    --colors-gray-600: #50545B;
-    --colors-gray-700: #2A2B2E;
-    --colors-gray-800: #1A1B1E;
-    --colors-gray-900: #111214;
-    --colors-blue-500: #0A84FF;
-    --colors-indigo-500: #5E5CE6;
-    --colors-teal-500: #64D2FF;
+    --colors-gray-50: #FAFAFA;
+    --colors-gray-100: #F5F5F7;
+    --colors-gray-200: #E5E5EA;
+    --colors-gray-300: #D1D1D6;
+    --colors-gray-400: #C7C7CC;
+    --colors-gray-500: #AEAEB2;
+    --colors-gray-600: #8E8E93;
+    --colors-gray-700: #636366;
+    --colors-gray-800: #48484A;
+    --colors-gray-900: #1C1C1E;
+    --colors-blue-100: #D1E9FF;
+    --colors-blue-500: #007AFF;
+    --colors-blue-600: #0056CC;
+    --colors-indigo-100: #D1D1FF;
+    --colors-indigo-500: #5856D6;
+    --colors-indigo-600: #3634A3;
+    --colors-teal-100: #B8F2FF;
+    --colors-teal-500: #5AC8FA;
+    --colors-teal-600: #0A84FF;
+    --colors-green-100: #D8F5A2;
     --colors-green-500: #34C759;
-    --colors-orange-500: #FF9F0A;
-    --colors-pink-500: #FF375F;
+    --colors-green-600: #248A3D;
+    --colors-orange-100: #FFE5B4;
+    --colors-orange-500: #FF9500;
+    --colors-orange-600: #C93400;
+    --colors-pink-100: #FFD1DC;
+    --colors-pink-500: #FF2D92;
+    --colors-pink-600: #D70015;
     --colors-bg-canvas: var(--colors-gray-50);
     --colors-bg-surface: var(--colors-gray-100);
     --colors-bg-subtle: #F2F3F5;
@@ -309,25 +329,31 @@
     --colors-border-hairline: color-mix(in oklch, #000 10%, transparent);
     --radii-none: 0px;
     --radii-xs: 4px;
-    --radii-sm: 8px;
-    --radii-control: 12px;
-    --radii-field: 10px;
-    --radii-md: 16px;
-    --radii-lg: 20px;
-    --radii-xl: 24px;
-    --radii-2xl: 28px;
+    --radii-sm: 6px;
+    --radii-md: 8px;
+    --radii-lg: 12px;
+    --radii-xl: 16px;
+    --radii-2xl: 20px;
+    --radii-3xl: 24px;
     --radii-full: 9999px;
-    --radii-roles-control: var(--radii-control);
-    --radii-roles-field: var(--radii-field);
-    --radii-roles-card: var(--radii-lg);
-    --radii-roles-sheet: var(--radii-xl);
-    --radii-roles-surface-lg: var(--radii-2xl);
+    --radii-roles-button: 8px;
+    --radii-roles-button-compact: 6px;
+    --radii-roles-button-large: 10px;
+    --radii-roles-field: 8px;
+    --radii-roles-field-large: 10px;
+    --radii-roles-card: 12px;
+    --radii-roles-card-large: 16px;
+    --radii-roles-sheet: 16px;
+    --radii-roles-modal: 20px;
+    --radii-roles-pill: var(--radii-full);
+    --radii-roles-badge: var(--radii-full);
     --radii-glass-xs: var(--radii-xs);
     --radii-glass-sm: var(--radii-sm);
     --radii-glass-md: var(--radii-md);
     --radii-glass-lg: var(--radii-lg);
     --radii-glass-xl: var(--radii-xl);
     --radii-glass-2xl: var(--radii-2xl);
+    --radii-glass-3xl: var(--radii-3xl);
     --radii-glass-full: var(--radii-full);
     --blurs-glass-sm: 5px;
     --blurs-glass-md: 10px;
@@ -408,22 +434,30 @@
     --fonts-sans: "SF Pro Display", sans-serif;
     --fonts-display: "SF Pro Display", sans-serif;
     --fonts-mono: "SF Mono", monospace;
-    --font-sizes-xs: 0.75rem;
-    --font-sizes-sm: 0.875rem;
-    --font-sizes-md: 1rem;
-    --font-sizes-lg: 1.125rem;
-    --font-sizes-xl: 1.25rem;
-    --font-sizes-2xl: 1.5rem;
-    --font-sizes-3xl: 1.875rem;
-    --font-sizes-4xl: 2.25rem;
-    --font-sizes-5xl: 3rem;
-    --font-sizes-6xl: 3.75rem;
-    --line-heights-none: 1;
+    --font-sizes-caption2: 11px;
+    --font-sizes-caption1: 12px;
+    --font-sizes-footnote: 13px;
+    --font-sizes-subheadline: 15px;
+    --font-sizes-callout: 16px;
+    --font-sizes-body: 17px;
+    --font-sizes-headline: 17px;
+    --font-sizes-title3: 20px;
+    --font-sizes-title2: 22px;
+    --font-sizes-title1: 28px;
+    --font-sizes-large-title: 34px;
+    --font-sizes-xs: 11px;
+    --font-sizes-sm: 13px;
+    --font-sizes-md: 17px;
+    --font-sizes-lg: 20px;
+    --font-sizes-xl: 22px;
+    --font-sizes-2xl: 28px;
+    --font-sizes-3xl: 34px;
     --line-heights-tight: 1.1;
-    --line-heights-snug: 1.3;
-    --line-heights-normal: 1.5;
-    --line-heights-relaxed: 1.7;
-    --line-heights-loose: 1.9;
+    --line-heights-snug: 1.2;
+    --line-heights-normal: 1.25;
+    --line-heights-relaxed: 1.4;
+    --line-heights-loose: 1.6;
+    --line-heights-none: 1;
     --font-weights-thin: 100;
     --font-weights-extralight: 200;
     --font-weights-light: 300;
@@ -1469,9 +1503,11 @@
 }
 
   .liquid-button--size_md {
-    padding: var(--spacing-glass-md) var(--spacing-glass-lg);
-    border-radius: var(--radii-roles-control);
-    font-size: 16px;
+    padding: 10px 16px;
+    border-radius: var(--radii-roles-button);
+    font-size: var(--font-sizes-body);
+    font-weight: var(--font-weights-semibold);
+    line-height: var(--line-heights-normal);
     min-height: 44px;
 }
 
@@ -1501,24 +1537,31 @@
 }
 
   .liquid-button--size_sm {
-    padding: var(--spacing-glass-sm) var(--spacing-glass-md);
-    border-radius: var(--radii-roles-field);
-    font-size: 14px;
-    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: var(--radii-roles-button-compact);
+    font-size: var(--font-sizes-footnote);
+    min-height: 32px;
+}
+
+  .liquid-button--size_sm,.liquid-button--size_lg {
+    font-weight: var(--font-weights-semibold);
+    line-height: var(--line-heights-snug);
 }
 
   .liquid-button--size_lg {
-    padding: var(--spacing-glass-lg) var(--spacing-glass-xl);
-    border-radius: var(--radii-md);
-    font-size: 18px;
-    min-height: 52px;
+    padding: 12px 20px;
+    border-radius: var(--radii-roles-button-large);
+    font-size: var(--font-sizes-title3);
+    min-height: 50px;
 }
 
   .liquid-button--size_xl {
-    padding: var(--spacing-glass-xl) var(--spacing-glass-2xl);
-    border-radius: var(--radii-xl);
-    font-size: 20px;
-    min-height: 60px;
+    padding: 16px 24px;
+    border-radius: var(--radii-lg);
+    font-size: var(--font-sizes-title2);
+    font-weight: var(--font-weights-bold);
+    line-height: var(--line-heights-snug);
+    min-height: 56px;
 }
 
   .checkbox--size_md {
@@ -1731,10 +1774,10 @@
     .dialog__content {
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
-      padding: var(--spacing-glass-2xl);
+      padding: 24px;
       overflow: hidden;
-      border-radius: var(--radii-roles-card);
-      gap: var(--spacing-glass-lg);
+      border-radius: var(--radii-roles-modal);
+      gap: 16px;
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1773,9 +1816,9 @@
 
     .dialog__title {
       color: var(--colors-text-glass-primary);
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 1.2;
+      font-size: var(--font-sizes-title3);
+      font-weight: var(--font-weights-bold);
+      line-height: var(--line-heights-snug);
 }
 
     .dialog__title,.dialog__description {
@@ -1785,8 +1828,8 @@
 
     .dialog__description {
       color: var(--colors-text-glass-secondary);
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: var(--font-sizes-body);
+      line-height: var(--line-heights-normal);
 }
 
     .dialog__trigger {
@@ -1794,7 +1837,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-roles-control);
+      border-radius: radii\.roles\.control;
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1834,19 +1877,21 @@
 }
 
     .tabs__list {
-      padding: 4px;
+      padding: 2px;
       background: var(--colors-bg-subtle);
       border: 1px solid var(--colors-border-default);
-      gap: 4px;
-      border-radius: var(--radii-md);
+      gap: 2px;
+      border-radius: var(--radii-roles-button);
       display: inline-flex;
 }
 
     .tabs__trigger {
-      padding: 10px 12px;
-      border-radius: var(--radii-sm);
+      padding: 8px 12px;
+      border-radius: var(--radii-roles-button-compact);
       transition: color .15s ease, background-color .15s ease;
-      font-weight: 600;
+      font-weight: var(--font-weights-semibold);
+      font-size: var(--font-sizes-subheadline);
+      line-height: var(--line-heights-snug);
       color: var(--colors-text-glass-muted);
 }
 
@@ -1868,7 +1913,9 @@
 }
 
     .tabs__content {
-      margin-top: 12px;
+      font-size: var(--font-sizes-body);
+      line-height: var(--line-heights-normal);
+      margin-top: 16px;
 }
 
     .tabs__indicator {
@@ -1916,7 +1963,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-roles-control);
+      border-radius: radii\.roles\.control;
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));

@@ -1,27 +1,55 @@
 "use client";
 
 import { Progress as ArkProgress } from "@ark-ui/react";
+import type { ComponentProps } from "react";
+import { forwardRef } from "react";
+import {
+	type ProgressCircularVariantProps,
+	progressCircular,
+} from "../../../../../../styled-system/recipes/progress-circular";
 
-// Auto-styled Ark UI Progress components with liquid glass styling
-export const ProgressCircularRoot = ArkProgress.Root;
-export const ProgressCircularLabel = ArkProgress.Label;
-export const ProgressCircularValueText = ArkProgress.ValueText;
-export const ProgressCircularView = ArkProgress.View;
-export const ProgressCircularTrack = ArkProgress.Track;
-export const ProgressCircularRange = ArkProgress.Range;
-export const ProgressCircularCircle = ArkProgress.Circle;
-export const ProgressCircularCircleTrack = ArkProgress.CircleTrack;
-export const ProgressCircularCircleRange = ArkProgress.CircleRange;
+export interface ProgressCircularProps
+	extends ComponentProps<typeof ArkProgress.Root>,
+		ProgressCircularVariantProps {
+	label?: string;
+	value?: number;
+	max?: number;
+}
 
-// Compound component API
-export const ProgressCircular = {
-	Root: ProgressCircularRoot,
-	Label: ProgressCircularLabel,
-	ValueText: ProgressCircularValueText,
-	View: ProgressCircularView,
-	Track: ProgressCircularTrack,
-	Range: ProgressCircularRange,
-	Circle: ProgressCircularCircle,
-	CircleTrack: ProgressCircularCircleTrack,
-	CircleRange: ProgressCircularCircleRange,
-};
+export const ProgressCircular = forwardRef<
+	HTMLDivElement,
+	ProgressCircularProps
+>(
+	(
+		{ label, value = 0, max = 100, size, children, className, ...props },
+		ref,
+	) => {
+		const [variantProps, restProps] = progressCircular.splitVariantProps({
+			size,
+		});
+
+		return (
+			<ArkProgress.Root
+				ref={ref}
+				className={[progressCircular(variantProps), className]
+					.filter(Boolean)
+					.join(" ")}
+				value={value}
+				max={max}
+				{...restProps}
+				{...props}
+			>
+				{(label || children) && (
+					<ArkProgress.Label>{label || children}</ArkProgress.Label>
+				)}
+				<ArkProgress.Circle>
+					<ArkProgress.CircleTrack />
+					<ArkProgress.CircleRange />
+				</ArkProgress.Circle>
+				<ArkProgress.ValueText />
+			</ArkProgress.Root>
+		);
+	},
+);
+
+ProgressCircular.displayName = "ProgressCircular";
