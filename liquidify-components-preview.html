@@ -62,12 +62,38 @@
         </div>
       </section>
 
-      <!-- Optional: simple Card using default recipe base class if available in your CSS build -->
+      <!-- Card + Badge + Input (field-input) + Symbol Tile -->
       <section>
-        <h2 class="section-title" style="font-size:18px;">Card (optional)</h2>
-        <div class="card" style="padding:16px;">
-          <div style="font-weight:600; margin-bottom:6px;">Hello, glassy world</div>
-          <div style="color:rgba(0,0,0,.6)">This card uses the <code>card</code> recipe base class.</div>
+        <h2 class="section-title" style="font-size:18px;">Card, Badge, Input, Symbol</h2>
+        <div class="card card--variant_solid card--padded_true">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="badge badge--tone_neutral">Neutral</span>
+            <span class="badge badge--tone_blue">Primary</span>
+          </div>
+          <div style="height:12px"></div>
+          <input class="field-input field-input--variant_glass field-input--size_md" placeholder="Type to search…"/>
+          <div style="height:12px"></div>
+          <span class="symbol" style="display:inline-grid; place-items:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
+          </span>
+        </div>
+      </section>
+
+      <!-- Overlay surfaces: Dialog / Popover / Tooltip bodies to confirm material -->
+      <section>
+        <h2 class="section-title" style="font-size:18px;">Overlay Surfaces</h2>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <div class="dialog__content" style="position:relative; padding:16px; max-width:260px;">
+            <div style="font-weight:600; margin-bottom:6px;">Dialog Content</div>
+            <div style="opacity:.8">Uses glass bg, hairline border, and highlight overlay.</div>
+          </div>
+          <div class="popover__content" style="position:relative; padding:16px; max-width:260px;">
+            <div style="font-weight:600; margin-bottom:6px;">Popover Content</div>
+            <div style="opacity:.8">Same material tokens apply.</div>
+          </div>
+          <div class="tooltip__content" style="position:relative; padding:10px 12px; max-width:260px;">
+            Tooltip Content
+          </div>
         </div>
       </section>
     </main>
