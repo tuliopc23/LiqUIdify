@@ -1,0 +1,44 @@
+name: Build Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-validation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Enforce banned tools
+        run: |
+          if grep -RniE "(storybook|tailwind)" -- . \
+            | grep -v "node_modules/" \
+            | grep -v "\.lock" \
+            | grep -v "^\./docs/"; then
+            echo "Banned tool reference found"; exit 1;
+          fi
+
+
+      - name: Health check
+        run: bun run health-check
+

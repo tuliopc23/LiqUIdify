@@ -1,0 +1,67 @@
+# Test files
+**/*.test.*
+**/*.spec.*
+**/__tests__/**
+**/tests/**
+
+# Development files
+**/*.stories.*
+
+# Development examples and demos
+**/examples/**
+**/demo/**
+**/playground/**
+**/glass-playground/**
+
+# Documentation source files
+**/docs/**
+**/docs-source/**
+**/README-dev.md
+**/*.mdx
+**/*.md
+
+# Configuration files
+*.config.js
+*.config.ts
+.env*
+.eslintrc*
+.prettierrc*
+.lintstagedrc
+.husky/
+vitest.config.ts
+postcss.config.js
+
+# Development tools
+.vscode/
+.idea/
+.github/
+
+# Templates and liquid glass artifacts
+**/*liquid-glass-template*
+**/*.backup
+
+# Build artifacts (except final dist)
+build/
+out/
+coverage/
+test-results/
+playwright-report/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+glass-ui-build-errors.log
+
+# Cache and temporary files
+.cache/
+.tmp/
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["apps/docs/src/main.tsx", "libs/components/src/index.ts", "scripts/**/*.ts"],
+  "project": ["apps/**/*.{ts,tsx}", "libs/**/*.{ts,tsx}"],
+  "ignore": [
+    "dist/**",
+    "node_modules/**",
+    "**/*.d.ts",
+    "vite.config.ts",
+    "vitest.config.mts",
+    "**/*.config.{ts,js,mjs}"
+  ],
+  "ignoreDependencies": [
+    "vite",
+    "vitest",
+    "vite-plugin-dts",
+    "@vitejs/plugin-react",
+    "@swc/core",
+    "@swc-node/register",
+    "rolldown-vite",
+    "terser",
+    "tsx",
+    "jiti",
+    "lightningcss"
+  ]
+}

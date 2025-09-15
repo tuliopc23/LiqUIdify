@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Exclude non-package content from source archives
+apps/ export-ignore
+scripts/ export-ignore
+test-results/ export-ignore
+.vscode/ export-ignore
+.github/ export-ignore

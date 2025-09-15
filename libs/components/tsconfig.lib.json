@@ -1,0 +1,40 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/libs/components",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "composite": false,
+    "stripInternal": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.stories.*",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/examples/**",
+    "src/examples/**",
+    "src/test/**",
+    "**/test/**",
+    "**/demo/**",
+    "**/playground/**",
+    "**/glass-playground/**",
+    "**/glass-accessible-demo/**",
+    "**/glass-focus-demo/**",
+    "**/*liquid-glass-template*",
+    "**/*.backup",
+    "**/*.md",
+    "**/*.mdx",
+    ".storybook/**",
+    "storybook-static/**",
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "test-results",
+    "playwright-report"
+  ]
+}
