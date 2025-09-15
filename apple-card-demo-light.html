@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apple‑style Cards — Light</title>
+  <style>
+    /* Light-only tokens */
+    :root {
+      color-scheme: light;
+      --page-bg: #f5f5f7;
+      --card-details-bg: #ffffff;
+      --text-primary: #1d1d1f;
+      --text-secondary: #515154;
+      --text-tertiary: #6e6e73;
+      --accent: #06c;
+      --keyline: #e8e8ed;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-primary);
+    }
+
+    .page { max-width: 1200px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 12px 0 24px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      --card-cover-height: 359px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: box-shadow .16s ease-out, transform .16s ease-out;
+      will-change: transform;
+      text-decoration: none;
+      color: inherit;
+      background: transparent;
+      -webkit-backface-visibility: hidden;
+              backface-visibility: hidden;
+    }
+    @media (max-width: 1250px) { .card { --card-cover-height: 249px; } }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 18px 56px rgba(0,0,0,.18); }
+    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    .cover { width: 100%; height: var(--card-cover-height); object-fit: cover; display: block; background: #e8e8ed; }
+
+    .details {
+      background-color: var(--card-details-bg);
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 150px;
+    }
+
+    .eyebrow { font-size: 12px; color: var(--text-tertiary); }
+    .title   { font-size: 20px; line-height: 1.25; font-weight: 700; margin: 2px 0 2px; }
+    .summary { font-size: 14px; color: var(--text-secondary); margin: 4px 0 10px; }
+    .cta     { font-size: 14px; color: var(--accent); }
+
+    .keyline { height: 1px; background: var(--keyline); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card { transition: none; }
+      .card:hover { transform: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="main" tabindex="-1">
+    <h1>Development essentials (Light)</h1>
+    <div class="grid">
+      <a class="card" href="#tech-overviews">
+        <img class="cover" alt="Technology overviews art" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" />
+        <div class="keyline" aria-hidden="true"></div>
+        <div class="details">
+          <div class="eyebrow">Development guides</div>
+          <div class="title">Technology overviews</div>
+          <p class="summary">Learn about the wide range of technologies you use to develop software for Apple platforms.</p>
+          <span class="cta">View technology overviews ›</span>
+        </div>
+      </a>
+
+      <a class="card" href="#hig">
+        <img class="cover" alt="Human Interface Guidelines art" src="https://images.unsplash.com/photo-1532153955177-f59af40d6472?q=80&w=1600&auto=format&fit=crop" />
+        <div class="keyline" aria-hidden="true"></div>
+        <div class="details">
+          <div class="eyebrow">Design guidance</div>
+          <div class="title">Human Interface Guidelines</div>
+          <p class="summary">Design a great experience for any Apple platform.</p>
+          <span class="cta">View design guidance ›</span>
+        </div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
