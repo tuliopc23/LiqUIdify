@@ -1,10 +1,8 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import React from "react";
-
+import { describe, expect, it } from "vitest";
+import { Checkbox } from "../components/ark-ui/checkbox/checkbox";
 // Import components directly from source to avoid bundling concerns in tests
 import { Button } from "../components/button";
-import { Checkbox } from "../components/ark-ui/checkbox/checkbox";
 
 // Basic smoke tests to ensure components render and carry styling classes
 
