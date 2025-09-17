@@ -1,17 +1,103 @@
 # Avatar
-## Summary
-One or two sentences describing what Avatar is and when to use it.
 
-### Import
-Use the exact subpath import:
+Display user profile pictures with automatic fallbacks. Shows images, initials, or placeholder icons when profile pictures are unavailable.
 
-```ts
-import { Avatar } from 'liquidify-react/ark-ui/avatar'
+## Import
+
+```tsx
+import { Avatar } from "liquidify-react/avatar"
 ```
 
-### Guidance
-- Keep guidance concise and actionable.
-- Include do and don't examples if relevant.
+## Basic Usage
 
-### Related
-- Link to other components or patterns.
+```tsx
+export default function Example() {
+	return (
+		<Avatar.Root>
+			<Avatar.Fallback>JD</Avatar.Fallback>
+			<Avatar.Image src="/profile.jpg" alt="John Doe" />
+		</Avatar.Root>
+	)
+}
+```
+
+## Different Sizes
+
+```tsx
+export default function SizesExample() {
+	return (
+		<div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+			<Avatar.Root size="sm">
+				<Avatar.Fallback>S</Avatar.Fallback>
+			</Avatar.Root>
+			
+			<Avatar.Root size="md">
+				<Avatar.Fallback>M</Avatar.Fallback>
+			</Avatar.Root>
+			
+			<Avatar.Root size="lg">
+				<Avatar.Fallback>L</Avatar.Fallback>
+			</Avatar.Root>
+		</div>
+	)
+}
+```
+
+## With Status Indicator
+
+```tsx
+export default function StatusExample() {
+	return (
+		<Avatar.Root>
+			<Avatar.Image src="/profile.jpg" alt="John Doe" />
+			<Avatar.Fallback>JD</Avatar.Fallback>
+			<Avatar.StatusIndicator status="online" />
+		</Avatar.Root>
+	)
+}
+```
+
+## Fallback Strategies
+
+```tsx
+export default function FallbackExample() {
+	return (
+		<div style={{ display: "flex", gap: "1rem" }}>
+			{/* Image loads successfully */}
+			<Avatar.Root>
+				<Avatar.Image src="/valid-image.jpg" alt="User" />
+				<Avatar.Fallback>AB</Avatar.Fallback>
+			</Avatar.Root>
+			
+			{/* Image fails, shows initials */}
+			<Avatar.Root>
+				<Avatar.Image src="/broken-image.jpg" alt="User" />
+				<Avatar.Fallback>CD</Avatar.Fallback>
+			</Avatar.Root>
+			
+			{/* No image, just initials */}
+			<Avatar.Root>
+				<Avatar.Fallback>EF</Avatar.Fallback>
+			</Avatar.Root>
+		</div>
+	)
+}
+```
+
+## API Reference
+
+### Root Props
+- `size`: `"sm" | "md" | "lg"` - Avatar size variant
+
+### Image Props
+- `src`: `string` - Image source URL
+- `alt`: `string` - Alt text for accessibility
+- `onLoadingStatusChange`: `(status: "loading" | "loaded" | "error") => void`
+
+### Fallback Props
+- `children`: `ReactNode` - Fallback content (usually initials)
+
+### Accessibility
+- Proper alt text for screen readers
+- Fallback content announced when image fails
+- Focus management for interactive avatars

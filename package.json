@@ -13,7 +13,9 @@
 	"bugs": {
 		"url": "https://github.com/tuliopc23/LiqUIdify/issues"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"cache": "^3.0.0"
+	},
 	"description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
 	"devDependencies": {
 		"@axe-core/playwright": "^4.10.2",
@@ -160,7 +162,7 @@
 			]
 		}
 	},
-	"version": "0.6.6",
+	"version": "0.6.7",
 	"workspaces": [
 		"libs/*"
 	]
