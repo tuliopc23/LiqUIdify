@@ -1,0 +1,27 @@
+# Importing
+## How to import
+Import the global styles once, then import components. Prefer subpath imports for tree‑shaking.
+
+### Styles
+Add the CSS import in your app entry.
+
+```ts
+import "liquidify-react/styles"
+```
+
+### Components (root)
+```ts
+import { Button } from "liquidify-react"
+```
+
+### Components (subpath)
+Exact subpaths are mapped in the package exports.
+
+```ts
+import { Button } from "liquidify-react/button"
+// e.g. import { Tabs } from "liquidify-react/tabs"
+```
+
+### Tips
+- Import styles once per app.
+- Use subpaths to keep bundles small.

@@ -1,0 +1,26 @@
+# Contributing
+## How to get involved
+Follow a lightweight workflow focused on clarity and quality.
+
+### Code of Conduct
+Be respectful. Provide context. Prefer small, focused changes.
+
+### Issues
+- Search existing issues before opening a new one
+- Include reproduction steps and environment details
+
+### Pull Requests
+- Keep PRs small and focused
+- Update or add docs under docs-public/ when you change APIs
+- Run checks locally:
+
+```bash
+bun run type-check
+bun run lint
+bun run test
+```
+
+### Docs changes only
+- Add or update MDX files under docs-public/
+- Do not modify library source to author docs
+- For component docs, prefer subpath imports and short guidance

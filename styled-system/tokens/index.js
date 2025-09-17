@@ -36,11 +36,11 @@ const tokens = {
     "variable": "var(--colors-glass-strong-border)"
   },
   "colors.glass.accent.bg": {
-    "value": "var(--colors-accent-primary)",
+    "value": "#007AFF",
     "variable": "var(--colors-glass-accent-bg)"
   },
   "colors.glass.accent.border": {
-    "value": "var(--colors-accent-primary)",
+    "value": "#007AFF",
     "variable": "var(--colors-glass-accent-border)"
   },
   "colors.glass.gradients.before": {
@@ -338,6 +338,10 @@ const tokens = {
   "radii.roles.buttonLarge": {
     "value": "10px",
     "variable": "var(--radii-roles-button-large)"
+  },
+  "radii.roles.control": {
+    "value": "8px",
+    "variable": "var(--radii-roles-control)"
   },
   "radii.roles.field": {
     "value": "8px",

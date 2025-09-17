@@ -1,0 +1,21 @@
+# Performance
+## Keep bundles small
+Compose imports and styles to minimize what ships to the client.
+
+### Subpath imports
+Import only what you use.
+
+```ts
+import { Tabs } from "liquidify-react/tabs"
+```
+
+### CSS
+Import the library CSS once at the app root.
+
+```ts
+import "liquidify-react/styles"
+```
+
+### Server rendering
+- Avoid client-only code in shared modules
+- Gate browser APIs behind effects or guards

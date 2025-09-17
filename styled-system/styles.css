@@ -265,8 +265,8 @@
     --colors-glass-medium-border: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-bg: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-border: rgba(255, 255, 255, 0.34);
-    --colors-glass-accent-bg: var(--colors-accent-primary);
-    --colors-glass-accent-border: var(--colors-accent-primary);
+    --colors-glass-accent-bg: #007AFF;
+    --colors-glass-accent-border: #007AFF;
     --colors-glass-gradients-before: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
     --colors-glass-gradients-after: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
     --colors-button-primary-bg: linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%);
@@ -341,6 +341,7 @@
     --radii-roles-button: 8px;
     --radii-roles-button-compact: 6px;
     --radii-roles-button-large: 10px;
+    --radii-roles-control: 8px;
     --radii-roles-field: 8px;
     --radii-roles-field-large: 10px;
     --radii-roles-card: 12px;
@@ -1791,7 +1792,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: radii\.roles\.control;
+      border-radius: var(--radii-roles-control);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1917,7 +1918,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: radii\.roles\.control;
+      border-radius: var(--radii-roles-control);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
