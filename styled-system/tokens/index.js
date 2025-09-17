@@ -35,6 +35,14 @@ const tokens = {
     "value": "rgba(255, 255, 255, 0.34)",
     "variable": "var(--colors-glass-strong-border)"
   },
+  "colors.glass.accent.bg": {
+    "value": "var(--colors-accent-primary)",
+    "variable": "var(--colors-glass-accent-bg)"
+  },
+  "colors.glass.accent.border": {
+    "value": "var(--colors-accent-primary)",
+    "variable": "var(--colors-glass-accent-border)"
+  },
   "colors.glass.gradients.before": {
     "value": "linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)",
     "variable": "var(--colors-glass-gradients-before)"
@@ -431,56 +439,6 @@ const tokens = {
     "value": "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
     "variable": "var(--shadows-glass-hover)"
   },
-  "shadows.textStyles.display": {
-    "value": {
-      "fontFamily": "display",
-      "fontWeight": "700",
-      "letterSpacing": "-0.01em",
-      "lineHeight": "1.1",
-      "fontSize": {
-        "base": "clamp(36px, 2.5vw + 20px, 56px)"
-      }
-    },
-    "variable": "var(--shadows-text-styles-display)"
-  },
-  "shadows.textStyles.title1": {
-    "value": {
-      "fontFamily": "display",
-      "fontWeight": "700",
-      "letterSpacing": "-0.01em",
-      "fontSize": {
-        "base": "clamp(24px, 1vw + 16px, 32px)"
-      },
-      "lineHeight": "1.2"
-    },
-    "variable": "var(--shadows-text-styles-title1)"
-  },
-  "shadows.textStyles.title3": {
-    "value": {
-      "fontFamily": "display",
-      "fontWeight": "600",
-      "letterSpacing": "-0.01em",
-      "fontSize": "18px",
-      "lineHeight": "1.25"
-    },
-    "variable": "var(--shadows-text-styles-title3)"
-  },
-  "shadows.textStyles.body": {
-    "value": {
-      "fontFamily": "sans",
-      "fontSize": "16px",
-      "lineHeight": "1.6"
-    },
-    "variable": "var(--shadows-text-styles-body)"
-  },
-  "shadows.textStyles.caption": {
-    "value": {
-      "fontFamily": "sans",
-      "fontSize": "14px",
-      "lineHeight": "1.4"
-    },
-    "variable": "var(--shadows-text-styles-caption)"
-  },
   "durations.glass.flow": {
     "value": "0.8s",
     "variable": "var(--durations-glass-flow)"
@@ -788,6 +746,14 @@ const tokens = {
   "colors.colorPalette.strong.border": {
     "value": "var(--colors-color-palette-strong-border)",
     "variable": "var(--colors-color-palette-strong-border)"
+  },
+  "colors.colorPalette.accent.bg": {
+    "value": "var(--colors-color-palette-accent-bg)",
+    "variable": "var(--colors-color-palette-accent-bg)"
+  },
+  "colors.colorPalette.accent.border": {
+    "value": "var(--colors-color-palette-accent-border)",
+    "variable": "var(--colors-color-palette-accent-border)"
   },
   "colors.colorPalette.gradients.before": {
     "value": "var(--colors-color-palette-gradients-before)",

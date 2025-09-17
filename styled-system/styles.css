@@ -265,6 +265,8 @@
     --colors-glass-medium-border: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-bg: rgba(255, 255, 255, 0.22);
     --colors-glass-strong-border: rgba(255, 255, 255, 0.34);
+    --colors-glass-accent-bg: var(--colors-accent-primary);
+    --colors-glass-accent-border: var(--colors-accent-primary);
     --colors-glass-gradients-before: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
     --colors-glass-gradients-after: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
     --colors-button-primary-bg: linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%);
@@ -364,54 +366,6 @@
     --shadows-glass-md: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
     --shadows-glass-lg: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
     --shadows-glass-hover: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
-}
-
-  --shadows-text-styles-display {
-    font-family: display;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-}
-
-  --shadows-text-styles-display fontSize {
-    base: clamp(36px, 2.5vw + 20px, 56px);
-}
-
-  --shadows-text-styles-title1 {
-    font-family: display;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-}
-
-  --shadows-text-styles-title1 fontSize {
-    base: clamp(24px, 1vw + 16px, 32px);
-}
-
-  --shadows-text-styles-title1 {
-    line-height: 1.2;
-}
-
-  --shadows-text-styles-title3 {
-    font-family: display;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    font-size: 18px;
-    line-height: 1.25;
-}
-
-  --shadows-text-styles-body {
-    font-family: sans;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-  --shadows-text-styles-caption {
-    font-family: sans;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-  :where(:root, :host) {
     --durations-glass-flow: 0.8s;
     --durations-glass-bounce: 0.6s;
     --durations-glass-quick: 0.2s;
@@ -977,7 +931,7 @@
 }
 
     .pin-input:is(:focus, [data-focus]) {
-      border-color: colors\.glass\.accent\.border;
+      border-color: var(--colors-glass-accent-border);
       box-shadow: var(--shadows-glass-hover);
 }
 
@@ -2236,7 +2190,7 @@
 }
 
     .carousel__indicator:is([aria-current=true], [data-current]) {
-      background: colors\.glass\.accent\.bg;
+      background: var(--colors-glass-accent-bg);
 }
 
     .combobox__root {
@@ -2471,13 +2425,13 @@
 }
 
     .file-upload__dropzone {
-      background: colors\.glass\.accent\.bg;
+      background: var(--colors-glass-accent-bg);
       border: 2px dashed var(--colors-glass-border);
       padding: var(--spacing-glass-2xl);
       overflow: hidden;
       border-radius: var(--radii-md);
       transition: all var(--durations-glass-quick) var(--easings-glass-flow);
-      border-color: colors\.glass\.accent\.border;
+      border-color: var(--colors-glass-accent-border);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2750,7 +2704,7 @@
 }
 
     .pagination__item:is([aria-selected=true], [data-selected]) {
-      background: colors\.glass\.accent\.bg;
+      background: var(--colors-glass-accent-bg);
       color: white;
 }
 
@@ -2855,7 +2809,7 @@
 }
 
     .radio-group__itemControl:is(:checked, [data-checked], [aria-checked=true], [data-state="checked"])::after {
-      background: colors\.glass\.accent\.bg;
+      background: var(--colors-glass-accent-bg);
       border-radius: var(--radii-full);
       content: "";
       position: relative;

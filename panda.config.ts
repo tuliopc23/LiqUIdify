@@ -36,6 +36,12 @@ export default defineConfig({
 							border: { value: "rgba(255, 255, 255, 0.34)" },
 						},
 
+						// Glass accent colors for interactive states (direct values to avoid circular refs)
+						accent: {
+							bg: { value: "#007AFF" },
+							border: { value: "#007AFF" },
+						},
+
 						// Glass gradients for pseudo-elements
 						gradients: {
 							before: {
@@ -200,6 +206,7 @@ export default defineConfig({
 						button: { value: "8px" },
 						buttonCompact: { value: "6px" },
 						buttonLarge: { value: "10px" },
+						control: { value: "8px" }, // General controls (aliases to button)
 
 						// Input fields (8px standard)
 						field: { value: "8px" },
@@ -268,42 +275,6 @@ export default defineConfig({
 						},
 					},
 
-      // Apple-like text styles for quick hierarchy usage
-      textStyles: {
-        display: {
-          value: {
-            fontFamily: 'display',
-            fontWeight: '700',
-            letterSpacing: '-0.01em',
-            lineHeight: '1.1',
-            fontSize: { base: 'clamp(36px, 2.5vw + 20px, 56px)' },
-          },
-        },
-        title1: {
-          value: {
-            fontFamily: 'display',
-            fontWeight: '700',
-            letterSpacing: '-0.01em',
-            fontSize: { base: 'clamp(24px, 1vw + 16px, 32px)' },
-            lineHeight: '1.2',
-          },
-        },
-        title3: {
-          value: {
-            fontFamily: 'display',
-            fontWeight: '600',
-            letterSpacing: '-0.01em',
-            fontSize: '18px',
-            lineHeight: '1.25',
-          },
-        },
-        body: {
-          value: { fontFamily: 'sans', fontSize: '16px', lineHeight: '1.6' },
-        },
-        caption: {
-          value: { fontFamily: 'sans', fontSize: '14px', lineHeight: '1.4' },
-        },
-      },
 				},
 
 				// Animation durations
@@ -413,6 +384,51 @@ export default defineConfig({
 					wide: { value: "0.01em" },
 					wider: { value: "0.02em" },
 					widest: { value: "0.04em" },
+				},
+			},
+
+			// Apple HIG Typography Styles
+			textStyles: {
+				display: {
+					value: {
+						fontFamily: 'token(fonts.display)',
+						fontWeight: 'token(fontWeights.bold)',
+						letterSpacing: 'token(letterSpacings.tight)',
+						lineHeight: 'token(lineHeights.tight)',
+						fontSize: { base: 'clamp(36px, 2.5vw + 20px, 56px)' },
+					},
+				},
+				title1: {
+					value: {
+						fontFamily: 'token(fonts.display)',
+						fontWeight: 'token(fontWeights.bold)',
+						letterSpacing: 'token(letterSpacings.tight)',
+						fontSize: { base: 'clamp(24px, 1vw + 16px, 32px)' },
+						lineHeight: 'token(lineHeights.snug)',
+					},
+				},
+				title3: {
+					value: {
+						fontFamily: 'token(fonts.display)',
+						fontWeight: 'token(fontWeights.semibold)',
+						letterSpacing: 'token(letterSpacings.tight)',
+						fontSize: 'token(fontSizes.title3)',
+						lineHeight: 'token(lineHeights.snug)',
+					},
+				},
+				body: {
+					value: {
+						fontFamily: 'token(fonts.sans)',
+						fontSize: 'token(fontSizes.body)',
+						lineHeight: 'token(lineHeights.normal)'
+					},
+				},
+				caption: {
+					value: {
+						fontFamily: 'token(fonts.sans)',
+						fontSize: 'token(fontSizes.caption1)',
+						lineHeight: 'token(lineHeights.loose)'
+					},
 				},
 			},
 
