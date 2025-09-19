@@ -1,11 +1,28 @@
 "use client";
 
 import { Tour as ArkTour } from "@ark-ui/react";
+import type { ComponentPropsWithoutRef, ElementRef } from "react";
+import { forwardRef } from "react";
+import { cx } from "../../../../../../styled-system/css";
+import { tour } from "../../../../../../styled-system/recipes/tour";
+
+type TourContentProps = ComponentPropsWithoutRef<typeof ArkTour.Content>;
 
 // Auto-styled Ark UI Tour components with liquid glass styling
 export const TourRoot = ArkTour.Root;
 export const TourPositioner = ArkTour.Positioner;
-export const TourContent = ArkTour.Content;
+export const TourContent = forwardRef<
+	ElementRef<typeof ArkTour.Content>,
+	TourContentProps
+>(({ className, ...props }, ref) => (
+	<ArkTour.Content
+		ref={ref}
+		className={cx(tour(), className)}
+		{...props}
+	/>
+));
+
+TourContent.displayName = "TourContent";
 export const TourArrow = ArkTour.Arrow;
 export const TourArrowTip = ArkTour.ArrowTip;
 export const TourCloseTrigger = ArkTour.CloseTrigger;

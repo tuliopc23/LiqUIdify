@@ -1,9 +1,28 @@
 "use client";
 
 import { TreeView as ArkTreeView } from "@ark-ui/react";
+import type { ComponentPropsWithoutRef, ElementRef } from "react";
+import { forwardRef } from "react";
+import { cx } from "../../../../../../styled-system/css";
+import { treeView } from "../../../../../../styled-system/recipes/tree-view";
+
+type TreeViewRootProps = ComponentPropsWithoutRef<typeof ArkTreeView.Root> & {
+	className?: string;
+};
 
 // Auto-styled Ark UI TreeView components with liquid glass styling
-export const TreeViewRoot = ArkTreeView.Root;
+export const TreeViewRoot = forwardRef<
+	ElementRef<typeof ArkTreeView.Root>,
+	TreeViewRootProps
+>(({ className, ...props }, ref) => (
+	<ArkTreeView.Root
+		ref={ref}
+		className={cx(treeView(), className)}
+		{...props}
+	/>
+));
+
+TreeViewRoot.displayName = "TreeViewRoot";
 export const TreeViewLabel = ArkTreeView.Label;
 export const TreeViewTree = ArkTreeView.Tree;
 export const TreeViewBranch = ArkTreeView.Branch;

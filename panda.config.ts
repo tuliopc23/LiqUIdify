@@ -3315,7 +3315,7 @@ export default defineConfig({
 			dialog: ["*"],
 			tabs: ["*"],
 			checkbox: ["*"],
-			switch: ["*"],
+			switchToggle: ["*"],
 			tooltip: ["*"],
 			popover: ["*"],
 			accordion: ["*"],

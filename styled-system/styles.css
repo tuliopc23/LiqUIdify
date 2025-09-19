@@ -621,6 +621,34 @@
       bottom: 0;
 }
 
+    .switch {
+      background: var(--colors-glass-bg);
+      border: 1px solid var(--colors-glass-border);
+      padding: 2px;
+      overflow: hidden;
+      border-radius: var(--radii-full);
+      position: relative;
+      backdrop-filter: blur(var(--blurs-glass-md));
+      -webkit-backdrop-filter: blur(var(--blurs-glass-md));
+      box-shadow: var(--shadows-glass-base);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+}
+
+    .switch::before {
+      background: var(--colors-glass-gradients-before);
+      border-radius: inherit;
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+}
+
     .avatar {
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
@@ -1532,6 +1560,21 @@
   .checkbox--size_lg {
     width: 24px;
     height: 24px;
+}
+
+  .switch--size_md {
+    width: 44px;
+    height: 24px;
+}
+
+  .switch--size_sm {
+    width: 36px;
+    height: 20px;
+}
+
+  .switch--size_lg {
+    width: 52px;
+    height: 28px;
 }
 
   .avatar--size_md {
