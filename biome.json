@@ -7,7 +7,18 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["libs/**", "src/**", "tests/**", "examples/**"]
+		"includes": [
+			"libs/components/src/**",
+			"libs/components/vite.config.ts",
+			"scripts/**",
+			"tests/**"
+		],
+		"experimentalScannerIgnores": [
+			"libs/**/styled-system/**",
+			"styled-system/**",
+			"dist/**",
+			"node_modules/**"
+		]
 	},
 	"formatter": {
 		"enabled": true,

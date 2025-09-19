@@ -1,49 +1,56 @@
-import { compact, getSlotCompoundVariant, memo, splitProps } from '../helpers.js';
-import { createRecipe } from './create-recipe.js';
+import {
+	compact,
+	getSlotCompoundVariant,
+	memo,
+	splitProps,
+} from "../helpers.js";
+import { createRecipe } from "./create-recipe.js";
 
-const paginationDefaultVariants = {}
-const paginationCompoundVariants = []
+const paginationDefaultVariants = {};
+const paginationCompoundVariants = [];
 
 const paginationSlotNames = [
-  [
-    "root",
-    "pagination__root"
-  ],
-  [
-    "item",
-    "pagination__item"
-  ],
-  [
-    "ellipsis",
-    "pagination__ellipsis"
-  ],
-  [
-    "prevTrigger",
-    "pagination__prevTrigger"
-  ],
-  [
-    "nextTrigger",
-    "pagination__nextTrigger"
-  ]
-]
-const paginationSlotFns = /* @__PURE__ */ paginationSlotNames.map(([slotName, slotKey]) => [slotName, createRecipe(slotKey, paginationDefaultVariants, getSlotCompoundVariant(paginationCompoundVariants, slotName))])
+	["root", "pagination__root"],
+	["item", "pagination__item"],
+	["ellipsis", "pagination__ellipsis"],
+	["prevTrigger", "pagination__prevTrigger"],
+	["nextTrigger", "pagination__nextTrigger"],
+];
+const paginationSlotFns = /* @__PURE__ */ paginationSlotNames.map(
+	([slotName, slotKey]) => [
+		slotName,
+		createRecipe(
+			slotKey,
+			paginationDefaultVariants,
+			getSlotCompoundVariant(paginationCompoundVariants, slotName),
+		),
+	],
+);
 
 const paginationFn = memo((props = {}) => {
-  return Object.fromEntries(paginationSlotFns.map(([slotName, slotFn]) => [slotName, slotFn.recipeFn(props)]))
-})
+	return Object.fromEntries(
+		paginationSlotFns.map(([slotName, slotFn]) => [
+			slotName,
+			slotFn.recipeFn(props),
+		]),
+	);
+});
 
-const paginationVariantKeys = []
-const getVariantProps = (variants) => ({ ...paginationDefaultVariants, ...compact(variants) })
+const paginationVariantKeys = [];
+const getVariantProps = (variants) => ({
+	...paginationDefaultVariants,
+	...compact(variants),
+});
 
 export const pagination = /* @__PURE__ */ Object.assign(paginationFn, {
-  __recipe__: false,
-  __name__: 'pagination',
-  raw: (props) => props,
-  classNameMap: {},
-  variantKeys: paginationVariantKeys,
-  variantMap: {},
-  splitVariantProps(props) {
-    return splitProps(props, paginationVariantKeys)
-  },
-  getVariantProps
-})
+	__recipe__: false,
+	__name__: "pagination",
+	raw: (props) => props,
+	classNameMap: {},
+	variantKeys: paginationVariantKeys,
+	variantMap: {},
+	splitVariantProps(props) {
+		return splitProps(props, paginationVariantKeys);
+	},
+	getVariantProps,
+});

@@ -3,7 +3,6 @@ export * from './button.js';
 export * from './card.js';
 export * from './badge.js';
 export * from './symbol-tile.js';
-export * from './navbar.js';
 export * from './input.js';
 export * from './avatar.js';
 export * from './checkbox.js';

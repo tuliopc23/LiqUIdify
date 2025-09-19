@@ -1,31 +1,42 @@
 /* eslint-disable */
-import type { ConditionalValue } from '../types/index';
-import type { DistributiveOmit, Pretty } from '../types/system-types';
+import type { ConditionalValue } from "../types/index";
+import type { DistributiveOmit, Pretty } from "../types/system-types";
 
-interface FileUploadVariant {
-  
-}
+type FileUploadVariant = {}
 
 type FileUploadVariantMap = {
-  [key in keyof FileUploadVariant]: Array<FileUploadVariant[key]>
-}
+	[key in keyof FileUploadVariant]: Array<FileUploadVariant[key]>;
+};
 
-type FileUploadSlot = "root" | "dropzone" | "trigger" | "itemGroup" | "item" | "itemName" | "itemSizeText"
+type FileUploadSlot =
+	| "root"
+	| "dropzone"
+	| "trigger"
+	| "itemGroup"
+	| "item"
+	| "itemName"
+	| "itemSizeText";
 
 export type FileUploadVariantProps = {
-  [key in keyof FileUploadVariant]?: ConditionalValue<FileUploadVariant[key]> | undefined
-}
+	[key in keyof FileUploadVariant]?:
+		| ConditionalValue<FileUploadVariant[key]>
+		| undefined;
+};
 
 export interface FileUploadRecipe {
-  __slot: FileUploadSlot
-  __type: FileUploadVariantProps
-  (props?: FileUploadVariantProps): Pretty<Record<FileUploadSlot, string>>
-  raw: (props?: FileUploadVariantProps) => FileUploadVariantProps
-  variantMap: FileUploadVariantMap
-  variantKeys: Array<keyof FileUploadVariant>
-  splitVariantProps<Props extends FileUploadVariantProps>(props: Props): [FileUploadVariantProps, Pretty<DistributiveOmit<Props, keyof FileUploadVariantProps>>]
-  getVariantProps: (props?: FileUploadVariantProps) => FileUploadVariantProps
+	__slot: FileUploadSlot;
+	__type: FileUploadVariantProps;
+	(props?: FileUploadVariantProps): Pretty<Record<FileUploadSlot, string>>;
+	raw: (props?: FileUploadVariantProps) => FileUploadVariantProps;
+	variantMap: FileUploadVariantMap;
+	variantKeys: Array<keyof FileUploadVariant>;
+	splitVariantProps<Props extends FileUploadVariantProps>(
+		props: Props,
+	): [
+		FileUploadVariantProps,
+		Pretty<DistributiveOmit<Props, keyof FileUploadVariantProps>>,
+	];
+	getVariantProps: (props?: FileUploadVariantProps) => FileUploadVariantProps;
 }
 
-
-export declare const fileUpload: FileUploadRecipe
+export declare const fileUpload: FileUploadRecipe;

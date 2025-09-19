@@ -2162,31 +2162,6 @@ export default defineConfig({
           defaultVariants: { tint: "gray" },
         },
 
-        // Navbar – Apple HIG navigation bar
-        navbar: {
-          className: "navbar",
-          base: {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 50,
-            padding: "12px 16px",
-            fontSize: "token(fontSizes.body)",
-            fontWeight: "token(fontWeights.semibold)",
-            lineHeight: "token(lineHeights.normal)",
-            transition:
-              "background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease",
-            _class: {
-              "&.is-scrolled": {
-                background: "{colors.glass.bg}",
-                borderBottomWidth: "1px",
-                borderColor: "{colors.border.hairline}",
-                backdropFilter: "blur(token(blurs.glass.md))",
-              },
-            },
-          },
-        },
 
         // Input – Apple HIG compliant input fields
         input: {

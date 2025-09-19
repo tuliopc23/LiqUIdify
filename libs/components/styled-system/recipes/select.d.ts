@@ -1,31 +1,42 @@
 /* eslint-disable */
-import type { ConditionalValue } from '../types/index';
-import type { DistributiveOmit, Pretty } from '../types/system-types';
+import type { ConditionalValue } from "../types/index";
+import type { DistributiveOmit, Pretty } from "../types/system-types";
 
-interface SelectVariant {
-  
-}
+type SelectVariant = {}
 
 type SelectVariantMap = {
-  [key in keyof SelectVariant]: Array<SelectVariant[key]>
-}
+	[key in keyof SelectVariant]: Array<SelectVariant[key]>;
+};
 
-type SelectSlot = "trigger" | "content" | "item" | "itemText" | "positioner" | "indicator" | "clearTrigger"
+type SelectSlot =
+	| "trigger"
+	| "content"
+	| "item"
+	| "itemText"
+	| "positioner"
+	| "indicator"
+	| "clearTrigger";
 
 export type SelectVariantProps = {
-  [key in keyof SelectVariant]?: ConditionalValue<SelectVariant[key]> | undefined
-}
+	[key in keyof SelectVariant]?:
+		| ConditionalValue<SelectVariant[key]>
+		| undefined;
+};
 
 export interface SelectRecipe {
-  __slot: SelectSlot
-  __type: SelectVariantProps
-  (props?: SelectVariantProps): Pretty<Record<SelectSlot, string>>
-  raw: (props?: SelectVariantProps) => SelectVariantProps
-  variantMap: SelectVariantMap
-  variantKeys: Array<keyof SelectVariant>
-  splitVariantProps<Props extends SelectVariantProps>(props: Props): [SelectVariantProps, Pretty<DistributiveOmit<Props, keyof SelectVariantProps>>]
-  getVariantProps: (props?: SelectVariantProps) => SelectVariantProps
+	__slot: SelectSlot;
+	__type: SelectVariantProps;
+	(props?: SelectVariantProps): Pretty<Record<SelectSlot, string>>;
+	raw: (props?: SelectVariantProps) => SelectVariantProps;
+	variantMap: SelectVariantMap;
+	variantKeys: Array<keyof SelectVariant>;
+	splitVariantProps<Props extends SelectVariantProps>(
+		props: Props,
+	): [
+		SelectVariantProps,
+		Pretty<DistributiveOmit<Props, keyof SelectVariantProps>>,
+	];
+	getVariantProps: (props?: SelectVariantProps) => SelectVariantProps;
 }
 
-
-export declare const select: SelectRecipe
+export declare const select: SelectRecipe;

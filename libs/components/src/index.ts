@@ -14,8 +14,6 @@ export * from "./components/button";
 export * from "./components/card";
 export * from "./components/iconButton";
 export * from "./components/icons";
-export * from "./components/liquidBackdrop";
-export * from "./components/navbar";
 export * from "./components/symbolTile";
 
 // Core UI Components (Ark UI + Panda CSS)

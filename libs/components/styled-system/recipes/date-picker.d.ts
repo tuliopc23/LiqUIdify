@@ -1,31 +1,45 @@
 /* eslint-disable */
-import type { ConditionalValue } from '../types/index';
-import type { DistributiveOmit, Pretty } from '../types/system-types';
+import type { ConditionalValue } from "../types/index";
+import type { DistributiveOmit, Pretty } from "../types/system-types";
 
-interface DatePickerVariant {
-  
-}
+type DatePickerVariant = {}
 
 type DatePickerVariantMap = {
-  [key in keyof DatePickerVariant]: Array<DatePickerVariant[key]>
-}
+	[key in keyof DatePickerVariant]: Array<DatePickerVariant[key]>;
+};
 
-type DatePickerSlot = "root" | "trigger" | "input" | "positioner" | "content" | "table" | "tableHead" | "tableBody" | "tableRow" | "tableCell"
+type DatePickerSlot =
+	| "root"
+	| "trigger"
+	| "input"
+	| "positioner"
+	| "content"
+	| "table"
+	| "tableHead"
+	| "tableBody"
+	| "tableRow"
+	| "tableCell";
 
 export type DatePickerVariantProps = {
-  [key in keyof DatePickerVariant]?: ConditionalValue<DatePickerVariant[key]> | undefined
-}
+	[key in keyof DatePickerVariant]?:
+		| ConditionalValue<DatePickerVariant[key]>
+		| undefined;
+};
 
 export interface DatePickerRecipe {
-  __slot: DatePickerSlot
-  __type: DatePickerVariantProps
-  (props?: DatePickerVariantProps): Pretty<Record<DatePickerSlot, string>>
-  raw: (props?: DatePickerVariantProps) => DatePickerVariantProps
-  variantMap: DatePickerVariantMap
-  variantKeys: Array<keyof DatePickerVariant>
-  splitVariantProps<Props extends DatePickerVariantProps>(props: Props): [DatePickerVariantProps, Pretty<DistributiveOmit<Props, keyof DatePickerVariantProps>>]
-  getVariantProps: (props?: DatePickerVariantProps) => DatePickerVariantProps
+	__slot: DatePickerSlot;
+	__type: DatePickerVariantProps;
+	(props?: DatePickerVariantProps): Pretty<Record<DatePickerSlot, string>>;
+	raw: (props?: DatePickerVariantProps) => DatePickerVariantProps;
+	variantMap: DatePickerVariantMap;
+	variantKeys: Array<keyof DatePickerVariant>;
+	splitVariantProps<Props extends DatePickerVariantProps>(
+		props: Props,
+	): [
+		DatePickerVariantProps,
+		Pretty<DistributiveOmit<Props, keyof DatePickerVariantProps>>,
+	];
+	getVariantProps: (props?: DatePickerVariantProps) => DatePickerVariantProps;
 }
 
-
-export declare const datePicker: DatePickerRecipe
+export declare const datePicker: DatePickerRecipe;
