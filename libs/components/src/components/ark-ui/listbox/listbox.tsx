@@ -15,11 +15,7 @@ export const ListboxRoot = forwardRef<
 	ElementRef<typeof ArkListbox.Root>,
 	ListboxRootProps
 >(({ className, ...props }, ref) => (
-	<ArkListbox.Root
-		ref={ref}
-		className={cx(listbox(), className)}
-		{...props}
-	/>
+	<ArkListbox.Root ref={ref} className={cx(listbox(), className)} {...props} />
 ));
 
 ListboxRoot.displayName = "ListboxRoot";

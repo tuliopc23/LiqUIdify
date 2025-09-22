@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { passwordInput } from "../../../../../../styled-system/recipes/password-input";
 
-type PasswordInputRootProps = ComponentPropsWithoutRef<typeof ArkPasswordInput.Root> & {
+type PasswordInputRootProps = ComponentPropsWithoutRef<
+	typeof ArkPasswordInput.Root
+> & {
 	className?: string;
 };
 

@@ -15,11 +15,7 @@ export const TourContent = forwardRef<
 	ElementRef<typeof ArkTour.Content>,
 	TourContentProps
 >(({ className, ...props }, ref) => (
-	<ArkTour.Content
-		ref={ref}
-		className={cx(tour(), className)}
-		{...props}
-	/>
+	<ArkTour.Content ref={ref} className={cx(tour(), className)} {...props} />
 ));
 
 TourContent.displayName = "TourContent";

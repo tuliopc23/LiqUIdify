@@ -11,15 +11,12 @@ type FieldRootProps = ComponentPropsWithoutRef<typeof ArkField.Root> & {
 };
 
 // Auto-styled Ark UI Field components with liquid glass styling
-export const FieldRoot = forwardRef<ElementRef<typeof ArkField.Root>, FieldRootProps>(
-	({ className, ...props }, ref) => (
-		<ArkField.Root
-			ref={ref}
-			className={cx(field(), className)}
-			{...props}
-		/>
-	),
-);
+export const FieldRoot = forwardRef<
+	ElementRef<typeof ArkField.Root>,
+	FieldRootProps
+>(({ className, ...props }, ref) => (
+	<ArkField.Root ref={ref} className={cx(field(), className)} {...props} />
+));
 
 FieldRoot.displayName = "FieldRoot";
 export const FieldLabel = ArkField.Label;

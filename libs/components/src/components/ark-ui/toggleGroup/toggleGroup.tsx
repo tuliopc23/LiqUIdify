@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { toggleGroup } from "../../../../../../styled-system/recipes/toggle-group";
 
-type ToggleGroupRootProps = ComponentPropsWithoutRef<typeof ArkToggleGroup.Root> & {
+type ToggleGroupRootProps = ComponentPropsWithoutRef<
+	typeof ArkToggleGroup.Root
+> & {
 	className?: string;
 };
 

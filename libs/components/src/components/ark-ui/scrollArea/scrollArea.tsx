@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { scrollArea } from "../../../../../../styled-system/recipes/scroll-area";
 
-type ScrollAreaRootProps = ComponentPropsWithoutRef<typeof ArkScrollArea.Root> & {
+type ScrollAreaRootProps = ComponentPropsWithoutRef<
+	typeof ArkScrollArea.Root
+> & {
 	className?: string;
 };
 

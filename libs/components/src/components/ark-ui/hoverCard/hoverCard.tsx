@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { hoverCard } from "../../../../../../styled-system/recipes/hover-card";
 
-type HoverCardContentProps = ComponentPropsWithoutRef<typeof ArkHoverCard.Content>;
+type HoverCardContentProps = ComponentPropsWithoutRef<
+	typeof ArkHoverCard.Content
+>;
 
 // Auto-styled Ark UI HoverCard components with liquid glass styling
 export const HoverCardRoot = ArkHoverCard.Root;

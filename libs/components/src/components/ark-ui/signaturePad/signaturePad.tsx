@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { signaturePad } from "../../../../../../styled-system/recipes/signature-pad";
 
-type SignaturePadRootProps = ComponentPropsWithoutRef<typeof ArkSignaturePad.Root> & {
+type SignaturePadRootProps = ComponentPropsWithoutRef<
+	typeof ArkSignaturePad.Root
+> & {
 	className?: string;
 };
 

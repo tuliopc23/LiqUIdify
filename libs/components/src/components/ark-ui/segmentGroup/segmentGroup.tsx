@@ -6,7 +6,9 @@ import { forwardRef } from "react";
 import { cx } from "../../../../../../styled-system/css";
 import { segmentGroup } from "../../../../../../styled-system/recipes/segment-group";
 
-type SegmentGroupRootProps = ComponentPropsWithoutRef<typeof ArkSegmentGroup.Root> & {
+type SegmentGroupRootProps = ComponentPropsWithoutRef<
+	typeof ArkSegmentGroup.Root
+> & {
 	className?: string;
 };
 

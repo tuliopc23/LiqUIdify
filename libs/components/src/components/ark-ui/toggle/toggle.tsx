@@ -11,15 +11,12 @@ type ToggleRootProps = ComponentPropsWithoutRef<typeof ArkToggle.Root> & {
 };
 
 // Auto-styled Ark UI Toggle component with liquid glass styling
-export const ToggleRoot = forwardRef<ElementRef<typeof ArkToggle.Root>, ToggleRootProps>(
-	({ className, ...props }, ref) => (
-		<ArkToggle.Root
-			ref={ref}
-			className={cx(toggle(), className)}
-			{...props}
-		/>
-	),
-);
+export const ToggleRoot = forwardRef<
+	ElementRef<typeof ArkToggle.Root>,
+	ToggleRootProps
+>(({ className, ...props }, ref) => (
+	<ArkToggle.Root ref={ref} className={cx(toggle(), className)} {...props} />
+));
 
 ToggleRoot.displayName = "ToggleRoot";
 

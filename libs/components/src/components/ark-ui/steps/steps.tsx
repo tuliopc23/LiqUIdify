@@ -11,15 +11,16 @@ type StepsRootProps = ComponentPropsWithoutRef<typeof ArkSteps.Root> & {
 };
 
 // Auto-styled Ark UI Steps components with liquid glass styling
-export const StepsRoot = forwardRef<ElementRef<typeof ArkSteps.Root>, StepsRootProps>(
-	({ className, ...props }, ref) => (
-		<ArkSteps.Root
-			ref={ref}
-			className={cx(stepsRecipe(), className)}
-			{...props}
-		/>
-	),
-);
+export const StepsRoot = forwardRef<
+	ElementRef<typeof ArkSteps.Root>,
+	StepsRootProps
+>(({ className, ...props }, ref) => (
+	<ArkSteps.Root
+		ref={ref}
+		className={cx(stepsRecipe(), className)}
+		{...props}
+	/>
+));
 
 StepsRoot.displayName = "StepsRoot";
 export const StepsList = ArkSteps.List;
