@@ -4,10 +4,10 @@ import { Accordion as ArkAccordion } from "@ark-ui/react";
 import { createStyleContext } from "../../../../../../styled-system/jsx";
 import { accordion } from "../../../../../../styled-system/recipes/accordion";
 
-const { withContext } = createStyleContext(accordion);
+const { withRootProvider, withContext } = createStyleContext(accordion);
 
 // Auto-styled Ark UI Accordion components with liquid glass
-export const AccordionRoot = withContext(ArkAccordion.Root, "root");
+export const AccordionRoot = withRootProvider(ArkAccordion.Root);
 export const AccordionItem = withContext(ArkAccordion.Item, "item");
 export const AccordionItemTrigger = withContext(
 	ArkAccordion.ItemTrigger,

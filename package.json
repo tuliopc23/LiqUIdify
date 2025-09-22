@@ -134,7 +134,7 @@
 		"format:fix": "biome format --write .",
 		"lint": "biome lint .",
 		"check:styles": "node scripts/check-styles-import.mjs",
-			"ci:guard:banned": "bash -lc 'if grep -RniE \"(storybook|tailwind)\" --exclude-dir=node_modules --exclude=\"*.lock\" -- .; then echo \"Banned tool reference found\"; exit 1; fi'",
+		"ci:guard:banned": "bash -lc 'if grep -RniE \"(storybook|tailwind)\" --exclude-dir=node_modules --exclude=\"*.lock\" -- .; then echo \"Banned tool reference found\"; exit 1; fi'",
 		"lint:fix": "biome lint --write .",
 		"check": "biome check .",
 		"check:fix": "biome check --write .",
@@ -161,7 +161,7 @@
 			]
 		}
 	},
-	"version": "0.6.7",
+	"version": "0.6.8",
 	"workspaces": [
 		"libs/*"
 	]

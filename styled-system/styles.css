@@ -190,10 +190,6 @@
     font-family: "SF Pro Display", sans-serif;
 }
 
-  button,input,textarea,select,[role='button'],[role='combobox'],[role='textbox'],.card,.panel,.dialog,.popover,.tooltip,.dropdown {
-    border-radius: var(--radii-md);
-}
-
   .liquid-wobble-active {
     animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
 }
@@ -338,16 +334,16 @@
     --radii-2xl: 20px;
     --radii-3xl: 24px;
     --radii-full: 9999px;
-    --radii-roles-button: 8px;
-    --radii-roles-button-compact: 6px;
-    --radii-roles-button-large: 10px;
-    --radii-roles-control: 8px;
-    --radii-roles-field: 8px;
-    --radii-roles-field-large: 10px;
-    --radii-roles-card: 12px;
-    --radii-roles-card-large: 16px;
-    --radii-roles-sheet: 16px;
-    --radii-roles-modal: 20px;
+    --radii-roles-button: var(--radii-full);
+    --radii-roles-button-compact: 14px;
+    --radii-roles-button-large: var(--radii-full);
+    --radii-roles-control: 14px;
+    --radii-roles-field: 14px;
+    --radii-roles-field-large: 16px;
+    --radii-roles-card: 20px;
+    --radii-roles-card-large: 22px;
+    --radii-roles-sheet: 22px;
+    --radii-roles-modal: 26px;
     --radii-roles-pill: var(--radii-full);
     --radii-roles-badge: var(--radii-full);
     --radii-glass-xs: var(--radii-xs);
@@ -681,7 +677,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-control);
       gap: var(--spacing-glass-sm);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
@@ -716,7 +712,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -740,7 +736,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -766,7 +762,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-field);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -803,7 +799,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
       box-shadow: var(--shadows-glass-base);
@@ -826,7 +822,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -853,7 +849,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-sheet);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -881,7 +877,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-sheet);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -907,7 +903,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-field);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -933,7 +929,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-field);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1043,7 +1039,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1069,7 +1065,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       gap: var(--spacing-glass-xs);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1096,7 +1092,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1121,7 +1117,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-xs);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-button);
       gap: var(--spacing-glass-xs);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1147,7 +1143,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1197,7 +1193,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1223,7 +1219,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1248,7 +1244,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-field);
       gap: var(--spacing-glass-sm);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1276,7 +1272,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1303,7 +1299,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-control);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1343,7 +1339,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-xs);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-button);
       gap: var(--spacing-glass-xs);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
@@ -1370,7 +1366,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-sheet);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1397,7 +1393,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -1856,7 +1852,7 @@
     .dialog__closeTrigger {
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: absolute;
       cursor: pointer;
       display: flex;
@@ -1933,7 +1929,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2033,7 +2029,7 @@
     .popover__closeTrigger {
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: absolute;
       cursor: pointer;
       display: flex;
@@ -2062,7 +2058,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2128,7 +2124,7 @@
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2447,7 +2443,7 @@
 
     .date-picker__tableCell {
       padding: var(--spacing-glass-sm);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       text-align: center;
       cursor: pointer;
 }
@@ -2473,7 +2469,7 @@
       border: 2px dashed var(--colors-glass-border);
       padding: var(--spacing-glass-2xl);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-card);
       transition: all var(--durations-glass-quick) var(--easings-glass-flow);
       border-color: var(--colors-glass-accent-border);
       position: relative;
@@ -2501,7 +2497,7 @@
       background: var(--colors-glass-medium-bg);
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       z-index: 2;
       cursor: pointer;
@@ -2525,7 +2521,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-sm));
       -webkit-backdrop-filter: blur(var(--blurs-glass-sm));
@@ -2550,7 +2546,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-control);
       gap: var(--spacing-glass-sm);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
@@ -2578,7 +2574,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-sheet);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2604,7 +2600,7 @@
       border: none;
       background: transparent;
       gap: var(--spacing-glass-sm);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       transition: all var(--durations-glass-quick) var(--easings-glass-flow);
       position: relative;
       z-index: 2;
@@ -2721,7 +2717,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2766,7 +2762,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2790,7 +2786,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       overflow: hidden;
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2875,7 +2871,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-md) var(--spacing-glass-lg);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-field);
       gap: var(--spacing-glass-sm);
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
@@ -2914,7 +2910,7 @@
       border: 1px solid var(--colors-glass-border);
       padding: var(--spacing-glass-sm);
       overflow: hidden;
-      border-radius: var(--radii-md);
+      border-radius: var(--radii-roles-sheet);
       position: relative;
       backdrop-filter: blur(var(--blurs-glass-md));
       -webkit-backdrop-filter: blur(var(--blurs-glass-md));
@@ -2943,7 +2939,7 @@
       border: none;
       background: transparent;
       gap: var(--spacing-glass-sm);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       transition: all var(--durations-glass-quick) var(--easings-glass-flow);
       position: relative;
       z-index: 2;
@@ -2986,7 +2982,7 @@
     .select__clearTrigger {
       background: transparent;
       border: 1px solid var(--colors-glass-border);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       cursor: pointer;
       width: 24px;
       height: 24px;
@@ -3047,7 +3043,7 @@
     .toast__closeTrigger {
       background: transparent;
       border: 1px solid var(--colors-glass-border);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       z-index: 2;
       cursor: pointer;
@@ -3068,7 +3064,7 @@
       padding: var(--spacing-glass-sm) var(--spacing-glass-md);
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
-      border-radius: var(--radii-sm);
+      border-radius: var(--radii-roles-control);
       position: relative;
       z-index: 2;
       font-size: 14px;

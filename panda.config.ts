@@ -202,23 +202,24 @@ export default defineConfig({
 
 					// Apple-specific component roles (exact HIG compliance)
 					roles: {
-						// Buttons (8px for standard, 6px for compact)
-						button: { value: "8px" },
-						buttonCompact: { value: "6px" },
-						buttonLarge: { value: "10px" },
-						control: { value: "8px" }, // General controls (aliases to button)
+						// Buttons: capsule rounding for standard/large; compact keeps a readable curve
+						button: { value: "{radii.full}" },
+						buttonCompact: { value: "14px" },
+						buttonLarge: { value: "{radii.full}" },
+						// Generic small pressables
+						control: { value: "14px" },
 
-						// Input fields (8px standard)
-						field: { value: "8px" },
-						fieldLarge: { value: "10px" },
+						// Input fields
+						field: { value: "14px" },
+						fieldLarge: { value: "16px" },
 
-						// Cards and surfaces (12px standard, 16px for large)
-						card: { value: "12px" },
-						cardLarge: { value: "16px" },
+						// Cards and surfaces
+						card: { value: "20px" },
+						cardLarge: { value: "22px" },
 
-						// Sheets and modals (16px-20px)
-						sheet: { value: "16px" },
-						modal: { value: "20px" },
+						// Sheets and modals
+						sheet: { value: "22px" },
+						modal: { value: "26px" },
 
 						// Pills and badges (full radius)
 						pill: { value: "{radii.full}" },
@@ -579,7 +580,7 @@ export default defineConfig({
 							right: "token(spacing.glass.md)",
 							width: "32px",
 							height: "32px",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							background: "token(colors.glass.bg)",
 							border: "1px solid token(colors.glass.border)",
 							cursor: "pointer",
@@ -615,7 +616,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.control)",
 							cursor: "pointer",
 							display: "inline-flex",
 							alignItems: "center",
@@ -640,7 +641,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.sheet)",
 							minWidth: "200px",
 							padding: "token(spacing.glass.sm)",
 							zIndex: 50,
@@ -664,7 +665,7 @@ export default defineConfig({
 							alignItems: "center",
 							gap: "token(spacing.glass.sm)",
 							padding: "token(spacing.glass.md) token(spacing.glass.lg)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							fontSize: "14px",
 							border: "none",
 							background: "transparent",
@@ -715,7 +716,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.field)",
 							cursor: "pointer",
 							display: "flex",
 							alignItems: "center",
@@ -755,7 +756,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.sheet)",
 							minWidth: "var(--reference-width)",
 							maxHeight: "300px",
 							overflowY: "auto",
@@ -781,7 +782,7 @@ export default defineConfig({
 							alignItems: "center",
 							gap: "token(spacing.glass.sm)",
 							padding: "token(spacing.glass.md) token(spacing.glass.lg)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							fontSize: "14px",
 							border: "none",
 							background: "transparent",
@@ -819,7 +820,7 @@ export default defineConfig({
 							justifyContent: "center",
 							width: "24px",
 							height: "24px",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							background: "transparent",
 							border: "1px solid token(colors.glass.border)",
 							cursor: "pointer",
@@ -891,7 +892,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							fontSize: "14px",
 							maxWidth: "300px",
@@ -998,7 +999,7 @@ export default defineConfig({
 							right: "token(spacing.glass.sm)",
 							width: "24px",
 							height: "24px",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							background: "token(colors.glass.bg)",
 							border: "1px solid token(colors.glass.border)",
 							cursor: "pointer",
@@ -1073,7 +1074,7 @@ export default defineConfig({
 							zIndex: 2,
 							width: "24px",
 							height: "24px",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							background: "transparent",
 							border: "1px solid token(colors.glass.border)",
 							cursor: "pointer",
@@ -1090,7 +1091,7 @@ export default defineConfig({
 							position: "relative",
 							zIndex: 2,
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							background: "token(colors.glass.bg)",
 							border: "1px solid token(colors.glass.border)",
 							fontSize: "14px",
@@ -1152,7 +1153,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.card)",
 							_before: {
 								content: '""',
 								position: "absolute",
@@ -1420,7 +1421,7 @@ export default defineConfig({
 							padding: "token(spacing.glass.sm)",
 							textAlign: "center",
 							cursor: "pointer",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							_hover: { background: "token(colors.glass.subtle.bg)" },
 							_selected: {
 								background: "token(colors.glass.medium.bg)",
@@ -1457,7 +1458,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "2px dashed token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.card)",
 							padding: "token(spacing.glass.2xl)",
 							textAlign: "center",
 							cursor: "pointer",
@@ -1485,7 +1486,7 @@ export default defineConfig({
 							zIndex: 2,
 							background: "token(colors.glass.medium.bg)",
 							border: "1px solid token(colors.glass.border)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							cursor: "pointer",
 							fontSize: "14px",
@@ -1504,7 +1505,7 @@ export default defineConfig({
 							background: "token(colors.glass.subtle.bg)",
 							backdropFilter: "blur(token(blurs.glass.sm))",
 							border: "1px solid token(colors.glass.border)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							display: "flex",
 							alignItems: "center",
@@ -1667,7 +1668,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							cursor: "pointer",
 							fontSize: "14px",
@@ -1704,7 +1705,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							cursor: "pointer",
 							fontSize: "14px",
@@ -1722,7 +1723,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.sm)",
+							borderRadius: "token(radii.roles.control)",
 							padding: "token(spacing.glass.sm) token(spacing.glass.md)",
 							cursor: "pointer",
 							fontSize: "14px",
@@ -1758,7 +1759,7 @@ export default defineConfig({
 							backdropFilter: "blur(token(blurs.glass.md))",
 							border: "1px solid token(colors.glass.border)",
 							boxShadow: "token(shadows.glass.base)",
-							borderRadius: "token(radii.md)",
+							borderRadius: "token(radii.roles.card)",
 							_before: {
 								content: '""',
 								position: "absolute",
@@ -2137,7 +2138,7 @@ export default defineConfig({
             height: "48px",
             display: "grid",
             placeItems: "center",
-            borderRadius: "token(radii.md)",
+borderRadius: "token(radii.roles.card)",
             border: "1px solid {colors.glass.border}",
             backgroundImage:
               "linear-gradient(180deg, rgba(255,255,255,.12), transparent)",
@@ -2412,7 +2413,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						cursor: "pointer",
 						_before: {
 							content: '""',
@@ -2448,7 +2449,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+borderRadius: "token(radii.roles.field)",
 						width: "48px",
 						height: "48px",
 						textAlign: "center",
@@ -2493,7 +2494,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.sm)",
+borderRadius: "token(radii.roles.control)",
 						padding: "token(spacing.glass.sm)",
 						display: "inline-flex",
 						alignItems: "center",
@@ -2568,7 +2569,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.control)",
 						cursor: "pointer",
 						display: "inline-flex",
 						alignItems: "center",
@@ -2607,7 +2608,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						_before: {
 							content: '""',
 							position: "absolute",
@@ -2634,7 +2635,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.field)",
 						padding: "token(spacing.glass.md)",
 						color: "token(colors.text.glass.primary)",
 						_before: {
@@ -2676,7 +2677,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						padding: "token(spacing.glass.lg)",
 						_before: {
 							content: '""',
@@ -2704,7 +2705,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						minWidth: "200px",
 						minHeight: "100px",
 						_before: {
@@ -2733,7 +2734,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.sheet)",
 						padding: "token(spacing.glass.lg)",
 						maxWidth: "300px",
 						zIndex: 50,
@@ -2764,7 +2765,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.sheet)",
 						padding: "token(spacing.glass.sm)",
 						maxHeight: "300px",
 						overflowY: "auto",
@@ -2794,7 +2795,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.field)",
 						display: "flex",
 						alignItems: "center",
 						_before: {
@@ -2894,7 +2895,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						padding: "token(spacing.glass.lg)",
 						display: "inline-block",
 						_before: {
@@ -2923,7 +2924,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						_before: {
 							content: '""',
 							position: "absolute",
@@ -2950,7 +2951,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.button)",
 						display: "flex",
 						padding: "token(spacing.glass.xs)",
 						gap: "token(spacing.glass.xs)",
@@ -2980,7 +2981,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						cursor: "crosshair",
 						_before: {
 							content: '""',
@@ -3008,7 +3009,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						display: "flex",
 						_before: {
 							content: '""',
@@ -3036,7 +3037,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						padding: "token(spacing.glass.lg)",
 						_before: {
 							content: '""',
@@ -3064,7 +3065,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.field)",
 						display: "flex",
 						flexWrap: "wrap",
 						gap: "token(spacing.glass.sm)",
@@ -3095,7 +3096,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						padding: "token(spacing.glass.lg)",
 						textAlign: "center",
 						color: "token(colors.text.glass.primary)",
@@ -3125,7 +3126,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.control)",
 						cursor: "pointer",
 						display: "inline-flex",
 						alignItems: "center",
@@ -3167,7 +3168,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.button)",
 						display: "flex",
 						padding: "token(spacing.glass.xs)",
 						gap: "token(spacing.glass.xs)",
@@ -3197,7 +3198,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.sheet)",
 						padding: "token(spacing.glass.lg)",
 						maxWidth: "400px",
 						zIndex: 100,
@@ -3227,7 +3228,7 @@ export default defineConfig({
 						backdropFilter: "blur(token(blurs.glass.md))",
 						border: "1px solid token(colors.glass.border)",
 						boxShadow: "token(shadows.glass.base)",
-						borderRadius: "token(radii.md)",
+						borderRadius: "token(radii.roles.card)",
 						padding: "token(spacing.glass.md)",
 						_before: {
 							content: '""',
@@ -3259,16 +3260,6 @@ export default defineConfig({
 			padding: 0,
 		},
 
-		// Component border radius standards - Apply 16px default to common components
-		"button, input, textarea, select, [role='button'], [role='combobox'], [role='textbox']":
-			{
-				borderRadius: "token(radii.md)", // 16px standard
-			},
-
-		// Card-like components get the standard radius
-		".card, .panel, .dialog, .popover, .tooltip, .dropdown": {
-			borderRadius: "token(radii.md)", // 16px standard
-		},
 
 		// Global liquid glass animation classes
 		".liquid-wobble-active": {

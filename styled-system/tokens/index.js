@@ -328,43 +328,43 @@ const tokens = {
     "variable": "var(--radii-full)"
   },
   "radii.roles.button": {
-    "value": "8px",
+    "value": "var(--radii-full)",
     "variable": "var(--radii-roles-button)"
   },
   "radii.roles.buttonCompact": {
-    "value": "6px",
+    "value": "14px",
     "variable": "var(--radii-roles-button-compact)"
   },
   "radii.roles.buttonLarge": {
-    "value": "10px",
+    "value": "var(--radii-full)",
     "variable": "var(--radii-roles-button-large)"
   },
   "radii.roles.control": {
-    "value": "8px",
+    "value": "14px",
     "variable": "var(--radii-roles-control)"
   },
   "radii.roles.field": {
-    "value": "8px",
+    "value": "14px",
     "variable": "var(--radii-roles-field)"
   },
   "radii.roles.fieldLarge": {
-    "value": "10px",
+    "value": "16px",
     "variable": "var(--radii-roles-field-large)"
   },
   "radii.roles.card": {
-    "value": "12px",
+    "value": "20px",
     "variable": "var(--radii-roles-card)"
   },
   "radii.roles.cardLarge": {
-    "value": "16px",
+    "value": "22px",
     "variable": "var(--radii-roles-card-large)"
   },
   "radii.roles.sheet": {
-    "value": "16px",
+    "value": "22px",
     "variable": "var(--radii-roles-sheet)"
   },
   "radii.roles.modal": {
-    "value": "20px",
+    "value": "26px",
     "variable": "var(--radii-roles-modal)"
   },
   "radii.roles.pill": {
