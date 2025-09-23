@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge - LiqUIdify Component Preview</title>
+<link rel="stylesheet" href="../dist/libs/components/liquidify.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f9fafb;
+        }
+        .preview-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .preview-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            margin: 2rem 0;
+        }
+        .variant-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Badge Component</h1>
+
+    <div class="preview-section">
+        <h2>Neutral Tone</h2>
+        <div class="preview-grid">
+            <div>
+                <div class="variant-label">Default</div>
+                <span class="recipes_badge__jw7qg8">Default Badge</span>
+            </div>
+            <div>
+                <div class="variant-label">Long Text</div>
+                <span class="recipes_badge__jw7qg8">This is a longer badge text</span>
+            </div>
+            <div>
+                <div class="variant-label">With Numbers</div>
+                <span class="recipes_badge__jw7qg8">Items: 42</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2>Blue Tone</h2>
+        <div class="preview-grid">
+            <div>
+                <div class="variant-label">Default</div>
+                <span class="recipes_badge_blue__jw7qg8">Default Badge</span>
+            </div>
+            <div>
+                <div class="variant-label">Long Text</div>
+                <span class="recipes_badge_blue__jw7qg8">This is a longer badge text</span>
+            </div>
+            <div>
+                <div class="variant-label">With Numbers</div>
+                <span class="recipes_badge_blue__jw7qg8">Items: 42</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar - LiqUIdify Component Preview</title>
+<link rel="stylesheet" href="../dist/libs/components/liquidify.css">
+    <style>
+        body {
+            font-family: var(--fonts-sans);
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--colors-gray-900);
+            color: var(--colors-text-glass-primary);
+        }
+        .preview-section {
+            background: var(--colors-glass-subtle-bg);
+            padding: 2rem;
+            border-radius: var(--radii-lg);
+            margin-bottom: 2rem;
+            border: 1px solid var(--colors-glass-subtle-border);
+        }
+        .preview-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            margin: 2rem 0;
+        }
+        .variant-label {
+            font-size: 0.875rem;
+color: var(--colors-text-glass-muted);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .avatar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Avatar Component</h1>
+
+    <div class="preview-section">
+        <h2>Size Variants</h2>
+        <div class="preview-grid">
+            <div class="avatar-wrapper">
+                <div class="variant-label">Small</div>
+                <div class="avatar" data-size="sm" role="img" aria-label="John Smith">
+                    <span class="avatar__fallback">JS</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Medium</div>
+                <div class="avatar" data-size="md" role="img" aria-label="John Smith">
+                    <span class="avatar__fallback">JS</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Large</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="John Smith">
+                    <span class="avatar__fallback">JS</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Extra Large</div>
+                <div class="avatar" data-size="xl" role="img" aria-label="John Smith">
+                    <span class="avatar__fallback">JS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2>With Images</h2>
+        <div class="preview-grid">
+            <div class="avatar-wrapper">
+                <div class="variant-label">Profile Image</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="John Smith">
+                    <img class="avatar__image" src="https://i.pravatar.cc/300?u=1" alt="John Smith" />
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Loading State</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="Loading...">
+                    <span class="avatar__fallback">...</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Error Fallback</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="Error">
+                    <span class="avatar__fallback">!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2>Fallback Variants</h2>
+        <div class="preview-grid">
+            <div class="avatar-wrapper">
+                <div class="variant-label">Initials</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="Alice Brown">
+                    <span class="avatar__fallback">AB</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Single Letter</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="John">
+                    <span class="avatar__fallback">J</span>
+                </div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="variant-label">Default</div>
+                <div class="avatar" data-size="lg" role="img" aria-label="User">
+                    <span class="avatar__fallback">U</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

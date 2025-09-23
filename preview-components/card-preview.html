@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card - LiqUIdify Component Preview</title>
+<link rel="stylesheet" href="../dist/libs/components/liquidify.css">
+    <style>
+        body {
+            font-family: var(--fonts-sans);
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--colors-gray-900);
+            color: var(--colors-text-glass-primary);
+        }
+        .preview-section {
+            background: var(--colors-glass-subtle-bg);
+            padding: 2rem;
+            border-radius: var(--radii-lg);
+            margin-bottom: 2rem;
+            border: 1px solid var(--colors-glass-subtle-border);
+        }
+        .preview-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin: 2rem 0;
+        }
+        .variant-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        .card-content {
+            padding: 1rem;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card-description {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+        .card-image {
+            width: 100%;
+            height: 150px;
+            background: #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .liquid-button {
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Card Component</h1>
+
+    <div class="preview-section">
+        <h2>Solid Variant</h2>
+        <div class="preview-grid">
+            <div>
+                <div class="variant-label">With Padding</div>
+<div class="card" data-variant="solid" data-padded="true">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Solid Card</h3>
+                        <p class="card-description">A solid card with padding enabled.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="variant-label">Without Padding</div>
+<div class="card" data-variant="solid" data-padded="false">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Solid Card</h3>
+                        <p class="card-description">A solid card without padding.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2>Glass Variant</h2>
+        <div class="preview-grid">
+            <div>
+                <div class="variant-label">With Padding</div>
+<div class="card" data-variant="glass" data-padded="true">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Glass Card</h3>
+                        <p class="card-description">A glass card with padding enabled.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="variant-label">Without Padding</div>
+<div class="card" data-variant="glass" data-padded="false">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Glass Card</h3>
+                        <p class="card-description">A glass card without padding.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2>Elevated Variant</h2>
+        <div class="preview-grid">
+            <div>
+                <div class="variant-label">With Padding</div>
+<div class="card" data-variant="elevated" data-padded="true">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Elevated Card</h3>
+                        <p class="card-description">An elevated card with padding.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="variant-label">Without Padding</div>
+<div class="card" data-variant="elevated" data-padded="false">
+                    <div class="card-content">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Elevated Card</h3>
+                        <p class="card-description">An elevated card without padding.</p>
+                        <div class="card-actions">
+                            <button class="liquid-button">Action</button>
+                            <button class="liquid-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
