@@ -134,6 +134,36 @@ Out of the box you get Apple HIG‑inspired tokens (colors, radii, shadows, blur
 }
 ```
 
+## ⤴️ Rounded corners (Apple HIG roles)
+
+LiqUIdify uses a roles‑based radius system for consistent, Apple‑style rounding across all components. When customizing shapes, use role tokens — do not use size‑based radii in component recipes.
+
+Roles and values:
+- button: capsule (full)
+- buttonCompact: 14px
+- buttonLarge: capsule (full)
+- control: 14px
+- field: 14px
+- fieldLarge: 16px
+- card: 20px
+- cardLarge: 22px
+- sheet: 22px
+- modal: 26px
+- pill, badge: capsule (full)
+
+Tip (for Panda users extending styles):
+
+```ts
+// Example: prefer role tokens over size tokens
+// This ensures library‑wide consistency with Apple HIG
+const styles = {
+  card: { borderRadius: "token(radii.roles.card)" },
+  field: { borderRadius: "token(radii.roles.field)" },
+  modal: { borderRadius: "token(radii.roles.modal)" },
+  button: { borderRadius: "token(radii.roles.button)" },
+};
+```
+
 ## ⚡ Performance & tree‑shaking
 
 - Subpath imports enable minimal bundles
