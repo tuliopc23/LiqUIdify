@@ -9,7 +9,6 @@ global.vi = vi;
 global.IS_REACT_ACT_ENVIRONMENT = true;
 
 // Debug: Check if setup is running
-console.log("Test setup loaded");
 
 /**
  * Sets up the DOM environment for React Testing Library
