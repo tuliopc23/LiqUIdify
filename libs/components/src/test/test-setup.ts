@@ -16,6 +16,43 @@ console.log("Test setup loaded");
  * Call this in beforeAll() in your test files
  */
 export function setupDOM() {
+	// If Vitest already provides a jsdom environment, don't recreate it.
+	const hasExistingDom =
+		typeof window !== "undefined" &&
+		typeof document !== "undefined" &&
+		!!document.body;
+	if (hasExistingDom) {
+		// Ensure required web APIs/mocks exist on the current jsdom window
+		Object.defineProperty(window, "matchMedia", {
+			writable: true,
+			value: vi.fn().mockImplementation((query) => ({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: vi.fn(),
+				removeListener: vi.fn(),
+				addEventListener: vi.fn(),
+				removeEventListener: vi.fn(),
+				dispatchEvent: vi.fn(),
+			})),
+		});
+
+		global.ResizeObserver = class ResizeObserver {
+			observe() {}
+			unobserve() {}
+			disconnect() {}
+		};
+
+		global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+			observe: vi.fn(),
+			unobserve: vi.fn(),
+			disconnect: vi.fn(),
+		})) as any;
+
+		return;
+	}
+
+	// Fallback: create a new jsdom if none exists (e.g., non-vitest callers)
 	const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
 		url: "http://localhost",
 	});
