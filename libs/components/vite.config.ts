@@ -8,6 +8,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 const Dirname = fileURLToPath(new URL(".", import.meta.url));
 
+const assetFileNameFn = (assetInfo: any) => {
+	if (assetInfo?.names?.[0]?.endsWith(".css")) {
+		return "liquidify.css";
+	}
+	return "assets/[name]-[hash][extname]";
+};
+
 function discoverEntries() {
 	const entries: Record<string, string> = {
 		index: resolve(Dirname, "src/index.ts"),
@@ -73,12 +80,7 @@ export default defineConfig({
 					entryFileNames: (chunkInfo) =>
 						chunkInfo.name === "index" ? "index.mjs" : `${chunkInfo.name}.mjs`,
 					chunkFileNames: "chunks/[name]-[hash].mjs",
-					assetFileNames: (assetInfo) => {
-						if (assetInfo?.names?.[0]?.endsWith(".css")) {
-							return "liquidify.css";
-						}
-						return "assets/[name]-[hash][extname]";
-					},
+					assetFileNames: assetFileNameFn,
 				},
 				{
 					format: "cjs",
@@ -86,12 +88,7 @@ export default defineConfig({
 					entryFileNames: (chunkInfo) =>
 						chunkInfo.name === "index" ? "index.cjs" : `${chunkInfo.name}.cjs`,
 					chunkFileNames: "chunks/[name]-[hash].cjs",
-					assetFileNames: (assetInfo) => {
-						if (assetInfo?.names?.[0]?.endsWith(".css")) {
-							return "liquidify.css";
-						}
-						return "assets/[name]-[hash][extname]";
-					},
+					assetFileNames: assetFileNameFn,
 				},
 			],
 		},
