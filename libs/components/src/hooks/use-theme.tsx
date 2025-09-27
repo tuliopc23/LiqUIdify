@@ -107,8 +107,8 @@ export function ThemeProvider({
 			"--ring": theme === "dark" ? "224.3 76.3% 94.1%" : "221.2 83.2% 53.3%",
 			"--radius": "0.5rem",
 
-			// Canvas background for docs only
-			"--ui-canvas-bg": theme === "dark" ? "#0a0a0a" : "#fafafa",
+			// Canvas background for docs only (mapped to tokens)
+			"--ui-canvas-bg": "var(--colors-bg-canvas)",
 		};
 
 		// Apply only compatibility properties

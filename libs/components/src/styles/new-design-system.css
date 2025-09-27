@@ -1,14 +1,18 @@
 /* SF Pro Display Font Import from CDN */
-@import url("https://v1.fontapi.ir/css/SFProDisplay");
+
 
 /* New Design System - SF Pro Font Implementation */
 
 /* Font Family Updates */
 :root {
-	--font-family-primary: "SF Pro Display", sans-serif;
-	--font-family-display: "SF Pro Display", sans-serif;
-	--font-family-body: "SF Pro Display", sans-serif;
-	--font-family-mono: "SF Mono", monospace;
+	--global-font-body: var(--font-fallback);
+	--global-font-display: var(--font-fallback);
+	--global-font-mono: var(--font-mono-fallback);
+
+	--font-family-primary: var(--global-font-body, var(--font-fallback));
+	--font-family-display: var(--global-font-display, var(--global-font-body, var(--font-fallback)));
+	--font-family-body: var(--global-font-body, var(--font-fallback));
+	--font-family-mono: var(--global-font-mono, var(--font-mono-fallback));
 
 	/* SF Pro Display Weight Hierarchy (Apple HIG Variable Font Guidelines) */
 	--font-weight-thin: 100;

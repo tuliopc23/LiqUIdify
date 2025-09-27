@@ -16,7 +16,7 @@
 	"dependencies": {
 		"cache": "^3.0.0"
 	},
-	"description": "🚀 Production-ready React component library with modern design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
+	"description": "🚀 Production-ready React component library inspired by Apple's new design language post-WWDC 2025. Built with Panda CSS and React, using Bun as runtime (npm compatible). Helps developers maintain design consistency for Apple platform apps. 47+ components, TypeScript-first, accessibility-ready.",
 	"devDependencies": {
 		"@axe-core/playwright": "^4.10.2",
 		"@biomejs/biome": "^2.2.4",
@@ -80,7 +80,7 @@
 		"type": "github",
 		"url": "https://github.com/sponsors/tuliopc23"
 	},
-	"homepage": "https://docs.useliquidify.dev",
+	"homepage": "https://www.useliquidify.dev",
 	"keywords": [
 		"react",
 		"typescript",

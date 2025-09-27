@@ -5,7 +5,7 @@
  * with proper handling of conditional classes, arrays, and objects.
  */
 
-import { cx } from "../../../../../styled-system/css";
+import { cx, css } from "../../../../../styled-system/css";
 
 /**
  * Combines multiple class values into a single string using Panda CSS
@@ -66,7 +66,15 @@ export function focusRing(visible = true): string {
 		return "";
 	}
 
-	return "focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2";
+	// Use Panda CSS tokens and dynamic accent color
+	// Applies a subtle outside ring that respects `--ui-accent` fallback
+	return css({
+		_focusVisible: {
+			outline: "none",
+			boxShadow: "0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
+			borderColor: "token(colors.accent.dynamic)",
+		},
+	});
 }
 
 /**

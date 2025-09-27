@@ -187,8 +187,8 @@
   body {
     margin: 0;
     padding: 0;
-    font-family: "SF Pro Display", sans-serif;
-}
+    font-family: var(--global-font-body, var(--font-fallback));
+  }
 
   .liquid-wobble-active {
     animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);

@@ -1,4 +1,6 @@
-# 🌊 LiqUIdify — Apple Liquid Glass for React (built on Ark UI + Panda CSS)
+# 🌊 LiqUIdify
+
+Apple-inspired React UI library for consistent web experiences in Apple platform apps. Built with Panda CSS, React, and Bun (npm compatible). TypeScript-first, accessible, and tree-shakeable.
 
 [![npm version](https://img.shields.io/npm/v/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
 [![npm downloads](https://img.shields.io/npm/dm/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
@@ -7,56 +9,47 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 
-Production‑ready, opinionated React components pre‑styled with Apple’s Liquid Glass look and feel. 47 Ark UI wrappers + 1 custom Button, TypeScript‑first, tree‑shakeable, and accessible.
+Inspired by Apple's post-WWDC 2025 design language and HIG principles, LiqUIdify brings Liquid Glass aesthetics (blurs, accents, SF Pro) to web apps. 48 pre-styled components (47 Ark UI wrappers + 1 custom), fully accessible (WCAG 2.1 AA), and optimized for React 18/19.
 
-## ✨ What you get
-- 🍎 Apple HIG Liquid Glass styling (blurred glass surfaces, Apple accent system, SF Pro typography)
-- 🏗️ Ark UI primitives under the hood (accessible, headless)
-- 🎨 Panda CSS recipes and tokens generated at build time
-- ⚡ Tree‑shaking with root and subpath imports
-- ♿ WCAG 2.1 AA targets (keyboard + screen reader friendly)
-- 🔧 React 18/19 compatible, ESM + CJS outputs
+## ✨ Features
 
-## 🚀 Install
+- 🍎 **Apple HIG Alignment**: Liquid Glass effects, dynamic accents, SF Pro fonts—mirroring post-WWDC 2025 iOS/macOS designs for seamless cross-platform consistency.
+- 🏗️ **Headless & Accessible**: Powered by Ark UI for robust, customizable primitives with built-in ARIA support.
+- 🎨 **Panda CSS Integration**: Atomic styles, recipes, and tokens for theming and extension.
+- ⚡ **Optimized Bundles**: Subpath imports for tree-shaking; peers prevent duplicates.
+- ♿ **Inclusive Design**: WCAG 2.1 AA compliant out-of-the-box.
+- 🔧 **Modern Stack**: React 18/19, Bun runtime (npm/yarn/pnpm compatible), ESM/CJS exports.
 
-LiqUIdify ships in peer mode (recommended). Install the package and peers:
+## 🚀 Quick Start
+
+### Installation
+Install via Bun (recommended) or npm:
 
 ```bash
-# Bun
+# Bun (primary runtime)
 bun add liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
 
-# npm
+# npm (compatible)
 npm i liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
-
-# pnpm
-pnpm add liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
-
-# yarn
-yarn add liquidify-react react react-dom @ark-ui/react framer-motion lucide-react
 ```
 
-## 🧩 Use
+Peers ensure no bundle bloat—add only what you need.
 
-Import the CSS once (tokens, preflight, and glass styles), then import components.
+### Basic Usage
+Import styles once, then components:
 
 ```tsx
 import "liquidify-react/styles";
 import { Button } from "liquidify-react";
 
-export default function App() {
+function App() {
   return <Button variant="primary">Get Started</Button>;
 }
 ```
 
-You can also subpath‑import any component for optimal tree‑shaking:
+For tree-shaking, use subpaths: `import { Button } from "liquidify-react/button";`
 
-```tsx
-import "liquidify-react/styles";
-import { Button } from "liquidify-react/button";
-// e.g. import { Tabs } from "liquidify-react/tabs";
-```
-
-Why CSS import? Library mode emits a single CSS file. Importing `liquidify-react/styles` ensures tokens + recipes are applied regardless of the consumer bundler.
+The CSS import loads tokens, resets, and base Liquid Glass styles—essential for consistent rendering.
 
 ### ThemeProvider (accent + theme)
 
@@ -114,16 +107,18 @@ Keeping Ark UI as a peer avoids duplicate copies in apps, improving bundle size 
 
 Components attach their classes via Panda recipes at runtime; the global CSS provides tokens and preflight.
 
-## 📚 Component inventory
+## 📚 Components (48 Total)
 
-47 Ark UI wrappers + 1 custom:
+Pre-styled wrappers for Ark UI primitives + custom Button:
 
-- Forms & Inputs: Button, IconButton, Checkbox, RadioGroup, Switch, Slider, NumberInput, PasswordInput, PinInput, TagsInput, Select, Combobox, DatePicker, FileUpload
-- Navigation & Structure: Tabs, Accordion, Collapsible, Menu, Pagination, Steps, Splitter
-- Feedback & Display: Toast, Progress (Linear/Circular), Avatar, HoverCard, Tooltip, Popover, ScrollArea, FloatingPanel, Dialog
-- Advanced: TreeView, ColorPicker, AngleSlider, SignaturePad, Carousel, RatingGroup, SegmentGroup, Toggle/ToggleGroup, QRCode, Timer, Tour
+| Category | Components |
+|----------|------------|
+| **Forms & Inputs** | Button, IconButton, Checkbox, RadioGroup, Switch, Slider, NumberInput, PasswordInput, PinInput, TagsInput, Select, Combobox, DatePicker, FileUpload |
+| **Navigation & Layout** | Tabs, Accordion, Collapsible, Menu, Pagination, Steps, Splitter |
+| **Feedback & Display** | Toast, Progress (Linear/Circular), Avatar, HoverCard, Tooltip, Popover, ScrollArea, FloatingPanel, Dialog |
+| **Advanced** | TreeView, ColorPicker, AngleSlider, SignaturePad, Carousel, RatingGroup, SegmentGroup, Toggle/ToggleGroup, QRCode, Timer, Tour |
 
-All wrappers ship pre‑styled.
+All are accessible and customizable via props/slots.
 
 ## 🛠️ Framework notes
 
@@ -226,9 +221,10 @@ These map to scripts in package.json and target `libs/components/vite.config.ts`
 
 MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
-## Links
+## 📖 Resources
 
-- Docs: https://docs.useliquidify.dev
-- GitHub: https://github.com/tuliopc23/LiqUIdify
-- npm: https://www.npmjs.com/package/liquidify-react
-- Issues: https://github.com/tuliopc23/LiqUIdify/issues
+- 🌐 [Website](https://www.useliquidify.dev)
+- 📚 [Documentation](https://docs.useliquidify.dev)
+- 🛠️ [GitHub Repo](https://github.com/tuliopc23/LiqUIdify)
+- 📦 [npm Package](https://www.npmjs.com/package/liquidify-react)
+- 🐛 [Issues & Feedback](https://github.com/tuliopc23/LiqUIdify/issues)
