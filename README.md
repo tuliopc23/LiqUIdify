@@ -58,6 +58,36 @@ import { Button } from "liquidify-react/button";
 
 Why CSS import? Library mode emits a single CSS file. Importing `liquidify-react/styles` ensures tokens + recipes are applied regardless of the consumer bundler.
 
+### ThemeProvider (accent + theme)
+
+Wrap your app with `ThemeProvider` to control light/dark and the Apple accent color at runtime.
+
+```tsx
+import "liquidify-react/styles";
+import { ThemeProvider, useTheme, Button } from "liquidify-react";
+
+function AccentToggle() {
+  const { accent, setAccent, theme, setTheme } = useTheme();
+  return (
+    <div style={{ display: "flex", gap: 8 }}>
+      <Button onClick={() => setAccent("#34C759")}>Mint</Button>
+      <Button onClick={() => setAccent("#007AFF")}>Blue</Button>
+      <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>Toggle theme</Button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider defaultTheme="light" defaultAccent="#007AFF">
+      <AccentToggle />
+    </ThemeProvider>
+  );
+}
+```
+
+`ThemeProvider` is optional: components render styled without it. When used, it sets `data-theme` and `--ui-accent` to match Apple HIG tokens.
+
 ## 📦 Exports
 
 - Root: `import { Button } from "liquidify-react"`

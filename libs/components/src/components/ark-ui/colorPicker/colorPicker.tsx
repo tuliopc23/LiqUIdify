@@ -31,7 +31,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
 				<ArkColorPicker.Control>
 					<ArkColorPicker.ChannelInput channel="hex" />
 					<ArkColorPicker.Trigger>
-						<ArkColorPicker.Swatch value="#ff0000" />
+						<ArkColorPicker.Swatch />
 					</ArkColorPicker.Trigger>
 				</ArkColorPicker.Control>
 				<ArkColorPicker.Positioner>
