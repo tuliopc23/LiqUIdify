@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { beforeAll, describe, expect, it } from "vitest";
-import { setupDOM } from "./test-setup";
 import { Checkbox } from "../components/ark-ui/checkbox/checkbox";
 // Import components directly from source to avoid bundling concerns in tests
 import { Button } from "../components/button";
+import { setupDOM } from "./test-setup";
 
 // Ensure DOM environment and mocks are set up
 beforeAll(() => {

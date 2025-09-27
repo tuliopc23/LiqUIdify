@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 function AccentChanger() {
   const { setAccent, accent } = useTheme();
   return (
-    <button aria-label="change-accent" onClick={() => setAccent("#34C759")}>
+    <button type="button" aria-label="change-accent" onClick={() => setAccent("#34C759")}>
       {accent}
     </button>
   );

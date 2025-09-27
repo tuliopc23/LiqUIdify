@@ -114,8 +114,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 				if (e.key === "Tab") {
 					const focusables = getFocusable(contentRef.current);
 					if (focusables.length === 0) return;
-					const first = focusables[0]!;
-					const last = focusables[focusables.length - 1]!;
+					const first = focusables[0];
+					const last = focusables[focusables.length - 1];
+					if (!first || !last) return;
 					const active = document.activeElement as HTMLElement | null;
 					if (e.shiftKey) {
 						if (active === first || !contentRef.current?.contains(active)) {

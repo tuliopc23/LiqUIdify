@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 import { setupDOM } from "../../test/test-setup";
 import { Modal } from "./Modal";
@@ -11,7 +11,7 @@ describe("Modal a11y", () => {
 	test("renders with role dialog and aria-modal", () => {
 		const { container } = render(
 			<Modal open ariaLabel="Example" ariaLabelledBy="heading-id">
-				<h2 id="heading-id">Title</h2>
+				<h2 id={"heading-id"}>Title</h2>
 			</Modal>,
 		);
 		const dialog = container.querySelector('[role="dialog"]') as HTMLElement;
@@ -24,8 +24,8 @@ describe("Modal a11y", () => {
 	test("focuses first focusable on open and traps tab", () => {
 		const { container } = render(
 			<Modal open>
-				<button>first</button>
-				<button>second</button>
+				<button type="button">first</button>
+				<button type="button">second</button>
 			</Modal>,
 		);
 		const buttons = container.querySelectorAll("button");
@@ -47,7 +47,7 @@ describe("Modal a11y", () => {
 		const onClose = vi.fn();
 		render(
 			<Modal open onClose={onClose} closeOnEsc>
-				<button>ok</button>
+				<button type="button">ok</button>
 			</Modal>,
 		);
 		fireEvent.keyDown(document, { key: "Escape" });
@@ -58,7 +58,7 @@ describe("Modal a11y", () => {
 		const onClose = vi.fn();
 		const { container } = render(
 			<Modal open onClose={onClose} closeOnBackdropClick>
-				<button>ok</button>
+				<button type="button">ok</button>
 			</Modal>,
 		);
 		// Positioner is parent of the dialog content
@@ -76,7 +76,7 @@ describe("Modal a11y", () => {
 
 		const { rerender } = render(
 			<Modal open>
-				<button>inside</button>
+				<button type="button">inside</button>
 			</Modal>,
 		);
 		// Close by toggling open -> false
