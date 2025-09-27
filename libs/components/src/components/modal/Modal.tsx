@@ -114,8 +114,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 				if (e.key === "Tab") {
 					const focusables = getFocusable(contentRef.current);
 					if (focusables.length === 0) return;
-					const first = focusables.at(0)!;
-					const last = focusables.at(-1)!;
+					const first = focusables[0]!;
+					const last = focusables[focusables.length - 1]!;
 					const active = document.activeElement as HTMLElement | null;
 					if (e.shiftKey) {
 						if (active === first || !contentRef.current?.contains(active)) {
@@ -152,7 +152,13 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 		return (
 			<>
 				<div className={slots.backdrop} />
-				<div className={slots.positioner} onMouseDown={handleBackdropClick}>
+				<div
+					className={slots.positioner}
+					role="button"
+					aria-label="Close modal"
+					onMouseDown={handleBackdropClick}
+					tabIndex={-1}
+				>
 					<div
 						className={cx(slots.content, className)}
 						ref={mergeRefs(contentRef, ref)}
