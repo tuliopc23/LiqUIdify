@@ -187,8 +187,8 @@
   body {
     margin: 0;
     padding: 0;
-    font-family: var(--global-font-body, var(--font-fallback));
-  }
+    font-family: "SF Pro Display", sans-serif;
+}
 
   .liquid-wobble-active {
     animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
@@ -579,6 +579,13 @@
       pointer-events: none;
 }
 
+    .liquid-button:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .liquid-button:is(:hover, [data-hover]) {
       border-color: rgba(255, 255, 255, 0.4);
       transform: translateY(-2px);
@@ -729,6 +736,13 @@
       bottom: 0;
 }
 
+    .checkbox:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .switch {
       background: var(--colors-glass-bg);
       border: 1px solid var(--colors-glass-border);
@@ -755,6 +769,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .switch:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .avatar {
@@ -815,6 +836,13 @@
       bottom: 0;
 }
 
+    .clipboard:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .clipboard:is(:hover, [data-hover]) {
       transform: translateY(-1px);
       box-shadow: var(--shadows-glass-hover);
@@ -867,6 +895,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .color-picker:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .editable {
@@ -1067,9 +1102,11 @@
       bottom: 0;
 }
 
-    .pin-input:is(:focus, [data-focus]) {
-      border-color: var(--colors-glass-accent-border);
-      box-shadow: var(--shadows-glass-hover);
+    .pin-input:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .progress {
@@ -1441,6 +1478,13 @@
       background: var(--colors-glass-medium-bg);
 }
 
+    .toggle:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .toggle:is(:hover, [data-hover]) {
       transform: translateY(-1px);
       box-shadow: var(--shadows-glass-hover);
@@ -1548,6 +1592,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .angle-slider:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .glass-surface {
@@ -1726,13 +1777,13 @@
 }
 
   .badge--tone_blue {
-    background: var(--colors-accent-primary);
+    background: var(--colors-accent-dynamic);
     border: 1px solid transparent;
     color: white;
 }
 
   .symbol--tint_blue {
-    background: color-mix(in oklch, var(--colors-blue-500) 20%, transparent);
+    background: color-mix(in oklch, var(--colors-accent-dynamic) 20%, transparent);
 }
 
   .symbol--tint_indigo {
@@ -2094,6 +2145,13 @@
       color: var(--colors-text-glass-primary);
 }
 
+    .dialog__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .dialog__trigger:is(:hover, [data-hover]) {
       transform: translateY(-1px);
       box-shadow: var(--shadows-glass-hover);
@@ -2114,6 +2172,13 @@
       right: var(--spacing-glass-md);
       width: 32px;
       height: 32px;
+}
+
+    .dialog__closeTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .dialog__closeTrigger:is(:hover, [data-hover]) {
@@ -2150,6 +2215,13 @@
     .tabs__trigger:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
       opacity: 0.5;
       cursor: not-allowed;
+}
+
+    .tabs__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .tabs__trigger:is(:hover, [data-hover]) {
@@ -2218,6 +2290,13 @@
       align-items: center;
       justify-content: center;
       color: var(--colors-text-glass-primary);
+}
+
+    .popover__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .popover__trigger:is(:hover, [data-hover]) {
@@ -2293,6 +2372,13 @@
       height: 24px;
 }
 
+    .popover__closeTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .popover__closeTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -2356,6 +2442,13 @@
       text-align: left;
       color: var(--colors-text-glass-primary);
       width: 100%;
+}
+
+    .accordion__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .accordion__trigger:is(:hover, [data-hover]) {
@@ -2432,6 +2525,13 @@
       height: 40px;
 }
 
+    .carousel__nextTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .carousel__nextTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -2454,6 +2554,13 @@
       left: var(--spacing-glass-md);
       width: 40px;
       height: 40px;
+}
+
+    .carousel__prevTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .carousel__prevTrigger:is(:hover, [data-hover]) {
@@ -2481,6 +2588,13 @@
 
     .carousel__indicator:is([aria-current=true], [data-current]) {
       background: var(--colors-glass-accent-bg);
+}
+
+    .carousel__indicator:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .combobox__root {
@@ -2517,6 +2631,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .combobox__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .combobox__input {
@@ -2581,6 +2702,13 @@
       background: var(--colors-glass-medium-bg);
 }
 
+    .combobox__item:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .combobox__item:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -2626,6 +2754,13 @@
       bottom: 0;
 }
 
+    .date-picker__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .date-picker__input {
       background: transparent;
       border: none;
@@ -2637,6 +2772,13 @@
       font-size: 16px;
       cursor: pointer;
       width: 100%;
+}
+
+    .date-picker__input:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .date-picker__positioner {
@@ -2703,6 +2845,13 @@
       color: var(--colors-text-glass-primary);
 }
 
+    .date-picker__tableCell:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .date-picker__tableCell:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -2743,6 +2892,13 @@
       bottom: 0;
 }
 
+    .file-upload__dropzone:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .file-upload__trigger {
       background: var(--colors-glass-medium-bg);
       border: 1px solid var(--colors-glass-border);
@@ -2754,6 +2910,13 @@
       font-size: 14px;
       font-weight: var(--font-weights-medium);
       color: var(--colors-text-glass-primary);
+}
+
+    .file-upload__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .file-upload__trigger:is(:hover, [data-hover]) {
@@ -2808,6 +2971,13 @@
       align-items: center;
       justify-content: center;
       color: var(--colors-text-glass-primary);
+}
+
+    .menu__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .menu__trigger:is(:hover, [data-hover]) {
@@ -2865,6 +3035,13 @@
 
     .menu__item[data-highlighted] {
       background: var(--colors-glass-subtle-bg);
+}
+
+    .menu__item:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .menu__item:is(:hover, [data-hover]) {
@@ -2937,6 +3114,13 @@
       color: var(--colors-text-glass-primary);
 }
 
+    .number-input__incrementTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .number-input__incrementTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-medium-bg);
 }
@@ -2950,6 +3134,13 @@
       z-index: 2;
       cursor: pointer;
       color: var(--colors-text-glass-primary);
+}
+
+    .number-input__decrementTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .number-input__decrementTrigger:is(:hover, [data-hover]) {
@@ -2998,6 +3189,13 @@
       color: white;
 }
 
+    .pagination__item:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .pagination__item:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -3027,6 +3225,13 @@
       cursor: not-allowed;
 }
 
+    .pagination__prevTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .pagination__prevTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -3051,6 +3256,13 @@
       cursor: not-allowed;
 }
 
+    .pagination__nextTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .pagination__nextTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -3067,6 +3279,13 @@
     .radio-group__item {
       align-items: center;
       cursor: pointer;
+}
+
+    .radio-group__item:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .radio-group__itemControl {
@@ -3096,6 +3315,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .radio-group__itemControl:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .radio-group__itemControl:is(:checked, [data-checked], [aria-checked=true], [data-state="checked"])::after {
@@ -3148,6 +3374,13 @@
       left: 0;
       right: 0;
       bottom: 0;
+}
+
+    .select__trigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .select__trigger:is(:hover, [data-hover]) {
@@ -3210,6 +3443,13 @@
       background: var(--colors-glass-medium-bg);
 }
 
+    .select__item:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .select__itemText {
       position: relative;
       z-index: 2;
@@ -3236,6 +3476,13 @@
       cursor: pointer;
       width: 24px;
       height: 24px;
+}
+
+    .select__clearTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
 }
 
     .select__clearTrigger:is(:hover, [data-hover]) {
@@ -3306,6 +3553,13 @@
       margin-left: auto;
 }
 
+    .toast__closeTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .toast__closeTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
@@ -3323,13 +3577,20 @@
       color: var(--colors-text-glass-primary);
 }
 
+    .toast__actionTrigger:is(:focus-visible, [data-focus-visible]) {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-color: var(--colors-accent-dynamic);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+}
+
     .toast__actionTrigger:is(:hover, [data-hover]) {
       background: var(--colors-glass-subtle-bg);
 }
 }
 
   .toast__root--status_info {
-    border-left-color: var(--colors-accent-primary);
+    border-left-color: var(--colors-accent-dynamic);
     border-left-width: 4px;
 }
 

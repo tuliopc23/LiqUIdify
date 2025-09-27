@@ -2,7 +2,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Theme lib helpers
-import { setAccent as applyAccent, getAccent as readAccent } from "../lib/theme";
+import {
+	setAccent as applyAccent,
+	getAccent as readAccent,
+} from "../lib/theme";
 
 // Type definitions
 type Theme = "light" | "dark";

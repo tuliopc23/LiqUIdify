@@ -5,7 +5,7 @@
  * with proper handling of conditional classes, arrays, and objects.
  */
 
-import { cx, css } from "../../../../../styled-system/css";
+import { css, cx } from "../../../../../styled-system/css";
 
 /**
  * Combines multiple class values into a single string using Panda CSS
@@ -71,7 +71,8 @@ export function focusRing(visible = true): string {
 	return css({
 		_focusVisible: {
 			outline: "none",
-			boxShadow: "0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
+			boxShadow:
+				"0 0 0 3px color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
 			borderColor: "token(colors.accent.dynamic)",
 		},
 	});

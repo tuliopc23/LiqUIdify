@@ -1,6 +1,5 @@
 /* SF Pro Display Font Import from CDN */
 
-
 /* New Design System - SF Pro Font Implementation */
 
 /* Font Family Updates */
@@ -10,7 +9,10 @@
 	--global-font-mono: var(--font-mono-fallback);
 
 	--font-family-primary: var(--global-font-body, var(--font-fallback));
-	--font-family-display: var(--global-font-display, var(--global-font-body, var(--font-fallback)));
+	--font-family-display: var(
+		--global-font-display,
+		var(--global-font-body, var(--font-fallback))
+	);
 	--font-family-body: var(--global-font-body, var(--font-fallback));
 	--font-family-mono: var(--global-font-mono, var(--font-mono-fallback));
 

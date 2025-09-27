@@ -2762,9 +2762,10 @@ borderRadius: "token(radii.roles.field)",
 							pointerEvents: "none",
 							zIndex: 1,
 						},
-						_focus: {
-							borderColor: "token(colors.glass.accent.border)",
-							boxShadow: "token(shadows.glass.hover)",
+						_focusVisible: {
+							outline: "none",
+							boxShadow: "0 0 0 3px color-mix(in oklch, {colors.accent.dynamic} 35%, transparent)",
+							borderColor: "token(colors.accent.dynamic)",
 						},
 					},
 					variants: {

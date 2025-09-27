@@ -69,7 +69,9 @@ export function initTheme(options: ThemeOptions = {}): Theme {
 // Accent helpers: manage dynamic accent color via CSS var and data attribute
 export type Accent = string; // CSS color string (e.g., "#007AFF" or "oklch(62% 0.2 236)")
 
-export function getAccent(options: { storageKey?: string; root?: HTMLElement } = {}): Accent {
+export function getAccent(
+	options: { storageKey?: string; root?: HTMLElement } = {},
+): Accent {
 	const { storageKey = DEFAULT_ACCENT_STORAGE_KEY, root } = options;
 	try {
 		if (typeof window !== "undefined" && window.localStorage) {
@@ -91,7 +93,10 @@ export function getAccent(options: { storageKey?: string; root?: HTMLElement } =
 	return "#007AFF";
 }
 
-export function setAccent(accent: Accent, options: { storageKey?: string; root?: HTMLElement } = {}): Accent {
+export function setAccent(
+	accent: Accent,
+	options: { storageKey?: string; root?: HTMLElement } = {},
+): Accent {
 	const { storageKey = DEFAULT_ACCENT_STORAGE_KEY, root } = options;
 	const el = getRoot(root);
 	if (el) {
@@ -112,7 +117,9 @@ export function setAccent(accent: Accent, options: { storageKey?: string; root?:
 	return accent;
 }
 
-export function initAccent(options: { storageKey?: string; root?: HTMLElement } = {}): Accent {
+export function initAccent(
+	options: { storageKey?: string; root?: HTMLElement } = {},
+): Accent {
 	const current = getAccent(options);
 	return setAccent(current, options);
 }
