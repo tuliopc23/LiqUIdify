@@ -1,6 +1,9 @@
 // External dependencies
 import { createContext, useContext, useEffect, useState } from "react";
 
+// Theme lib helpers
+import { setAccent as applyAccent, getAccent as readAccent } from "../lib/theme";
+
 // Type definitions
 type Theme = "light" | "dark";
 
@@ -8,17 +11,23 @@ interface ThemeProviderProps {
 	children: React.ReactNode;
 	defaultTheme?: Theme;
 	storageKey?: string;
+	defaultAccent?: string;
+	accentStorageKey?: string;
 }
 
 interface ThemeProviderState {
 	theme: Theme;
 	setTheme: (theme: Theme) => void;
+	accent: string;
+	setAccent: (accent: string) => void;
 }
 
 // Initial state
 const initialState: ThemeProviderState = {
 	theme: "light",
 	setTheme: () => undefined,
+	accent: "#007AFF",
+	setAccent: () => undefined,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
@@ -27,6 +36,8 @@ export function ThemeProvider({
 	children,
 	defaultTheme = "light",
 	storageKey = "ui-theme",
+	defaultAccent = "#007AFF",
+	accentStorageKey = "ui-accent",
 	...props
 }: ThemeProviderProps) {
 	const [theme, setTheme] = useState<Theme>(() => {
@@ -40,6 +51,14 @@ export function ThemeProvider({
 			// Logging disabled
 		}
 		return defaultTheme;
+	});
+
+	const [accent, setAccentState] = useState<string>(() => {
+		try {
+			return readAccent({ storageKey: accentStorageKey }) || defaultAccent;
+		} catch {
+			return defaultAccent;
+		}
 	});
 
 	useEffect(() => {
@@ -114,6 +133,22 @@ export function ThemeProvider({
 		}
 	}, [theme]);
 
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		const root = window.document.documentElement;
+		applyAccent(accent, { storageKey: accentStorageKey, root });
+		if (
+			typeof process !== "undefined" &&
+			process.env &&
+			process.env.NODE_ENV !== "production"
+		) {
+			console.log(`🎨 Accent applied: ${accent}`, {
+				dataAccent: root.dataset.accent,
+				cssVar: root.style.getPropertyValue("--ui-accent"),
+			});
+		}
+	}, [accent, accentStorageKey]);
+
 	const value = {
 		theme,
 		setTheme: (theme: Theme) => {
@@ -125,6 +160,10 @@ export function ThemeProvider({
 				// Logging disabled
 			}
 			setTheme(theme);
+		},
+		accent,
+		setAccent: (next: string) => {
+			setAccentState(next);
 		},
 	};
 

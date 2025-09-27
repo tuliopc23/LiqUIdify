@@ -38,8 +38,8 @@ export default defineConfig({
 
 						// Glass accent colors for interactive states (direct values to avoid circular refs)
 						accent: {
-							bg: { value: "#007AFF" },
-							border: { value: "#007AFF" },
+									bg: { value: "{colors.accent.dynamic}" },
+									border: { value: "{colors.accent.dynamic}" }
 						},
 
 						// Glass gradients for pseudo-elements
@@ -58,13 +58,13 @@ export default defineConfig({
 					// Component Variants (Apple-inspired, token-driven)
 					button: {
 						// Primary actions use the Apple Blue accent, blended for glass context
-						primary: {
-							bg: {
-								value:
-									"linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%)",
+							primary: {
+								bg: {
+									value:
+										"linear-gradient(135deg, color-mix(in oklch, {colors.accent.dynamic} 30%, transparent) 0%, color-mix(in oklch, {colors.accent.dynamic} 30%, transparent) 100%)",
+								},
+								border: { value: "color-mix(in oklch, {colors.accent.dynamic} 50%, transparent)" },
 							},
-							border: { value: "rgba(0, 122, 255, 0.50)" },
-						},
 						// Neutral/glassy surface — keep mostly translucent
 						secondary: {
 							bg: { value: "{colors.glass.medium.bg}" },
@@ -100,6 +100,8 @@ export default defineConfig({
 
 					// Apple System Accents (exact Apple system colors)
 					accent: {
+						// Dynamic accent – driven by CSS var with Apple Blue fallback
+						dynamic: { value: "var(--ui-accent, #007AFF)" },
 						// Blue — iOS/macOS system blue (exact Apple color)
 						primary: { value: "#007AFF" },
 						// Purple — iOS/macOS system purple
@@ -1107,7 +1109,7 @@ export default defineConfig({
 						status: {
 							info: {
 								root: {
-									borderLeftColor: "token(colors.accent.primary)",
+									borderLeftColor: "token(colors.accent.dynamic)",
 									borderLeftWidth: "4px",
 								},
 							},
@@ -2197,7 +2199,7 @@ export default defineConfig({
               neutral: { color: "{colors.text.glass.primary}" },
               blue: {
                 color: "white",
-                background: "{colors.accent.primary}",
+                background: "{colors.accent.dynamic}",
                 border: "1px solid transparent",
               },
             },
@@ -2246,7 +2248,7 @@ export default defineConfig({
               gray: {},
               blue: {
                 background:
-                  "color-mix(in oklch, var(--colors-blue-500) 20%, transparent)",
+                  "color-mix(in oklch, {colors.accent.dynamic} 20%, transparent)",
               },
               indigo: {
                 background:
@@ -2277,8 +2279,8 @@ export default defineConfig({
             _placeholder: { color: "{colors.text.glass.muted}" },
             outline: "none",
             _focusVisible: {
-              boxShadow: "0 0 0 3px rgba(0,122,255,.35)",
-              borderColor: "{colors.accent.primary}",
+              boxShadow: "0 0 0 3px color-mix(in oklch, {colors.accent.dynamic} 35%, transparent)",
+              borderColor: "{colors.accent.dynamic}",
             },
           },
           variants: {

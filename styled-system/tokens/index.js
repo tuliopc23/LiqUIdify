@@ -36,11 +36,11 @@ const tokens = {
     "variable": "var(--colors-glass-strong-border)"
   },
   "colors.glass.accent.bg": {
-    "value": "#007AFF",
+    "value": "var(--colors-accent-dynamic)",
     "variable": "var(--colors-glass-accent-bg)"
   },
   "colors.glass.accent.border": {
-    "value": "#007AFF",
+    "value": "var(--colors-accent-dynamic)",
     "variable": "var(--colors-glass-accent-border)"
   },
   "colors.glass.gradients.before": {
@@ -52,11 +52,11 @@ const tokens = {
     "variable": "var(--colors-glass-gradients-after)"
   },
   "colors.button.primary.bg": {
-    "value": "linear-gradient(135deg, rgba(0, 122, 255, 0.30) 0%, rgba(0, 122, 255, 0.30) 100%)",
+    "value": "linear-gradient(135deg, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 0%, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 100%)",
     "variable": "var(--colors-button-primary-bg)"
   },
   "colors.button.primary.border": {
-    "value": "rgba(0, 122, 255, 0.50)",
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 50%, transparent)",
     "variable": "var(--colors-button-primary-border)"
   },
   "colors.button.secondary.bg": {
@@ -98,6 +98,10 @@ const tokens = {
   "colors.button.warning.border": {
     "value": "rgba(255, 149, 0, 0.50)",
     "variable": "var(--colors-button-warning-border)"
+  },
+  "colors.accent.dynamic": {
+    "value": "var(--ui-accent, #007AFF)",
+    "variable": "var(--colors-accent-dynamic)"
   },
   "colors.accent.primary": {
     "value": "#007AFF",
@@ -352,15 +356,15 @@ const tokens = {
     "variable": "var(--radii-roles-field-large)"
   },
   "radii.roles.card": {
-    "value": "20px",
+    "value": "26px",
     "variable": "var(--radii-roles-card)"
   },
   "radii.roles.cardLarge": {
-    "value": "22px",
+    "value": "26px",
     "variable": "var(--radii-roles-card-large)"
   },
   "radii.roles.sheet": {
-    "value": "22px",
+    "value": "26px",
     "variable": "var(--radii-roles-sheet)"
   },
   "radii.roles.modal": {
@@ -822,6 +826,10 @@ const tokens = {
   "colors.colorPalette.warning.border": {
     "value": "var(--colors-color-palette-warning-border)",
     "variable": "var(--colors-color-palette-warning-border)"
+  },
+  "colors.colorPalette.dynamic": {
+    "value": "var(--colors-color-palette-dynamic)",
+    "variable": "var(--colors-color-palette-dynamic)"
   },
   "colors.colorPalette.primary": {
     "value": "var(--colors-color-palette-primary)",
