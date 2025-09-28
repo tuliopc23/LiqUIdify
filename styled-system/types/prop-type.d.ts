@@ -187,7 +187,7 @@ export interface UtilityValues {
 	srOnly: boolean;
 	debug: boolean;
 	containerName: CssProperties["containerName"];
-	colorPalette: "glass" | "glass.subtle" | "glass.medium" | "glass.strong" | "glass.accent" | "glass.gradients" | "button" | "button.primary" | "button.secondary" | "button.ghost" | "button.danger" | "button.success" | "button.warning" | "accent" | "text" | "text.glass" | "gray" | "blue" | "indigo" | "teal" | "green" | "orange" | "pink" | "bg" | "border";
+	colorPalette: "glass" | "glass.subtle" | "glass.medium" | "glass.strong" | "glass.accent" | "glass.gradients" | "button" | "button.primary" | "button.secondary" | "button.ghost" | "button.danger" | "button.success" | "button.warning" | "accent" | "text" | "text.glass" | "gray" | "blue" | "indigo" | "teal" | "green" | "orange" | "pink" | "bg" | "border" | "semantic" | "materials" | "selection";
 	textStyle: "display" | "title1" | "title3" | "body" | "caption";
 }
 

@@ -36,6 +36,10 @@ export function setupDOM() {
 			})),
 		});
 
+		// Ensure HTMLElement is available on global (jsdom provides it on window)
+		(global as any).HTMLElement = (window as any).HTMLElement;
+		(global as any).Element = (window as any).Element;
+
 		global.ResizeObserver = class ResizeObserver {
 			observe() {}
 			unobserve() {}

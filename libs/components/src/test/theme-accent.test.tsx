@@ -44,13 +44,13 @@ describe("ThemeProvider accent", () => {
 	it("updates DOM and storage when setAccent is called", async () => {
 		const user = userEvent.setup();
 
-		render(
+		const { findByRole } = render(
 			<ThemeProvider>
 				<AccentChanger />
 			</ThemeProvider>,
 		);
 
-		const btn = await screen.findByRole("button", { name: /change-accent/i });
+		const btn = await findByRole("button", { name: /change-accent/i });
 		await user.click(btn);
 
 		await waitFor(() => {

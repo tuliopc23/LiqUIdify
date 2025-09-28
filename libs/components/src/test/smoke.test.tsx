@@ -14,15 +14,15 @@ beforeAll(() => {
 
 describe("LiqUIdify components (smoke)", () => {
 	it("Button renders with Liquid recipe class", () => {
-		render(<Button variant="primary">Click</Button>);
-		const btn = screen.getByRole("button", { name: /click/i });
+		const { getByRole } = render(<Button variant="primary">Click</Button>);
+		const btn = getByRole("button", { name: /click/i });
 		// Panda recipe generates class names prefixed by recipe key (e.g., liquid-button)
 		expect(btn.className).toMatch(/liquid-/);
 	});
 
 	it("Checkbox renders without crash and shows label", () => {
-		render(<Checkbox label="Accept" />);
+		const { getByText } = render(<Checkbox label="Accept" />);
 		// Ark UI Checkbox renders a label element for text
-		expect(screen.getByText("Accept")).toBeInTheDocument();
+		expect(getByText("Accept")).toBeInTheDocument();
 	});
 });

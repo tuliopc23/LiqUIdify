@@ -83,7 +83,19 @@ export function getAccent(
 	}
 
 	const el = getRoot(root);
-	// Prefer inline CSS var if present
+	// Prefer computed CSS var (captures inline and stylesheet values with fallbacks)
+	try {
+		if (el && typeof window !== "undefined" && window.getComputedStyle) {
+			const computed = window
+				.getComputedStyle(el)
+				.getPropertyValue("--ui-accent")
+				.trim();
+			if (computed) return computed;
+		}
+	} catch {
+		// ignore style errors
+	}
+	// Check inline CSS var next
 	const cssVar = el?.style.getPropertyValue("--ui-accent").trim();
 	if (cssVar) return cssVar;
 	// Fallback to data attribute

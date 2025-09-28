@@ -187,6 +187,38 @@ export default defineConfig({
                 "color-mix(in oklch, #000 10%, transparent)",
             },
           },
+          // System semantic colors (Apple HIG)
+          semantic: {
+            label: { value: "rgba(0, 0, 0, 0.92)" },
+            secondaryLabel: { value: "rgba(0, 0, 0, 0.6)" },
+            tertiaryLabel: { value: "rgba(0, 0, 0, 0.3)" },
+            quaternaryLabel: { value: "rgba(0, 0, 0, 0.18)" },
+            systemBackground: { value: "{colors.bg.canvas}" },
+            secondarySystemBackground: { value: "{colors.bg.surface}" },
+            tertiarySystemBackground: { value: "{colors.bg.subtle}" },
+            separator: { value: "color-mix(in oklch, #000 10%, transparent)" },
+            fill: { value: "color-mix(in oklch, #000 5%, transparent)" },
+            fillSecondary: { value: "color-mix(in oklch, #000 10%, transparent)" }
+          },
+          // Material tiers and vibrancy overlays
+          materials: {
+            ultraThin: { value: "rgba(255, 255, 255, 0.06)" },
+            thin: { value: "rgba(255, 255, 255, 0.12)" },
+            regular: { value: "rgba(255, 255, 255, 0.2)" },
+            thick: { value: "rgba(255, 255, 255, 0.28)" },
+            overlayLight: {
+              value:
+                "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)"
+            },
+            overlayDark: {
+              value:
+                "linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%)"
+            }
+          },
+          selection: {
+            bg: { value: "color-mix(in oklch, {colors.accent.dynamic} 40%, transparent)" },
+            fg: { value: "{colors.text.glass.primary}" }
+          },
 				},
 
 				// Apple-exact border radius system (matches iOS/macOS HIG)

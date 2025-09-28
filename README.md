@@ -64,7 +64,7 @@ function AccentToggle() {
   return (
     <div style={{ display: "flex", gap: 8 }}>
       <Button onClick={() => setAccent("#34C759")}>Mint</Button>
-      <Button onClick={() => setAccent("#007AFF")}>Blue</Button>
+      <Button onClick={() => setAccent("var(--colors-accent-primary)")}>Blue</Button>
       <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>Toggle theme</Button>
     </div>
   );
@@ -72,7 +72,7 @@ function AccentToggle() {
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme="light" defaultAccent="#007AFF">
+    <ThemeProvider defaultTheme="light">
       <AccentToggle />
     </ThemeProvider>
   );
@@ -80,6 +80,37 @@ export default function App() {
 ```
 
 `ThemeProvider` is optional: components render styled without it. When used, it sets `data-theme` and `--ui-accent` to match Apple HIG tokens.
+
+Tip: You can set a global accent via CSS without using state:
+
+```css
+:root { --ui-accent: var(--colors-accent-primary, #007AFF); }
+```
+
+Components consume `token(colors.accent.dynamic)`, which resolves to `var(--ui-accent, #007AFF)`.
+
+#### Accent input formats
+- CSS colors: `#RRGGBB`, `rgb()`, `hsl()`, `oklch()` (e.g., `oklch(62% 0.2 236)`).
+- CSS variables: `var(--brand-accent)` or `var(--colors-accent-primary)`.
+
+Examples:
+```tsx
+// Using a CSS variable
+setAccent('var(--brand-accent)');
+
+// Using a color
+setAccent('#34C759');
+
+// Default via provider can also be a var
+<ThemeProvider defaultAccent={"var(--brand-accent)"}>
+  ...
+</ThemeProvider>
+```
+
+And define it in CSS:
+```css
+:root { --brand-accent: oklch(62% 0.2 236); }
+```
 
 ## 📦 Exports
 

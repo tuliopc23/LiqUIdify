@@ -295,6 +295,78 @@ const tokens = {
     "value": "color-mix(in oklch, #000 10%, transparent)",
     "variable": "var(--colors-border-hairline)"
   },
+  "colors.semantic.label": {
+    "value": "rgba(0, 0, 0, 0.92)",
+    "variable": "var(--colors-semantic-label)"
+  },
+  "colors.semantic.secondaryLabel": {
+    "value": "rgba(0, 0, 0, 0.6)",
+    "variable": "var(--colors-semantic-secondary-label)"
+  },
+  "colors.semantic.tertiaryLabel": {
+    "value": "rgba(0, 0, 0, 0.3)",
+    "variable": "var(--colors-semantic-tertiary-label)"
+  },
+  "colors.semantic.quaternaryLabel": {
+    "value": "rgba(0, 0, 0, 0.18)",
+    "variable": "var(--colors-semantic-quaternary-label)"
+  },
+  "colors.semantic.systemBackground": {
+    "value": "var(--colors-bg-canvas)",
+    "variable": "var(--colors-semantic-system-background)"
+  },
+  "colors.semantic.secondarySystemBackground": {
+    "value": "var(--colors-bg-surface)",
+    "variable": "var(--colors-semantic-secondary-system-background)"
+  },
+  "colors.semantic.tertiarySystemBackground": {
+    "value": "var(--colors-bg-subtle)",
+    "variable": "var(--colors-semantic-tertiary-system-background)"
+  },
+  "colors.semantic.separator": {
+    "value": "color-mix(in oklch, #000 10%, transparent)",
+    "variable": "var(--colors-semantic-separator)"
+  },
+  "colors.semantic.fill": {
+    "value": "color-mix(in oklch, #000 5%, transparent)",
+    "variable": "var(--colors-semantic-fill)"
+  },
+  "colors.semantic.fillSecondary": {
+    "value": "color-mix(in oklch, #000 10%, transparent)",
+    "variable": "var(--colors-semantic-fill-secondary)"
+  },
+  "colors.materials.ultraThin": {
+    "value": "rgba(255, 255, 255, 0.06)",
+    "variable": "var(--colors-materials-ultra-thin)"
+  },
+  "colors.materials.thin": {
+    "value": "rgba(255, 255, 255, 0.12)",
+    "variable": "var(--colors-materials-thin)"
+  },
+  "colors.materials.regular": {
+    "value": "rgba(255, 255, 255, 0.2)",
+    "variable": "var(--colors-materials-regular)"
+  },
+  "colors.materials.thick": {
+    "value": "rgba(255, 255, 255, 0.28)",
+    "variable": "var(--colors-materials-thick)"
+  },
+  "colors.materials.overlayLight": {
+    "value": "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
+    "variable": "var(--colors-materials-overlay-light)"
+  },
+  "colors.materials.overlayDark": {
+    "value": "linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%)",
+    "variable": "var(--colors-materials-overlay-dark)"
+  },
+  "colors.selection.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 40%, transparent)",
+    "variable": "var(--colors-selection-bg)"
+  },
+  "colors.selection.fg": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-selection-fg)"
+  },
   "radii.none": {
     "value": "0px",
     "variable": "var(--radii-none)"
@@ -958,6 +1030,74 @@ const tokens = {
   "colors.colorPalette.hairline": {
     "value": "var(--colors-color-palette-hairline)",
     "variable": "var(--colors-color-palette-hairline)"
+  },
+  "colors.colorPalette.label": {
+    "value": "var(--colors-color-palette-label)",
+    "variable": "var(--colors-color-palette-label)"
+  },
+  "colors.colorPalette.secondaryLabel": {
+    "value": "var(--colors-color-palette-secondary-label)",
+    "variable": "var(--colors-color-palette-secondary-label)"
+  },
+  "colors.colorPalette.tertiaryLabel": {
+    "value": "var(--colors-color-palette-tertiary-label)",
+    "variable": "var(--colors-color-palette-tertiary-label)"
+  },
+  "colors.colorPalette.quaternaryLabel": {
+    "value": "var(--colors-color-palette-quaternary-label)",
+    "variable": "var(--colors-color-palette-quaternary-label)"
+  },
+  "colors.colorPalette.systemBackground": {
+    "value": "var(--colors-color-palette-system-background)",
+    "variable": "var(--colors-color-palette-system-background)"
+  },
+  "colors.colorPalette.secondarySystemBackground": {
+    "value": "var(--colors-color-palette-secondary-system-background)",
+    "variable": "var(--colors-color-palette-secondary-system-background)"
+  },
+  "colors.colorPalette.tertiarySystemBackground": {
+    "value": "var(--colors-color-palette-tertiary-system-background)",
+    "variable": "var(--colors-color-palette-tertiary-system-background)"
+  },
+  "colors.colorPalette.separator": {
+    "value": "var(--colors-color-palette-separator)",
+    "variable": "var(--colors-color-palette-separator)"
+  },
+  "colors.colorPalette.fill": {
+    "value": "var(--colors-color-palette-fill)",
+    "variable": "var(--colors-color-palette-fill)"
+  },
+  "colors.colorPalette.fillSecondary": {
+    "value": "var(--colors-color-palette-fill-secondary)",
+    "variable": "var(--colors-color-palette-fill-secondary)"
+  },
+  "colors.colorPalette.ultraThin": {
+    "value": "var(--colors-color-palette-ultra-thin)",
+    "variable": "var(--colors-color-palette-ultra-thin)"
+  },
+  "colors.colorPalette.thin": {
+    "value": "var(--colors-color-palette-thin)",
+    "variable": "var(--colors-color-palette-thin)"
+  },
+  "colors.colorPalette.regular": {
+    "value": "var(--colors-color-palette-regular)",
+    "variable": "var(--colors-color-palette-regular)"
+  },
+  "colors.colorPalette.thick": {
+    "value": "var(--colors-color-palette-thick)",
+    "variable": "var(--colors-color-palette-thick)"
+  },
+  "colors.colorPalette.overlayLight": {
+    "value": "var(--colors-color-palette-overlay-light)",
+    "variable": "var(--colors-color-palette-overlay-light)"
+  },
+  "colors.colorPalette.overlayDark": {
+    "value": "var(--colors-color-palette-overlay-dark)",
+    "variable": "var(--colors-color-palette-overlay-dark)"
+  },
+  "colors.colorPalette.fg": {
+    "value": "var(--colors-color-palette-fg)",
+    "variable": "var(--colors-color-palette-fg)"
   }
 }
 
