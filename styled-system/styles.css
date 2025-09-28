@@ -252,6 +252,21 @@
 
 @layer tokens{
   :where(:root, :host) {
+    --typography-button-font-compact-size: var(--font-sizes-footnote);
+    --typography-button-font-compact-weight: var(--font-weights-semibold);
+    --typography-button-font-compact-line-height: var(--line-heights-snug);
+    --typography-button-font-compact-letter-spacing: var(--letter-spacings-tight);
+    --typography-button-font-regular-size: var(--font-sizes-body);
+    --typography-button-font-regular-weight: var(--font-weights-semibold);
+    --typography-button-font-regular-line-height: var(--line-heights-normal);
+    --typography-button-font-regular-letter-spacing: var(--letter-spacings-tight);
+    --typography-button-font-large-size: var(--font-sizes-title3);
+    --typography-button-font-large-weight: var(--font-weights-semibold);
+    --typography-button-font-large-line-height: var(--line-heights-snug);
+    --typography-button-font-large-letter-spacing: var(--letter-spacings-tight);
+    --typography-button-icon-compact: 1em;
+    --typography-button-icon-regular: 1.1em;
+    --typography-button-icon-large: 1.2em;
     --colors-glass-bg: rgba(255, 255, 255, 0.1);
     --colors-glass-border: rgba(255, 255, 255, 0.2);
     --colors-glass-ripple: rgba(255, 255, 255, 0.3);
@@ -277,6 +292,330 @@
     --colors-button-success-border: rgba(76, 217, 100, 0.50);
     --colors-button-warning-bg: linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%);
     --colors-button-warning-border: rgba(255, 149, 0, 0.50);
+    --colors-button-hig-filled-accent-default-bg: color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent);
+    --colors-button-hig-filled-accent-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-accent-default-border: color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent);
+    --colors-button-hig-filled-accent-hover-bg: color-mix(in oklch, var(--colors-accent-dynamic) 36%, transparent);
+    --colors-button-hig-filled-accent-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-accent-hover-border: color-mix(in oklch, var(--colors-accent-dynamic) 60%, transparent);
+    --colors-button-hig-filled-accent-active-bg: color-mix(in oklch, var(--colors-accent-dynamic) 42%, transparent);
+    --colors-button-hig-filled-accent-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-accent-active-border: color-mix(in oklch, var(--colors-accent-dynamic) 65%, transparent);
+    --colors-button-hig-filled-accent-disabled-bg: color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent);
+    --colors-button-hig-filled-accent-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-filled-accent-disabled-border: color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+    --colors-button-hig-filled-accent-focus-bg: color-mix(in oklch, var(--colors-accent-dynamic) 32%, transparent);
+    --colors-button-hig-filled-accent-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-accent-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-filled-accent-loading-bg: color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent);
+    --colors-button-hig-filled-accent-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-accent-loading-border: color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent);
+    --colors-button-hig-filled-neutral-default-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-filled-neutral-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-neutral-default-border: var(--colors-glass-medium-border);
+    --colors-button-hig-filled-neutral-hover-bg: var(--colors-glass-strong-bg);
+    --colors-button-hig-filled-neutral-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-neutral-hover-border: var(--colors-glass-strong-border);
+    --colors-button-hig-filled-neutral-active-bg: color-mix(in oklch, #000 5%, var(--colors-glass-strong-bg));
+    --colors-button-hig-filled-neutral-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-neutral-active-border: var(--colors-glass-strong-border);
+    --colors-button-hig-filled-neutral-disabled-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-filled-neutral-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-filled-neutral-disabled-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-filled-neutral-focus-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-filled-neutral-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-neutral-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-filled-neutral-loading-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-filled-neutral-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-neutral-loading-border: var(--colors-glass-medium-border);
+    --colors-button-hig-filled-destructive-default-bg: color-mix(in oklch, var(--colors-accent-danger) 30%, transparent);
+    --colors-button-hig-filled-destructive-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-destructive-default-border: color-mix(in oklch, var(--colors-accent-danger) 55%, transparent);
+    --colors-button-hig-filled-destructive-hover-bg: color-mix(in oklch, var(--colors-accent-danger) 36%, transparent);
+    --colors-button-hig-filled-destructive-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-destructive-hover-border: color-mix(in oklch, var(--colors-accent-danger) 60%, transparent);
+    --colors-button-hig-filled-destructive-active-bg: color-mix(in oklch, var(--colors-accent-danger) 42%, transparent);
+    --colors-button-hig-filled-destructive-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-destructive-active-border: color-mix(in oklch, var(--colors-accent-danger) 65%, transparent);
+    --colors-button-hig-filled-destructive-disabled-bg: color-mix(in oklch, var(--colors-accent-danger) 18%, transparent);
+    --colors-button-hig-filled-destructive-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-filled-destructive-disabled-border: color-mix(in oklch, var(--colors-accent-danger) 35%, transparent);
+    --colors-button-hig-filled-destructive-focus-bg: color-mix(in oklch, var(--colors-accent-danger) 32%, transparent);
+    --colors-button-hig-filled-destructive-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-destructive-focus-border: var(--colors-accent-danger);
+    --colors-button-hig-filled-destructive-loading-bg: color-mix(in oklch, var(--colors-accent-danger) 30%, transparent);
+    --colors-button-hig-filled-destructive-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-filled-destructive-loading-border: color-mix(in oklch, var(--colors-accent-danger) 55%, transparent);
+    --colors-button-hig-tinted-accent-default-bg: color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent);
+    --colors-button-hig-tinted-accent-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-accent-default-border: color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+    --colors-button-hig-tinted-accent-hover-bg: color-mix(in oklch, var(--colors-accent-dynamic) 24%, transparent);
+    --colors-button-hig-tinted-accent-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-accent-hover-border: color-mix(in oklch, var(--colors-accent-dynamic) 45%, transparent);
+    --colors-button-hig-tinted-accent-active-bg: color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent);
+    --colors-button-hig-tinted-accent-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-accent-active-border: color-mix(in oklch, var(--colors-accent-dynamic) 50%, transparent);
+    --colors-button-hig-tinted-accent-disabled-bg: color-mix(in oklch, var(--colors-accent-dynamic) 12%, transparent);
+    --colors-button-hig-tinted-accent-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-tinted-accent-disabled-border: color-mix(in oklch, var(--colors-accent-dynamic) 25%, transparent);
+    --colors-button-hig-tinted-accent-focus-bg: color-mix(in oklch, var(--colors-accent-dynamic) 20%, transparent);
+    --colors-button-hig-tinted-accent-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-accent-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-tinted-accent-loading-bg: color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent);
+    --colors-button-hig-tinted-accent-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-accent-loading-border: color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
+    --colors-button-hig-tinted-neutral-default-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-tinted-neutral-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-neutral-default-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-tinted-neutral-hover-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-tinted-neutral-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-neutral-hover-border: var(--colors-glass-medium-border);
+    --colors-button-hig-tinted-neutral-active-bg: var(--colors-glass-strong-bg);
+    --colors-button-hig-tinted-neutral-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-neutral-active-border: var(--colors-glass-strong-border);
+    --colors-button-hig-tinted-neutral-disabled-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-tinted-neutral-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-tinted-neutral-disabled-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-tinted-neutral-focus-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-tinted-neutral-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-neutral-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-tinted-neutral-loading-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-tinted-neutral-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-neutral-loading-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-tinted-destructive-default-bg: color-mix(in oklch, var(--colors-accent-danger) 18%, transparent);
+    --colors-button-hig-tinted-destructive-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-destructive-default-border: color-mix(in oklch, var(--colors-accent-danger) 35%, transparent);
+    --colors-button-hig-tinted-destructive-hover-bg: color-mix(in oklch, var(--colors-accent-danger) 24%, transparent);
+    --colors-button-hig-tinted-destructive-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-destructive-hover-border: color-mix(in oklch, var(--colors-accent-danger) 45%, transparent);
+    --colors-button-hig-tinted-destructive-active-bg: color-mix(in oklch, var(--colors-accent-danger) 28%, transparent);
+    --colors-button-hig-tinted-destructive-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-destructive-active-border: color-mix(in oklch, var(--colors-accent-danger) 50%, transparent);
+    --colors-button-hig-tinted-destructive-disabled-bg: color-mix(in oklch, var(--colors-accent-danger) 12%, transparent);
+    --colors-button-hig-tinted-destructive-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-tinted-destructive-disabled-border: color-mix(in oklch, var(--colors-accent-danger) 25%, transparent);
+    --colors-button-hig-tinted-destructive-focus-bg: color-mix(in oklch, var(--colors-accent-danger) 20%, transparent);
+    --colors-button-hig-tinted-destructive-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-destructive-focus-border: var(--colors-accent-danger);
+    --colors-button-hig-tinted-destructive-loading-bg: color-mix(in oklch, var(--colors-accent-danger) 18%, transparent);
+    --colors-button-hig-tinted-destructive-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-tinted-destructive-loading-border: color-mix(in oklch, var(--colors-accent-danger) 35%, transparent);
+    --colors-button-hig-plain-accent-default-bg: transparent;
+    --colors-button-hig-plain-accent-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-accent-default-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-accent-hover-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-plain-accent-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-accent-hover-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-accent-active-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-plain-accent-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-accent-active-border: var(--colors-glass-medium-border);
+    --colors-button-hig-plain-accent-disabled-bg: transparent;
+    --colors-button-hig-plain-accent-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-plain-accent-disabled-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-accent-focus-bg: transparent;
+    --colors-button-hig-plain-accent-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-accent-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-plain-accent-loading-bg: transparent;
+    --colors-button-hig-plain-accent-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-accent-loading-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-neutral-default-bg: transparent;
+    --colors-button-hig-plain-neutral-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-neutral-default-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-neutral-hover-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-plain-neutral-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-neutral-hover-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-neutral-active-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-plain-neutral-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-neutral-active-border: var(--colors-glass-medium-border);
+    --colors-button-hig-plain-neutral-disabled-bg: transparent;
+    --colors-button-hig-plain-neutral-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-plain-neutral-disabled-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-neutral-focus-bg: transparent;
+    --colors-button-hig-plain-neutral-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-neutral-focus-border: var(--colors-accent-dynamic);
+    --colors-button-hig-plain-neutral-loading-bg: transparent;
+    --colors-button-hig-plain-neutral-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-neutral-loading-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-destructive-default-bg: transparent;
+    --colors-button-hig-plain-destructive-default-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-destructive-default-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-destructive-hover-bg: var(--colors-glass-subtle-bg);
+    --colors-button-hig-plain-destructive-hover-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-destructive-hover-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-destructive-active-bg: var(--colors-glass-medium-bg);
+    --colors-button-hig-plain-destructive-active-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-destructive-active-border: var(--colors-glass-medium-border);
+    --colors-button-hig-plain-destructive-disabled-bg: transparent;
+    --colors-button-hig-plain-destructive-disabled-text: var(--colors-text-glass-disabled);
+    --colors-button-hig-plain-destructive-disabled-border: var(--colors-glass-subtle-border);
+    --colors-button-hig-plain-destructive-focus-bg: transparent;
+    --colors-button-hig-plain-destructive-focus-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-destructive-focus-border: var(--colors-accent-danger);
+    --colors-button-hig-plain-destructive-loading-bg: transparent;
+    --colors-button-hig-plain-destructive-loading-text: var(--colors-text-glass-primary);
+    --colors-button-hig-plain-destructive-loading-border: var(--colors-glass-subtle-border);
+    --colors-button-filled-accent-default-bg: var(--colors-button-hig-filled-accent-default-bg);
+    --colors-button-filled-accent-default-text: var(--colors-button-hig-filled-accent-default-text);
+    --colors-button-filled-accent-default-border: var(--colors-button-hig-filled-accent-default-border);
+    --colors-button-filled-accent-hover-bg: var(--colors-button-hig-filled-accent-hover-bg);
+    --colors-button-filled-accent-hover-text: var(--colors-button-hig-filled-accent-hover-text);
+    --colors-button-filled-accent-hover-border: var(--colors-button-hig-filled-accent-hover-border);
+    --colors-button-filled-accent-active-bg: var(--colors-button-hig-filled-accent-active-bg);
+    --colors-button-filled-accent-active-text: var(--colors-button-hig-filled-accent-active-text);
+    --colors-button-filled-accent-active-border: var(--colors-button-hig-filled-accent-active-border);
+    --colors-button-filled-accent-disabled-bg: var(--colors-button-hig-filled-accent-disabled-bg);
+    --colors-button-filled-accent-disabled-text: var(--colors-button-hig-filled-accent-disabled-text);
+    --colors-button-filled-accent-disabled-border: var(--colors-button-hig-filled-accent-disabled-border);
+    --colors-button-filled-accent-focus-bg: var(--colors-button-hig-filled-accent-focus-bg);
+    --colors-button-filled-accent-focus-text: var(--colors-button-hig-filled-accent-focus-text);
+    --colors-button-filled-accent-focus-border: var(--colors-button-hig-filled-accent-focus-border);
+    --colors-button-filled-accent-loading-bg: var(--colors-button-hig-filled-accent-loading-bg);
+    --colors-button-filled-accent-loading-text: var(--colors-button-hig-filled-accent-loading-text);
+    --colors-button-filled-accent-loading-border: var(--colors-button-hig-filled-accent-loading-border);
+    --colors-button-filled-neutral-default-bg: var(--colors-button-hig-filled-neutral-default-bg);
+    --colors-button-filled-neutral-default-text: var(--colors-button-hig-filled-neutral-default-text);
+    --colors-button-filled-neutral-default-border: var(--colors-button-hig-filled-neutral-default-border);
+    --colors-button-filled-neutral-hover-bg: var(--colors-button-hig-filled-neutral-hover-bg);
+    --colors-button-filled-neutral-hover-text: var(--colors-button-hig-filled-neutral-hover-text);
+    --colors-button-filled-neutral-hover-border: var(--colors-button-hig-filled-neutral-hover-border);
+    --colors-button-filled-neutral-active-bg: var(--colors-button-hig-filled-neutral-active-bg);
+    --colors-button-filled-neutral-active-text: var(--colors-button-hig-filled-neutral-active-text);
+    --colors-button-filled-neutral-active-border: var(--colors-button-hig-filled-neutral-active-border);
+    --colors-button-filled-neutral-disabled-bg: var(--colors-button-hig-filled-neutral-disabled-bg);
+    --colors-button-filled-neutral-disabled-text: var(--colors-button-hig-filled-neutral-disabled-text);
+    --colors-button-filled-neutral-disabled-border: var(--colors-button-hig-filled-neutral-disabled-border);
+    --colors-button-filled-neutral-focus-bg: var(--colors-button-hig-filled-neutral-focus-bg);
+    --colors-button-filled-neutral-focus-text: var(--colors-button-hig-filled-neutral-focus-text);
+    --colors-button-filled-neutral-focus-border: var(--colors-button-hig-filled-neutral-focus-border);
+    --colors-button-filled-neutral-loading-bg: var(--colors-button-hig-filled-neutral-loading-bg);
+    --colors-button-filled-neutral-loading-text: var(--colors-button-hig-filled-neutral-loading-text);
+    --colors-button-filled-neutral-loading-border: var(--colors-button-hig-filled-neutral-loading-border);
+    --colors-button-filled-destructive-default-bg: var(--colors-button-hig-filled-destructive-default-bg);
+    --colors-button-filled-destructive-default-text: var(--colors-button-hig-filled-destructive-default-text);
+    --colors-button-filled-destructive-default-border: var(--colors-button-hig-filled-destructive-default-border);
+    --colors-button-filled-destructive-hover-bg: var(--colors-button-hig-filled-destructive-hover-bg);
+    --colors-button-filled-destructive-hover-text: var(--colors-button-hig-filled-destructive-hover-text);
+    --colors-button-filled-destructive-hover-border: var(--colors-button-hig-filled-destructive-hover-border);
+    --colors-button-filled-destructive-active-bg: var(--colors-button-hig-filled-destructive-active-bg);
+    --colors-button-filled-destructive-active-text: var(--colors-button-hig-filled-destructive-active-text);
+    --colors-button-filled-destructive-active-border: var(--colors-button-hig-filled-destructive-active-border);
+    --colors-button-filled-destructive-disabled-bg: var(--colors-button-hig-filled-destructive-disabled-bg);
+    --colors-button-filled-destructive-disabled-text: var(--colors-button-hig-filled-destructive-disabled-text);
+    --colors-button-filled-destructive-disabled-border: var(--colors-button-hig-filled-destructive-disabled-border);
+    --colors-button-filled-destructive-focus-bg: var(--colors-button-hig-filled-destructive-focus-bg);
+    --colors-button-filled-destructive-focus-text: var(--colors-button-hig-filled-destructive-focus-text);
+    --colors-button-filled-destructive-focus-border: var(--colors-button-hig-filled-destructive-focus-border);
+    --colors-button-filled-destructive-loading-bg: var(--colors-button-hig-filled-destructive-loading-bg);
+    --colors-button-filled-destructive-loading-text: var(--colors-button-hig-filled-destructive-loading-text);
+    --colors-button-filled-destructive-loading-border: var(--colors-button-hig-filled-destructive-loading-border);
+    --colors-button-tinted-accent-default-bg: var(--colors-button-hig-tinted-accent-default-bg);
+    --colors-button-tinted-accent-default-text: var(--colors-button-hig-tinted-accent-default-text);
+    --colors-button-tinted-accent-default-border: var(--colors-button-hig-tinted-accent-default-border);
+    --colors-button-tinted-accent-hover-bg: var(--colors-button-hig-tinted-accent-hover-bg);
+    --colors-button-tinted-accent-hover-text: var(--colors-button-hig-tinted-accent-hover-text);
+    --colors-button-tinted-accent-hover-border: var(--colors-button-hig-tinted-accent-hover-border);
+    --colors-button-tinted-accent-active-bg: var(--colors-button-hig-tinted-accent-active-bg);
+    --colors-button-tinted-accent-active-text: var(--colors-button-hig-tinted-accent-active-text);
+    --colors-button-tinted-accent-active-border: var(--colors-button-hig-tinted-accent-active-border);
+    --colors-button-tinted-accent-disabled-bg: var(--colors-button-hig-tinted-accent-disabled-bg);
+    --colors-button-tinted-accent-disabled-text: var(--colors-button-hig-tinted-accent-disabled-text);
+    --colors-button-tinted-accent-disabled-border: var(--colors-button-hig-tinted-accent-disabled-border);
+    --colors-button-tinted-accent-focus-bg: var(--colors-button-hig-tinted-accent-focus-bg);
+    --colors-button-tinted-accent-focus-text: var(--colors-button-hig-tinted-accent-focus-text);
+    --colors-button-tinted-accent-focus-border: var(--colors-button-hig-tinted-accent-focus-border);
+    --colors-button-tinted-accent-loading-bg: var(--colors-button-hig-tinted-accent-loading-bg);
+    --colors-button-tinted-accent-loading-text: var(--colors-button-hig-tinted-accent-loading-text);
+    --colors-button-tinted-accent-loading-border: var(--colors-button-hig-tinted-accent-loading-border);
+    --colors-button-tinted-neutral-default-bg: var(--colors-button-hig-tinted-neutral-default-bg);
+    --colors-button-tinted-neutral-default-text: var(--colors-button-hig-tinted-neutral-default-text);
+    --colors-button-tinted-neutral-default-border: var(--colors-button-hig-tinted-neutral-default-border);
+    --colors-button-tinted-neutral-hover-bg: var(--colors-button-hig-tinted-neutral-hover-bg);
+    --colors-button-tinted-neutral-hover-text: var(--colors-button-hig-tinted-neutral-hover-text);
+    --colors-button-tinted-neutral-hover-border: var(--colors-button-hig-tinted-neutral-hover-border);
+    --colors-button-tinted-neutral-active-bg: var(--colors-button-hig-tinted-neutral-active-bg);
+    --colors-button-tinted-neutral-active-text: var(--colors-button-hig-tinted-neutral-active-text);
+    --colors-button-tinted-neutral-active-border: var(--colors-button-hig-tinted-neutral-active-border);
+    --colors-button-tinted-neutral-disabled-bg: var(--colors-button-hig-tinted-neutral-disabled-bg);
+    --colors-button-tinted-neutral-disabled-text: var(--colors-button-hig-tinted-neutral-disabled-text);
+    --colors-button-tinted-neutral-disabled-border: var(--colors-button-hig-tinted-neutral-disabled-border);
+    --colors-button-tinted-neutral-focus-bg: var(--colors-button-hig-tinted-neutral-focus-bg);
+    --colors-button-tinted-neutral-focus-text: var(--colors-button-hig-tinted-neutral-focus-text);
+    --colors-button-tinted-neutral-focus-border: var(--colors-button-hig-tinted-neutral-focus-border);
+    --colors-button-tinted-neutral-loading-bg: var(--colors-button-hig-tinted-neutral-loading-bg);
+    --colors-button-tinted-neutral-loading-text: var(--colors-button-hig-tinted-neutral-loading-text);
+    --colors-button-tinted-neutral-loading-border: var(--colors-button-hig-tinted-neutral-loading-border);
+    --colors-button-tinted-destructive-default-bg: var(--colors-button-hig-tinted-destructive-default-bg);
+    --colors-button-tinted-destructive-default-text: var(--colors-button-hig-tinted-destructive-default-text);
+    --colors-button-tinted-destructive-default-border: var(--colors-button-hig-tinted-destructive-default-border);
+    --colors-button-tinted-destructive-hover-bg: var(--colors-button-hig-tinted-destructive-hover-bg);
+    --colors-button-tinted-destructive-hover-text: var(--colors-button-hig-tinted-destructive-hover-text);
+    --colors-button-tinted-destructive-hover-border: var(--colors-button-hig-tinted-destructive-hover-border);
+    --colors-button-tinted-destructive-active-bg: var(--colors-button-hig-tinted-destructive-active-bg);
+    --colors-button-tinted-destructive-active-text: var(--colors-button-hig-tinted-destructive-active-text);
+    --colors-button-tinted-destructive-active-border: var(--colors-button-hig-tinted-destructive-active-border);
+    --colors-button-tinted-destructive-disabled-bg: var(--colors-button-hig-tinted-destructive-disabled-bg);
+    --colors-button-tinted-destructive-disabled-text: var(--colors-button-hig-tinted-destructive-disabled-text);
+    --colors-button-tinted-destructive-disabled-border: var(--colors-button-hig-tinted-destructive-disabled-border);
+    --colors-button-tinted-destructive-focus-bg: var(--colors-button-hig-tinted-destructive-focus-bg);
+    --colors-button-tinted-destructive-focus-text: var(--colors-button-hig-tinted-destructive-focus-text);
+    --colors-button-tinted-destructive-focus-border: var(--colors-button-hig-tinted-destructive-focus-border);
+    --colors-button-tinted-destructive-loading-bg: var(--colors-button-hig-tinted-destructive-loading-bg);
+    --colors-button-tinted-destructive-loading-text: var(--colors-button-hig-tinted-destructive-loading-text);
+    --colors-button-tinted-destructive-loading-border: var(--colors-button-hig-tinted-destructive-loading-border);
+    --colors-button-plain-accent-default-bg: var(--colors-button-hig-plain-accent-default-bg);
+    --colors-button-plain-accent-default-text: var(--colors-button-hig-plain-accent-default-text);
+    --colors-button-plain-accent-default-border: var(--colors-button-hig-plain-accent-default-border);
+    --colors-button-plain-accent-hover-bg: var(--colors-button-hig-plain-accent-hover-bg);
+    --colors-button-plain-accent-hover-text: var(--colors-button-hig-plain-accent-hover-text);
+    --colors-button-plain-accent-hover-border: var(--colors-button-hig-plain-accent-hover-border);
+    --colors-button-plain-accent-active-bg: var(--colors-button-hig-plain-accent-active-bg);
+    --colors-button-plain-accent-active-text: var(--colors-button-hig-plain-accent-active-text);
+    --colors-button-plain-accent-active-border: var(--colors-button-hig-plain-accent-active-border);
+    --colors-button-plain-accent-disabled-bg: var(--colors-button-hig-plain-accent-disabled-bg);
+    --colors-button-plain-accent-disabled-text: var(--colors-button-hig-plain-accent-disabled-text);
+    --colors-button-plain-accent-disabled-border: var(--colors-button-hig-plain-accent-disabled-border);
+    --colors-button-plain-accent-focus-bg: var(--colors-button-hig-plain-accent-focus-bg);
+    --colors-button-plain-accent-focus-text: var(--colors-button-hig-plain-accent-focus-text);
+    --colors-button-plain-accent-focus-border: var(--colors-button-hig-plain-accent-focus-border);
+    --colors-button-plain-accent-loading-bg: var(--colors-button-hig-plain-accent-loading-bg);
+    --colors-button-plain-accent-loading-text: var(--colors-button-hig-plain-accent-loading-text);
+    --colors-button-plain-accent-loading-border: var(--colors-button-hig-plain-accent-loading-border);
+    --colors-button-plain-neutral-default-bg: var(--colors-button-hig-plain-neutral-default-bg);
+    --colors-button-plain-neutral-default-text: var(--colors-button-hig-plain-neutral-default-text);
+    --colors-button-plain-neutral-default-border: var(--colors-button-hig-plain-neutral-default-border);
+    --colors-button-plain-neutral-hover-bg: var(--colors-button-hig-plain-neutral-hover-bg);
+    --colors-button-plain-neutral-hover-text: var(--colors-button-hig-plain-neutral-hover-text);
+    --colors-button-plain-neutral-hover-border: var(--colors-button-hig-plain-neutral-hover-border);
+    --colors-button-plain-neutral-active-bg: var(--colors-button-hig-plain-neutral-active-bg);
+    --colors-button-plain-neutral-active-text: var(--colors-button-hig-plain-neutral-active-text);
+    --colors-button-plain-neutral-active-border: var(--colors-button-hig-plain-neutral-active-border);
+    --colors-button-plain-neutral-disabled-bg: var(--colors-button-hig-plain-neutral-disabled-bg);
+    --colors-button-plain-neutral-disabled-text: var(--colors-button-hig-plain-neutral-disabled-text);
+    --colors-button-plain-neutral-disabled-border: var(--colors-button-hig-plain-neutral-disabled-border);
+    --colors-button-plain-neutral-focus-bg: var(--colors-button-hig-plain-neutral-focus-bg);
+    --colors-button-plain-neutral-focus-text: var(--colors-button-hig-plain-neutral-focus-text);
+    --colors-button-plain-neutral-focus-border: var(--colors-button-hig-plain-neutral-focus-border);
+    --colors-button-plain-neutral-loading-bg: var(--colors-button-hig-plain-neutral-loading-bg);
+    --colors-button-plain-neutral-loading-text: var(--colors-button-hig-plain-neutral-loading-text);
+    --colors-button-plain-neutral-loading-border: var(--colors-button-hig-plain-neutral-loading-border);
+    --colors-button-plain-destructive-default-bg: var(--colors-button-hig-plain-destructive-default-bg);
+    --colors-button-plain-destructive-default-text: var(--colors-button-hig-plain-destructive-default-text);
+    --colors-button-plain-destructive-default-border: var(--colors-button-hig-plain-destructive-default-border);
+    --colors-button-plain-destructive-hover-bg: var(--colors-button-hig-plain-destructive-hover-bg);
+    --colors-button-plain-destructive-hover-text: var(--colors-button-hig-plain-destructive-hover-text);
+    --colors-button-plain-destructive-hover-border: var(--colors-button-hig-plain-destructive-hover-border);
+    --colors-button-plain-destructive-active-bg: var(--colors-button-hig-plain-destructive-active-bg);
+    --colors-button-plain-destructive-active-text: var(--colors-button-hig-plain-destructive-active-text);
+    --colors-button-plain-destructive-active-border: var(--colors-button-hig-plain-destructive-active-border);
+    --colors-button-plain-destructive-disabled-bg: var(--colors-button-hig-plain-destructive-disabled-bg);
+    --colors-button-plain-destructive-disabled-text: var(--colors-button-hig-plain-destructive-disabled-text);
+    --colors-button-plain-destructive-disabled-border: var(--colors-button-hig-plain-destructive-disabled-border);
+    --colors-button-plain-destructive-focus-bg: var(--colors-button-hig-plain-destructive-focus-bg);
+    --colors-button-plain-destructive-focus-text: var(--colors-button-hig-plain-destructive-focus-text);
+    --colors-button-plain-destructive-focus-border: var(--colors-button-hig-plain-destructive-focus-border);
+    --colors-button-plain-destructive-loading-bg: var(--colors-button-hig-plain-destructive-loading-bg);
+    --colors-button-plain-destructive-loading-text: var(--colors-button-hig-plain-destructive-loading-text);
+    --colors-button-plain-destructive-loading-border: var(--colors-button-hig-plain-destructive-loading-border);
     --colors-accent-dynamic: var(--ui-accent, #007AFF);
     --colors-accent-primary: #007AFF;
     --colors-accent-secondary: #5856D6;
@@ -365,6 +704,9 @@
     --radii-roles-modal: 26px;
     --radii-roles-pill: var(--radii-full);
     --radii-roles-badge: var(--radii-full);
+    --radii-button-default: 0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    --radii-button-hover: 0 10px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    --radii-button-active: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.15);
     --radii-glass-xs: var(--radii-xs);
     --radii-glass-sm: var(--radii-sm);
     --radii-glass-md: var(--radii-md);
@@ -377,11 +719,18 @@
     --blurs-glass-md: 10px;
     --blurs-glass-lg: 20px;
     --blurs-glass-xl: 30px;
+    --shadows-button-default: var(--shadows-glass-base);
+    --shadows-button-hover: var(--shadows-glass-hover);
+    --shadows-button-active: var(--shadows-glass-sm);
+    --shadows-button-focus: var(--shadows-glass-md);
     --shadows-glass-base: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
     --shadows-glass-sm: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     --shadows-glass-md: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
     --shadows-glass-lg: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
     --shadows-glass-hover: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
+    --durations-button-hover: var(--durations-glass-flow);
+    --durations-button-press: var(--durations-glass-instant);
+    --durations-button-focus: var(--durations-glass-flow);
     --durations-glass-flow: 0.8s;
     --durations-glass-bounce: 0.6s;
     --durations-glass-quick: 0.2s;
@@ -401,6 +750,13 @@
     --spacing-glass-xl: 20px;
     --spacing-glass-2xl: 24px;
     --spacing-glass-3xl: 32px;
+    --spacing-button-pad-compact: 8px 12px;
+    --spacing-button-pad-regular: 10px 16px;
+    --spacing-button-pad-large: 12px 20px;
+    --spacing-button-gap-icon-compact: var(--spacing-glass-xs);
+    --spacing-button-gap-icon-regular: var(--spacing-glass-xs);
+    --spacing-button-gap-icon-large: var(--spacing-glass-sm);
+    --spacing-button-hit-min: 44px;
     --fonts-sans: "SF Pro Display", sans-serif;
     --fonts-display: "SF Pro Display", sans-serif;
     --fonts-mono: "SF Mono", monospace;
@@ -591,10 +947,19 @@
       bottom: 2px;
 }
 
-    .liquid-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    .liquid-button[aria-disabled='true'] {
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
+}
+
+    .liquid-button[data-loading] {
+      cursor: progress;
+      pointer-events: none;
+}
+
+    .liquid-button[data-icon-only] {
+      aspect-ratio: 1 / 1;
 }
 
     .liquid-button:is(:focus-visible, [data-focus-visible]) {
@@ -1654,6 +2019,21 @@
       left: 2px;
       right: 2px;
       bottom: 2px;
+}
+
+    @media (prefers-reduced-motion: reduce) {
+      .liquid-button {
+        transition: none;
+}
+
+      .liquid-button:is(:hover, [data-hover]) {
+        transform: none;
+        box-shadow: var(--shadows-glass-base);
+}
+
+      .liquid-button:is(:active, [data-active]) {
+        transform: none;
+}
 }
 }
 
@@ -3625,5 +4005,512 @@
   .toast__root--status_error {
     border-left-color: var(--colors-accent-danger);
     border-left-width: 4px;
+}
+}
+
+@layer utilities{
+
+  .bg_token\(colors\.button\.hig\.filled\.accent\.default\.bg\) {
+    background: var(--colors-button-hig-filled-accent-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.filled\.neutral\.default\.bg\) {
+    background: var(--colors-button-hig-filled-neutral-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.filled\.destructive\.default\.bg\) {
+    background: var(--colors-button-hig-filled-destructive-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.tinted\.accent\.default\.bg\) {
+    background: var(--colors-button-hig-tinted-accent-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.tinted\.neutral\.default\.bg\) {
+    background: var(--colors-button-hig-tinted-neutral-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.tinted\.destructive\.default\.bg\) {
+    background: var(--colors-button-hig-tinted-destructive-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.plain\.accent\.default\.bg\) {
+    background: var(--colors-button-hig-plain-accent-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.plain\.neutral\.default\.bg\) {
+    background: var(--colors-button-hig-plain-neutral-default-bg);
+}
+
+  .bg_token\(colors\.button\.hig\.plain\.destructive\.default\.bg\) {
+    background: var(--colors-button-hig-plain-destructive-default-bg);
+}
+
+  .bd-c_token\(colors\.button\.hig\.filled\.accent\.default\.border\) {
+    border-color: var(--colors-button-hig-filled-accent-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.filled\.neutral\.default\.border\) {
+    border-color: var(--colors-button-hig-filled-neutral-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.filled\.destructive\.default\.border\) {
+    border-color: var(--colors-button-hig-filled-destructive-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.tinted\.accent\.default\.border\) {
+    border-color: var(--colors-button-hig-tinted-accent-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.tinted\.neutral\.default\.border\) {
+    border-color: var(--colors-button-hig-tinted-neutral-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.tinted\.destructive\.default\.border\) {
+    border-color: var(--colors-button-hig-tinted-destructive-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.plain\.accent\.default\.border\) {
+    border-color: var(--colors-button-hig-plain-accent-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.plain\.neutral\.default\.border\) {
+    border-color: var(--colors-button-hig-plain-neutral-default-border);
+}
+
+  .bd-c_token\(colors\.button\.hig\.plain\.destructive\.default\.border\) {
+    border-color: var(--colors-button-hig-plain-destructive-default-border);
+}
+
+  .c_token\(colors\.button\.hig\.filled\.accent\.default\.text\) {
+    color: var(--colors-button-hig-filled-accent-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.filled\.neutral\.default\.text\) {
+    color: var(--colors-button-hig-filled-neutral-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.filled\.destructive\.default\.text\) {
+    color: var(--colors-button-hig-filled-destructive-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.tinted\.accent\.default\.text\) {
+    color: var(--colors-button-hig-tinted-accent-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.tinted\.neutral\.default\.text\) {
+    color: var(--colors-button-hig-tinted-neutral-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.tinted\.destructive\.default\.text\) {
+    color: var(--colors-button-hig-tinted-destructive-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.plain\.accent\.default\.text\) {
+    color: var(--colors-button-hig-plain-accent-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.plain\.neutral\.default\.text\) {
+    color: var(--colors-button-hig-plain-neutral-default-text);
+}
+
+  .c_token\(colors\.button\.hig\.plain\.destructive\.default\.text\) {
+    color: var(--colors-button-hig-plain-destructive-default-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-filled-accent-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-filled-accent-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-filled-neutral-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-filled-neutral-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.destructive\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.destructive\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.destructive\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-filled-destructive-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.filled\.destructive\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-filled-destructive-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.accent\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.accent\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.accent\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-tinted-accent-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.tinted\.accent\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-tinted-accent-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-tinted-neutral-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.tinted\.neutral\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-tinted-neutral-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-tinted-destructive-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.tinted\.destructive\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-tinted-destructive-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.accent\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.accent\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.accent\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-plain-accent-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.plain\.accent\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-plain-accent-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.neutral\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.neutral\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.neutral\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-plain-neutral-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.plain\.neutral\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-plain-neutral-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.destructive\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.destructive\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.plain\.destructive\.disabled\.bg\)[aria-disabled='true'] {
+    background: var(--colors-button-hig-plain-destructive-disabled-bg);
+}
+
+  .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.plain\.destructive\.loading\.bg\)[data-loading] {
+    background: var(--colors-button-hig-plain-destructive-loading-bg);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-filled-accent-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-filled-accent-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-filled-neutral-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-filled-neutral-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-filled-destructive-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-filled-destructive-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-tinted-accent-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-tinted-accent-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-tinted-neutral-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-tinted-neutral-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-tinted-destructive-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-tinted-destructive-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.accent\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.accent\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.accent\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-plain-accent-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.plain\.accent\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-plain-accent-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-plain-neutral-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-plain-neutral-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.border\)[aria-disabled='true'] {
+    border-color: var(--colors-button-hig-plain-destructive-disabled-border);
+}
+
+  .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.loading\.border\)[data-loading] {
+    border-color: var(--colors-button-hig-plain-destructive-loading-border);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-filled-accent-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-filled-neutral-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.destructive\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-filled-destructive-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.accent\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-tinted-accent-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.neutral\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-tinted-neutral-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.tinted\.destructive\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-tinted-destructive-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.accent\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.accent\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.accent\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-plain-accent-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.neutral\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-plain-neutral-disabled-text);
+}
+
+  .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.plain\.destructive\.disabled\.text\)[aria-disabled='true'] {
+    color: var(--colors-button-hig-plain-destructive-disabled-text);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.filled\.accent\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-filled-accent-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.filled\.neutral\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-filled-neutral-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.filled\.destructive\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-filled-destructive-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.tinted\.accent\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-tinted-accent-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.tinted\.neutral\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-tinted-neutral-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.tinted\.destructive\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-tinted-destructive-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.plain\.accent\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-plain-accent-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.plain\.neutral\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-plain-neutral-focus-bg);
+}
+
+  .focusVisible\:bg_token\(colors\.button\.hig\.plain\.destructive\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
+    background: var(--colors-button-hig-plain-destructive-focus-bg);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.filled\.accent\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-filled-accent-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-filled-neutral-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-filled-destructive-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-tinted-accent-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-tinted-neutral-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-tinted-destructive-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.plain\.accent\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-plain-accent-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-plain-neutral-focus-border);
+}
+
+  .focusVisible\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
+    border-color: var(--colors-button-hig-plain-destructive-focus-border);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.filled\.accent\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-filled-accent-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.filled\.neutral\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-filled-neutral-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.filled\.destructive\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-filled-destructive-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.tinted\.accent\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-tinted-accent-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.tinted\.neutral\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-tinted-neutral-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.tinted\.destructive\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-tinted-destructive-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.plain\.accent\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-plain-accent-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.plain\.neutral\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-plain-neutral-hover-bg);
+}
+
+  .hover\:bg_token\(colors\.button\.hig\.plain\.destructive\.hover\.bg\):is(:hover, [data-hover]) {
+    background: var(--colors-button-hig-plain-destructive-hover-bg);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.filled\.accent\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-filled-accent-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-filled-neutral-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-filled-destructive-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-tinted-accent-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-tinted-neutral-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-tinted-destructive-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.plain\.accent\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-plain-accent-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-plain-neutral-hover-border);
+}
+
+  .hover\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.hover\.border\):is(:hover, [data-hover]) {
+    border-color: var(--colors-button-hig-plain-destructive-hover-border);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.filled\.accent\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-filled-accent-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.filled\.neutral\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-filled-neutral-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.filled\.destructive\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-filled-destructive-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.tinted\.accent\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-tinted-accent-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.tinted\.neutral\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-tinted-neutral-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.tinted\.destructive\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-tinted-destructive-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.plain\.accent\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-plain-accent-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.plain\.neutral\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-plain-neutral-active-bg);
+}
+
+  .active\:bg_token\(colors\.button\.hig\.plain\.destructive\.active\.bg\):is(:active, [data-active]) {
+    background: var(--colors-button-hig-plain-destructive-active-bg);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.filled\.accent\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-filled-accent-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-filled-neutral-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.filled\.destructive\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-filled-destructive-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.tinted\.accent\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-tinted-accent-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.tinted\.neutral\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-tinted-neutral-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.tinted\.destructive\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-tinted-destructive-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.plain\.accent\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-plain-accent-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.plain\.neutral\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-plain-neutral-active-border);
+}
+
+  .active\:bd-c_token\(colors\.button\.hig\.plain\.destructive\.active\.border\):is(:active, [data-active]) {
+    border-color: var(--colors-button-hig-plain-destructive-active-border);
 }
 }

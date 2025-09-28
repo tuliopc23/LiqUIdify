@@ -1,4 +1,64 @@
 const tokens = {
+  "typography.button.font.compact.size": {
+    "value": "var(--font-sizes-footnote)",
+    "variable": "var(--typography-button-font-compact-size)"
+  },
+  "typography.button.font.compact.weight": {
+    "value": "var(--font-weights-semibold)",
+    "variable": "var(--typography-button-font-compact-weight)"
+  },
+  "typography.button.font.compact.lineHeight": {
+    "value": "var(--line-heights-snug)",
+    "variable": "var(--typography-button-font-compact-line-height)"
+  },
+  "typography.button.font.compact.letterSpacing": {
+    "value": "var(--letter-spacings-tight)",
+    "variable": "var(--typography-button-font-compact-letter-spacing)"
+  },
+  "typography.button.font.regular.size": {
+    "value": "var(--font-sizes-body)",
+    "variable": "var(--typography-button-font-regular-size)"
+  },
+  "typography.button.font.regular.weight": {
+    "value": "var(--font-weights-semibold)",
+    "variable": "var(--typography-button-font-regular-weight)"
+  },
+  "typography.button.font.regular.lineHeight": {
+    "value": "var(--line-heights-normal)",
+    "variable": "var(--typography-button-font-regular-line-height)"
+  },
+  "typography.button.font.regular.letterSpacing": {
+    "value": "var(--letter-spacings-tight)",
+    "variable": "var(--typography-button-font-regular-letter-spacing)"
+  },
+  "typography.button.font.large.size": {
+    "value": "var(--font-sizes-title3)",
+    "variable": "var(--typography-button-font-large-size)"
+  },
+  "typography.button.font.large.weight": {
+    "value": "var(--font-weights-semibold)",
+    "variable": "var(--typography-button-font-large-weight)"
+  },
+  "typography.button.font.large.lineHeight": {
+    "value": "var(--line-heights-snug)",
+    "variable": "var(--typography-button-font-large-line-height)"
+  },
+  "typography.button.font.large.letterSpacing": {
+    "value": "var(--letter-spacings-tight)",
+    "variable": "var(--typography-button-font-large-letter-spacing)"
+  },
+  "typography.button.icon.compact": {
+    "value": "1em",
+    "variable": "var(--typography-button-icon-compact)"
+  },
+  "typography.button.icon.regular": {
+    "value": "1.1em",
+    "variable": "var(--typography-button-icon-regular)"
+  },
+  "typography.button.icon.large": {
+    "value": "1.2em",
+    "variable": "var(--typography-button-icon-large)"
+  },
   "colors.glass.bg": {
     "value": "rgba(255, 255, 255, 0.1)",
     "variable": "var(--colors-glass-bg)"
@@ -98,6 +158,1302 @@ const tokens = {
   "colors.button.warning.border": {
     "value": "rgba(255, 149, 0, 0.50)",
     "variable": "var(--colors-button-warning-border)"
+  },
+  "colors.button.hig.filled.accent.default.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-default-bg)"
+  },
+  "colors.button.hig.filled.accent.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-accent-default-text)"
+  },
+  "colors.button.hig.filled.accent.default.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-default-border)"
+  },
+  "colors.button.hig.filled.accent.hover.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 36%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-hover-bg)"
+  },
+  "colors.button.hig.filled.accent.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-accent-hover-text)"
+  },
+  "colors.button.hig.filled.accent.hover.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 60%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-hover-border)"
+  },
+  "colors.button.hig.filled.accent.active.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 42%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-active-bg)"
+  },
+  "colors.button.hig.filled.accent.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-accent-active-text)"
+  },
+  "colors.button.hig.filled.accent.active.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 65%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-active-border)"
+  },
+  "colors.button.hig.filled.accent.disabled.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-disabled-bg)"
+  },
+  "colors.button.hig.filled.accent.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-filled-accent-disabled-text)"
+  },
+  "colors.button.hig.filled.accent.disabled.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-disabled-border)"
+  },
+  "colors.button.hig.filled.accent.focus.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 32%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-focus-bg)"
+  },
+  "colors.button.hig.filled.accent.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-accent-focus-text)"
+  },
+  "colors.button.hig.filled.accent.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-filled-accent-focus-border)"
+  },
+  "colors.button.hig.filled.accent.loading.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-loading-bg)"
+  },
+  "colors.button.hig.filled.accent.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-accent-loading-text)"
+  },
+  "colors.button.hig.filled.accent.loading.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent)",
+    "variable": "var(--colors-button-hig-filled-accent-loading-border)"
+  },
+  "colors.button.hig.filled.neutral.default.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-filled-neutral-default-bg)"
+  },
+  "colors.button.hig.filled.neutral.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-neutral-default-text)"
+  },
+  "colors.button.hig.filled.neutral.default.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-filled-neutral-default-border)"
+  },
+  "colors.button.hig.filled.neutral.hover.bg": {
+    "value": "var(--colors-glass-strong-bg)",
+    "variable": "var(--colors-button-hig-filled-neutral-hover-bg)"
+  },
+  "colors.button.hig.filled.neutral.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-neutral-hover-text)"
+  },
+  "colors.button.hig.filled.neutral.hover.border": {
+    "value": "var(--colors-glass-strong-border)",
+    "variable": "var(--colors-button-hig-filled-neutral-hover-border)"
+  },
+  "colors.button.hig.filled.neutral.active.bg": {
+    "value": "color-mix(in oklch, #000 5%, var(--colors-glass-strong-bg))",
+    "variable": "var(--colors-button-hig-filled-neutral-active-bg)"
+  },
+  "colors.button.hig.filled.neutral.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-neutral-active-text)"
+  },
+  "colors.button.hig.filled.neutral.active.border": {
+    "value": "var(--colors-glass-strong-border)",
+    "variable": "var(--colors-button-hig-filled-neutral-active-border)"
+  },
+  "colors.button.hig.filled.neutral.disabled.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-filled-neutral-disabled-bg)"
+  },
+  "colors.button.hig.filled.neutral.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-filled-neutral-disabled-text)"
+  },
+  "colors.button.hig.filled.neutral.disabled.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-filled-neutral-disabled-border)"
+  },
+  "colors.button.hig.filled.neutral.focus.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-filled-neutral-focus-bg)"
+  },
+  "colors.button.hig.filled.neutral.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-neutral-focus-text)"
+  },
+  "colors.button.hig.filled.neutral.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-filled-neutral-focus-border)"
+  },
+  "colors.button.hig.filled.neutral.loading.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-filled-neutral-loading-bg)"
+  },
+  "colors.button.hig.filled.neutral.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-neutral-loading-text)"
+  },
+  "colors.button.hig.filled.neutral.loading.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-filled-neutral-loading-border)"
+  },
+  "colors.button.hig.filled.destructive.default.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 30%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-default-bg)"
+  },
+  "colors.button.hig.filled.destructive.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-destructive-default-text)"
+  },
+  "colors.button.hig.filled.destructive.default.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 55%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-default-border)"
+  },
+  "colors.button.hig.filled.destructive.hover.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 36%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-hover-bg)"
+  },
+  "colors.button.hig.filled.destructive.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-destructive-hover-text)"
+  },
+  "colors.button.hig.filled.destructive.hover.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 60%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-hover-border)"
+  },
+  "colors.button.hig.filled.destructive.active.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 42%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-active-bg)"
+  },
+  "colors.button.hig.filled.destructive.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-destructive-active-text)"
+  },
+  "colors.button.hig.filled.destructive.active.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 65%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-active-border)"
+  },
+  "colors.button.hig.filled.destructive.disabled.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 18%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-disabled-bg)"
+  },
+  "colors.button.hig.filled.destructive.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-filled-destructive-disabled-text)"
+  },
+  "colors.button.hig.filled.destructive.disabled.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 35%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-disabled-border)"
+  },
+  "colors.button.hig.filled.destructive.focus.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 32%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-focus-bg)"
+  },
+  "colors.button.hig.filled.destructive.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-destructive-focus-text)"
+  },
+  "colors.button.hig.filled.destructive.focus.border": {
+    "value": "var(--colors-accent-danger)",
+    "variable": "var(--colors-button-hig-filled-destructive-focus-border)"
+  },
+  "colors.button.hig.filled.destructive.loading.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 30%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-loading-bg)"
+  },
+  "colors.button.hig.filled.destructive.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-filled-destructive-loading-text)"
+  },
+  "colors.button.hig.filled.destructive.loading.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 55%, transparent)",
+    "variable": "var(--colors-button-hig-filled-destructive-loading-border)"
+  },
+  "colors.button.hig.tinted.accent.default.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-default-bg)"
+  },
+  "colors.button.hig.tinted.accent.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-accent-default-text)"
+  },
+  "colors.button.hig.tinted.accent.default.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-default-border)"
+  },
+  "colors.button.hig.tinted.accent.hover.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 24%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-hover-bg)"
+  },
+  "colors.button.hig.tinted.accent.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-accent-hover-text)"
+  },
+  "colors.button.hig.tinted.accent.hover.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 45%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-hover-border)"
+  },
+  "colors.button.hig.tinted.accent.active.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-active-bg)"
+  },
+  "colors.button.hig.tinted.accent.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-accent-active-text)"
+  },
+  "colors.button.hig.tinted.accent.active.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 50%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-active-border)"
+  },
+  "colors.button.hig.tinted.accent.disabled.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 12%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-disabled-bg)"
+  },
+  "colors.button.hig.tinted.accent.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-tinted-accent-disabled-text)"
+  },
+  "colors.button.hig.tinted.accent.disabled.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 25%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-disabled-border)"
+  },
+  "colors.button.hig.tinted.accent.focus.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 20%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-focus-bg)"
+  },
+  "colors.button.hig.tinted.accent.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-accent-focus-text)"
+  },
+  "colors.button.hig.tinted.accent.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-tinted-accent-focus-border)"
+  },
+  "colors.button.hig.tinted.accent.loading.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-loading-bg)"
+  },
+  "colors.button.hig.tinted.accent.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-accent-loading-text)"
+  },
+  "colors.button.hig.tinted.accent.loading.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-accent-loading-border)"
+  },
+  "colors.button.hig.tinted.neutral.default.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-default-bg)"
+  },
+  "colors.button.hig.tinted.neutral.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-neutral-default-text)"
+  },
+  "colors.button.hig.tinted.neutral.default.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-tinted-neutral-default-border)"
+  },
+  "colors.button.hig.tinted.neutral.hover.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-hover-bg)"
+  },
+  "colors.button.hig.tinted.neutral.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-neutral-hover-text)"
+  },
+  "colors.button.hig.tinted.neutral.hover.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-tinted-neutral-hover-border)"
+  },
+  "colors.button.hig.tinted.neutral.active.bg": {
+    "value": "var(--colors-glass-strong-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-active-bg)"
+  },
+  "colors.button.hig.tinted.neutral.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-neutral-active-text)"
+  },
+  "colors.button.hig.tinted.neutral.active.border": {
+    "value": "var(--colors-glass-strong-border)",
+    "variable": "var(--colors-button-hig-tinted-neutral-active-border)"
+  },
+  "colors.button.hig.tinted.neutral.disabled.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-disabled-bg)"
+  },
+  "colors.button.hig.tinted.neutral.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-tinted-neutral-disabled-text)"
+  },
+  "colors.button.hig.tinted.neutral.disabled.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-tinted-neutral-disabled-border)"
+  },
+  "colors.button.hig.tinted.neutral.focus.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-focus-bg)"
+  },
+  "colors.button.hig.tinted.neutral.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-neutral-focus-text)"
+  },
+  "colors.button.hig.tinted.neutral.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-tinted-neutral-focus-border)"
+  },
+  "colors.button.hig.tinted.neutral.loading.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-tinted-neutral-loading-bg)"
+  },
+  "colors.button.hig.tinted.neutral.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-neutral-loading-text)"
+  },
+  "colors.button.hig.tinted.neutral.loading.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-tinted-neutral-loading-border)"
+  },
+  "colors.button.hig.tinted.destructive.default.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 18%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-default-bg)"
+  },
+  "colors.button.hig.tinted.destructive.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-destructive-default-text)"
+  },
+  "colors.button.hig.tinted.destructive.default.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 35%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-default-border)"
+  },
+  "colors.button.hig.tinted.destructive.hover.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 24%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-hover-bg)"
+  },
+  "colors.button.hig.tinted.destructive.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-destructive-hover-text)"
+  },
+  "colors.button.hig.tinted.destructive.hover.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 45%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-hover-border)"
+  },
+  "colors.button.hig.tinted.destructive.active.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 28%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-active-bg)"
+  },
+  "colors.button.hig.tinted.destructive.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-destructive-active-text)"
+  },
+  "colors.button.hig.tinted.destructive.active.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 50%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-active-border)"
+  },
+  "colors.button.hig.tinted.destructive.disabled.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 12%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-disabled-bg)"
+  },
+  "colors.button.hig.tinted.destructive.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-tinted-destructive-disabled-text)"
+  },
+  "colors.button.hig.tinted.destructive.disabled.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 25%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-disabled-border)"
+  },
+  "colors.button.hig.tinted.destructive.focus.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 20%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-focus-bg)"
+  },
+  "colors.button.hig.tinted.destructive.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-destructive-focus-text)"
+  },
+  "colors.button.hig.tinted.destructive.focus.border": {
+    "value": "var(--colors-accent-danger)",
+    "variable": "var(--colors-button-hig-tinted-destructive-focus-border)"
+  },
+  "colors.button.hig.tinted.destructive.loading.bg": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 18%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-loading-bg)"
+  },
+  "colors.button.hig.tinted.destructive.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-tinted-destructive-loading-text)"
+  },
+  "colors.button.hig.tinted.destructive.loading.border": {
+    "value": "color-mix(in oklch, var(--colors-accent-danger) 35%, transparent)",
+    "variable": "var(--colors-button-hig-tinted-destructive-loading-border)"
+  },
+  "colors.button.hig.plain.accent.default.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-accent-default-bg)"
+  },
+  "colors.button.hig.plain.accent.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-accent-default-text)"
+  },
+  "colors.button.hig.plain.accent.default.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-accent-default-border)"
+  },
+  "colors.button.hig.plain.accent.hover.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-plain-accent-hover-bg)"
+  },
+  "colors.button.hig.plain.accent.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-accent-hover-text)"
+  },
+  "colors.button.hig.plain.accent.hover.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-accent-hover-border)"
+  },
+  "colors.button.hig.plain.accent.active.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-plain-accent-active-bg)"
+  },
+  "colors.button.hig.plain.accent.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-accent-active-text)"
+  },
+  "colors.button.hig.plain.accent.active.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-plain-accent-active-border)"
+  },
+  "colors.button.hig.plain.accent.disabled.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-accent-disabled-bg)"
+  },
+  "colors.button.hig.plain.accent.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-plain-accent-disabled-text)"
+  },
+  "colors.button.hig.plain.accent.disabled.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-accent-disabled-border)"
+  },
+  "colors.button.hig.plain.accent.focus.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-accent-focus-bg)"
+  },
+  "colors.button.hig.plain.accent.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-accent-focus-text)"
+  },
+  "colors.button.hig.plain.accent.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-plain-accent-focus-border)"
+  },
+  "colors.button.hig.plain.accent.loading.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-accent-loading-bg)"
+  },
+  "colors.button.hig.plain.accent.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-accent-loading-text)"
+  },
+  "colors.button.hig.plain.accent.loading.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-accent-loading-border)"
+  },
+  "colors.button.hig.plain.neutral.default.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-neutral-default-bg)"
+  },
+  "colors.button.hig.plain.neutral.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-neutral-default-text)"
+  },
+  "colors.button.hig.plain.neutral.default.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-neutral-default-border)"
+  },
+  "colors.button.hig.plain.neutral.hover.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-plain-neutral-hover-bg)"
+  },
+  "colors.button.hig.plain.neutral.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-neutral-hover-text)"
+  },
+  "colors.button.hig.plain.neutral.hover.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-neutral-hover-border)"
+  },
+  "colors.button.hig.plain.neutral.active.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-plain-neutral-active-bg)"
+  },
+  "colors.button.hig.plain.neutral.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-neutral-active-text)"
+  },
+  "colors.button.hig.plain.neutral.active.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-plain-neutral-active-border)"
+  },
+  "colors.button.hig.plain.neutral.disabled.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-neutral-disabled-bg)"
+  },
+  "colors.button.hig.plain.neutral.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-plain-neutral-disabled-text)"
+  },
+  "colors.button.hig.plain.neutral.disabled.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-neutral-disabled-border)"
+  },
+  "colors.button.hig.plain.neutral.focus.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-neutral-focus-bg)"
+  },
+  "colors.button.hig.plain.neutral.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-neutral-focus-text)"
+  },
+  "colors.button.hig.plain.neutral.focus.border": {
+    "value": "var(--colors-accent-dynamic)",
+    "variable": "var(--colors-button-hig-plain-neutral-focus-border)"
+  },
+  "colors.button.hig.plain.neutral.loading.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-neutral-loading-bg)"
+  },
+  "colors.button.hig.plain.neutral.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-neutral-loading-text)"
+  },
+  "colors.button.hig.plain.neutral.loading.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-neutral-loading-border)"
+  },
+  "colors.button.hig.plain.destructive.default.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-destructive-default-bg)"
+  },
+  "colors.button.hig.plain.destructive.default.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-destructive-default-text)"
+  },
+  "colors.button.hig.plain.destructive.default.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-destructive-default-border)"
+  },
+  "colors.button.hig.plain.destructive.hover.bg": {
+    "value": "var(--colors-glass-subtle-bg)",
+    "variable": "var(--colors-button-hig-plain-destructive-hover-bg)"
+  },
+  "colors.button.hig.plain.destructive.hover.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-destructive-hover-text)"
+  },
+  "colors.button.hig.plain.destructive.hover.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-destructive-hover-border)"
+  },
+  "colors.button.hig.plain.destructive.active.bg": {
+    "value": "var(--colors-glass-medium-bg)",
+    "variable": "var(--colors-button-hig-plain-destructive-active-bg)"
+  },
+  "colors.button.hig.plain.destructive.active.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-destructive-active-text)"
+  },
+  "colors.button.hig.plain.destructive.active.border": {
+    "value": "var(--colors-glass-medium-border)",
+    "variable": "var(--colors-button-hig-plain-destructive-active-border)"
+  },
+  "colors.button.hig.plain.destructive.disabled.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-destructive-disabled-bg)"
+  },
+  "colors.button.hig.plain.destructive.disabled.text": {
+    "value": "var(--colors-text-glass-disabled)",
+    "variable": "var(--colors-button-hig-plain-destructive-disabled-text)"
+  },
+  "colors.button.hig.plain.destructive.disabled.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-destructive-disabled-border)"
+  },
+  "colors.button.hig.plain.destructive.focus.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-destructive-focus-bg)"
+  },
+  "colors.button.hig.plain.destructive.focus.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-destructive-focus-text)"
+  },
+  "colors.button.hig.plain.destructive.focus.border": {
+    "value": "var(--colors-accent-danger)",
+    "variable": "var(--colors-button-hig-plain-destructive-focus-border)"
+  },
+  "colors.button.hig.plain.destructive.loading.bg": {
+    "value": "transparent",
+    "variable": "var(--colors-button-hig-plain-destructive-loading-bg)"
+  },
+  "colors.button.hig.plain.destructive.loading.text": {
+    "value": "var(--colors-text-glass-primary)",
+    "variable": "var(--colors-button-hig-plain-destructive-loading-text)"
+  },
+  "colors.button.hig.plain.destructive.loading.border": {
+    "value": "var(--colors-glass-subtle-border)",
+    "variable": "var(--colors-button-hig-plain-destructive-loading-border)"
+  },
+  "colors.button.filled.accent.default.bg": {
+    "value": "var(--colors-button-hig-filled-accent-default-bg)",
+    "variable": "var(--colors-button-filled-accent-default-bg)"
+  },
+  "colors.button.filled.accent.default.text": {
+    "value": "var(--colors-button-hig-filled-accent-default-text)",
+    "variable": "var(--colors-button-filled-accent-default-text)"
+  },
+  "colors.button.filled.accent.default.border": {
+    "value": "var(--colors-button-hig-filled-accent-default-border)",
+    "variable": "var(--colors-button-filled-accent-default-border)"
+  },
+  "colors.button.filled.accent.hover.bg": {
+    "value": "var(--colors-button-hig-filled-accent-hover-bg)",
+    "variable": "var(--colors-button-filled-accent-hover-bg)"
+  },
+  "colors.button.filled.accent.hover.text": {
+    "value": "var(--colors-button-hig-filled-accent-hover-text)",
+    "variable": "var(--colors-button-filled-accent-hover-text)"
+  },
+  "colors.button.filled.accent.hover.border": {
+    "value": "var(--colors-button-hig-filled-accent-hover-border)",
+    "variable": "var(--colors-button-filled-accent-hover-border)"
+  },
+  "colors.button.filled.accent.active.bg": {
+    "value": "var(--colors-button-hig-filled-accent-active-bg)",
+    "variable": "var(--colors-button-filled-accent-active-bg)"
+  },
+  "colors.button.filled.accent.active.text": {
+    "value": "var(--colors-button-hig-filled-accent-active-text)",
+    "variable": "var(--colors-button-filled-accent-active-text)"
+  },
+  "colors.button.filled.accent.active.border": {
+    "value": "var(--colors-button-hig-filled-accent-active-border)",
+    "variable": "var(--colors-button-filled-accent-active-border)"
+  },
+  "colors.button.filled.accent.disabled.bg": {
+    "value": "var(--colors-button-hig-filled-accent-disabled-bg)",
+    "variable": "var(--colors-button-filled-accent-disabled-bg)"
+  },
+  "colors.button.filled.accent.disabled.text": {
+    "value": "var(--colors-button-hig-filled-accent-disabled-text)",
+    "variable": "var(--colors-button-filled-accent-disabled-text)"
+  },
+  "colors.button.filled.accent.disabled.border": {
+    "value": "var(--colors-button-hig-filled-accent-disabled-border)",
+    "variable": "var(--colors-button-filled-accent-disabled-border)"
+  },
+  "colors.button.filled.accent.focus.bg": {
+    "value": "var(--colors-button-hig-filled-accent-focus-bg)",
+    "variable": "var(--colors-button-filled-accent-focus-bg)"
+  },
+  "colors.button.filled.accent.focus.text": {
+    "value": "var(--colors-button-hig-filled-accent-focus-text)",
+    "variable": "var(--colors-button-filled-accent-focus-text)"
+  },
+  "colors.button.filled.accent.focus.border": {
+    "value": "var(--colors-button-hig-filled-accent-focus-border)",
+    "variable": "var(--colors-button-filled-accent-focus-border)"
+  },
+  "colors.button.filled.accent.loading.bg": {
+    "value": "var(--colors-button-hig-filled-accent-loading-bg)",
+    "variable": "var(--colors-button-filled-accent-loading-bg)"
+  },
+  "colors.button.filled.accent.loading.text": {
+    "value": "var(--colors-button-hig-filled-accent-loading-text)",
+    "variable": "var(--colors-button-filled-accent-loading-text)"
+  },
+  "colors.button.filled.accent.loading.border": {
+    "value": "var(--colors-button-hig-filled-accent-loading-border)",
+    "variable": "var(--colors-button-filled-accent-loading-border)"
+  },
+  "colors.button.filled.neutral.default.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-default-bg)",
+    "variable": "var(--colors-button-filled-neutral-default-bg)"
+  },
+  "colors.button.filled.neutral.default.text": {
+    "value": "var(--colors-button-hig-filled-neutral-default-text)",
+    "variable": "var(--colors-button-filled-neutral-default-text)"
+  },
+  "colors.button.filled.neutral.default.border": {
+    "value": "var(--colors-button-hig-filled-neutral-default-border)",
+    "variable": "var(--colors-button-filled-neutral-default-border)"
+  },
+  "colors.button.filled.neutral.hover.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-hover-bg)",
+    "variable": "var(--colors-button-filled-neutral-hover-bg)"
+  },
+  "colors.button.filled.neutral.hover.text": {
+    "value": "var(--colors-button-hig-filled-neutral-hover-text)",
+    "variable": "var(--colors-button-filled-neutral-hover-text)"
+  },
+  "colors.button.filled.neutral.hover.border": {
+    "value": "var(--colors-button-hig-filled-neutral-hover-border)",
+    "variable": "var(--colors-button-filled-neutral-hover-border)"
+  },
+  "colors.button.filled.neutral.active.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-active-bg)",
+    "variable": "var(--colors-button-filled-neutral-active-bg)"
+  },
+  "colors.button.filled.neutral.active.text": {
+    "value": "var(--colors-button-hig-filled-neutral-active-text)",
+    "variable": "var(--colors-button-filled-neutral-active-text)"
+  },
+  "colors.button.filled.neutral.active.border": {
+    "value": "var(--colors-button-hig-filled-neutral-active-border)",
+    "variable": "var(--colors-button-filled-neutral-active-border)"
+  },
+  "colors.button.filled.neutral.disabled.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-disabled-bg)",
+    "variable": "var(--colors-button-filled-neutral-disabled-bg)"
+  },
+  "colors.button.filled.neutral.disabled.text": {
+    "value": "var(--colors-button-hig-filled-neutral-disabled-text)",
+    "variable": "var(--colors-button-filled-neutral-disabled-text)"
+  },
+  "colors.button.filled.neutral.disabled.border": {
+    "value": "var(--colors-button-hig-filled-neutral-disabled-border)",
+    "variable": "var(--colors-button-filled-neutral-disabled-border)"
+  },
+  "colors.button.filled.neutral.focus.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-focus-bg)",
+    "variable": "var(--colors-button-filled-neutral-focus-bg)"
+  },
+  "colors.button.filled.neutral.focus.text": {
+    "value": "var(--colors-button-hig-filled-neutral-focus-text)",
+    "variable": "var(--colors-button-filled-neutral-focus-text)"
+  },
+  "colors.button.filled.neutral.focus.border": {
+    "value": "var(--colors-button-hig-filled-neutral-focus-border)",
+    "variable": "var(--colors-button-filled-neutral-focus-border)"
+  },
+  "colors.button.filled.neutral.loading.bg": {
+    "value": "var(--colors-button-hig-filled-neutral-loading-bg)",
+    "variable": "var(--colors-button-filled-neutral-loading-bg)"
+  },
+  "colors.button.filled.neutral.loading.text": {
+    "value": "var(--colors-button-hig-filled-neutral-loading-text)",
+    "variable": "var(--colors-button-filled-neutral-loading-text)"
+  },
+  "colors.button.filled.neutral.loading.border": {
+    "value": "var(--colors-button-hig-filled-neutral-loading-border)",
+    "variable": "var(--colors-button-filled-neutral-loading-border)"
+  },
+  "colors.button.filled.destructive.default.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-default-bg)",
+    "variable": "var(--colors-button-filled-destructive-default-bg)"
+  },
+  "colors.button.filled.destructive.default.text": {
+    "value": "var(--colors-button-hig-filled-destructive-default-text)",
+    "variable": "var(--colors-button-filled-destructive-default-text)"
+  },
+  "colors.button.filled.destructive.default.border": {
+    "value": "var(--colors-button-hig-filled-destructive-default-border)",
+    "variable": "var(--colors-button-filled-destructive-default-border)"
+  },
+  "colors.button.filled.destructive.hover.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-hover-bg)",
+    "variable": "var(--colors-button-filled-destructive-hover-bg)"
+  },
+  "colors.button.filled.destructive.hover.text": {
+    "value": "var(--colors-button-hig-filled-destructive-hover-text)",
+    "variable": "var(--colors-button-filled-destructive-hover-text)"
+  },
+  "colors.button.filled.destructive.hover.border": {
+    "value": "var(--colors-button-hig-filled-destructive-hover-border)",
+    "variable": "var(--colors-button-filled-destructive-hover-border)"
+  },
+  "colors.button.filled.destructive.active.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-active-bg)",
+    "variable": "var(--colors-button-filled-destructive-active-bg)"
+  },
+  "colors.button.filled.destructive.active.text": {
+    "value": "var(--colors-button-hig-filled-destructive-active-text)",
+    "variable": "var(--colors-button-filled-destructive-active-text)"
+  },
+  "colors.button.filled.destructive.active.border": {
+    "value": "var(--colors-button-hig-filled-destructive-active-border)",
+    "variable": "var(--colors-button-filled-destructive-active-border)"
+  },
+  "colors.button.filled.destructive.disabled.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-disabled-bg)",
+    "variable": "var(--colors-button-filled-destructive-disabled-bg)"
+  },
+  "colors.button.filled.destructive.disabled.text": {
+    "value": "var(--colors-button-hig-filled-destructive-disabled-text)",
+    "variable": "var(--colors-button-filled-destructive-disabled-text)"
+  },
+  "colors.button.filled.destructive.disabled.border": {
+    "value": "var(--colors-button-hig-filled-destructive-disabled-border)",
+    "variable": "var(--colors-button-filled-destructive-disabled-border)"
+  },
+  "colors.button.filled.destructive.focus.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-focus-bg)",
+    "variable": "var(--colors-button-filled-destructive-focus-bg)"
+  },
+  "colors.button.filled.destructive.focus.text": {
+    "value": "var(--colors-button-hig-filled-destructive-focus-text)",
+    "variable": "var(--colors-button-filled-destructive-focus-text)"
+  },
+  "colors.button.filled.destructive.focus.border": {
+    "value": "var(--colors-button-hig-filled-destructive-focus-border)",
+    "variable": "var(--colors-button-filled-destructive-focus-border)"
+  },
+  "colors.button.filled.destructive.loading.bg": {
+    "value": "var(--colors-button-hig-filled-destructive-loading-bg)",
+    "variable": "var(--colors-button-filled-destructive-loading-bg)"
+  },
+  "colors.button.filled.destructive.loading.text": {
+    "value": "var(--colors-button-hig-filled-destructive-loading-text)",
+    "variable": "var(--colors-button-filled-destructive-loading-text)"
+  },
+  "colors.button.filled.destructive.loading.border": {
+    "value": "var(--colors-button-hig-filled-destructive-loading-border)",
+    "variable": "var(--colors-button-filled-destructive-loading-border)"
+  },
+  "colors.button.tinted.accent.default.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-default-bg)",
+    "variable": "var(--colors-button-tinted-accent-default-bg)"
+  },
+  "colors.button.tinted.accent.default.text": {
+    "value": "var(--colors-button-hig-tinted-accent-default-text)",
+    "variable": "var(--colors-button-tinted-accent-default-text)"
+  },
+  "colors.button.tinted.accent.default.border": {
+    "value": "var(--colors-button-hig-tinted-accent-default-border)",
+    "variable": "var(--colors-button-tinted-accent-default-border)"
+  },
+  "colors.button.tinted.accent.hover.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-hover-bg)",
+    "variable": "var(--colors-button-tinted-accent-hover-bg)"
+  },
+  "colors.button.tinted.accent.hover.text": {
+    "value": "var(--colors-button-hig-tinted-accent-hover-text)",
+    "variable": "var(--colors-button-tinted-accent-hover-text)"
+  },
+  "colors.button.tinted.accent.hover.border": {
+    "value": "var(--colors-button-hig-tinted-accent-hover-border)",
+    "variable": "var(--colors-button-tinted-accent-hover-border)"
+  },
+  "colors.button.tinted.accent.active.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-active-bg)",
+    "variable": "var(--colors-button-tinted-accent-active-bg)"
+  },
+  "colors.button.tinted.accent.active.text": {
+    "value": "var(--colors-button-hig-tinted-accent-active-text)",
+    "variable": "var(--colors-button-tinted-accent-active-text)"
+  },
+  "colors.button.tinted.accent.active.border": {
+    "value": "var(--colors-button-hig-tinted-accent-active-border)",
+    "variable": "var(--colors-button-tinted-accent-active-border)"
+  },
+  "colors.button.tinted.accent.disabled.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-disabled-bg)",
+    "variable": "var(--colors-button-tinted-accent-disabled-bg)"
+  },
+  "colors.button.tinted.accent.disabled.text": {
+    "value": "var(--colors-button-hig-tinted-accent-disabled-text)",
+    "variable": "var(--colors-button-tinted-accent-disabled-text)"
+  },
+  "colors.button.tinted.accent.disabled.border": {
+    "value": "var(--colors-button-hig-tinted-accent-disabled-border)",
+    "variable": "var(--colors-button-tinted-accent-disabled-border)"
+  },
+  "colors.button.tinted.accent.focus.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-focus-bg)",
+    "variable": "var(--colors-button-tinted-accent-focus-bg)"
+  },
+  "colors.button.tinted.accent.focus.text": {
+    "value": "var(--colors-button-hig-tinted-accent-focus-text)",
+    "variable": "var(--colors-button-tinted-accent-focus-text)"
+  },
+  "colors.button.tinted.accent.focus.border": {
+    "value": "var(--colors-button-hig-tinted-accent-focus-border)",
+    "variable": "var(--colors-button-tinted-accent-focus-border)"
+  },
+  "colors.button.tinted.accent.loading.bg": {
+    "value": "var(--colors-button-hig-tinted-accent-loading-bg)",
+    "variable": "var(--colors-button-tinted-accent-loading-bg)"
+  },
+  "colors.button.tinted.accent.loading.text": {
+    "value": "var(--colors-button-hig-tinted-accent-loading-text)",
+    "variable": "var(--colors-button-tinted-accent-loading-text)"
+  },
+  "colors.button.tinted.accent.loading.border": {
+    "value": "var(--colors-button-hig-tinted-accent-loading-border)",
+    "variable": "var(--colors-button-tinted-accent-loading-border)"
+  },
+  "colors.button.tinted.neutral.default.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-default-bg)",
+    "variable": "var(--colors-button-tinted-neutral-default-bg)"
+  },
+  "colors.button.tinted.neutral.default.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-default-text)",
+    "variable": "var(--colors-button-tinted-neutral-default-text)"
+  },
+  "colors.button.tinted.neutral.default.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-default-border)",
+    "variable": "var(--colors-button-tinted-neutral-default-border)"
+  },
+  "colors.button.tinted.neutral.hover.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-hover-bg)",
+    "variable": "var(--colors-button-tinted-neutral-hover-bg)"
+  },
+  "colors.button.tinted.neutral.hover.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-hover-text)",
+    "variable": "var(--colors-button-tinted-neutral-hover-text)"
+  },
+  "colors.button.tinted.neutral.hover.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-hover-border)",
+    "variable": "var(--colors-button-tinted-neutral-hover-border)"
+  },
+  "colors.button.tinted.neutral.active.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-active-bg)",
+    "variable": "var(--colors-button-tinted-neutral-active-bg)"
+  },
+  "colors.button.tinted.neutral.active.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-active-text)",
+    "variable": "var(--colors-button-tinted-neutral-active-text)"
+  },
+  "colors.button.tinted.neutral.active.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-active-border)",
+    "variable": "var(--colors-button-tinted-neutral-active-border)"
+  },
+  "colors.button.tinted.neutral.disabled.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-disabled-bg)",
+    "variable": "var(--colors-button-tinted-neutral-disabled-bg)"
+  },
+  "colors.button.tinted.neutral.disabled.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-disabled-text)",
+    "variable": "var(--colors-button-tinted-neutral-disabled-text)"
+  },
+  "colors.button.tinted.neutral.disabled.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-disabled-border)",
+    "variable": "var(--colors-button-tinted-neutral-disabled-border)"
+  },
+  "colors.button.tinted.neutral.focus.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-focus-bg)",
+    "variable": "var(--colors-button-tinted-neutral-focus-bg)"
+  },
+  "colors.button.tinted.neutral.focus.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-focus-text)",
+    "variable": "var(--colors-button-tinted-neutral-focus-text)"
+  },
+  "colors.button.tinted.neutral.focus.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-focus-border)",
+    "variable": "var(--colors-button-tinted-neutral-focus-border)"
+  },
+  "colors.button.tinted.neutral.loading.bg": {
+    "value": "var(--colors-button-hig-tinted-neutral-loading-bg)",
+    "variable": "var(--colors-button-tinted-neutral-loading-bg)"
+  },
+  "colors.button.tinted.neutral.loading.text": {
+    "value": "var(--colors-button-hig-tinted-neutral-loading-text)",
+    "variable": "var(--colors-button-tinted-neutral-loading-text)"
+  },
+  "colors.button.tinted.neutral.loading.border": {
+    "value": "var(--colors-button-hig-tinted-neutral-loading-border)",
+    "variable": "var(--colors-button-tinted-neutral-loading-border)"
+  },
+  "colors.button.tinted.destructive.default.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-default-bg)",
+    "variable": "var(--colors-button-tinted-destructive-default-bg)"
+  },
+  "colors.button.tinted.destructive.default.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-default-text)",
+    "variable": "var(--colors-button-tinted-destructive-default-text)"
+  },
+  "colors.button.tinted.destructive.default.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-default-border)",
+    "variable": "var(--colors-button-tinted-destructive-default-border)"
+  },
+  "colors.button.tinted.destructive.hover.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-hover-bg)",
+    "variable": "var(--colors-button-tinted-destructive-hover-bg)"
+  },
+  "colors.button.tinted.destructive.hover.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-hover-text)",
+    "variable": "var(--colors-button-tinted-destructive-hover-text)"
+  },
+  "colors.button.tinted.destructive.hover.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-hover-border)",
+    "variable": "var(--colors-button-tinted-destructive-hover-border)"
+  },
+  "colors.button.tinted.destructive.active.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-active-bg)",
+    "variable": "var(--colors-button-tinted-destructive-active-bg)"
+  },
+  "colors.button.tinted.destructive.active.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-active-text)",
+    "variable": "var(--colors-button-tinted-destructive-active-text)"
+  },
+  "colors.button.tinted.destructive.active.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-active-border)",
+    "variable": "var(--colors-button-tinted-destructive-active-border)"
+  },
+  "colors.button.tinted.destructive.disabled.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-disabled-bg)",
+    "variable": "var(--colors-button-tinted-destructive-disabled-bg)"
+  },
+  "colors.button.tinted.destructive.disabled.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-disabled-text)",
+    "variable": "var(--colors-button-tinted-destructive-disabled-text)"
+  },
+  "colors.button.tinted.destructive.disabled.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-disabled-border)",
+    "variable": "var(--colors-button-tinted-destructive-disabled-border)"
+  },
+  "colors.button.tinted.destructive.focus.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-focus-bg)",
+    "variable": "var(--colors-button-tinted-destructive-focus-bg)"
+  },
+  "colors.button.tinted.destructive.focus.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-focus-text)",
+    "variable": "var(--colors-button-tinted-destructive-focus-text)"
+  },
+  "colors.button.tinted.destructive.focus.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-focus-border)",
+    "variable": "var(--colors-button-tinted-destructive-focus-border)"
+  },
+  "colors.button.tinted.destructive.loading.bg": {
+    "value": "var(--colors-button-hig-tinted-destructive-loading-bg)",
+    "variable": "var(--colors-button-tinted-destructive-loading-bg)"
+  },
+  "colors.button.tinted.destructive.loading.text": {
+    "value": "var(--colors-button-hig-tinted-destructive-loading-text)",
+    "variable": "var(--colors-button-tinted-destructive-loading-text)"
+  },
+  "colors.button.tinted.destructive.loading.border": {
+    "value": "var(--colors-button-hig-tinted-destructive-loading-border)",
+    "variable": "var(--colors-button-tinted-destructive-loading-border)"
+  },
+  "colors.button.plain.accent.default.bg": {
+    "value": "var(--colors-button-hig-plain-accent-default-bg)",
+    "variable": "var(--colors-button-plain-accent-default-bg)"
+  },
+  "colors.button.plain.accent.default.text": {
+    "value": "var(--colors-button-hig-plain-accent-default-text)",
+    "variable": "var(--colors-button-plain-accent-default-text)"
+  },
+  "colors.button.plain.accent.default.border": {
+    "value": "var(--colors-button-hig-plain-accent-default-border)",
+    "variable": "var(--colors-button-plain-accent-default-border)"
+  },
+  "colors.button.plain.accent.hover.bg": {
+    "value": "var(--colors-button-hig-plain-accent-hover-bg)",
+    "variable": "var(--colors-button-plain-accent-hover-bg)"
+  },
+  "colors.button.plain.accent.hover.text": {
+    "value": "var(--colors-button-hig-plain-accent-hover-text)",
+    "variable": "var(--colors-button-plain-accent-hover-text)"
+  },
+  "colors.button.plain.accent.hover.border": {
+    "value": "var(--colors-button-hig-plain-accent-hover-border)",
+    "variable": "var(--colors-button-plain-accent-hover-border)"
+  },
+  "colors.button.plain.accent.active.bg": {
+    "value": "var(--colors-button-hig-plain-accent-active-bg)",
+    "variable": "var(--colors-button-plain-accent-active-bg)"
+  },
+  "colors.button.plain.accent.active.text": {
+    "value": "var(--colors-button-hig-plain-accent-active-text)",
+    "variable": "var(--colors-button-plain-accent-active-text)"
+  },
+  "colors.button.plain.accent.active.border": {
+    "value": "var(--colors-button-hig-plain-accent-active-border)",
+    "variable": "var(--colors-button-plain-accent-active-border)"
+  },
+  "colors.button.plain.accent.disabled.bg": {
+    "value": "var(--colors-button-hig-plain-accent-disabled-bg)",
+    "variable": "var(--colors-button-plain-accent-disabled-bg)"
+  },
+  "colors.button.plain.accent.disabled.text": {
+    "value": "var(--colors-button-hig-plain-accent-disabled-text)",
+    "variable": "var(--colors-button-plain-accent-disabled-text)"
+  },
+  "colors.button.plain.accent.disabled.border": {
+    "value": "var(--colors-button-hig-plain-accent-disabled-border)",
+    "variable": "var(--colors-button-plain-accent-disabled-border)"
+  },
+  "colors.button.plain.accent.focus.bg": {
+    "value": "var(--colors-button-hig-plain-accent-focus-bg)",
+    "variable": "var(--colors-button-plain-accent-focus-bg)"
+  },
+  "colors.button.plain.accent.focus.text": {
+    "value": "var(--colors-button-hig-plain-accent-focus-text)",
+    "variable": "var(--colors-button-plain-accent-focus-text)"
+  },
+  "colors.button.plain.accent.focus.border": {
+    "value": "var(--colors-button-hig-plain-accent-focus-border)",
+    "variable": "var(--colors-button-plain-accent-focus-border)"
+  },
+  "colors.button.plain.accent.loading.bg": {
+    "value": "var(--colors-button-hig-plain-accent-loading-bg)",
+    "variable": "var(--colors-button-plain-accent-loading-bg)"
+  },
+  "colors.button.plain.accent.loading.text": {
+    "value": "var(--colors-button-hig-plain-accent-loading-text)",
+    "variable": "var(--colors-button-plain-accent-loading-text)"
+  },
+  "colors.button.plain.accent.loading.border": {
+    "value": "var(--colors-button-hig-plain-accent-loading-border)",
+    "variable": "var(--colors-button-plain-accent-loading-border)"
+  },
+  "colors.button.plain.neutral.default.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-default-bg)",
+    "variable": "var(--colors-button-plain-neutral-default-bg)"
+  },
+  "colors.button.plain.neutral.default.text": {
+    "value": "var(--colors-button-hig-plain-neutral-default-text)",
+    "variable": "var(--colors-button-plain-neutral-default-text)"
+  },
+  "colors.button.plain.neutral.default.border": {
+    "value": "var(--colors-button-hig-plain-neutral-default-border)",
+    "variable": "var(--colors-button-plain-neutral-default-border)"
+  },
+  "colors.button.plain.neutral.hover.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-hover-bg)",
+    "variable": "var(--colors-button-plain-neutral-hover-bg)"
+  },
+  "colors.button.plain.neutral.hover.text": {
+    "value": "var(--colors-button-hig-plain-neutral-hover-text)",
+    "variable": "var(--colors-button-plain-neutral-hover-text)"
+  },
+  "colors.button.plain.neutral.hover.border": {
+    "value": "var(--colors-button-hig-plain-neutral-hover-border)",
+    "variable": "var(--colors-button-plain-neutral-hover-border)"
+  },
+  "colors.button.plain.neutral.active.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-active-bg)",
+    "variable": "var(--colors-button-plain-neutral-active-bg)"
+  },
+  "colors.button.plain.neutral.active.text": {
+    "value": "var(--colors-button-hig-plain-neutral-active-text)",
+    "variable": "var(--colors-button-plain-neutral-active-text)"
+  },
+  "colors.button.plain.neutral.active.border": {
+    "value": "var(--colors-button-hig-plain-neutral-active-border)",
+    "variable": "var(--colors-button-plain-neutral-active-border)"
+  },
+  "colors.button.plain.neutral.disabled.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-disabled-bg)",
+    "variable": "var(--colors-button-plain-neutral-disabled-bg)"
+  },
+  "colors.button.plain.neutral.disabled.text": {
+    "value": "var(--colors-button-hig-plain-neutral-disabled-text)",
+    "variable": "var(--colors-button-plain-neutral-disabled-text)"
+  },
+  "colors.button.plain.neutral.disabled.border": {
+    "value": "var(--colors-button-hig-plain-neutral-disabled-border)",
+    "variable": "var(--colors-button-plain-neutral-disabled-border)"
+  },
+  "colors.button.plain.neutral.focus.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-focus-bg)",
+    "variable": "var(--colors-button-plain-neutral-focus-bg)"
+  },
+  "colors.button.plain.neutral.focus.text": {
+    "value": "var(--colors-button-hig-plain-neutral-focus-text)",
+    "variable": "var(--colors-button-plain-neutral-focus-text)"
+  },
+  "colors.button.plain.neutral.focus.border": {
+    "value": "var(--colors-button-hig-plain-neutral-focus-border)",
+    "variable": "var(--colors-button-plain-neutral-focus-border)"
+  },
+  "colors.button.plain.neutral.loading.bg": {
+    "value": "var(--colors-button-hig-plain-neutral-loading-bg)",
+    "variable": "var(--colors-button-plain-neutral-loading-bg)"
+  },
+  "colors.button.plain.neutral.loading.text": {
+    "value": "var(--colors-button-hig-plain-neutral-loading-text)",
+    "variable": "var(--colors-button-plain-neutral-loading-text)"
+  },
+  "colors.button.plain.neutral.loading.border": {
+    "value": "var(--colors-button-hig-plain-neutral-loading-border)",
+    "variable": "var(--colors-button-plain-neutral-loading-border)"
+  },
+  "colors.button.plain.destructive.default.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-default-bg)",
+    "variable": "var(--colors-button-plain-destructive-default-bg)"
+  },
+  "colors.button.plain.destructive.default.text": {
+    "value": "var(--colors-button-hig-plain-destructive-default-text)",
+    "variable": "var(--colors-button-plain-destructive-default-text)"
+  },
+  "colors.button.plain.destructive.default.border": {
+    "value": "var(--colors-button-hig-plain-destructive-default-border)",
+    "variable": "var(--colors-button-plain-destructive-default-border)"
+  },
+  "colors.button.plain.destructive.hover.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-hover-bg)",
+    "variable": "var(--colors-button-plain-destructive-hover-bg)"
+  },
+  "colors.button.plain.destructive.hover.text": {
+    "value": "var(--colors-button-hig-plain-destructive-hover-text)",
+    "variable": "var(--colors-button-plain-destructive-hover-text)"
+  },
+  "colors.button.plain.destructive.hover.border": {
+    "value": "var(--colors-button-hig-plain-destructive-hover-border)",
+    "variable": "var(--colors-button-plain-destructive-hover-border)"
+  },
+  "colors.button.plain.destructive.active.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-active-bg)",
+    "variable": "var(--colors-button-plain-destructive-active-bg)"
+  },
+  "colors.button.plain.destructive.active.text": {
+    "value": "var(--colors-button-hig-plain-destructive-active-text)",
+    "variable": "var(--colors-button-plain-destructive-active-text)"
+  },
+  "colors.button.plain.destructive.active.border": {
+    "value": "var(--colors-button-hig-plain-destructive-active-border)",
+    "variable": "var(--colors-button-plain-destructive-active-border)"
+  },
+  "colors.button.plain.destructive.disabled.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-disabled-bg)",
+    "variable": "var(--colors-button-plain-destructive-disabled-bg)"
+  },
+  "colors.button.plain.destructive.disabled.text": {
+    "value": "var(--colors-button-hig-plain-destructive-disabled-text)",
+    "variable": "var(--colors-button-plain-destructive-disabled-text)"
+  },
+  "colors.button.plain.destructive.disabled.border": {
+    "value": "var(--colors-button-hig-plain-destructive-disabled-border)",
+    "variable": "var(--colors-button-plain-destructive-disabled-border)"
+  },
+  "colors.button.plain.destructive.focus.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-focus-bg)",
+    "variable": "var(--colors-button-plain-destructive-focus-bg)"
+  },
+  "colors.button.plain.destructive.focus.text": {
+    "value": "var(--colors-button-hig-plain-destructive-focus-text)",
+    "variable": "var(--colors-button-plain-destructive-focus-text)"
+  },
+  "colors.button.plain.destructive.focus.border": {
+    "value": "var(--colors-button-hig-plain-destructive-focus-border)",
+    "variable": "var(--colors-button-plain-destructive-focus-border)"
+  },
+  "colors.button.plain.destructive.loading.bg": {
+    "value": "var(--colors-button-hig-plain-destructive-loading-bg)",
+    "variable": "var(--colors-button-plain-destructive-loading-bg)"
+  },
+  "colors.button.plain.destructive.loading.text": {
+    "value": "var(--colors-button-hig-plain-destructive-loading-text)",
+    "variable": "var(--colors-button-plain-destructive-loading-text)"
+  },
+  "colors.button.plain.destructive.loading.border": {
+    "value": "var(--colors-button-hig-plain-destructive-loading-border)",
+    "variable": "var(--colors-button-plain-destructive-loading-border)"
   },
   "colors.accent.dynamic": {
     "value": "var(--ui-accent, #007AFF)",
@@ -451,6 +1807,18 @@ const tokens = {
     "value": "var(--radii-full)",
     "variable": "var(--radii-roles-badge)"
   },
+  "radii.button.default": {
+    "value": "0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+    "variable": "var(--radii-button-default)"
+  },
+  "radii.button.hover": {
+    "value": "0 10px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+    "variable": "var(--radii-button-hover)"
+  },
+  "radii.button.active": {
+    "value": "0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.15)",
+    "variable": "var(--radii-button-active)"
+  },
   "radii.glass.xs": {
     "value": "var(--radii-xs)",
     "variable": "var(--radii-glass-xs)"
@@ -499,6 +1867,22 @@ const tokens = {
     "value": "30px",
     "variable": "var(--blurs-glass-xl)"
   },
+  "shadows.button.default": {
+    "value": "var(--shadows-glass-base)",
+    "variable": "var(--shadows-button-default)"
+  },
+  "shadows.button.hover": {
+    "value": "var(--shadows-glass-hover)",
+    "variable": "var(--shadows-button-hover)"
+  },
+  "shadows.button.active": {
+    "value": "var(--shadows-glass-sm)",
+    "variable": "var(--shadows-button-active)"
+  },
+  "shadows.button.focus": {
+    "value": "var(--shadows-glass-md)",
+    "variable": "var(--shadows-button-focus)"
+  },
   "shadows.glass.base": {
     "value": "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
     "variable": "var(--shadows-glass-base)"
@@ -518,6 +1902,18 @@ const tokens = {
   "shadows.glass.hover": {
     "value": "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
     "variable": "var(--shadows-glass-hover)"
+  },
+  "durations.button.hover": {
+    "value": "var(--durations-glass-flow)",
+    "variable": "var(--durations-button-hover)"
+  },
+  "durations.button.press": {
+    "value": "var(--durations-glass-instant)",
+    "variable": "var(--durations-button-press)"
+  },
+  "durations.button.focus": {
+    "value": "var(--durations-glass-flow)",
+    "variable": "var(--durations-button-focus)"
   },
   "durations.glass.flow": {
     "value": "0.8s",
@@ -594,6 +1990,34 @@ const tokens = {
   "spacing.glass.3xl": {
     "value": "32px",
     "variable": "var(--spacing-glass-3xl)"
+  },
+  "spacing.button.pad.compact": {
+    "value": "8px 12px",
+    "variable": "var(--spacing-button-pad-compact)"
+  },
+  "spacing.button.pad.regular": {
+    "value": "10px 16px",
+    "variable": "var(--spacing-button-pad-regular)"
+  },
+  "spacing.button.pad.large": {
+    "value": "12px 20px",
+    "variable": "var(--spacing-button-pad-large)"
+  },
+  "spacing.button.gap.icon.compact": {
+    "value": "var(--spacing-glass-xs)",
+    "variable": "var(--spacing-button-gap-icon-compact)"
+  },
+  "spacing.button.gap.icon.regular": {
+    "value": "var(--spacing-glass-xs)",
+    "variable": "var(--spacing-button-gap-icon-regular)"
+  },
+  "spacing.button.gap.icon.large": {
+    "value": "var(--spacing-glass-sm)",
+    "variable": "var(--spacing-button-gap-icon-large)"
+  },
+  "spacing.button.hit.min": {
+    "value": "44px",
+    "variable": "var(--spacing-button-hit-min)"
   },
   "fonts.sans": {
     "value": "\"SF Pro Display\", sans-serif",
@@ -791,6 +2215,34 @@ const tokens = {
     "value": "calc(var(--spacing-glass-3xl) * -1)",
     "variable": "var(--spacing-glass-3xl)"
   },
+  "spacing.button.pad.-compact": {
+    "value": "calc(var(--spacing-button-pad-compact) * -1)",
+    "variable": "var(--spacing-button-pad-compact)"
+  },
+  "spacing.button.pad.-regular": {
+    "value": "calc(var(--spacing-button-pad-regular) * -1)",
+    "variable": "var(--spacing-button-pad-regular)"
+  },
+  "spacing.button.pad.-large": {
+    "value": "calc(var(--spacing-button-pad-large) * -1)",
+    "variable": "var(--spacing-button-pad-large)"
+  },
+  "spacing.button.gap.icon.-compact": {
+    "value": "calc(var(--spacing-button-gap-icon-compact) * -1)",
+    "variable": "var(--spacing-button-gap-icon-compact)"
+  },
+  "spacing.button.gap.icon.-regular": {
+    "value": "calc(var(--spacing-button-gap-icon-regular) * -1)",
+    "variable": "var(--spacing-button-gap-icon-regular)"
+  },
+  "spacing.button.gap.icon.-large": {
+    "value": "calc(var(--spacing-button-gap-icon-large) * -1)",
+    "variable": "var(--spacing-button-gap-icon-large)"
+  },
+  "spacing.button.hit.-min": {
+    "value": "calc(var(--spacing-button-hit-min) * -1)",
+    "variable": "var(--spacing-button-hit-min)"
+  },
   "colors.colorPalette.bg": {
     "value": "var(--colors-color-palette-bg)",
     "variable": "var(--colors-color-palette-bg)"
@@ -898,6 +2350,1594 @@ const tokens = {
   "colors.colorPalette.warning.border": {
     "value": "var(--colors-color-palette-warning-border)",
     "variable": "var(--colors-color-palette-warning-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.default.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-default-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-default-bg)"
+  },
+  "colors.colorPalette.filled.accent.default.bg": {
+    "value": "var(--colors-color-palette-filled-accent-default-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-default-bg)"
+  },
+  "colors.colorPalette.accent.default.bg": {
+    "value": "var(--colors-color-palette-accent-default-bg)",
+    "variable": "var(--colors-color-palette-accent-default-bg)"
+  },
+  "colors.colorPalette.default.bg": {
+    "value": "var(--colors-color-palette-default-bg)",
+    "variable": "var(--colors-color-palette-default-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.default.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-default-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-default-text)"
+  },
+  "colors.colorPalette.filled.accent.default.text": {
+    "value": "var(--colors-color-palette-filled-accent-default-text)",
+    "variable": "var(--colors-color-palette-filled-accent-default-text)"
+  },
+  "colors.colorPalette.accent.default.text": {
+    "value": "var(--colors-color-palette-accent-default-text)",
+    "variable": "var(--colors-color-palette-accent-default-text)"
+  },
+  "colors.colorPalette.default.text": {
+    "value": "var(--colors-color-palette-default-text)",
+    "variable": "var(--colors-color-palette-default-text)"
+  },
+  "colors.colorPalette.text": {
+    "value": "var(--colors-color-palette-text)",
+    "variable": "var(--colors-color-palette-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.default.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-default-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-default-border)"
+  },
+  "colors.colorPalette.filled.accent.default.border": {
+    "value": "var(--colors-color-palette-filled-accent-default-border)",
+    "variable": "var(--colors-color-palette-filled-accent-default-border)"
+  },
+  "colors.colorPalette.accent.default.border": {
+    "value": "var(--colors-color-palette-accent-default-border)",
+    "variable": "var(--colors-color-palette-accent-default-border)"
+  },
+  "colors.colorPalette.default.border": {
+    "value": "var(--colors-color-palette-default-border)",
+    "variable": "var(--colors-color-palette-default-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.hover.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-hover-bg)"
+  },
+  "colors.colorPalette.filled.accent.hover.bg": {
+    "value": "var(--colors-color-palette-filled-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-hover-bg)"
+  },
+  "colors.colorPalette.accent.hover.bg": {
+    "value": "var(--colors-color-palette-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-accent-hover-bg)"
+  },
+  "colors.colorPalette.hover.bg": {
+    "value": "var(--colors-color-palette-hover-bg)",
+    "variable": "var(--colors-color-palette-hover-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.hover.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-hover-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-hover-text)"
+  },
+  "colors.colorPalette.filled.accent.hover.text": {
+    "value": "var(--colors-color-palette-filled-accent-hover-text)",
+    "variable": "var(--colors-color-palette-filled-accent-hover-text)"
+  },
+  "colors.colorPalette.accent.hover.text": {
+    "value": "var(--colors-color-palette-accent-hover-text)",
+    "variable": "var(--colors-color-palette-accent-hover-text)"
+  },
+  "colors.colorPalette.hover.text": {
+    "value": "var(--colors-color-palette-hover-text)",
+    "variable": "var(--colors-color-palette-hover-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.hover.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-hover-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-hover-border)"
+  },
+  "colors.colorPalette.filled.accent.hover.border": {
+    "value": "var(--colors-color-palette-filled-accent-hover-border)",
+    "variable": "var(--colors-color-palette-filled-accent-hover-border)"
+  },
+  "colors.colorPalette.accent.hover.border": {
+    "value": "var(--colors-color-palette-accent-hover-border)",
+    "variable": "var(--colors-color-palette-accent-hover-border)"
+  },
+  "colors.colorPalette.hover.border": {
+    "value": "var(--colors-color-palette-hover-border)",
+    "variable": "var(--colors-color-palette-hover-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.active.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-active-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-active-bg)"
+  },
+  "colors.colorPalette.filled.accent.active.bg": {
+    "value": "var(--colors-color-palette-filled-accent-active-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-active-bg)"
+  },
+  "colors.colorPalette.accent.active.bg": {
+    "value": "var(--colors-color-palette-accent-active-bg)",
+    "variable": "var(--colors-color-palette-accent-active-bg)"
+  },
+  "colors.colorPalette.active.bg": {
+    "value": "var(--colors-color-palette-active-bg)",
+    "variable": "var(--colors-color-palette-active-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.active.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-active-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-active-text)"
+  },
+  "colors.colorPalette.filled.accent.active.text": {
+    "value": "var(--colors-color-palette-filled-accent-active-text)",
+    "variable": "var(--colors-color-palette-filled-accent-active-text)"
+  },
+  "colors.colorPalette.accent.active.text": {
+    "value": "var(--colors-color-palette-accent-active-text)",
+    "variable": "var(--colors-color-palette-accent-active-text)"
+  },
+  "colors.colorPalette.active.text": {
+    "value": "var(--colors-color-palette-active-text)",
+    "variable": "var(--colors-color-palette-active-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.active.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-active-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-active-border)"
+  },
+  "colors.colorPalette.filled.accent.active.border": {
+    "value": "var(--colors-color-palette-filled-accent-active-border)",
+    "variable": "var(--colors-color-palette-filled-accent-active-border)"
+  },
+  "colors.colorPalette.accent.active.border": {
+    "value": "var(--colors-color-palette-accent-active-border)",
+    "variable": "var(--colors-color-palette-accent-active-border)"
+  },
+  "colors.colorPalette.active.border": {
+    "value": "var(--colors-color-palette-active-border)",
+    "variable": "var(--colors-color-palette-active-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-disabled-bg)"
+  },
+  "colors.colorPalette.filled.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-filled-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-disabled-bg)"
+  },
+  "colors.colorPalette.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-accent-disabled-bg)"
+  },
+  "colors.colorPalette.disabled.bg": {
+    "value": "var(--colors-color-palette-disabled-bg)",
+    "variable": "var(--colors-color-palette-disabled-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.disabled.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-disabled-text)"
+  },
+  "colors.colorPalette.filled.accent.disabled.text": {
+    "value": "var(--colors-color-palette-filled-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-filled-accent-disabled-text)"
+  },
+  "colors.colorPalette.accent.disabled.text": {
+    "value": "var(--colors-color-palette-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-accent-disabled-text)"
+  },
+  "colors.colorPalette.disabled.text": {
+    "value": "var(--colors-color-palette-disabled-text)",
+    "variable": "var(--colors-color-palette-disabled-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.disabled.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-disabled-border)"
+  },
+  "colors.colorPalette.filled.accent.disabled.border": {
+    "value": "var(--colors-color-palette-filled-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-filled-accent-disabled-border)"
+  },
+  "colors.colorPalette.accent.disabled.border": {
+    "value": "var(--colors-color-palette-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-accent-disabled-border)"
+  },
+  "colors.colorPalette.disabled.border": {
+    "value": "var(--colors-color-palette-disabled-border)",
+    "variable": "var(--colors-color-palette-disabled-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.focus.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-focus-bg)"
+  },
+  "colors.colorPalette.filled.accent.focus.bg": {
+    "value": "var(--colors-color-palette-filled-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-focus-bg)"
+  },
+  "colors.colorPalette.accent.focus.bg": {
+    "value": "var(--colors-color-palette-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-accent-focus-bg)"
+  },
+  "colors.colorPalette.focus.bg": {
+    "value": "var(--colors-color-palette-focus-bg)",
+    "variable": "var(--colors-color-palette-focus-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.focus.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-focus-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-focus-text)"
+  },
+  "colors.colorPalette.filled.accent.focus.text": {
+    "value": "var(--colors-color-palette-filled-accent-focus-text)",
+    "variable": "var(--colors-color-palette-filled-accent-focus-text)"
+  },
+  "colors.colorPalette.accent.focus.text": {
+    "value": "var(--colors-color-palette-accent-focus-text)",
+    "variable": "var(--colors-color-palette-accent-focus-text)"
+  },
+  "colors.colorPalette.focus.text": {
+    "value": "var(--colors-color-palette-focus-text)",
+    "variable": "var(--colors-color-palette-focus-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.focus.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-focus-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-focus-border)"
+  },
+  "colors.colorPalette.filled.accent.focus.border": {
+    "value": "var(--colors-color-palette-filled-accent-focus-border)",
+    "variable": "var(--colors-color-palette-filled-accent-focus-border)"
+  },
+  "colors.colorPalette.accent.focus.border": {
+    "value": "var(--colors-color-palette-accent-focus-border)",
+    "variable": "var(--colors-color-palette-accent-focus-border)"
+  },
+  "colors.colorPalette.focus.border": {
+    "value": "var(--colors-color-palette-focus-border)",
+    "variable": "var(--colors-color-palette-focus-border)"
+  },
+  "colors.colorPalette.hig.filled.accent.loading.bg": {
+    "value": "var(--colors-color-palette-hig-filled-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-loading-bg)"
+  },
+  "colors.colorPalette.filled.accent.loading.bg": {
+    "value": "var(--colors-color-palette-filled-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-filled-accent-loading-bg)"
+  },
+  "colors.colorPalette.accent.loading.bg": {
+    "value": "var(--colors-color-palette-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-accent-loading-bg)"
+  },
+  "colors.colorPalette.loading.bg": {
+    "value": "var(--colors-color-palette-loading-bg)",
+    "variable": "var(--colors-color-palette-loading-bg)"
+  },
+  "colors.colorPalette.hig.filled.accent.loading.text": {
+    "value": "var(--colors-color-palette-hig-filled-accent-loading-text)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-loading-text)"
+  },
+  "colors.colorPalette.filled.accent.loading.text": {
+    "value": "var(--colors-color-palette-filled-accent-loading-text)",
+    "variable": "var(--colors-color-palette-filled-accent-loading-text)"
+  },
+  "colors.colorPalette.accent.loading.text": {
+    "value": "var(--colors-color-palette-accent-loading-text)",
+    "variable": "var(--colors-color-palette-accent-loading-text)"
+  },
+  "colors.colorPalette.loading.text": {
+    "value": "var(--colors-color-palette-loading-text)",
+    "variable": "var(--colors-color-palette-loading-text)"
+  },
+  "colors.colorPalette.hig.filled.accent.loading.border": {
+    "value": "var(--colors-color-palette-hig-filled-accent-loading-border)",
+    "variable": "var(--colors-color-palette-hig-filled-accent-loading-border)"
+  },
+  "colors.colorPalette.filled.accent.loading.border": {
+    "value": "var(--colors-color-palette-filled-accent-loading-border)",
+    "variable": "var(--colors-color-palette-filled-accent-loading-border)"
+  },
+  "colors.colorPalette.accent.loading.border": {
+    "value": "var(--colors-color-palette-accent-loading-border)",
+    "variable": "var(--colors-color-palette-accent-loading-border)"
+  },
+  "colors.colorPalette.loading.border": {
+    "value": "var(--colors-color-palette-loading-border)",
+    "variable": "var(--colors-color-palette-loading-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.default.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-default-bg)"
+  },
+  "colors.colorPalette.filled.neutral.default.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-default-bg)"
+  },
+  "colors.colorPalette.neutral.default.bg": {
+    "value": "var(--colors-color-palette-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-neutral-default-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.default.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-default-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-default-text)"
+  },
+  "colors.colorPalette.filled.neutral.default.text": {
+    "value": "var(--colors-color-palette-filled-neutral-default-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-default-text)"
+  },
+  "colors.colorPalette.neutral.default.text": {
+    "value": "var(--colors-color-palette-neutral-default-text)",
+    "variable": "var(--colors-color-palette-neutral-default-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.default.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-default-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-default-border)"
+  },
+  "colors.colorPalette.filled.neutral.default.border": {
+    "value": "var(--colors-color-palette-filled-neutral-default-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-default-border)"
+  },
+  "colors.colorPalette.neutral.default.border": {
+    "value": "var(--colors-color-palette-neutral-default-border)",
+    "variable": "var(--colors-color-palette-neutral-default-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-hover-bg)"
+  },
+  "colors.colorPalette.filled.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-hover-bg)"
+  },
+  "colors.colorPalette.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-neutral-hover-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.hover.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-hover-text)"
+  },
+  "colors.colorPalette.filled.neutral.hover.text": {
+    "value": "var(--colors-color-palette-filled-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-hover-text)"
+  },
+  "colors.colorPalette.neutral.hover.text": {
+    "value": "var(--colors-color-palette-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-neutral-hover-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.hover.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-hover-border)"
+  },
+  "colors.colorPalette.filled.neutral.hover.border": {
+    "value": "var(--colors-color-palette-filled-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-hover-border)"
+  },
+  "colors.colorPalette.neutral.hover.border": {
+    "value": "var(--colors-color-palette-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-neutral-hover-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.active.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-active-bg)"
+  },
+  "colors.colorPalette.filled.neutral.active.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-active-bg)"
+  },
+  "colors.colorPalette.neutral.active.bg": {
+    "value": "var(--colors-color-palette-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-neutral-active-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.active.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-active-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-active-text)"
+  },
+  "colors.colorPalette.filled.neutral.active.text": {
+    "value": "var(--colors-color-palette-filled-neutral-active-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-active-text)"
+  },
+  "colors.colorPalette.neutral.active.text": {
+    "value": "var(--colors-color-palette-neutral-active-text)",
+    "variable": "var(--colors-color-palette-neutral-active-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.active.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-active-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-active-border)"
+  },
+  "colors.colorPalette.filled.neutral.active.border": {
+    "value": "var(--colors-color-palette-filled-neutral-active-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-active-border)"
+  },
+  "colors.colorPalette.neutral.active.border": {
+    "value": "var(--colors-color-palette-neutral-active-border)",
+    "variable": "var(--colors-color-palette-neutral-active-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.filled.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-disabled-text)"
+  },
+  "colors.colorPalette.filled.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-filled-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-disabled-text)"
+  },
+  "colors.colorPalette.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-neutral-disabled-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-disabled-border)"
+  },
+  "colors.colorPalette.filled.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-filled-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-disabled-border)"
+  },
+  "colors.colorPalette.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-neutral-disabled-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-focus-bg)"
+  },
+  "colors.colorPalette.filled.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-focus-bg)"
+  },
+  "colors.colorPalette.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-neutral-focus-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.focus.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-focus-text)"
+  },
+  "colors.colorPalette.filled.neutral.focus.text": {
+    "value": "var(--colors-color-palette-filled-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-focus-text)"
+  },
+  "colors.colorPalette.neutral.focus.text": {
+    "value": "var(--colors-color-palette-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-neutral-focus-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.focus.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-focus-border)"
+  },
+  "colors.colorPalette.filled.neutral.focus.border": {
+    "value": "var(--colors-color-palette-filled-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-focus-border)"
+  },
+  "colors.colorPalette.neutral.focus.border": {
+    "value": "var(--colors-color-palette-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-neutral-focus-border)"
+  },
+  "colors.colorPalette.hig.filled.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-loading-bg)"
+  },
+  "colors.colorPalette.filled.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-filled-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-filled-neutral-loading-bg)"
+  },
+  "colors.colorPalette.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-neutral-loading-bg)"
+  },
+  "colors.colorPalette.hig.filled.neutral.loading.text": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-loading-text)"
+  },
+  "colors.colorPalette.filled.neutral.loading.text": {
+    "value": "var(--colors-color-palette-filled-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-filled-neutral-loading-text)"
+  },
+  "colors.colorPalette.neutral.loading.text": {
+    "value": "var(--colors-color-palette-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-neutral-loading-text)"
+  },
+  "colors.colorPalette.hig.filled.neutral.loading.border": {
+    "value": "var(--colors-color-palette-hig-filled-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-hig-filled-neutral-loading-border)"
+  },
+  "colors.colorPalette.filled.neutral.loading.border": {
+    "value": "var(--colors-color-palette-filled-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-filled-neutral-loading-border)"
+  },
+  "colors.colorPalette.neutral.loading.border": {
+    "value": "var(--colors-color-palette-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-neutral-loading-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.default.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-default-bg)"
+  },
+  "colors.colorPalette.filled.destructive.default.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-default-bg)"
+  },
+  "colors.colorPalette.destructive.default.bg": {
+    "value": "var(--colors-color-palette-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-destructive-default-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.default.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-default-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-default-text)"
+  },
+  "colors.colorPalette.filled.destructive.default.text": {
+    "value": "var(--colors-color-palette-filled-destructive-default-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-default-text)"
+  },
+  "colors.colorPalette.destructive.default.text": {
+    "value": "var(--colors-color-palette-destructive-default-text)",
+    "variable": "var(--colors-color-palette-destructive-default-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.default.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-default-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-default-border)"
+  },
+  "colors.colorPalette.filled.destructive.default.border": {
+    "value": "var(--colors-color-palette-filled-destructive-default-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-default-border)"
+  },
+  "colors.colorPalette.destructive.default.border": {
+    "value": "var(--colors-color-palette-destructive-default-border)",
+    "variable": "var(--colors-color-palette-destructive-default-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-hover-bg)"
+  },
+  "colors.colorPalette.filled.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-hover-bg)"
+  },
+  "colors.colorPalette.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-destructive-hover-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.hover.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-hover-text)"
+  },
+  "colors.colorPalette.filled.destructive.hover.text": {
+    "value": "var(--colors-color-palette-filled-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-hover-text)"
+  },
+  "colors.colorPalette.destructive.hover.text": {
+    "value": "var(--colors-color-palette-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-destructive-hover-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.hover.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-hover-border)"
+  },
+  "colors.colorPalette.filled.destructive.hover.border": {
+    "value": "var(--colors-color-palette-filled-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-hover-border)"
+  },
+  "colors.colorPalette.destructive.hover.border": {
+    "value": "var(--colors-color-palette-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-destructive-hover-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.active.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-active-bg)"
+  },
+  "colors.colorPalette.filled.destructive.active.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-active-bg)"
+  },
+  "colors.colorPalette.destructive.active.bg": {
+    "value": "var(--colors-color-palette-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-destructive-active-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.active.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-active-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-active-text)"
+  },
+  "colors.colorPalette.filled.destructive.active.text": {
+    "value": "var(--colors-color-palette-filled-destructive-active-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-active-text)"
+  },
+  "colors.colorPalette.destructive.active.text": {
+    "value": "var(--colors-color-palette-destructive-active-text)",
+    "variable": "var(--colors-color-palette-destructive-active-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.active.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-active-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-active-border)"
+  },
+  "colors.colorPalette.filled.destructive.active.border": {
+    "value": "var(--colors-color-palette-filled-destructive-active-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-active-border)"
+  },
+  "colors.colorPalette.destructive.active.border": {
+    "value": "var(--colors-color-palette-destructive-active-border)",
+    "variable": "var(--colors-color-palette-destructive-active-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.filled.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-disabled-text)"
+  },
+  "colors.colorPalette.filled.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-filled-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-disabled-text)"
+  },
+  "colors.colorPalette.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-destructive-disabled-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-disabled-border)"
+  },
+  "colors.colorPalette.filled.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-filled-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-disabled-border)"
+  },
+  "colors.colorPalette.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-destructive-disabled-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-focus-bg)"
+  },
+  "colors.colorPalette.filled.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-focus-bg)"
+  },
+  "colors.colorPalette.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-destructive-focus-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.focus.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-focus-text)"
+  },
+  "colors.colorPalette.filled.destructive.focus.text": {
+    "value": "var(--colors-color-palette-filled-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-focus-text)"
+  },
+  "colors.colorPalette.destructive.focus.text": {
+    "value": "var(--colors-color-palette-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-destructive-focus-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.focus.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-focus-border)"
+  },
+  "colors.colorPalette.filled.destructive.focus.border": {
+    "value": "var(--colors-color-palette-filled-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-focus-border)"
+  },
+  "colors.colorPalette.destructive.focus.border": {
+    "value": "var(--colors-color-palette-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-destructive-focus-border)"
+  },
+  "colors.colorPalette.hig.filled.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-loading-bg)"
+  },
+  "colors.colorPalette.filled.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-filled-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-filled-destructive-loading-bg)"
+  },
+  "colors.colorPalette.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-destructive-loading-bg)"
+  },
+  "colors.colorPalette.hig.filled.destructive.loading.text": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-loading-text)"
+  },
+  "colors.colorPalette.filled.destructive.loading.text": {
+    "value": "var(--colors-color-palette-filled-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-filled-destructive-loading-text)"
+  },
+  "colors.colorPalette.destructive.loading.text": {
+    "value": "var(--colors-color-palette-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-destructive-loading-text)"
+  },
+  "colors.colorPalette.hig.filled.destructive.loading.border": {
+    "value": "var(--colors-color-palette-hig-filled-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-hig-filled-destructive-loading-border)"
+  },
+  "colors.colorPalette.filled.destructive.loading.border": {
+    "value": "var(--colors-color-palette-filled-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-filled-destructive-loading-border)"
+  },
+  "colors.colorPalette.destructive.loading.border": {
+    "value": "var(--colors-color-palette-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-destructive-loading-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.default.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-default-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-default-bg)"
+  },
+  "colors.colorPalette.tinted.accent.default.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-default-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-default-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.default.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-default-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-default-text)"
+  },
+  "colors.colorPalette.tinted.accent.default.text": {
+    "value": "var(--colors-color-palette-tinted-accent-default-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-default-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.default.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-default-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-default-border)"
+  },
+  "colors.colorPalette.tinted.accent.default.border": {
+    "value": "var(--colors-color-palette-tinted-accent-default-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-default-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.hover.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-hover-bg)"
+  },
+  "colors.colorPalette.tinted.accent.hover.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-hover-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.hover.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-hover-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-hover-text)"
+  },
+  "colors.colorPalette.tinted.accent.hover.text": {
+    "value": "var(--colors-color-palette-tinted-accent-hover-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-hover-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.hover.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-hover-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-hover-border)"
+  },
+  "colors.colorPalette.tinted.accent.hover.border": {
+    "value": "var(--colors-color-palette-tinted-accent-hover-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-hover-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.active.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-active-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-active-bg)"
+  },
+  "colors.colorPalette.tinted.accent.active.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-active-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-active-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.active.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-active-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-active-text)"
+  },
+  "colors.colorPalette.tinted.accent.active.text": {
+    "value": "var(--colors-color-palette-tinted-accent-active-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-active-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.active.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-active-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-active-border)"
+  },
+  "colors.colorPalette.tinted.accent.active.border": {
+    "value": "var(--colors-color-palette-tinted-accent-active-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-active-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-disabled-bg)"
+  },
+  "colors.colorPalette.tinted.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-disabled-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.disabled.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-disabled-text)"
+  },
+  "colors.colorPalette.tinted.accent.disabled.text": {
+    "value": "var(--colors-color-palette-tinted-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-disabled-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.disabled.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-disabled-border)"
+  },
+  "colors.colorPalette.tinted.accent.disabled.border": {
+    "value": "var(--colors-color-palette-tinted-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-disabled-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.focus.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-focus-bg)"
+  },
+  "colors.colorPalette.tinted.accent.focus.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-focus-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.focus.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-focus-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-focus-text)"
+  },
+  "colors.colorPalette.tinted.accent.focus.text": {
+    "value": "var(--colors-color-palette-tinted-accent-focus-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-focus-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.focus.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-focus-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-focus-border)"
+  },
+  "colors.colorPalette.tinted.accent.focus.border": {
+    "value": "var(--colors-color-palette-tinted-accent-focus-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-focus-border)"
+  },
+  "colors.colorPalette.hig.tinted.accent.loading.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-loading-bg)"
+  },
+  "colors.colorPalette.tinted.accent.loading.bg": {
+    "value": "var(--colors-color-palette-tinted-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-tinted-accent-loading-bg)"
+  },
+  "colors.colorPalette.hig.tinted.accent.loading.text": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-loading-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-loading-text)"
+  },
+  "colors.colorPalette.tinted.accent.loading.text": {
+    "value": "var(--colors-color-palette-tinted-accent-loading-text)",
+    "variable": "var(--colors-color-palette-tinted-accent-loading-text)"
+  },
+  "colors.colorPalette.hig.tinted.accent.loading.border": {
+    "value": "var(--colors-color-palette-hig-tinted-accent-loading-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-accent-loading-border)"
+  },
+  "colors.colorPalette.tinted.accent.loading.border": {
+    "value": "var(--colors-color-palette-tinted-accent-loading-border)",
+    "variable": "var(--colors-color-palette-tinted-accent-loading-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.default.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-default-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.default.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-default-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.default.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-default-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-default-text)"
+  },
+  "colors.colorPalette.tinted.neutral.default.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-default-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-default-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.default.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-default-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-default-border)"
+  },
+  "colors.colorPalette.tinted.neutral.default.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-default-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-default-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-hover-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-hover-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.hover.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-hover-text)"
+  },
+  "colors.colorPalette.tinted.neutral.hover.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-hover-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.hover.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-hover-border)"
+  },
+  "colors.colorPalette.tinted.neutral.hover.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-hover-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.active.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-active-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.active.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-active-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.active.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-active-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-active-text)"
+  },
+  "colors.colorPalette.tinted.neutral.active.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-active-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-active-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.active.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-active-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-active-border)"
+  },
+  "colors.colorPalette.tinted.neutral.active.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-active-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-active-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-disabled-text)"
+  },
+  "colors.colorPalette.tinted.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-disabled-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-disabled-border)"
+  },
+  "colors.colorPalette.tinted.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-disabled-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-focus-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-focus-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.focus.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-focus-text)"
+  },
+  "colors.colorPalette.tinted.neutral.focus.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-focus-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.focus.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-focus-border)"
+  },
+  "colors.colorPalette.tinted.neutral.focus.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-focus-border)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-loading-bg)"
+  },
+  "colors.colorPalette.tinted.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-tinted-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-tinted-neutral-loading-bg)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.loading.text": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-loading-text)"
+  },
+  "colors.colorPalette.tinted.neutral.loading.text": {
+    "value": "var(--colors-color-palette-tinted-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-tinted-neutral-loading-text)"
+  },
+  "colors.colorPalette.hig.tinted.neutral.loading.border": {
+    "value": "var(--colors-color-palette-hig-tinted-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-neutral-loading-border)"
+  },
+  "colors.colorPalette.tinted.neutral.loading.border": {
+    "value": "var(--colors-color-palette-tinted-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-tinted-neutral-loading-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.default.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-default-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.default.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-default-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.default.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-default-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-default-text)"
+  },
+  "colors.colorPalette.tinted.destructive.default.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-default-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-default-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.default.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-default-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-default-border)"
+  },
+  "colors.colorPalette.tinted.destructive.default.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-default-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-default-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-hover-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-hover-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.hover.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-hover-text)"
+  },
+  "colors.colorPalette.tinted.destructive.hover.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-hover-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.hover.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-hover-border)"
+  },
+  "colors.colorPalette.tinted.destructive.hover.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-hover-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.active.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-active-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.active.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-active-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.active.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-active-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-active-text)"
+  },
+  "colors.colorPalette.tinted.destructive.active.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-active-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-active-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.active.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-active-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-active-border)"
+  },
+  "colors.colorPalette.tinted.destructive.active.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-active-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-active-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-disabled-text)"
+  },
+  "colors.colorPalette.tinted.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-disabled-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-disabled-border)"
+  },
+  "colors.colorPalette.tinted.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-disabled-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-focus-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-focus-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.focus.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-focus-text)"
+  },
+  "colors.colorPalette.tinted.destructive.focus.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-focus-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.focus.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-focus-border)"
+  },
+  "colors.colorPalette.tinted.destructive.focus.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-focus-border)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-loading-bg)"
+  },
+  "colors.colorPalette.tinted.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-tinted-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-tinted-destructive-loading-bg)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.loading.text": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-loading-text)"
+  },
+  "colors.colorPalette.tinted.destructive.loading.text": {
+    "value": "var(--colors-color-palette-tinted-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-tinted-destructive-loading-text)"
+  },
+  "colors.colorPalette.hig.tinted.destructive.loading.border": {
+    "value": "var(--colors-color-palette-hig-tinted-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-hig-tinted-destructive-loading-border)"
+  },
+  "colors.colorPalette.tinted.destructive.loading.border": {
+    "value": "var(--colors-color-palette-tinted-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-tinted-destructive-loading-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.default.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-default-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-default-bg)"
+  },
+  "colors.colorPalette.plain.accent.default.bg": {
+    "value": "var(--colors-color-palette-plain-accent-default-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-default-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.default.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-default-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-default-text)"
+  },
+  "colors.colorPalette.plain.accent.default.text": {
+    "value": "var(--colors-color-palette-plain-accent-default-text)",
+    "variable": "var(--colors-color-palette-plain-accent-default-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.default.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-default-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-default-border)"
+  },
+  "colors.colorPalette.plain.accent.default.border": {
+    "value": "var(--colors-color-palette-plain-accent-default-border)",
+    "variable": "var(--colors-color-palette-plain-accent-default-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.hover.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-hover-bg)"
+  },
+  "colors.colorPalette.plain.accent.hover.bg": {
+    "value": "var(--colors-color-palette-plain-accent-hover-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-hover-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.hover.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-hover-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-hover-text)"
+  },
+  "colors.colorPalette.plain.accent.hover.text": {
+    "value": "var(--colors-color-palette-plain-accent-hover-text)",
+    "variable": "var(--colors-color-palette-plain-accent-hover-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.hover.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-hover-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-hover-border)"
+  },
+  "colors.colorPalette.plain.accent.hover.border": {
+    "value": "var(--colors-color-palette-plain-accent-hover-border)",
+    "variable": "var(--colors-color-palette-plain-accent-hover-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.active.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-active-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-active-bg)"
+  },
+  "colors.colorPalette.plain.accent.active.bg": {
+    "value": "var(--colors-color-palette-plain-accent-active-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-active-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.active.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-active-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-active-text)"
+  },
+  "colors.colorPalette.plain.accent.active.text": {
+    "value": "var(--colors-color-palette-plain-accent-active-text)",
+    "variable": "var(--colors-color-palette-plain-accent-active-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.active.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-active-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-active-border)"
+  },
+  "colors.colorPalette.plain.accent.active.border": {
+    "value": "var(--colors-color-palette-plain-accent-active-border)",
+    "variable": "var(--colors-color-palette-plain-accent-active-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-disabled-bg)"
+  },
+  "colors.colorPalette.plain.accent.disabled.bg": {
+    "value": "var(--colors-color-palette-plain-accent-disabled-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-disabled-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.disabled.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-disabled-text)"
+  },
+  "colors.colorPalette.plain.accent.disabled.text": {
+    "value": "var(--colors-color-palette-plain-accent-disabled-text)",
+    "variable": "var(--colors-color-palette-plain-accent-disabled-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.disabled.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-disabled-border)"
+  },
+  "colors.colorPalette.plain.accent.disabled.border": {
+    "value": "var(--colors-color-palette-plain-accent-disabled-border)",
+    "variable": "var(--colors-color-palette-plain-accent-disabled-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.focus.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-focus-bg)"
+  },
+  "colors.colorPalette.plain.accent.focus.bg": {
+    "value": "var(--colors-color-palette-plain-accent-focus-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-focus-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.focus.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-focus-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-focus-text)"
+  },
+  "colors.colorPalette.plain.accent.focus.text": {
+    "value": "var(--colors-color-palette-plain-accent-focus-text)",
+    "variable": "var(--colors-color-palette-plain-accent-focus-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.focus.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-focus-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-focus-border)"
+  },
+  "colors.colorPalette.plain.accent.focus.border": {
+    "value": "var(--colors-color-palette-plain-accent-focus-border)",
+    "variable": "var(--colors-color-palette-plain-accent-focus-border)"
+  },
+  "colors.colorPalette.hig.plain.accent.loading.bg": {
+    "value": "var(--colors-color-palette-hig-plain-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-loading-bg)"
+  },
+  "colors.colorPalette.plain.accent.loading.bg": {
+    "value": "var(--colors-color-palette-plain-accent-loading-bg)",
+    "variable": "var(--colors-color-palette-plain-accent-loading-bg)"
+  },
+  "colors.colorPalette.hig.plain.accent.loading.text": {
+    "value": "var(--colors-color-palette-hig-plain-accent-loading-text)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-loading-text)"
+  },
+  "colors.colorPalette.plain.accent.loading.text": {
+    "value": "var(--colors-color-palette-plain-accent-loading-text)",
+    "variable": "var(--colors-color-palette-plain-accent-loading-text)"
+  },
+  "colors.colorPalette.hig.plain.accent.loading.border": {
+    "value": "var(--colors-color-palette-hig-plain-accent-loading-border)",
+    "variable": "var(--colors-color-palette-hig-plain-accent-loading-border)"
+  },
+  "colors.colorPalette.plain.accent.loading.border": {
+    "value": "var(--colors-color-palette-plain-accent-loading-border)",
+    "variable": "var(--colors-color-palette-plain-accent-loading-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.default.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-default-bg)"
+  },
+  "colors.colorPalette.plain.neutral.default.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-default-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-default-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.default.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-default-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-default-text)"
+  },
+  "colors.colorPalette.plain.neutral.default.text": {
+    "value": "var(--colors-color-palette-plain-neutral-default-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-default-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.default.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-default-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-default-border)"
+  },
+  "colors.colorPalette.plain.neutral.default.border": {
+    "value": "var(--colors-color-palette-plain-neutral-default-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-default-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-hover-bg)"
+  },
+  "colors.colorPalette.plain.neutral.hover.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-hover-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-hover-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.hover.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-hover-text)"
+  },
+  "colors.colorPalette.plain.neutral.hover.text": {
+    "value": "var(--colors-color-palette-plain-neutral-hover-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-hover-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.hover.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-hover-border)"
+  },
+  "colors.colorPalette.plain.neutral.hover.border": {
+    "value": "var(--colors-color-palette-plain-neutral-hover-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-hover-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.active.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-active-bg)"
+  },
+  "colors.colorPalette.plain.neutral.active.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-active-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-active-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.active.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-active-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-active-text)"
+  },
+  "colors.colorPalette.plain.neutral.active.text": {
+    "value": "var(--colors-color-palette-plain-neutral-active-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-active-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.active.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-active-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-active-border)"
+  },
+  "colors.colorPalette.plain.neutral.active.border": {
+    "value": "var(--colors-color-palette-plain-neutral-active-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-active-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.plain.neutral.disabled.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-disabled-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-disabled-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-disabled-text)"
+  },
+  "colors.colorPalette.plain.neutral.disabled.text": {
+    "value": "var(--colors-color-palette-plain-neutral-disabled-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-disabled-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-disabled-border)"
+  },
+  "colors.colorPalette.plain.neutral.disabled.border": {
+    "value": "var(--colors-color-palette-plain-neutral-disabled-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-disabled-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-focus-bg)"
+  },
+  "colors.colorPalette.plain.neutral.focus.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-focus-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-focus-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.focus.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-focus-text)"
+  },
+  "colors.colorPalette.plain.neutral.focus.text": {
+    "value": "var(--colors-color-palette-plain-neutral-focus-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-focus-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.focus.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-focus-border)"
+  },
+  "colors.colorPalette.plain.neutral.focus.border": {
+    "value": "var(--colors-color-palette-plain-neutral-focus-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-focus-border)"
+  },
+  "colors.colorPalette.hig.plain.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-loading-bg)"
+  },
+  "colors.colorPalette.plain.neutral.loading.bg": {
+    "value": "var(--colors-color-palette-plain-neutral-loading-bg)",
+    "variable": "var(--colors-color-palette-plain-neutral-loading-bg)"
+  },
+  "colors.colorPalette.hig.plain.neutral.loading.text": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-loading-text)"
+  },
+  "colors.colorPalette.plain.neutral.loading.text": {
+    "value": "var(--colors-color-palette-plain-neutral-loading-text)",
+    "variable": "var(--colors-color-palette-plain-neutral-loading-text)"
+  },
+  "colors.colorPalette.hig.plain.neutral.loading.border": {
+    "value": "var(--colors-color-palette-hig-plain-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-hig-plain-neutral-loading-border)"
+  },
+  "colors.colorPalette.plain.neutral.loading.border": {
+    "value": "var(--colors-color-palette-plain-neutral-loading-border)",
+    "variable": "var(--colors-color-palette-plain-neutral-loading-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.default.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-default-bg)"
+  },
+  "colors.colorPalette.plain.destructive.default.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-default-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-default-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.default.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-default-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-default-text)"
+  },
+  "colors.colorPalette.plain.destructive.default.text": {
+    "value": "var(--colors-color-palette-plain-destructive-default-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-default-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.default.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-default-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-default-border)"
+  },
+  "colors.colorPalette.plain.destructive.default.border": {
+    "value": "var(--colors-color-palette-plain-destructive-default-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-default-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-hover-bg)"
+  },
+  "colors.colorPalette.plain.destructive.hover.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-hover-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-hover-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.hover.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-hover-text)"
+  },
+  "colors.colorPalette.plain.destructive.hover.text": {
+    "value": "var(--colors-color-palette-plain-destructive-hover-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-hover-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.hover.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-hover-border)"
+  },
+  "colors.colorPalette.plain.destructive.hover.border": {
+    "value": "var(--colors-color-palette-plain-destructive-hover-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-hover-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.active.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-active-bg)"
+  },
+  "colors.colorPalette.plain.destructive.active.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-active-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-active-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.active.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-active-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-active-text)"
+  },
+  "colors.colorPalette.plain.destructive.active.text": {
+    "value": "var(--colors-color-palette-plain-destructive-active-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-active-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.active.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-active-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-active-border)"
+  },
+  "colors.colorPalette.plain.destructive.active.border": {
+    "value": "var(--colors-color-palette-plain-destructive-active-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-active-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.plain.destructive.disabled.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-disabled-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-disabled-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-disabled-text)"
+  },
+  "colors.colorPalette.plain.destructive.disabled.text": {
+    "value": "var(--colors-color-palette-plain-destructive-disabled-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-disabled-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-disabled-border)"
+  },
+  "colors.colorPalette.plain.destructive.disabled.border": {
+    "value": "var(--colors-color-palette-plain-destructive-disabled-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-disabled-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-focus-bg)"
+  },
+  "colors.colorPalette.plain.destructive.focus.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-focus-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-focus-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.focus.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-focus-text)"
+  },
+  "colors.colorPalette.plain.destructive.focus.text": {
+    "value": "var(--colors-color-palette-plain-destructive-focus-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-focus-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.focus.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-focus-border)"
+  },
+  "colors.colorPalette.plain.destructive.focus.border": {
+    "value": "var(--colors-color-palette-plain-destructive-focus-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-focus-border)"
+  },
+  "colors.colorPalette.hig.plain.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-loading-bg)"
+  },
+  "colors.colorPalette.plain.destructive.loading.bg": {
+    "value": "var(--colors-color-palette-plain-destructive-loading-bg)",
+    "variable": "var(--colors-color-palette-plain-destructive-loading-bg)"
+  },
+  "colors.colorPalette.hig.plain.destructive.loading.text": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-loading-text)"
+  },
+  "colors.colorPalette.plain.destructive.loading.text": {
+    "value": "var(--colors-color-palette-plain-destructive-loading-text)",
+    "variable": "var(--colors-color-palette-plain-destructive-loading-text)"
+  },
+  "colors.colorPalette.hig.plain.destructive.loading.border": {
+    "value": "var(--colors-color-palette-hig-plain-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-hig-plain-destructive-loading-border)"
+  },
+  "colors.colorPalette.plain.destructive.loading.border": {
+    "value": "var(--colors-color-palette-plain-destructive-loading-border)",
+    "variable": "var(--colors-color-palette-plain-destructive-loading-border)"
   },
   "colors.colorPalette.dynamic": {
     "value": "var(--colors-color-palette-dynamic)",

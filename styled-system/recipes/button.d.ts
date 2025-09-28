@@ -6,11 +6,15 @@ interface ButtonVariant {
   /**
  * @default "primary"
  */
-variant: "primary" | "secondary" | "ghost" | "danger" | "success" | "warning"
+variant: "primary" | "secondary" | "ghost" | "danger" | "success" | "warning" | "filled" | "tinted" | "plain"
+/**
+ * @default "accent"
+ */
+tone: "accent" | "neutral" | "destructive"
 /**
  * @default "md"
  */
-size: "sm" | "md" | "lg" | "xl"
+size: "compact" | "regular" | "large" | "sm" | "md" | "lg" | "xl"
 }
 
 type ButtonVariantMap = {
@@ -20,7 +24,7 @@ type ButtonVariantMap = {
 
 
 export type ButtonVariantProps = {
-  [key in keyof ButtonVariant]?: ConditionalValue<ButtonVariant[key]> | undefined
+  [key in keyof ButtonVariant]?: ButtonVariant[key] | undefined
 }
 
 export interface ButtonRecipe {

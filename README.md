@@ -43,11 +43,19 @@ import "liquidify-react/styles";
 import { Button } from "liquidify-react";
 
 function App() {
-  return <Button variant="primary">Get Started</Button>;
+  return <Button variant="filled" tone="accent">Get Started</Button>;
 }
 ```
 
 For tree-shaking, use subpaths: `import { Button } from "liquidify-react/button";`
+
+Migration note: Legacy Button variants map to the new API as follows (deprecated in dev with warnings):
+- primary → variant="filled" tone="accent"
+- secondary → variant="tinted" tone="neutral"
+- ghost → variant="plain" tone="neutral"
+- danger → variant="filled" tone="destructive"
+- success → variant="filled" tone="accent"
+- warning → variant="tinted" tone="accent"
 
 The CSS import loads tokens, resets, and base Liquid Glass styles—essential for consistent rendering.
 

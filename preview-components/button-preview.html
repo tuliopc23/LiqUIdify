@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name</head>="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>Button — Li</title>qUIdify Component Preview</title>
+
+  <!-- Shared preview layout -->
+  <link rel="stylesheet" href="base-styles.css" />
+  <!-- Generated Panda CSS (tokens + recipes) -->
+  <link rel="stylesheet" href="../styled-system/styles.css" />
+
+  <style>
+    .button-group {</style>
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+    }
+    .icon-start { margin-right: 0.5rem; }
+    .icon-end { margin-left: 0.5rem; }
+    .note {
+      color: #64748b;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body></body>
+  <header class="component-header">
+    <h1 class="component-title">Button</h1>
+    <p class="component-description">
+      Apple HIG–inspired, token‑driven Button built with Panda CSS recipes. This page demonstrates
+      variants, sizes, states, icon compositions, and usage of the generated liquid-button classes.
+    </p>
+  </header>
+
+  <!-- Variants × Sizes -->
+  <section class="preview-section" aria-labelledby="variants-sizes-title">
+    <h2 id="variants-sizes-title" class="preview-title">Variants × Sizes</h2>
+    <p class="variant-label">Each size targets accessible hit areas; medium and larger aim for ≥ 44px height.</p>
+
+    <div class="preview-grid">
+      <div>
+        <div class="variant-label">variant</div>: primary</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_primary liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_primary liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_primary liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_primary liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+
+      <div></div>
+        <div class="variant-label">variant: secondary</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_secondary liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_secondary liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_secondary liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_secondary liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+
+      <div></div>
+        <div class="variant-label">variant: ghost</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_ghost liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_ghost liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_ghost liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_ghost liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+
+      <div>
+        <div class</div>="variant-label">variant: danger</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_danger liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_danger liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_danger liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_danger liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="variant-label</div>">variant: success</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_success liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_success liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_success liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_success liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+
+      <div></div>
+        <div class="variant-label">variant: warning</div>
+        <div class="button-group">
+          <button class="liquid-button liquid-button--variant_warning liquid-button--size_sm">Small</button>
+          <button class="liquid-button liquid-button--variant_warning liquid-button--size_md">Medium</button>
+          <button class="liquid-button liquid-button--variant_warning liquid-button--size_lg">Large</button>
+          <button class="liquid-button liquid-button--variant_warning liquid-button--size_xl">XLarge</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- States -->
+  <section class="preview-section" aria-labelledby="states-title">
+    <h2 id="states-title" class="preview-title">States</h2>
+
+    <div class="preview-grid">
+      <div>
+        <div class="variant-label">Default</div>
+        <button class="liquid-button liquid-button--variant_primary liquid-button--size_md</div>">Default</button>
+      </div>
+
+      <div>
+        <div class="variant-label</div>">Hover</div>
+        <button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-hover>Hover</button></button>
+        <p class="note">Selector: .liquid-button:is(:hover, [data-hover])</p>
+      </div>
+
+      <div>
+        <div class="variant-label</div>">Active / Pressed</div>
+        <button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-active>Active</button>
+        <p class="note">Selector</button>: .liquid-button:is(:active, [data-active])</p>
+      </div>
+
+      <div>
+        <</div>div class="variant-label">Focus Visible</div>
+        <button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-focus-visible>Focused</button>
+        <p class="note">Selector</button>: .liquid-button:is(:focus-visible, [data-focus-visible])</p>
+      </div>
+
+      <div>
+        <div class="variant-label">Disabled</div>
+        <</div>button class="liquid-button liquid-button--variant_primary liquid-button--size_md" disabled>Disabled</button>
+        <p class="note">Selector: .liquid-button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true])</p>
+      </div>
+
+      <div>
+        <div class</div>="variant-label">Aria Disabled</div>
+        <button class="liquid-button liquid-button--variant_primary liquid-button--size_md" aria-disabled="true">Aria Disabled</button>
+        <p class="note">Use for non‑native semantics (e.g., links acting as buttons)</p>
+      </div>
+
+      <div>
+        <div class="variant-label">Loading</div>
+        <button</div>
+          class="liquid-button liquid-button--variant_primary liquid-button--size_md"
+          data-loading
+          aria-busy="true"
+          aria-live="polite"
+        >
+          Loading…
+        </button>
+        <p class="note">Attributes: [data-loading] + aria-busy="true"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Icon Compositions -->
+  <section class="preview-section" aria-labelledby="icons-title">
+    <h2 id="icons-title" class="preview-title">Icon Compositions</h2>
+    <p class="variant-label">Icon‑only buttons must provide an accessible name via aria-label.</p>
+
+    <div class="preview-grid">
+      <div>
+        <div class="variant-label">Leading icon</div>
+        <</div>button class="liquid-button liquid-button--variant_primary liquid-button--size_md">
+          <svg class="icon icon-start" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2Zm1 11H9v-1h2v1Zm0-3H9V5h2v5Z" />
+          </svg>
+          Continue
+        </button>
+      </div>
+
+      <div>
+        <div class="variant-label</div>">Trailing icon</div>
+        <button class="liquid-button liquid-button--variant_secondary liquid-button--size_md">
+          Next
+          <svg class="icon icon-end" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M7 5l5 5-5 5V5Z" />
+          </svg>
+        </button>
+      </div>
+
+      <div>
+        <div class="variant-label">Icon only</div>
+        <button</div> class="liquid-button liquid-button--variant_ghost liquid-button--size_md" aria-label="Search">
+          <svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M12.9 14.32a6 6 0 1 1 1.41-1.41l3.39 3.39-1.41 1.41-3.39-3.39ZM14 9a5 5 0 1 0-10 0 5 5 0 0 0 10 0Z" />
+          </svg>
+        </button>
+      </div>
+
+      <div>
+        <div class="variant</div>-label">Danger (leading icon)</div>
+        <button class="liquid-button liquid-button--variant_danger liquid-button--size_md">
+          <svg class="icon icon-start" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10 2 2 18h16L10 2Zm1 12H9v-2h2v2Zm0-3H9V7h2v4Z" />
+          </svg>
+          Delete
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Examples -->
+  <section class="preview-section" aria-labelledby="usage-title">
+    <h2 id="usage-title" class="preview-title">Usage (Recipe Classes)</h2>
+
+    <div class="preview-grid">
+      <div>
+        <div class</div>="variant-label">Primary / md</div>
+        <pre class="code-block"><code>&lt;button class="liquid-button liquid-button--variant_primary liquid-button--size_md"&gt;
+  Save
+&lt;/button&gt;</code></pre>
+      </div>
+
+      <div></div>
+        <div class="variant-label">Secondary / lg</div>
+        <pre class="code-block"><code>&lt;button class="liquid-button liquid-button--variant_secondary liquid-button--size_lg"&gt;
+  Continue
+&lt;/button&gt;</code></pre>
+      </div>
+
+      <div>
+        <div class="</div>variant-label">Ghost / sm (icon‑only)</div>
+        <pre class="code-block"><code>&lt;button
+  class="liquid-button liquid-button--variant_ghost liquid-button--size_sm"
+  aria-label="Search"
+&gt;
+  &lt;svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+      </div>
+
+      <div>
+        <div class="variant-label">Disabled / danger</div>
+        <pre class="</div>code-block"><code>&lt;button
+  class="liquid-button liquid-button--variant_danger liquid-button--size_md"
+  disabled
+&gt;Delete&lt;/button&gt;</code></pre>
+      </div>
+
+      <div></div>
+        <div class="variant-label">Static state demo</div>
+        <pre class="code-block"><code>&lt;button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-focus-visible&gt;Focused&lt;/button&gt;
+&lt;button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-active&gt;Active&lt;/button&gt;
+&lt;button class="liquid-button liquid-button--variant_primary liquid-button--size_md" data-hover&gt;Hover&lt;/button&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
