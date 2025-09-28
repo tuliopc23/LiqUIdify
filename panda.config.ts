@@ -43,6 +43,17 @@ export default defineConfig({
             },
           },
         },
+        radii: {
+          global: {
+            premium: { value: "26px" },
+          },
+        },
+        fonts: {
+          sfPro: {
+            value:
+              "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto",
+          },
+        },
         colors: {
           // Core Liquid Glass Colors from HTML demo
           glass: {
@@ -80,6 +91,24 @@ export default defineConfig({
               after: {
                 value:
                   "linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%)",
+              },
+            },
+            liquid: {
+              base: { value: "rgba(255,255,255,0.08)" },
+              opacity: { value: "{0.08, 0.25}" }, // Range for states via conditions
+              blur: { value: "backdrop-filter: blur(12px)" },
+              layers: {
+                before: {
+                  value:
+                    "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%)",
+                },
+                after: {
+                  value:
+                    "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                },
+                glow: {
+                  value: "box-shadow: inset 0 1px 0 rgba(255,255,255,0.2)",
+                },
               },
             },
           },
@@ -295,6 +324,27 @@ export default defineConfig({
                     border: {
                       value:
                         "color-mix(in oklch, {colors.accent.danger} 55%, transparent)",
+                    },
+                  },
+                },
+                accent: {
+                  apple: {
+                    dynamic: {
+                      value:
+                        "color-mix(in oklch, hsl(210 100% 50%) 28%, transparent)",
+                    },
+                    destructive: {
+                      value: "rgba(255,59,48,0.3)",
+                    },
+                    motion: {
+                      liquid: {
+                        duration: { value: "120-200ms" },
+                        easing: { value: "cubic-bezier(0.25,0.46,0.45,0.94)" },
+                        ripple: {
+                          value:
+                            "radial-gradient(white, transparent, 0.3s ease-out)",
+                        },
+                      },
                     },
                   },
                 },
