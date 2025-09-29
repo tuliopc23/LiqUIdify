@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 
 // Import components from the library

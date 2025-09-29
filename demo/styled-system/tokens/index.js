@@ -56,7 +56,7 @@ const tokens = {
     "variable": "var(--colors-glass-liquid-base)"
   },
   "colors.glass.liquid.opacity": {
-    "value": "var(--0-08\\,\\ 0-25)",
+    "value": "0.08",
     "variable": "var(--colors-glass-liquid-opacity)"
   },
   "colors.glass.liquid.blur": {

@@ -14,46 +14,6 @@ export default defineConfig({
   theme: {
     extend: {
       tokens: {
-        typography: {
-          button: {
-            font: {
-              compact: {
-                size: { value: "{fontSizes.footnote}" },
-                weight: { value: "{fontWeights.semibold}" },
-                lineHeight: { value: "{lineHeights.snug}" },
-                letterSpacing: { value: "{letterSpacings.tight}" },
-              },
-              regular: {
-                size: { value: "{fontSizes.body}" },
-                weight: { value: "{fontWeights.semibold}" },
-                lineHeight: { value: "{lineHeights.normal}" },
-                letterSpacing: { value: "{letterSpacings.tight}" },
-              },
-              large: {
-                size: { value: "{fontSizes.title3}" },
-                weight: { value: "{fontWeights.semibold}" },
-                lineHeight: { value: "{lineHeights.snug}" },
-                letterSpacing: { value: "{letterSpacings.tight}" },
-              },
-            },
-            icon: {
-              compact: { value: "1em" },
-              regular: { value: "1.1em" },
-              large: { value: "1.2em" },
-            },
-          },
-        },
-        radii: {
-          global: {
-            premium: { value: "26px" },
-          },
-        },
-        fonts: {
-          sfPro: {
-            value:
-              "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto",
-          },
-        },
         colors: {
           // Core Liquid Glass Colors from HTML demo
           glass: {
@@ -95,7 +55,7 @@ export default defineConfig({
             },
             liquid: {
               base: { value: "rgba(255,255,255,0.08)" },
-              opacity: { value: "{0.08, 0.25}" }, // Range for states via conditions
+              opacity: { value: "0.08" }, // Base opacity for liquid glass states
               blur: { value: "backdrop-filter: blur(12px)" },
               layers: {
                 before: {
@@ -324,27 +284,6 @@ export default defineConfig({
                     border: {
                       value:
                         "color-mix(in oklch, {colors.accent.danger} 55%, transparent)",
-                    },
-                  },
-                },
-                accent: {
-                  apple: {
-                    dynamic: {
-                      value:
-                        "color-mix(in oklch, hsl(210 100% 50%) 28%, transparent)",
-                    },
-                    destructive: {
-                      value: "rgba(255,59,48,0.3)",
-                    },
-                    motion: {
-                      liquid: {
-                        duration: { value: "120-200ms" },
-                        easing: { value: "cubic-bezier(0.25,0.46,0.45,0.94)" },
-                        ripple: {
-                          value:
-                            "radial-gradient(white, transparent, 0.3s ease-out)",
-                        },
-                      },
                     },
                   },
                 },
