@@ -42,33 +42,71 @@ export default defineConfig({
               border: { value: "{colors.accent.dynamic}" },
             },
 
-            // Glass gradients for pseudo-elements
+            // Enhanced P3 Glass Gradients (Multi-layered depth effects)
             gradients: {
+              // Primary light gradients with P3 enhancement
               before: {
                 value:
                   "linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)",
+                _p3: {
+                  value: "linear-gradient(145deg, color(display-p3 1 1 1 / 0.25) 0%, color(display-p3 1 1 1 / 0.08) 50%, color(display-p3 1 1 1 / 0) 100%)"
+                }
               },
               after: {
                 value:
                   "linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%)",
+                _p3: {
+                  value: "linear-gradient(145deg, color(display-p3 1 1 1 / 0.15) 0%, color(display-p3 1 1 1 / 0.04) 50%, color(display-p3 0 0 0 / 0.08) 100%)"
+                }
+              },
+              
+              // New sophisticated P3 gradients for enhanced depth
+              depth: {
+                value: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.03) 50%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.08) 100%)",
+                _p3: {
+                  value: "linear-gradient(135deg, color(display-p3 1 1 1 / 0.2) 0%, color(display-p3 1 1 1 / 0.12) 25%, color(display-p3 1 1 1 / 0.05) 50%, color(display-p3 0 0 0 / 0.05) 75%, color(display-p3 0 0 0 / 0.12) 100%)"
+                }
+              },
+              vibrancy: {
+                value: "radial-gradient(ellipse at top left, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 40%, transparent 70%)",
+                _p3: {
+                  value: "radial-gradient(ellipse at top left, color(display-p3 1 1 1 / 0.18) 0%, color(display-p3 1 1 1 / 0.09) 40%, transparent 70%)"
+                }
               },
             },
+            
+            // Enhanced Liquid Glass Effects with P3 Color Space
             liquid: {
-              base: { value: "rgba(255,255,255,0.08)" },
+              base: { 
+                value: "rgba(255,255,255,0.08)",
+                _p3: { value: "color(display-p3 1 1 1 / 0.12)" }
+              },
               opacity: { value: "0.08" }, // Base opacity for liquid glass states
-              blur: { value: "backdrop-filter: blur(12px)" },
+              blur: { value: "backdrop-filter: blur(12px) saturate(1.8)" }, // Enhanced saturation for P3
+              
               layers: {
                 before: {
-                  value:
-                    "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%)",
+                  value: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%)",
+                  _p3: { value: "linear-gradient(135deg, color(display-p3 1 1 1 / 0.25) 0%, transparent 100%)" }
                 },
                 after: {
-                  value:
-                    "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                  value: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                  _p3: { value: "radial-gradient(circle, color(display-p3 1 1 1 / 0.15) 0%, transparent 70%)" }
                 },
                 glow: {
                   value: "box-shadow: inset 0 1px 0 rgba(255,255,255,0.2)",
+                  _p3: { value: "box-shadow: inset 0 1px 0 color(display-p3 1 1 1 / 0.25), 0 0 20px color(display-p3 1 1 1 / 0.1)" }
                 },
+                
+                // New multi-layered liquid effects
+                shimmer: {
+                  value: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)",
+                  _p3: { value: "linear-gradient(90deg, transparent 0%, color(display-p3 1 1 1 / 0.5) 50%, transparent 100%)" }
+                },
+                depth: {
+                  value: "box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(255,255,255,0.3)",
+                  _p3: { value: "box-shadow: inset 0 2px 4px color(display-p3 0 0 0 / 0.15), inset 0 -1px 0 color(display-p3 1 1 1 / 0.4)" }
+                }
               },
             },
           },
@@ -1148,27 +1186,72 @@ export default defineConfig({
             },
           },
 
-          // Apple System Accents (exact Apple system colors)
+          // Apple System Accents (Enhanced P3 Wide Gamut Colors)
           accent: {
-            // Dynamic accent – driven by CSS var with Apple Blue fallback
-            dynamic: { value: "var(--ui-accent, #007AFF)" },
-            // Blue — iOS/macOS system blue (exact Apple color)
-            primary: { value: "#007AFF" },
-            // Purple — iOS/macOS system purple
-            secondary: { value: "#5856D6" },
-            // Green — iOS/macOS system green
-            success: { value: "#34C759" },
-            // Orange — iOS/macOS system orange
-            warning: { value: "#FF9500" },
-            // Red — iOS/macOS system red
-            danger: { value: "#FF3B30" },
-            // Additional Apple system colors
-            indigo: { value: "#5856D6" },
-            teal: { value: "#5AC8FA" },
-            cyan: { value: "#32D74B" },
-            mint: { value: "#00C7BE" },
-            pink: { value: "#FF2D92" },
-            yellow: { value: "#FFCC00" },
+            // Dynamic accent – driven by CSS var with enhanced P3 fallback
+            dynamic: { value: "var(--ui-accent, color(display-p3 0.0 0.478 1.0))" },
+            
+            // P3 Enhanced System Colors (wider gamut for liquid glass vibrancy)
+            primary: { 
+              value: "#007AFF", // sRGB fallback
+              _p3: { value: "color(display-p3 0.0 0.478 1.0)" } // P3 enhanced blue
+            },
+            secondary: { 
+              value: "#5856D6", // sRGB fallback
+              _p3: { value: "color(display-p3 0.345 0.337 0.839)" } // P3 enhanced purple
+            },
+            success: { 
+              value: "#34C759", // sRGB fallback
+              _p3: { value: "color(display-p3 0.204 0.78 0.349)" } // P3 enhanced green
+            },
+            warning: { 
+              value: "#FF9500", // sRGB fallback
+              _p3: { value: "color(display-p3 1.0 0.584 0.0)" } // P3 enhanced orange
+            },
+            danger: { 
+              value: "#FF3B30", // sRGB fallback
+              _p3: { value: "color(display-p3 1.0 0.231 0.188)" } // P3 enhanced red
+            },
+            
+            // Extended P3 Color Palette for Liquid Glass Effects
+            indigo: { 
+              value: "#5856D6",
+              _p3: { value: "color(display-p3 0.345 0.337 0.839)" }
+            },
+            teal: { 
+              value: "#5AC8FA",
+              _p3: { value: "color(display-p3 0.353 0.784 0.98)" }
+            },
+            cyan: { 
+              value: "#32D74B",
+              _p3: { value: "color(display-p3 0.196 0.843 0.294)" }
+            },
+            mint: { 
+              value: "#00C7BE",
+              _p3: { value: "color(display-p3 0.0 0.78 0.745)" }
+            },
+            pink: { 
+              value: "#FF2D92",
+              _p3: { value: "color(display-p3 1.0 0.176 0.573)" }
+            },
+            yellow: { 
+              value: "#FFCC00",
+              _p3: { value: "color(display-p3 1.0 0.8 0.0)" }
+            },
+            
+            // New P3-exclusive accent variations for enhanced vibrancy
+            neonBlue: {
+              value: "#007AFF", // fallback
+              _p3: { value: "color(display-p3 0.0 0.6 1.0)" } // Enhanced P3 neon blue
+            },
+            vibrantPurple: {
+              value: "#5856D6", // fallback
+              _p3: { value: "color(display-p3 0.4 0.3 0.9)" } // Enhanced P3 vibrant purple
+            },
+            liquidTeal: {
+              value: "#5AC8FA", // fallback
+              _p3: { value: "color(display-p3 0.3 0.85 1.0)" } // Enhanced P3 liquid teal
+            },
           },
 
           // Text colors for glass components
@@ -1251,20 +1334,63 @@ export default defineConfig({
               value: "color-mix(in oklch, #000 10%, transparent)",
             },
           },
-          // Material tiers and vibrancy overlays
+          // Enhanced Material Tiers with P3 Vibrancy Support
           materials: {
-            ultraThin: { value: "rgba(255, 255, 255, 0.06)" },
-            thin: { value: "rgba(255, 255, 255, 0.12)" },
-            regular: { value: "rgba(255, 255, 255, 0.2)" },
-            thick: { value: "rgba(255, 255, 255, 0.28)" },
+            // Base material tiers with P3 enhancements
+            ultraThin: { 
+              value: "rgba(255, 255, 255, 0.06)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.08)" }
+            },
+            thin: { 
+              value: "rgba(255, 255, 255, 0.12)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.15)" }
+            },
+            regular: { 
+              value: "rgba(255, 255, 255, 0.2)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.25)" }
+            },
+            thick: { 
+              value: "rgba(255, 255, 255, 0.28)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.35)" }
+            },
+            
+            // Enhanced vibrancy overlays with P3 depth
             overlayLight: {
-              value:
-                "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
+              value: "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
+              _p3: { value: "linear-gradient(145deg, color(display-p3 1 1 1 / 0.22) 0%, color(display-p3 1 1 1 / 0.06) 50%, transparent 100%)" }
             },
             overlayDark: {
-              value:
-                "linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%)",
+              value: "linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%)",
+              _p3: { value: "linear-gradient(145deg, color(display-p3 0 0 0 / 0.25) 0%, color(display-p3 0 0 0 / 0.08) 50%, transparent 100%)" }
             },
+            
+            // New P3-enhanced material effects for liquid glass
+            vibrancyUltraLight: {
+              value: "rgba(255, 255, 255, 0.03)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.05)" }
+            },
+            vibrancyLight: {
+              value: "rgba(255, 255, 255, 0.08)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.12)" }
+            },
+            vibrancyMedium: {
+              value: "rgba(255, 255, 255, 0.15)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.2)" }
+            },
+            vibrancyStrong: {
+              value: "rgba(255, 255, 255, 0.25)",
+              _p3: { value: "color(display-p3 1 1 1 / 0.32)" }
+            },
+            
+            // Sophisticated multi-layer overlays for depth
+            depthGradient: {
+              value: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.03) 60%, rgba(0,0,0,0.02) 80%, rgba(0,0,0,0.06) 100%)",
+              _p3: { value: "linear-gradient(135deg, color(display-p3 1 1 1 / 0.2) 0%, color(display-p3 1 1 1 / 0.12) 30%, color(display-p3 1 1 1 / 0.05) 60%, color(display-p3 0 0 0 / 0.04) 80%, color(display-p3 0 0 0 / 0.08) 100%)" }
+            },
+            shimmerOverlay: {
+              value: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 40%, transparent 70%)",
+              _p3: { value: "radial-gradient(circle at 30% 30%, color(display-p3 1 1 1 / 0.18) 0%, color(display-p3 1 1 1 / 0.09) 40%, transparent 70%)" }
+            }
           },
           selection: {
             bg: {
@@ -1710,6 +1836,13 @@ export default defineConfig({
         liquidBounce: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-4px)" },
+        },
+        
+        // Enhanced shimmer effect for liquid glass P3 support
+        shimmerPass: {
+          "0%": { transform: "translateX(-100%)", opacity: "0" },
+          "50%": { transform: "translateX(0%)", opacity: "0.6" },
+          "100%": { transform: "translateX(100%)", opacity: "0" },
         },
       },
 
@@ -3284,13 +3417,15 @@ export default defineConfig({
           base: {
             position: "relative",
             overflow: "hidden",
-            background: "token(colors.glass.bg)",
-            backdropFilter: "blur(token(blurs.glass.md))",
+            background: "token(colors.glass.liquid.base)",
+            backdropFilter: "token(colors.glass.liquid.blur)",
             border: "1px solid token(colors.glass.border)",
-            boxShadow: "token(shadows.glass.base)",
+            boxShadow: "token(colors.glass.liquid.layers.glow)",
             transition:
               "all token(durations.glass.flow) token(easings.glass.flow)",
             transformOrigin: "center center",
+            
+            // Enhanced multi-layer depth effect with P3 support
             _before: {
               content: '""',
               position: "absolute",
@@ -3299,22 +3434,32 @@ export default defineConfig({
               right: 0,
               bottom: 0,
               borderRadius: "inherit",
-              background: "token(colors.glass.gradients.before)",
+              background: "token(colors.glass.gradients.depth)", // Enhanced depth gradient
               pointerEvents: "none",
-              zIndex: 1,
+              zIndex: 3,
             },
             _after: {
               content: '""',
               position: "absolute",
-              top: "2px",
-              left: "2px",
-              right: "2px",
-              bottom: "2px",
+              top: "1px",
+              left: "1px",
+              right: "1px",
+              bottom: "1px",
               borderRadius: "inherit",
-              background: "token(colors.glass.gradients.after)",
+              background: "token(colors.glass.gradients.vibrancy)", // Enhanced vibrancy overlay
               pointerEvents: "none",
-              zIndex: 0,
+              zIndex: 2,
             },
+            
+            // Shimmer effect for enhanced liquid glass interactivity
+            "@media (prefers-reduced-motion: no-preference)": {
+              _hover: {
+                boxShadow: "token(colors.glass.liquid.layers.depth)",
+                "&::before": {
+                  opacity: "1.2",
+                }
+              }
+            }
           },
           variants: {
             intensity: {
@@ -5301,6 +5446,49 @@ export default defineConfig({
       fontFamily: '"SF Pro Display", sans-serif',
       margin: 0,
       padding: 0,
+    },
+
+    // Enhanced P3 Color Space Support
+    "@supports (color: color(display-p3 1 1 1))": {
+      ":root": {
+        // Override glass gradients with P3 variants for enhanced vibrancy
+        "--colors-glass-gradients-before": "var(--colors-glass-gradients-before-_p3)",
+        "--colors-glass-gradients-after": "var(--colors-glass-gradients-after-_p3)",
+        "--colors-glass-gradients-depth": "var(--colors-glass-gradients-depth-_p3)",
+        "--colors-glass-gradients-vibrancy": "var(--colors-glass-gradients-vibrancy-_p3)",
+        
+        // Override liquid glass effects with P3 variants
+        "--colors-glass-liquid-base": "var(--colors-glass-liquid-base-_p3)",
+        "--colors-glass-liquid-layers-before": "var(--colors-glass-liquid-layers-before-_p3)",
+        "--colors-glass-liquid-layers-after": "var(--colors-glass-liquid-layers-after-_p3)",
+        "--colors-glass-liquid-layers-glow": "var(--colors-glass-liquid-layers-glow-_p3)",
+        "--colors-glass-liquid-layers-shimmer": "var(--colors-glass-liquid-layers-shimmer-_p3)",
+        "--colors-glass-liquid-layers-depth": "var(--colors-glass-liquid-layers-depth-_p3)",
+        
+        // Override material tiers with P3 variants
+        "--colors-materials-ultraThin": "var(--colors-materials-ultraThin-_p3)",
+        "--colors-materials-thin": "var(--colors-materials-thin-_p3)",
+        "--colors-materials-regular": "var(--colors-materials-regular-_p3)",
+        "--colors-materials-thick": "var(--colors-materials-thick-_p3)",
+        "--colors-materials-overlayLight": "var(--colors-materials-overlayLight-_p3)",
+        "--colors-materials-overlayDark": "var(--colors-materials-overlayDark-_p3)",
+        
+        // Enhanced accent colors for P3 displays
+        "--colors-accent-primary": "var(--colors-accent-primary-_p3)",
+        "--colors-accent-secondary": "var(--colors-accent-secondary-_p3)",
+        "--colors-accent-success": "var(--colors-accent-success-_p3)",
+        "--colors-accent-warning": "var(--colors-accent-warning-_p3)",
+        "--colors-accent-danger": "var(--colors-accent-danger-_p3)",
+      }
+    },
+
+    // Alternative P3 support via media query for broader compatibility
+    "@media (color-gamut: p3)": {
+      ":root[data-color-gamut='p3']": {
+        // Enhanced saturation and vibrancy multipliers
+        "--glass-saturation-boost": "1.8",
+        "--glass-vibrancy-multiplier": "1.25",
+      }
     },
 
     // Global liquid glass animation classes
