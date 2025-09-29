@@ -36,3 +36,8 @@ externalPort = 80
 [[ports]]
 localPort = 40985
 externalPort = 3000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["bash", "-c", "cd demo && bunx vite preview --host 0.0.0.0 --port 5000"]
+build = ["cd demo", "&&", "bun run build"]
