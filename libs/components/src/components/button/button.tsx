@@ -174,10 +174,10 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
   // Loading/disabled semantics (moved up)
   const isDisabled = !!disabledProp || !!loading;
   
-  // Enhanced liquid animations with magnetic hover
+  // Enhanced liquid animations with magnetic hover (respects reduced motion)
   const magnetic = useMagneticHover({
     strength: magneticStrength,
-    disabled: isDisabled || !magneticHover,
+    disabled: isDisabled || !magneticHover || reducedMotion,
   });
 
   // Enhanced spring physics for touch interactions
@@ -186,6 +186,9 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     damping: 22,
     onTap: onClick ? () => {} : undefined, // Enable tap effects when clickable
   });
+
+  // Disable magnetic hover when reduced motion is preferred
+  const reducedMotion = glassMicro.reducedMotion;
 
   // Merge refs to support both magnetic ref and forwarded ref
   const mergedRef = useCallback((node: HTMLElement | null) => {
