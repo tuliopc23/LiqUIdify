@@ -267,6 +267,41 @@
     --typography-button-icon-compact: 1em;
     --typography-button-icon-regular: 1.1em;
     --typography-button-icon-large: 1.2em;
+    --radii-none: 0px;
+    --radii-xs: 4px;
+    --radii-sm: 6px;
+    --radii-md: 8px;
+    --radii-lg: 12px;
+    --radii-xl: 16px;
+    --radii-2xl: 20px;
+    --radii-3xl: 24px;
+    --radii-full: 9999px;
+    --radii-roles-button: var(--radii-full);
+    --radii-roles-button-compact: 14px;
+    --radii-roles-button-large: var(--radii-full);
+    --radii-roles-control: 14px;
+    --radii-roles-field: 14px;
+    --radii-roles-field-large: 16px;
+    --radii-roles-card: 26px;
+    --radii-roles-card-large: 26px;
+    --radii-roles-sheet: 26px;
+    --radii-roles-modal: 26px;
+    --radii-roles-pill: var(--radii-full);
+    --radii-roles-badge: var(--radii-full);
+    --radii-button-default: 0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    --radii-button-hover: 0 10px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    --radii-button-active: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    --radii-glass-xs: var(--radii-xs);
+    --radii-glass-sm: var(--radii-sm);
+    --radii-glass-md: var(--radii-md);
+    --radii-glass-lg: var(--radii-lg);
+    --radii-glass-xl: var(--radii-xl);
+    --radii-glass-2xl: var(--radii-2xl);
+    --radii-glass-3xl: var(--radii-3xl);
+    --radii-glass-full: var(--radii-full);
+    --fonts-sans: "SF Pro Display", sans-serif;
+    --fonts-display: "SF Pro Display", sans-serif;
+    --fonts-mono: "SF Mono", monospace;
     --colors-glass-bg: rgba(255, 255, 255, 0.1);
     --colors-glass-border: rgba(255, 255, 255, 0.2);
     --colors-glass-ripple: rgba(255, 255, 255, 0.3);
@@ -280,6 +315,12 @@
     --colors-glass-accent-border: var(--colors-accent-dynamic);
     --colors-glass-gradients-before: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
     --colors-glass-gradients-after: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
+    --colors-glass-liquid-base: rgba(255,255,255,0.08);
+    --colors-glass-liquid-opacity: var(--0-08\,\ 0-25);
+    --colors-glass-liquid-blur: backdrop-filter: blur(12px);
+    --colors-glass-liquid-layers-before: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    --colors-glass-liquid-layers-after: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    --colors-glass-liquid-layers-glow: box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
     --colors-button-primary-bg: linear-gradient(135deg, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 0%, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 100%);
     --colors-button-primary-border: color-mix(in oklch, var(--colors-accent-dynamic) 50%, transparent);
     --colors-button-secondary-bg: var(--colors-glass-medium-bg);
@@ -292,24 +333,11 @@
     --colors-button-success-border: rgba(76, 217, 100, 0.50);
     --colors-button-warning-bg: linear-gradient(135deg, rgba(255, 149, 0, 0.30) 0%, rgba(255, 149, 0, 0.30) 100%);
     --colors-button-warning-border: rgba(255, 149, 0, 0.50);
-    --colors-button-hig-filled-accent-default-bg: color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent);
-    --colors-button-hig-filled-accent-default-text: var(--colors-text-glass-primary);
-    --colors-button-hig-filled-accent-default-border: color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent);
-    --colors-button-hig-filled-accent-hover-bg: color-mix(in oklch, var(--colors-accent-dynamic) 36%, transparent);
-    --colors-button-hig-filled-accent-hover-text: var(--colors-text-glass-primary);
-    --colors-button-hig-filled-accent-hover-border: color-mix(in oklch, var(--colors-accent-dynamic) 60%, transparent);
-    --colors-button-hig-filled-accent-active-bg: color-mix(in oklch, var(--colors-accent-dynamic) 42%, transparent);
-    --colors-button-hig-filled-accent-active-text: var(--colors-text-glass-primary);
-    --colors-button-hig-filled-accent-active-border: color-mix(in oklch, var(--colors-accent-dynamic) 65%, transparent);
-    --colors-button-hig-filled-accent-disabled-bg: color-mix(in oklch, var(--colors-accent-dynamic) 18%, transparent);
-    --colors-button-hig-filled-accent-disabled-text: var(--colors-text-glass-disabled);
-    --colors-button-hig-filled-accent-disabled-border: color-mix(in oklch, var(--colors-accent-dynamic) 35%, transparent);
-    --colors-button-hig-filled-accent-focus-bg: color-mix(in oklch, var(--colors-accent-dynamic) 32%, transparent);
-    --colors-button-hig-filled-accent-focus-text: var(--colors-text-glass-primary);
-    --colors-button-hig-filled-accent-focus-border: var(--colors-accent-dynamic);
-    --colors-button-hig-filled-accent-loading-bg: color-mix(in oklch, var(--colors-accent-dynamic) 28%, transparent);
-    --colors-button-hig-filled-accent-loading-text: var(--colors-text-glass-primary);
-    --colors-button-hig-filled-accent-loading-border: color-mix(in oklch, var(--colors-accent-dynamic) 55%, transparent);
+    --colors-button-hig-filled-accent-apple-dynamic: color-mix(in oklch, hsl(210 100% 50%) 28%, transparent);
+    --colors-button-hig-filled-accent-apple-destructive: rgba(255,59,48,0.3);
+    --colors-button-hig-filled-accent-apple-motion-liquid-duration: 120-200ms;
+    --colors-button-hig-filled-accent-apple-motion-liquid-easing: cubic-bezier(0.25,0.46,0.45,0.94);
+    --colors-button-hig-filled-accent-apple-motion-liquid-ripple: radial-gradient(white, transparent, 0.3s ease-out);
     --colors-button-hig-filled-neutral-default-bg: var(--colors-glass-medium-bg);
     --colors-button-hig-filled-neutral-default-text: var(--colors-text-glass-primary);
     --colors-button-hig-filled-neutral-default-border: var(--colors-glass-medium-border);
@@ -683,38 +711,6 @@
     --colors-materials-overlay-dark: linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%);
     --colors-selection-bg: color-mix(in oklch, var(--colors-accent-dynamic) 40%, transparent);
     --colors-selection-fg: var(--colors-text-glass-primary);
-    --radii-none: 0px;
-    --radii-xs: 4px;
-    --radii-sm: 6px;
-    --radii-md: 8px;
-    --radii-lg: 12px;
-    --radii-xl: 16px;
-    --radii-2xl: 20px;
-    --radii-3xl: 24px;
-    --radii-full: 9999px;
-    --radii-roles-button: var(--radii-full);
-    --radii-roles-button-compact: 14px;
-    --radii-roles-button-large: var(--radii-full);
-    --radii-roles-control: 14px;
-    --radii-roles-field: 14px;
-    --radii-roles-field-large: 16px;
-    --radii-roles-card: 26px;
-    --radii-roles-card-large: 26px;
-    --radii-roles-sheet: 26px;
-    --radii-roles-modal: 26px;
-    --radii-roles-pill: var(--radii-full);
-    --radii-roles-badge: var(--radii-full);
-    --radii-button-default: 0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    --radii-button-hover: 0 10px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    --radii-button-active: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.15);
-    --radii-glass-xs: var(--radii-xs);
-    --radii-glass-sm: var(--radii-sm);
-    --radii-glass-md: var(--radii-md);
-    --radii-glass-lg: var(--radii-lg);
-    --radii-glass-xl: var(--radii-xl);
-    --radii-glass-2xl: var(--radii-2xl);
-    --radii-glass-3xl: var(--radii-3xl);
-    --radii-glass-full: var(--radii-full);
     --blurs-glass-sm: 5px;
     --blurs-glass-md: 10px;
     --blurs-glass-lg: 20px;
@@ -757,9 +753,6 @@
     --spacing-button-gap-icon-regular: var(--spacing-glass-xs);
     --spacing-button-gap-icon-large: var(--spacing-glass-sm);
     --spacing-button-hit-min: 44px;
-    --fonts-sans: "SF Pro Display", sans-serif;
-    --fonts-display: "SF Pro Display", sans-serif;
-    --fonts-mono: "SF Mono", monospace;
     --font-sizes-caption2: 11px;
     --font-sizes-caption1: 12px;
     --font-sizes-footnote: 13px;
@@ -4011,7 +4004,7 @@
 @layer utilities{
 
   .bg_token\(colors\.button\.hig\.filled\.accent\.default\.bg\) {
-    background: var(--colors-button-hig-filled-accent-default-bg);
+    background: colors\.button\.hig\.filled\.accent\.default\.bg;
 }
 
   .bg_token\(colors\.button\.hig\.filled\.neutral\.default\.bg\) {
@@ -4047,7 +4040,7 @@
 }
 
   .bd-c_token\(colors\.button\.hig\.filled\.accent\.default\.border\) {
-    border-color: var(--colors-button-hig-filled-accent-default-border);
+    border-color: colors\.button\.hig\.filled\.accent\.default\.border;
 }
 
   .bd-c_token\(colors\.button\.hig\.filled\.neutral\.default\.border\) {
@@ -4083,7 +4076,7 @@
 }
 
   .c_token\(colors\.button\.hig\.filled\.accent\.default\.text\) {
-    color: var(--colors-button-hig-filled-accent-default-text);
+    color: colors\.button\.hig\.filled\.accent\.default\.text;
 }
 
   .c_token\(colors\.button\.hig\.filled\.neutral\.default\.text\) {
@@ -4119,11 +4112,11 @@
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.disabled\.bg\)[aria-disabled='true'] {
-    background: var(--colors-button-hig-filled-accent-disabled-bg);
+    background: colors\.button\.hig\.filled\.accent\.disabled\.bg;
 }
 
   .\[\&\[data-loading\]\]\:bg_token\(colors\.button\.hig\.filled\.accent\.loading\.bg\)[data-loading] {
-    background: var(--colors-button-hig-filled-accent-loading-bg);
+    background: colors\.button\.hig\.filled\.accent\.loading\.bg;
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bg_token\(colors\.button\.hig\.filled\.neutral\.disabled\.bg\)[aria-disabled='true'] {
@@ -4191,11 +4184,11 @@
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.disabled\.border\)[aria-disabled='true'] {
-    border-color: var(--colors-button-hig-filled-accent-disabled-border);
+    border-color: colors\.button\.hig\.filled\.accent\.disabled\.border;
 }
 
   .\[\&\[data-loading\]\]\:bd-c_token\(colors\.button\.hig\.filled\.accent\.loading\.border\)[data-loading] {
-    border-color: var(--colors-button-hig-filled-accent-loading-border);
+    border-color: colors\.button\.hig\.filled\.accent\.loading\.border;
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.border\)[aria-disabled='true'] {
@@ -4263,7 +4256,7 @@
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.accent\.disabled\.text\)[aria-disabled='true'] {
-    color: var(--colors-button-hig-filled-accent-disabled-text);
+    color: colors\.button\.hig\.filled\.accent\.disabled\.text;
 }
 
   .\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\):disabled,.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\)[disabled],.\[\&\:disabled\,_\&\[disabled\]\,_\&\[aria-disabled\=\'true\'\]\]\:c_token\(colors\.button\.hig\.filled\.neutral\.disabled\.text\)[aria-disabled='true'] {
@@ -4299,7 +4292,7 @@
 }
 
   .focusVisible\:bg_token\(colors\.button\.hig\.filled\.accent\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
-    background: var(--colors-button-hig-filled-accent-focus-bg);
+    background: colors\.button\.hig\.filled\.accent\.focus\.bg;
 }
 
   .focusVisible\:bg_token\(colors\.button\.hig\.filled\.neutral\.focus\.bg\):is(:focus-visible, [data-focus-visible]) {
@@ -4335,7 +4328,7 @@
 }
 
   .focusVisible\:bd-c_token\(colors\.button\.hig\.filled\.accent\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
-    border-color: var(--colors-button-hig-filled-accent-focus-border);
+    border-color: colors\.button\.hig\.filled\.accent\.focus\.border;
 }
 
   .focusVisible\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.focus\.border\):is(:focus-visible, [data-focus-visible]) {
@@ -4371,7 +4364,7 @@
 }
 
   .hover\:bg_token\(colors\.button\.hig\.filled\.accent\.hover\.bg\):is(:hover, [data-hover]) {
-    background: var(--colors-button-hig-filled-accent-hover-bg);
+    background: colors\.button\.hig\.filled\.accent\.hover\.bg;
 }
 
   .hover\:bg_token\(colors\.button\.hig\.filled\.neutral\.hover\.bg\):is(:hover, [data-hover]) {
@@ -4407,7 +4400,7 @@
 }
 
   .hover\:bd-c_token\(colors\.button\.hig\.filled\.accent\.hover\.border\):is(:hover, [data-hover]) {
-    border-color: var(--colors-button-hig-filled-accent-hover-border);
+    border-color: colors\.button\.hig\.filled\.accent\.hover\.border;
 }
 
   .hover\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.hover\.border\):is(:hover, [data-hover]) {
@@ -4443,7 +4436,7 @@
 }
 
   .active\:bg_token\(colors\.button\.hig\.filled\.accent\.active\.bg\):is(:active, [data-active]) {
-    background: var(--colors-button-hig-filled-accent-active-bg);
+    background: colors\.button\.hig\.filled\.accent\.active\.bg;
 }
 
   .active\:bg_token\(colors\.button\.hig\.filled\.neutral\.active\.bg\):is(:active, [data-active]) {
@@ -4479,7 +4472,7 @@
 }
 
   .active\:bd-c_token\(colors\.button\.hig\.filled\.accent\.active\.border\):is(:active, [data-active]) {
-    border-color: var(--colors-button-hig-filled-accent-active-border);
+    border-color: colors\.button\.hig\.filled\.accent\.active\.border;
 }
 
   .active\:bd-c_token\(colors\.button\.hig\.filled\.neutral\.active\.border\):is(:active, [data-active]) {
