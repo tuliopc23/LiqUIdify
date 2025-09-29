@@ -45,14 +45,14 @@ function discoverEntries() {
 
 export default defineConfig({
         logLevel: "info",
-        plugins: [react(), tsconfigPaths()],
+        plugins: [react(), tsconfigPaths({ ignoreConfigErrors: true })],
         build: {
                 lib: {
                         entry: discoverEntries(),
                         name: "LiquidifyComponents",
                         formats: ["es", "cjs"],
                 },
-                outDir: resolve(Dirname, "../../dist/libs/components"),
+                outDir: resolve(Dirname, "./dist"),
 
                 rollupOptions: {
                         external: (source) => {

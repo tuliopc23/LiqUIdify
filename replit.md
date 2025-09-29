@@ -4,6 +4,13 @@
 
 LiqUIdify is a production-ready React component library that brings Apple's post-WWDC 2025 design language to web applications. The library provides glassmorphism UI components with liquid glass aesthetics, blur effects, and Apple HIG-compliant design patterns. Built with TypeScript, React, Panda CSS, and Bun runtime, it offers 48+ accessible components wrapped around Ark UI primitives for consistent cross-platform experiences.
 
+### Recent Enhancements (September 2025)
+- **Physics-Based Spring Animations**: Implemented Apple-like spring physics with precise parameters (stiffness: 350, damping: 22, mass: 0.9)
+- **Enhanced Touch Interactions**: Created unified `useInteractiveGlass` hook for consistent touch feedback across components
+- **Component Polish**: Enhanced Card, Button, Checkbox, Switch, and Slider with sophisticated spring animations
+- **Bundle Optimization**: Configured tree-shaking with individual component entry points
+- **Production Ready**: Fixed packaging for npm publishing, moved dependencies to peer deps, added comprehensive documentation
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
