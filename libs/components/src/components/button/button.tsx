@@ -4,6 +4,7 @@ import { cx } from "../../../../../styled-system/css";
 import { button as buttonRecipe } from "../../../../../styled-system/recipes";
 import { focusRing } from "../../core/utils/classname";
 import { useMagneticHover } from "../../hooks/useMagneticHover";
+import { useGlassMicro } from "../../hooks/useGlassMicro";
 
 type ButtonVariantNew = "filled" | "tinted" | "plain";
 type ButtonTone = "accent" | "neutral" | "destructive";
@@ -179,6 +180,13 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     disabled: isDisabled || !magneticHover,
   });
 
+  // Enhanced spring physics for touch interactions
+  const glassMicro = useGlassMicro({
+    stiffness: 350,
+    damping: 22,
+    onTap: onClick ? () => {} : undefined, // Enable tap effects when clickable
+  });
+
   // Merge refs to support both magnetic ref and forwarded ref
   const mergedRef = useCallback((node: HTMLElement | null) => {
     // Set the magnetic ref
@@ -268,12 +276,14 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     [magneticHover, Comp]
   );
 
-  // Compose event handlers to support both consumer and magnetic interactions
-  const composeHandlers = useCallback((consumerHandler: any, magneticHandler: any) => {
-    return consumerHandler || magneticHandler 
+  // Enhanced compose function to support multiple handlers (consumer, magnetic, spring)
+  const composeHandlers = useCallback((consumerHandler: any, magneticHandler?: any, springHandler?: any) => {
+    const hasHandlers = consumerHandler || magneticHandler || springHandler;
+    return hasHandlers 
       ? (event: any) => {
           consumerHandler?.(event);
           magneticHandler?.(event);
+          springHandler?.(event);
         }
       : undefined;
   }, []);
@@ -283,24 +293,44 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     onMouseMove: consumerMouseMove, 
     onMouseEnter: consumerMouseEnter, 
     onMouseLeave: consumerMouseLeave,
+    onMouseDown: consumerMouseDown,
+    onMouseUp: consumerMouseUp,
+    onTouchStart: consumerTouchStart,
+    onTouchEnd: consumerTouchEnd,
     style: consumerStyle,
     ...restWithoutHandlers 
   } = rest;
 
-  const composedHandlers = magneticHover ? {
-    onMouseMove: composeHandlers(consumerMouseMove, magnetic.handlers.onMouseMove),
-    onMouseEnter: composeHandlers(consumerMouseEnter, magnetic.handlers.onMouseEnter), 
-    onMouseLeave: composeHandlers(consumerMouseLeave, magnetic.handlers.onMouseLeave),
-  } : {
-    onMouseMove: consumerMouseMove,
-    onMouseEnter: consumerMouseEnter,
-    onMouseLeave: consumerMouseLeave,
+  const composedHandlers = {
+    // Magnetic hover handlers (if enabled)
+    onMouseMove: magneticHover 
+      ? composeHandlers(consumerMouseMove, magnetic.handlers.onMouseMove)
+      : consumerMouseMove,
+    onMouseEnter: composeHandlers(
+      consumerMouseEnter, 
+      magneticHover ? magnetic.handlers.onMouseEnter : undefined,
+      glassMicro.interactions.onHoverStart
+    ),
+    onMouseLeave: composeHandlers(
+      consumerMouseLeave,
+      magneticHover ? magnetic.handlers.onMouseLeave : undefined, 
+      glassMicro.interactions.onHoverEnd
+    ),
+    // Enhanced spring physics for press interactions
+    onMouseDown: composeHandlers(consumerMouseDown, glassMicro.interactions.onPressStart),
+    onMouseUp: composeHandlers(consumerMouseUp, glassMicro.interactions.onPressEnd),
+    onTouchStart: composeHandlers(consumerTouchStart, glassMicro.interactions.onPressStart),
+    onTouchEnd: composeHandlers(consumerTouchEnd, glassMicro.interactions.onPressEnd),
   };
 
-  // Merge styles to preserve motion values
-  const mergedStyle = magneticHover 
-    ? { ...consumerStyle, ...magnetic.style }
-    : consumerStyle;
+  // Merge styles to preserve motion values and spring physics
+  const mergedStyle = {
+    ...consumerStyle,
+    ...(magneticHover ? magnetic.style : {}),
+    // Add enhanced spring physics to all buttons
+    scale: glassMicro.scale,
+    y: glassMicro.y,
+  };
 
   return (
     <MotionComp
