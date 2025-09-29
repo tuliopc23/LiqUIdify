@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ThemeProvider, useTheme } from "../hooks/use-theme";
-import { render, screen, waitFor } from "./test-utils";
+import { render, waitFor } from "./test-utils";
 
 function AccentChanger() {
 	const { setAccent, accent } = useTheme();
