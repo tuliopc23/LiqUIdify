@@ -1,7 +1,9 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
 import { cx } from "../../../../../styled-system/css";
 import { button as buttonRecipe } from "../../../../../styled-system/recipes";
 import { focusRing } from "../../core/utils/classname";
+import { useMagneticHover } from "../../hooks/useMagneticHover";
 
 type ButtonVariantNew = "filled" | "tinted" | "plain";
 type ButtonTone = "accent" | "neutral" | "destructive";
@@ -69,6 +71,9 @@ export interface BaseButtonProps {
   "aria-label"?: string;
   children?: React.ReactNode;
   className?: string;
+  // Magnetic hover enhancement
+  magneticHover?: boolean;
+  magneticStrength?: number;
 }
 
 export type ButtonProps<C extends AsElement = "button"> = BaseButtonProps &
@@ -158,10 +163,36 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     onClick,
     role,
     tabIndex,
+    magneticHover = true,
+    magneticStrength = 0.3,
     ...rest
   } = props;
 
   const Comp: any = as || "button";
+  
+  // Loading/disabled semantics (moved up)
+  const isDisabled = !!disabledProp || !!loading;
+  
+  // Enhanced liquid animations with magnetic hover
+  const magnetic = useMagneticHover({
+    strength: magneticStrength,
+    disabled: isDisabled || !magneticHover,
+  });
+
+  // Merge refs to support both magnetic ref and forwarded ref
+  const mergedRef = useCallback((node: HTMLElement | null) => {
+    // Set the magnetic ref
+    if (magnetic.ref.current !== node) {
+      magnetic.ref.current = node;
+    }
+    
+    // Forward to consumer ref
+    if (typeof ref === 'function') {
+      ref(node);
+    } else if (ref && 'current' in ref) {
+      (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+    }
+  }, [ref, magnetic.ref]);
   if (
     isLegacyVariant(variant) &&
     typeof process !== "undefined" &&
@@ -204,8 +235,7 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
     );
   }
 
-  // Loading/disabled semantics
-  const isDisabled = !!disabledProp || !!loading;
+  // Loading/disabled semantics (already defined above)
   const commonA11y: Record<string, any> = {
     "aria-busy": loading || undefined,
     "aria-disabled": !isNativeButton(Comp) && isDisabled ? true : undefined,
@@ -232,9 +262,50 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
         : 0
       : tabIndex;
 
+  // Memoize MotionComp to prevent remounting
+  const MotionComp = useMemo(() => 
+    magneticHover ? motion(Comp) : Comp, 
+    [magneticHover, Comp]
+  );
+
+  // Compose event handlers to support both consumer and magnetic interactions
+  const composeHandlers = useCallback((consumerHandler: any, magneticHandler: any) => {
+    return consumerHandler || magneticHandler 
+      ? (event: any) => {
+          consumerHandler?.(event);
+          magneticHandler?.(event);
+        }
+      : undefined;
+  }, []);
+
+  // Extract and compose handlers from rest
+  const { 
+    onMouseMove: consumerMouseMove, 
+    onMouseEnter: consumerMouseEnter, 
+    onMouseLeave: consumerMouseLeave,
+    style: consumerStyle,
+    ...restWithoutHandlers 
+  } = rest;
+
+  const composedHandlers = magneticHover ? {
+    onMouseMove: composeHandlers(consumerMouseMove, magnetic.handlers.onMouseMove),
+    onMouseEnter: composeHandlers(consumerMouseEnter, magnetic.handlers.onMouseEnter), 
+    onMouseLeave: composeHandlers(consumerMouseLeave, magnetic.handlers.onMouseLeave),
+  } : {
+    onMouseMove: consumerMouseMove,
+    onMouseEnter: consumerMouseEnter,
+    onMouseLeave: consumerMouseLeave,
+  };
+
+  // Merge styles to preserve motion values
+  const mergedStyle = magneticHover 
+    ? { ...consumerStyle, ...magnetic.style }
+    : consumerStyle;
+
   return (
-    <Comp
-      ref={ref}
+    <MotionComp
+      ref={magneticHover ? mergedRef : ref}
+      style={mergedStyle}
       className={cx(
         buttonRecipe({ variant: recipeVariant, tone, size: recipeSize }),
         focusRing(true),
@@ -246,7 +317,8 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
       tabIndex={computedTabIndex}
       aria-label={ariaLabel}
       {...commonA11y}
-      {...rest}
+      {...restWithoutHandlers}
+      {...composedHandlers}
     >
       {icon && iconPosition === "start" ? (
         <span aria-hidden="true" className="btn__icon btn__icon--start">
@@ -264,7 +336,7 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
           {/* Placeholder spinner slot for consumers to style */}
         </span>
       ) : null}
-    </Comp>
+    </MotionComp>
   );
 }) as <C extends React.ElementType = "button">(
   props: ButtonProps<C> & { ref?: React.Ref<any> },

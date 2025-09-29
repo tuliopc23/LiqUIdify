@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSpring, useMotionValue, useTransform, motion } from 'framer-motion';
-import { useReducedMotion } from './useReducedMotion'; // Assume this exists or implement as a simple media query hook
 
 interface UseGlassMicroProps {
   duration?: number; // Default 150ms
@@ -37,18 +36,15 @@ export const useGlassMicro = (props: UseGlassMicroProps = {}) => {
     if (reducedMotion || !onTap) return;
 
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
+    const x = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    const y = 'touches' in event ? event.touches[0].clientY : event.clientY;
 
     rippleX.set(x - rect.left);
     rippleY.set(y - rect.top);
     rippleOpacity.set(1);
 
     // Animate ripple fade
-    rippleOpacity.start(0, {
-      duration: 300,
-      ease: 'easeOut',
-    });
+    rippleOpacity.set(0);
 
     onTap();
   }, [reducedMotion, onTap, rippleX, rippleY, rippleOpacity]);
@@ -78,30 +74,30 @@ export const useGlassMicro = (props: UseGlassMicroProps = {}) => {
     }
   }, [scale, reducedMotion]);
 
-  // Ripple motion component (to be rendered in JSX)
-  const Ripple = motion.div({
-    style: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      background: `radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), ${rippleColor} 0%, transparent 70%)`,
-      scale: rippleScale,
-      opacity: rippleOpacity,
-      borderRadius: 'inherit',
-      pointerEvents: 'none',
-      transformOrigin: 'var(--ripple-x, 50%) var(--ripple-y, 50%)',
-    },
-    initial: { scale: 0, opacity: 0 },
-    animate: { scale: rippleSize, opacity: rippleOpacity },
-    transition: { duration: 0.3, ease: 'easeOut' },
-  });
+  // Ripple motion component factory
+  const createRipple = () => (
+    <motion.div
+      style={{
+        position: 'absolute' as const,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: `radial-gradient(circle, ${rippleColor} 0%, transparent 70%)`,
+        scale: rippleScale,
+        opacity: rippleOpacity,
+        borderRadius: 'inherit',
+        pointerEvents: 'none' as const,
+      }}
+      initial={{ scale: 0, opacity: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+    />
+  );
 
   return {
     scale, // Use in motion.div style={{ scale }}
     ripple: {
-      Ripple, // Render <Ripple style={{ '--ripple-x': `${rippleX.get()}px`, '--ripple-y': `${rippleY.get()}px` }} />
+      createRipple,
       handleTap,
     },
     interactions: {
@@ -114,8 +110,8 @@ export const useGlassMicro = (props: UseGlassMicroProps = {}) => {
   };
 };
 
-// Simple reduced motion hook (if not existing)
-export const useReducedMotion = () => {
+// Simple reduced motion hook
+const useReducedMotion = () => {
   const [prefersReduced, setPrefersReduced] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
