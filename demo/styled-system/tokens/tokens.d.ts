@@ -27,7 +27,7 @@ export type LineHeightToken = "tight" | "snug" | "normal" | "relaxed" | "loose" 
 
 export type FontWeightToken = "thin" | "extralight" | "light" | "normal" | "medium" | "semibold" | "bold" | "extrabold" | "black"
 
-export type LetterSpacingToken = "tighter" | "tight" | "normal" | "wide" | "wider" | "widest"
+export type LetterSpacingToken = "largeTitle" | "title" | "headline" | "body" | "callout" | "subheadline" | "footnote" | "caption" | "tighter" | "tight" | "normal" | "wide" | "wider" | "widest"
 
 export type Tokens = {
 		colors: ColorToken

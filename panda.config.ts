@@ -1509,6 +1509,17 @@ export default defineConfig({
           black: { value: "900" },
         },
         letterSpacings: {
+          // Apple HIG specific letter spacing values (based on SF Pro Display characteristics)
+          largeTitle: { value: "-0.026em" }, // For titles > 28px
+          title: { value: "-0.022em" }, // For title1, title2, title3
+          headline: { value: "-0.019em" }, // For headline text
+          body: { value: "-0.016em" }, // For body text (Apple's standard)
+          callout: { value: "-0.012em" }, // For callout text
+          subheadline: { value: "-0.006em" }, // For subheadline
+          footnote: { value: "-0.003em" }, // For footnote
+          caption: { value: "0em" }, // For caption text
+          
+          // Generic spacing (legacy support)
           tighter: { value: "-0.02em" },
           tight: { value: "-0.01em" },
           normal: { value: "0" },
@@ -1518,47 +1529,153 @@ export default defineConfig({
         },
       },
 
-      // Apple HIG Typography Styles
+      // Complete Apple HIG Typography Styles (iOS 26/macOS 26 compliant)
       textStyles: {
-        display: {
+        // Large Titles (Hero sections, main headings)
+        largeTitle: {
+          description: "Large title - Primary hero text and main headings",
           value: {
             fontFamily: "token(fonts.display)",
             fontWeight: "token(fontWeights.bold)",
-            letterSpacing: "token(letterSpacings.tight)",
-            lineHeight: "token(lineHeights.tight)",
-            fontSize: { base: "clamp(36px, 2.5vw + 20px, 56px)" },
+            fontSize: "token(fontSizes.largeTitle)", // 34px
+            lineHeight: "token(lineHeights.tight)", // 1.1
+            letterSpacing: "token(letterSpacings.largeTitle)", // -0.026em
           },
         },
+
+        // Title Hierarchy
         title1: {
+          description: "Title 1 - Section headings, page titles",
           value: {
             fontFamily: "token(fonts.display)",
             fontWeight: "token(fontWeights.bold)",
-            letterSpacing: "token(letterSpacings.tight)",
-            fontSize: { base: "clamp(24px, 1vw + 16px, 32px)" },
-            lineHeight: "token(lineHeights.snug)",
+            fontSize: "token(fontSizes.title1)", // 28px
+            lineHeight: "token(lineHeights.snug)", // 1.2
+            letterSpacing: "token(letterSpacings.title)", // -0.022em
+          },
+        },
+        title2: {
+          description: "Title 2 - Subsection headings",
+          value: {
+            fontFamily: "token(fonts.display)",
+            fontWeight: "token(fontWeights.bold)",
+            fontSize: "token(fontSizes.title2)", // 22px
+            lineHeight: "token(lineHeights.snug)", // 1.2
+            letterSpacing: "token(letterSpacings.title)", // -0.022em
           },
         },
         title3: {
+          description: "Title 3 - Card titles, component headers",
           value: {
             fontFamily: "token(fonts.display)",
             fontWeight: "token(fontWeights.semibold)",
-            letterSpacing: "token(letterSpacings.tight)",
-            fontSize: "token(fontSizes.title3)",
-            lineHeight: "token(lineHeights.snug)",
+            fontSize: "token(fontSizes.title3)", // 20px
+            lineHeight: "token(lineHeights.snug)", // 1.2
+            letterSpacing: "token(letterSpacings.title)", // -0.022em
+          },
+        },
+
+        // Body Text
+        headline: {
+          description: "Headline - Emphasized body text, important content",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.semibold)",
+            fontSize: "token(fontSizes.headline)", // 17px
+            lineHeight: "token(lineHeights.normal)", // 1.25
+            letterSpacing: "token(letterSpacings.headline)", // -0.019em
           },
         },
         body: {
+          description: "Body - Primary reading text, paragraphs",
           value: {
             fontFamily: "token(fonts.sans)",
-            fontSize: "token(fontSizes.body)",
-            lineHeight: "token(lineHeights.normal)",
+            fontWeight: "token(fontWeights.normal)",
+            fontSize: "token(fontSizes.body)", // 17px
+            lineHeight: "token(lineHeights.normal)", // 1.25
+            letterSpacing: "token(letterSpacings.body)", // -0.016em
           },
         },
-        caption: {
+        callout: {
+          description: "Callout - Highlighted content, emphasized body text",
           value: {
             fontFamily: "token(fonts.sans)",
-            fontSize: "token(fontSizes.caption1)",
-            lineHeight: "token(lineHeights.loose)",
+            fontWeight: "token(fontWeights.medium)",
+            fontSize: "token(fontSizes.callout)", // 16px
+            lineHeight: "token(lineHeights.normal)", // 1.25
+            letterSpacing: "token(letterSpacings.callout)", // -0.012em
+          },
+        },
+
+        // Secondary Text
+        subheadline: {
+          description: "Subheadline - Supporting text, secondary information",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.normal)",
+            fontSize: "token(fontSizes.subheadline)", // 15px
+            lineHeight: "token(lineHeights.relaxed)", // 1.4
+            letterSpacing: "token(letterSpacings.subheadline)", // -0.006em
+          },
+        },
+        footnote: {
+          description: "Footnote - Metadata, timestamps, auxiliary information",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.normal)",
+            fontSize: "token(fontSizes.footnote)", // 13px
+            lineHeight: "token(lineHeights.relaxed)", // 1.4
+            letterSpacing: "token(letterSpacings.footnote)", // -0.003em
+          },
+        },
+
+        // Caption Text
+        caption1: {
+          description: "Caption 1 - Image captions, form labels",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.medium)",
+            fontSize: "token(fontSizes.caption1)", // 12px
+            lineHeight: "token(lineHeights.relaxed)", // 1.4
+            letterSpacing: "token(letterSpacings.caption)", // 0em
+          },
+        },
+        caption2: {
+          description: "Caption 2 - Fine print, legal text",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.normal)",
+            fontSize: "token(fontSizes.caption2)", // 11px
+            lineHeight: "token(lineHeights.loose)", // 1.6
+            letterSpacing: "token(letterSpacings.caption)", // 0em
+          },
+        },
+
+        // Interactive Elements
+        button: {
+          description: "Button - Interactive controls, CTAs",
+          value: {
+            fontFamily: "token(fonts.sans)",
+            fontWeight: "token(fontWeights.semibold)",
+            fontSize: "token(fontSizes.body)", // 17px
+            lineHeight: "token(lineHeights.none)", // 1
+            letterSpacing: "token(letterSpacings.body)", // -0.016em
+          },
+        },
+
+        // Legacy/Responsive Display (for hero sections)
+        display: {
+          description: "Display - Large hero text with fluid scaling",
+          value: {
+            fontFamily: "token(fonts.display)",
+            fontWeight: "token(fontWeights.bold)",
+            letterSpacing: "token(letterSpacings.largeTitle)",
+            lineHeight: "token(lineHeights.tight)",
+            fontSize: { 
+              base: "token(fontSizes.title1)", // 28px on small screens
+              md: "token(fontSizes.largeTitle)", // 34px on larger screens
+              lg: "clamp(34px, 2.5vw + 20px, 56px)" // Fluid scaling for very large screens
+            },
           },
         },
       },

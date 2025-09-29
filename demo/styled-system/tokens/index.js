@@ -2127,6 +2127,38 @@ const tokens = {
     "value": "900",
     "variable": "var(--font-weights-black)"
   },
+  "letterSpacings.largeTitle": {
+    "value": "-0.026em",
+    "variable": "var(--letter-spacings-large-title)"
+  },
+  "letterSpacings.title": {
+    "value": "-0.022em",
+    "variable": "var(--letter-spacings-title)"
+  },
+  "letterSpacings.headline": {
+    "value": "-0.019em",
+    "variable": "var(--letter-spacings-headline)"
+  },
+  "letterSpacings.body": {
+    "value": "-0.016em",
+    "variable": "var(--letter-spacings-body)"
+  },
+  "letterSpacings.callout": {
+    "value": "-0.012em",
+    "variable": "var(--letter-spacings-callout)"
+  },
+  "letterSpacings.subheadline": {
+    "value": "-0.006em",
+    "variable": "var(--letter-spacings-subheadline)"
+  },
+  "letterSpacings.footnote": {
+    "value": "-0.003em",
+    "variable": "var(--letter-spacings-footnote)"
+  },
+  "letterSpacings.caption": {
+    "value": "0em",
+    "variable": "var(--letter-spacings-caption)"
+  },
   "letterSpacings.tighter": {
     "value": "-0.02em",
     "variable": "var(--letter-spacings-tighter)"
