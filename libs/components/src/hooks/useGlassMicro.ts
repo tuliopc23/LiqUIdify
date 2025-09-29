@@ -46,8 +46,10 @@ export const useGlassMicro = (props: UseGlassMicroProps = {}) => {
 			if (reducedMotion || !onTap) return;
 
 			const rect = event.currentTarget.getBoundingClientRect();
-			const x = "touches" in event ? event.touches[0]?.clientX ?? 0 : event.clientX;
-			const y = "touches" in event ? event.touches[0]?.clientY ?? 0 : event.clientY;
+			const x =
+				"touches" in event ? (event.touches[0]?.clientX ?? 0) : event.clientX;
+			const y =
+				"touches" in event ? (event.touches[0]?.clientY ?? 0) : event.clientY;
 
 			rippleX.set(x - rect.left);
 			rippleY.set(y - rect.top);

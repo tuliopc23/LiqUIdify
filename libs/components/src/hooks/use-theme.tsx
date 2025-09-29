@@ -4,7 +4,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 // Theme lib helpers
 import {
 	setAccent as applyAccent,
-	getAccent as readAccent,
+	getAccent,
+	getAccentPreset,
+	getAccentPresetName,
+	setAccentPreset as applyAccentPreset,
 } from "../lib/theme";
 
 // Type definitions
@@ -16,6 +19,10 @@ interface ThemeProviderProps {
 	storageKey?: string;
 	defaultAccent?: string;
 	accentStorageKey?: string;
+	accentPreset?: string;
+	accentPresets?: Record<string, string>;
+	persistAccent?: boolean;
+	onAccentChange?: (accent: string, accentPreset: string | null) => void;
 }
 
 interface ThemeProviderState {
@@ -23,6 +30,8 @@ interface ThemeProviderState {
 	setTheme: (theme: Theme) => void;
 	accent: string;
 	setAccent: (accent: string) => void;
+	accentPreset: string | null;
+	setAccentPreset: (preset: string) => void;
 }
 
 // Initial state
@@ -31,6 +40,8 @@ const initialState: ThemeProviderState = {
 	setTheme: () => undefined,
 	accent: "#007AFF",
 	setAccent: () => undefined,
+	accentPreset: null,
+	setAccentPreset: () => undefined,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
@@ -41,6 +52,10 @@ export function ThemeProvider({
 	storageKey = "ui-theme",
 	defaultAccent = "#007AFF",
 	accentStorageKey = "ui-accent",
+	accentPreset,
+	accentPresets,
+	persistAccent = true,
+	onAccentChange,
 	...props
 }: ThemeProviderProps) {
 	const [theme, setTheme] = useState<Theme>(() => {
@@ -57,12 +72,40 @@ export function ThemeProvider({
 	});
 
 	const [accent, setAccentState] = useState<string>(() => {
+		// If accentPreset prop is provided, use it first
+		if (accentPreset) {
+			const presetColor = getAccentPreset(accentPreset, accentPresets);
+			if (presetColor) return presetColor;
+		}
+
 		try {
-			return readAccent({ storageKey: accentStorageKey }) || defaultAccent;
+			return (
+				getAccent({ storageKey: accentStorageKey, persist: persistAccent }) ||
+				defaultAccent
+			);
 		} catch {
 			return defaultAccent;
 		}
 	});
+
+	const [currentAccentPreset, setCurrentAccentPreset] = useState<string | null>(
+		() => {
+			// Check prop first
+			if (accentPreset) return accentPreset;
+
+			// Then check storage if persistence enabled
+			if (persistAccent) {
+				try {
+					const stored = getAccentPresetName({ persist: persistAccent });
+					if (stored) return stored;
+				} catch {
+					// ignore errors
+				}
+			}
+
+			return null;
+		},
+	);
 
 	useEffect(() => {
 		if (typeof window === "undefined") {
@@ -139,7 +182,11 @@ export function ThemeProvider({
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 		const root = window.document.documentElement;
-		applyAccent(accent, { storageKey: accentStorageKey, root });
+		applyAccent(accent, {
+			storageKey: accentStorageKey,
+			root,
+			persist: persistAccent,
+		});
 		if (
 			typeof process !== "undefined" &&
 			process.env &&
@@ -150,7 +197,18 @@ export function ThemeProvider({
 				cssVar: root.style.getPropertyValue("--ui-accent"),
 			});
 		}
-	}, [accent, accentStorageKey]);
+	}, [accent, accentStorageKey, persistAccent]);
+
+	const handleAccentChange = (
+		newAccent: string,
+		preset: string | null = null,
+	) => {
+		setAccentState(newAccent);
+		setCurrentAccentPreset(preset);
+		if (onAccentChange) {
+			onAccentChange(newAccent, preset);
+		}
+	};
 
 	const value = {
 		theme,
@@ -166,7 +224,40 @@ export function ThemeProvider({
 		},
 		accent,
 		setAccent: (next: string) => {
-			setAccentState(next);
+			// Clear stored preset when setting custom accent
+			if (persistAccent) {
+				try {
+					if (typeof window !== "undefined" && window.localStorage) {
+						window.localStorage.removeItem("ui-accent-preset");
+					}
+				} catch {
+					// ignore errors
+				}
+			}
+			handleAccentChange(next, null);
+		},
+		accentPreset: currentAccentPreset,
+		setAccentPreset: (preset: string) => {
+			const presetColor = getAccentPreset(preset, accentPresets);
+			if (presetColor) {
+				// Store preset name if persistence enabled
+				if (persistAccent) {
+					try {
+						if (typeof window !== "undefined" && window.localStorage) {
+							window.localStorage.setItem("ui-accent-preset", preset);
+						}
+					} catch {
+						// ignore errors
+					}
+				}
+
+				applyAccentPreset(preset, {
+					storageKey: accentStorageKey,
+					persist: persistAccent,
+					customPresets: accentPresets,
+				});
+				handleAccentChange(presetColor, preset);
+			}
 		},
 	};
 
