@@ -39,9 +39,9 @@
 		"canvas": "^3.2.0",
 		"concurrently": "^9.2.1",
 		"dev": "^0.1.3",
-		"happy-dom": "^18.0.1",
+		"happy-dom": "^19.0.1",
 		"jscodeshift": "^17.3.0",
-		"jsdom": "^26.1.0",
+		"jsdom": "^27.0.0",
 		"knip": "^5.64.1",
 		"postcss": "^8.5.6",
 		"react": "^19.1.1",
@@ -104,8 +104,8 @@
 	"peerDependencies": {
 		"react": "^18 || ^19",
 		"react-dom": "^18 || ^19",
-		"@ark-ui/react": "^5.23.0",
-		"framer-motion": "^12.23.12",
+		"@ark-ui/react": "^5.25.1",
+		"framer-motion": "^12.23.22",
 		"lucide-react": "^0.544.0"
 	},
 	"repository": {
