@@ -190,6 +190,32 @@
     font-family: "SF Pro Display", sans-serif;
 }
 
+  @supports (color: color(display-p3 1 1 1)) {
+    :root {
+      --colors-glass-gradients-before: var(--colors-glass-gradients-before-_p3);
+      --colors-glass-gradients-after: var(--colors-glass-gradients-after-_p3);
+      --colors-glass-gradients-depth: var(--colors-glass-gradients-depth-_p3);
+      --colors-glass-gradients-vibrancy: var(--colors-glass-gradients-vibrancy-_p3);
+      --colors-glass-liquid-base: var(--colors-glass-liquid-base-_p3);
+      --colors-glass-liquid-layers-before: var(--colors-glass-liquid-layers-before-_p3);
+      --colors-glass-liquid-layers-after: var(--colors-glass-liquid-layers-after-_p3);
+      --colors-glass-liquid-layers-glow: var(--colors-glass-liquid-layers-glow-_p3);
+      --colors-glass-liquid-layers-shimmer: var(--colors-glass-liquid-layers-shimmer-_p3);
+      --colors-glass-liquid-layers-depth: var(--colors-glass-liquid-layers-depth-_p3);
+      --colors-materials-ultraThin: var(--colors-materials-ultraThin-_p3);
+      --colors-materials-thin: var(--colors-materials-thin-_p3);
+      --colors-materials-regular: var(--colors-materials-regular-_p3);
+      --colors-materials-thick: var(--colors-materials-thick-_p3);
+      --colors-materials-overlayLight: var(--colors-materials-overlayLight-_p3);
+      --colors-materials-overlayDark: var(--colors-materials-overlayDark-_p3);
+      --colors-accent-primary: var(--colors-accent-primary-_p3);
+      --colors-accent-secondary: var(--colors-accent-secondary-_p3);
+      --colors-accent-success: var(--colors-accent-success-_p3);
+      --colors-accent-warning: var(--colors-accent-warning-_p3);
+      --colors-accent-danger: var(--colors-accent-danger-_p3);
+}
+}
+
   .liquid-wobble-active {
     animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
 }
@@ -248,6 +274,13 @@
     --scale-x: 1;
     --scale-y: 1;
 }
+
+  @media (color-gamut: p3) {
+    :root[data-color-gamut='p3'] {
+      --glass-saturation-boost: 1.8;
+      --glass-vibrancy-multiplier: 1.25;
+}
+}
 }
 
 @layer tokens{
@@ -263,14 +296,28 @@
     --colors-glass-strong-border: rgba(255, 255, 255, 0.34);
     --colors-glass-accent-bg: var(--colors-accent-dynamic);
     --colors-glass-accent-border: var(--colors-accent-dynamic);
+    --colors-glass-gradients-before-_p3: linear-gradient(145deg, color(display-p3 1 1 1 / 0.25) 0%, color(display-p3 1 1 1 / 0.08) 50%, color(display-p3 1 1 1 / 0) 100%);
     --colors-glass-gradients-before: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+    --colors-glass-gradients-after-_p3: linear-gradient(145deg, color(display-p3 1 1 1 / 0.15) 0%, color(display-p3 1 1 1 / 0.04) 50%, color(display-p3 0 0 0 / 0.08) 100%);
     --colors-glass-gradients-after: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0.05) 100%);
+    --colors-glass-gradients-depth-_p3: linear-gradient(135deg, color(display-p3 1 1 1 / 0.2) 0%, color(display-p3 1 1 1 / 0.12) 25%, color(display-p3 1 1 1 / 0.05) 50%, color(display-p3 0 0 0 / 0.05) 75%, color(display-p3 0 0 0 / 0.12) 100%);
+    --colors-glass-gradients-depth: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.03) 50%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.08) 100%);
+    --colors-glass-gradients-vibrancy-_p3: radial-gradient(ellipse at top left, color(display-p3 1 1 1 / 0.18) 0%, color(display-p3 1 1 1 / 0.09) 40%, transparent 70%);
+    --colors-glass-gradients-vibrancy: radial-gradient(ellipse at top left, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 40%, transparent 70%);
+    --colors-glass-liquid-base-_p3: color(display-p3 1 1 1 / 0.12);
     --colors-glass-liquid-base: rgba(255,255,255,0.08);
-    --colors-glass-liquid-opacity: var(--0-08\,\ 0-25);
-    --colors-glass-liquid-blur: backdrop-filter: blur(12px);
+    --colors-glass-liquid-opacity: 0.08;
+    --colors-glass-liquid-blur: backdrop-filter: blur(12px) saturate(1.8);
+    --colors-glass-liquid-layers-before-_p3: linear-gradient(135deg, color(display-p3 1 1 1 / 0.25) 0%, transparent 100%);
     --colors-glass-liquid-layers-before: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    --colors-glass-liquid-layers-after-_p3: radial-gradient(circle, color(display-p3 1 1 1 / 0.15) 0%, transparent 70%);
     --colors-glass-liquid-layers-after: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    --colors-glass-liquid-layers-glow-_p3: box-shadow: inset 0 1px 0 color(display-p3 1 1 1 / 0.25), 0 0 20px color(display-p3 1 1 1 / 0.1);
     --colors-glass-liquid-layers-glow: box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    --colors-glass-liquid-layers-shimmer-_p3: linear-gradient(90deg, transparent 0%, color(display-p3 1 1 1 / 0.5) 50%, transparent 100%);
+    --colors-glass-liquid-layers-shimmer: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    --colors-glass-liquid-layers-depth-_p3: box-shadow: inset 0 2px 4px color(display-p3 0 0 0 / 0.15), inset 0 -1px 0 color(display-p3 1 1 1 / 0.4);
+    --colors-glass-liquid-layers-depth: box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(255,255,255,0.3);
     --colors-button-primary-bg: linear-gradient(135deg, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 0%, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 100%);
     --colors-button-primary-border: color-mix(in oklch, var(--colors-accent-dynamic) 50%, transparent);
     --colors-button-secondary-bg: var(--colors-glass-medium-bg);
@@ -607,18 +654,35 @@
     --colors-button-plain-destructive-loading-bg: var(--colors-button-hig-plain-destructive-loading-bg);
     --colors-button-plain-destructive-loading-text: var(--colors-button-hig-plain-destructive-loading-text);
     --colors-button-plain-destructive-loading-border: var(--colors-button-hig-plain-destructive-loading-border);
-    --colors-accent-dynamic: var(--ui-accent, #007AFF);
+    --colors-accent-dynamic: var(--ui-accent, color(display-p3 0.0 0.478 1.0));
+    --colors-accent-primary-_p3: color(display-p3 0.0 0.478 1.0);
     --colors-accent-primary: #007AFF;
+    --colors-accent-secondary-_p3: color(display-p3 0.345 0.337 0.839);
     --colors-accent-secondary: #5856D6;
+    --colors-accent-success-_p3: color(display-p3 0.204 0.78 0.349);
     --colors-accent-success: #34C759;
+    --colors-accent-warning-_p3: color(display-p3 1.0 0.584 0.0);
     --colors-accent-warning: #FF9500;
+    --colors-accent-danger-_p3: color(display-p3 1.0 0.231 0.188);
     --colors-accent-danger: #FF3B30;
+    --colors-accent-indigo-_p3: color(display-p3 0.345 0.337 0.839);
     --colors-accent-indigo: #5856D6;
+    --colors-accent-teal-_p3: color(display-p3 0.353 0.784 0.98);
     --colors-accent-teal: #5AC8FA;
+    --colors-accent-cyan-_p3: color(display-p3 0.196 0.843 0.294);
     --colors-accent-cyan: #32D74B;
+    --colors-accent-mint-_p3: color(display-p3 0.0 0.78 0.745);
     --colors-accent-mint: #00C7BE;
+    --colors-accent-pink-_p3: color(display-p3 1.0 0.176 0.573);
     --colors-accent-pink: #FF2D92;
+    --colors-accent-yellow-_p3: color(display-p3 1.0 0.8 0.0);
     --colors-accent-yellow: #FFCC00;
+    --colors-accent-neon-blue-_p3: color(display-p3 0.0 0.6 1.0);
+    --colors-accent-neon-blue: #007AFF;
+    --colors-accent-vibrant-purple-_p3: color(display-p3 0.4 0.3 0.9);
+    --colors-accent-vibrant-purple: #5856D6;
+    --colors-accent-liquid-teal-_p3: color(display-p3 0.3 0.85 1.0);
+    --colors-accent-liquid-teal: #5AC8FA;
     --colors-text-glass-primary: rgba(255, 255, 255, 1);
     --colors-text-glass-secondary: rgba(255, 255, 255, 0.9);
     --colors-text-glass-muted: rgba(255, 255, 255, 0.7);
@@ -666,12 +730,30 @@
     --colors-semantic-separator: color-mix(in oklch, #000 10%, transparent);
     --colors-semantic-fill: color-mix(in oklch, #000 5%, transparent);
     --colors-semantic-fill-secondary: color-mix(in oklch, #000 10%, transparent);
+    --colors-materials-ultra-thin-_p3: color(display-p3 1 1 1 / 0.08);
     --colors-materials-ultra-thin: rgba(255, 255, 255, 0.06);
+    --colors-materials-thin-_p3: color(display-p3 1 1 1 / 0.15);
     --colors-materials-thin: rgba(255, 255, 255, 0.12);
+    --colors-materials-regular-_p3: color(display-p3 1 1 1 / 0.25);
     --colors-materials-regular: rgba(255, 255, 255, 0.2);
+    --colors-materials-thick-_p3: color(display-p3 1 1 1 / 0.35);
     --colors-materials-thick: rgba(255, 255, 255, 0.28);
+    --colors-materials-overlay-light-_p3: linear-gradient(145deg, color(display-p3 1 1 1 / 0.22) 0%, color(display-p3 1 1 1 / 0.06) 50%, transparent 100%);
     --colors-materials-overlay-light: linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+    --colors-materials-overlay-dark-_p3: linear-gradient(145deg, color(display-p3 0 0 0 / 0.25) 0%, color(display-p3 0 0 0 / 0.08) 50%, transparent 100%);
     --colors-materials-overlay-dark: linear-gradient(145deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.06) 50%, transparent 100%);
+    --colors-materials-vibrancy-ultra-light-_p3: color(display-p3 1 1 1 / 0.05);
+    --colors-materials-vibrancy-ultra-light: rgba(255, 255, 255, 0.03);
+    --colors-materials-vibrancy-light-_p3: color(display-p3 1 1 1 / 0.12);
+    --colors-materials-vibrancy-light: rgba(255, 255, 255, 0.08);
+    --colors-materials-vibrancy-medium-_p3: color(display-p3 1 1 1 / 0.2);
+    --colors-materials-vibrancy-medium: rgba(255, 255, 255, 0.15);
+    --colors-materials-vibrancy-strong-_p3: color(display-p3 1 1 1 / 0.32);
+    --colors-materials-vibrancy-strong: rgba(255, 255, 255, 0.25);
+    --colors-materials-depth-gradient-_p3: linear-gradient(135deg, color(display-p3 1 1 1 / 0.2) 0%, color(display-p3 1 1 1 / 0.12) 30%, color(display-p3 1 1 1 / 0.05) 60%, color(display-p3 0 0 0 / 0.04) 80%, color(display-p3 0 0 0 / 0.08) 100%);
+    --colors-materials-depth-gradient: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.03) 60%, rgba(0,0,0,0.02) 80%, rgba(0,0,0,0.06) 100%);
+    --colors-materials-shimmer-overlay-_p3: radial-gradient(circle at 30% 30%, color(display-p3 1 1 1 / 0.18) 0%, color(display-p3 1 1 1 / 0.09) 40%, transparent 70%);
+    --colors-materials-shimmer-overlay: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 40%, transparent 70%);
     --colors-selection-bg: color-mix(in oklch, var(--colors-accent-dynamic) 40%, transparent);
     --colors-selection-fg: var(--colors-text-glass-primary);
     --radii-none: 0px;
@@ -784,6 +866,14 @@
     --font-weights-bold: 700;
     --font-weights-extrabold: 800;
     --font-weights-black: 900;
+    --letter-spacings-large-title: -0.026em;
+    --letter-spacings-title: -0.022em;
+    --letter-spacings-headline: -0.019em;
+    --letter-spacings-body: -0.016em;
+    --letter-spacings-callout: -0.012em;
+    --letter-spacings-subheadline: -0.006em;
+    --letter-spacings-footnote: -0.003em;
+    --letter-spacings-caption: 0em;
     --letter-spacings-tighter: -0.02em;
     --letter-spacings-tight: -0.01em;
     --letter-spacings-normal: 0;
@@ -883,6 +973,23 @@
 
     50% {
       transform: translateY(-4px);
+}
+}
+
+  @keyframes shimmerPass {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+}
+
+    50% {
+      transform: translateX(0%);
+      opacity: 0.6;
+}
+
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
 }
 }
 }
@@ -1976,20 +2083,20 @@
 }
 
     .glass-surface {
-      background: var(--colors-glass-bg);
+      background: var(--colors-glass-liquid-base);
       border: 1px solid var(--colors-glass-border);
       overflow: hidden;
       transition: all var(--durations-glass-flow) var(--easings-glass-flow);
       position: relative;
-      backdrop-filter: blur(var(--blurs-glass-md));
-      -webkit-backdrop-filter: blur(var(--blurs-glass-md));
-      box-shadow: var(--shadows-glass-base);
+      backdrop-filter: var(--colors-glass-liquid-blur);
+      -webkit-backdrop-filter: var(--colors-glass-liquid-blur);
+      box-shadow: var(--colors-glass-liquid-layers-glow);
       transform-origin: center center;
 }
 
     .glass-surface::before {
-      background: var(--colors-glass-gradients-before);
-      z-index: 1;
+      background: var(--colors-glass-gradients-depth);
+      z-index: 3;
       top: 0;
       left: 0;
       right: 0;
@@ -2004,12 +2111,22 @@
 }
 
     .glass-surface::after {
-      background: var(--colors-glass-gradients-after);
-      z-index: 0;
-      top: 2px;
-      left: 2px;
-      right: 2px;
-      bottom: 2px;
+      background: var(--colors-glass-gradients-vibrancy);
+      z-index: 2;
+      top: 1px;
+      left: 1px;
+      right: 1px;
+      bottom: 1px;
+}
+
+    @media (prefers-reduced-motion: no-preference) {
+      .glass-surface:is(:hover, [data-hover]) {
+        box-shadow: var(--colors-glass-liquid-layers-depth);
+}
+
+      .glass-surface:is(:hover, [data-hover])::before {
+        opacity: 1.2;
+}
 }
 
     @media (prefers-reduced-motion: reduce) {
