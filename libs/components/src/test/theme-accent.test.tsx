@@ -1,12 +1,12 @@
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider, useTheme } from "../hooks/use-theme";
+import type { AccentPresetName } from "../lib/theme";
 import {
-	listAccentPresets,
 	getAccentPreset,
+	listAccentPresets,
 	setAccentPreset,
 } from "../lib/theme";
-import type { AccentPresetName } from "../lib/theme";
 import { render, waitFor } from "./test-utils";
 
 function AccentChanger() {
@@ -352,7 +352,9 @@ describe("ThemeProvider accent", () => {
 				</ThemeProvider>,
 			);
 
-			const btn = await findByRole("button", { name: /set-red-preset-callback/i });
+			const btn = await findByRole("button", {
+				name: /set-red-preset-callback/i,
+			});
 			await user.click(btn);
 
 			await waitFor(() => {
@@ -370,7 +372,9 @@ describe("ThemeProvider accent", () => {
 				</ThemeProvider>,
 			);
 
-			const btn = await findByRole("button", { name: /set-custom-accent-null/i });
+			const btn = await findByRole("button", {
+				name: /set-custom-accent-null/i,
+			});
 			await user.click(btn);
 
 			await waitFor(() => {

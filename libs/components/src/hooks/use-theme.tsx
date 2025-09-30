@@ -4,10 +4,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 // Theme lib helpers
 import {
 	setAccent as applyAccent,
+	setAccentPreset as applyAccentPreset,
 	getAccent,
 	getAccentPreset,
 	getAccentPresetName,
-	setAccentPreset as applyAccentPreset,
 } from "../lib/theme";
 
 // Type definitions

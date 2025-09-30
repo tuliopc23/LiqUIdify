@@ -56,8 +56,8 @@ describe("Button accessibility and interaction", () => {
 		const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
 		const { getByTestId } = render(
-			<Button 
-				icon={<span aria-hidden="true">★</span>} 
+			<Button
+				icon={<span aria-hidden="true">★</span>}
 				data-testid="icon-only-button"
 			/>,
 		);
