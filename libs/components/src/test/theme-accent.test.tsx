@@ -35,22 +35,22 @@ function PresetChanger() {
 	);
 }
 
-function TestComponent() {
+function TestComponent({ testId = "" }: { testId?: string }) {
 	const { accent, accentPreset, setAccent, setAccentPreset } = useTheme();
 	return (
 		<div>
-			<div data-testid="accent">{accent}</div>
-			<div data-testid="preset">{accentPreset || "none"}</div>
+			<div data-testid={`accent${testId}`}>{accent}</div>
+			<div data-testid={`preset${testId}`}>{accentPreset || "none"}</div>
 			<button
 				type="button"
-				aria-label="set-red-preset"
+				aria-label={`set-red-preset${testId}`}
 				onClick={() => setAccentPreset("red")}
 			>
 				Red
 			</button>
 			<button
 				type="button"
-				aria-label="set-custom-accent"
+				aria-label={`set-custom-accent${testId}`}
 				onClick={() => setAccent("#CUSTOM")}
 			>
 				Custom
@@ -160,16 +160,16 @@ describe("ThemeProvider accent", () => {
 
 			const { findByRole, getByTestId } = render(
 				<ThemeProvider>
-					<TestComponent />
+					<TestComponent testId="-track" />
 				</ThemeProvider>,
 			);
 
-			const btn = await findByRole("button", { name: /set-red-preset/i });
+			const btn = await findByRole("button", { name: /set-red-preset-track/i });
 			await user.click(btn);
 
 			await waitFor(() => {
-				expect(getByTestId("preset")).toHaveTextContent("red");
-				expect(getByTestId("accent")).toHaveTextContent("#FF3B30");
+				expect(getByTestId("preset-track")).toHaveTextContent("red");
+				expect(getByTestId("accent-track")).toHaveTextContent("#FF3B30");
 			});
 		});
 
@@ -178,25 +178,25 @@ describe("ThemeProvider accent", () => {
 
 			const { findByRole, getByTestId } = render(
 				<ThemeProvider accentPreset="green">
-					<TestComponent />
+					<TestComponent testId="-clear" />
 				</ThemeProvider>,
 			);
 
 			// Initially has green preset
 			await waitFor(() => {
-				expect(getByTestId("preset")).toHaveTextContent("green");
-				expect(getByTestId("accent")).toHaveTextContent("#34C759");
+				expect(getByTestId("preset-clear")).toHaveTextContent("green");
+				expect(getByTestId("accent-clear")).toHaveTextContent("#34C759");
 			});
 
 			// Set custom accent should clear preset
 			const customBtn = await findByRole("button", {
-				name: /set-custom-accent/i,
+				name: /set-custom-accent-clear/i,
 			});
 			await user.click(customBtn);
 
 			await waitFor(() => {
-				expect(getByTestId("preset")).toHaveTextContent("none");
-				expect(getByTestId("accent")).toHaveTextContent("#CUSTOM");
+				expect(getByTestId("preset-clear")).toHaveTextContent("none");
+				expect(getByTestId("accent-clear")).toHaveTextContent("#CUSTOM");
 			});
 		});
 	});
@@ -248,13 +248,13 @@ describe("ThemeProvider accent", () => {
 
 			const { getByTestId } = render(
 				<ThemeProvider>
-					<TestComponent />
+					<TestComponent testId="-restore" />
 				</ThemeProvider>,
 			);
 
 			await waitFor(() => {
-				expect(getByTestId("preset")).toHaveTextContent("orange");
-				expect(getByTestId("accent")).toHaveTextContent("#FF9500");
+				expect(getByTestId("preset-restore")).toHaveTextContent("orange");
+				expect(getByTestId("accent-restore")).toHaveTextContent("#FF9500");
 			});
 		});
 	});
@@ -266,13 +266,13 @@ describe("ThemeProvider accent", () => {
 
 			const { getByTestId } = render(
 				<ThemeProvider accentPreset="red">
-					<TestComponent />
+					<TestComponent testId="-prop" />
 				</ThemeProvider>,
 			);
 
 			await waitFor(() => {
-				expect(getByTestId("preset")).toHaveTextContent("red");
-				expect(getByTestId("accent")).toHaveTextContent("#FF3B30");
+				expect(getByTestId("preset-prop")).toHaveTextContent("red");
+				expect(getByTestId("accent-prop")).toHaveTextContent("#FF3B30");
 			});
 		});
 
@@ -284,12 +284,12 @@ describe("ThemeProvider accent", () => {
 
 			const { getByTestId } = render(
 				<ThemeProvider>
-					<TestComponent />
+					<TestComponent testId="-local" />
 				</ThemeProvider>,
 			);
 
 			await waitFor(() => {
-				expect(getByTestId("accent")).toHaveTextContent("#34C759");
+				expect(getByTestId("accent-local")).toHaveTextContent("#34C759");
 			});
 		});
 
@@ -299,12 +299,12 @@ describe("ThemeProvider accent", () => {
 
 			const { getByTestId } = render(
 				<ThemeProvider>
-					<TestComponent />
+					<TestComponent testId="-css" />
 				</ThemeProvider>,
 			);
 
 			await waitFor(() => {
-				expect(getByTestId("accent")).toHaveTextContent("#CSS123");
+				expect(getByTestId("accent-css")).toHaveTextContent("#CSS123");
 			});
 		});
 
@@ -313,12 +313,12 @@ describe("ThemeProvider accent", () => {
 
 			const { getByTestId } = render(
 				<ThemeProvider>
-					<TestComponent />
+					<TestComponent testId="-data" />
 				</ThemeProvider>,
 			);
 
 			await waitFor(() => {
-				expect(getByTestId("accent")).toHaveTextContent("#DATA456");
+				expect(getByTestId("accent-data")).toHaveTextContent("#DATA456");
 			});
 		});
 	});
@@ -348,11 +348,11 @@ describe("ThemeProvider accent", () => {
 
 			const { findByRole } = render(
 				<ThemeProvider onAccentChange={onAccentChange}>
-					<TestComponent />
+					<TestComponent testId="-callback" />
 				</ThemeProvider>,
 			);
 
-			const btn = await findByRole("button", { name: /set-red-preset/i });
+			const btn = await findByRole("button", { name: /set-red-preset-callback/i });
 			await user.click(btn);
 
 			await waitFor(() => {
@@ -366,11 +366,11 @@ describe("ThemeProvider accent", () => {
 
 			const { findByRole } = render(
 				<ThemeProvider accentPreset="green" onAccentChange={onAccentChange}>
-					<TestComponent />
+					<TestComponent testId="-null" />
 				</ThemeProvider>,
 			);
 
-			const btn = await findByRole("button", { name: /set-custom-accent/i });
+			const btn = await findByRole("button", { name: /set-custom-accent-null/i });
 			await user.click(btn);
 
 			await waitFor(() => {

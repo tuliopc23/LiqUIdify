@@ -55,8 +55,11 @@ describe("Button accessibility and interaction", () => {
 	it("icon-only without aria-label warns in development and sets data-icon-only", () => {
 		const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-		const { getByRole } = render(
-			<Button icon={<span aria-hidden="true">★</span>} />,
+		const { getByTestId } = render(
+			<Button 
+				icon={<span aria-hidden="true">★</span>} 
+				data-testid="icon-only-button"
+			/>,
 		);
 
 		// Warn about missing accessible name for icon-only buttons
@@ -65,7 +68,7 @@ describe("Button accessibility and interaction", () => {
 			/Icon-only buttons must include an accessible name/i,
 		);
 
-		const btn = getByRole("button");
+		const btn = getByTestId("icon-only-button");
 		expect(btn).toHaveAttribute("data-icon-only");
 
 		warnSpy.mockRestore();
