@@ -32,12 +32,12 @@ function App() {
         <section className="demo-section">
           <h2>Cards</h2>
           <div className="component-grid">
-            <Card className="demo-card">
+            <Card variant="glass" padded className="demo-card">
               <h3>Sample Card</h3>
               <p>This is a glassmorphism card component with beautiful translucent effects.</p>
               <Button variant="primary">Learn More</Button>
             </Card>
-            <Card className="demo-card">
+            <Card variant="glass" padded className="demo-card">
               <h3>Another Card</h3>
               <p>Cards support various content types and maintain the liquid glass aesthetic.</p>
               <Button variant="secondary">Explore</Button>

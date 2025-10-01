@@ -2150,6 +2150,10 @@
     border-color: var(--colors-button-primary-border);
 }
 
+  .liquid-button--tone_accent {
+    opacity: 1;
+}
+
   .liquid-button--size_md {
     padding: 10px 16px;
     border-radius: var(--radii-roles-button);
@@ -2184,6 +2188,10 @@
     border-color: var(--colors-button-warning-border);
 }
 
+  .liquid-button--variant_filled,.liquid-button--variant_tinted,.liquid-button--variant_plain,.liquid-button--tone_neutral,.liquid-button--tone_destructive {
+    opacity: 1;
+}
+
   .liquid-button--size_sm {
     padding: 8px 12px;
     border-radius: var(--radii-roles-button-compact);
@@ -2210,6 +2218,33 @@
     font-weight: var(--font-weights-bold);
     line-height: var(--line-heights-snug);
     min-height: 56px;
+}
+
+  .liquid-button--size_compact {
+    padding: 8px 12px;
+    border-radius: var(--radii-roles-button-compact);
+    font-size: var(--font-sizes-footnote);
+    font-weight: var(--font-weights-semibold);
+    line-height: var(--line-heights-snug);
+    min-height: 32px;
+}
+
+  .liquid-button--size_regular {
+    padding: 10px 16px;
+    border-radius: var(--radii-roles-button);
+    font-size: var(--font-sizes-body);
+    font-weight: var(--font-weights-semibold);
+    line-height: var(--line-heights-normal);
+    min-height: 44px;
+}
+
+  .liquid-button--size_large {
+    padding: 12px 20px;
+    border-radius: var(--radii-roles-button-large);
+    font-size: var(--font-sizes-title3);
+    font-weight: var(--font-weights-semibold);
+    line-height: var(--line-heights-snug);
+    min-height: 50px;
 }
 
   .card--padded_true {

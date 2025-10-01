@@ -3628,16 +3628,16 @@ export default defineConfig({
               },
 
               // New HIG emphasis variants
-              filled: {},
-              tinted: {},
-              plain: {},
+              filled: { opacity: "1" },
+              tinted: { opacity: "1" },
+              plain: { opacity: "1" },
             },
 
             // New HIG tones (used with filled/tinted/plain)
             tone: {
-              accent: {},
-              neutral: {},
-              destructive: {},
+              accent: { opacity: "1" },
+              neutral: { opacity: "1" },
+              destructive: { opacity: "1" },
             },
 
             // Sizes (new names + legacy aliases)
@@ -5528,9 +5528,15 @@ export default defineConfig({
             "danger",
             "success",
             "warning",
+            "filled",
+            "tinted",
+            "plain",
           ],
         },
-        { size: ["sm", "md", "lg", "xl"] },
+        { 
+          tone: ["accent", "neutral", "destructive"]
+        },
+        { size: ["sm", "md", "lg", "xl", "compact", "regular", "large"] },
       ],
       // Generate CSS for all other component recipes
       card: ["*"],
