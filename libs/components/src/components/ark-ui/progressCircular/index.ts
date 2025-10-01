@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export ProgressCircular components for subpath imports
  */

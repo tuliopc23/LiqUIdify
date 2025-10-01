@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Combobox components for subpath imports
  */

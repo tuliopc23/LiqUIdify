@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Pagination components for subpath imports
  */

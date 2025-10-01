@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export FloatingPanel components for subpath imports
  */

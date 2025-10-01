@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export NumberInput components for subpath imports
  */

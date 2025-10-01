@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export SegmentGroup components for subpath imports,
  * ensuring global Liquidify styles are applied out of the box.

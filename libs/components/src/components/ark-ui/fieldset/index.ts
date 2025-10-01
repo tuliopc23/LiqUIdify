@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Fieldset components for subpath imports
  */

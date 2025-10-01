@@ -1,7 +1,4 @@
-import "../../../styles/global";
-
 /**
- * Re-export Editable components for subpath imports with global styles applied.
  */
 export * from "./editable";
 

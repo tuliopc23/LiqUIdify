@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export PinInput components for subpath imports
  */

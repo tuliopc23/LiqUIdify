@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export FileUpload components for subpath imports
  */

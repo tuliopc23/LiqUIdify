@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Progress components for subpath imports
  */

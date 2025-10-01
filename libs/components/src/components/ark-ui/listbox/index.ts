@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Listbox components for subpath imports
  */

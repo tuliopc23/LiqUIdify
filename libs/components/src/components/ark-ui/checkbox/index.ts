@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Checkbox components for subpath imports
  */

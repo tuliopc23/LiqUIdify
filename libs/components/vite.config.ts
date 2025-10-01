@@ -18,6 +18,7 @@ const assetFileNameFn = (assetInfo: any) => {
 function discoverEntries() {
 	const entries: Record<string, string> = {
 		index: resolve(Dirname, "src/index.ts"),
+		styles: resolve(Dirname, "src/styles/entry.ts"),
 	};
 	const base = resolve(Dirname, "src/components");
 

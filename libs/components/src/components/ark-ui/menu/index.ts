@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Menu components for subpath imports
  */

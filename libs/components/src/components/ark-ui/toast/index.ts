@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Toast components for subpath imports,
  * ensuring global Liquidify styles are applied out of the box.

@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Avatar components for subpath imports
  */

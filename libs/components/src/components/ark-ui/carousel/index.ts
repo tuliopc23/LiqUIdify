@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Carousel components for subpath imports
  */

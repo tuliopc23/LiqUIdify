@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export AngleSlider components for subpath imports
  */

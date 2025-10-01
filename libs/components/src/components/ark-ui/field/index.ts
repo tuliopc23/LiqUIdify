@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Field components for subpath imports
  */

@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export DatePicker components for subpath imports
  */

@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Tabs components for subpath imports
  */

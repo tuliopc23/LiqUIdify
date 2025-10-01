@@ -1,5 +1,3 @@
-import "../../../styles/global";
-
 /**
  * Re-export Popover components for subpath imports
  */

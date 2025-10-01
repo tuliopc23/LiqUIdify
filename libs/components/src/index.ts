@@ -1,12 +1,7 @@
 // Main entry point for the LiqUIdify component library - Apple Design Language for Web
 // Built on Ark UI primitives with Panda CSS styling system
 
-// Styles: trigger Panda CSS generation for tokens/recipes/utilities when building the library
-import "./styles/panda.css";
-// Include new design system with SF Pro font
-import "./styles/new-design-system.css";
-// Include extracted Panda recipe CSS so components are fully pre-styled out of the box
-import "../../../styled-system/styles.css";
+// Styles are bundled separately via vite.config.ts styles entry
 
 export * from "./components/badge";
 // Basic UI Components
