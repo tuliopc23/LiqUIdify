@@ -18,7 +18,7 @@ The library SHALL provide a reliable, single-step way for external consumers (As
 ### Requirement: CSS Bundle Integrity Check
 The build process SHALL validate the emitted CSS bundle contains essential token/recipe layers.
 
-- A CI/script MUST confirm that `dist/libs/components/liquidify.css` contains `@layer tokens` and `@layer recipes`
+- A CI/script MUST confirm that `libs/components/dist/liquidify.css` contains `@layer tokens` and `@layer recipes`
 - The script MUST fail the build if layers are missing
 
 #### Scenario: CI catches missing layers

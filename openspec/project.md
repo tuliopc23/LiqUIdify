@@ -14,7 +14,7 @@ Provide a production‑ready, Apple‑inspired React component library (LiqUIdif
 - CI/CD: GitHub Actions (build, tests, coverage, security/contrast audits, release)
 
 ## Monorepo Layout
-- Root package: liquidify-react (build artifacts in dist/libs/components)
+- Root package: liquidify-react (build artifacts in libs/components/dist)
 - Library: libs/components (source, tests, build config, subpath exports)
 - Demo playground: /demo (Vite)
 - OpenSpec: /openspec (project conventions, specs, proposals, archive)

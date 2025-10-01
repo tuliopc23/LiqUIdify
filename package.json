@@ -52,26 +52,26 @@
 	},
 	"exports": {
 		".": {
-			"types": "./dist/libs/components/index.d.ts",
-			"style": "./dist/libs/components/liquidify.css",
-			"import": "./dist/libs/components/index.mjs",
-			"require": "./dist/libs/components/index.cjs"
+			"types": "./libs/components/dist/index.d.ts",
+			"style": "./libs/components/dist/liquidify.css",
+			"import": "./libs/components/dist/index.mjs",
+			"require": "./libs/components/dist/index.cjs"
 		},
 		"./button": {
-			"types": "./dist/libs/components/components/button/index.d.ts",
-			"import": "./dist/libs/components/components/button/index.mjs",
-			"require": "./dist/libs/components/components/button/index.cjs"
+			"types": "./libs/components/dist/components/button/index.d.ts",
+			"import": "./libs/components/dist/components/button/index.mjs",
+			"require": "./libs/components/dist/components/button/index.cjs"
 		},
-		"./styles": "./dist/libs/components/liquidify.css",
+		"./styles": "./libs/components/dist/liquidify.css",
 		"./package.json": "./package.json",
 		"./*": {
-			"types": "./dist/libs/components/components/*/index.d.ts",
-			"import": "./dist/libs/components/components/*/index.mjs",
-			"require": "./dist/libs/components/components/*/index.cjs"
+			"types": "./libs/components/dist/components/*/index.d.ts",
+			"import": "./libs/components/dist/components/*/index.mjs",
+			"require": "./libs/components/dist/components/*/index.cjs"
 		}
 	},
 	"files": [
-		"dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
+		"libs/components/dist/**/*.{js,mjs,cjs,d.ts,css}",
 		"README.md",
 		"LICENSE",
 		"CHANGELOG.md"
@@ -98,8 +98,8 @@
 		"production-ready"
 	],
 	"license": "MIT",
-	"main": "./dist/libs/components/index.cjs",
-	"module": "./dist/libs/components/index.mjs",
+	"main": "./libs/components/dist/index.cjs",
+	"module": "./libs/components/dist/index.mjs",
 	"name": "liquidify-react",
 	"peerDependencies": {
 		"react": "^18 || ^19",
@@ -134,6 +134,7 @@
 		"format:fix": "biome format --write .",
 		"lint": "biome lint .",
 		"check:styles": "node scripts/check-styles-import.mjs",
+		"check:css-layers": "node scripts/check-css-layers.js",
 		"ci:guard:banned": "bash -lc 'if grep -RniE \"(storybook|tailwind)\" -- libs/components/src; then echo \"Banned tool reference found\"; exit 1; fi'",
 		"ci:guard:inline-styles": "bash -lc 'if grep -Rni --include=\"*.tsx\" -- \"style={{\" libs/components/src; then echo \"Inline style usage found\"; exit 1; fi'",
 		"lint:fix": "biome lint --write .",
@@ -152,13 +153,13 @@
 		"*.css",
 		"src/styles/**"
 	],
-	"style": "./dist/libs/components/liquidify.css",
+	"style": "./libs/components/dist/liquidify.css",
 	"type": "module",
-	"types": "./dist/libs/components/index.d.ts",
+	"types": "./libs/components/dist/index.d.ts",
 	"typesVersions": {
 		"*": {
 			"*": [
-				"dist/libs/components/components/*/index.d.ts"
+				"libs/components/dist/components/*/index.d.ts"
 			]
 		}
 	},

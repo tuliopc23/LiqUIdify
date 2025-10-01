@@ -1,6 +1,6 @@
 ## 1. Investigation
-- [ ] 1.1 Verify dist/libs/components/liquidify.css contains Panda layers and styled-system
-- [ ] 1.2 Verify package.json exports.styles points to dist/libs/components/liquidify.css and is published
+- [ ] 1.1 Verify libs/components/dist/liquidify.css contains Panda layers and styled-system
+- [ ] 1.2 Verify package.json exports.styles points to libs/components/dist/liquidify.css and is published
 - [ ] 1.3 Confirm subpath entries do not depend on import-order for CSS (global.ts path)
 - [ ] 1.4 Reproduce in Astro MDX minimal repo and capture failures
 

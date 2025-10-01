@@ -12,11 +12,11 @@ import {
   IconButton,
   Icon,
   SymbolTile
-} from './dist/libs/components/index.mjs';
+} from './libs/components/dist/index.mjs';
 
 // Test subpath imports
-import { Button as ButtonSubpath } from './dist/libs/components/components/button/index.mjs';
-import { Accordion as AccordionSubpath } from './dist/libs/components/components/ark-ui/accordion/index.mjs';
+import { Button as ButtonSubpath } from './libs/components/dist/components/button/index.mjs';
+import { Accordion as AccordionSubpath } from './libs/components/dist/components/ark-ui/accordion/index.mjs';
 
 console.log('✅ All imports successful!');
 console.log('✅ Button:', typeof Button);

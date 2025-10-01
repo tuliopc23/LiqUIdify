@@ -245,7 +245,7 @@ bun install
 # dev (library playground)
 bun run dev
 
-# build the library (writes to dist/libs/components)
+# build the library (writes to libs/components/dist)
 bun run build:lib
 
 # type check, lint, test
