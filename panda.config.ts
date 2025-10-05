@@ -1414,26 +1414,26 @@ export default defineConfig({
           "3xl": { value: "24px" }, // Hero elements
           full: { value: "9999px" },
 
-          // Apple-specific component roles (exact HIG compliance)
+          // Apple-specific component roles (exact HIG compliance - iOS 17/macOS 14)
           roles: {
             // Buttons: capsule rounding for standard/large; compact keeps a readable curve
             button: { value: "{radii.full}" },
-            buttonCompact: { value: "14px" },
+            buttonCompact: { value: "10px" },
             buttonLarge: { value: "{radii.full}" },
             // Generic small pressables
-            control: { value: "14px" },
+            control: { value: "10px" },
 
             // Input fields
-            field: { value: "14px" },
-            fieldLarge: { value: "16px" },
+            field: { value: "12px" },
+            fieldLarge: { value: "14px" },
 
-            // Cards and surfaces
-            card: { value: "26px" },
-            cardLarge: { value: "26px" },
+            // Cards and surfaces (iOS 17 standard: 16px)
+            card: { value: "16px" },
+            cardLarge: { value: "20px" },
 
             // Sheets and modals
-            sheet: { value: "26px" },
-            modal: { value: "26px" },
+            sheet: { value: "16px" },
+            modal: { value: "16px" },
 
             // Pills and badges (full radius)
             pill: { value: "{radii.full}" },
@@ -1477,62 +1477,93 @@ export default defineConfig({
           },
         },
 
-        // Complete shadow system from HTML demo
+        // Shadow system (iOS 17/macOS 14 elevation standards)
         shadows: {
           button: {
-            default: { value: "{shadows.glass.base}" },
-            hover: { value: "{shadows.glass.hover}" },
-            active: { value: "{shadows.glass.sm}" },
-            focus: { value: "{shadows.glass.md}" },
+            default: { value: "{shadows.elevation.1}" },
+            hover: { value: "{shadows.elevation.4}" },
+            active: { value: "{shadows.elevation.0}" },
+            focus: { value: "{shadows.elevation.1}" },
           },
+
+          // Elevation system (0dp through 24dp)
+          elevation: {
+            0: { value: "none" },
+            1: {
+              value:
+                "0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+            },
+            4: {
+              value:
+                "0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+            },
+            8: {
+              value:
+                "0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.35)",
+            },
+            16: {
+              value:
+                "0 16px 32px rgba(0, 0, 0, 0.16), 0 8px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.4)",
+            },
+            24: {
+              value:
+                "0 24px 48px rgba(0, 0, 0, 0.20), 0 12px 24px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.45)",
+            },
+          },
+
+          // Legacy glass shadow aliases (for backward compatibility)
           glass: {
-            // Main glass shadow from HTML demo
-            base: {
-              value:
-                "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
-            },
-            sm: {
-              value:
-                "0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-            },
-            md: {
-              value:
-                "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
-            },
-            lg: {
-              value:
-                "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
-            },
-            // Hover state shadow
-            hover: {
-              value:
-                "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
-            },
+            base: { value: "{shadows.elevation.1}" },
+            sm: { value: "{shadows.elevation.1}" },
+            md: { value: "{shadows.elevation.4}" },
+            lg: { value: "{shadows.elevation.8}" },
+            hover: { value: "{shadows.elevation.4}" },
           },
         },
 
-        // Animation durations
+        // Animation durations (Apple HIG standards)
         durations: {
           button: {
-            hover: { value: "{durations.glass.flow}" },
+            hover: { value: "{durations.glass.quick}" },
             press: { value: "{durations.glass.instant}" },
-            focus: { value: "{durations.glass.flow}" },
+            focus: { value: "{durations.glass.quick}" },
           },
 
           glass: {
-            flow: { value: "0.8s" },
-            bounce: { value: "0.6s" },
-            quick: { value: "0.2s" },
-            instant: { value: "0.1s" },
+            instant: { value: "0.15s" },  // Tooltips, switches, immediate feedback
+            quick: { value: "0.3s" },     // Standard transitions, buttons, tabs
+            flow: { value: "0.5s" },      // Sheets, modals, page transitions
+            bounce: { value: "0.6s" },    // Playful spring physics elements
           },
         },
 
-        // Easing curves from HTML demo
+        // Easing curves (Apple standard cubic-beziers)
         easings: {
           glass: {
-            flow: { value: "cubic-bezier(0.23, 1, 0.32, 1)" },
-            bounce: { value: "cubic-bezier(0.68, -0.55, 0.265, 1.55)" },
-            spring: { value: "cubic-bezier(0.175, 0.885, 0.32, 1.275)" },
+            flow: { value: "cubic-bezier(0.25, 0.1, 0.25, 1.0)" },      // Apple standard ease
+            bounce: { value: "cubic-bezier(0.68, -0.55, 0.265, 1.55)" }, // Spring overshoot
+            spring: { value: "cubic-bezier(0.17, 0.67, 0.83, 0.67)" },   // Natural spring
+            easeOut: { value: "cubic-bezier(0, 0, 0.2, 1)" },            // Deceleration
+            easeIn: { value: "cubic-bezier(0.4, 0, 1, 1)" },             // Acceleration
+          },
+        },
+
+        // Spring animation physics (Apple HIG standard)
+        springs: {
+          default: {
+            mass: { value: "1" },
+            stiffness: { value: "180" },
+            damping: { value: "20" },
+          },
+          gentle: {
+            mass: { value: "1" },
+            stiffness: { value: "120" },
+            damping: { value: "14" },
+          },
+          bouncy: {
+            mass: { value: "1" },
+            stiffness: { value: "220" },
+            damping: { value: "12" },
           },
         },
 
@@ -3539,23 +3570,24 @@ export default defineConfig({
 
             // State selectors
             "&[aria-disabled='true']": {
-              opacity: 0.5,
+              opacity: 0.8,
               cursor: "not-allowed",
               pointerEvents: "none",
             },
             "&[data-loading]": {
               cursor: "progress",
               pointerEvents: "none",
+              opacity: 0.8,
             },
             _hover: {
-              transform: "translateY(-2px)",
+              transform: "translateY(-2px) scale(1.02)",
               borderColor: "rgba(255, 255, 255, 0.4)",
               boxShadow: "token(shadows.glass.hover)",
             },
             _active: {
-              transform: "translateY(1px) scale(0.96)",
+              transform: "translateY(1px) scale(0.97)",
               transition:
-                "all token(durations.glass.instant) token(easings.glass.flow)",
+                "all token(durations.glass.instant) token(easings.glass.easeOut)",
             },
 
             // Icon-only affordance (square hit area)
@@ -3589,14 +3621,18 @@ export default defineConfig({
               zIndex: 0,
             },
 
-            // Reduced motion
+            // Reduced motion (Apple HIG accessibility compliance)
             "@media (prefers-reduced-motion: reduce)": {
               transition: "none",
+              animation: "none",
               _hover: {
                 transform: "none",
-                boxShadow: "token(shadows.glass.base)",
+                boxShadow: "token(shadows.elevation.1)",
               },
-              _active: { transform: "none" },
+              _active: {
+                transform: "none",
+                boxShadow: "token(shadows.elevation.0)",
+              },
             },
           },
           variants: {
@@ -3640,61 +3676,61 @@ export default defineConfig({
               destructive: { opacity: "1" },
             },
 
-            // Sizes (new names + legacy aliases)
+            // Sizes (new names + legacy aliases) - Apple HIG 44pt touch target compliance
             size: {
               // NEW
               compact: {
-                padding: "8px 12px",
+                padding: "12px 16px", // Increased to reach 44px height
                 borderRadius: "token(radii.roles.buttonCompact)",
                 fontSize: "token(fontSizes.footnote)",
-                minHeight: "32px",
+                minHeight: "44px", // Apple HIG minimum
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.snug)",
               },
               regular: {
-                padding: "10px 16px",
+                padding: "12px 20px",
                 borderRadius: "token(radii.roles.button)",
                 fontSize: "token(fontSizes.body)",
-                minHeight: "44px", // HIG >= 44px
+                minHeight: "44px", // Apple HIG minimum
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.normal)",
               },
               large: {
-                padding: "12px 20px",
+                padding: "14px 24px",
                 borderRadius: "token(radii.roles.buttonLarge)",
                 fontSize: "token(fontSizes.title3)",
-                minHeight: "50px",
+                minHeight: "52px",
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.snug)",
               },
 
               // LEGACY aliases
               sm: {
-                padding: "8px 12px",
+                padding: "12px 16px", // Updated for 44px minimum
                 borderRadius: "token(radii.roles.buttonCompact)",
                 fontSize: "token(fontSizes.footnote)",
-                minHeight: "32px",
+                minHeight: "44px", // Apple HIG minimum
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.snug)",
               },
               md: {
-                padding: "10px 16px",
+                padding: "12px 20px",
                 borderRadius: "token(radii.roles.button)",
                 fontSize: "token(fontSizes.body)",
-                minHeight: "44px",
+                minHeight: "44px", // Apple HIG minimum
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.normal)",
               },
               lg: {
-                padding: "12px 20px",
+                padding: "14px 24px",
                 borderRadius: "token(radii.roles.buttonLarge)",
                 fontSize: "token(fontSizes.title3)",
-                minHeight: "50px",
+                minHeight: "52px",
                 fontWeight: "token(fontWeights.semibold)",
                 lineHeight: "token(lineHeights.snug)",
               },
               xl: {
-                padding: "16px 24px",
+                padding: "16px 28px",
                 borderRadius: "token(radii.lg)",
                 fontSize: "token(fontSizes.title2)",
                 minHeight: "56px",
@@ -5491,24 +5527,60 @@ export default defineConfig({
       }
     },
 
-    // Global liquid glass animation classes
-    ".liquid-wobble-active": {
-      animation:
-        "liquidJiggle token(durations.glass.bounce) token(easings.glass.bounce)",
+    // Global liquid glass animation classes (wrapped for motion preference)
+    "@media (prefers-reduced-motion: no-preference)": {
+      ".liquid-wobble-active": {
+        animation:
+          "liquidJiggle token(durations.glass.bounce) token(easings.glass.bounce)",
+      },
+      ".liquid-flow": {
+        animation:
+          "liquidFlow token(durations.glass.flow) token(easings.glass.flow)",
+      },
     },
 
     ".liquid-pressed": {
-      transform: "translateY(1px) scale(0.96)",
+      transform: "translateY(1px) scale(0.97)",
       transition:
-        "all token(durations.glass.instant) token(easings.glass.flow)",
+        "all token(durations.glass.instant) token(easings.glass.easeOut)",
     },
 
-    ".liquid-flow": {
-      animation:
-        "liquidFlow token(durations.glass.flow) token(easings.glass.flow)",
+    // Reduced motion alternatives
+    "@media (prefers-reduced-motion: reduce)": {
+      "*": {
+        animationDuration: "0.01ms !important",
+        animationIterationCount: "1 !important",
+        transitionDuration: "0.01ms !important",
+        scrollBehavior: "auto !important",
+      },
+      ".liquid-wobble-active, .liquid-flow": {
+        animation: "none",
+      },
+      ".liquid-pressed": {
+        transform: "none",
+        transition: "none",
+      },
     },
 
-    // Add missing keyframes for spin animation
+    // High contrast mode support (WCAG compliance)
+    "@media (prefers-contrast: high)": {
+      "*": {
+        borderWidth: "2px",
+      },
+      ":root": {
+        "--contrast-multiplier": "1.5",
+      },
+    },
+
+    // Reduced transparency support
+    "@media (prefers-reduced-transparency: reduce)": {
+      "*": {
+        backdropFilter: "none !important",
+        background: "solid",
+      },
+    },
+
+    // Add keyframes for animations
     "@keyframes spin": {
       "0%": { transform: "rotate(0deg)" },
       "100%": { transform: "rotate(360deg)" },

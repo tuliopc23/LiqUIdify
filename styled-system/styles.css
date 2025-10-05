@@ -216,17 +216,9 @@
 }
 }
 
-  .liquid-wobble-active {
-    animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
-}
-
   .liquid-pressed {
-    transition: all var(--durations-glass-instant) var(--easings-glass-flow);
-    transform: translateY(1px) scale(0.96);
-}
-
-  .liquid-flow {
-    animation: liquidFlow var(--durations-glass-flow) var(--easings-glass-flow);
+    transition: all var(--durations-glass-instant) var(--easings-glass-ease-out);
+    transform: translateY(1px) scale(0.97);
 }
 
   @keyframes spin {
@@ -279,6 +271,53 @@
     :root[data-color-gamut='p3'] {
       --glass-saturation-boost: 1.8;
       --glass-vibrancy-multiplier: 1.25;
+}
+}
+
+  @media (prefers-contrast: high) {
+    :root {
+      --contrast-multiplier: 1.5;
+}
+
+    * {
+      border-width: 2px;
+}
+}
+
+  @media (prefers-reduced-motion: no-preference) {
+    .liquid-wobble-active {
+      animation: liquidJiggle var(--durations-glass-bounce) var(--easings-glass-bounce);
+}
+
+    .liquid-flow {
+      animation: liquidFlow var(--durations-glass-flow) var(--easings-glass-flow);
+}
+}
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-wobble-active,.liquid-flow {
+      animation: none;
+}
+
+    .liquid-pressed {
+      transition: none;
+      transform: none;
+}
+
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      --transition-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+}
+}
+
+  @media (prefers-reduced-transparency: reduce) {
+    * {
+      background: solid;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
 }
 }
 }
@@ -766,15 +805,15 @@
     --radii-3xl: 24px;
     --radii-full: 9999px;
     --radii-roles-button: var(--radii-full);
-    --radii-roles-button-compact: 14px;
+    --radii-roles-button-compact: 10px;
     --radii-roles-button-large: var(--radii-full);
-    --radii-roles-control: 14px;
-    --radii-roles-field: 14px;
-    --radii-roles-field-large: 16px;
-    --radii-roles-card: 26px;
-    --radii-roles-card-large: 26px;
-    --radii-roles-sheet: 26px;
-    --radii-roles-modal: 26px;
+    --radii-roles-control: 10px;
+    --radii-roles-field: 12px;
+    --radii-roles-field-large: 14px;
+    --radii-roles-card: 16px;
+    --radii-roles-card-large: 20px;
+    --radii-roles-sheet: 16px;
+    --radii-roles-modal: 16px;
     --radii-roles-pill: var(--radii-full);
     --radii-roles-badge: var(--radii-full);
     --radii-button-default: 0 6px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25);
@@ -792,25 +831,42 @@
     --blurs-glass-md: 10px;
     --blurs-glass-lg: 20px;
     --blurs-glass-xl: 30px;
-    --shadows-button-default: var(--shadows-glass-base);
-    --shadows-button-hover: var(--shadows-glass-hover);
-    --shadows-button-active: var(--shadows-glass-sm);
-    --shadows-button-focus: var(--shadows-glass-md);
-    --shadows-glass-base: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
-    --shadows-glass-sm: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    --shadows-glass-md: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1);
-    --shadows-glass-lg: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
-    --shadows-glass-hover: 0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15);
-    --durations-button-hover: var(--durations-glass-flow);
+    --shadows-button-default: var(--shadows-elevation-1);
+    --shadows-button-hover: var(--shadows-elevation-4);
+    --shadows-button-active: var(--shadows-elevation-0);
+    --shadows-button-focus: var(--shadows-elevation-1);
+    --shadows-elevation-0: none;
+    --shadows-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    --shadows-elevation-4: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    --shadows-elevation-8: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    --shadows-elevation-16: 0 16px 32px rgba(0, 0, 0, 0.16), 0 8px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    --shadows-elevation-24: 0 24px 48px rgba(0, 0, 0, 0.20), 0 12px 24px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    --shadows-glass-base: var(--shadows-elevation-1);
+    --shadows-glass-sm: var(--shadows-elevation-1);
+    --shadows-glass-md: var(--shadows-elevation-4);
+    --shadows-glass-lg: var(--shadows-elevation-8);
+    --shadows-glass-hover: var(--shadows-elevation-4);
+    --durations-button-hover: var(--durations-glass-quick);
     --durations-button-press: var(--durations-glass-instant);
-    --durations-button-focus: var(--durations-glass-flow);
-    --durations-glass-flow: 0.8s;
+    --durations-button-focus: var(--durations-glass-quick);
+    --durations-glass-instant: 0.15s;
+    --durations-glass-quick: 0.3s;
+    --durations-glass-flow: 0.5s;
     --durations-glass-bounce: 0.6s;
-    --durations-glass-quick: 0.2s;
-    --durations-glass-instant: 0.1s;
-    --easings-glass-flow: cubic-bezier(0.23, 1, 0.32, 1);
+    --easings-glass-flow: cubic-bezier(0.25, 0.1, 0.25, 1.0);
     --easings-glass-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --easings-glass-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --easings-glass-spring: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    --easings-glass-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --easings-glass-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --springs-default-mass: 1;
+    --springs-default-stiffness: 180;
+    --springs-default-damping: 20;
+    --springs-gentle-mass: 1;
+    --springs-gentle-stiffness: 120;
+    --springs-gentle-damping: 14;
+    --springs-bouncy-mass: 1;
+    --springs-bouncy-stiffness: 220;
+    --springs-bouncy-damping: 12;
     --sizes-glass-xs: 8px;
     --sizes-glass-sm: 12px;
     --sizes-glass-md: 16px;
@@ -1046,7 +1102,7 @@
 }
 
     .liquid-button[aria-disabled='true'] {
-      opacity: 0.5;
+      opacity: 0.8;
       cursor: not-allowed;
       pointer-events: none;
 }
@@ -1054,6 +1110,7 @@
     .liquid-button[data-loading] {
       cursor: progress;
       pointer-events: none;
+      opacity: 0.8;
 }
 
     .liquid-button[data-icon-only] {
@@ -1069,13 +1126,13 @@
 
     .liquid-button:is(:hover, [data-hover]) {
       border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.02);
       box-shadow: var(--shadows-glass-hover);
 }
 
     .liquid-button:is(:active, [data-active]) {
-      transition: all var(--durations-glass-instant) var(--easings-glass-flow);
-      transform: translateY(1px) scale(0.96);
+      transition: all var(--durations-glass-instant) var(--easings-glass-ease-out);
+      transform: translateY(1px) scale(0.97);
 }
 
     .card {
@@ -2131,16 +2188,18 @@
 
     @media (prefers-reduced-motion: reduce) {
       .liquid-button {
+        animation: none;
         transition: none;
 }
 
       .liquid-button:is(:hover, [data-hover]) {
         transform: none;
-        box-shadow: var(--shadows-glass-base);
+        box-shadow: var(--shadows-elevation-1);
 }
 
       .liquid-button:is(:active, [data-active]) {
         transform: none;
+        box-shadow: var(--shadows-elevation-0);
 }
 }
 }
@@ -2155,7 +2214,7 @@
 }
 
   .liquid-button--size_md {
-    padding: 10px 16px;
+    padding: 12px 20px;
     border-radius: var(--radii-roles-button);
     font-size: var(--font-sizes-body);
     font-weight: var(--font-weights-semibold);
@@ -2193,10 +2252,10 @@
 }
 
   .liquid-button--size_sm {
-    padding: 8px 12px;
+    padding: 12px 16px;
     border-radius: var(--radii-roles-button-compact);
     font-size: var(--font-sizes-footnote);
-    min-height: 32px;
+    min-height: 44px;
 }
 
   .liquid-button--size_sm,.liquid-button--size_lg {
@@ -2205,14 +2264,14 @@
 }
 
   .liquid-button--size_lg {
-    padding: 12px 20px;
+    padding: 14px 24px;
     border-radius: var(--radii-roles-button-large);
     font-size: var(--font-sizes-title3);
-    min-height: 50px;
+    min-height: 52px;
 }
 
   .liquid-button--size_xl {
-    padding: 16px 24px;
+    padding: 16px 28px;
     border-radius: var(--radii-lg);
     font-size: var(--font-sizes-title2);
     font-weight: var(--font-weights-bold);
@@ -2221,30 +2280,31 @@
 }
 
   .liquid-button--size_compact {
-    padding: 8px 12px;
+    padding: 12px 16px;
     border-radius: var(--radii-roles-button-compact);
     font-size: var(--font-sizes-footnote);
-    font-weight: var(--font-weights-semibold);
     line-height: var(--line-heights-snug);
-    min-height: 32px;
 }
 
-  .liquid-button--size_regular {
-    padding: 10px 16px;
-    border-radius: var(--radii-roles-button);
-    font-size: var(--font-sizes-body);
+  .liquid-button--size_compact,.liquid-button--size_regular {
     font-weight: var(--font-weights-semibold);
-    line-height: var(--line-heights-normal);
     min-height: 44px;
 }
 
-  .liquid-button--size_large {
+  .liquid-button--size_regular {
     padding: 12px 20px;
+    border-radius: var(--radii-roles-button);
+    font-size: var(--font-sizes-body);
+    line-height: var(--line-heights-normal);
+}
+
+  .liquid-button--size_large {
+    padding: 14px 24px;
     border-radius: var(--radii-roles-button-large);
     font-size: var(--font-sizes-title3);
     font-weight: var(--font-weights-semibold);
     line-height: var(--line-heights-snug);
-    min-height: 50px;
+    min-height: 52px;
 }
 
   .card--padded_true {

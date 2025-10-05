@@ -1924,7 +1924,7 @@ const tokens = {
     "variable": "var(--radii-roles-button)"
   },
   "radii.roles.buttonCompact": {
-    "value": "14px",
+    "value": "10px",
     "variable": "var(--radii-roles-button-compact)"
   },
   "radii.roles.buttonLarge": {
@@ -1932,31 +1932,31 @@ const tokens = {
     "variable": "var(--radii-roles-button-large)"
   },
   "radii.roles.control": {
-    "value": "14px",
+    "value": "10px",
     "variable": "var(--radii-roles-control)"
   },
   "radii.roles.field": {
-    "value": "14px",
+    "value": "12px",
     "variable": "var(--radii-roles-field)"
   },
   "radii.roles.fieldLarge": {
-    "value": "16px",
+    "value": "14px",
     "variable": "var(--radii-roles-field-large)"
   },
   "radii.roles.card": {
-    "value": "26px",
+    "value": "16px",
     "variable": "var(--radii-roles-card)"
   },
   "radii.roles.cardLarge": {
-    "value": "26px",
+    "value": "20px",
     "variable": "var(--radii-roles-card-large)"
   },
   "radii.roles.sheet": {
-    "value": "26px",
+    "value": "16px",
     "variable": "var(--radii-roles-sheet)"
   },
   "radii.roles.modal": {
-    "value": "26px",
+    "value": "16px",
     "variable": "var(--radii-roles-modal)"
   },
   "radii.roles.pill": {
@@ -2028,43 +2028,67 @@ const tokens = {
     "variable": "var(--blurs-glass-xl)"
   },
   "shadows.button.default": {
-    "value": "var(--shadows-glass-base)",
+    "value": "var(--shadows-elevation-1)",
     "variable": "var(--shadows-button-default)"
   },
   "shadows.button.hover": {
-    "value": "var(--shadows-glass-hover)",
+    "value": "var(--shadows-elevation-4)",
     "variable": "var(--shadows-button-hover)"
   },
   "shadows.button.active": {
-    "value": "var(--shadows-glass-sm)",
+    "value": "var(--shadows-elevation-0)",
     "variable": "var(--shadows-button-active)"
   },
   "shadows.button.focus": {
-    "value": "var(--shadows-glass-md)",
+    "value": "var(--shadows-elevation-1)",
     "variable": "var(--shadows-button-focus)"
   },
+  "shadows.elevation.0": {
+    "value": "none",
+    "variable": "var(--shadows-elevation-0)"
+  },
+  "shadows.elevation.1": {
+    "value": "0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+    "variable": "var(--shadows-elevation-1)"
+  },
+  "shadows.elevation.4": {
+    "value": "0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+    "variable": "var(--shadows-elevation-4)"
+  },
+  "shadows.elevation.8": {
+    "value": "0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.35)",
+    "variable": "var(--shadows-elevation-8)"
+  },
+  "shadows.elevation.16": {
+    "value": "0 16px 32px rgba(0, 0, 0, 0.16), 0 8px 16px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.4)",
+    "variable": "var(--shadows-elevation-16)"
+  },
+  "shadows.elevation.24": {
+    "value": "0 24px 48px rgba(0, 0, 0, 0.20), 0 12px 24px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.45)",
+    "variable": "var(--shadows-elevation-24)"
+  },
   "shadows.glass.base": {
-    "value": "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
+    "value": "var(--shadows-elevation-1)",
     "variable": "var(--shadows-glass-base)"
   },
   "shadows.glass.sm": {
-    "value": "0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+    "value": "var(--shadows-elevation-1)",
     "variable": "var(--shadows-glass-sm)"
   },
   "shadows.glass.md": {
-    "value": "0 12px 40px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
+    "value": "var(--shadows-elevation-4)",
     "variable": "var(--shadows-glass-md)"
   },
   "shadows.glass.lg": {
-    "value": "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
+    "value": "var(--shadows-elevation-8)",
     "variable": "var(--shadows-glass-lg)"
   },
   "shadows.glass.hover": {
-    "value": "0 16px 50px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 255, 255, 0.15)",
+    "value": "var(--shadows-elevation-4)",
     "variable": "var(--shadows-glass-hover)"
   },
   "durations.button.hover": {
-    "value": "var(--durations-glass-flow)",
+    "value": "var(--durations-glass-quick)",
     "variable": "var(--durations-button-hover)"
   },
   "durations.button.press": {
@@ -2072,27 +2096,27 @@ const tokens = {
     "variable": "var(--durations-button-press)"
   },
   "durations.button.focus": {
-    "value": "var(--durations-glass-flow)",
+    "value": "var(--durations-glass-quick)",
     "variable": "var(--durations-button-focus)"
   },
+  "durations.glass.instant": {
+    "value": "0.15s",
+    "variable": "var(--durations-glass-instant)"
+  },
+  "durations.glass.quick": {
+    "value": "0.3s",
+    "variable": "var(--durations-glass-quick)"
+  },
   "durations.glass.flow": {
-    "value": "0.8s",
+    "value": "0.5s",
     "variable": "var(--durations-glass-flow)"
   },
   "durations.glass.bounce": {
     "value": "0.6s",
     "variable": "var(--durations-glass-bounce)"
   },
-  "durations.glass.quick": {
-    "value": "0.2s",
-    "variable": "var(--durations-glass-quick)"
-  },
-  "durations.glass.instant": {
-    "value": "0.1s",
-    "variable": "var(--durations-glass-instant)"
-  },
   "easings.glass.flow": {
-    "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "value": "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
     "variable": "var(--easings-glass-flow)"
   },
   "easings.glass.bounce": {
@@ -2100,8 +2124,52 @@ const tokens = {
     "variable": "var(--easings-glass-bounce)"
   },
   "easings.glass.spring": {
-    "value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+    "value": "cubic-bezier(0.17, 0.67, 0.83, 0.67)",
     "variable": "var(--easings-glass-spring)"
+  },
+  "easings.glass.easeOut": {
+    "value": "cubic-bezier(0, 0, 0.2, 1)",
+    "variable": "var(--easings-glass-ease-out)"
+  },
+  "easings.glass.easeIn": {
+    "value": "cubic-bezier(0.4, 0, 1, 1)",
+    "variable": "var(--easings-glass-ease-in)"
+  },
+  "springs.default.mass": {
+    "value": "1",
+    "variable": "var(--springs-default-mass)"
+  },
+  "springs.default.stiffness": {
+    "value": "180",
+    "variable": "var(--springs-default-stiffness)"
+  },
+  "springs.default.damping": {
+    "value": "20",
+    "variable": "var(--springs-default-damping)"
+  },
+  "springs.gentle.mass": {
+    "value": "1",
+    "variable": "var(--springs-gentle-mass)"
+  },
+  "springs.gentle.stiffness": {
+    "value": "120",
+    "variable": "var(--springs-gentle-stiffness)"
+  },
+  "springs.gentle.damping": {
+    "value": "14",
+    "variable": "var(--springs-gentle-damping)"
+  },
+  "springs.bouncy.mass": {
+    "value": "1",
+    "variable": "var(--springs-bouncy-mass)"
+  },
+  "springs.bouncy.stiffness": {
+    "value": "220",
+    "variable": "var(--springs-bouncy-stiffness)"
+  },
+  "springs.bouncy.damping": {
+    "value": "12",
+    "variable": "var(--springs-bouncy-damping)"
   },
   "sizes.glass.xs": {
     "value": "8px",
