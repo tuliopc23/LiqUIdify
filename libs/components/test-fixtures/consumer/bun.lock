@@ -1,0 +1,14 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "consumer-fixture",
+      "dependencies": {
+        "liquidify-react": "link:../../../..",
+      },
+    },
+  },
+  "packages": {
+    "liquidify-react": ["liquidify-react@link:../../../..", {}],
+  }
+}

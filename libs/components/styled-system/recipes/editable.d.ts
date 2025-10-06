@@ -1,32 +1,31 @@
 /* eslint-disable */
-import type { ConditionalValue } from "../types/index";
-import type { DistributiveOmit, Pretty } from "../types/system-types";
+import type { ConditionalValue } from '../types/index';
+import type { DistributiveOmit, Pretty } from '../types/system-types';
 
-type EditableVariant = {}
-
-type EditableVariantMap = {
-	[key in keyof EditableVariant]: Array<EditableVariant[key]>;
-};
-
-export type EditableVariantProps = {
-	[key in keyof EditableVariant]?:
-		| ConditionalValue<EditableVariant[key]>
-		| undefined;
-};
-
-export interface EditableRecipe {
-	__type: EditableVariantProps;
-	(props?: EditableVariantProps): string;
-	raw: (props?: EditableVariantProps) => EditableVariantProps;
-	variantMap: EditableVariantMap;
-	variantKeys: Array<keyof EditableVariant>;
-	splitVariantProps<Props extends EditableVariantProps>(
-		props: Props,
-	): [
-		EditableVariantProps,
-		Pretty<DistributiveOmit<Props, keyof EditableVariantProps>>,
-	];
-	getVariantProps: (props?: EditableVariantProps) => EditableVariantProps;
+interface EditableVariant {
+  
 }
 
-export declare const editable: EditableRecipe;
+type EditableVariantMap = {
+  [key in keyof EditableVariant]: Array<EditableVariant[key]>
+}
+
+
+
+export type EditableVariantProps = {
+  [key in keyof EditableVariant]?: ConditionalValue<EditableVariant[key]> | undefined
+}
+
+export interface EditableRecipe {
+  
+  __type: EditableVariantProps
+  (props?: EditableVariantProps): string
+  raw: (props?: EditableVariantProps) => EditableVariantProps
+  variantMap: EditableVariantMap
+  variantKeys: Array<keyof EditableVariant>
+  splitVariantProps<Props extends EditableVariantProps>(props: Props): [EditableVariantProps, Pretty<DistributiveOmit<Props, keyof EditableVariantProps>>]
+  getVariantProps: (props?: EditableVariantProps) => EditableVariantProps
+}
+
+
+export declare const editable: EditableRecipe

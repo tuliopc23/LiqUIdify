@@ -1,6 +1,6 @@
 {
   "name": "@liquidify/components",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "private": false,
   "type": "module",
   "description": "LiqUIdify component library - glassmorphism React components",
@@ -19,6 +19,11 @@
       "import": "./dist/components/button/index.mjs",
       "require": "./dist/components/button/index.cjs"
     },
+    "./ark-ui/*": {
+      "types": "./dist/components/ark-ui/*/index.d.ts",
+      "import": "./dist/components/ark-ui/*/index.mjs",
+      "require": "./dist/components/ark-ui/*/index.cjs"
+    },
     "./*": {
       "types": "./dist/components/*/index.d.ts",
       "import": "./dist/components/*/index.mjs",
@@ -31,12 +36,14 @@
     "README.md"
   ],
   "scripts": {
+    "prebuild": "bunx panda codegen",
     "build": "bun run clean && bunx vite build && bun run build:types",
     "build:types": "bunx tsc -p tsconfig.lib.json --pretty false --noEmitOnError false",
     "build:watch": "bunx vite build --config vite.config.ts --watch",
     "clean": "rm -rf dist",
     "dev": "bunx vite -c vite.config.ts",
-    "type-check": "bunx tsc --noEmit --project tsconfig.lib.json"
+    "type-check": "bunx tsc --noEmit --project tsconfig.lib.json",
+    "test:imports": "cd test-fixtures/consumer && bun install && bun run test:imports"
   },
   "dependencies": {},
   "publishConfig": {

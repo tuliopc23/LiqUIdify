@@ -1,7 +1,7 @@
 /* eslint-disable */
-import type { ConditionalValue } from "./conditions";
-import type { CssProperties } from "./system-types";
-import type { Tokens } from "../tokens/index";
+import type { ConditionalValue } from './conditions';
+import type { CssProperties } from './system-types';
+import type { Tokens } from '../tokens/index';
 
 export interface UtilityValues {
 	top: Tokens["spacing"];
@@ -16,35 +16,7 @@ export interface UtilityValues {
 	right: Tokens["spacing"];
 	bottom: Tokens["spacing"];
 	float: "start" | "end" | CssProperties["float"];
-	flexBasis:
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "full";
+	flexBasis: Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "full";
 	flex: "1" | "auto" | "initial" | "none";
 	gridAutoColumns: "min" | "max" | "fr";
 	gridAutoRows: "min" | "max" | "fr";
@@ -88,348 +60,19 @@ export interface UtilityValues {
 	focusRingStyle: CssProperties["outlineStyle"];
 	divideColor: Tokens["colors"];
 	divideStyle: CssProperties["borderStyle"];
-	width:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	inlineSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	minWidth:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	minInlineSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	maxWidth:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	maxInlineSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
-	height:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	blockSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	minHeight:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	minBlockSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	maxHeight:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	maxBlockSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "svh"
-		| "lvh"
-		| "dvh"
-		| "screen"
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6";
-	boxSize:
-		| "auto"
-		| Tokens["sizes"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "1/5"
-		| "2/5"
-		| "3/5"
-		| "4/5"
-		| "1/6"
-		| "2/6"
-		| "3/6"
-		| "4/6"
-		| "5/6"
-		| "1/12"
-		| "2/12"
-		| "3/12"
-		| "4/12"
-		| "5/12"
-		| "6/12"
-		| "7/12"
-		| "8/12"
-		| "9/12"
-		| "10/12"
-		| "11/12"
-		| "screen";
+	width: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	inlineSize: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	minWidth: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	minInlineSize: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	maxWidth: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	maxInlineSize: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
+	height: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	blockSize: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	minHeight: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	minBlockSize: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	maxHeight: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	maxBlockSize: "auto" | Tokens["sizes"] | "svh" | "lvh" | "dvh" | "screen" | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6";
+	boxSize: "auto" | Tokens["sizes"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "screen";
 	color: Tokens["colors"];
 	fontFamily: Tokens["fonts"];
 	fontSize: Tokens["fontSizes"];
@@ -446,33 +89,9 @@ export interface UtilityValues {
 	truncate: boolean;
 	background: Tokens["colors"];
 	backgroundColor: Tokens["colors"];
-	backgroundGradient:
-		| "to-t"
-		| "to-tr"
-		| "to-r"
-		| "to-br"
-		| "to-b"
-		| "to-bl"
-		| "to-l"
-		| "to-tl";
-	backgroundLinear:
-		| "to-t"
-		| "to-tr"
-		| "to-r"
-		| "to-br"
-		| "to-b"
-		| "to-bl"
-		| "to-l"
-		| "to-tl";
-	textGradient:
-		| "to-t"
-		| "to-tr"
-		| "to-r"
-		| "to-br"
-		| "to-b"
-		| "to-bl"
-		| "to-l"
-		| "to-tl";
+	backgroundGradient: "to-t" | "to-tr" | "to-r" | "to-br" | "to-b" | "to-bl" | "to-l" | "to-tl";
+	backgroundLinear: "to-t" | "to-tr" | "to-r" | "to-br" | "to-b" | "to-bl" | "to-l" | "to-tl";
+	textGradient: "to-t" | "to-tr" | "to-r" | "to-br" | "to-b" | "to-bl" | "to-l" | "to-tl";
 	gradientFrom: Tokens["colors"];
 	gradientTo: Tokens["colors"];
 	gradientVia: Tokens["colors"];
@@ -515,21 +134,8 @@ export interface UtilityValues {
 	transitionDelay: Tokens["durations"];
 	transitionDuration: Tokens["durations"];
 	transitionProperty: "common" | "colors" | "size" | "position" | "background";
-	transition:
-		| "all"
-		| "common"
-		| "size"
-		| "position"
-		| "background"
-		| "colors"
-		| "opacity"
-		| "shadow"
-		| "transform";
-	animationName:
-		| "liquidRipple"
-		| "liquidJiggle"
-		| "liquidFlow"
-		| "liquidBounce";
+	transition: "all" | "common" | "size" | "position" | "background" | "colors" | "opacity" | "shadow" | "transform";
+	animationName: "liquidRipple" | "liquidJiggle" | "liquidFlow" | "liquidBounce" | "shimmerPass";
 	animationTimingFunction: Tokens["easings"];
 	animationDuration: Tokens["durations"];
 	animationDelay: Tokens["durations"];
@@ -539,54 +145,9 @@ export interface UtilityValues {
 	rotateZ: CssProperties["rotate"];
 	scale: "auto" | CssProperties["scale"];
 	translate: "auto" | "auto-3d" | CssProperties["translate"];
-	translateX:
-		| Tokens["spacing"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "full"
-		| "-1/2"
-		| "-1/3"
-		| "-2/3"
-		| "-1/4"
-		| "-2/4"
-		| "-3/4"
-		| "-full";
-	translateY:
-		| Tokens["spacing"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "full"
-		| "-1/2"
-		| "-1/3"
-		| "-2/3"
-		| "-1/4"
-		| "-2/4"
-		| "-3/4"
-		| "-full";
-	translateZ:
-		| Tokens["spacing"]
-		| "1/2"
-		| "1/3"
-		| "2/3"
-		| "1/4"
-		| "2/4"
-		| "3/4"
-		| "full"
-		| "-1/2"
-		| "-1/3"
-		| "-2/3"
-		| "-1/4"
-		| "-2/4"
-		| "-3/4"
-		| "-full";
+	translateX: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full" | "-1/2" | "-1/3" | "-2/3" | "-1/4" | "-2/4" | "-3/4" | "-full";
+	translateY: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full" | "-1/2" | "-1/3" | "-2/3" | "-1/4" | "-2/4" | "-3/4" | "-full";
+	translateZ: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "full" | "-1/2" | "-1/3" | "-2/3" | "-1/4" | "-2/4" | "-3/4" | "-full";
 	accentColor: Tokens["colors"];
 	caretColor: Tokens["colors"];
 	scrollbar: "visible" | "hidden";
@@ -626,45 +187,18 @@ export interface UtilityValues {
 	srOnly: boolean;
 	debug: boolean;
 	containerName: CssProperties["containerName"];
-	colorPalette:
-		| "glass"
-		| "glass.subtle"
-		| "glass.medium"
-		| "glass.strong"
-		| "glass.accent"
-		| "glass.gradients"
-		| "button"
-		| "button.primary"
-		| "button.secondary"
-		| "button.ghost"
-		| "button.danger"
-		| "button.success"
-		| "button.warning"
-		| "accent"
-		| "text"
-		| "text.glass"
-		| "gray"
-		| "blue"
-		| "indigo"
-		| "teal"
-		| "green"
-		| "orange"
-		| "pink"
-		| "bg"
-		| "border";
-	textStyle: "display" | "title1" | "title3" | "body" | "caption";
+	colorPalette: "glass" | "glass.subtle" | "glass.medium" | "glass.strong" | "glass.accent" | "glass.gradients" | "glass.gradients.before" | "glass.gradients.after" | "glass.gradients.depth" | "glass.gradients.vibrancy" | "glass.liquid" | "glass.liquid.base" | "glass.liquid.layers" | "glass.liquid.layers.before" | "glass.liquid.layers.after" | "glass.liquid.layers.glow" | "glass.liquid.layers.shimmer" | "glass.liquid.layers.depth" | "button" | "button.primary" | "button.secondary" | "button.ghost" | "button.danger" | "button.success" | "button.warning" | "button.hig" | "button.hig.filled" | "button.hig.filled.accent" | "button.hig.filled.accent.default" | "button.hig.filled.accent.hover" | "button.hig.filled.accent.active" | "button.hig.filled.accent.disabled" | "button.hig.filled.accent.focus" | "button.hig.filled.accent.loading" | "button.hig.filled.neutral" | "button.hig.filled.neutral.default" | "button.hig.filled.neutral.hover" | "button.hig.filled.neutral.active" | "button.hig.filled.neutral.disabled" | "button.hig.filled.neutral.focus" | "button.hig.filled.neutral.loading" | "button.hig.filled.destructive" | "button.hig.filled.destructive.default" | "button.hig.filled.destructive.hover" | "button.hig.filled.destructive.active" | "button.hig.filled.destructive.disabled" | "button.hig.filled.destructive.focus" | "button.hig.filled.destructive.loading" | "button.hig.tinted" | "button.hig.tinted.accent" | "button.hig.tinted.accent.default" | "button.hig.tinted.accent.hover" | "button.hig.tinted.accent.active" | "button.hig.tinted.accent.disabled" | "button.hig.tinted.accent.focus" | "button.hig.tinted.accent.loading" | "button.hig.tinted.neutral" | "button.hig.tinted.neutral.default" | "button.hig.tinted.neutral.hover" | "button.hig.tinted.neutral.active" | "button.hig.tinted.neutral.disabled" | "button.hig.tinted.neutral.focus" | "button.hig.tinted.neutral.loading" | "button.hig.tinted.destructive" | "button.hig.tinted.destructive.default" | "button.hig.tinted.destructive.hover" | "button.hig.tinted.destructive.active" | "button.hig.tinted.destructive.disabled" | "button.hig.tinted.destructive.focus" | "button.hig.tinted.destructive.loading" | "button.hig.plain" | "button.hig.plain.accent" | "button.hig.plain.accent.default" | "button.hig.plain.accent.hover" | "button.hig.plain.accent.active" | "button.hig.plain.accent.disabled" | "button.hig.plain.accent.focus" | "button.hig.plain.accent.loading" | "button.hig.plain.neutral" | "button.hig.plain.neutral.default" | "button.hig.plain.neutral.hover" | "button.hig.plain.neutral.active" | "button.hig.plain.neutral.disabled" | "button.hig.plain.neutral.focus" | "button.hig.plain.neutral.loading" | "button.hig.plain.destructive" | "button.hig.plain.destructive.default" | "button.hig.plain.destructive.hover" | "button.hig.plain.destructive.active" | "button.hig.plain.destructive.disabled" | "button.hig.plain.destructive.focus" | "button.hig.plain.destructive.loading" | "button.filled" | "button.filled.accent" | "button.filled.accent.default" | "button.filled.accent.hover" | "button.filled.accent.active" | "button.filled.accent.disabled" | "button.filled.accent.focus" | "button.filled.accent.loading" | "button.filled.neutral" | "button.filled.neutral.default" | "button.filled.neutral.hover" | "button.filled.neutral.active" | "button.filled.neutral.disabled" | "button.filled.neutral.focus" | "button.filled.neutral.loading" | "button.filled.destructive" | "button.filled.destructive.default" | "button.filled.destructive.hover" | "button.filled.destructive.active" | "button.filled.destructive.disabled" | "button.filled.destructive.focus" | "button.filled.destructive.loading" | "button.tinted" | "button.tinted.accent" | "button.tinted.accent.default" | "button.tinted.accent.hover" | "button.tinted.accent.active" | "button.tinted.accent.disabled" | "button.tinted.accent.focus" | "button.tinted.accent.loading" | "button.tinted.neutral" | "button.tinted.neutral.default" | "button.tinted.neutral.hover" | "button.tinted.neutral.active" | "button.tinted.neutral.disabled" | "button.tinted.neutral.focus" | "button.tinted.neutral.loading" | "button.tinted.destructive" | "button.tinted.destructive.default" | "button.tinted.destructive.hover" | "button.tinted.destructive.active" | "button.tinted.destructive.disabled" | "button.tinted.destructive.focus" | "button.tinted.destructive.loading" | "button.plain" | "button.plain.accent" | "button.plain.accent.default" | "button.plain.accent.hover" | "button.plain.accent.active" | "button.plain.accent.disabled" | "button.plain.accent.focus" | "button.plain.accent.loading" | "button.plain.neutral" | "button.plain.neutral.default" | "button.plain.neutral.hover" | "button.plain.neutral.active" | "button.plain.neutral.disabled" | "button.plain.neutral.focus" | "button.plain.neutral.loading" | "button.plain.destructive" | "button.plain.destructive.default" | "button.plain.destructive.hover" | "button.plain.destructive.active" | "button.plain.destructive.disabled" | "button.plain.destructive.focus" | "button.plain.destructive.loading" | "accent" | "accent.primary" | "accent.secondary" | "accent.success" | "accent.warning" | "accent.danger" | "accent.indigo" | "accent.teal" | "accent.cyan" | "accent.mint" | "accent.pink" | "accent.yellow" | "accent.neonBlue" | "accent.vibrantPurple" | "accent.liquidTeal" | "text" | "text.glass" | "gray" | "blue" | "indigo" | "teal" | "green" | "orange" | "pink" | "bg" | "border" | "semantic" | "materials" | "materials.ultraThin" | "materials.thin" | "materials.regular" | "materials.thick" | "materials.overlayLight" | "materials.overlayDark" | "materials.vibrancyUltraLight" | "materials.vibrancyLight" | "materials.vibrancyMedium" | "materials.vibrancyStrong" | "materials.depthGradient" | "materials.shimmerOverlay" | "selection";
+	textStyle: "largeTitle" | "title1" | "title2" | "title3" | "headline" | "body" | "callout" | "subheadline" | "footnote" | "caption1" | "caption2" | "button" | "display";
 }
 
-type WithColorOpacityModifier<T> = [T] extends [string]
-	? `${T}/${string}` & { __colorOpacityModifier?: true }
-	: never;
 
-type ImportantMark = "!" | "!important";
-type WhitespaceImportant = ` ${ImportantMark}`;
-type Important = ImportantMark | WhitespaceImportant;
-type WithImportant<T> = [T] extends [string]
-	? `${T}${Important}` & { __important?: true }
-	: never;
+
+type WithColorOpacityModifier<T> = [T] extends [string] ? `${T}/${string}` & { __colorOpacityModifier?: true } : never
+
+type ImportantMark = "!" | "!important"
+type WhitespaceImportant = ` ${ImportantMark}`
+type Important = ImportantMark | WhitespaceImportant
+type WithImportant<T> = [T] extends [string] ? `${T}${Important}` & { __important?: true } : never
 
 /**
  * Only relevant when using `strictTokens` or `strictPropertyValues` in your config.
@@ -682,11 +216,7 @@ type WithImportant<T> = [T] extends [string]
  * @see https://panda-css.com/docs/concepts/writing-styles#stricttokens
  * @see https://panda-css.com/docs/concepts/writing-styles#strictpropertyvalues
  */
-export type WithEscapeHatch<T> =
-	| T
-	| `[${string}]`
-	| WithColorOpacityModifier<T>
-	| WithImportant<T>;
+export type WithEscapeHatch<T> = T | `[${string}]` | WithColorOpacityModifier<T> | WithImportant<T>
 
 /**
  * Will restrict the value of properties that have predefined values to those values only.
@@ -699,7 +229,5 @@ export type WithEscapeHatch<T> =
  * @see https://panda-css.com/docs/concepts/writing-styles#strictpropertyvalues
  */
 export type OnlyKnown<Key, Value> = Value extends boolean
-	? Value
-	: Value extends `${infer _}`
-		? Value
-		: never;
+  ? Value
+  : Value extends `${infer _}` ? Value : never

@@ -1,107 +1,98 @@
-"use client";
+'use client'
 
-import { cx, css, sva } from "../css/index.js";
-import { styled } from "./factory.js";
-import { getDisplayName } from "./factory-helper.js";
-import { createContext, useContext, createElement, forwardRef } from "react";
+import { cx, css, sva } from '../css/index.js';
+import { styled } from './factory.js';
+import { getDisplayName } from './factory-helper.js';
+import { createContext, useContext, createElement, forwardRef } from 'react'
 
 export function createStyleContext(recipe) {
-	const StyleContext = createContext({});
-	const isConfigRecipe = "__recipe__" in recipe;
-	const svaFn = isConfigRecipe ? recipe : sva(recipe.config);
+  const StyleContext = createContext({})
+  const isConfigRecipe = '__recipe__' in recipe
+  const svaFn = isConfigRecipe ? recipe : sva(recipe.config)
 
-	const getResolvedProps = (props, slotStyles) => {
-		const { unstyled, ...restProps } = props;
-		if (unstyled) return restProps;
-		if (isConfigRecipe) {
-			return { ...restProps, className: cx(slotStyles, restProps.className) };
-		}
-		return { ...slotStyles, ...restProps };
-	};
+  const getResolvedProps = (props, slotStyles) => {
+    const { unstyled, ...restProps } = props
+    if (unstyled) return restProps
+    if (isConfigRecipe) {
+       return { ...restProps, className: cx(slotStyles, restProps.className) }
+    }
+    return { ...slotStyles, ...restProps }
+  }
 
-	const withRootProvider = (Component) => {
-		const WithRootProvider = (props) => {
-			const [variantProps, otherProps] = svaFn.splitVariantProps(props);
+  const withRootProvider = (Component, options) => {
+    const WithRootProvider = (props) => {
+      const [variantProps, otherProps] = svaFn.splitVariantProps(props)
+      
+      const slotStyles = isConfigRecipe ? svaFn(variantProps) : svaFn.raw(variantProps)
+      slotStyles._classNameMap = svaFn.classNameMap
 
-			const slotStyles = isConfigRecipe
-				? svaFn(variantProps)
-				: svaFn.raw(variantProps);
-			slotStyles._classNameMap = svaFn.classNameMap;
+      const mergedProps = options?.defaultProps 
+        ? { ...options.defaultProps, ...otherProps } 
+        : otherProps
 
-			return createElement(StyleContext.Provider, {
-				value: slotStyles,
-				children: createElement(Component, otherProps),
-			});
-		};
+      return createElement(StyleContext.Provider, {
+        value: slotStyles,
+        children: createElement(Component, mergedProps)
+      })
+    }
+    
+    const componentName = getDisplayName(Component)
+    WithRootProvider.displayName = `withRootProvider(${componentName})`
+    
+    return WithRootProvider
+  }
 
-		const componentName = getDisplayName(Component);
-		WithRootProvider.displayName = `withRootProvider(${componentName})`;
+  const withProvider = (Component, slot, options) => {
+    const StyledComponent = styled(Component, {}, options)
+    
+    const WithProvider = forwardRef((props, ref) => {
+      const [variantProps, restProps] = svaFn.splitVariantProps(props)
+      
+      const slotStyles = isConfigRecipe ? svaFn(variantProps) : svaFn.raw(variantProps)
+      slotStyles._classNameMap = svaFn.classNameMap
 
-		return WithRootProvider;
-	};
+      const propsWithClass = { ...restProps, className: restProps.className ?? options?.defaultProps?.className }
+      const resolvedProps = getResolvedProps(propsWithClass, slotStyles[slot])
+      return createElement(StyleContext.Provider, {
+        value: slotStyles,
+        children: createElement(StyledComponent, {
+          ...resolvedProps,
+          className: cx(resolvedProps.className, slotStyles._classNameMap[slot]),
+          ref,
+        })
+      })
+    })
+    
+    const componentName = getDisplayName(Component)
+    WithProvider.displayName = `withProvider(${componentName})`
+    
+    return WithProvider
+  }
 
-	const withProvider = (Component, slot, options) => {
-		const StyledComponent = styled(Component, {}, options);
+  const withContext = (Component, slot, options) => {
+    const StyledComponent = styled(Component, {}, options)
+    
+    const WithContext = forwardRef((props, ref) => {
+      const slotStyles = useContext(StyleContext)
 
-		const WithProvider = forwardRef((props, ref) => {
-			const [variantProps, restProps] = svaFn.splitVariantProps(props);
+      const propsWithClass = { ...props, className: props.className ?? options?.defaultProps?.className }
+      const resolvedProps = getResolvedProps(propsWithClass, slotStyles[slot])
+      return createElement(StyledComponent, {
+        ...resolvedProps,
+        className: cx(resolvedProps.className, slotStyles._classNameMap[slot]),
+        ref,
+      })
+    })
+    
+    const componentName = getDisplayName(Component)
+    WithContext.displayName = `withContext(${componentName})`
+    
+    return WithContext
+  }
 
-			const slotStyles = isConfigRecipe
-				? svaFn(variantProps)
-				: svaFn.raw(variantProps);
-			slotStyles._classNameMap = svaFn.classNameMap;
-
-			const propsWithClass = {
-				...restProps,
-				className: restProps.className ?? options?.defaultProps?.className,
-			};
-			const resolvedProps = getResolvedProps(propsWithClass, slotStyles[slot]);
-			return createElement(StyleContext.Provider, {
-				value: slotStyles,
-				children: createElement(StyledComponent, {
-					...resolvedProps,
-					className: cx(
-						resolvedProps.className,
-						slotStyles._classNameMap[slot],
-					),
-					ref,
-				}),
-			});
-		});
-
-		const componentName = getDisplayName(Component);
-		WithProvider.displayName = `withProvider(${componentName})`;
-
-		return WithProvider;
-	};
-
-	const withContext = (Component, slot, options) => {
-		const StyledComponent = styled(Component, {}, options);
-
-		const WithContext = forwardRef((props, ref) => {
-			const slotStyles = useContext(StyleContext);
-
-			const propsWithClass = {
-				...props,
-				className: props.className ?? options?.defaultProps?.className,
-			};
-			const resolvedProps = getResolvedProps(propsWithClass, slotStyles[slot]);
-			return createElement(StyledComponent, {
-				...resolvedProps,
-				className: cx(resolvedProps.className, slotStyles._classNameMap[slot]),
-				ref,
-			});
-		});
-
-		const componentName = getDisplayName(Component);
-		WithContext.displayName = `withContext(${componentName})`;
-
-		return WithContext;
-	};
-
-	return {
-		withRootProvider,
-		withProvider,
-		withContext,
-	};
+  return {
+    withRootProvider,
+    withProvider,
+    withContext,
+  }
 }

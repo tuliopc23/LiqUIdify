@@ -64,6 +64,11 @@
 		},
 		"./styles": "./libs/components/dist/liquidify.css",
 		"./package.json": "./package.json",
+		"./ark-ui/*": {
+			"types": "./libs/components/dist/components/ark-ui/*/index.d.ts",
+			"import": "./libs/components/dist/components/ark-ui/*/index.mjs",
+			"require": "./libs/components/dist/components/ark-ui/*/index.cjs"
+		},
 		"./*": {
 			"types": "./libs/components/dist/components/*/index.d.ts",
 			"import": "./libs/components/dist/components/*/index.mjs",
@@ -173,7 +178,7 @@
 			]
 		}
 	},
-	"version": "0.6.20",
+	"version": "0.6.21",
 	"workspaces": [
 		"libs/*"
 	]

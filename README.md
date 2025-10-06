@@ -184,6 +184,79 @@ export default function App() {
 - OKLCH: `oklch(62% 0.2 236)` (recommended for perceptual uniformity)
 - CSS variables: `var(--brand-accent)`
 
+### Ark UI Components (Advanced Primitives)
+
+LiqUIdify includes 47+ Ark UI headless components for complex interactions. Import them via nested paths:
+
+```tsx
+// ESM imports
+import * as Dialog from "liquidify-react/ark-ui/dialog";
+import * as Tooltip from "liquidify-react/ark-ui/tooltip";
+import * as Select from "liquidify-react/ark-ui/select";
+import * as DatePicker from "liquidify-react/ark-ui/datePicker";
+
+// CJS requires (also supported)
+const Accordion = require("liquidify-react/ark-ui/accordion");
+const Carousel = require("liquidify-react/ark-ui/carousel");
+```
+
+**Available Ark UI components** (all with TypeScript types):
+- Form controls: `checkbox`, `switch`, `radioGroup`, `select`, `combobox`, `slider`
+- Input helpers: `datePicker`, `colorPicker`, `fileUpload`, `pinInput`, `tagsInput`
+- Navigation: `tabs`, `menu`, `pagination`, `steps`, `carousel`
+- Overlays: `dialog`, `popover`, `tooltip`, `hoverCard`, `toast`
+- Containers: `accordion`, `collapsible`, `splitter`, `treeView`
+- Feedback: `progress`, `progressCircular`, `progressLinear`, `ratingGroup`
+- Advanced: `signaturePad`, `qrCode`, `timer`, `tour`, `clipboard`
+
+### Button Component API
+
+The Button component supports Apple HIG-compliant variants and tones:
+
+```tsx
+import { Button } from "liquidify-react";
+
+// Variants (visual weight)
+<Button variant="filled">Primary Action</Button>    // Solid background
+<Button variant="tinted">Secondary Action</Button> // Subtle background
+<Button variant="plain">Tertiary Action</Button>   // Transparent
+
+// Tones (semantic meaning)
+<Button tone="accent">Save</Button>          // Blue (default)
+<Button tone="neutral">Cancel</Button>       // Gray
+<Button tone="destructive">Delete</Button>   // Red
+
+// Combining variant + tone
+<Button variant="filled" tone="destructive">Delete Forever</Button>
+<Button variant="tinted" tone="accent">Enable Feature</Button>
+<Button variant="plain" tone="neutral">Learn More</Button>
+
+// Sizes (all meet 44px minimum touch target)
+<Button size="compact">Compact</Button>   // 44px height
+<Button size="regular">Regular</Button>   // 44px height (default)
+<Button size="large">Large</Button>       // 52px height
+
+// States
+<Button disabled>Disabled</Button>
+<Button loading>Processing...</Button>
+
+// Icons
+<Button icon={<CheckIcon />} iconPosition="start">
+  Confirm
+</Button>
+<Button icon={<TrashIcon />} aria-label="Delete" /> {/* Icon-only */}
+
+// Polymorphic (renders as different elements)
+<Button as="a" href="/docs">Documentation</Button>
+<Button as={Link} to="/home">Home</Button>
+```
+
+**Legacy variant mapping** (for backward compatibility):
+- `primary` → `filled` + `accent`
+- `secondary` → `tinted` + `neutral`
+- `ghost` → `plain` + `neutral`
+- `danger` → `filled` + `destructive`
+
 ---
 
 ## 🏗️ Architecture

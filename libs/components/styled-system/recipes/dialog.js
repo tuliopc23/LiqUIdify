@@ -1,58 +1,57 @@
-import {
-	compact,
-	getSlotCompoundVariant,
-	memo,
-	splitProps,
-} from "../helpers.js";
-import { createRecipe } from "./create-recipe.js";
+import { compact, getSlotCompoundVariant, memo, splitProps } from '../helpers.js';
+import { createRecipe } from './create-recipe.js';
 
-const dialogDefaultVariants = {};
-const dialogCompoundVariants = [];
+const dialogDefaultVariants = {}
+const dialogCompoundVariants = []
 
 const dialogSlotNames = [
-	["backdrop", "dialog__backdrop"],
-	["positioner", "dialog__positioner"],
-	["content", "dialog__content"],
-	["title", "dialog__title"],
-	["description", "dialog__description"],
-	["trigger", "dialog__trigger"],
-	["closeTrigger", "dialog__closeTrigger"],
-];
-const dialogSlotFns = /* @__PURE__ */ dialogSlotNames.map(
-	([slotName, slotKey]) => [
-		slotName,
-		createRecipe(
-			slotKey,
-			dialogDefaultVariants,
-			getSlotCompoundVariant(dialogCompoundVariants, slotName),
-		),
-	],
-);
+  [
+    "backdrop",
+    "dialog__backdrop"
+  ],
+  [
+    "positioner",
+    "dialog__positioner"
+  ],
+  [
+    "content",
+    "dialog__content"
+  ],
+  [
+    "title",
+    "dialog__title"
+  ],
+  [
+    "description",
+    "dialog__description"
+  ],
+  [
+    "trigger",
+    "dialog__trigger"
+  ],
+  [
+    "closeTrigger",
+    "dialog__closeTrigger"
+  ]
+]
+const dialogSlotFns = /* @__PURE__ */ dialogSlotNames.map(([slotName, slotKey]) => [slotName, createRecipe(slotKey, dialogDefaultVariants, getSlotCompoundVariant(dialogCompoundVariants, slotName))])
 
 const dialogFn = memo((props = {}) => {
-	return Object.fromEntries(
-		dialogSlotFns.map(([slotName, slotFn]) => [
-			slotName,
-			slotFn.recipeFn(props),
-		]),
-	);
-});
+  return Object.fromEntries(dialogSlotFns.map(([slotName, slotFn]) => [slotName, slotFn.recipeFn(props)]))
+})
 
-const dialogVariantKeys = [];
-const getVariantProps = (variants) => ({
-	...dialogDefaultVariants,
-	...compact(variants),
-});
+const dialogVariantKeys = []
+const getVariantProps = (variants) => ({ ...dialogDefaultVariants, ...compact(variants) })
 
 export const dialog = /* @__PURE__ */ Object.assign(dialogFn, {
-	__recipe__: false,
-	__name__: "dialog",
-	raw: (props) => props,
-	classNameMap: {},
-	variantKeys: dialogVariantKeys,
-	variantMap: {},
-	splitVariantProps(props) {
-		return splitProps(props, dialogVariantKeys);
-	},
-	getVariantProps,
-});
+  __recipe__: false,
+  __name__: 'dialog',
+  raw: (props) => props,
+  classNameMap: {},
+  variantKeys: dialogVariantKeys,
+  variantMap: {},
+  splitVariantProps(props) {
+    return splitProps(props, dialogVariantKeys)
+  },
+  getVariantProps
+})
