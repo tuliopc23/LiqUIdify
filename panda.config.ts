@@ -1608,16 +1608,16 @@ export default defineConfig({
           },
         },
 
-        // Typography tokens
+        // Typography tokens with enhanced fallback stack
         fonts: {
           sans: {
-            value: '"SF Pro Display", sans-serif',
+            value: '"SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
           },
           display: {
-            value: '"SF Pro Display", sans-serif',
+            value: '"SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
           },
           mono: {
-            value: '"SF Mono", monospace',
+            value: '"SF Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace',
           },
         },
         fontSizes: {

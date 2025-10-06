@@ -1,0 +1,22 @@
+/* 
+ * SF Font Family Web Fonts
+ * Ensures consistent rendering across all operating systems
+ * Priority order: SF Pro Display > SF UI Display > SF UI Text > system fallbacks
+ */
+
+/* SF Pro Display - Primary display font */
+@import url("https://v1.fontapi.ir/css/SFProDisplay");
+
+/* SF UI Display - Fallback for older systems */
+@import url("https://v1.fontapi.ir/css/SFUIDisplay");
+
+/* SF UI Text - Additional fallback */
+@import url("https://v1.fontapi.ir/css/SFUIText");
+
+/* SF Mono - Monospace font for code */
+@import url("https://v1.fontapi.ir/css/SFMono");
+
+/* 
+ * Preconnect hints for performance
+ * These should also be added to HTML <head> for optimal loading
+ */

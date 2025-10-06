@@ -1,4 +1,5 @@
-/* SF Pro Display Font Import from CDN */
+/* Import SF Fonts with fallbacks for cross-OS compatibility */
+@import "./fonts.css";
 
 /* New Design System - SF Pro Font Implementation */
 
