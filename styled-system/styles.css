@@ -2,7 +2,7 @@
 
 @layer reset{
   html,:host {
-    --font-fallback: "SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, ui-sans-serif, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-fallback: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -142,7 +142,7 @@
 }
 
   code,kbd,samp,pre {
-    --font-mono-fallback: "SF Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --font-mono-fallback: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New';
     font-family: var(--global-font-mono, var(--font-mono-fallback));
     font-size: 1em;
     font-feature-settings: normal;
@@ -187,8 +187,8 @@
   body {
     margin: 0;
     padding: 0;
-    font-family: "SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
+    font-family: "SF Pro Display", sans-serif;
+}
 
   @supports (color: color(display-p3 1 1 1)) {
     :root {
@@ -886,9 +886,9 @@
     --spacing-button-gap-icon-regular: var(--spacing-glass-xs);
     --spacing-button-gap-icon-large: var(--spacing-glass-sm);
     --spacing-button-hit-min: 44px;
-    --fonts-sans: "SF Pro Display", sans-serif;
-    --fonts-display: "SF Pro Display", sans-serif;
-    --fonts-mono: "SF Mono", monospace;
+    --fonts-sans: "SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --fonts-display: "SF Pro Display", "SF UI Display", "SF UI Text", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --fonts-mono: "SF Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
     --font-sizes-caption2: 11px;
     --font-sizes-caption1: 12px;
     --font-sizes-footnote: 13px;
