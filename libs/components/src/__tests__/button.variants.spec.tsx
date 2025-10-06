@@ -76,7 +76,11 @@ describe("Button Variant and Tone Combinations", () => {
 describe("Button States", () => {
 	it("should handle focus state", async () => {
 		const user = userEvent.setup();
-		render(<Button variant="filled" tone="accent">Focus Test</Button>);
+		render(
+			<Button variant="filled" tone="accent">
+				Focus Test
+			</Button>,
+		);
 
 		const button = screen.getByRole("button");
 		await user.tab();
@@ -238,7 +242,9 @@ describe("Button Accessibility", () => {
 			/>,
 		);
 
-		expect(screen.getByRole("button", { name: "Close dialog" })).toBeInTheDocument();
+		expect(
+			screen.getByRole("button", { name: "Close dialog" }),
+		).toBeInTheDocument();
 	});
 
 	it("should be keyboard navigable", async () => {

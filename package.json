@@ -165,8 +165,7 @@
 		"ci:guard:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' && echo 'ERROR: Legacy liquid-glass artifacts found' && exit 1 || echo 'OK: No legacy artifacts found'"
 	},
 	"sideEffects": [
-		"*.css",
-		"src/styles/**"
+		"libs/components/dist/**/*.css"
 	],
 	"style": "./libs/components/dist/liquidify.css",
 	"type": "module",
