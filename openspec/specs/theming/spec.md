@@ -82,19 +82,15 @@ Preset accents SHALL meet WCAG 2.1 AA color contrast for text and UI indicators 
 - **THEN** each preset passes the stated AA thresholds for small and large text against default foreground tokens in light and dark themes
 
 ### Requirement: SSR Safety and Hydration
-Accent resolution SHALL be safe during SSR and consistent through hydration.
+Accent and theme resolution SHALL be safe during SSR and consistent through hydration.
 
 - No browser globals (window, document) MUST be accessed at import time
-- On the server, the active accent MAY be provided via <html data-accent="..."> or inline --ui-accent; the client MUST respect those values on first paint
-- On hydration, the client MUST keep the SSR-provided accent unless overridden by ThemeProvider props or persistence rules
+- On the server, the active theme MAY be provided via <html data-theme="..."> and the client MUST respect it on first paint
+- On hydration, the client MUST keep the SSR-provided theme unless overridden by ThemeProvider props or persistence rules
 
-#### Scenario: SSR-provided accent retained
-- **WHEN** the SSR HTML includes <html data-accent="#FF9500"> and ThemeProvider mounts without accentPreset and with persistAccent=false
-- **THEN** the client keeps "#FF9500" as the accent after hydration
-
-#### Scenario: SSR with persistence override
-- **WHEN** the SSR HTML includes data-accent="#FF9500" and localStorage has "#34C759" with persistAccent=true
-- **THEN** the client resolves to "#34C759" after hydration following persistence precedence
+#### Scenario: SSR-provided theme retained
+- **WHEN** SSR HTML includes <html data-theme="light"> and ThemeProvider mounts with defaultMode="system"
+- **THEN** the client keeps "light" after hydration unless the system preference requires an update and followSystem/system mode is active
 
 ### Requirement: API Type Safety and Extensibility
 The API SHALL provide typed preset names while allowing custom extensions.
@@ -106,4 +102,64 @@ The API SHALL provide typed preset names while allowing custom extensions.
 #### Scenario: Extend preset catalog
 - **WHEN** ThemeProvider is provided accentPresets={{ "brand-blue": "#0050FF" }} and setAccentPreset("brand-blue") is called
 - **THEN** the accent becomes "#0050FF" and accentPreset becomes "brand-blue"
+
+### Requirement: External Consumer Styles Inclusion
+The library SHALL provide a reliable, single-step way for external consumers (Astro/MDX, Next.js, Vite, etc.) to include all required CSS (tokens, recipes, utilities, globals) so components render fully styled in any environment.
+
+- The package export `"liquidify-react/styles"` MUST resolve to a single CSS file that contains: Panda reset/base/tokens/recipes/utilities and library-global overrides (new-design-system)
+- Subpath component imports (e.g., `liquidify-react/button`) MUST NOT require additional CSS imports beyond the root styles import
+- The root JS entry MUST NOT rely on CSS side-effects for styling in a way that varies with tree-shaking; styling MUST be obtainable via the `./styles` export alone
+
+#### Scenario: Astro MDX consumer
+- **WHEN** a consumer project imports `import "liquidify-react/styles"` once in its layout
+- **THEN** all components render fully styled within MDX pages and Astro islands
+
+#### Scenario: Subpath-only import
+- **WHEN** a consumer imports `import { Button } from "liquidify-react/button"` and also imports `"liquidify-react/styles"`
+- **THEN** Button is fully styled without needing JS entry side-effects
+
+### Requirement: CSS Bundle Integrity Check
+The build process SHALL validate the emitted CSS bundle contains essential token/recipe layers.
+
+- A CI/script MUST confirm that `libs/components/dist/liquidify.css` contains `@layer tokens` and `@layer recipes`
+- The script MUST fail the build if layers are missing
+
+#### Scenario: CI catches missing layers
+- **WHEN** Panda generation fails or styles are omitted
+- **THEN** CI fails with a message identifying missing layers
+
+### Requirement: System Theme Synchronization
+The theming system SHALL support a "system" mode that follows the operating system color scheme and updates live.
+
+- Theme mode MUST accept: "light" | "dark" | "system"
+- The effective theme MUST be derived as:
+  - If mode=="light" -> light
+  - If mode=="dark" -> dark
+  - If mode=="system" -> match prefers-color-scheme media query
+- A change in prefers-color-scheme MUST update the effective theme without page reload
+- SSR: On first paint, the client MUST respect an SSR-provided data-theme if present; otherwise compute from mode and media query
+
+#### Scenario: Follow system to dark
+- **WHEN** mode is set to "system" and the OS switches to dark
+- **THEN** data-theme becomes "dark" and root classes include "dark" and "theme-dark"
+
+#### Scenario: Force light mode
+- **WHEN** mode is set to "light"
+- **THEN** data-theme remains "light" regardless of OS preference
+
+#### Scenario: SSR provided theme retained
+- **WHEN** SSR sets <html data-theme="dark"> and provider mounts in system mode
+- **THEN** hydration keeps "dark" until the first evaluation, then aligns with system if not overridden by props
+
+### Requirement: Theme Mode Persistence
+Theme mode persistence SHALL be configurable and SSR-safe.
+
+- ThemeProvider MUST accept: defaultMode?: "light"|"dark"|"system" (default "light")
+- ThemeProvider MUST accept: persistTheme?: boolean (default true)
+- When persistence is enabled, the selected mode MUST be stored under localStorage key "ui-theme-mode"
+- The effective theme MAY be stored under key "ui-theme" for compatibility
+
+#### Scenario: Persistence disabled
+- **WHEN** persistTheme=false and mode is changed to dark
+- **THEN** a page reload reverts to defaultMode
 

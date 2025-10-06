@@ -109,6 +109,155 @@ export default defineConfig({
                 }
               },
             },
+
+            // WWDC 2025: Lensing Effects (Light Refraction & Optical Depth)
+            lensing: {
+              // Edge highlight for top-edge light refraction
+              edgeHighlight: {
+                value: "rgba(255, 255, 255, 0.35)",
+                _p3: { value: "color(display-p3 1 1 1 / 0.45)" }
+              },
+              // Refraction gradient for optical distortion
+              refraction: {
+                value: "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 30%, transparent 60%)",
+                _p3: { value: "linear-gradient(135deg, color(display-p3 1 1 1 / 0.32) 0%, color(display-p3 1 1 1 / 0.15) 30%, transparent 60%)" }
+              },
+              // Multi-layer optical depth gradient
+              opticalDepth: {
+                light: {
+                  value: "linear-gradient(125deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 35%, transparent 70%)",
+                  _p3: { value: "linear-gradient(125deg, color(display-p3 1 1 1 / 0.24) 0%, color(display-p3 1 1 1 / 0.12) 35%, transparent 70%)" }
+                },
+                medium: {
+                  value: "linear-gradient(125deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.14) 40%, transparent 75%)",
+                  _p3: { value: "linear-gradient(125deg, color(display-p3 1 1 1 / 0.36) 0%, color(display-p3 1 1 1 / 0.20) 40%, transparent 75%)" }
+                },
+                strong: {
+                  value: "linear-gradient(125deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.20) 45%, transparent 80%)",
+                  _p3: { value: "linear-gradient(125deg, color(display-p3 1 1 1 / 0.48) 0%, color(display-p3 1 1 1 / 0.28) 45%, transparent 80%)" }
+                }
+              },
+              // Hue-rotate for color refraction
+              hueShift: {
+                subtle: { value: "2deg" },
+                medium: { value: "5deg" },
+                strong: { value: "8deg" }
+              }
+            },
+
+            // WWDC 2025: Frostiness (Opacity Gradients & Texture)
+            frost: {
+              // Light frosted glass with non-uniform opacity
+              light: {
+                value: "radial-gradient(ellipse at 40% 30%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.04) 100%)",
+                _p3: { value: "radial-gradient(ellipse at 40% 30%, color(display-p3 1 1 1 / 0.08) 0%, color(display-p3 1 1 1 / 0.04) 50%, color(display-p3 1 1 1 / 0.05) 100%)" }
+              },
+              // Medium frosted glass
+              medium: {
+                value: "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.09) 100%)",
+                _p3: { value: "radial-gradient(ellipse at 35% 25%, color(display-p3 1 1 1 / 0.16) 0%, color(display-p3 1 1 1 / 0.11) 45%, color(display-p3 1 1 1 / 0.12) 100%)" }
+              },
+              // Heavy frosted glass for modal backdrops
+              heavy: {
+                value: "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.18) 100%)",
+                _p3: { value: "radial-gradient(ellipse at 30% 20%, color(display-p3 1 1 1 / 0.28) 0%, color(display-p3 1 1 1 / 0.20) 40%, color(display-p3 1 1 1 / 0.24) 100%)" }
+              },
+              // Texture overlay for authentic frosted appearance
+              texture: {
+                value: "repeating-linear-gradient(45deg, transparent 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px)",
+                _p3: { value: "repeating-linear-gradient(45deg, transparent 0px, color(display-p3 1 1 1 / 0.03) 1px, transparent 2px, transparent 4px)" }
+              }
+            },
+
+            // WWDC 2025: Motion-Responsive Glass (Device Tilt & Reflection)
+            motion: {
+              // Dynamic highlight that responds to device tilt (CSS custom property driven)
+              tiltHighlight: {
+                // Base static fallback for reduced-motion
+                static: {
+                  value: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                  _p3: { value: "linear-gradient(135deg, color(display-p3 1 1 1 / 0.28) 0%, transparent 50%)" }
+                },
+                // Dynamic version using custom properties (updated by JS)
+                dynamic: {
+                  value: "var(--glass-tilt-highlight, linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%))"
+                }
+              },
+              // Reflection angle gradients
+              reflectionAngle: {
+                top: {
+                  value: "linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+                  _p3: { value: "linear-gradient(180deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)" }
+                },
+                topRight: {
+                  value: "linear-gradient(225deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+                  _p3: { value: "linear-gradient(225deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)" }
+                },
+                right: {
+                  value: "linear-gradient(270deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+                  _p3: { value: "linear-gradient(270deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)" }
+                }
+              },
+              // Dynamic glow intensity
+              dynamicGlow: {
+                subtle: {
+                  value: "0 0 15px rgba(255,255,255,0.1)",
+                  _p3: { value: "0 0 15px color(display-p3 1 1 1 / 0.15)" }
+                },
+                medium: {
+                  value: "0 0 25px rgba(255,255,255,0.15)",
+                  _p3: { value: "0 0 25px color(display-p3 1 1 1 / 0.22)" }
+                },
+                strong: {
+                  value: "0 0 40px rgba(255,255,255,0.22)",
+                  _p3: { value: "0 0 40px color(display-p3 1 1 1 / 0.32)" }
+                }
+              }
+            },
+
+            // WWDC 2025: Adaptive Contrast (Context-Aware Vibrancy)
+            adaptive: {
+              // Context-aware tint that adjusts based on background
+              contextTint: {
+                // Light background: darken tint for contrast
+                onLight: {
+                  value: "color-mix(in oklch, rgba(0, 0, 0, 0.08) 40%, transparent)",
+                  _p3: { value: "color-mix(in oklch, color(display-p3 0 0 0 / 0.12) 45%, transparent)" }
+                },
+                // Dark background: lighten tint for contrast
+                onDark: {
+                  value: "color-mix(in oklch, rgba(255, 255, 255, 0.12) 50%, transparent)",
+                  _p3: { value: "color-mix(in oklch, color(display-p3 1 1 1 / 0.18) 55%, transparent)" }
+                },
+                // Medium background: balanced tint
+                onMedium: {
+                  value: "color-mix(in oklch, rgba(128, 128, 128, 0.10) 45%, transparent)",
+                  _p3: { value: "color-mix(in oklch, color(display-p3 0.5 0.5 0.5 / 0.15) 50%, transparent)" }
+                }
+              },
+              // Legibility boost for low-contrast scenarios
+              legibilityBoost: {
+                // 1.5x contrast enhancement
+                subtle: {
+                  value: "rgba(255, 255, 255, 0.05)",
+                  _p3: { value: "color(display-p3 1 1 1 / 0.08)" }
+                },
+                medium: {
+                  value: "rgba(255, 255, 255, 0.10)",
+                  _p3: { value: "color(display-p3 1 1 1 / 0.15)" }
+                },
+                strong: {
+                  value: "rgba(255, 255, 255, 0.18)",
+                  _p3: { value: "color(display-p3 1 1 1 / 0.26)" }
+                }
+              },
+              // Vibrancy levels that auto-adjust
+              vibrancyLevel: {
+                low: { value: "1.2" },
+                medium: { value: "1.5" },
+                high: { value: "1.8" }
+              }
+            },
           },
 
           // Component Variants (Apple-inspired, token-driven)
@@ -1576,6 +1725,34 @@ export default defineConfig({
             lg: { value: "20px" },
             xl: { value: "24px" },
           },
+        },
+
+        // WWDC 2025: GPU Performance Optimization Tokens
+        performance: {
+          // will-change presets for glass effects
+          willChange: {
+            glass: { value: "transform, opacity, backdrop-filter" },
+            transform: { value: "transform" },
+            opacity: { value: "opacity" },
+            backdrop: { value: "backdrop-filter" }
+          },
+          // GPU acceleration via transform3d
+          transform: {
+            gpuAccel: { value: "translate3d(0, 0, 0)" },
+            gpuAccelScale: { value: "translate3d(0, 0, 0) scale(1)" }
+          },
+          // Isolation for multi-layer effects
+          isolation: {
+            layer: { value: "isolate" },
+            auto: { value: "auto" }
+          },
+          // Contain for performance optimization
+          contain: {
+            layout: { value: "layout" },
+            paint: { value: "paint" },
+            strict: { value: "strict" },
+            content: { value: "content" }
+          }
         },
 
         // Spacing system

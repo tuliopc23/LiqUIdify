@@ -131,6 +131,210 @@ const tokens = {
     "value": "box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(255,255,255,0.3)",
     "variable": "var(--colors-glass-liquid-layers-depth)"
   },
+  "colors.glass.lensing.edgeHighlight._p3": {
+    "value": "color(display-p3 1 1 1 / 0.45)",
+    "variable": "var(--colors-glass-lensing-edge-highlight-_p3)"
+  },
+  "colors.glass.lensing.edgeHighlight": {
+    "value": "rgba(255, 255, 255, 0.35)",
+    "variable": "var(--colors-glass-lensing-edge-highlight)"
+  },
+  "colors.glass.lensing.refraction._p3": {
+    "value": "linear-gradient(135deg, color(display-p3 1 1 1 / 0.32) 0%, color(display-p3 1 1 1 / 0.15) 30%, transparent 60%)",
+    "variable": "var(--colors-glass-lensing-refraction-_p3)"
+  },
+  "colors.glass.lensing.refraction": {
+    "value": "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 30%, transparent 60%)",
+    "variable": "var(--colors-glass-lensing-refraction)"
+  },
+  "colors.glass.lensing.opticalDepth.light._p3": {
+    "value": "linear-gradient(125deg, color(display-p3 1 1 1 / 0.24) 0%, color(display-p3 1 1 1 / 0.12) 35%, transparent 70%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-light-_p3)"
+  },
+  "colors.glass.lensing.opticalDepth.light": {
+    "value": "linear-gradient(125deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 35%, transparent 70%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-light)"
+  },
+  "colors.glass.lensing.opticalDepth.medium._p3": {
+    "value": "linear-gradient(125deg, color(display-p3 1 1 1 / 0.36) 0%, color(display-p3 1 1 1 / 0.20) 40%, transparent 75%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-medium-_p3)"
+  },
+  "colors.glass.lensing.opticalDepth.medium": {
+    "value": "linear-gradient(125deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.14) 40%, transparent 75%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-medium)"
+  },
+  "colors.glass.lensing.opticalDepth.strong._p3": {
+    "value": "linear-gradient(125deg, color(display-p3 1 1 1 / 0.48) 0%, color(display-p3 1 1 1 / 0.28) 45%, transparent 80%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-strong-_p3)"
+  },
+  "colors.glass.lensing.opticalDepth.strong": {
+    "value": "linear-gradient(125deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.20) 45%, transparent 80%)",
+    "variable": "var(--colors-glass-lensing-optical-depth-strong)"
+  },
+  "colors.glass.lensing.hueShift.subtle": {
+    "value": "2deg",
+    "variable": "var(--colors-glass-lensing-hue-shift-subtle)"
+  },
+  "colors.glass.lensing.hueShift.medium": {
+    "value": "5deg",
+    "variable": "var(--colors-glass-lensing-hue-shift-medium)"
+  },
+  "colors.glass.lensing.hueShift.strong": {
+    "value": "8deg",
+    "variable": "var(--colors-glass-lensing-hue-shift-strong)"
+  },
+  "colors.glass.frost.light._p3": {
+    "value": "radial-gradient(ellipse at 40% 30%, color(display-p3 1 1 1 / 0.08) 0%, color(display-p3 1 1 1 / 0.04) 50%, color(display-p3 1 1 1 / 0.05) 100%)",
+    "variable": "var(--colors-glass-frost-light-_p3)"
+  },
+  "colors.glass.frost.light": {
+    "value": "radial-gradient(ellipse at 40% 30%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.04) 100%)",
+    "variable": "var(--colors-glass-frost-light)"
+  },
+  "colors.glass.frost.medium._p3": {
+    "value": "radial-gradient(ellipse at 35% 25%, color(display-p3 1 1 1 / 0.16) 0%, color(display-p3 1 1 1 / 0.11) 45%, color(display-p3 1 1 1 / 0.12) 100%)",
+    "variable": "var(--colors-glass-frost-medium-_p3)"
+  },
+  "colors.glass.frost.medium": {
+    "value": "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.09) 100%)",
+    "variable": "var(--colors-glass-frost-medium)"
+  },
+  "colors.glass.frost.heavy._p3": {
+    "value": "radial-gradient(ellipse at 30% 20%, color(display-p3 1 1 1 / 0.28) 0%, color(display-p3 1 1 1 / 0.20) 40%, color(display-p3 1 1 1 / 0.24) 100%)",
+    "variable": "var(--colors-glass-frost-heavy-_p3)"
+  },
+  "colors.glass.frost.heavy": {
+    "value": "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.18) 100%)",
+    "variable": "var(--colors-glass-frost-heavy)"
+  },
+  "colors.glass.frost.texture._p3": {
+    "value": "repeating-linear-gradient(45deg, transparent 0px, color(display-p3 1 1 1 / 0.03) 1px, transparent 2px, transparent 4px)",
+    "variable": "var(--colors-glass-frost-texture-_p3)"
+  },
+  "colors.glass.frost.texture": {
+    "value": "repeating-linear-gradient(45deg, transparent 0px, rgba(255,255,255,0.02) 1px, transparent 2px, transparent 4px)",
+    "variable": "var(--colors-glass-frost-texture)"
+  },
+  "colors.glass.motion.tiltHighlight.static._p3": {
+    "value": "linear-gradient(135deg, color(display-p3 1 1 1 / 0.28) 0%, transparent 50%)",
+    "variable": "var(--colors-glass-motion-tilt-highlight-static-_p3)"
+  },
+  "colors.glass.motion.tiltHighlight.static": {
+    "value": "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%)",
+    "variable": "var(--colors-glass-motion-tilt-highlight-static)"
+  },
+  "colors.glass.motion.tiltHighlight.dynamic": {
+    "value": "var(--glass-tilt-highlight, linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%))",
+    "variable": "var(--colors-glass-motion-tilt-highlight-dynamic)"
+  },
+  "colors.glass.motion.reflectionAngle.top._p3": {
+    "value": "linear-gradient(180deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-top-_p3)"
+  },
+  "colors.glass.motion.reflectionAngle.top": {
+    "value": "linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-top)"
+  },
+  "colors.glass.motion.reflectionAngle.topRight._p3": {
+    "value": "linear-gradient(225deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-top-right-_p3)"
+  },
+  "colors.glass.motion.reflectionAngle.topRight": {
+    "value": "linear-gradient(225deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-top-right)"
+  },
+  "colors.glass.motion.reflectionAngle.right._p3": {
+    "value": "linear-gradient(270deg, color(display-p3 1 1 1 / 0.4) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-right-_p3)"
+  },
+  "colors.glass.motion.reflectionAngle.right": {
+    "value": "linear-gradient(270deg, rgba(255,255,255,0.3) 0%, transparent 30%)",
+    "variable": "var(--colors-glass-motion-reflection-angle-right)"
+  },
+  "colors.glass.motion.dynamicGlow.subtle._p3": {
+    "value": "0 0 15px color(display-p3 1 1 1 / 0.15)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-subtle-_p3)"
+  },
+  "colors.glass.motion.dynamicGlow.subtle": {
+    "value": "0 0 15px rgba(255,255,255,0.1)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-subtle)"
+  },
+  "colors.glass.motion.dynamicGlow.medium._p3": {
+    "value": "0 0 25px color(display-p3 1 1 1 / 0.22)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-medium-_p3)"
+  },
+  "colors.glass.motion.dynamicGlow.medium": {
+    "value": "0 0 25px rgba(255,255,255,0.15)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-medium)"
+  },
+  "colors.glass.motion.dynamicGlow.strong._p3": {
+    "value": "0 0 40px color(display-p3 1 1 1 / 0.32)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-strong-_p3)"
+  },
+  "colors.glass.motion.dynamicGlow.strong": {
+    "value": "0 0 40px rgba(255,255,255,0.22)",
+    "variable": "var(--colors-glass-motion-dynamic-glow-strong)"
+  },
+  "colors.glass.adaptive.contextTint.onLight._p3": {
+    "value": "color-mix(in oklch, color(display-p3 0 0 0 / 0.12) 45%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-light-_p3)"
+  },
+  "colors.glass.adaptive.contextTint.onLight": {
+    "value": "color-mix(in oklch, rgba(0, 0, 0, 0.08) 40%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-light)"
+  },
+  "colors.glass.adaptive.contextTint.onDark._p3": {
+    "value": "color-mix(in oklch, color(display-p3 1 1 1 / 0.18) 55%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-dark-_p3)"
+  },
+  "colors.glass.adaptive.contextTint.onDark": {
+    "value": "color-mix(in oklch, rgba(255, 255, 255, 0.12) 50%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-dark)"
+  },
+  "colors.glass.adaptive.contextTint.onMedium._p3": {
+    "value": "color-mix(in oklch, color(display-p3 0.5 0.5 0.5 / 0.15) 50%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-medium-_p3)"
+  },
+  "colors.glass.adaptive.contextTint.onMedium": {
+    "value": "color-mix(in oklch, rgba(128, 128, 128, 0.10) 45%, transparent)",
+    "variable": "var(--colors-glass-adaptive-context-tint-on-medium)"
+  },
+  "colors.glass.adaptive.legibilityBoost.subtle._p3": {
+    "value": "color(display-p3 1 1 1 / 0.08)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-subtle-_p3)"
+  },
+  "colors.glass.adaptive.legibilityBoost.subtle": {
+    "value": "rgba(255, 255, 255, 0.05)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-subtle)"
+  },
+  "colors.glass.adaptive.legibilityBoost.medium._p3": {
+    "value": "color(display-p3 1 1 1 / 0.15)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-medium-_p3)"
+  },
+  "colors.glass.adaptive.legibilityBoost.medium": {
+    "value": "rgba(255, 255, 255, 0.10)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-medium)"
+  },
+  "colors.glass.adaptive.legibilityBoost.strong._p3": {
+    "value": "color(display-p3 1 1 1 / 0.26)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-strong-_p3)"
+  },
+  "colors.glass.adaptive.legibilityBoost.strong": {
+    "value": "rgba(255, 255, 255, 0.18)",
+    "variable": "var(--colors-glass-adaptive-legibility-boost-strong)"
+  },
+  "colors.glass.adaptive.vibrancyLevel.low": {
+    "value": "1.2",
+    "variable": "var(--colors-glass-adaptive-vibrancy-level-low)"
+  },
+  "colors.glass.adaptive.vibrancyLevel.medium": {
+    "value": "1.5",
+    "variable": "var(--colors-glass-adaptive-vibrancy-level-medium)"
+  },
+  "colors.glass.adaptive.vibrancyLevel.high": {
+    "value": "1.8",
+    "variable": "var(--colors-glass-adaptive-vibrancy-level-high)"
+  },
   "colors.button.primary.bg": {
     "value": "linear-gradient(135deg, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 0%, color-mix(in oklch, var(--colors-accent-dynamic) 30%, transparent) 100%)",
     "variable": "var(--colors-button-primary-bg)"
@@ -2191,6 +2395,54 @@ const tokens = {
     "value": "24px",
     "variable": "var(--sizes-glass-xl)"
   },
+  "performance.willChange.glass": {
+    "value": "transform, opacity, backdrop-filter",
+    "variable": "var(--performance-will-change-glass)"
+  },
+  "performance.willChange.transform": {
+    "value": "transform",
+    "variable": "var(--performance-will-change-transform)"
+  },
+  "performance.willChange.opacity": {
+    "value": "opacity",
+    "variable": "var(--performance-will-change-opacity)"
+  },
+  "performance.willChange.backdrop": {
+    "value": "backdrop-filter",
+    "variable": "var(--performance-will-change-backdrop)"
+  },
+  "performance.transform.gpuAccel": {
+    "value": "translate3d(0, 0, 0)",
+    "variable": "var(--performance-transform-gpu-accel)"
+  },
+  "performance.transform.gpuAccelScale": {
+    "value": "translate3d(0, 0, 0) scale(1)",
+    "variable": "var(--performance-transform-gpu-accel-scale)"
+  },
+  "performance.isolation.layer": {
+    "value": "isolate",
+    "variable": "var(--performance-isolation-layer)"
+  },
+  "performance.isolation.auto": {
+    "value": "auto",
+    "variable": "var(--performance-isolation-auto)"
+  },
+  "performance.contain.layout": {
+    "value": "layout",
+    "variable": "var(--performance-contain-layout)"
+  },
+  "performance.contain.paint": {
+    "value": "paint",
+    "variable": "var(--performance-contain-paint)"
+  },
+  "performance.contain.strict": {
+    "value": "strict",
+    "variable": "var(--performance-contain-strict)"
+  },
+  "performance.contain.content": {
+    "value": "content",
+    "variable": "var(--performance-contain-content)"
+  },
   "spacing.glass.xs": {
     "value": "4px",
     "variable": "var(--spacing-glass-xs)"
@@ -2746,6 +2998,498 @@ const tokens = {
   "colors.colorPalette.layers.depth": {
     "value": "var(--colors-color-palette-layers-depth)",
     "variable": "var(--colors-color-palette-layers-depth)"
+  },
+  "colors.colorPalette.lensing.edgeHighlight._p3": {
+    "value": "var(--colors-color-palette-lensing-edge-highlight-_p3)",
+    "variable": "var(--colors-color-palette-lensing-edge-highlight-_p3)"
+  },
+  "colors.colorPalette.edgeHighlight._p3": {
+    "value": "var(--colors-color-palette-edge-highlight-_p3)",
+    "variable": "var(--colors-color-palette-edge-highlight-_p3)"
+  },
+  "colors.colorPalette.lensing.edgeHighlight": {
+    "value": "var(--colors-color-palette-lensing-edge-highlight)",
+    "variable": "var(--colors-color-palette-lensing-edge-highlight)"
+  },
+  "colors.colorPalette.edgeHighlight": {
+    "value": "var(--colors-color-palette-edge-highlight)",
+    "variable": "var(--colors-color-palette-edge-highlight)"
+  },
+  "colors.colorPalette.lensing.refraction._p3": {
+    "value": "var(--colors-color-palette-lensing-refraction-_p3)",
+    "variable": "var(--colors-color-palette-lensing-refraction-_p3)"
+  },
+  "colors.colorPalette.refraction._p3": {
+    "value": "var(--colors-color-palette-refraction-_p3)",
+    "variable": "var(--colors-color-palette-refraction-_p3)"
+  },
+  "colors.colorPalette.lensing.refraction": {
+    "value": "var(--colors-color-palette-lensing-refraction)",
+    "variable": "var(--colors-color-palette-lensing-refraction)"
+  },
+  "colors.colorPalette.refraction": {
+    "value": "var(--colors-color-palette-refraction)",
+    "variable": "var(--colors-color-palette-refraction)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.light._p3": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-light-_p3)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-light-_p3)"
+  },
+  "colors.colorPalette.opticalDepth.light._p3": {
+    "value": "var(--colors-color-palette-optical-depth-light-_p3)",
+    "variable": "var(--colors-color-palette-optical-depth-light-_p3)"
+  },
+  "colors.colorPalette.light._p3": {
+    "value": "var(--colors-color-palette-light-_p3)",
+    "variable": "var(--colors-color-palette-light-_p3)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.light": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-light)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-light)"
+  },
+  "colors.colorPalette.opticalDepth.light": {
+    "value": "var(--colors-color-palette-optical-depth-light)",
+    "variable": "var(--colors-color-palette-optical-depth-light)"
+  },
+  "colors.colorPalette.light": {
+    "value": "var(--colors-color-palette-light)",
+    "variable": "var(--colors-color-palette-light)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.medium._p3": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-medium-_p3)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-medium-_p3)"
+  },
+  "colors.colorPalette.opticalDepth.medium._p3": {
+    "value": "var(--colors-color-palette-optical-depth-medium-_p3)",
+    "variable": "var(--colors-color-palette-optical-depth-medium-_p3)"
+  },
+  "colors.colorPalette.medium._p3": {
+    "value": "var(--colors-color-palette-medium-_p3)",
+    "variable": "var(--colors-color-palette-medium-_p3)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.medium": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-medium)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-medium)"
+  },
+  "colors.colorPalette.opticalDepth.medium": {
+    "value": "var(--colors-color-palette-optical-depth-medium)",
+    "variable": "var(--colors-color-palette-optical-depth-medium)"
+  },
+  "colors.colorPalette.medium": {
+    "value": "var(--colors-color-palette-medium)",
+    "variable": "var(--colors-color-palette-medium)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.strong._p3": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-strong-_p3)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-strong-_p3)"
+  },
+  "colors.colorPalette.opticalDepth.strong._p3": {
+    "value": "var(--colors-color-palette-optical-depth-strong-_p3)",
+    "variable": "var(--colors-color-palette-optical-depth-strong-_p3)"
+  },
+  "colors.colorPalette.strong._p3": {
+    "value": "var(--colors-color-palette-strong-_p3)",
+    "variable": "var(--colors-color-palette-strong-_p3)"
+  },
+  "colors.colorPalette.lensing.opticalDepth.strong": {
+    "value": "var(--colors-color-palette-lensing-optical-depth-strong)",
+    "variable": "var(--colors-color-palette-lensing-optical-depth-strong)"
+  },
+  "colors.colorPalette.opticalDepth.strong": {
+    "value": "var(--colors-color-palette-optical-depth-strong)",
+    "variable": "var(--colors-color-palette-optical-depth-strong)"
+  },
+  "colors.colorPalette.strong": {
+    "value": "var(--colors-color-palette-strong)",
+    "variable": "var(--colors-color-palette-strong)"
+  },
+  "colors.colorPalette.lensing.hueShift.subtle": {
+    "value": "var(--colors-color-palette-lensing-hue-shift-subtle)",
+    "variable": "var(--colors-color-palette-lensing-hue-shift-subtle)"
+  },
+  "colors.colorPalette.hueShift.subtle": {
+    "value": "var(--colors-color-palette-hue-shift-subtle)",
+    "variable": "var(--colors-color-palette-hue-shift-subtle)"
+  },
+  "colors.colorPalette.subtle": {
+    "value": "var(--colors-color-palette-subtle)",
+    "variable": "var(--colors-color-palette-subtle)"
+  },
+  "colors.colorPalette.lensing.hueShift.medium": {
+    "value": "var(--colors-color-palette-lensing-hue-shift-medium)",
+    "variable": "var(--colors-color-palette-lensing-hue-shift-medium)"
+  },
+  "colors.colorPalette.hueShift.medium": {
+    "value": "var(--colors-color-palette-hue-shift-medium)",
+    "variable": "var(--colors-color-palette-hue-shift-medium)"
+  },
+  "colors.colorPalette.lensing.hueShift.strong": {
+    "value": "var(--colors-color-palette-lensing-hue-shift-strong)",
+    "variable": "var(--colors-color-palette-lensing-hue-shift-strong)"
+  },
+  "colors.colorPalette.hueShift.strong": {
+    "value": "var(--colors-color-palette-hue-shift-strong)",
+    "variable": "var(--colors-color-palette-hue-shift-strong)"
+  },
+  "colors.colorPalette.frost.light._p3": {
+    "value": "var(--colors-color-palette-frost-light-_p3)",
+    "variable": "var(--colors-color-palette-frost-light-_p3)"
+  },
+  "colors.colorPalette.frost.light": {
+    "value": "var(--colors-color-palette-frost-light)",
+    "variable": "var(--colors-color-palette-frost-light)"
+  },
+  "colors.colorPalette.frost.medium._p3": {
+    "value": "var(--colors-color-palette-frost-medium-_p3)",
+    "variable": "var(--colors-color-palette-frost-medium-_p3)"
+  },
+  "colors.colorPalette.frost.medium": {
+    "value": "var(--colors-color-palette-frost-medium)",
+    "variable": "var(--colors-color-palette-frost-medium)"
+  },
+  "colors.colorPalette.frost.heavy._p3": {
+    "value": "var(--colors-color-palette-frost-heavy-_p3)",
+    "variable": "var(--colors-color-palette-frost-heavy-_p3)"
+  },
+  "colors.colorPalette.heavy._p3": {
+    "value": "var(--colors-color-palette-heavy-_p3)",
+    "variable": "var(--colors-color-palette-heavy-_p3)"
+  },
+  "colors.colorPalette.frost.heavy": {
+    "value": "var(--colors-color-palette-frost-heavy)",
+    "variable": "var(--colors-color-palette-frost-heavy)"
+  },
+  "colors.colorPalette.heavy": {
+    "value": "var(--colors-color-palette-heavy)",
+    "variable": "var(--colors-color-palette-heavy)"
+  },
+  "colors.colorPalette.frost.texture._p3": {
+    "value": "var(--colors-color-palette-frost-texture-_p3)",
+    "variable": "var(--colors-color-palette-frost-texture-_p3)"
+  },
+  "colors.colorPalette.texture._p3": {
+    "value": "var(--colors-color-palette-texture-_p3)",
+    "variable": "var(--colors-color-palette-texture-_p3)"
+  },
+  "colors.colorPalette.frost.texture": {
+    "value": "var(--colors-color-palette-frost-texture)",
+    "variable": "var(--colors-color-palette-frost-texture)"
+  },
+  "colors.colorPalette.texture": {
+    "value": "var(--colors-color-palette-texture)",
+    "variable": "var(--colors-color-palette-texture)"
+  },
+  "colors.colorPalette.motion.tiltHighlight.static._p3": {
+    "value": "var(--colors-color-palette-motion-tilt-highlight-static-_p3)",
+    "variable": "var(--colors-color-palette-motion-tilt-highlight-static-_p3)"
+  },
+  "colors.colorPalette.tiltHighlight.static._p3": {
+    "value": "var(--colors-color-palette-tilt-highlight-static-_p3)",
+    "variable": "var(--colors-color-palette-tilt-highlight-static-_p3)"
+  },
+  "colors.colorPalette.static._p3": {
+    "value": "var(--colors-color-palette-static-_p3)",
+    "variable": "var(--colors-color-palette-static-_p3)"
+  },
+  "colors.colorPalette.motion.tiltHighlight.static": {
+    "value": "var(--colors-color-palette-motion-tilt-highlight-static)",
+    "variable": "var(--colors-color-palette-motion-tilt-highlight-static)"
+  },
+  "colors.colorPalette.tiltHighlight.static": {
+    "value": "var(--colors-color-palette-tilt-highlight-static)",
+    "variable": "var(--colors-color-palette-tilt-highlight-static)"
+  },
+  "colors.colorPalette.static": {
+    "value": "var(--colors-color-palette-static)",
+    "variable": "var(--colors-color-palette-static)"
+  },
+  "colors.colorPalette.motion.tiltHighlight.dynamic": {
+    "value": "var(--colors-color-palette-motion-tilt-highlight-dynamic)",
+    "variable": "var(--colors-color-palette-motion-tilt-highlight-dynamic)"
+  },
+  "colors.colorPalette.tiltHighlight.dynamic": {
+    "value": "var(--colors-color-palette-tilt-highlight-dynamic)",
+    "variable": "var(--colors-color-palette-tilt-highlight-dynamic)"
+  },
+  "colors.colorPalette.dynamic": {
+    "value": "var(--colors-color-palette-dynamic)",
+    "variable": "var(--colors-color-palette-dynamic)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.top._p3": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-top-_p3)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-top-_p3)"
+  },
+  "colors.colorPalette.reflectionAngle.top._p3": {
+    "value": "var(--colors-color-palette-reflection-angle-top-_p3)",
+    "variable": "var(--colors-color-palette-reflection-angle-top-_p3)"
+  },
+  "colors.colorPalette.top._p3": {
+    "value": "var(--colors-color-palette-top-_p3)",
+    "variable": "var(--colors-color-palette-top-_p3)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.top": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-top)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-top)"
+  },
+  "colors.colorPalette.reflectionAngle.top": {
+    "value": "var(--colors-color-palette-reflection-angle-top)",
+    "variable": "var(--colors-color-palette-reflection-angle-top)"
+  },
+  "colors.colorPalette.top": {
+    "value": "var(--colors-color-palette-top)",
+    "variable": "var(--colors-color-palette-top)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.topRight._p3": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-top-right-_p3)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-top-right-_p3)"
+  },
+  "colors.colorPalette.reflectionAngle.topRight._p3": {
+    "value": "var(--colors-color-palette-reflection-angle-top-right-_p3)",
+    "variable": "var(--colors-color-palette-reflection-angle-top-right-_p3)"
+  },
+  "colors.colorPalette.topRight._p3": {
+    "value": "var(--colors-color-palette-top-right-_p3)",
+    "variable": "var(--colors-color-palette-top-right-_p3)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.topRight": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-top-right)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-top-right)"
+  },
+  "colors.colorPalette.reflectionAngle.topRight": {
+    "value": "var(--colors-color-palette-reflection-angle-top-right)",
+    "variable": "var(--colors-color-palette-reflection-angle-top-right)"
+  },
+  "colors.colorPalette.topRight": {
+    "value": "var(--colors-color-palette-top-right)",
+    "variable": "var(--colors-color-palette-top-right)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.right._p3": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-right-_p3)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-right-_p3)"
+  },
+  "colors.colorPalette.reflectionAngle.right._p3": {
+    "value": "var(--colors-color-palette-reflection-angle-right-_p3)",
+    "variable": "var(--colors-color-palette-reflection-angle-right-_p3)"
+  },
+  "colors.colorPalette.right._p3": {
+    "value": "var(--colors-color-palette-right-_p3)",
+    "variable": "var(--colors-color-palette-right-_p3)"
+  },
+  "colors.colorPalette.motion.reflectionAngle.right": {
+    "value": "var(--colors-color-palette-motion-reflection-angle-right)",
+    "variable": "var(--colors-color-palette-motion-reflection-angle-right)"
+  },
+  "colors.colorPalette.reflectionAngle.right": {
+    "value": "var(--colors-color-palette-reflection-angle-right)",
+    "variable": "var(--colors-color-palette-reflection-angle-right)"
+  },
+  "colors.colorPalette.right": {
+    "value": "var(--colors-color-palette-right)",
+    "variable": "var(--colors-color-palette-right)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.subtle._p3": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-subtle-_p3)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-subtle-_p3)"
+  },
+  "colors.colorPalette.dynamicGlow.subtle._p3": {
+    "value": "var(--colors-color-palette-dynamic-glow-subtle-_p3)",
+    "variable": "var(--colors-color-palette-dynamic-glow-subtle-_p3)"
+  },
+  "colors.colorPalette.subtle._p3": {
+    "value": "var(--colors-color-palette-subtle-_p3)",
+    "variable": "var(--colors-color-palette-subtle-_p3)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.subtle": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-subtle)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-subtle)"
+  },
+  "colors.colorPalette.dynamicGlow.subtle": {
+    "value": "var(--colors-color-palette-dynamic-glow-subtle)",
+    "variable": "var(--colors-color-palette-dynamic-glow-subtle)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.medium._p3": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-medium-_p3)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-medium-_p3)"
+  },
+  "colors.colorPalette.dynamicGlow.medium._p3": {
+    "value": "var(--colors-color-palette-dynamic-glow-medium-_p3)",
+    "variable": "var(--colors-color-palette-dynamic-glow-medium-_p3)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.medium": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-medium)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-medium)"
+  },
+  "colors.colorPalette.dynamicGlow.medium": {
+    "value": "var(--colors-color-palette-dynamic-glow-medium)",
+    "variable": "var(--colors-color-palette-dynamic-glow-medium)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.strong._p3": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-strong-_p3)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-strong-_p3)"
+  },
+  "colors.colorPalette.dynamicGlow.strong._p3": {
+    "value": "var(--colors-color-palette-dynamic-glow-strong-_p3)",
+    "variable": "var(--colors-color-palette-dynamic-glow-strong-_p3)"
+  },
+  "colors.colorPalette.motion.dynamicGlow.strong": {
+    "value": "var(--colors-color-palette-motion-dynamic-glow-strong)",
+    "variable": "var(--colors-color-palette-motion-dynamic-glow-strong)"
+  },
+  "colors.colorPalette.dynamicGlow.strong": {
+    "value": "var(--colors-color-palette-dynamic-glow-strong)",
+    "variable": "var(--colors-color-palette-dynamic-glow-strong)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onLight._p3": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-light-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-light-_p3)"
+  },
+  "colors.colorPalette.contextTint.onLight._p3": {
+    "value": "var(--colors-color-palette-context-tint-on-light-_p3)",
+    "variable": "var(--colors-color-palette-context-tint-on-light-_p3)"
+  },
+  "colors.colorPalette.onLight._p3": {
+    "value": "var(--colors-color-palette-on-light-_p3)",
+    "variable": "var(--colors-color-palette-on-light-_p3)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onLight": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-light)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-light)"
+  },
+  "colors.colorPalette.contextTint.onLight": {
+    "value": "var(--colors-color-palette-context-tint-on-light)",
+    "variable": "var(--colors-color-palette-context-tint-on-light)"
+  },
+  "colors.colorPalette.onLight": {
+    "value": "var(--colors-color-palette-on-light)",
+    "variable": "var(--colors-color-palette-on-light)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onDark._p3": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-dark-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-dark-_p3)"
+  },
+  "colors.colorPalette.contextTint.onDark._p3": {
+    "value": "var(--colors-color-palette-context-tint-on-dark-_p3)",
+    "variable": "var(--colors-color-palette-context-tint-on-dark-_p3)"
+  },
+  "colors.colorPalette.onDark._p3": {
+    "value": "var(--colors-color-palette-on-dark-_p3)",
+    "variable": "var(--colors-color-palette-on-dark-_p3)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onDark": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-dark)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-dark)"
+  },
+  "colors.colorPalette.contextTint.onDark": {
+    "value": "var(--colors-color-palette-context-tint-on-dark)",
+    "variable": "var(--colors-color-palette-context-tint-on-dark)"
+  },
+  "colors.colorPalette.onDark": {
+    "value": "var(--colors-color-palette-on-dark)",
+    "variable": "var(--colors-color-palette-on-dark)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onMedium._p3": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-medium-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-medium-_p3)"
+  },
+  "colors.colorPalette.contextTint.onMedium._p3": {
+    "value": "var(--colors-color-palette-context-tint-on-medium-_p3)",
+    "variable": "var(--colors-color-palette-context-tint-on-medium-_p3)"
+  },
+  "colors.colorPalette.onMedium._p3": {
+    "value": "var(--colors-color-palette-on-medium-_p3)",
+    "variable": "var(--colors-color-palette-on-medium-_p3)"
+  },
+  "colors.colorPalette.adaptive.contextTint.onMedium": {
+    "value": "var(--colors-color-palette-adaptive-context-tint-on-medium)",
+    "variable": "var(--colors-color-palette-adaptive-context-tint-on-medium)"
+  },
+  "colors.colorPalette.contextTint.onMedium": {
+    "value": "var(--colors-color-palette-context-tint-on-medium)",
+    "variable": "var(--colors-color-palette-context-tint-on-medium)"
+  },
+  "colors.colorPalette.onMedium": {
+    "value": "var(--colors-color-palette-on-medium)",
+    "variable": "var(--colors-color-palette-on-medium)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.subtle._p3": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-subtle-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-subtle-_p3)"
+  },
+  "colors.colorPalette.legibilityBoost.subtle._p3": {
+    "value": "var(--colors-color-palette-legibility-boost-subtle-_p3)",
+    "variable": "var(--colors-color-palette-legibility-boost-subtle-_p3)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.subtle": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-subtle)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-subtle)"
+  },
+  "colors.colorPalette.legibilityBoost.subtle": {
+    "value": "var(--colors-color-palette-legibility-boost-subtle)",
+    "variable": "var(--colors-color-palette-legibility-boost-subtle)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.medium._p3": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-medium-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-medium-_p3)"
+  },
+  "colors.colorPalette.legibilityBoost.medium._p3": {
+    "value": "var(--colors-color-palette-legibility-boost-medium-_p3)",
+    "variable": "var(--colors-color-palette-legibility-boost-medium-_p3)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.medium": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-medium)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-medium)"
+  },
+  "colors.colorPalette.legibilityBoost.medium": {
+    "value": "var(--colors-color-palette-legibility-boost-medium)",
+    "variable": "var(--colors-color-palette-legibility-boost-medium)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.strong._p3": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-strong-_p3)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-strong-_p3)"
+  },
+  "colors.colorPalette.legibilityBoost.strong._p3": {
+    "value": "var(--colors-color-palette-legibility-boost-strong-_p3)",
+    "variable": "var(--colors-color-palette-legibility-boost-strong-_p3)"
+  },
+  "colors.colorPalette.adaptive.legibilityBoost.strong": {
+    "value": "var(--colors-color-palette-adaptive-legibility-boost-strong)",
+    "variable": "var(--colors-color-palette-adaptive-legibility-boost-strong)"
+  },
+  "colors.colorPalette.legibilityBoost.strong": {
+    "value": "var(--colors-color-palette-legibility-boost-strong)",
+    "variable": "var(--colors-color-palette-legibility-boost-strong)"
+  },
+  "colors.colorPalette.adaptive.vibrancyLevel.low": {
+    "value": "var(--colors-color-palette-adaptive-vibrancy-level-low)",
+    "variable": "var(--colors-color-palette-adaptive-vibrancy-level-low)"
+  },
+  "colors.colorPalette.vibrancyLevel.low": {
+    "value": "var(--colors-color-palette-vibrancy-level-low)",
+    "variable": "var(--colors-color-palette-vibrancy-level-low)"
+  },
+  "colors.colorPalette.low": {
+    "value": "var(--colors-color-palette-low)",
+    "variable": "var(--colors-color-palette-low)"
+  },
+  "colors.colorPalette.adaptive.vibrancyLevel.medium": {
+    "value": "var(--colors-color-palette-adaptive-vibrancy-level-medium)",
+    "variable": "var(--colors-color-palette-adaptive-vibrancy-level-medium)"
+  },
+  "colors.colorPalette.vibrancyLevel.medium": {
+    "value": "var(--colors-color-palette-vibrancy-level-medium)",
+    "variable": "var(--colors-color-palette-vibrancy-level-medium)"
+  },
+  "colors.colorPalette.adaptive.vibrancyLevel.high": {
+    "value": "var(--colors-color-palette-adaptive-vibrancy-level-high)",
+    "variable": "var(--colors-color-palette-adaptive-vibrancy-level-high)"
+  },
+  "colors.colorPalette.vibrancyLevel.high": {
+    "value": "var(--colors-color-palette-vibrancy-level-high)",
+    "variable": "var(--colors-color-palette-vibrancy-level-high)"
+  },
+  "colors.colorPalette.high": {
+    "value": "var(--colors-color-palette-high)",
+    "variable": "var(--colors-color-palette-high)"
   },
   "colors.colorPalette.primary.bg": {
     "value": "var(--colors-color-palette-primary-bg)",
@@ -4383,10 +5127,6 @@ const tokens = {
     "value": "var(--colors-color-palette-plain-destructive-loading-border)",
     "variable": "var(--colors-color-palette-plain-destructive-loading-border)"
   },
-  "colors.colorPalette.dynamic": {
-    "value": "var(--colors-color-palette-dynamic)",
-    "variable": "var(--colors-color-palette-dynamic)"
-  },
   "colors.colorPalette.primary._p3": {
     "value": "var(--colors-color-palette-primary-_p3)",
     "variable": "var(--colors-color-palette-primary-_p3)"
@@ -4570,10 +5310,6 @@ const tokens = {
   "colors.colorPalette.surface": {
     "value": "var(--colors-color-palette-surface)",
     "variable": "var(--colors-color-palette-surface)"
-  },
-  "colors.colorPalette.subtle": {
-    "value": "var(--colors-color-palette-subtle)",
-    "variable": "var(--colors-color-palette-subtle)"
   },
   "colors.colorPalette.default": {
     "value": "var(--colors-color-palette-default)",
