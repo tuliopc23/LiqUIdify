@@ -6,7 +6,8 @@
 		"declarationMap": true,
 		"emitDeclarationOnly": true,
 		"composite": false,
-		"stripInternal": true
+		"stripInternal": true,
+		"types": ["node"]
 	},
 	"include": ["src/**/*"],
 	"exclude": [

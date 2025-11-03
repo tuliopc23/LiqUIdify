@@ -160,6 +160,7 @@
 		"test:coverage": "bun test --coverage",
 		"type-check": "bunx tsc --noEmit --project tsconfig.json && bun run --filter @liquidify/components type-check",
 		"type-check:watch": "bunx tsc --noEmit --project tsconfig.json --watch",
+		"prepack": "bun run --filter @liquidify/components type-check && bun run build:lib && bun run check:css-layers",
 		"prepublishOnly": "bun run --filter @liquidify/components type-check && bun run build:lib && bun run check:css-layers",
 		"scan:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' || true",
 		"ci:guard:glass": "rg -n --hidden --no-ignore -S -g '!**/dist/**' -g '!**/node_modules/**' -g '!**/Liquid-glass-imp/**' -e 'liquid-glass|LiquidGlass|UnifiedGlassProvider|LiquidGlassDefs|glassmorphism|\\bglass-|\\bliquid-|backdrop-filter|--glass-' && echo 'ERROR: Legacy liquid-glass artifacts found' && exit 1 || echo 'OK: No legacy artifacts found'"
