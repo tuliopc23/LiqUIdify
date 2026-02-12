@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import type React from "react";
 import { forwardRef, useCallback, useMemo } from "react";
-import { cx } from "../../../../../styled-system/css";
-import { button as buttonRecipe } from "../../../../../styled-system/recipes";
+import { cx } from "styled-system/css";
+import { button as buttonRecipe } from "styled-system/recipes";
 import { focusRing } from "../../core/utils/classname";
 import { useGlassMicro } from "../../hooks/useGlassMicro";
 import { useMagneticHover } from "../../hooks/useMagneticHover";
@@ -147,6 +147,7 @@ function isNativeButton(el: React.ElementType | undefined): el is "button" {
 	return !el || el === "button";
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: polymorphic Button typing uses any internally but exposes a strongly-typed public signature below.
 export const Button = forwardRef<any, ButtonProps<any>>(function Button<
 	C extends React.ElementType = "button",
 >(props: ButtonProps<C>, ref: React.Ref<any>) {
@@ -170,7 +171,7 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
 		...rest
 	} = props;
 
-	const Comp: any = as || "button";
+	const Comp: AsElement = as || "button";
 
 	// Loading/disabled semantics (moved up)
 	const isDisabled = !!disabledProp || !!loading;
@@ -248,7 +249,7 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
 	}
 
 	// Loading/disabled semantics (already defined above)
-	const commonA11y: Record<string, any> = {
+	const commonA11y: Record<string, string | boolean | undefined> = {
 		"aria-busy": loading || undefined,
 		"aria-disabled": !isNativeButton(Comp) && isDisabled ? true : undefined,
 		"data-loading": loading ? "" : undefined,
@@ -281,8 +282,13 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
 	);
 
 	// Enhanced compose function to support multiple handlers (consumer, magnetic, spring)
+	// biome-ignore lint/suspicious/noExplicitAny: event handler composition helper, type-safe at call sites.
 	const composeHandlers = useCallback(
-		(consumerHandler: any, magneticHandler?: any, springHandler?: any) => {
+		(
+			consumerHandler?: (event: any) => void,
+			magneticHandler?: (event: any) => void,
+			springHandler?: (event: any) => void,
+		) => {
 			const hasHandlers = consumerHandler || magneticHandler || springHandler;
 			return hasHandlers
 				? (event: any) => {

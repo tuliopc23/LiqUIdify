@@ -1,8 +1,8 @@
 "use client";
 
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/react";
-import { createStyleContext } from "../../../../../../styled-system/jsx";
-import { radioGroup } from "../../../../../../styled-system/recipes/radioGroup";
+import { createStyleContext } from "styled-system/jsx";
+import { radioGroup } from "styled-system/recipes/radioGroup";
 
 const { withRootProvider, withContext } = createStyleContext(radioGroup);
 

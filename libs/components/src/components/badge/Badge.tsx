@@ -1,8 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import { cx } from "../../../../../styled-system/css";
-import { badge } from "../../../../../styled-system/recipes/badge";
+import { cx } from "styled-system/css";
+import { badge } from "styled-system/recipes/badge";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 	tone?: "neutral" | "blue";

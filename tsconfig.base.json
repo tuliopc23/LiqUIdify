@@ -14,7 +14,9 @@
 		"types": ["bun-types", "vite/client"],
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["libs/components/src/*"]
+			"@/*": ["libs/components/src/*"],
+			"styled-system": ["styled-system"],
+			"styled-system/*": ["styled-system/*"]
 		}
 	}
 }

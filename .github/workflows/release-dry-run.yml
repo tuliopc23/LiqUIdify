@@ -15,10 +15,10 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run build:lib
-      - working-directory: libs/components
+      - name: Publint root package
         run: bunx publint
-      - working-directory: libs/components
+      - name: npm pack root package (dry run)
         run: npm pack --dry-run
       - name: Summarize
         run: |
-          echo "Publint and npm pack --dry-run completed. See logs for details." >> $GITHUB_STEP_SUMMARY
+          echo "Publint and npm pack --dry-run completed for the root liquidify-react package. See logs for details." >> $GITHUB_STEP_SUMMARY

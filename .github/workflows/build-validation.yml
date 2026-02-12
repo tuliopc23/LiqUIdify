@@ -30,14 +30,10 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Enforce banned tools
-        run: |
-          if grep -RniE "(storybook|tailwind)" -- . \
-            | grep -v "node_modules/" \
-            | grep -v "\.lock" \
-            | grep -v "^\./docs/"; then
-            echo "Banned tool reference found"; exit 1;
-          fi
+        run: bun run ci:guard:banned
 
+      - name: Enforce no inline styles
+        run: bun run ci:guard:inline-styles
 
       - name: Health check
         run: bun run health-check

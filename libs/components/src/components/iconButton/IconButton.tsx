@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { css, cx } from "../../../../../styled-system/css";
+import { css, cx } from "styled-system/css";
 import { Button, type ButtonProps } from "../button";
 import { Icon, type IconName, type IconProps } from "../icons";
 

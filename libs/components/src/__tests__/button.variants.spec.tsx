@@ -214,10 +214,10 @@ describe("Button Polymorphic Rendering", () => {
 			</Button>,
 		);
 
-		const link = screen.getByRole("link");
-		expect(link).toBeInTheDocument();
-		expect(link).toHaveAttribute("href", "/test");
-		expect(link).toHaveTextContent("Link Button");
+		const anchorButton = screen.getByRole("button", { name: "Link Button" });
+		expect(anchorButton).toBeInTheDocument();
+		expect(anchorButton).toHaveAttribute("href", "/test");
+		expect(anchorButton).toHaveTextContent("Link Button");
 	});
 });
 

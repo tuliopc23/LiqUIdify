@@ -3,8 +3,8 @@
 import { Listbox as ArkListbox } from "@ark-ui/react";
 import type { ComponentPropsWithoutRef, ElementRef } from "react";
 import { forwardRef } from "react";
-import { cx } from "../../../../../../styled-system/css";
-import { listbox } from "../../../../../../styled-system/recipes/listbox";
+import { cx } from "styled-system/css";
+import { listbox } from "styled-system/recipes/listbox";
 
 type ListboxRootProps = ComponentPropsWithoutRef<typeof ArkListbox.Root> & {
 	className?: string;

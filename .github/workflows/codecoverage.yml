@@ -30,7 +30,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run tests with coverage (lcov + summary)
-        continue-on-error: true
         run: |
           mkdir -p coverage
           bunx vitest run \

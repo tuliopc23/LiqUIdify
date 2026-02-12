@@ -8,7 +8,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 const Dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const assetFileNameFn = (assetInfo: any) => {
+const assetFileNameFn = (assetInfo: { names?: string[] }) => {
 	if (assetInfo?.names?.[0]?.endsWith(".css")) {
 		return "liquidify.css";
 	}
@@ -103,6 +103,8 @@ export default defineConfig({
 		alias: {
 			"@": resolve(Dirname, "src"),
 			liquidify: resolve(Dirname, "src/index.ts"),
+			// styled-system alias to avoid deep relative imports from components
+			"styled-system": resolve(Dirname, "../../styled-system"),
 		},
 	},
 	experimental: {

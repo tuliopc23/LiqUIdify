@@ -3,8 +3,8 @@
 import { Steps as ArkSteps } from "@ark-ui/react";
 import type { ComponentPropsWithoutRef, ElementRef } from "react";
 import { forwardRef } from "react";
-import { cx } from "../../../../../../styled-system/css";
-import { steps as stepsRecipe } from "../../../../../../styled-system/recipes/steps";
+import { cx } from "styled-system/css";
+import { steps as stepsRecipe } from "styled-system/recipes/steps";
 
 type StepsRootProps = ComponentPropsWithoutRef<typeof ArkSteps.Root> & {
 	className?: string;

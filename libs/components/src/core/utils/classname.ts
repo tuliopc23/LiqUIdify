@@ -5,7 +5,7 @@
  * with proper handling of conditional classes, arrays, and objects.
  */
 
-import { css, cx } from "../../../../../styled-system/css";
+import { css, cx } from "styled-system/css";
 
 /**
  * Combines multiple class values into a single string using Panda CSS

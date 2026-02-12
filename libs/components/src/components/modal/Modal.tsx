@@ -7,10 +7,10 @@ import {
 	useImperativeHandle,
 	useRef,
 } from "react";
-import { cx } from "../../../../../styled-system/css";
+import { cx } from "styled-system/css";
 // Slot recipe: returns slot class names
 // eslint-disable-next-line import/no-relative-packages
-import { dialog } from "../../../../../styled-system/recipes/dialog.js";
+import { dialog } from "styled-system/recipes/dialog.js";
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 	open?: boolean;
@@ -153,13 +153,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 		return (
 			<>
 				<div className={slots.backdrop} />
-				<div
-					className={slots.positioner}
-					role="button"
-					aria-label="Close modal"
-					onMouseDown={handleBackdropClick}
-					tabIndex={-1}
-				>
+				{/* biome-ignore lint/a11y/noStaticElementInteractions: backdrop click closes the modal; content handles actual dialog semantics. */}
+				<div className={slots.positioner} onMouseDown={handleBackdropClick}>
 					<div
 						className={cx(slots.content, className)}
 						ref={mergeRefs(contentRef, ref)}

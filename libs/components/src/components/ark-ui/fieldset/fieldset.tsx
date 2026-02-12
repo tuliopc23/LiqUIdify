@@ -3,8 +3,8 @@
 import { Fieldset as ArkFieldset } from "@ark-ui/react";
 import type { ComponentPropsWithoutRef, ElementRef } from "react";
 import { forwardRef } from "react";
-import { cx } from "../../../../../../styled-system/css";
-import { fieldset } from "../../../../../../styled-system/recipes/fieldset";
+import { cx } from "styled-system/css";
+import { fieldset } from "styled-system/recipes/fieldset";
 
 type FieldsetRootProps = ComponentPropsWithoutRef<typeof ArkFieldset.Root> & {
 	className?: string;

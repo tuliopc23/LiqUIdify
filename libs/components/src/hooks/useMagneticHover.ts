@@ -1,23 +1,11 @@
 import { useSpring } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
+import { useReducedMotion } from "./useReducedMotion";
 
 interface UseMagneticHoverProps {
 	strength?: number; // Magnetic strength (0-1)
 	disabled?: boolean;
 }
-
-// Reduced motion hook
-const useReducedMotion = () => {
-	const [prefersReduced, setPrefersReduced] = useState(false);
-	useEffect(() => {
-		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setPrefersReduced(mediaQuery.matches);
-		const listener = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-		mediaQuery.addEventListener("change", listener);
-		return () => mediaQuery.removeEventListener("change", listener);
-	}, []);
-	return prefersReduced;
-};
 
 export const useMagneticHover = (props: UseMagneticHoverProps = {}) => {
 	const { strength = 0.3, disabled = false } = props;

@@ -4,7 +4,7 @@
  * Centralized variant management using Panda CSS patterns and tokens
  */
 
-import { cx } from "../../../../styled-system/css";
+import { cx } from "styled-system/css";
 
 type VariantProps<T> = {
 	[K in keyof T]?: T[K] extends Record<string, unknown>

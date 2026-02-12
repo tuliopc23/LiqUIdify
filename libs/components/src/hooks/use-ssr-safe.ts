@@ -265,21 +265,30 @@ function _useNetworkStatus(): {
 		window.addEventListener("offline", handleOffline);
 
 		// Update connection info if available
-		if ("connection" in navigator) {
-			const connection = (navigator as any).connection;
+		const nav = navigator as Navigator & {
+			connection?: {
+				effectiveType?: "slow-2g" | "2g" | "3g" | "4g";
+				saveData?: boolean;
+				addEventListener?: (type: "change", handler: () => void) => void;
+				removeEventListener?: (type: "change", handler: () => void) => void;
+			};
+		};
+
+		if ("connection" in nav) {
+			const connection = nav.connection;
 
 			if (connection) {
-				setEffectiveType(connection.effectiveType);
-				setSaveData(connection.saveData);
+				setEffectiveType(connection.effectiveType ?? undefined);
+				setSaveData(connection.saveData ?? undefined);
 
 				const handleConnectionChange = () => {
-					setEffectiveType(connection.effectiveType);
-					setSaveData(connection.saveData);
+					setEffectiveType(connection.effectiveType ?? undefined);
+					setSaveData(connection.saveData ?? undefined);
 				};
 
-				connection.addEventListener("change", handleConnectionChange);
+				connection.addEventListener?.("change", handleConnectionChange);
 				return () => {
-					connection.removeEventListener("change", handleConnectionChange);
+					connection.removeEventListener?.("change", handleConnectionChange);
 					window.removeEventListener("online", handleOnline);
 					window.removeEventListener("offline", handleOffline);
 				};

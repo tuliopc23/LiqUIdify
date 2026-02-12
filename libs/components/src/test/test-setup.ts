@@ -69,6 +69,27 @@ export function setupDOM() {
 			disconnect: vi.fn(),
 		})) as any;
 
+		// Provide a simple in-memory localStorage implementation with clear()
+		const storage: Record<string, string> = {};
+		(window as any).localStorage = {
+			getItem(key: string) {
+				return Object.prototype.hasOwnProperty.call(storage, key)
+					? storage[key]
+					: null;
+			},
+			setItem(key: string, value: string) {
+				storage[key] = String(value);
+			},
+			removeItem(key: string) {
+				delete storage[key];
+			},
+			clear() {
+				for (const key of Object.keys(storage)) {
+					delete storage[key];
+				}
+			},
+		};
+
 		return;
 	}
 
@@ -109,6 +130,27 @@ export function setupDOM() {
 		unobserve: vi.fn(),
 		disconnect: vi.fn(),
 	})) as any;
+
+	// Simple in-memory localStorage for non-vitest callers as well
+	const storage: Record<string, string> = {};
+	(window as any).localStorage = {
+		getItem(key: string) {
+			return Object.prototype.hasOwnProperty.call(storage, key)
+				? storage[key]
+				: null;
+		},
+		setItem(key: string, value: string) {
+			storage[key] = String(value);
+		},
+		removeItem(key: string) {
+			delete storage[key];
+		},
+		clear() {
+			for (const key of Object.keys(storage)) {
+				delete storage[key];
+			}
+		},
+	};
 }
 
 /**

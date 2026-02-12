@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -11,13 +11,11 @@
 			"libs/components/src/**",
 			"libs/components/vite.config.ts",
 			"scripts/**",
-			"tests/**"
-		],
-		"experimentalScannerIgnores": [
-			"libs/**/styled-system/**",
-			"styled-system/**",
-			"dist/**",
-			"node_modules/**"
+			"tests/**",
+			"!!**/libs/**/styled-system",
+			"!!**/styled-system",
+			"!!**/dist",
+			"!!**/node_modules"
 		]
 	},
 	"formatter": {
@@ -29,14 +27,14 @@
 		"rules": {
 			"recommended": true,
 			"suspicious": {
-				"noExplicitAny": "off"
+				"noExplicitAny": "warn"
 			},
 			"complexity": {
-				"noBannedTypes": "off",
+				"noBannedTypes": "warn",
 				"useOptionalChain": "off"
 			},
 			"a11y": {
-				"useSemanticElements": "off"
+				"useSemanticElements": "error"
 			}
 		}
 	},

@@ -8,7 +8,7 @@ beforeAll(() => {
 		url: "http://localhost",
 	});
 
-	global.window = dom.window as any;
+	global.window = dom.window as unknown as Window & typeof globalThis;
 	global.document = dom.window.document;
 	global.navigator = dom.window.navigator;
 

@@ -1,5 +1,6 @@
 import { useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useReducedMotion } from "./useReducedMotion";
 
 interface UseGlassMicroProps {
 	duration?: number; // Default 150ms
@@ -131,17 +132,4 @@ export const useGlassMicro = (props: UseGlassMicroProps = {}) => {
 		},
 		reducedMotion,
 	};
-};
-
-// Simple reduced motion hook
-const useReducedMotion = () => {
-	const [prefersReduced, setPrefersReduced] = useState(false);
-	useEffect(() => {
-		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setPrefersReduced(mediaQuery.matches);
-		const listener = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-		mediaQuery.addEventListener("change", listener);
-		return () => mediaQuery.removeEventListener("change", listener);
-	}, []);
-	return prefersReduced;
 };

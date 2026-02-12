@@ -27,13 +27,21 @@ export default defineConfig({
 		// Basic coverage
 		coverage: {
 			provider: "v8",
-			enabled: false,
+			// Enable coverage in CI or when explicitly requested
+			enabled: process.env.CI === "true" || process.env.COVERAGE === "1",
 			include: ["libs/components/src/**/*.{js,ts,jsx,tsx}"],
 			exclude: [
 				"**/test/**",
 				"**/*.{test,spec}.{js,ts,jsx,tsx}",
 				"**/node_modules/**",
 			],
+			thresholds: {
+				// Initial realistic thresholds for current suite; raise as coverage improves.
+				lines: 25,
+				statements: 25,
+				branches: 30,
+				functions: 24,
+			},
 		},
 
 		// Simple timeouts
@@ -59,6 +67,8 @@ export default defineConfig({
 			"@/utils": resolve(__dirname, "libs/components/src/utils"),
 			"@/core": resolve(__dirname, "libs/components/src/core"),
 			"@/styles": resolve(__dirname, "libs/components/src/styles"),
+			// styled-system alias to avoid deep relative imports
+			"styled-system": resolve(__dirname, "styled-system"),
 		},
 	},
 });

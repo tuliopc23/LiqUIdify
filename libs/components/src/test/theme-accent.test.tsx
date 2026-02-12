@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider, useTheme } from "../hooks/use-theme";
 import type { AccentPresetName } from "../lib/theme";
 import {
@@ -58,6 +58,38 @@ function TestComponent({ testId = "" }: { testId?: string }) {
 		</div>
 	);
 }
+
+// Ensure a consistent in-memory localStorage implementation for these tests,
+// regardless of how Vitest configures localStorage under the hood.
+const createMemoryStorage = (): Storage => {
+	const store: Record<string, string> = {};
+	const storage = {
+		getItem(key: string) {
+			return Object.hasOwn(store, key) ? store[key] : null;
+		},
+		setItem(key: string, value: string) {
+			store[key] = String(value);
+		},
+		removeItem(key: string) {
+			delete store[key];
+		},
+		clear() {
+			for (const key of Object.keys(store)) {
+				delete store[key];
+			}
+		},
+	};
+
+	return storage as unknown as Storage;
+};
+
+beforeAll(() => {
+	// Override with an in-memory implementation to make tests deterministic
+	Object.defineProperty(window, "localStorage", {
+		writable: true,
+		value: createMemoryStorage(),
+	});
+});
 
 describe("ThemeProvider accent", () => {
 	beforeEach(() => {
@@ -425,7 +457,13 @@ describe("Accent preset library", () => {
 
 	it("setAccentPreset with persist option controls localStorage", () => {
 		// Clear any existing storage
-		window.localStorage.clear();
+		const storage = window.localStorage as any;
+		if (typeof storage.clear === "function") {
+			storage.clear();
+		} else {
+			storage.removeItem?.("ui-accent");
+			storage.removeItem?.("ui-accent-preset");
+		}
 
 		// Test with persist: false
 		setAccentPreset("teal", { persist: false });

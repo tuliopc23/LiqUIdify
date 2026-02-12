@@ -48,6 +48,23 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 		if (typeof window === "undefined") return;
 
 		const detectCapabilities = () => {
+			// Navigator with extended properties (when available)
+			const nav = navigator as Navigator & {
+				hardwareConcurrency?: number;
+				deviceMemory?: number;
+				connection?: {
+					effectiveType?: string;
+					downlink?: number;
+					saveData?: boolean;
+					addEventListener?: (type: "change", handler: () => void) => void;
+					removeEventListener?: (
+						type: "change",
+						handler: () => void,
+					) => void;
+				};
+				msMaxTouchPoints?: number;
+			};
+
 			// Check backdrop-filter support
 			const hasBackdropFilter =
 				(typeof CSS !== "undefined" &&
@@ -86,14 +103,13 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 			// Detect performance tier based on various factors
 			const detectPerformanceTier = (): "high" | "medium" | "low" => {
 				// Check hardware concurrency (CPU cores)
-				const cores =
-					(navigator && (navigator as any).hardwareConcurrency) || 1;
+				const cores = nav.hardwareConcurrency ?? 1;
 
 				// Check device memory (if available)
-				const memory = (navigator as any).deviceMemory || 4;
+				const memory = nav.deviceMemory ?? 4;
 
 				// Check connection type
-				const connection = (navigator as any).connection;
+				const connection = nav.connection;
 				const effectiveType = connection?.effectiveType || "4g"; // align with tests' expected tiers
 
 				// Score based on capabilities
@@ -147,8 +163,8 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 			// Check if touch device
 			const isTouch =
 				"ontouchstart" in window ||
-				navigator.maxTouchPoints > 0 ||
-				(navigator as any).msMaxTouchPoints > 0;
+				(nav.maxTouchPoints ?? 0) > 0 ||
+				(nav.msMaxTouchPoints ?? 0) > 0;
 
 			// Get device pixel ratio
 			const devicePixelRatio = window.devicePixelRatio || 1;
@@ -156,11 +172,11 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 			// Detect connection speed
 			const detectConnectionSpeed =
 				(): DeviceCapabilities["connectionSpeed"] => {
-					const connection = (navigator as any).connection;
+					const connection = nav.connection;
 					if (!connection) return "unknown";
 
 					const effectiveType = connection.effectiveType;
-					const downlink = connection.downlink;
+					const downlink = connection.downlink ?? 0;
 
 					if (effectiveType === "slow-2g" || downlink < 0.5) return "slow-2g";
 					if (effectiveType === "2g" || effectiveType === "3g" || downlink < 2)
@@ -224,8 +240,14 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 		}
 
 		// Listen for connection changes
-		const connection = (navigator as any).connection;
-		if (connection) {
+		const nav = navigator as Navigator & {
+			connection?: {
+				addEventListener?: (type: "change", handler: () => void) => void;
+				removeEventListener?: (type: "change", handler: () => void) => void;
+			};
+		};
+		const connection = nav.connection;
+		if (connection?.addEventListener) {
 			connection.addEventListener("change", handleChange);
 		}
 
@@ -240,7 +262,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 				contrastQuery.removeListener(handleChange);
 			}
 
-			if (connection) {
+			if (connection?.removeEventListener) {
 				connection.removeEventListener("change", handleChange);
 			}
 		};

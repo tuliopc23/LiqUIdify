@@ -4,7 +4,7 @@
 	"type": "module",
 	"version": "1.0.0",
 	"dependencies": {
-		"liquidify-react": "workspace:*"
+		"liquidify-react": "file:../../.."
 	},
 	"scripts": {
 		"test:imports": "bun ./test/imports.esm.mjs && bun ./test/imports.cjs.cjs && bun ./test/all-ark-ui.mjs"
