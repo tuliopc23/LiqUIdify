@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.26] - 2026-02-12
+
+### Fixed
+- Fixed TypeScript compiler (`tsc`) errors in `Button` component related to `framer-motion` polymorphic types.
+- Resolved linting warnings and modernized code with Biome (using `Object.hasOwn`).
+- Standardized code formatting across the project.
+
 ### Added
 - **Accent Preset System**: Complete runtime accent theme switching with 11 built-in Apple system colors
   - New `accentPreset`, `accentPresets`, `persistAccent`, and `onAccentChange` props for ThemeProvider
