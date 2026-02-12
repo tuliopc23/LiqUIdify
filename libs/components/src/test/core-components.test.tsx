@@ -54,4 +54,3 @@ describe("Core components", () => {
 		expect(tile).toBeInTheDocument();
 	});
 });
-

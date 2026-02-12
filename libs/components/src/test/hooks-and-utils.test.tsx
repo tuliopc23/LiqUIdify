@@ -25,16 +25,18 @@ describe("useReducedMotion", () => {
 
 	it("respects prefers-reduced-motion=true when matchMedia matches", () => {
 		const original = window.matchMedia;
-		(window as any).matchMedia = vi.fn().mockImplementation((query: string) => ({
-			matches: query.includes("prefers-reduced-motion"),
-			media: query,
-			onchange: null,
-			addListener: vi.fn(),
-			removeListener: vi.fn(),
-			addEventListener: vi.fn(),
-			removeEventListener: vi.fn(),
-			dispatchEvent: vi.fn(),
-		}));
+		(window as any).matchMedia = vi
+			.fn()
+			.mockImplementation((query: string) => ({
+				matches: query.includes("prefers-reduced-motion"),
+				media: query,
+				onchange: null,
+				addListener: vi.fn(),
+				removeListener: vi.fn(),
+				addEventListener: vi.fn(),
+				removeEventListener: vi.fn(),
+				dispatchEvent: vi.fn(),
+			}));
 
 		const { result } = renderHook(() => useReducedMotion());
 		expect(result.current).toBe(true);
@@ -81,4 +83,3 @@ describe("theme accent helpers", () => {
 		expect(next).toBe("#34C759");
 	});
 });
-

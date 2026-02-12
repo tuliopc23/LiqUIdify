@@ -73,9 +73,7 @@ export function setupDOM() {
 		const storage: Record<string, string> = {};
 		(window as any).localStorage = {
 			getItem(key: string) {
-				return Object.prototype.hasOwnProperty.call(storage, key)
-					? storage[key]
-					: null;
+				return Object.hasOwn(storage, key) ? storage[key] : null;
 			},
 			setItem(key: string, value: string) {
 				storage[key] = String(value);
@@ -135,9 +133,7 @@ export function setupDOM() {
 	const storage: Record<string, string> = {};
 	(window as any).localStorage = {
 		getItem(key: string) {
-			return Object.prototype.hasOwnProperty.call(storage, key)
-				? storage[key]
-				: null;
+			return Object.hasOwn(storage, key) ? storage[key] : null;
 		},
 		setItem(key: string, value: string) {
 			storage[key] = String(value);

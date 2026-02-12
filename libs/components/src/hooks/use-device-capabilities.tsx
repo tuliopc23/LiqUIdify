@@ -57,10 +57,7 @@ export function useDeviceCapabilities(): DeviceCapabilities {
 					downlink?: number;
 					saveData?: boolean;
 					addEventListener?: (type: "change", handler: () => void) => void;
-					removeEventListener?: (
-						type: "change",
-						handler: () => void,
-					) => void;
+					removeEventListener?: (type: "change", handler: () => void) => void;
 				};
 				msMaxTouchPoints?: number;
 			};

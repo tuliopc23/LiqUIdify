@@ -34,7 +34,7 @@ describe("Ark UI wrappers (basic behavior)", () => {
 			<Slider label="Volume" min={0} max={100} value={[50]} />,
 		);
 		expect(getByText("Volume")).toBeInTheDocument();
-		const thumb = container.querySelector("[role=\"slider\"]");
+		const thumb = container.querySelector('[role="slider"]');
 		expect(thumb).toBeInTheDocument();
 	});
 
@@ -97,4 +97,3 @@ describe("Ark UI wrappers (basic behavior)", () => {
 		expect(getByText("Item 1")).toBeInTheDocument();
 	});
 });
-

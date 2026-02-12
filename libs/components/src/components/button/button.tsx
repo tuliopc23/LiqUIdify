@@ -277,9 +277,9 @@ export const Button = forwardRef<any, ButtonProps<any>>(function Button<
 
 	// Memoize MotionComp to prevent remounting
 	const MotionComp = useMemo(
-		() => (magneticHover ? motion(Comp) : Comp),
+		() => (magneticHover ? motion(Comp as any) : Comp),
 		[magneticHover, Comp],
-	);
+	) as any;
 
 	// Enhanced compose function to support multiple handlers (consumer, magnetic, spring)
 	// biome-ignore lint/suspicious/noExplicitAny: event handler composition helper, type-safe at call sites.
