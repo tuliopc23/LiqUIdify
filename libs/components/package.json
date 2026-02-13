@@ -24,7 +24,7 @@
     "@pandacss/dev": "^1.2.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.544.0",
