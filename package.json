@@ -159,6 +159,7 @@
 		"health-check": "bun run type-check && bun run check && bun run build:lib",
 		"test": "vitest -c vitest.config.mts run",
 		"test:coverage": "bun test --coverage",
+		"test:consumer": "node scripts/consumer-fixture-test.mjs",
 		"type-check": "bunx tsc --noEmit --project tsconfig.json && bun run --filter @liquidify/components type-check",
 		"type-check:watch": "bunx tsc --noEmit --project tsconfig.json --watch",
 		"prepack": "bun run --filter @liquidify/components type-check && bun run build:lib && bun run check:css-layers",
@@ -179,7 +180,7 @@
 			]
 		}
 	},
-	"version": "0.6.26",
+	"version": "1.0.0",
 	"workspaces": [
 		"libs/*"
 	]

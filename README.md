@@ -1,7 +1,7 @@
 # 🌊 LiqUIdify
 
-**Production-ready React component library with 100% Apple Human Interface Guidelines compliance.**
-iOS 17 / macOS 14 calibrated design tokens • 48 accessible components • WCAG 2.1 AA certified
+**Production-ready React component library with 100% Apple Human Interface Guidelines compliance.**  
+iOS 17 / macOS 14 calibrated design tokens • 48 accessible components • WCAG 2.1 AA certified • **v1.0.0 stable**
 
 [![npm version](https://img.shields.io/npm/v/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
 [![npm downloads](https://img.shields.io/npm/dm/liquidify-react)](https://www.npmjs.com/package/liquidify-react)
