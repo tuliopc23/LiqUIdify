@@ -38,7 +38,7 @@ jobs:
         run: bun run test
 
       - name: Upload contrast audit results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: contrast-audit-results
